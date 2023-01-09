@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		BB0DBAA8296AA4FE00D2DFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBAA7296AA4FE00D2DFB9 /* AppDelegate.swift */; };
 		BB0DBAAA296AA4FE00D2DFB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBAA9296AA4FE00D2DFB9 /* SceneDelegate.swift */; };
-		BB0DBAAC296AA4FE00D2DFB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBAAB296AA4FE00D2DFB9 /* ViewController.swift */; };
 		BB0DBAAF296AA4FE00D2DFB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB0DBAAD296AA4FE00D2DFB9 /* Main.storyboard */; };
 		BB0DBAB2296AA4FE00D2DFB9 /* ChitChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBAB0296AA4FE00D2DFB9 /* ChitChat.xcdatamodeld */; };
 		BB0DBAB4296AA50000D2DFB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0DBAB3296AA50000D2DFB9 /* Assets.xcassets */; };
@@ -17,6 +16,13 @@
 		BB0DBAC2296AA50000D2DFB9 /* ChitChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBAC1296AA50000D2DFB9 /* ChitChatTests.swift */; };
 		BB0DBACC296AA50000D2DFB9 /* ChitChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBACB296AA50000D2DFB9 /* ChitChatUITests.swift */; };
 		BB0DBACE296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBACD296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift */; };
+		BB720C90296AAB7800BEA070 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB720C8F296AAB7800BEA070 /* MainViewController.swift */; };
+		BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = BB720C92296B1EAD00BEA070 /* MessageKit */; };
+		BBC16387296B5FF800868752 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC16386296B5FF800868752 /* GradientView.swift */; };
+		BBC16389296B601500868752 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC16388296B601500868752 /* Constants.swift */; };
+		BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638A296BCB6500868752 /* HTTPSHelper.swift */; };
+		BBC1638D296BD1F600868752 /* ChatStorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */; };
+		BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638E296BD98200868752 /* ChatTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +46,6 @@
 		BB0DBAA4296AA4FE00D2DFB9 /* ChitChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChitChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB0DBAA7296AA4FE00D2DFB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB0DBAA9296AA4FE00D2DFB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BB0DBAAB296AA4FE00D2DFB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BB0DBAAE296AA4FE00D2DFB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BB0DBAB1296AA4FE00D2DFB9 /* ChitChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChitChat.xcdatamodel; sourceTree = "<group>"; };
 		BB0DBAB3296AA50000D2DFB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +56,12 @@
 		BB0DBAC7296AA50000D2DFB9 /* ChitChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChitChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB0DBACB296AA50000D2DFB9 /* ChitChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChitChatUITests.swift; sourceTree = "<group>"; };
 		BB0DBACD296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChitChatUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BB720C8F296AAB7800BEA070 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		BBC16386296B5FF800868752 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		BBC16388296B601500868752 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BBC1638A296BCB6500868752 /* HTTPSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSHelper.swift; sourceTree = "<group>"; };
+		BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStorageHelper.swift; sourceTree = "<group>"; };
+		BBC1638E296BD98200868752 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +115,12 @@
 			children = (
 				BB0DBAA7296AA4FE00D2DFB9 /* AppDelegate.swift */,
 				BB0DBAA9296AA4FE00D2DFB9 /* SceneDelegate.swift */,
-				BB0DBAAB296AA4FE00D2DFB9 /* ViewController.swift */,
+				BB720C8F296AAB7800BEA070 /* MainViewController.swift */,
+				BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */,
+				BBC1638E296BD98200868752 /* ChatTableViewCell.swift */,
+				BBC1638A296BCB6500868752 /* HTTPSHelper.swift */,
+				BBC16386296B5FF800868752 /* GradientView.swift */,
+				BBC16388296B601500868752 /* Constants.swift */,
 				BB0DBAAD296AA4FE00D2DFB9 /* Main.storyboard */,
 				BB0DBAB3296AA50000D2DFB9 /* Assets.xcassets */,
 				BB0DBAB5296AA50000D2DFB9 /* LaunchScreen.storyboard */,
@@ -146,6 +163,9 @@
 			dependencies = (
 			);
 			name = ChitChat;
+			packageProductDependencies = (
+				BB720C92296B1EAD00BEA070 /* MessageKit */,
+			);
 			productName = ChitChat;
 			productReference = BB0DBAA4296AA4FE00D2DFB9 /* ChitChat.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +238,9 @@
 				Base,
 			);
 			mainGroup = BB0DBA9B296AA4FE00D2DFB9;
+			packageReferences = (
+				BB720C91296B1EAD00BEA070 /* XCRemoteSwiftPackageReference "MessageKit" */,
+			);
 			productRefGroup = BB0DBAA5296AA4FE00D2DFB9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -261,10 +284,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB0DBAAC296AA4FE00D2DFB9 /* ViewController.swift in Sources */,
 				BB0DBAB2296AA4FE00D2DFB9 /* ChitChat.xcdatamodeld in Sources */,
+				BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */,
 				BB0DBAA8296AA4FE00D2DFB9 /* AppDelegate.swift in Sources */,
+				BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */,
+				BBC16387296B5FF800868752 /* GradientView.swift in Sources */,
 				BB0DBAAA296AA4FE00D2DFB9 /* SceneDelegate.swift in Sources */,
+				BB720C90296AAB7800BEA070 /* MainViewController.swift in Sources */,
+				BBC1638D296BD1F600868752 /* ChatStorageHelper.swift in Sources */,
+				BBC16389296B601500868752 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,6 +628,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BB720C91296B1EAD00BEA070 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BB720C92296B1EAD00BEA070 /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB720C91296B1EAD00BEA070 /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		BB0DBAB0296AA4FE00D2DFB9 /* ChitChat.xcdatamodeld */ = {
