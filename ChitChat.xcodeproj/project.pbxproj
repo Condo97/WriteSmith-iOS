@@ -7,6 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB04B3E9296DE2BD000BEC02 /* IAPHTTPSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3E8296DE2BD000BEC02 /* IAPHTTPSHelper.swift */; };
+		BB04B3EB296DE8FF000BEC02 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3EA296DE8FF000BEC02 /* IAPManager.swift */; };
+		BB04B3ED296E2E7B000BEC02 /* giftGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3EC296E2E7B000BEC02 /* giftGif.gif */; };
+		BB04B3EE296E2E7B000BEC02 /* giftGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3EC296E2E7B000BEC02 /* giftGif.gif */; };
+		BB04B3EF296E2E7B000BEC02 /* giftGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3EC296E2E7B000BEC02 /* giftGif.gif */; };
+		BB04B3F1296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F0296E2EAE000BEC02 /* SettingsTableViewController.swift */; };
+		BB04B3F2296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F0296E2EAE000BEC02 /* SettingsTableViewController.swift */; };
+		BB04B3F3296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F0296E2EAE000BEC02 /* SettingsTableViewController.swift */; };
+		BB04B3F5296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */; };
+		BB04B3F6296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */; };
+		BB04B3F7296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */; };
+		BB04B3F9296E38E1000BEC02 /* Ultra Image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3F8296E38E0000BEC02 /* Ultra Image.jpg */; };
+		BB04B3FA296E38E1000BEC02 /* Ultra Image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3F8296E38E0000BEC02 /* Ultra Image.jpg */; };
+		BB04B3FB296E38E1000BEC02 /* Ultra Image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3F8296E38E0000BEC02 /* Ultra Image.jpg */; };
+		BB04B401296E548F000BEC02 /* loadingDots.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B400296E548E000BEC02 /* loadingDots.gif */; };
+		BB04B402296E548F000BEC02 /* loadingDots.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B400296E548E000BEC02 /* loadingDots.gif */; };
+		BB04B403296E548F000BEC02 /* loadingDots.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B400296E548E000BEC02 /* loadingDots.gif */; };
+		BB0A8C09296CDB760035F046 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A8C08296CDB760035F046 /* RoundedView.swift */; };
+		BB0A8C0D296CE70E0035F046 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A8C0C296CE70E0035F046 /* ShadowView.swift */; };
+		BB0A8C0F296D05FA0035F046 /* UltraPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A8C0E296D05FA0035F046 /* UltraPurchaseViewController.swift */; };
+		BB0A8C11296D063D0035F046 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A8C10296D063D0035F046 /* RoundedButton.swift */; };
 		BB0DBAA8296AA4FE00D2DFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBAA7296AA4FE00D2DFB9 /* AppDelegate.swift */; };
 		BB0DBAAA296AA4FE00D2DFB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBAA9296AA4FE00D2DFB9 /* SceneDelegate.swift */; };
 		BB0DBAAF296AA4FE00D2DFB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB0DBAAD296AA4FE00D2DFB9 /* Main.storyboard */; };
@@ -43,6 +64,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB04B3E8296DE2BD000BEC02 /* IAPHTTPSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHTTPSHelper.swift; sourceTree = "<group>"; };
+		BB04B3EA296DE8FF000BEC02 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
+		BB04B3EC296E2E7B000BEC02 /* giftGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = giftGif.gif; sourceTree = "<group>"; };
+		BB04B3F0296E2EAE000BEC02 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GIF.swift"; sourceTree = "<group>"; };
+		BB04B3F8296E38E0000BEC02 /* Ultra Image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Ultra Image.jpg"; sourceTree = "<group>"; };
+		BB04B400296E548E000BEC02 /* loadingDots.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loadingDots.gif; path = ../../../Downloads/loadingDots.gif; sourceTree = "<group>"; };
+		BB0A8C08296CDB760035F046 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
+		BB0A8C0C296CE70E0035F046 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		BB0A8C0E296D05FA0035F046 /* UltraPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltraPurchaseViewController.swift; sourceTree = "<group>"; };
+		BB0A8C10296D063D0035F046 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		BB0DBAA4296AA4FE00D2DFB9 /* ChitChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChitChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB0DBAA7296AA4FE00D2DFB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB0DBAA9296AA4FE00D2DFB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,12 +145,23 @@
 		BB0DBAA6296AA4FE00D2DFB9 /* ChitChat */ = {
 			isa = PBXGroup;
 			children = (
+				BB04B400296E548E000BEC02 /* loadingDots.gif */,
+				BB04B3EC296E2E7B000BEC02 /* giftGif.gif */,
+				BB04B3F8296E38E0000BEC02 /* Ultra Image.jpg */,
 				BB0DBAA7296AA4FE00D2DFB9 /* AppDelegate.swift */,
 				BB0DBAA9296AA4FE00D2DFB9 /* SceneDelegate.swift */,
+				BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */,
 				BB720C8F296AAB7800BEA070 /* MainViewController.swift */,
+				BB04B3F0296E2EAE000BEC02 /* SettingsTableViewController.swift */,
+				BB0A8C0E296D05FA0035F046 /* UltraPurchaseViewController.swift */,
+				BB0A8C08296CDB760035F046 /* RoundedView.swift */,
+				BB0A8C0C296CE70E0035F046 /* ShadowView.swift */,
 				BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */,
 				BBC1638E296BD98200868752 /* ChatTableViewCell.swift */,
 				BBC1638A296BCB6500868752 /* HTTPSHelper.swift */,
+				BB04B3E8296DE2BD000BEC02 /* IAPHTTPSHelper.swift */,
+				BB04B3EA296DE8FF000BEC02 /* IAPManager.swift */,
+				BB0A8C10296D063D0035F046 /* RoundedButton.swift */,
 				BBC16386296B5FF800868752 /* GradientView.swift */,
 				BBC16388296B601500868752 /* Constants.swift */,
 				BB0DBAAD296AA4FE00D2DFB9 /* Main.storyboard */,
@@ -257,9 +300,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB04B3F9296E38E1000BEC02 /* Ultra Image.jpg in Resources */,
 				BB0DBAB7296AA50000D2DFB9 /* LaunchScreen.storyboard in Resources */,
 				BB0DBAB4296AA50000D2DFB9 /* Assets.xcassets in Resources */,
+				BB04B401296E548F000BEC02 /* loadingDots.gif in Resources */,
 				BB0DBAAF296AA4FE00D2DFB9 /* Main.storyboard in Resources */,
+				BB04B3ED296E2E7B000BEC02 /* giftGif.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +313,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB04B402296E548F000BEC02 /* loadingDots.gif in Resources */,
+				BB04B3EE296E2E7B000BEC02 /* giftGif.gif in Resources */,
+				BB04B3FA296E38E1000BEC02 /* Ultra Image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +323,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB04B403296E548F000BEC02 /* loadingDots.gif in Resources */,
+				BB04B3EF296E2E7B000BEC02 /* giftGif.gif in Resources */,
+				BB04B3FB296E38E1000BEC02 /* Ultra Image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,14 +337,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB0DBAB2296AA4FE00D2DFB9 /* ChitChat.xcdatamodeld in Sources */,
+				BB0A8C0D296CE70E0035F046 /* ShadowView.swift in Sources */,
 				BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */,
 				BB0DBAA8296AA4FE00D2DFB9 /* AppDelegate.swift in Sources */,
 				BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */,
 				BBC16387296B5FF800868752 /* GradientView.swift in Sources */,
+				BB04B3EB296DE8FF000BEC02 /* IAPManager.swift in Sources */,
 				BB0DBAAA296AA4FE00D2DFB9 /* SceneDelegate.swift in Sources */,
 				BB720C90296AAB7800BEA070 /* MainViewController.swift in Sources */,
 				BBC1638D296BD1F600868752 /* ChatStorageHelper.swift in Sources */,
+				BB0A8C09296CDB760035F046 /* RoundedView.swift in Sources */,
+				BB0A8C0F296D05FA0035F046 /* UltraPurchaseViewController.swift in Sources */,
+				BB04B3F1296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */,
 				BBC16389296B601500868752 /* Constants.swift in Sources */,
+				BB04B3E9296DE2BD000BEC02 /* IAPHTTPSHelper.swift in Sources */,
+				BB0A8C11296D063D0035F046 /* RoundedButton.swift in Sources */,
+				BB04B3F5296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +360,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB04B3F2296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */,
+				BB04B3F6296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */,
 				BB0DBAC2296AA50000D2DFB9 /* ChitChatTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +372,8 @@
 			files = (
 				BB0DBACE296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift in Sources */,
 				BB0DBACC296AA50000D2DFB9 /* ChitChatUITests.swift in Sources */,
+				BB04B3F7296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */,
+				BB04B3F3296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +533,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -496,6 +561,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
