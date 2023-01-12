@@ -59,6 +59,16 @@ class SettingsTableViewController: UITableViewController {
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        //TODO: - Add share button action
+        if indexPath.section == 1 && indexPath.row == 0 {
+            return 0
+        }
+        
+        return super.tableView(tableView, heightForRowAt: indexPath)
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             performSegue(withIdentifier: "toUltraPurchase", sender: nil)
