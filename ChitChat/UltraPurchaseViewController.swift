@@ -25,6 +25,7 @@ class UltraPurchaseViewController: UIViewController {
     
     var fromStart: Bool = false
     var restorePressed: Bool = false
+    var shouldRestoreFromSettings: Bool = false
     
     //TODO: - Get ProductIDs from Server
     //    let productIDsForTesting: Set<String> = ["com.acapplications.mindseye.in_app_purchase_premium"]
@@ -33,52 +34,13 @@ class UltraPurchaseViewController: UIViewController {
         super.viewDidLoad()
         
 //        imageView.image = UIImage(named: UserDefaults.standard.string(forKey: GlobalConstants.userDefaultStoredProImageName) ?? StartScreenConstants.rainbowHills)
-        
-        if fromStart {
-            ultraLabel.alpha = 0.0
-            unleashLabel.alpha = 0.0
-            gradientView.alpha = 0.0
-            backgroundView.alpha = 0.0
-            everythingElseView.alpha = 0.0
-            
-            imageView.transform = CGAffineTransform(scaleX: 1, y: 1)
-            imageView.transform = CGAffineTransform(translationX: 0, y: self.everythingElseView.frame.size.height - 100)
-            
-//            gradientView.transform = CGAffineTransform(scaleX: 4, y: 4)
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if fromStart {
-            let firstDelay = 0.7
-            UIView.animate(withDuration: 0.5, delay: firstDelay, options: .curveEaseOut, animations: { [self] in
-                imageView.transform = CGAffineTransform(translationX: 0, y: 0)
-            })
-            
-            
-            UIView.animate(withDuration: 0.5, delay: 0.2 + firstDelay, options: .curveEaseOut, animations: { [self] in
-                gradientView.transform = CGAffineTransform(translationX: 0, y: 0)
-                imageView.transform = CGAffineTransform(scaleX: 1, y: 1)
-            })
-            
-            UIView.animate(withDuration: 0.5, delay: 1.2 + firstDelay, options: .curveEaseOut, animations: { [self] in
-                ultraLabel.alpha = 1.0
-            })
-            UIView.animate(withDuration: 0.5, delay: 0.7 + firstDelay, options: .curveEaseOut, animations: { [self] in
-                unleashLabel.alpha = 1.0
-            })
-            UIView.animate(withDuration: 0.5, delay: 1.7 + firstDelay, options: .curveEaseOut, animations: { [self] in
-                everythingElseView.alpha = 1.0
-            })
-            UIView.animate(withDuration: 0.5, delay: 0.2 + firstDelay, options: .curveEaseOut, animations: { [self] in
-                gradientView.transform = CGAffineTransform(scaleX: 1, y: 1)
-                
-                gradientView.alpha = 1.0
-                backgroundView.alpha = 1.0
-            })
-            
+        if shouldRestoreFromSettings {
+            restorePurchases()
         }
     }
     
@@ -141,6 +103,10 @@ class UltraPurchaseViewController: UIViewController {
     }
     
     @IBAction func restorePurchaseButton(_ sender: Any) {
+        restorePurchases()
+    }
+    
+    func restorePurchases() {
         restorePressed = true
         disableButtons()
         getIAPStuffFromServer()
@@ -268,11 +234,11 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
     }
     
     func setPremiumToFalse() {
-        UserDefaults.standard.set(false, forKey: Constants.authTokenKey)
+        UserDefaults.standard.set(false, forKey: Constants.userDefaultStoredIsPremium)
     }
     
     func setPremiumToTrue() {
-        UserDefaults.standard.set(true, forKey: Constants.authTokenKey)
+        UserDefaults.standard.set(true, forKey: Constants.userDefaultStoredIsPremium)
     }
     
     //MARK: - IAPHTTPSHelper Delegate Function
@@ -317,8 +283,6 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
                 
                 //TODO: - Kind've hack-y but works here, fix this implementation
                 if restorePressed {
-                    enableButtons()
-                    
                     let alertController = UIAlertController(title: "Error Restoring", message: "Couldn't find your subscription. Please try resubscribing.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { alertAction in
                         self.startSubscriptionButton(self)

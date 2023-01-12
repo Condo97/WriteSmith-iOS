@@ -16,6 +16,8 @@ struct Constants {
     static let userDefaultHasFinishedIntro = "hasFinishedIntro"
     static let userDefaultStoredIsPremium = "storedIsPremium"
     
+    static let shareURL = NSURL(string: "https://apps.apple.com/")! //TODO: - Fill in with App Store URL
+    
     static let borderWidth = CGFloat(0.0)
     static let cornerRadius = 14.0
     
@@ -47,9 +49,13 @@ struct Colors {
     static let aiChatBubbleColor = UIColor(named: "AIChatBubbleColor")!
 }
 
+struct FinishReasons {
+    static let length = "length"
+    static let stop = "stop"
+}
+
 enum ChatSender: Codable {
     case user
     case ai
 }
-
 

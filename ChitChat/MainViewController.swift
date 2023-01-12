@@ -6,16 +6,23 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class MainViewController: UIViewController {
     
     @IBOutlet weak var inputTextView: UITextView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var promoView: RoundedView!
+    @IBOutlet weak var promoShadowView: ShadowView!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var remainingView: RoundedView!
+    @IBOutlet weak var remainingShadowView: ShadowView!
     @IBOutlet weak var chatsRemainingText: UILabel!
-    @IBOutlet weak var promoView: RoundedView!
+    @IBOutlet weak var adView: UIView!
+    @IBOutlet weak var adShadowView: ShadowView!
+    
+    @IBOutlet weak var adViewHeightConstraint: NSLayoutConstraint!
     
     let inputPlaceholder = "Tap to start chatting..."
     
@@ -24,21 +31,44 @@ class MainViewController: UIViewController {
     
     var logoMenuBarItem = UIBarButtonItem()
     var moreMenuBarItem = UIBarButtonItem()
+    var shareMenuBarItem = UIBarButtonItem()
     var proMenuBarItem = UIBarButtonItem()
     var navigationSpacer = UIBarButtonItem()
     
-    var firstLoad = true
+    var firstLoad = false
+    var firstChat = true
     var isProcessingChat = false
     var submitSoftDisable = false
     
     var remaining = -1
     
+    var interstitial: GADRewardedInterstitialAd?
+    var banner: GADBannerView!
+    var failedToLoadInterstitial = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // For Testing
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "417bf2ca112515b09c600668985dbf2b" ]
         
         inputTextView.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        
+        interstitial?.fullScreenContentDelegate = self
+        
+        adViewHeightConstraint.constant = 0.0
+        
+        banner = GADBannerView(adSize: GADAdSizeBanner)
+        banner.adUnitID = Private.bannerID
+        banner.rootViewController = self
+        banner.delegate = self
+        
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            banner.load(GADRequest())
+            loadGAD()
+        }
         
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableView.automaticDimension
@@ -62,14 +92,13 @@ class MainViewController: UIViewController {
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)))
         remainingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upgradeSelector)))
-        promoView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upgradeSelector)))
         
         if UserDefaults.standard.string(forKey: Constants.authTokenKey) == nil {
             HTTPSHelper.registerUser(delegate: self)
         } else {
             HTTPSHelper.getRemaining(delegate: self, authToken: UserDefaults.standard.string(forKey: Constants.authTokenKey)!)
         }
-
+        
         updateInputTextViewSize(textView: inputTextView)
         
         loadMenuBarItems()
@@ -79,6 +108,11 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if firstLoad && !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            firstLoad = false
+            goToUltraPurchase()
+        }
         
         doServerPremiumCheck()
         setPremiumItems()
@@ -91,11 +125,13 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func submitButton(_ sender: Any) {
+        dismissKeyboard()
+        
         if submitSoftDisable {
             let alert = UIAlertController(title: "3 Days Free", message: "Send messages faster! Try Ultra for 3 days free today.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Try Now", style: .default, handler: { action in
-                self.performSegue(withIdentifier: "toUltraPurchase", sender: nil)
+                self.goToUltraPurchase()
             }))
             present(alert, animated: true)
             return
@@ -130,6 +166,10 @@ class MainViewController: UIViewController {
         }
     }
     
+    @IBAction func promoButton(_ sender: Any) {
+        goToUltraPurchase()
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == origin {
@@ -148,16 +188,22 @@ class MainViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @objc func ultraPressed() {
-        performSegue(withIdentifier: "toUltraPurchase", sender: nil)
-    }
-    
     @objc func openMenu() {
         performSegue(withIdentifier: "toSettingsView", sender: nil)
     }
     
+    @objc func shareApp() {
+        let activityVC = UIActivityViewController(activityItems: [Constants.shareURL], applicationActivities: [])
+        
+        present(activityVC, animated: true)
+    }
+    
+    @objc func ultraPressed() {
+        goToUltraPurchase()
+    }
+    
     @objc func upgradeSelector(notification: NSNotification) {
-        performSegue(withIdentifier: "toUltraPurchase", sender: nil)
+        goToUltraPurchase()
     }
     
     func loadMenuBarItems() {
@@ -183,6 +229,18 @@ class MainViewController: UIViewController {
         
         moreMenuBarItem = UIBarButtonItem(customView: moreImageButton)
         
+        /* Setup Share Menu Bar Item */
+        let shareImage = UIImage.gifImageWithName("shareImage")
+        let shareImageButton = UIButton(type: .custom)
+        
+        shareImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30, height: 30)
+        shareImageButton.setBackgroundImage(shareImage, for: .normal)
+        shareImageButton.addTarget(self, action: #selector(shareApp), for: .touchUpInside)
+        shareImageButton.tintColor = Colors.chatTextColor
+        
+        //shareMenuBarItem = UIBarButtonItem(customView: shareImageButton) Enable once I get an AppStore URL
+        
+        
         /* Setup Pro Menu Bar Item */
         //TODO: - New Pro Image
         let proImage = UIImage.gifImageWithName("giftGif")
@@ -203,6 +261,10 @@ class MainViewController: UIViewController {
         moreMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 28).isActive = true
         moreMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28).isActive = true
         
+        /* Setup Share */
+        shareMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 28).isActive = true
+        shareMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28).isActive = true
+        
         /* Setup Constraints */
         logoMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 86).isActive = true
         logoMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -220,7 +282,7 @@ class MainViewController: UIViewController {
     
     func setLeftMenuBarItems() {
         /* Put things in Left NavigationBar. Phew! */
-        navigationItem.leftBarButtonItems = [moreMenuBarItem, navigationSpacer]
+        navigationItem.leftBarButtonItems = [moreMenuBarItem, shareMenuBarItem, navigationSpacer]
         
     }
     
@@ -228,14 +290,21 @@ class MainViewController: UIViewController {
         /* Update the text that says how many chats are remaining for user */
         updateRemainingText()
         
-        /* Setup Right Bar Button Items */
+        /* Setup Right Bar Button Items and Top Ad View */
         var rightBarButtonItems:[UIBarButtonItem] = []
-        if(!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium)) {
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
             rightBarButtonItems.append(proMenuBarItem)
+        } else {
+            adViewHeightConstraint.constant = 0.0
+            adShadowView.isHidden = true
         }
         
         /* Put things in Right NavigationBar */
         navigationItem.rightBarButtonItems = rightBarButtonItems
+    }
+    
+    func goToUltraPurchase() {
+        performSegue(withIdentifier: "toUltraPurchase", sender: nil)
     }
     
     func addChat(message: String, userSent: ChatSender) {
@@ -266,7 +335,7 @@ class MainViewController: UIViewController {
         imageView.image = image
             .resizableImage(withCapInsets:
                                 UIEdgeInsets(top: 17, left: 21, bottom: 17, right: 21),
-                                    resizingMode: .stretch)
+                            resizingMode: .stretch)
             .withRenderingMode(.alwaysTemplate)
     }
     
@@ -274,16 +343,57 @@ class MainViewController: UIViewController {
         DispatchQueue.main.async {
             if UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
                 self.remainingView.isHidden = true
+                self.remainingShadowView.isHidden = true
+                self.promoView.isHidden = true
+                self.promoShadowView.isHidden = true
             } else {
                 if self.remaining >= 0 {
                     self.remainingView.isHidden = false
+                    self.remainingShadowView.isHidden = false
+                    self.promoView.isHidden = false
+                    self.promoShadowView.isHidden = false
+                    
                     self.chatsRemainingText.text = "You have \(self.remaining) chats remaining today..."
                     
                     //TODO: - If remaining % 5 is 0 then serve an ad
+                    if self.remaining % 5 == 0 && !self.firstChat {
+                        if self.interstitial != nil {
+                            //Display ad
+                            self.interstitial?.present(fromRootViewController: self) {
+                                let reward = self.interstitial?.adReward
+                                if reward?.amount == 0 {
+                                    //TODO: - Handle early ad close
+                                }
+                            }
+                        }
+                    }
                 } else {
                     self.remainingView.isHidden = true
+                    self.remainingShadowView.isHidden = true
+                    self.promoView.isHidden = true
+                    self.promoShadowView.isHidden = true
                 }
             }
+        }
+    }
+    
+    func loadGAD() {
+        failedToLoadInterstitial = false
+        
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            let request = GADRequest()
+            GADRewardedInterstitialAd.load(withAdUnitID: Private.rewardedInterstitialID, request: request, completionHandler: { [self] ad, error in
+                if let error = error {
+                    print("Failed to load ad with error: \(error.localizedDescription)")
+                    self.failedToLoadInterstitial = true
+                    
+                    return
+                }
+                
+                interstitial = ad
+                interstitial?.fullScreenContentDelegate = self
+                failedToLoadInterstitial = false
+            })
         }
     }
 }
@@ -383,15 +493,29 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let finalText = currentChat.text
         
+        //TODO: - Wait, does this trigger submitSoftDisable even when the user text is being typed out?
+        //TODO: - Need to remove rows from rowsToType once they are typed (Done?)
         if rowsToType.contains(indexPath.row) {
-            cell.chatText.text = ""
+//            cell.chatText.text = ""
+            let chatTextMutableAttriburtedString = NSMutableAttributedString()
+            cell.chatText.attributedText = chatTextMutableAttriburtedString
+            
             var writingTask: DispatchWorkItem?
             writingTask = DispatchWorkItem { () in
                 for character in finalText {
                     DispatchQueue.main.async {
                         let initialHeight = cell.frame.height
                         tableView.beginUpdates()
-                        cell.chatText.text!.append(character)
+//                        cell.chatText.text!.append(character)
+                        //TODO: - Fix this bad implementation of the secondary font
+                        if (cell.chatText.attributedText!.string + "\(character)").contains("...\n\n") {
+                            chatTextMutableAttriburtedString.secondaryFont("\(character)")
+                        } else {
+                            chatTextMutableAttriburtedString.normal("\(character)")
+                        }
+                        
+                        cell.chatText.attributedText = chatTextMutableAttriburtedString
+                        
                         tableView.endUpdates()
                         
                         if cell.frame.height != initialHeight {
@@ -401,10 +525,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                     Thread.sleep(forTimeInterval: 5.0/100)
                 }
                 
-                //AI finished typing, soft enable button
+                //AI finished typing, soft enable button and remove row from needing to be typed
                 DispatchQueue.main.async {
                     self.submitButton.alpha = 1.0
                     self.submitSoftDisable = false
+                    self.rowsToType.remove(at: self.rowsToType.firstIndex(of: indexPath.row)!)
                 }
             }
             
@@ -416,7 +541,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.chatText.text = finalText
         }
         
-//        cell.chatText.setTextWithTypeAnimation(typedText: "aldjflahsdljfhajklfhkljahdfkhasdjf hjkasdghfkjldljkfhajlsdfhk sdkfghkja dgfkjgasdjhfg aksdgf g sadfhg ajkhdfkad fkljh alkjdfljkahdfjk alsdkjfkl dafjkhdaljkfhkjahsdf klasdjfl h")
+        //        cell.chatText.setTextWithTypeAnimation(typedText: "aldjflahsdljfhajklfhkljahdfkhasdjf hjkasdghfkjldljkfhajlsdfhk sdkfghkja dgfkjgasdjhfg aksdgf g sadfhg ajkhdfkad fkljh alkjdfljkahdfjk alsdkjfkl dafjkhdaljkfhkjahsdf klasdjfl h")
         
         return cell
     }
@@ -500,9 +625,27 @@ extension MainViewController: HTTPSHelperDelegate {
                 return
             }
             
+            guard let finishReason = body["finishReason"] as? String else {
+                print("Error! No Finish Reason in response...\n\(json)")
+                return
+            }
+            
+            print(finishReason)
+            // Trim first two lines off of output
+            var trimmedOutput = output
+            if output.contains("\n\n") {
+                let firstOccurence = output.range(of: "\n\n")!
+                trimmedOutput.removeSubrange(output.startIndex..<firstOccurence.upperBound)
+            }
+            
+            if finishReason == FinishReasons.length && !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+                trimmedOutput += "...\n\nThis answer is too long for your plan. Please upgrade to Ultra for unlimited length."
+            }
+            
             self.remaining = remaining
+            firstChat = false
             updateRemainingText()
-            addChat(message: output, userSent: .ai)
+            addChat(message: trimmedOutput, userSent: .ai)
         } else if success == 51 {
             //Too many chats generated
             guard let body = json["Body"] as? [String: Any] else {
@@ -518,7 +661,7 @@ extension MainViewController: HTTPSHelperDelegate {
             let ac = UIAlertController(title: "Limit Reached", message: "You've reached your daily chat limit. Upgrade for unlimited chats...", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Close", style: .cancel))
             ac.addAction(UIAlertAction(title: "Upgrade", style: .default, handler: { action in
-                self.performSegue(withIdentifier: "toUltraPurchase", sender: nil)
+                self.goToUltraPurchase()
             }))
             present(ac, animated: true)
             
@@ -526,8 +669,17 @@ extension MainViewController: HTTPSHelperDelegate {
         } else {
             print("Error! Unhandled error number...\n\(json)")
         }
-        
-        
+    }
+    
+    func getChatError() {
+        DispatchQueue.main.async {
+            if self.isProcessingChat {
+                self.isProcessingChat = false
+                self.tableView.deleteRows(at: [IndexPath(row: self.tableView.numberOfRows(inSection: 0) - 1, section: 0)], with: .none)
+            }
+            
+            self.addChat(message: "There was an issue getting your chat. Please try a different prompt.", userSent: .ai)
+        }
     }
 }
 
@@ -623,3 +775,55 @@ extension MainViewController: IAPHTTPSHelperDelegate {
     }
 }
 
+extension MainViewController: GADFullScreenContentDelegate {
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        print("Ad failed to present full screen content")
+        
+    }
+    
+    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("Ad will present full screen content")
+    }
+    
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("Ad did dismiss full screen content")
+        
+        loadGAD()
+    }
+}
+
+extension MainViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            adViewHeightConstraint.constant = 50.0
+            adShadowView.isHidden = false
+            
+            bannerView.translatesAutoresizingMaskIntoConstraints = false
+            adView.addSubview(bannerView)
+            adView.addConstraints([NSLayoutConstraint(item: bannerView, attribute: .centerY, relatedBy: .equal, toItem: adView, attribute: .centerY, multiplier: 1, constant: 0), NSLayoutConstraint(item: bannerView, attribute: .centerX, relatedBy: .equal, toItem: adView, attribute: .centerX, multiplier: 1, constant: 0)])
+        }
+    }
+    
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+        
+        adViewHeightConstraint.constant = 0.0
+        adShadowView.isHidden = true
+    }
+    
+    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
+        print("bannerViewDidRecordImpression")
+    }
+    
+    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+        print("bannerViewWillPresentScreen")
+    }
+    
+    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
+        print("bannerViewWillDIsmissScreen")
+    }
+    
+    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
+        print("bannerViewDidDismissScreen")
+    }
+}

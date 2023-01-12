@@ -12,10 +12,16 @@ class SettingsTableViewController: UITableViewController {
     
     @IBOutlet weak var giftImageView: UIImageView!
     
+    var restorePressed: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         giftImageView.image = UIImage.gifImageWithName("giftGif")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        restorePressed = false
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -26,11 +32,31 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 {
+        if section == 1 && !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            return 0
+        }
+        
+        if section == 0 && UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
             return 0
         }
         
         return tableView.estimatedSectionHeaderHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 && UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            return 0
+        }
+        
+        return tableView.estimatedSectionFooterHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) && section == 0 {
+            return 0
+        }
+        
+        return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -55,7 +81,18 @@ class SettingsTableViewController: UITableViewController {
             let vc = SFSafariViewController(url: url, configuration: config)
             present(vc, animated: true)
         } else if indexPath.row == 3 {
-            
+            restorePressed = true
+            performSegue(withIdentifier: "toUltraPurchase", sender: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        //Set shouldRestoreFromSettings to true in UltraPurchaesViewController if restore was pressed
+        if segue.identifier == "toUltraPurchase" && restorePressed {
+            if let detailVC = segue.destination as? UltraPurchaseViewController {
+                detailVC.shouldRestoreFromSettings = true
+            }
         }
     }
     

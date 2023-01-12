@@ -13,8 +13,6 @@
 		BB04B3EE296E2E7B000BEC02 /* giftGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3EC296E2E7B000BEC02 /* giftGif.gif */; };
 		BB04B3EF296E2E7B000BEC02 /* giftGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3EC296E2E7B000BEC02 /* giftGif.gif */; };
 		BB04B3F1296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F0296E2EAE000BEC02 /* SettingsTableViewController.swift */; };
-		BB04B3F2296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F0296E2EAE000BEC02 /* SettingsTableViewController.swift */; };
-		BB04B3F3296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F0296E2EAE000BEC02 /* SettingsTableViewController.swift */; };
 		BB04B3F5296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */; };
 		BB04B3F6296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */; };
 		BB04B3F7296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */; };
@@ -44,6 +42,39 @@
 		BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638A296BCB6500868752 /* HTTPSHelper.swift */; };
 		BBC1638D296BD1F600868752 /* ChatStorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */; };
 		BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638E296BD98200868752 /* ChatTableViewCell.swift */; };
+		BBD65BB7296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
+		BBD65BB8296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
+		BBD65BB9296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
+		BBD65BC029705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBB29705CCE001F730C /* Screenshot 2 Cropped.jpg */; };
+		BBD65BC129705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBB29705CCE001F730C /* Screenshot 2 Cropped.jpg */; };
+		BBD65BC229705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBB29705CCE001F730C /* Screenshot 2 Cropped.jpg */; };
+		BBD65BC329705CCF001F730C /* Screenshot 2 Cropped.psd in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBC29705CCE001F730C /* Screenshot 2 Cropped.psd */; };
+		BBD65BC429705CCF001F730C /* Screenshot 2 Cropped.psd in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBC29705CCE001F730C /* Screenshot 2 Cropped.psd */; };
+		BBD65BC529705CCF001F730C /* Screenshot 2 Cropped.psd in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBC29705CCE001F730C /* Screenshot 2 Cropped.psd */; };
+		BBD65BC629705CCF001F730C /* Screenshot 1 Cropped.psd in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBD29705CCE001F730C /* Screenshot 1 Cropped.psd */; };
+		BBD65BC729705CCF001F730C /* Screenshot 1 Cropped.psd in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBD29705CCE001F730C /* Screenshot 1 Cropped.psd */; };
+		BBD65BC829705CCF001F730C /* Screenshot 1 Cropped.psd in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBD29705CCE001F730C /* Screenshot 1 Cropped.psd */; };
+		BBD65BC929705CCF001F730C /* Screenshot 1 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBE29705CCE001F730C /* Screenshot 1 Cropped.jpg */; };
+		BBD65BCA29705CCF001F730C /* Screenshot 1 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBE29705CCE001F730C /* Screenshot 1 Cropped.jpg */; };
+		BBD65BCB29705CCF001F730C /* Screenshot 1 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBE29705CCE001F730C /* Screenshot 1 Cropped.jpg */; };
+		BBD65BD02970648F001F730C /* Screenshot 3 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BCF2970648F001F730C /* Screenshot 3 Cropped.jpg */; };
+		BBD65BD12970648F001F730C /* Screenshot 3 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BCF2970648F001F730C /* Screenshot 3 Cropped.jpg */; };
+		BBD65BD22970648F001F730C /* Screenshot 3 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BCF2970648F001F730C /* Screenshot 3 Cropped.jpg */; };
+		BBD65BDD2970655D001F730C /* Intro3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD65BDC2970655D001F730C /* Intro3ViewController.swift */; };
+		BBD65BDE2970655D001F730C /* Intro3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD65BDC2970655D001F730C /* Intro3ViewController.swift */; };
+		BBD65BDF2970655D001F730C /* Intro3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD65BDC2970655D001F730C /* Intro3ViewController.swift */; };
+		BBD65BE129706A02001F730C /* MainNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD65BE029706A02001F730C /* MainNavigationViewController.swift */; };
+		BBD65BE229706A02001F730C /* MainNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD65BE029706A02001F730C /* MainNavigationViewController.swift */; };
+		BBD65BE329706A02001F730C /* MainNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD65BE029706A02001F730C /* MainNavigationViewController.swift */; };
+		BBD65BE929706F2C001F730C /* Intro1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD65BE829706F2C001F730C /* Intro1ViewController.swift */; };
+		BBD65BEA29706F2C001F730C /* Intro1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD65BE829706F2C001F730C /* Intro1ViewController.swift */; };
+		BBD65BEB29706F2C001F730C /* Intro1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD65BE829706F2C001F730C /* Intro1ViewController.swift */; };
+		BBD65BED2970766C001F730C /* arrowGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BEC2970766C001F730C /* arrowGif.gif */; };
+		BBD65BEE2970766C001F730C /* arrowGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BEC2970766C001F730C /* arrowGif.gif */; };
+		BBD65BEF2970766C001F730C /* arrowGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BEC2970766C001F730C /* arrowGif.gif */; };
+		BBEA8A24296E88C100DF37F8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = BBEA8A23296E88C100DF37F8 /* GoogleMobileAds */; };
+		BBEA8A26296E8A4700DF37F8 /* Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA8A25296E8A4700DF37F8 /* Private.swift */; };
+		BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +125,18 @@
 		BBC1638A296BCB6500868752 /* HTTPSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSHelper.swift; sourceTree = "<group>"; };
 		BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStorageHelper.swift; sourceTree = "<group>"; };
 		BBC1638E296BD98200868752 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		BBD65BB6296FDBB4001F730C /* shareImage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = shareImage.gif; sourceTree = "<group>"; };
+		BBD65BBB29705CCE001F730C /* Screenshot 2 Cropped.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Screenshot 2 Cropped.jpg"; sourceTree = "<group>"; };
+		BBD65BBC29705CCE001F730C /* Screenshot 2 Cropped.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Screenshot 2 Cropped.psd"; sourceTree = "<group>"; };
+		BBD65BBD29705CCE001F730C /* Screenshot 1 Cropped.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Screenshot 1 Cropped.psd"; sourceTree = "<group>"; };
+		BBD65BBE29705CCE001F730C /* Screenshot 1 Cropped.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Screenshot 1 Cropped.jpg"; sourceTree = "<group>"; };
+		BBD65BCF2970648F001F730C /* Screenshot 3 Cropped.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Screenshot 3 Cropped.jpg"; sourceTree = "<group>"; };
+		BBD65BDC2970655D001F730C /* Intro3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro3ViewController.swift; sourceTree = "<group>"; };
+		BBD65BE029706A02001F730C /* MainNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationViewController.swift; sourceTree = "<group>"; };
+		BBD65BE829706F2C001F730C /* Intro1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro1ViewController.swift; sourceTree = "<group>"; };
+		BBD65BEC2970766C001F730C /* arrowGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = arrowGif.gif; sourceTree = "<group>"; };
+		BBEA8A25296E8A4700DF37F8 /* Private.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Private.swift; sourceTree = "<group>"; };
+		BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBEA8A24296E88C100DF37F8 /* GoogleMobileAds in Frameworks */,
 				BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,22 +192,22 @@
 				BB04B400296E548E000BEC02 /* loadingDots.gif */,
 				BB04B3EC296E2E7B000BEC02 /* giftGif.gif */,
 				BB04B3F8296E38E0000BEC02 /* Ultra Image.jpg */,
+				BBD65BB6296FDBB4001F730C /* shareImage.gif */,
+				BBD65BEC2970766C001F730C /* arrowGif.gif */,
+				BBD65BBA29705CCE001F730C /* Screenshots for Inside the App */,
 				BB0DBAA7296AA4FE00D2DFB9 /* AppDelegate.swift */,
 				BB0DBAA9296AA4FE00D2DFB9 /* SceneDelegate.swift */,
-				BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */,
+				BBEA8A25296E8A4700DF37F8 /* Private.swift */,
+				BBC16388296B601500868752 /* Constants.swift */,
+				BBD65BD4297064ED001F730C /* Extensions */,
+				BBD65BD5297064FB001F730C /* Custom Views */,
+				BBD65BD62970650B001F730C /* Helpers */,
 				BB720C8F296AAB7800BEA070 /* MainViewController.swift */,
+				BBD65BE029706A02001F730C /* MainNavigationViewController.swift */,
 				BB04B3F0296E2EAE000BEC02 /* SettingsTableViewController.swift */,
 				BB0A8C0E296D05FA0035F046 /* UltraPurchaseViewController.swift */,
-				BB0A8C08296CDB760035F046 /* RoundedView.swift */,
-				BB0A8C0C296CE70E0035F046 /* ShadowView.swift */,
-				BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */,
-				BBC1638E296BD98200868752 /* ChatTableViewCell.swift */,
-				BBC1638A296BCB6500868752 /* HTTPSHelper.swift */,
-				BB04B3E8296DE2BD000BEC02 /* IAPHTTPSHelper.swift */,
-				BB04B3EA296DE8FF000BEC02 /* IAPManager.swift */,
-				BB0A8C10296D063D0035F046 /* RoundedButton.swift */,
-				BBC16386296B5FF800868752 /* GradientView.swift */,
-				BBC16388296B601500868752 /* Constants.swift */,
+				BBD65BE829706F2C001F730C /* Intro1ViewController.swift */,
+				BBD65BDC2970655D001F730C /* Intro3ViewController.swift */,
 				BB0DBAAD296AA4FE00D2DFB9 /* Main.storyboard */,
 				BB0DBAB3296AA50000D2DFB9 /* Assets.xcassets */,
 				BB0DBAB5296AA50000D2DFB9 /* LaunchScreen.storyboard */,
@@ -190,6 +234,50 @@
 			path = ChitChatUITests;
 			sourceTree = "<group>";
 		};
+		BBD65BBA29705CCE001F730C /* Screenshots for Inside the App */ = {
+			isa = PBXGroup;
+			children = (
+				BBD65BBB29705CCE001F730C /* Screenshot 2 Cropped.jpg */,
+				BBD65BBC29705CCE001F730C /* Screenshot 2 Cropped.psd */,
+				BBD65BBD29705CCE001F730C /* Screenshot 1 Cropped.psd */,
+				BBD65BBE29705CCE001F730C /* Screenshot 1 Cropped.jpg */,
+				BBD65BCF2970648F001F730C /* Screenshot 3 Cropped.jpg */,
+			);
+			path = "Screenshots for Inside the App";
+			sourceTree = "<group>";
+		};
+		BBD65BD4297064ED001F730C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */,
+				BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedString.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BBD65BD5297064FB001F730C /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				BBC1638E296BD98200868752 /* ChatTableViewCell.swift */,
+				BB0A8C08296CDB760035F046 /* RoundedView.swift */,
+				BB0A8C0C296CE70E0035F046 /* ShadowView.swift */,
+				BB0A8C10296D063D0035F046 /* RoundedButton.swift */,
+				BBC16386296B5FF800868752 /* GradientView.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		BBD65BD62970650B001F730C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */,
+				BBC1638A296BCB6500868752 /* HTTPSHelper.swift */,
+				BB04B3E8296DE2BD000BEC02 /* IAPHTTPSHelper.swift */,
+				BB04B3EA296DE8FF000BEC02 /* IAPManager.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -208,6 +296,7 @@
 			name = ChitChat;
 			packageProductDependencies = (
 				BB720C92296B1EAD00BEA070 /* MessageKit */,
+				BBEA8A23296E88C100DF37F8 /* GoogleMobileAds */,
 			);
 			productName = ChitChat;
 			productReference = BB0DBAA4296AA4FE00D2DFB9 /* ChitChat.app */;
@@ -283,6 +372,7 @@
 			mainGroup = BB0DBA9B296AA4FE00D2DFB9;
 			packageReferences = (
 				BB720C91296B1EAD00BEA070 /* XCRemoteSwiftPackageReference "MessageKit" */,
+				BBEA8A22296E88C100DF37F8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = BB0DBAA5296AA4FE00D2DFB9 /* Products */;
 			projectDirPath = "";
@@ -300,11 +390,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBD65BC329705CCF001F730C /* Screenshot 2 Cropped.psd in Resources */,
 				BB04B3F9296E38E1000BEC02 /* Ultra Image.jpg in Resources */,
 				BB0DBAB7296AA50000D2DFB9 /* LaunchScreen.storyboard in Resources */,
+				BBD65BC629705CCF001F730C /* Screenshot 1 Cropped.psd in Resources */,
 				BB0DBAB4296AA50000D2DFB9 /* Assets.xcassets in Resources */,
 				BB04B401296E548F000BEC02 /* loadingDots.gif in Resources */,
+				BBD65BC929705CCF001F730C /* Screenshot 1 Cropped.jpg in Resources */,
+				BBD65BC029705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */,
 				BB0DBAAF296AA4FE00D2DFB9 /* Main.storyboard in Resources */,
+				BBD65BD02970648F001F730C /* Screenshot 3 Cropped.jpg in Resources */,
+				BBD65BB7296FDBB4001F730C /* shareImage.gif in Resources */,
+				BBD65BED2970766C001F730C /* arrowGif.gif in Resources */,
 				BB04B3ED296E2E7B000BEC02 /* giftGif.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,9 +410,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBD65BC429705CCF001F730C /* Screenshot 2 Cropped.psd in Resources */,
 				BB04B402296E548F000BEC02 /* loadingDots.gif in Resources */,
+				BBD65BB8296FDBB4001F730C /* shareImage.gif in Resources */,
+				BBD65BEE2970766C001F730C /* arrowGif.gif in Resources */,
+				BBD65BCA29705CCF001F730C /* Screenshot 1 Cropped.jpg in Resources */,
 				BB04B3EE296E2E7B000BEC02 /* giftGif.gif in Resources */,
+				BBD65BC729705CCF001F730C /* Screenshot 1 Cropped.psd in Resources */,
+				BBD65BD12970648F001F730C /* Screenshot 3 Cropped.jpg in Resources */,
 				BB04B3FA296E38E1000BEC02 /* Ultra Image.jpg in Resources */,
+				BBD65BC129705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,9 +427,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBD65BC529705CCF001F730C /* Screenshot 2 Cropped.psd in Resources */,
 				BB04B403296E548F000BEC02 /* loadingDots.gif in Resources */,
+				BBD65BB9296FDBB4001F730C /* shareImage.gif in Resources */,
+				BBD65BEF2970766C001F730C /* arrowGif.gif in Resources */,
+				BBD65BCB29705CCF001F730C /* Screenshot 1 Cropped.jpg in Resources */,
 				BB04B3EF296E2E7B000BEC02 /* giftGif.gif in Resources */,
+				BBD65BC829705CCF001F730C /* Screenshot 1 Cropped.psd in Resources */,
+				BBD65BD22970648F001F730C /* Screenshot 3 Cropped.jpg in Resources */,
 				BB04B3FB296E38E1000BEC02 /* Ultra Image.jpg in Resources */,
+				BBD65BC229705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,17 +448,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB0DBAB2296AA4FE00D2DFB9 /* ChitChat.xcdatamodeld in Sources */,
+				BBD65BDD2970655D001F730C /* Intro3ViewController.swift in Sources */,
 				BB0A8C0D296CE70E0035F046 /* ShadowView.swift in Sources */,
 				BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */,
 				BB0DBAA8296AA4FE00D2DFB9 /* AppDelegate.swift in Sources */,
 				BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */,
 				BBC16387296B5FF800868752 /* GradientView.swift in Sources */,
+				BBD65BE129706A02001F730C /* MainNavigationViewController.swift in Sources */,
 				BB04B3EB296DE8FF000BEC02 /* IAPManager.swift in Sources */,
 				BB0DBAAA296AA4FE00D2DFB9 /* SceneDelegate.swift in Sources */,
 				BB720C90296AAB7800BEA070 /* MainViewController.swift in Sources */,
 				BBC1638D296BD1F600868752 /* ChatStorageHelper.swift in Sources */,
+				BBEA8A26296E8A4700DF37F8 /* Private.swift in Sources */,
 				BB0A8C09296CDB760035F046 /* RoundedView.swift in Sources */,
 				BB0A8C0F296D05FA0035F046 /* UltraPurchaseViewController.swift in Sources */,
+				BBD65BE929706F2C001F730C /* Intro1ViewController.swift in Sources */,
+				BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedString.swift in Sources */,
 				BB04B3F1296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */,
 				BBC16389296B601500868752 /* Constants.swift in Sources */,
 				BB04B3E9296DE2BD000BEC02 /* IAPHTTPSHelper.swift in Sources */,
@@ -360,7 +476,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB04B3F2296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */,
+				BBD65BDE2970655D001F730C /* Intro3ViewController.swift in Sources */,
+				BBD65BEA29706F2C001F730C /* Intro1ViewController.swift in Sources */,
+				BBD65BE229706A02001F730C /* MainNavigationViewController.swift in Sources */,
 				BB04B3F6296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */,
 				BB0DBAC2296AA50000D2DFB9 /* ChitChatTests.swift in Sources */,
 			);
@@ -370,10 +488,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBD65BE329706A02001F730C /* MainNavigationViewController.swift in Sources */,
 				BB0DBACE296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift in Sources */,
+				BBD65BDF2970655D001F730C /* Intro3ViewController.swift in Sources */,
+				BBD65BEB29706F2C001F730C /* Intro1ViewController.swift in Sources */,
 				BB0DBACC296AA50000D2DFB9 /* ChitChatUITests.swift in Sources */,
 				BB04B3F7296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */,
-				BB04B3F3296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,16 +656,19 @@
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -564,16 +687,19 @@
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -704,6 +830,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		BBEA8A22296E88C100DF37F8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -711,6 +845,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BB720C91296B1EAD00BEA070 /* XCRemoteSwiftPackageReference "MessageKit" */;
 			productName = MessageKit;
+		};
+		BBEA8A23296E88C100DF37F8 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BBEA8A22296E88C100DF37F8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 
