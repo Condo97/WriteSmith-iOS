@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StoreKit
 import GoogleMobileAds
 
 class MainViewController: UIViewController {
@@ -319,6 +320,14 @@ class MainViewController: UIViewController {
         tableView.insertRows(at: [IndexPath(row: row, section: 0)], with: animation)
         rowsToType.append(row + 1)
         tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
+        
+        if ChatStorageHelper.getAllChats().count % 5 == 0 && !firstChat {
+            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                DispatchQueue.main.async {
+                    SKStoreReviewController.requestReview(in: scene)
+                }
+            }
+        }
     }
     
     func setBubbleImage(imageView: UIImageView, isUser: Bool) {
