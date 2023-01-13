@@ -61,11 +61,6 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        //TODO: - Add share button action
-        if indexPath.section == 1 && indexPath.row == 0 {
-            return 0
-        }
-        
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
@@ -75,7 +70,9 @@ class SettingsTableViewController: UITableViewController {
         }
         
         if indexPath.row == 0 {
-            //TODO: - Share sheet
+            let activityVC = UIActivityViewController(activityItems: [Constants.shareURL], applicationActivities: [])
+            
+            present(activityVC, animated: true)
         } else if indexPath.row == 1 {
             let config = SFSafariViewController.Configuration()
             config.entersReaderIfAvailable = true

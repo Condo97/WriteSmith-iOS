@@ -15,7 +15,7 @@ protocol HTTPSHelperDelegate: AnyObject {
 }
 
 class HTTPSHelper {
-    static func registerUser(delegate: HTTPSHelperDelegate) {
+    static func registerUser(delegate: HTTPSHelperDelegate?) {
         let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.registerUesr)")!
         let postBody = "{}"
         
@@ -33,7 +33,7 @@ class HTTPSHelper {
                 DispatchQueue.main.async {
                     do {
                         let json = try JSONSerialization.jsonObject(with: data, options:[]) as? [String: Any]
-                        delegate.didRegisterUser(json: json!)
+                        delegate?.didRegisterUser(json: json!)
                     } catch {
                         print("Error serializing registerUesr() JSON from data")
                     }

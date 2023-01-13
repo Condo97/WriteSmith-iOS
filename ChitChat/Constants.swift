@@ -16,7 +16,7 @@ struct Constants {
     static let userDefaultHasFinishedIntro = "hasFinishedIntro"
     static let userDefaultStoredIsPremium = "storedIsPremium"
     
-    static let shareURL = NSURL(string: "https://apps.apple.com/")! //TODO: - Fill in with App Store URL
+    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")! //TODO: - Fill in with App Store URL
     
     static let borderWidth = CGFloat(0.0)
     static let cornerRadius = 14.0

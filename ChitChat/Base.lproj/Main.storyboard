@@ -445,7 +445,6 @@
         <!--Navigation Controller-->
         <scene sceneID="GkP-1Z-dhJ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QJO-BK-FKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController navigationBarHidden="YES" id="L6j-RB-Sjf" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TBa-ws-AX3">
                         <autoresizingMask key="autoresizingMask"/>
@@ -454,6 +453,7 @@
                         <segue destination="DdP-Wd-1Jl" kind="relationship" relationship="rootViewController" id="5nL-Yf-Zal"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QJO-BK-FKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1309" y="-632"/>
         </scene>
@@ -1393,7 +1393,7 @@
             <color red="0.26666666666666666" green="0.27450980392156865" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="UserChatBubbleColor">
-            <color red="0.26666666666666666" green="0.27450980392156865" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.2669999897480011" green="0.27500000596046448" blue="0.32499998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

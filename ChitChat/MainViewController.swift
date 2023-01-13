@@ -239,7 +239,7 @@ class MainViewController: UIViewController {
         shareImageButton.addTarget(self, action: #selector(shareApp), for: .touchUpInside)
         shareImageButton.tintColor = Colors.chatTextColor
         
-        //shareMenuBarItem = UIBarButtonItem(customView: shareImageButton) Enable once I get an AppStore URL
+        shareMenuBarItem = UIBarButtonItem(customView: shareImageButton)
         
         
         /* Setup Pro Menu Bar Item */

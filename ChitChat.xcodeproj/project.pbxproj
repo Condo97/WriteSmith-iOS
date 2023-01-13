@@ -37,6 +37,10 @@
 		BB0DBACE296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBACD296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift */; };
 		BB720C90296AAB7800BEA070 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB720C8F296AAB7800BEA070 /* MainViewController.swift */; };
 		BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = BB720C92296B1EAD00BEA070 /* MessageKit */; };
+		BBA8C2222971F3C3009BDECC /* libTenjinSDKUniversal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBA8C2212971F3C3009BDECC /* libTenjinSDKUniversal.a */; };
+		BBA8C2232971F3C3009BDECC /* libTenjinSDKUniversal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBA8C2212971F3C3009BDECC /* libTenjinSDKUniversal.a */; };
+		BBA8C2242971F3C3009BDECC /* libTenjinSDKUniversal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBA8C2212971F3C3009BDECC /* libTenjinSDKUniversal.a */; };
+		BBA8C2272971FA08009BDECC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBA8C2262971FA08009BDECC /* AdSupport.framework */; };
 		BBC16387296B5FF800868752 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC16386296B5FF800868752 /* GradientView.swift */; };
 		BBC16389296B601500868752 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC16388296B601500868752 /* Constants.swift */; };
 		BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638A296BCB6500868752 /* HTTPSHelper.swift */; };
@@ -120,6 +124,10 @@
 		BB0DBACB296AA50000D2DFB9 /* ChitChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChitChatUITests.swift; sourceTree = "<group>"; };
 		BB0DBACD296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChitChatUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BB720C8F296AAB7800BEA070 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		BBA8C21F2971F3C3009BDECC /* TenjinSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TenjinSDK.h; sourceTree = "<group>"; };
+		BBA8C2202971F3C3009BDECC /* chitchat-client-bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "chitchat-client-bridge.h"; sourceTree = "<group>"; };
+		BBA8C2212971F3C3009BDECC /* libTenjinSDKUniversal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTenjinSDKUniversal.a; sourceTree = "<group>"; };
+		BBA8C2262971FA08009BDECC /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		BBC16386296B5FF800868752 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		BBC16388296B601500868752 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BBC1638A296BCB6500868752 /* HTTPSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSHelper.swift; sourceTree = "<group>"; };
@@ -145,7 +153,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBEA8A24296E88C100DF37F8 /* GoogleMobileAds in Frameworks */,
+				BBA8C2272971FA08009BDECC /* AdSupport.framework in Frameworks */,
 				BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */,
+				BBA8C2222971F3C3009BDECC /* libTenjinSDKUniversal.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBA8C2232971F3C3009BDECC /* libTenjinSDKUniversal.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBA8C2242971F3C3009BDECC /* libTenjinSDKUniversal.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +185,7 @@
 				BB0DBAC0296AA50000D2DFB9 /* ChitChatTests */,
 				BB0DBACA296AA50000D2DFB9 /* ChitChatUITests */,
 				BB0DBAA5296AA4FE00D2DFB9 /* Products */,
+				BBA8C2252971FA07009BDECC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -194,6 +207,7 @@
 				BB04B3F8296E38E0000BEC02 /* Ultra Image.jpg */,
 				BBD65BB6296FDBB4001F730C /* shareImage.gif */,
 				BBD65BEC2970766C001F730C /* arrowGif.gif */,
+				BBA8C21E2971F3C3009BDECC /* Tenjin */,
 				BBD65BBA29705CCE001F730C /* Screenshots for Inside the App */,
 				BB0DBAA7296AA4FE00D2DFB9 /* AppDelegate.swift */,
 				BB0DBAA9296AA4FE00D2DFB9 /* SceneDelegate.swift */,
@@ -232,6 +246,24 @@
 				BB0DBACD296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift */,
 			);
 			path = ChitChatUITests;
+			sourceTree = "<group>";
+		};
+		BBA8C21E2971F3C3009BDECC /* Tenjin */ = {
+			isa = PBXGroup;
+			children = (
+				BBA8C21F2971F3C3009BDECC /* TenjinSDK.h */,
+				BBA8C2202971F3C3009BDECC /* chitchat-client-bridge.h */,
+				BBA8C2212971F3C3009BDECC /* libTenjinSDKUniversal.a */,
+			);
+			path = Tenjin;
+			sourceTree = "<group>";
+		};
+		BBA8C2252971FA07009BDECC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBA8C2262971FA08009BDECC /* AdSupport.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		BBD65BBA29705CCE001F730C /* Screenshots for Inside the App */ = {
@@ -652,7 +684,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;
@@ -666,7 +698,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ChitChat/Tenjin",
+				);
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -674,6 +710,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/alexcoundouriotis/Xcode Projects/ChitChat/ChitChat/Tenjin/chitchat-client-bridge.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -685,7 +722,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;
@@ -699,7 +736,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ChitChat/Tenjin",
+				);
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -707,6 +748,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/alexcoundouriotis/Xcode Projects/ChitChat/ChitChat/Tenjin/chitchat-client-bridge.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -721,6 +763,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ChitChat/Tenjin",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -740,6 +786,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ChitChat/Tenjin",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -757,6 +807,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ChitChat/Tenjin",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChatUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -774,6 +828,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ChitChat/Tenjin",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChatUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
