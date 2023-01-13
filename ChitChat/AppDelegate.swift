@@ -11,24 +11,40 @@ import GoogleMobileAds
 import AppTrackingTransparency
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        let center = UNUserNotificationCenter.current()
+            UNUserNotificationCenter.current().delegate = self
+            center.requestAuthorization(options: [.sound, .alert, .badge], completionHandler: { (granted, error) in
+                if #available(iOS 14.0, *) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                            DispatchQueue.main.async {
+                                TenjinSDK.getInstance("UN4PPH4ZU5Z3S6BDDJZZCXLPPFFJ5XLP")
+                                TenjinSDK.connect()
+                                TenjinSDK.debugLogs()
+                                TenjinSDK.sendEvent(withName: "test_event")
+                            }
+                        })
+                    })
+                }})
+            UIApplication.shared.registerForRemoteNotifications()
+        
         GADMobileAds.sharedInstance().start()
         
-        TenjinSDK.getInstance("UN4PPH4ZU5Z3S6BDDJZZCXLPPFFJ5XLP")
-        TenjinSDK.connect()
-        TenjinSDK.debugLogs()
-        TenjinSDK.sendEvent(withName: "test_event")
+        
         
         if UserDefaults.standard.string(forKey: Constants.authTokenKey) == nil {
             HTTPSHelper.registerUser(delegate: self)
         }
         
+                
         return true
     }
+    
 
     // MARK: UISceneSession Lifecycle
 
