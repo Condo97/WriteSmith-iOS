@@ -258,7 +258,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrade Now!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ohx-NE-H3Z">
-                                        <rect key="frame" x="232" y="0.0" width="97" height="28"/>
+                                        <rect key="frame" x="234" y="0.0" width="97" height="28"/>
                                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -266,13 +266,13 @@
                                 </subviews>
                                 <color key="backgroundColor" name="ChatTextColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ohx-NE-H3Z" secondAttribute="trailing" constant="14" id="9W5-OE-ySv"/>
+                                    <constraint firstAttribute="trailing" secondItem="ohx-NE-H3Z" secondAttribute="trailing" constant="14" id="9W5-OE-ySv"/>
                                     <constraint firstItem="ohx-NE-H3Z" firstAttribute="top" secondItem="zjO-lF-Ljf" secondAttribute="top" id="BhK-JA-lcA"/>
                                     <constraint firstAttribute="bottom" secondItem="aBe-Pd-VRe" secondAttribute="bottom" id="CjQ-Hu-PPP"/>
                                     <constraint firstAttribute="height" constant="28" id="GRb-PJ-I6M"/>
                                     <constraint firstItem="aBe-Pd-VRe" firstAttribute="top" secondItem="zjO-lF-Ljf" secondAttribute="top" id="KXX-4b-WXf"/>
                                     <constraint firstAttribute="bottom" secondItem="ohx-NE-H3Z" secondAttribute="bottom" id="USr-5L-JYM"/>
-                                    <constraint firstItem="ohx-NE-H3Z" firstAttribute="leading" secondItem="aBe-Pd-VRe" secondAttribute="trailing" constant="7" id="fAl-nL-8dv"/>
+                                    <constraint firstItem="ohx-NE-H3Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aBe-Pd-VRe" secondAttribute="trailing" constant="7" id="fAl-nL-8dv"/>
                                     <constraint firstItem="aBe-Pd-VRe" firstAttribute="leading" secondItem="zjO-lF-Ljf" secondAttribute="leading" constant="14" id="v8r-bs-5Da"/>
                                 </constraints>
                             </view>
@@ -434,6 +434,7 @@
                         <outlet property="remainingView" destination="zjO-lF-Ljf" id="4Mh-xL-j9a"/>
                         <outlet property="submitButton" destination="ebw-3H-E13" id="YIC-eB-NK7"/>
                         <outlet property="tableView" destination="qLG-Gu-PvP" id="Cve-wH-kIT"/>
+                        <outlet property="upgradeNowText" destination="ohx-NE-H3Z" id="EUZ-nZ-Igo"/>
                         <segue destination="kYQ-hg-YGZ" kind="presentation" identifier="toUltraPurchase" modalPresentationStyle="fullScreen" id="cCs-vG-REI"/>
                         <segue destination="9ii-tI-ywc" kind="presentation" identifier="toSettingsView" id="kSa-7n-s2X"/>
                     </connections>
@@ -499,16 +500,10 @@
                                         <subviews>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Za-Kx-jza">
                                                 <rect key="frame" x="61" y="0.0" width="48.666666666666657" height="35"/>
-                                                <color key="tintColor" name="TextColor"/>
+                                                <color key="tintColor" name="ChatTextColor"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="Terms">
-                                                            <attributes>
-                                                                <font key="NSFont" size="9" name="Helvetica"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
+                                                <buttonConfiguration key="configuration" style="plain" title="Terms">
+                                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
                                                 </buttonConfiguration>
                                                 <connections>
                                                     <action selector="termsAndConditionsButton:" destination="kYQ-hg-YGZ" eventType="touchUpInside" id="LhA-gP-2RG"/>
@@ -516,16 +511,10 @@
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wX4-ym-oES">
                                                 <rect key="frame" x="330" y="0.0" width="56" height="35"/>
-                                                <color key="tintColor" name="TextColor"/>
+                                                <color key="tintColor" name="ChatTextColor"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="Restore">
-                                                            <attributes>
-                                                                <font key="NSFont" size="9" name="Helvetica"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
+                                                <buttonConfiguration key="configuration" style="plain" title="Restore">
+                                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
                                                 </buttonConfiguration>
                                                 <connections>
                                                     <action selector="restorePurchaseButton:" destination="kYQ-hg-YGZ" eventType="touchUpInside" id="oci-Xk-Ing"/>
@@ -533,16 +522,10 @@
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VIZ-jx-bP0">
                                                 <rect key="frame" x="7" y="0.0" width="54" height="35"/>
-                                                <color key="tintColor" name="TextColor"/>
+                                                <color key="tintColor" name="ChatTextColor"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="Privacy">
-                                                            <attributes>
-                                                                <font key="NSFont" size="9" name="Helvetica"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
+                                                <buttonConfiguration key="configuration" style="plain" title="Privacy">
+                                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
                                                 </buttonConfiguration>
                                                 <connections>
                                                     <action selector="privacyPolicyButton:" destination="kYQ-hg-YGZ" eventType="touchUpInside" id="1T6-zg-B3K"/>

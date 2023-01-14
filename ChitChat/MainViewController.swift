@@ -20,6 +20,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var remainingView: RoundedView!
     @IBOutlet weak var remainingShadowView: ShadowView!
     @IBOutlet weak var chatsRemainingText: UILabel!
+    @IBOutlet weak var upgradeNowText: UILabel!
     @IBOutlet weak var adView: UIView!
     @IBOutlet weak var adShadowView: ShadowView!
     
@@ -362,6 +363,8 @@ class MainViewController: UIViewController {
                     self.promoShadowView.isHidden = false
                     
                     self.chatsRemainingText.text = "You have \(self.remaining) chats remaining today..."
+                    self.chatsRemainingText.textColor = .darkGray
+                    self.upgradeNowText.textColor = .darkGray
                     
                     //TODO: - If remaining % 5 is 0 then serve an ad
                     if self.remaining % 5 == 0 && !self.firstChat {
