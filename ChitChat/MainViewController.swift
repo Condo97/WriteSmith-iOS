@@ -51,7 +51,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         // For Testing
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "417bf2ca112515b09c600668985dbf2b" ]
+//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "417bf2ca112515b09c600668985dbf2b" ]
         
         inputTextView.delegate = self
         tableView.delegate = self
@@ -240,7 +240,6 @@ class MainViewController: UIViewController {
         shareImageButton.tintColor = Colors.chatTextColor
         
         shareMenuBarItem = UIBarButtonItem(customView: shareImageButton)
-        
         
         /* Setup Pro Menu Bar Item */
         //TODO: - New Pro Image
