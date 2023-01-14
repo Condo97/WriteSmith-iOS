@@ -20,6 +20,7 @@ class UltraPurchaseViewController: UIViewController {
     @IBOutlet weak var gradientView: GradientView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var everythingElseView: UIView!
+    @IBOutlet weak var displayPriceLabel: UILabel!
     
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     
@@ -34,6 +35,16 @@ class UltraPurchaseViewController: UIViewController {
         super.viewDidLoad()
         
 //        imageView.image = UIImage(named: UserDefaults.standard.string(forKey: GlobalConstants.userDefaultStoredProImageName) ?? StartScreenConstants.rainbowHills)
+        
+        let displayPrice = (UserDefaults.standard.string(forKey: Constants.userDefaultStoredWeeklyDisplayPrice) ?? Constants.defaultDisplayPrice) as String
+        
+        let displayPriceString = NSMutableAttributedString()
+        displayPriceString.bold("3 Day Trial")
+        displayPriceString.normal(" - Then ")
+        displayPriceString.normal(displayPrice)
+        displayPriceString.normal(" / week")
+        
+        displayPriceLabel.attributedText = displayPriceString
     }
     
     override func viewDidAppear(_ animated: Bool) {

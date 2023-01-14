@@ -586,6 +586,10 @@ extension MainViewController: HTTPSHelperDelegate {
         UserDefaults.standard.set(authToken, forKey: Constants.authTokenKey)
     }
     
+    func didGetDisplayPrice(json: [String : Any]) {
+        
+    }
+    
     func getRemaining(json: [String : Any]) {
         guard let body = json["Body"] as? [String: Any] else {
             print("Error! No Body in response...\n\(json)")

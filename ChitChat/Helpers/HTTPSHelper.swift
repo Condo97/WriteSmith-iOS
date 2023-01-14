@@ -9,6 +9,7 @@ import Foundation
 
 protocol HTTPSHelperDelegate: AnyObject {
     func didRegisterUser(json: [String: Any])
+    func didGetDisplayPrice(json: [String: Any])
     func getRemaining(json: [String: Any])
     func getChat(json: [String: Any])
     func getChatError()
@@ -34,6 +35,35 @@ class HTTPSHelper {
                     do {
                         let json = try JSONSerialization.jsonObject(with: data, options:[]) as? [String: Any]
                         delegate?.didRegisterUser(json: json!)
+                    } catch {
+                        print("Error serializing registerUesr() JSON from data")
+                    }
+                }
+            }
+        })
+        
+        task.resume()
+    }
+    
+    static func getDisplayPrice(delegate: HTTPSHelperDelegate?) {
+        let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getDisplayPrice)")!
+        let postBody = "{}"
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.httpBody = postBody.data(using: .utf8)
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+            if let error = error {
+                print("ERRROR")
+                print(error)
+            } else if let data = data {
+                DispatchQueue.main.async {
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data, options:[]) as? [String: Any]
+                        delegate?.didGetDisplayPrice(json: json!)
                     } catch {
                         print("Error serializing registerUesr() JSON from data")
                     }

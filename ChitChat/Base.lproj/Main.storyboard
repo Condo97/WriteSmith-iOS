@@ -238,7 +238,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0O5-8u-YqV" customClass="ShadowView" customModule="ChitChat" customModuleProvider="target">
-                                <rect key="frame" x="24" y="574" width="345" height="28"/>
+                                <rect key="frame" x="24" y="567" width="345" height="28"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="Pdk-4H-dl4"/>
@@ -249,7 +249,7 @@
                                 <color key="backgroundColor" name="ChatBackgroundColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjO-lF-Ljf" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
-                                <rect key="frame" x="24" y="574" width="345" height="28"/>
+                                <rect key="frame" x="24" y="567" width="345" height="28"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have blank chats remaining today..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aBe-Pd-VRe">
                                         <rect key="frame" x="14" y="0.0" width="211" height="28"/>
@@ -414,7 +414,7 @@
                             <constraint firstItem="0O5-8u-YqV" firstAttribute="leading" secondItem="zjO-lF-Ljf" secondAttribute="leading" id="j37-gk-0u4"/>
                             <constraint firstItem="x8b-qr-kTU" firstAttribute="trailing" secondItem="qLG-Gu-PvP" secondAttribute="trailing" id="opt-Y3-RiY"/>
                             <constraint firstItem="x8b-qr-kTU" firstAttribute="trailing" secondItem="qGN-dw-4Vg" secondAttribute="trailing" id="t92-Q3-B7g"/>
-                            <constraint firstItem="5Yk-MW-nHX" firstAttribute="top" secondItem="zjO-lF-Ljf" secondAttribute="bottom" id="v5E-bR-5tP"/>
+                            <constraint firstItem="5Yk-MW-nHX" firstAttribute="top" secondItem="zjO-lF-Ljf" secondAttribute="bottom" constant="7" id="v5E-bR-5tP"/>
                             <constraint firstItem="5Yk-MW-nHX" firstAttribute="bottom" secondItem="qLG-Gu-PvP" secondAttribute="bottom" id="wAF-TV-zBl"/>
                             <constraint firstItem="qGN-dw-4Vg" firstAttribute="leading" secondItem="x8b-qr-kTU" secondAttribute="leading" id="yLo-2P-GAU"/>
                             <constraint firstItem="wfE-Ew-1Ob" firstAttribute="leading" secondItem="5Yk-MW-nHX" secondAttribute="leading" id="z5p-sg-ggp"/>
@@ -903,6 +903,7 @@
                         <outlet property="activityIndicator" destination="j8U-ao-kNn" id="HQr-jq-Cfc"/>
                         <outlet property="backgroundView" destination="l0r-Pf-luk" id="2AK-Nl-ZwK"/>
                         <outlet property="closeButton" destination="7NL-s3-xkg" id="qZY-dS-uAe"/>
+                        <outlet property="displayPriceLabel" destination="n2p-wm-pmS" id="5ms-6J-i0F"/>
                         <outlet property="everythingElseView" destination="9sZ-As-459" id="KW0-CE-xbm"/>
                         <outlet property="gradientView" destination="Zis-EH-kPh" id="hvz-ND-qpv"/>
                         <outlet property="imageView" destination="WJY-ZT-siG" id="kCy-lW-fgi"/>
@@ -956,13 +957,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B8F-lp-bol">
                                                     <rect key="frame" x="117" y="32.666666666666664" width="222" height="53.999999999999993"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ChitChat Ultra hasn't been activated." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sux-75-J18">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChitChat Ultra hasn't been activated." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sux-75-J18">
                                                             <rect key="frame" x="7" y="7" width="208" height="16"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="11"/>
                                                             <color key="textColor" name="UserChatBubbleColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tap to Claim 3 Days Free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8t-lW-8Wz">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap to Claim 3 Days Free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8t-lW-8Wz">
                                                             <rect key="frame" x="7" y="23" width="201" height="24"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                                             <color key="textColor" name="UserChatBubbleColor"/>
@@ -1354,7 +1355,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="pmL-jf-Hfe"/>
+        <segue reference="cCs-vG-REI"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Screenshot 1 Cropped.jpg" width="1284" height="2078"/>

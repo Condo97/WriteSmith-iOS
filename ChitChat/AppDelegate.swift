@@ -35,12 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         GADMobileAds.sharedInstance().start()
         
-        
-        
         if UserDefaults.standard.string(forKey: Constants.authTokenKey) == nil {
             HTTPSHelper.registerUser(delegate: self)
         }
         
+        HTTPSHelper.getDisplayPrice(delegate: self)
                 
         return true
     }
@@ -113,6 +112,18 @@ extension AppDelegate: HTTPSHelperDelegate {
             if let authToken = body["authToken"] as? String {
                 UserDefaults.standard.set(authToken, forKey: Constants.authTokenKey)
             }
+        }
+    }
+    
+    func didGetDisplayPrice(json: [String : Any]) {
+        if let body = json["Body"] as? [String: Any] {
+            if let displayPrice = body["displayPrice"] as? String {
+                UserDefaults.standard.set(displayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+            } else {
+                UserDefaults.standard.set(Constants.defaultDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+            }
+        } else {
+            UserDefaults.standard.set(Constants.defaultDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
         }
     }
     
