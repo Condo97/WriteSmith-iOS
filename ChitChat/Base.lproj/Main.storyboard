@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="749"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qLG-Gu-PvP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qLG-Gu-PvP" customClass="ChatTableView" customModule="ChitChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="393" height="699"/>
                                 <color key="backgroundColor" name="ChatBackgroundColor"/>
                                 <prototypes>
@@ -35,7 +35,34 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="999" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obb-Wb-64u">
                                                     <rect key="frame" x="32" y="18" width="281" height="45"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" name="ChatTextColor"/>
+                                                    <color key="textColor" name="UserChatTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Nm-Oo-DlD">
+                                                    <rect key="frame" x="32" y="18" width="281" height="45"/>
+                                                    <color key="backgroundColor" name="UserChatBubbleColor"/>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOh-0V-oPQ">
+                                                    <rect key="frame" x="32" y="18.666666666666671" width="281" height="44"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment>
+                                                            <string key="content">Copied!
+</string>
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.87450987099999999" green="0.87450987099999999" blue="0.87450975180000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <font key="NSFont" size="20" name="Avenir-Light"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                        <fragment content="(hold to share)">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.87450987099999999" green="0.87450987099999999" blue="0.87450975180000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <font key="NSFont" size="12" name="Avenir-Heavy"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNh-rI-jan" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
@@ -67,22 +94,31 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="5Nm-Oo-DlD" firstAttribute="bottom" secondItem="obb-Wb-64u" secondAttribute="bottom" id="7M0-4Z-c7b"/>
                                                 <constraint firstItem="ePE-H6-IrF" firstAttribute="trailing" secondItem="obb-Wb-64u" secondAttribute="trailing" constant="24" id="DBA-F5-aMk"/>
+                                                <constraint firstItem="5Nm-Oo-DlD" firstAttribute="trailing" secondItem="obb-Wb-64u" secondAttribute="trailing" id="Enq-1Q-dBm"/>
+                                                <constraint firstItem="5Nm-Oo-DlD" firstAttribute="leading" secondItem="obb-Wb-64u" secondAttribute="leading" id="Fbc-lB-jyI"/>
                                                 <constraint firstItem="obb-Wb-64u" firstAttribute="leading" secondItem="Dr6-sl-WSv" secondAttribute="leading" constant="32" id="JoJ-rt-Cue"/>
                                                 <constraint firstItem="CNh-rI-jan" firstAttribute="leading" secondItem="obb-Wb-64u" secondAttribute="trailing" constant="24" id="QIB-ou-qOt"/>
                                                 <constraint firstAttribute="trailing" secondItem="CNh-rI-jan" secondAttribute="trailing" constant="24" id="b1Z-gE-dqH"/>
                                                 <constraint firstItem="ePE-H6-IrF" firstAttribute="top" secondItem="obb-Wb-64u" secondAttribute="top" priority="999" constant="-14" id="ip6-gd-4eG"/>
                                                 <constraint firstItem="ePE-H6-IrF" firstAttribute="leading" secondItem="obb-Wb-64u" secondAttribute="leading" constant="-24" id="kCL-ne-7MI"/>
+                                                <constraint firstItem="5Nm-Oo-DlD" firstAttribute="top" secondItem="obb-Wb-64u" secondAttribute="top" id="kcP-Pp-Tul"/>
+                                                <constraint firstItem="lOh-0V-oPQ" firstAttribute="centerY" secondItem="Dr6-sl-WSv" secondAttribute="centerY" id="lWW-80-SmL"/>
                                                 <constraint firstAttribute="bottom" secondItem="CNh-rI-jan" secondAttribute="bottom" constant="4" id="nSe-Zw-1MY"/>
                                                 <constraint firstItem="ePE-H6-IrF" firstAttribute="bottom" secondItem="obb-Wb-64u" secondAttribute="bottom" priority="999" constant="14" id="pJ0-cE-LD6"/>
+                                                <constraint firstItem="lOh-0V-oPQ" firstAttribute="leading" secondItem="obb-Wb-64u" secondAttribute="leading" id="rtZ-js-KBs"/>
                                                 <constraint firstItem="obb-Wb-64u" firstAttribute="top" secondItem="Dr6-sl-WSv" secondAttribute="topMargin" constant="7" id="y0v-rM-aH4"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="obb-Wb-64u" secondAttribute="bottom" constant="7" id="zk2-kG-iOV"/>
+                                                <constraint firstItem="lOh-0V-oPQ" firstAttribute="trailing" secondItem="obb-Wb-64u" secondAttribute="trailing" id="zpn-fk-RbJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="ChatBackgroundColor"/>
                                         <connections>
                                             <outlet property="bubbleImageView" destination="ePE-H6-IrF" id="d26-K6-STv"/>
                                             <outlet property="chatText" destination="obb-Wb-64u" id="Nwc-Pa-f1t"/>
+                                            <outlet property="copiedBackgroundView" destination="5Nm-Oo-DlD" id="uJj-pT-MIq"/>
+                                            <outlet property="copiedLabel" destination="lOh-0V-oPQ" id="UrG-0V-0Uj"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="aiCell" rowHeight="81" id="LFh-dL-xvE" customClass="ChatTableViewCell" customModule="ChitChat" customModuleProvider="target">
@@ -99,7 +135,34 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="999" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EV8-uE-Vif">
                                                     <rect key="frame" x="80" y="18" width="281" height="45"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                    <color key="textColor" name="AccentColor"/>
+                                                    <color key="textColor" name="AIChatTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9aq-cl-z4b">
+                                                    <rect key="frame" x="80" y="18" width="281" height="45"/>
+                                                    <color key="backgroundColor" name="AIChatBubbleColor"/>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZb-bv-Ido">
+                                                    <rect key="frame" x="80" y="18.666666666666671" width="281" height="44"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment>
+                                                            <string key="content">Copied!
+</string>
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.2669476569" green="0.27396714690000001" blue="0.32157525419999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <font key="NSFont" size="20" name="Avenir-Light"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                        <fragment content="(hold to share)">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.2669476569" green="0.27396714690000001" blue="0.32157525419999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <font key="NSFont" size="12" name="Avenir-Heavy"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifr-cc-0Nq" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
@@ -136,18 +199,27 @@
                                                 <constraint firstItem="ckP-Im-npd" firstAttribute="bottom" secondItem="EV8-uE-Vif" secondAttribute="bottom" constant="14" id="6OW-Ke-ruR"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="EV8-uE-Vif" secondAttribute="bottom" constant="7" id="B6J-yg-0T1"/>
                                                 <constraint firstItem="ckP-Im-npd" firstAttribute="leading" secondItem="EV8-uE-Vif" secondAttribute="leading" constant="-24" id="Gdk-7Y-CXX"/>
+                                                <constraint firstItem="qZb-bv-Ido" firstAttribute="leading" secondItem="EV8-uE-Vif" secondAttribute="leading" id="O5W-Fq-Kd4"/>
+                                                <constraint firstItem="qZb-bv-Ido" firstAttribute="trailing" secondItem="EV8-uE-Vif" secondAttribute="trailing" id="Oaa-kP-zGb"/>
+                                                <constraint firstItem="9aq-cl-z4b" firstAttribute="bottom" secondItem="EV8-uE-Vif" secondAttribute="bottom" id="Ty8-jf-FiQ"/>
+                                                <constraint firstItem="9aq-cl-z4b" firstAttribute="leading" secondItem="EV8-uE-Vif" secondAttribute="leading" id="UQj-eA-QcV"/>
+                                                <constraint firstItem="9aq-cl-z4b" firstAttribute="top" secondItem="EV8-uE-Vif" secondAttribute="top" id="VII-6I-NFu"/>
                                                 <constraint firstItem="ifr-cc-0Nq" firstAttribute="leading" secondItem="3cn-Uq-UKg" secondAttribute="leading" constant="24" id="Vc6-Xa-yex"/>
+                                                <constraint firstItem="9aq-cl-z4b" firstAttribute="trailing" secondItem="EV8-uE-Vif" secondAttribute="trailing" id="Zf8-C7-sC9"/>
                                                 <constraint firstItem="ifr-cc-0Nq" firstAttribute="width" secondItem="ifr-cc-0Nq" secondAttribute="height" id="aWO-FJ-uvt"/>
                                                 <constraint firstItem="EV8-uE-Vif" firstAttribute="leading" secondItem="ifr-cc-0Nq" secondAttribute="trailing" constant="24" id="dr2-2O-UM6"/>
                                                 <constraint firstItem="ckP-Im-npd" firstAttribute="top" secondItem="EV8-uE-Vif" secondAttribute="top" constant="-14" id="lv1-6x-6rJ"/>
                                                 <constraint firstItem="ckP-Im-npd" firstAttribute="trailing" secondItem="EV8-uE-Vif" secondAttribute="trailing" constant="24" id="qk2-Oc-tBH"/>
                                                 <constraint firstItem="EV8-uE-Vif" firstAttribute="top" secondItem="3cn-Uq-UKg" secondAttribute="topMargin" constant="7" id="wU8-uE-YzV"/>
+                                                <constraint firstItem="qZb-bv-Ido" firstAttribute="centerY" secondItem="3cn-Uq-UKg" secondAttribute="centerY" id="yF3-HR-1Ev"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="ChatBackgroundColor"/>
                                         <connections>
                                             <outlet property="bubbleImageView" destination="ckP-Im-npd" id="GwG-37-QKq"/>
                                             <outlet property="chatText" destination="EV8-uE-Vif" id="8Vs-NQ-GzU"/>
+                                            <outlet property="copiedBackgroundView" destination="9aq-cl-z4b" id="tNS-oE-zUW"/>
+                                            <outlet property="copiedLabel" destination="qZb-bv-Ido" id="t0g-mh-JZj"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loadingCell" rowHeight="81" id="SM0-gq-GeG" customClass="ChatTableViewCell" customModule="ChitChat" customModuleProvider="target">
@@ -264,7 +336,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="ChatTextColor"/>
+                                <color key="backgroundColor" name="UserChatTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ohx-NE-H3Z" secondAttribute="trailing" constant="14" id="9W5-OE-ySv"/>
                                     <constraint firstItem="ohx-NE-H3Z" firstAttribute="top" secondItem="zjO-lF-Ljf" secondAttribute="top" id="BhK-JA-lcA"/>
@@ -293,7 +365,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="bRU-av-FzB"/>
                                                 </constraints>
-                                                <color key="textColor" name="ChatTextColor"/>
+                                                <color key="textColor" name="UserChatTextColor"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -304,7 +376,7 @@
                                                     <constraint firstAttribute="width" secondItem="ebw-3H-E13" secondAttribute="height" multiplier="1:1" id="NL3-rG-50V"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="tintColor" name="ChatTextColor"/>
+                                                <color key="tintColor" name="UserChatTextColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" backgroundImage="arrow.up.circle.fill" catalog="system"/>
                                                 <connections>
@@ -312,7 +384,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" name="AccentColor"/>
+                                        <color key="backgroundColor" name="UserChatBubbleColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="mEz-xa-3yT" secondAttribute="bottom" constant="14" id="6qo-Nw-1d4"/>
                                             <constraint firstAttribute="trailing" secondItem="ebw-3H-E13" secondAttribute="trailing" constant="24" id="NfW-BC-6sL"/>
@@ -336,6 +408,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTX-cg-tD5">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
+                                                <color key="backgroundColor" name="AIChatBubbleColor"/>
                                                 <color key="tintColor" name="ChatBackgroundColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Get 3 Days Free">
@@ -552,7 +625,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m14-pZ-TJZ" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
                                                 <rect key="frame" x="14" y="27" width="365" height="75"/>
-                                                <color key="backgroundColor" name="ChatTextColor"/>
+                                                <color key="backgroundColor" name="UserChatTextColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="75" id="AtX-jf-XxM"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="Vag-nl-j8f"/>
@@ -656,7 +729,7 @@
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bEp-IC-2eU">
                                                         <rect key="frame" x="0.0" y="9.6666666666666643" width="40" height="37"/>
-                                                        <color key="tintColor" name="ChatTextColor"/>
+                                                        <color key="tintColor" name="UserChatTextColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="5bW-6W-Lh6"/>
                                                             <constraint firstAttribute="height" constant="40" id="hVu-KB-gfE"/>
@@ -664,15 +737,15 @@
                                                     </imageView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ldl-Ch-Zrn">
                                                         <rect key="frame" x="0.0" y="49.666666666666657" width="40" height="37.000000000000007"/>
-                                                        <color key="tintColor" name="ChatTextColor"/>
+                                                        <color key="tintColor" name="UserChatTextColor"/>
                                                     </imageView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NLr-QG-Njr">
                                                         <rect key="frame" x="0.0" y="89.6666666666666" width="40" height="37"/>
-                                                        <color key="tintColor" name="ChatTextColor"/>
+                                                        <color key="tintColor" name="UserChatTextColor"/>
                                                     </imageView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="IHg-zV-J0T">
                                                         <rect key="frame" x="0.0" y="129.6666666666666" width="40" height="37"/>
-                                                        <color key="tintColor" name="ChatTextColor"/>
+                                                        <color key="tintColor" name="UserChatTextColor"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJK-i4-EQw">
                                                         <rect key="frame" x="54" y="15" width="220" height="26"/>
@@ -691,6 +764,11 @@
                                                             </fragment>
                                                         </attributedString>
                                                         <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="setTextColor">
+                                                                <color key="value" red="1" green="0.59215688710000003" blue="0.28627452250000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LH-YW-lYH">
                                                         <rect key="frame" x="54" y="55" width="220" height="26"/>
@@ -828,13 +906,13 @@
                                     <constraint firstAttribute="width" secondItem="JzP-RW-8RR" secondAttribute="height" multiplier="146:87" id="Ime-eJ-qjs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="127"/>
-                                <color key="textColor" name="ChatTextColor"/>
+                                <color key="textColor" name="UserChatTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlimited Messages &amp; More!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkE-jT-vqk">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlimited Messages &amp; More!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkE-jT-vqk" customClass="AttributedLabel" customModule="ChitChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="415.66666666666669" width="393" height="28"/>
                                 <fontDescription key="fontDescription" name="Avenir-MediumOblique" family="Avenir" pointSize="20"/>
-                                <color key="textColor" name="ChatTextColor"/>
+                                <color key="textColor" name="UserChatTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7NL-s3-xkg">
@@ -940,13 +1018,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B8F-lp-bol">
                                                     <rect key="frame" x="117" y="32.666666666666664" width="222" height="53.999999999999993"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChitChat Ultra hasn't been activated." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sux-75-J18">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ChitChat Ultra hasn't been activated." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sux-75-J18">
                                                             <rect key="frame" x="7" y="7" width="208" height="16"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="11"/>
                                                             <color key="textColor" name="UserChatBubbleColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap to Claim 3 Days Free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8t-lW-8Wz">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tap to Claim 3 Days Free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8t-lW-8Wz">
                                                             <rect key="frame" x="7" y="23" width="201" height="24"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                                             <color key="textColor" name="UserChatBubbleColor"/>
@@ -1359,13 +1437,13 @@
             <color red="0.20392156862745098" green="0.20784313725490197" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="AIChatBubbleColor">
-            <color red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.875" green="0.875" blue="0.875" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="AccentColor">
+        <namedColor name="AIChatTextColor">
             <color red="0.2669999897480011" green="0.27500000596046448" blue="0.32499998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ChatBackgroundColor">
-            <color red="0.3843137254901961" green="0.41960784313725491" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.38400000333786011" green="0.41999998688697815" blue="0.48600000143051147" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="ChatTextColor">
             <color red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1378,6 +1456,9 @@
         </namedColor>
         <namedColor name="UserChatBubbleColor">
             <color red="0.2669999897480011" green="0.27500000596046448" blue="0.32499998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="UserChatTextColor">
+            <color red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

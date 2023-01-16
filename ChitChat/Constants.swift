@@ -46,11 +46,12 @@ struct HTTPSConstants {
 }
 
 struct Colors {
-    static let accentColor = UIColor(named: "AccentColor")!
+    static let accentColor = UIColor(named: "UserChatBubbleColor")!
     static let userChatBackgroundColor = UIColor(named: "UserChatBackgroundColor")!
-    static let chatTextColor = UIColor(named: "ChatTextColor")!
     static let userChatBubbleColor = UIColor(named: "UserChatBubbleColor")!
+    static let userChatTextColor = UIColor(named: "UserChatTextColor")!
     static let aiChatBubbleColor = UIColor(named: "AIChatBubbleColor")!
+    static let aiChatTextColor = UIColor(named: "AIChatTextColor")!
 }
 
 struct FinishReasons {

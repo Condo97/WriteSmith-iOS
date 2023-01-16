@@ -27,6 +27,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var adViewHeightConstraint: NSLayoutConstraint!
     
     let inputPlaceholder = "Tap to start chatting..."
+    let copyFooterText = "Made on ChitChat - AI Chat With GPT"
     
     var rowsToType: [Int] = []
     var origin: CGFloat = 0.0
@@ -41,6 +42,7 @@ class MainViewController: UIViewController {
     var firstChat = true
     var isProcessingChat = false
     var submitSoftDisable = false
+    var isLongPressForCopy = false
     
     var remaining = -1
     
@@ -52,7 +54,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         // For Testing
-//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "417bf2ca112515b09c600668985dbf2b" ]
+        //        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "417bf2ca112515b09c600668985dbf2b" ]
         
         inputTextView.delegate = self
         tableView.delegate = self
@@ -92,8 +94,19 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)))
+        // Dismiss Keyboard Gesture Recognizer
+        let dismissKeyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        dismissKeyboardGestureRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
+        
+        // Tap on Remaining View to upgrade gesture recognizer
         remainingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upgradeSelector)))
+        
+        // Long press for message share sheet
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressOnTableView))
+        longPressGestureRecognizer.cancelsTouchesInView = false
+        longPressGestureRecognizer.minimumPressDuration = 1.0
+        tableView.addGestureRecognizer(longPressGestureRecognizer)
         
         if UserDefaults.standard.string(forKey: Constants.authTokenKey) == nil {
             HTTPSHelper.registerUser(delegate: self)
@@ -208,6 +221,138 @@ class MainViewController: UIViewController {
         goToUltraPurchase()
     }
     
+    // Touches began
+    // Putting it here because it's being used for the tableViewCell bouncing
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        if let touch = touches.first {
+            let location = touch.location(in: tableView)
+            let indexPath = tableView.indexPathForRow(at: location)
+            
+            if indexPath != nil {
+                guard let cell = tableView.cellForRow(at: indexPath!) as? ChatTableViewCell else {
+                    return
+                }
+                
+                bounce(sender: cell)
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        touchUpOrMoved(touches: touches, with: event)
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        touchUpOrMoved(touches: touches, with: event)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        touchUpOrMoved(touches: touches, with: event)
+    }
+    
+    func touchUpOrMoved(touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let location = touch.location(in: tableView)
+            let indexPath = tableView.indexPathForRow(at: location)
+            
+            if indexPath != nil {
+                guard let cell = tableView.cellForRow(at: indexPath!) as? ChatTableViewCell else {
+                    return
+                }
+                
+                if !isLongPressForCopy {
+                    // Show copy text at location
+                    if let attributedText = cell.chatText.attributedText {
+                        // Copy to Pasteboard
+                        var text = attributedText.string
+                        text = "\(text)\n\n\(copyFooterText)"
+                        
+                        UIPasteboard.general.string = attributedText.string
+                        
+                        // Move label if too large
+                        if cell.frame.height >= cell.copiedLabel.frame.height * 4 {
+                            let touchLocationInCell = touch.location(in: cell.chatText)
+                            let proposedY = touchLocationInCell.y - cell.copiedLabel.frame.height
+                            let copiedLabelCenterY = cell.copiedLabel.frame.height / 2
+                            let littleBuffer = (cell.frame.height - cell.chatText.frame.height) / 2
+                            
+                            // Okay I've got to do something about these calculations at some point
+                            if proposedY <= cell.copiedLabel.frame.height * 1.2 - cell.copiedLabel.frame.height {
+                                cell.copiedLabel.frame = CGRect(x: cell.copiedLabel.frame.minX, y: cell.copiedLabel.frame.height * 1.2 - copiedLabelCenterY + littleBuffer, width: cell.copiedLabel.frame.width, height: cell.copiedLabel.frame.height)
+                            } else if proposedY >= cell.chatText.frame.height - cell.copiedLabel.frame.height * 1.2 - 2 * cell.copiedLabel.frame.height - littleBuffer  {
+                                cell.copiedLabel.frame = CGRect(x: cell.copiedLabel.frame.minX, y: cell.chatText.frame.height - cell.copiedLabel.frame.height * 1.2 - cell.copiedLabel.frame.height / 2 + littleBuffer, width: cell.copiedLabel.frame.width, height: cell.copiedLabel.frame.height)
+                            } else {
+                                cell.copiedLabel.frame = CGRect(x: cell.copiedLabel.frame.minX, y: touchLocationInCell.y + copiedLabelCenterY, width: cell.copiedLabel.frame.width, height: cell.copiedLabel.frame.height)
+                            }
+                        } else {
+                            cell.copiedLabel.frame = CGRect(x: 0, y: 0, width: cell.chatText.frame.width, height: cell.chatText.frame.height)
+                        }
+                        
+                        // Animate Copy
+                        UIView.animate(withDuration: 0.2, delay: 0.0, animations: {
+                            cell.copiedLabel.alpha = 1.0
+                            cell.copiedBackgroundView.alpha = 1.0
+                            
+                            UIView.animate(withDuration: 0.2, delay: 0.5, animations: {
+                                cell.copiedLabel.alpha = 0.0
+                                cell.copiedBackgroundView.alpha = 0.0
+                            })
+                        })
+                    }
+                }
+                
+                bounceRelease(sender: cell)
+            }
+        }
+        
+        isLongPressForCopy = false
+    }
+    
+    @objc func longPressOnTableView(gestureRecognizer: UILongPressGestureRecognizer) {
+        let location = gestureRecognizer.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: location)
+        
+        if indexPath != nil && gestureRecognizer.state == .began {
+            // Get the cell tapped
+            let cell = tableView.cellForRow(at: indexPath!) as! ChatTableViewCell
+            guard let attributedText = cell.chatText.attributedText else {
+                return
+            }
+            
+            // Don't show the copy text
+            isLongPressForCopy = true
+            
+            // Share text at row
+            var text = attributedText.string
+            
+            text = "\(text)\n\n\(copyFooterText)"
+            
+            let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: [])
+            
+            present(activityVC, animated: true)
+        }
+    }
+    
+    // Bounce TableView Cell
+    @objc private func bounce(sender: UITableViewCell) {
+        UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
+        }) { (_) in
+            
+        }
+    }
+    
+    @objc private func bounceRelease(sender: UITableViewCell) {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
+            sender.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }, completion: nil)
+    }
+    
     func loadMenuBarItems() {
         /* Setup Logo Menu Bar Item */
         let logoImage = UIImage(named: "logoImage")
@@ -216,7 +361,7 @@ class MainViewController: UIViewController {
         logoImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 100, height: 30)
         logoImageButton.setBackgroundImage(logoImage?.withRenderingMode(.alwaysTemplate), for: .normal)
         //logoImageButton.addTarget(self, action: #selector(doSomethingFunny), for: .touchUpInside) //Can add this for an extra way to advertise or something? Maybe shares?
-        logoImageButton.tintColor = Colors.chatTextColor
+        logoImageButton.tintColor = Colors.userChatTextColor
         
         logoMenuBarItem = UIBarButtonItem(customView: logoImageButton)
         
@@ -227,7 +372,7 @@ class MainViewController: UIViewController {
         moreImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30, height: 30)
         moreImageButton.setBackgroundImage(moreImage, for: .normal)
         moreImageButton.addTarget(self, action: #selector(openMenu), for: .touchUpInside)
-        moreImageButton.tintColor = Colors.chatTextColor
+        moreImageButton.tintColor = Colors.userChatTextColor
         
         moreMenuBarItem = UIBarButtonItem(customView: moreImageButton)
         
@@ -238,7 +383,7 @@ class MainViewController: UIViewController {
         shareImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30, height: 30)
         shareImageButton.setBackgroundImage(shareImage, for: .normal)
         shareImageButton.addTarget(self, action: #selector(shareApp), for: .touchUpInside)
-        shareImageButton.tintColor = Colors.chatTextColor
+        shareImageButton.tintColor = Colors.userChatTextColor
         
         shareMenuBarItem = UIBarButtonItem(customView: shareImageButton)
         
@@ -248,7 +393,7 @@ class MainViewController: UIViewController {
         let proImageButton = RoundedButton(type: .custom)
         proImageButton.borderWidth = 2.0
         proImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30, height: 30)
-        proImageButton.tintColor = Colors.chatTextColor
+        proImageButton.tintColor = Colors.userChatTextColor
         proImageButton.setImage(proImage, for: .normal)
         proImageButton.addTarget(self, action: #selector(ultraPressed), for: .touchUpInside)
         
@@ -447,7 +592,7 @@ extension MainViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == .lightGray {
             textView.text = ""
-            textView.textColor = Colors.chatTextColor
+            textView.textColor = Colors.userChatTextColor
         }
     }
     
@@ -507,7 +652,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         //TODO: - Wait, does this trigger submitSoftDisable even when the user text is being typed out?
         //TODO: - Need to remove rows from rowsToType once they are typed (Done?)
         if rowsToType.contains(indexPath.row) {
-//            cell.chatText.text = ""
+            //            cell.chatText.text = ""
             let chatTextMutableAttriburtedString = NSMutableAttributedString()
             cell.chatText.attributedText = chatTextMutableAttriburtedString
             
@@ -517,7 +662,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                     DispatchQueue.main.async {
                         let initialHeight = cell.frame.height
                         tableView.beginUpdates()
-//                        cell.chatText.text!.append(character)
+                        //                        cell.chatText.text!.append(character)
                         //TODO: - Fix this bad implementation of the secondary font
                         if (cell.chatText.attributedText!.string + "\(character)").contains("...\n\n") {
                             chatTextMutableAttriburtedString.secondaryFont("\(character)")
@@ -559,9 +704,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        
-        //Show Chat Messages
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -26,7 +26,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
-        header.textLabel?.textColor = Colors.chatTextColor
+        header.textLabel?.textColor = Colors.userChatTextColor
         header.textLabel?.font = UIFont(name: Constants.primaryFontNameBold, size: 25)
         header.textLabel?.frame = CGRect(x: view.bounds.minX + 24, y: view.bounds.minY, width: view.bounds.width, height: view.bounds.height)
     }
