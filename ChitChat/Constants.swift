@@ -16,10 +16,15 @@ struct Constants {
     static let userDefaultHasFinishedIntro = "hasFinishedIntro"
     static let userDefaultStoredIsPremium = "storedIsPremium"
     static let userDefaultStoredWeeklyDisplayPrice = "weeklyDisplayPrice"
+    static let userDefaultStoredAnnualDisplayPrice = "annualDisplayPrice"
     
     static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
     
-    static let defaultDisplayPrice = "3.99"
+    static let defaultWeeklyDisplayPrice = "2.99"
+    static let defaultAnnualDisplayPrice = "29.99"
+    
+    static let weeklyProductIdentifier = "chitchatultra"
+    static let annualProductIdentifier = "chitchatultrayearly"
     
     static let borderWidth = CGFloat(0.0)
     static let cornerRadius = 14.0

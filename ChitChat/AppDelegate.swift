@@ -117,13 +117,21 @@ extension AppDelegate: HTTPSHelperDelegate {
     
     func didGetDisplayPrice(json: [String : Any]) {
         if let body = json["Body"] as? [String: Any] {
-            if let displayPrice = body["displayPrice"] as? String {
-                UserDefaults.standard.set(displayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+            if let weeklyDisplayPrice = body["weeklyDisplayPrice"] as? String {
+                if let annualDisplayPrice = body["annualDisplayPrice"] as? String {
+                    UserDefaults.standard.set(weeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+                    UserDefaults.standard.set(annualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+                } else {
+                    UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+                    UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+                }
             } else {
-                UserDefaults.standard.set(Constants.defaultDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+                UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+                UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
             }
         } else {
-            UserDefaults.standard.set(Constants.defaultDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+            UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+            UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
         }
     }
     

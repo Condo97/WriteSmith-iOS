@@ -9,44 +9,104 @@ import Foundation
 import UIKit
 
 extension NSMutableAttributedString {
-    var fontSize:CGFloat { return 17 }
-    var boldFont:UIFont { return UIFont(name: "Avenir-Bold", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize) }
-    var normalFont:UIFont { return UIFont(name: "Avenir-Book", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize) }
-    var secondaryFont:UIFont { return UIFont(name: "Avenir-Bold", size: 14) ?? UIFont.systemFont(ofSize: 14) }
+    var fontSize: CGFloat { return 17 }
+    var boldFont: UIFont { return UIFont(name: "Avenir-Bold", size: defaultBoldSize) ?? UIFont.boldSystemFont(ofSize: defaultBoldSize) }
+    var normalFont: UIFont { return UIFont(name: "Avenir-Book", size: defaultNormalSize) ?? UIFont.systemFont(ofSize: defaultNormalSize) }
+    var secondaryFont: UIFont { return UIFont(name: "Avenir-Bold", size: defaultSecondarySize) ?? UIFont.systemFont(ofSize: defaultSecondarySize) }
+    var normalAndBigFont: UIFont { return UIFont(name: "Avenir-Book", size: normalAndBigSize) ?? UIFont.systemFont(ofSize: normalAndBigSize) }
+    var boldAndBigFont: UIFont { return UIFont(name: "Avenir-Bold", size: boldAndBigSize) ?? UIFont.boldSystemFont(ofSize: boldAndBigSize) }
+    var secondarySmallerFont: UIFont { return UIFont(name: "Avenir-Bold", size: secondarySmallerSize) ?? UIFont.systemFont(ofSize: secondarySmallerSize) }
     
-    func bold(_ value:String) -> NSMutableAttributedString {
+    var defaultBoldSize: CGFloat { return fontSize }
+    var defaultNormalSize: CGFloat {return fontSize }
+    var defaultSecondarySize: CGFloat { return 14.0 }
+    var normalAndBigSize: CGFloat { return 24.0 }
+    var boldAndBigSize: CGFloat { return 24.0 }
+    var secondarySmallerSize: CGFloat { return 12.0 }
+    
+    func bold(_ value: String, size: CGFloat) {
         
         let attributes:[NSAttributedString.Key : Any] = [
-            .font: boldFont
+            .font: boldFont.withSize(size)
         ]
         
         self.append(NSAttributedString(string: value, attributes:attributes))
-        return self
     }
     
-    func normal(_ value:String) -> NSMutableAttributedString {
+    func bold(_ value: String) {
+        bold(value, size: defaultBoldSize)
+    }
+    
+    func normal(_ value: String, size: CGFloat) {
         
         let attributes:[NSAttributedString.Key : Any] = [
-            .font: normalFont
+            .font: normalFont.withSize(size)
         ]
         
         self.append(NSAttributedString(string: value, attributes:attributes))
-        return self
     }
     
-    func secondaryFont(_ value:String) -> NSMutableAttributedString {
+    
+    func normal(_ value: String) {
+        normal(value, size: defaultNormalSize)
+    }
+    
+    func secondary(_ value: String, size: CGFloat) {
         
         let attributes:[NSAttributedString.Key : Any] = [
-            .font: secondaryFont,
+            .font: secondaryFont.withSize(size),
             .foregroundColor: UIColor.gray
         ]
         
         self.append(NSAttributedString(string: value, attributes:attributes))
-        return self
+    }
+    
+    func secondary(_ value: String) {
+        secondary(value, size: defaultSecondarySize)
+    }
+    
+    func normalAndBig(_ value: String, size: CGFloat) {
+        
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font: normalAndBigFont.withSize(size),
+        ]
+        
+        self.append(NSAttributedString(string: value, attributes:attributes))
+    }
+    
+    func normalAndBig(_ value: String) {
+        normalAndBig(value, size: normalAndBigSize)
+    }
+    
+    func boldAndBig(_ value: String, size: CGFloat) {
+        
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font: boldAndBigFont.withSize(size)
+        ]
+        
+        self.append(NSAttributedString(string: value, attributes:attributes))
+    }
+    
+    func boldAndBig(_ value: String) {
+        boldAndBig(value, size: boldAndBigSize)
+    }
+    
+    func secondarySmaller(_ value: String, size: CGFloat) {
+        
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font: secondarySmallerFont.withSize(size),
+            .foregroundColor: UIColor.gray
+        ]
+        
+        self.append(NSAttributedString(string: value, attributes:attributes))
+    }
+    
+    func secondarySmaller(_ value: String) {
+        secondary(value, size: defaultSecondarySize)
     }
     
     /* Other styling methods */
-    func orangeHighlight(_ value:String) -> NSMutableAttributedString {
+    func orangeHighlight(_ value:String) {
         
         let attributes:[NSAttributedString.Key : Any] = [
             .font:  normalFont,
@@ -55,10 +115,9 @@ extension NSMutableAttributedString {
         ]
         
         self.append(NSAttributedString(string: value, attributes:attributes))
-        return self
     }
     
-    func blackHighlight(_ value:String) -> NSMutableAttributedString {
+    func blackHighlight(_ value:String) {
         
         let attributes:[NSAttributedString.Key : Any] = [
             .font :  normalFont,
@@ -68,10 +127,9 @@ extension NSMutableAttributedString {
         ]
         
         self.append(NSAttributedString(string: value, attributes:attributes))
-        return self
     }
     
-    func underlined(_ value:String) -> NSMutableAttributedString {
+    func underlined(_ value:String) {
         
         let attributes:[NSAttributedString.Key : Any] = [
             .font :  normalFont,
@@ -80,6 +138,5 @@ extension NSMutableAttributedString {
         ]
         
         self.append(NSAttributedString(string: value, attributes:attributes))
-        return self
     }
 }

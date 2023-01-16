@@ -665,7 +665,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                         //                        cell.chatText.text!.append(character)
                         //TODO: - Fix this bad implementation of the secondary font
                         if (cell.chatText.attributedText!.string + "\(character)").contains("...\n\n") {
-                            chatTextMutableAttriburtedString.secondaryFont("\(character)")
+                            chatTextMutableAttriburtedString.secondary("\(character)")
                         } else {
                             chatTextMutableAttriburtedString.normal("\(character)")
                         }

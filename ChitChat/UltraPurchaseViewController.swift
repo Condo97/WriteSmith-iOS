@@ -9,10 +9,14 @@ import UIKit
 import Foundation
 import SafariServices
 
+enum PlanType {
+    case none
+    case weekly
+    case annual
+}
+
 class UltraPurchaseViewController: UIViewController {
-    @IBOutlet weak var startSubscriptionButton: RoundedButton!
     @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var ultraLabel: UILabel!
@@ -20,13 +24,20 @@ class UltraPurchaseViewController: UIViewController {
     @IBOutlet weak var gradientView: GradientView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var everythingElseView: UIView!
-    @IBOutlet weak var displayPriceLabel: UILabel!
     
-    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var weeklyRoundedView: RoundedView!
+    @IBOutlet weak var weeklyText: UILabel!
+    @IBOutlet weak var weeklyActivityView: UIActivityIndicatorView!
+    
+    @IBOutlet weak var annualRoundedView: RoundedView!
+    @IBOutlet weak var annualText: UILabel!
+    @IBOutlet weak var annualActivityView: UIActivityIndicatorView!
     
     var fromStart: Bool = false
     var restorePressed: Bool = false
     var shouldRestoreFromSettings: Bool = false
+    
+    var selectedPlanType: PlanType = .none
     
     //TODO: - Get ProductIDs from Server
     //    let productIDsForTesting: Set<String> = ["com.acapplications.mindseye.in_app_purchase_premium"]
@@ -36,15 +47,32 @@ class UltraPurchaseViewController: UIViewController {
         
 //        imageView.image = UIImage(named: UserDefaults.standard.string(forKey: GlobalConstants.userDefaultStoredProImageName) ?? StartScreenConstants.rainbowHills)
         
-        let displayPrice = (UserDefaults.standard.string(forKey: Constants.userDefaultStoredWeeklyDisplayPrice) ?? Constants.defaultDisplayPrice) as String
+        let weeklyDisplayPrice = (UserDefaults.standard.string(forKey: Constants.userDefaultStoredWeeklyDisplayPrice) ?? Constants.defaultWeeklyDisplayPrice) as String
+        let annualDisplayPrice = (UserDefaults.standard.string(forKey: Constants.userDefaultStoredAnnualDisplayPrice) ?? Constants.defaultAnnualDisplayPrice) as String
         
-        let displayPriceString = NSMutableAttributedString()
-        displayPriceString.bold("3 Day Trial")
-        displayPriceString.normal(" - Then ")
-        displayPriceString.normal(displayPrice)
-        displayPriceString.normal(" / week")
+        // Setup Weekly Text
+        let weeklyString = NSMutableAttributedString()
+        weeklyString.boldAndBig("Start Free Trial & Plan\n")
+        weeklyString.secondarySmaller("3 Day Trial - Then \(weeklyDisplayPrice) / week")
+        weeklyText.attributedText = weeklyString
         
-        displayPriceLabel.attributedText = displayPriceString
+        // Setup Weekly Gesture Recognizer
+        let weeklyGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedWeekly))
+        weeklyGestureRecognizer.cancelsTouchesInView = false
+        weeklyRoundedView.addGestureRecognizer(weeklyGestureRecognizer)
+        
+        // Setup Annual Text
+        let annualString = NSMutableAttributedString()
+        annualString.normalAndBig("Annual - \(annualDisplayPrice) / year\n", size: 22.0)
+        annualString.secondarySmaller("That's 70% Off Weekly!")
+        annualText.attributedText = annualString
+        
+        // Setup Annual Gesture Recognizer
+        let annualGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedAnnual))
+        annualGestureRecognizer.cancelsTouchesInView = false
+        annualRoundedView.addGestureRecognizer(annualGestureRecognizer)
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,14 +85,16 @@ class UltraPurchaseViewController: UIViewController {
     
     func disableButtons() {
         closeButton.isEnabled = false
-        startSubscriptionButton.isEnabled = false
-        activityIndicator.startAnimating()
+        weeklyRoundedView.alpha = 0.5
+        annualRoundedView.alpha = 0.5
     }
     
     func enableButtons() {
         closeButton.isEnabled = true
-        startSubscriptionButton.isEnabled = true
-        activityIndicator.stopAnimating()
+        weeklyRoundedView.alpha = 1.0
+        annualRoundedView.alpha = 1.0
+        weeklyActivityView.stopAnimating()
+        annualActivityView.stopAnimating()
     }
     
     func getIAPStuffFromServer() {
@@ -77,6 +107,26 @@ class UltraPurchaseViewController: UIViewController {
             
             enableButtons()
         }
+    }
+    
+    @objc func tappedWeekly(sender: Any) {
+        bounce(sender: weeklyRoundedView)
+        
+        restorePressed = false
+        selectedPlanType = .weekly
+        weeklyActivityView.startAnimating()
+        disableButtons()
+        getIAPStuffFromServer()
+    }
+    
+    @objc func tappedAnnual(sender: Any) {
+        bounce(sender: annualRoundedView)
+        
+        restorePressed = false
+        selectedPlanType = .annual
+        annualActivityView.startAnimating()
+        disableButtons()
+        getIAPStuffFromServer()
     }
     
     
@@ -135,6 +185,17 @@ class UltraPurchaseViewController: UIViewController {
              }
          }
      }
+    
+    // Bounce Weekly and Annual RoundedViews
+    @objc private func bounce(sender: RoundedView) {
+        UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
+        }) { (_) in
+            UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
+                sender.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }, completion: nil)
+        }
+    }
 }
 
 //MARK: - In App Purchase Handling
@@ -175,6 +236,16 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
      - Called when IAPMAnager returns the subscription product */
     @objc func receivedProductsDidLoadNotification(notification: Notification) {
         guard let products = IAPManager.shared.products else { return }
+        var productsToIndex: [PlanType: Int] = [:]
+        for i in 0..<products.count {
+            let product = products[i]
+            if product.productIdentifier == Constants.weeklyProductIdentifier {
+                productsToIndex[.weekly] = i
+            } else if product.productIdentifier == Constants.annualProductIdentifier {
+                productsToIndex[.annual] = i
+            }
+        }
+        
         if products.count > 0 {
             if restorePressed {
                 IAPManager.shared.restorePurchases(success: {
@@ -194,8 +265,36 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
                     }))
                     self.present(alertController, animated: true)
                 })
-            } else {
-                IAPManager.shared.purchaseProduct(product: products[0], success: {
+            } else if selectedPlanType == .weekly {
+                guard let weeklyIndex = productsToIndex[.weekly] else {
+                    enableButtons()
+                    return
+                }
+                
+                IAPManager.shared.purchaseProduct(product: products[weeklyIndex], success: {
+                    /* Successfully Purchased Product */
+                    DispatchQueue.main.async {
+                        self.doServerPremiumCheck()
+                    }
+                }, failure: {(Error) in
+                    /* Purchase Product Unsuccessful */
+                    //TODO: - Handle IAP Purchase Product Error
+                    let alertController = UIAlertController(title: "Error Subscribing", message: "Please try your subscription again.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { alertAction in
+                        self.startSubscriptionButton(self)
+                    }))
+                    alertController.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { alertAction in
+                        self.enableButtons()
+                    }))
+                    self.present(alertController, animated: true)
+                })
+            } else if selectedPlanType == .annual {
+                guard let annualIndex = productsToIndex[.annual] else {
+                    enableButtons()
+                    return
+                }
+                
+                IAPManager.shared.purchaseProduct(product: products[annualIndex], success: {
                     /* Successfully Purchased Product */
                     DispatchQueue.main.async {
                         self.doServerPremiumCheck()
@@ -280,7 +379,7 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
              
             if isPremium {
                 /* Server has validated user is Premium */
-                UserDefaults.standard.set(true, forKey: Constants.userDefaultStoredIsPremium)
+                setPremiumToTrue()
                 
                 if self.fromStart {
                     UserDefaults.standard.set(true, forKey: Constants.userDefaultHasFinishedIntro)
@@ -290,7 +389,7 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
                 }
             } else {
                 /* Server has validated user is Free */
-                UserDefaults.standard.set(false, forKey: Constants.userDefaultStoredIsPremium)
+                setPremiumToFalse()
                 
                 //TODO: - Kind've hack-y but works here, fix this implementation
                 if restorePressed {
