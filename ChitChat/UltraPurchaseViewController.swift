@@ -44,9 +44,7 @@ class UltraPurchaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        imageView.image = UIImage(named: UserDefaults.standard.string(forKey: GlobalConstants.userDefaultStoredProImageName) ?? StartScreenConstants.rainbowHills)
-        
+                
         let weeklyDisplayPrice = (UserDefaults.standard.string(forKey: Constants.userDefaultStoredWeeklyDisplayPrice) ?? Constants.defaultWeeklyDisplayPrice) as String
         let annualDisplayPrice = (UserDefaults.standard.string(forKey: Constants.userDefaultStoredAnnualDisplayPrice) ?? Constants.defaultAnnualDisplayPrice) as String
         
@@ -274,6 +272,9 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
                 IAPManager.shared.purchaseProduct(product: products[weeklyIndex], success: {
                     /* Successfully Purchased Product */
                     DispatchQueue.main.async {
+                        // Log manual event to Tenjin
+                        TenjinSDK.sendEvent(withName: "subWeekly")
+                        
                         self.doServerPremiumCheck()
                     }
                 }, failure: {(Error) in
@@ -297,6 +298,9 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
                 IAPManager.shared.purchaseProduct(product: products[annualIndex], success: {
                     /* Successfully Purchased Product */
                     DispatchQueue.main.async {
+                        // Log manual event to Tenjin
+                        TenjinSDK.sendEvent(withName: "subAnnual")
+                        
                         self.doServerPremiumCheck()
                     }
                 }, failure: {(Error) in
