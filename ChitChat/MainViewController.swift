@@ -266,43 +266,47 @@ class MainViewController: UIViewController {
                 }
                 
                 if !isLongPressForCopy {
-                    // Show copy text at location
-                    if let attributedText = cell.chatText.attributedText {
-                        // Copy to Pasteboard
-                        var text = attributedText.string
-                        text = "\(text)\n\n\(copyFooterText)"
+                    // Make sure cell has chatText
+                    if cell.chatText != nil {
                         
-                        UIPasteboard.general.string = attributedText.string
-                        
-                        // Move label if too large
-                        if cell.frame.height >= cell.copiedLabel.frame.height * 4 {
-                            let touchLocationInCell = touch.location(in: cell.chatText)
-                            let proposedY = touchLocationInCell.y - cell.copiedLabel.frame.height
-                            let copiedLabelCenterY = cell.copiedLabel.frame.height / 2
-                            let littleBuffer = (cell.frame.height - cell.chatText.frame.height) / 2
+                        // Show copy text at location
+                        if let attributedText = cell.chatText.attributedText {
+                            // Copy to Pasteboard
+                            var text = attributedText.string
+                            text = "\(text)\n\n\(copyFooterText)"
                             
-                            // Okay I've got to do something about these calculations at some point
-                            if proposedY <= cell.copiedLabel.frame.height * 1.2 - cell.copiedLabel.frame.height {
-                                cell.copiedLabel.frame = CGRect(x: cell.copiedLabel.frame.minX, y: cell.copiedLabel.frame.height * 1.2 - copiedLabelCenterY + littleBuffer, width: cell.copiedLabel.frame.width, height: cell.copiedLabel.frame.height)
-                            } else if proposedY >= cell.chatText.frame.height - cell.copiedLabel.frame.height * 1.2 - 2 * cell.copiedLabel.frame.height - littleBuffer  {
-                                cell.copiedLabel.frame = CGRect(x: cell.copiedLabel.frame.minX, y: cell.chatText.frame.height - cell.copiedLabel.frame.height * 1.2 - cell.copiedLabel.frame.height / 2 + littleBuffer, width: cell.copiedLabel.frame.width, height: cell.copiedLabel.frame.height)
+                            UIPasteboard.general.string = attributedText.string
+                            
+                            // Move label if too large
+                            if cell.frame.height >= cell.copiedLabel.frame.height * 4 {
+                                let touchLocationInCell = touch.location(in: cell.chatText)
+                                let proposedY = touchLocationInCell.y - cell.copiedLabel.frame.height
+                                let copiedLabelCenterY = cell.copiedLabel.frame.height / 2
+                                let littleBuffer = (cell.frame.height - cell.chatText.frame.height) / 2
+                                
+                                // Okay I've got to do something about these calculations at some point
+                                if proposedY <= cell.copiedLabel.frame.height * 1.2 - cell.copiedLabel.frame.height {
+                                    cell.copiedLabel.frame = CGRect(x: cell.copiedLabel.frame.minX, y: cell.copiedLabel.frame.height * 1.2 - copiedLabelCenterY + littleBuffer, width: cell.copiedLabel.frame.width, height: cell.copiedLabel.frame.height)
+                                } else if proposedY >= cell.chatText.frame.height - cell.copiedLabel.frame.height * 1.2 - 2 * cell.copiedLabel.frame.height - littleBuffer  {
+                                    cell.copiedLabel.frame = CGRect(x: cell.copiedLabel.frame.minX, y: cell.chatText.frame.height - cell.copiedLabel.frame.height * 1.2 - cell.copiedLabel.frame.height / 2 + littleBuffer, width: cell.copiedLabel.frame.width, height: cell.copiedLabel.frame.height)
+                                } else {
+                                    cell.copiedLabel.frame = CGRect(x: cell.copiedLabel.frame.minX, y: touchLocationInCell.y + copiedLabelCenterY, width: cell.copiedLabel.frame.width, height: cell.copiedLabel.frame.height)
+                                }
                             } else {
-                                cell.copiedLabel.frame = CGRect(x: cell.copiedLabel.frame.minX, y: touchLocationInCell.y + copiedLabelCenterY, width: cell.copiedLabel.frame.width, height: cell.copiedLabel.frame.height)
+                                cell.copiedLabel.frame = CGRect(x: 0, y: 0, width: cell.chatText.frame.width, height: cell.chatText.frame.height)
                             }
-                        } else {
-                            cell.copiedLabel.frame = CGRect(x: 0, y: 0, width: cell.chatText.frame.width, height: cell.chatText.frame.height)
-                        }
-                        
-                        // Animate Copy
-                        UIView.animate(withDuration: 0.2, delay: 0.0, animations: {
-                            cell.copiedLabel.alpha = 1.0
-                            cell.copiedBackgroundView.alpha = 1.0
                             
-                            UIView.animate(withDuration: 0.2, delay: 0.5, animations: {
-                                cell.copiedLabel.alpha = 0.0
-                                cell.copiedBackgroundView.alpha = 0.0
+                            // Animate Copy
+                            UIView.animate(withDuration: 0.2, delay: 0.0, animations: {
+                                cell.copiedLabel.alpha = 1.0
+                                cell.copiedBackgroundView.alpha = 1.0
+                                
+                                UIView.animate(withDuration: 0.2, delay: 0.5, animations: {
+                                    cell.copiedLabel.alpha = 0.0
+                                    cell.copiedBackgroundView.alpha = 0.0
+                                })
                             })
-                        })
+                        }
                     }
                 }
                 
@@ -320,7 +324,14 @@ class MainViewController: UIViewController {
         if indexPath != nil && gestureRecognizer.state == .began {
             // Get the cell tapped
             let cell = tableView.cellForRow(at: indexPath!) as! ChatTableViewCell
-            guard let attributedText = cell.chatText.attributedText else {
+            
+            // Make sure cell has chatText
+            guard let chatText = cell.chatText else {
+                return
+            }
+            
+            // Make sure chatText has attributedText
+            guard let attributedText = chatText.attributedText else {
                 return
             }
             
