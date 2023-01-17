@@ -696,6 +696,7 @@
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Chit Chat";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -734,6 +735,7 @@
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Chit Chat";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
