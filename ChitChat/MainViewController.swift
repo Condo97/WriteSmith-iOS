@@ -473,8 +473,11 @@ class MainViewController: UIViewController {
             animation = .none
         }
         
+        if userSent == .ai {
+            rowsToType.append(row)
+        }
+        
         tableView.insertRows(at: [IndexPath(row: row, section: 0)], with: animation)
-        rowsToType.append(row + 1)
         tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
         
         if ChatStorageHelper.getAllChats().count % 5 == 0 && !firstChat {
@@ -505,8 +508,15 @@ class MainViewController: UIViewController {
     }
     
     func setFaceImage(imageView: UIImageView, chat: String, isUser: Bool) {
-//        for wordType in orderedWordTypes {
-//            
+//        if !isUser {
+//            for wordType in FaceConstants.orderedWordTypes {
+//                for theWord in FaceConstants.allWords[wordType]! {
+//                    if chat.contains(theWord) {
+//                        imageView.image = UIImage(named: FaceConstants.allFaceImageNames[wordType]!)
+//                        return
+//                    }
+//                }
+//            }
 //        }
     }
     

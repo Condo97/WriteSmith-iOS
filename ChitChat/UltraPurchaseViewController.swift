@@ -36,6 +36,7 @@ class UltraPurchaseViewController: UIViewController {
     var fromStart: Bool = false
     var restorePressed: Bool = false
     var shouldRestoreFromSettings: Bool = false
+    var buttonsAreSoftDisabled: Bool = false
     
     var selectedPlanType: PlanType = .none
     
@@ -83,12 +84,14 @@ class UltraPurchaseViewController: UIViewController {
     
     func disableButtons() {
         closeButton.isEnabled = false
+        buttonsAreSoftDisabled = true
         weeklyRoundedView.alpha = 0.5
         annualRoundedView.alpha = 0.5
     }
     
     func enableButtons() {
         closeButton.isEnabled = true
+        buttonsAreSoftDisabled = false
         weeklyRoundedView.alpha = 1.0
         annualRoundedView.alpha = 1.0
         weeklyActivityView.stopAnimating()
@@ -108,23 +111,27 @@ class UltraPurchaseViewController: UIViewController {
     }
     
     @objc func tappedWeekly(sender: Any) {
-        bounce(sender: weeklyRoundedView)
-        
-        restorePressed = false
-        selectedPlanType = .weekly
-        weeklyActivityView.startAnimating()
-        disableButtons()
-        getIAPStuffFromServer()
+        if !buttonsAreSoftDisabled {
+            bounce(sender: weeklyRoundedView)
+            
+            restorePressed = false
+            selectedPlanType = .weekly
+            weeklyActivityView.startAnimating()
+            disableButtons()
+            getIAPStuffFromServer()
+        }
     }
     
     @objc func tappedAnnual(sender: Any) {
-        bounce(sender: annualRoundedView)
-        
-        restorePressed = false
-        selectedPlanType = .annual
-        annualActivityView.startAnimating()
-        disableButtons()
-        getIAPStuffFromServer()
+        if !buttonsAreSoftDisabled {
+            bounce(sender: annualRoundedView)
+            
+            restorePressed = false
+            selectedPlanType = .annual
+            annualActivityView.startAnimating()
+            disableButtons()
+            getIAPStuffFromServer()
+        }
     }
     
     
