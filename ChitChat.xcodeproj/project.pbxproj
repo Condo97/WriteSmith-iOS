@@ -22,6 +22,7 @@
 		BB04B401296E548F000BEC02 /* loadingDots.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B400296E548E000BEC02 /* loadingDots.gif */; };
 		BB04B402296E548F000BEC02 /* loadingDots.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B400296E548E000BEC02 /* loadingDots.gif */; };
 		BB04B403296E548F000BEC02 /* loadingDots.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B400296E548E000BEC02 /* loadingDots.gif */; };
+		BB089B082978A3F3003B8AAF /* Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB089B072978A3F3003B8AAF /* Private.swift */; };
 		BB0A8C09296CDB760035F046 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A8C08296CDB760035F046 /* RoundedView.swift */; };
 		BB0A8C0D296CE70E0035F046 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A8C0C296CE70E0035F046 /* ShadowView.swift */; };
 		BB0A8C0F296D05FA0035F046 /* UltraPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A8C0E296D05FA0035F046 /* UltraPurchaseViewController.swift */; };
@@ -84,7 +85,6 @@
 		BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638A296BCB6500868752 /* HTTPSHelper.swift */; };
 		BBC1638D296BD1F600868752 /* ChatStorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */; };
 		BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638E296BD98200868752 /* ChatTableViewCell.swift */; };
-		BBCDEFEC297869A600280FCC /* Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCDEFEB297869A600280FCC /* Private.swift */; };
 		BBD65BB7296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
 		BBD65BB8296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
 		BBD65BB9296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
@@ -144,6 +144,7 @@
 		BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GIF.swift"; sourceTree = "<group>"; };
 		BB04B3F8296E38E0000BEC02 /* Ultra Image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Ultra Image.jpg"; sourceTree = "<group>"; };
 		BB04B400296E548E000BEC02 /* loadingDots.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loadingDots.gif; path = ../../../Downloads/loadingDots.gif; sourceTree = "<group>"; };
+		BB089B072978A3F3003B8AAF /* Private.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Private.swift; sourceTree = "<group>"; };
 		BB0A8C08296CDB760035F046 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		BB0A8C0C296CE70E0035F046 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		BB0A8C0E296D05FA0035F046 /* UltraPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltraPurchaseViewController.swift; sourceTree = "<group>"; };
@@ -185,7 +186,6 @@
 		BBC1638A296BCB6500868752 /* HTTPSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSHelper.swift; sourceTree = "<group>"; };
 		BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStorageHelper.swift; sourceTree = "<group>"; };
 		BBC1638E296BD98200868752 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
-		BBCDEFEB297869A600280FCC /* Private.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Private.swift; sourceTree = "<group>"; };
 		BBD65BB6296FDBB4001F730C /* shareImage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = shareImage.gif; sourceTree = "<group>"; };
 		BBD65BBB29705CCE001F730C /* Screenshot 2 Cropped.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Screenshot 2 Cropped.jpg"; sourceTree = "<group>"; };
 		BBD65BBC29705CCE001F730C /* Screenshot 2 Cropped.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Screenshot 2 Cropped.psd"; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 				BBD65BBA29705CCE001F730C /* Screenshots for Inside the App */,
 				BB0DBAA7296AA4FE00D2DFB9 /* AppDelegate.swift */,
 				BB0DBAA9296AA4FE00D2DFB9 /* SceneDelegate.swift */,
-				BBCDEFEB297869A600280FCC /* Private.swift */,
+				BB089B072978A3F3003B8AAF /* Private.swift */,
 				BBC16388296B601500868752 /* Constants.swift */,
 				BBA83E7629779E3A00536FF9 /* FaceConstants.swift */,
 				BBD65BD4297064ED001F730C /* Extensions */,
@@ -603,7 +603,7 @@
 				BB0A8C0F296D05FA0035F046 /* UltraPurchaseViewController.swift in Sources */,
 				BBD65BE929706F2C001F730C /* Intro1ViewController.swift in Sources */,
 				BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedString.swift in Sources */,
-				BBCDEFEC297869A600280FCC /* Private.swift in Sources */,
+				BB089B082978A3F3003B8AAF /* Private.swift in Sources */,
 				BB04B3F1296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */,
 				BBC16389296B601500868752 /* Constants.swift in Sources */,
 				BB04B3E9296DE2BD000BEC02 /* IAPHTTPSHelper.swift in Sources */,
