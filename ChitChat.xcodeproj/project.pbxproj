@@ -39,6 +39,42 @@
 		BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = BB720C92296B1EAD00BEA070 /* MessageKit */; };
 		BB7BC14E2974FC9200D34695 /* ChatTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7BC14D2974FC9200D34695 /* ChatTableView.swift */; };
 		BB7BC150297527EB00D34695 /* AttributedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7BC14F297527EA00D34695 /* AttributedLabel.swift */; };
+		BBA83E522977939600536FF9 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4A2977939600536FF9 /* mask.png */; };
+		BBA83E532977939600536FF9 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4A2977939600536FF9 /* mask.png */; };
+		BBA83E542977939600536FF9 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4A2977939600536FF9 /* mask.png */; };
+		BBA83E552977939600536FF9 /* dead.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4B2977939600536FF9 /* dead.png */; };
+		BBA83E562977939600536FF9 /* dead.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4B2977939600536FF9 /* dead.png */; };
+		BBA83E572977939600536FF9 /* dead.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4B2977939600536FF9 /* dead.png */; };
+		BBA83E582977939600536FF9 /* what.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4C2977939600536FF9 /* what.png */; };
+		BBA83E592977939600536FF9 /* what.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4C2977939600536FF9 /* what.png */; };
+		BBA83E5A2977939600536FF9 /* what.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4C2977939600536FF9 /* what.png */; };
+		BBA83E5B2977939600536FF9 /* smile.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4D2977939600536FF9 /* smile.png */; };
+		BBA83E5C2977939600536FF9 /* smile.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4D2977939600536FF9 /* smile.png */; };
+		BBA83E5D2977939600536FF9 /* smile.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4D2977939600536FF9 /* smile.png */; };
+		BBA83E5E2977939600536FF9 /* nomouth.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4E2977939600536FF9 /* nomouth.png */; };
+		BBA83E5F2977939600536FF9 /* nomouth.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4E2977939600536FF9 /* nomouth.png */; };
+		BBA83E602977939600536FF9 /* nomouth.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4E2977939600536FF9 /* nomouth.png */; };
+		BBA83E612977939600536FF9 /* neutral.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4F2977939600536FF9 /* neutral.png */; };
+		BBA83E622977939600536FF9 /* neutral.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4F2977939600536FF9 /* neutral.png */; };
+		BBA83E632977939600536FF9 /* neutral.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4F2977939600536FF9 /* neutral.png */; };
+		BBA83E642977939600536FF9 /* mad.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E502977939600536FF9 /* mad.png */; };
+		BBA83E652977939600536FF9 /* mad.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E502977939600536FF9 /* mad.png */; };
+		BBA83E662977939600536FF9 /* mad.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E502977939600536FF9 /* mad.png */; };
+		BBA83E672977939600536FF9 /* cuirous.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E512977939600536FF9 /* cuirous.png */; };
+		BBA83E682977939600536FF9 /* cuirous.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E512977939600536FF9 /* cuirous.png */; };
+		BBA83E692977939600536FF9 /* cuirous.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E512977939600536FF9 /* cuirous.png */; };
+		BBA83E6B2977968400536FF9 /* pencil1.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E6A2977968400536FF9 /* pencil1.png */; };
+		BBA83E6C2977968400536FF9 /* pencil1.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E6A2977968400536FF9 /* pencil1.png */; };
+		BBA83E6D2977968400536FF9 /* pencil1.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E6A2977968400536FF9 /* pencil1.png */; };
+		BBA83E6F2977968900536FF9 /* pencil2.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E6E2977968900536FF9 /* pencil2.png */; };
+		BBA83E702977968900536FF9 /* pencil2.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E6E2977968900536FF9 /* pencil2.png */; };
+		BBA83E712977968900536FF9 /* pencil2.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E6E2977968900536FF9 /* pencil2.png */; };
+		BBA83E732977968F00536FF9 /* pencil3.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E722977968E00536FF9 /* pencil3.png */; };
+		BBA83E742977968F00536FF9 /* pencil3.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E722977968E00536FF9 /* pencil3.png */; };
+		BBA83E752977968F00536FF9 /* pencil3.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E722977968E00536FF9 /* pencil3.png */; };
+		BBA83E7729779E3A00536FF9 /* FaceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA83E7629779E3A00536FF9 /* FaceConstants.swift */; };
+		BBA83E7829779E3A00536FF9 /* FaceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA83E7629779E3A00536FF9 /* FaceConstants.swift */; };
+		BBA83E7929779E3A00536FF9 /* FaceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA83E7629779E3A00536FF9 /* FaceConstants.swift */; };
 		BBA8C2222971F3C3009BDECC /* libTenjinSDKUniversal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBA8C2212971F3C3009BDECC /* libTenjinSDKUniversal.a */; };
 		BBA8C2232971F3C3009BDECC /* libTenjinSDKUniversal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBA8C2212971F3C3009BDECC /* libTenjinSDKUniversal.a */; };
 		BBA8C2242971F3C3009BDECC /* libTenjinSDKUniversal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBA8C2212971F3C3009BDECC /* libTenjinSDKUniversal.a */; };
@@ -48,6 +84,7 @@
 		BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638A296BCB6500868752 /* HTTPSHelper.swift */; };
 		BBC1638D296BD1F600868752 /* ChatStorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */; };
 		BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638E296BD98200868752 /* ChatTableViewCell.swift */; };
+		BBCDEFEC297869A600280FCC /* Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCDEFEB297869A600280FCC /* Private.swift */; };
 		BBD65BB7296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
 		BBD65BB8296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
 		BBD65BB9296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
@@ -79,7 +116,6 @@
 		BBD65BEE2970766C001F730C /* arrowGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BEC2970766C001F730C /* arrowGif.gif */; };
 		BBD65BEF2970766C001F730C /* arrowGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BEC2970766C001F730C /* arrowGif.gif */; };
 		BBEA8A24296E88C100DF37F8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = BBEA8A23296E88C100DF37F8 /* GoogleMobileAds */; };
-		BBEA8A26296E8A4700DF37F8 /* Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA8A25296E8A4700DF37F8 /* Private.swift */; };
 		BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedString.swift */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +164,18 @@
 		BB720C8F296AAB7800BEA070 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BB7BC14D2974FC9200D34695 /* ChatTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableView.swift; sourceTree = "<group>"; };
 		BB7BC14F297527EA00D34695 /* AttributedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedLabel.swift; sourceTree = "<group>"; };
+		BBA83E4A2977939600536FF9 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
+		BBA83E4B2977939600536FF9 /* dead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dead.png; sourceTree = "<group>"; };
+		BBA83E4C2977939600536FF9 /* what.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = what.png; sourceTree = "<group>"; };
+		BBA83E4D2977939600536FF9 /* smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile.png; sourceTree = "<group>"; };
+		BBA83E4E2977939600536FF9 /* nomouth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nomouth.png; sourceTree = "<group>"; };
+		BBA83E4F2977939600536FF9 /* neutral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = neutral.png; sourceTree = "<group>"; };
+		BBA83E502977939600536FF9 /* mad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mad.png; sourceTree = "<group>"; };
+		BBA83E512977939600536FF9 /* cuirous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cuirous.png; sourceTree = "<group>"; };
+		BBA83E6A2977968400536FF9 /* pencil1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil1.png; sourceTree = "<group>"; };
+		BBA83E6E2977968900536FF9 /* pencil2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil2.png; sourceTree = "<group>"; };
+		BBA83E722977968E00536FF9 /* pencil3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil3.png; sourceTree = "<group>"; };
+		BBA83E7629779E3A00536FF9 /* FaceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceConstants.swift; sourceTree = "<group>"; };
 		BBA8C21F2971F3C3009BDECC /* TenjinSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TenjinSDK.h; sourceTree = "<group>"; };
 		BBA8C2202971F3C3009BDECC /* chitchat-client-bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "chitchat-client-bridge.h"; sourceTree = "<group>"; };
 		BBA8C2212971F3C3009BDECC /* libTenjinSDKUniversal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTenjinSDKUniversal.a; sourceTree = "<group>"; };
@@ -137,6 +185,7 @@
 		BBC1638A296BCB6500868752 /* HTTPSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSHelper.swift; sourceTree = "<group>"; };
 		BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStorageHelper.swift; sourceTree = "<group>"; };
 		BBC1638E296BD98200868752 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		BBCDEFEB297869A600280FCC /* Private.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Private.swift; sourceTree = "<group>"; };
 		BBD65BB6296FDBB4001F730C /* shareImage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = shareImage.gif; sourceTree = "<group>"; };
 		BBD65BBB29705CCE001F730C /* Screenshot 2 Cropped.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Screenshot 2 Cropped.jpg"; sourceTree = "<group>"; };
 		BBD65BBC29705CCE001F730C /* Screenshot 2 Cropped.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Screenshot 2 Cropped.psd"; sourceTree = "<group>"; };
@@ -147,7 +196,6 @@
 		BBD65BE029706A02001F730C /* MainNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationViewController.swift; sourceTree = "<group>"; };
 		BBD65BE829706F2C001F730C /* Intro1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro1ViewController.swift; sourceTree = "<group>"; };
 		BBD65BEC2970766C001F730C /* arrowGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = arrowGif.gif; sourceTree = "<group>"; };
-		BBEA8A25296E8A4700DF37F8 /* Private.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Private.swift; sourceTree = "<group>"; };
 		BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,6 +254,10 @@
 		BB0DBAA6296AA4FE00D2DFB9 /* ChitChat */ = {
 			isa = PBXGroup;
 			children = (
+				BBA83E6A2977968400536FF9 /* pencil1.png */,
+				BBA83E6E2977968900536FF9 /* pencil2.png */,
+				BBA83E722977968E00536FF9 /* pencil3.png */,
+				BBA83E492977939600536FF9 /* Smith Faces */,
 				BB04B400296E548E000BEC02 /* loadingDots.gif */,
 				BB04B3EC296E2E7B000BEC02 /* giftGif.gif */,
 				BB04B3F8296E38E0000BEC02 /* Ultra Image.jpg */,
@@ -215,8 +267,9 @@
 				BBD65BBA29705CCE001F730C /* Screenshots for Inside the App */,
 				BB0DBAA7296AA4FE00D2DFB9 /* AppDelegate.swift */,
 				BB0DBAA9296AA4FE00D2DFB9 /* SceneDelegate.swift */,
-				BBEA8A25296E8A4700DF37F8 /* Private.swift */,
+				BBCDEFEB297869A600280FCC /* Private.swift */,
 				BBC16388296B601500868752 /* Constants.swift */,
+				BBA83E7629779E3A00536FF9 /* FaceConstants.swift */,
 				BBD65BD4297064ED001F730C /* Extensions */,
 				BBD65BD5297064FB001F730C /* Custom Views */,
 				BBD65BD62970650B001F730C /* Helpers */,
@@ -250,6 +303,21 @@
 				BB0DBACD296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift */,
 			);
 			path = ChitChatUITests;
+			sourceTree = "<group>";
+		};
+		BBA83E492977939600536FF9 /* Smith Faces */ = {
+			isa = PBXGroup;
+			children = (
+				BBA83E4A2977939600536FF9 /* mask.png */,
+				BBA83E4B2977939600536FF9 /* dead.png */,
+				BBA83E4C2977939600536FF9 /* what.png */,
+				BBA83E4D2977939600536FF9 /* smile.png */,
+				BBA83E4E2977939600536FF9 /* nomouth.png */,
+				BBA83E4F2977939600536FF9 /* neutral.png */,
+				BBA83E502977939600536FF9 /* mad.png */,
+				BBA83E512977939600536FF9 /* cuirous.png */,
+			);
+			path = "Smith Faces";
 			sourceTree = "<group>";
 		};
 		BBA8C21E2971F3C3009BDECC /* Tenjin */ = {
@@ -428,17 +496,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBA83E612977939600536FF9 /* neutral.png in Resources */,
 				BBD65BC329705CCF001F730C /* Screenshot 2 Cropped.psd in Resources */,
 				BB04B3F9296E38E1000BEC02 /* Ultra Image.jpg in Resources */,
+				BBA83E5B2977939600536FF9 /* smile.png in Resources */,
 				BB0DBAB7296AA50000D2DFB9 /* LaunchScreen.storyboard in Resources */,
+				BBA83E522977939600536FF9 /* mask.png in Resources */,
 				BBD65BC629705CCF001F730C /* Screenshot 1 Cropped.psd in Resources */,
+				BBA83E642977939600536FF9 /* mad.png in Resources */,
+				BBA83E6F2977968900536FF9 /* pencil2.png in Resources */,
+				BBA83E5E2977939600536FF9 /* nomouth.png in Resources */,
+				BBA83E732977968F00536FF9 /* pencil3.png in Resources */,
 				BB0DBAB4296AA50000D2DFB9 /* Assets.xcassets in Resources */,
 				BB04B401296E548F000BEC02 /* loadingDots.gif in Resources */,
 				BBD65BC929705CCF001F730C /* Screenshot 1 Cropped.jpg in Resources */,
+				BBA83E672977939600536FF9 /* cuirous.png in Resources */,
 				BBD65BC029705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */,
 				BB0DBAAF296AA4FE00D2DFB9 /* Main.storyboard in Resources */,
+				BBA83E582977939600536FF9 /* what.png in Resources */,
 				BBD65BD02970648F001F730C /* Screenshot 3 Cropped.jpg in Resources */,
+				BBA83E552977939600536FF9 /* dead.png in Resources */,
 				BBD65BB7296FDBB4001F730C /* shareImage.gif in Resources */,
+				BBA83E6B2977968400536FF9 /* pencil1.png in Resources */,
 				BBD65BED2970766C001F730C /* arrowGif.gif in Resources */,
 				BB04B3ED296E2E7B000BEC02 /* giftGif.gif in Resources */,
 			);
@@ -449,15 +528,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD65BC429705CCF001F730C /* Screenshot 2 Cropped.psd in Resources */,
+				BBA83E742977968F00536FF9 /* pencil3.png in Resources */,
 				BB04B402296E548F000BEC02 /* loadingDots.gif in Resources */,
 				BBD65BB8296FDBB4001F730C /* shareImage.gif in Resources */,
+				BBA83E592977939600536FF9 /* what.png in Resources */,
 				BBD65BEE2970766C001F730C /* arrowGif.gif in Resources */,
 				BBD65BCA29705CCF001F730C /* Screenshot 1 Cropped.jpg in Resources */,
+				BBA83E5F2977939600536FF9 /* nomouth.png in Resources */,
+				BBA83E5C2977939600536FF9 /* smile.png in Resources */,
 				BB04B3EE296E2E7B000BEC02 /* giftGif.gif in Resources */,
+				BBA83E6C2977968400536FF9 /* pencil1.png in Resources */,
+				BBA83E532977939600536FF9 /* mask.png in Resources */,
 				BBD65BC729705CCF001F730C /* Screenshot 1 Cropped.psd in Resources */,
 				BBD65BD12970648F001F730C /* Screenshot 3 Cropped.jpg in Resources */,
 				BB04B3FA296E38E1000BEC02 /* Ultra Image.jpg in Resources */,
+				BBA83E702977968900536FF9 /* pencil2.png in Resources */,
+				BBA83E622977939600536FF9 /* neutral.png in Resources */,
+				BBA83E652977939600536FF9 /* mad.png in Resources */,
+				BBA83E682977939600536FF9 /* cuirous.png in Resources */,
 				BBD65BC129705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */,
+				BBA83E562977939600536FF9 /* dead.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,15 +556,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD65BC529705CCF001F730C /* Screenshot 2 Cropped.psd in Resources */,
+				BBA83E752977968F00536FF9 /* pencil3.png in Resources */,
 				BB04B403296E548F000BEC02 /* loadingDots.gif in Resources */,
 				BBD65BB9296FDBB4001F730C /* shareImage.gif in Resources */,
+				BBA83E5A2977939600536FF9 /* what.png in Resources */,
 				BBD65BEF2970766C001F730C /* arrowGif.gif in Resources */,
 				BBD65BCB29705CCF001F730C /* Screenshot 1 Cropped.jpg in Resources */,
+				BBA83E602977939600536FF9 /* nomouth.png in Resources */,
+				BBA83E5D2977939600536FF9 /* smile.png in Resources */,
 				BB04B3EF296E2E7B000BEC02 /* giftGif.gif in Resources */,
+				BBA83E6D2977968400536FF9 /* pencil1.png in Resources */,
+				BBA83E542977939600536FF9 /* mask.png in Resources */,
 				BBD65BC829705CCF001F730C /* Screenshot 1 Cropped.psd in Resources */,
 				BBD65BD22970648F001F730C /* Screenshot 3 Cropped.jpg in Resources */,
 				BB04B3FB296E38E1000BEC02 /* Ultra Image.jpg in Resources */,
+				BBA83E712977968900536FF9 /* pencil2.png in Resources */,
+				BBA83E632977939600536FF9 /* neutral.png in Resources */,
+				BBA83E662977939600536FF9 /* mad.png in Resources */,
+				BBA83E692977939600536FF9 /* cuirous.png in Resources */,
 				BBD65BC229705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */,
+				BBA83E572977939600536FF9 /* dead.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,15 +599,16 @@
 				BB0DBAAA296AA4FE00D2DFB9 /* SceneDelegate.swift in Sources */,
 				BB720C90296AAB7800BEA070 /* MainViewController.swift in Sources */,
 				BBC1638D296BD1F600868752 /* ChatStorageHelper.swift in Sources */,
-				BBEA8A26296E8A4700DF37F8 /* Private.swift in Sources */,
 				BB0A8C09296CDB760035F046 /* RoundedView.swift in Sources */,
 				BB0A8C0F296D05FA0035F046 /* UltraPurchaseViewController.swift in Sources */,
 				BBD65BE929706F2C001F730C /* Intro1ViewController.swift in Sources */,
 				BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedString.swift in Sources */,
+				BBCDEFEC297869A600280FCC /* Private.swift in Sources */,
 				BB04B3F1296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */,
 				BBC16389296B601500868752 /* Constants.swift in Sources */,
 				BB04B3E9296DE2BD000BEC02 /* IAPHTTPSHelper.swift in Sources */,
 				BB0A8C11296D063D0035F046 /* RoundedButton.swift in Sources */,
+				BBA83E7729779E3A00536FF9 /* FaceConstants.swift in Sources */,
 				BB7BC14E2974FC9200D34695 /* ChatTableView.swift in Sources */,
 				BB04B3F5296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */,
 			);
@@ -518,6 +620,7 @@
 			files = (
 				BBD65BDE2970655D001F730C /* Intro3ViewController.swift in Sources */,
 				BBD65BEA29706F2C001F730C /* Intro1ViewController.swift in Sources */,
+				BBA83E7829779E3A00536FF9 /* FaceConstants.swift in Sources */,
 				BBD65BE229706A02001F730C /* MainNavigationViewController.swift in Sources */,
 				BB04B3F6296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */,
 				BB0DBAC2296AA50000D2DFB9 /* ChitChatTests.swift in Sources */,
@@ -528,6 +631,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBA83E7929779E3A00536FF9 /* FaceConstants.swift in Sources */,
 				BBD65BE329706A02001F730C /* MainNavigationViewController.swift in Sources */,
 				BB0DBACE296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift in Sources */,
 				BBD65BDF2970655D001F730C /* Intro3ViewController.swift in Sources */,
@@ -692,11 +796,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Chit Chat";
+				INFOPLIST_KEY_CFBundleDisplayName = WriteSmith;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -711,7 +815,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChitChat/Tenjin",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -731,11 +835,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Chit Chat";
+				INFOPLIST_KEY_CFBundleDisplayName = WriteSmith;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -750,7 +854,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChitChat/Tenjin",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
