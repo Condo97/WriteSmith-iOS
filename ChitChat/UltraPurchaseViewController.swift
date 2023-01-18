@@ -202,8 +202,6 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
         guard let success = json["Success"] as? Int else { showGeneralIAPErrorAndUnhide(); return }
         
         if success == 1 {
-            //TODO: - Allow for Multiple Product IDs
-            //Since there is only one product ID for now, just test for it, get it, and proceed with IAP
             guard let body = json["Body"] as? [String: Any] else { showGeneralIAPErrorAndUnhide(); return }
             guard let sharedSecret = body["sharedSecret"] as? String else { showGeneralIAPErrorAndUnhide(); return }
             guard let productIDs = body["productIDs"] as? [String] else { showGeneralIAPErrorAndUnhide(); return }

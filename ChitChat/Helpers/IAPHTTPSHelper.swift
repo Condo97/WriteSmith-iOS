@@ -30,7 +30,7 @@ struct IAPHTTPSHelper {
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             if let error = error {
-                print("Error in GetGenerateImageJSON")
+                print("Error in VaidateAndSaveReceipt")
                 print(error)
             } else if let data = data {
                 DispatchQueue.main.async {
@@ -63,7 +63,7 @@ struct IAPHTTPSHelper {
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             if let error = error {
-                print("Error in GetGenerateImageJSON")
+                print("Error in GetIAPStuffFromServer")
                 print(error)
             } else if let data = data {
                 DispatchQueue.main.async {

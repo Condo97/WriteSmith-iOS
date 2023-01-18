@@ -429,7 +429,7 @@ class MainViewController: UIViewController {
         proMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 34).isActive = true
         proMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 34).isActive = true
         
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 170, height: 80))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 140, height: 80))
         imageView.contentMode = .scaleAspectFit
         
         let image = UIImage(named: "logoImage")
@@ -502,6 +502,12 @@ class MainViewController: UIViewController {
                                 UIEdgeInsets(top: 17, left: 21, bottom: 17, right: 21),
                             resizingMode: .stretch)
             .withRenderingMode(.alwaysTemplate)
+    }
+    
+    func setFaceImage(imageView: UIImageView, chat: String, isUser: Bool) {
+//        for wordType in orderedWordTypes {
+//            
+//        }
     }
     
     func updateRemainingText() {
@@ -656,6 +662,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "aiCell", for: indexPath) as! ChatTableViewCell
             setBubbleImage(imageView: cell.bubbleImageView, isUser: false)
+            setFaceImage(imageView: cell.profileImageView, chat: currentChat.text, isUser: false)
         }
         
         let finalText = currentChat.text
