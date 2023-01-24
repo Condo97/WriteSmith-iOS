@@ -13,6 +13,7 @@ protocol HTTPSHelperDelegate: AnyObject {
     func getRemaining(json: [String: Any])
     func getChat(json: [String: Any])
     func getChatError()
+    func didGetShareURL(json: [String: Any])
 }
 
 class HTTPSHelper {
@@ -136,6 +137,35 @@ class HTTPSHelper {
                         delegate.getChat(json: json!)
                     } catch {
                         print("Error serializing getChat() JSON from data")
+                    }
+                }
+            }
+        })
+        
+        task.resume()
+    }
+    
+    static func getShareURL(delegate: HTTPSHelperDelegate?) {
+        let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getShareURL)")!
+        let postBody = "{}"
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.httpBody = postBody.data(using: .utf8)
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+            if let error = error {
+                print("ERRROR")
+                print(error)
+            } else if let data = data {
+                DispatchQueue.main.async {
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data, options:[]) as? [String: Any]
+                        delegate?.didGetShareURL(json: json!)
+                    } catch {
+                        print("Error serializing registerUesr() JSON from data")
                     }
                 }
             }

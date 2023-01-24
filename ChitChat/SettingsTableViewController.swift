@@ -17,6 +17,9 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let image = UIImage(named: "logoImage")
+        navigationItem.titleView = UIImageView(image: image)
+        
         giftImageView.image = UIImage.gifImageWithName("giftGif")
     }
     
@@ -70,7 +73,7 @@ class SettingsTableViewController: UITableViewController {
         }
         
         if indexPath.row == 0 {
-            let activityVC = UIActivityViewController(activityItems: [Constants.shareURL], applicationActivities: [])
+            let activityVC = UIActivityViewController(activityItems: [UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) ?? ""], applicationActivities: [])
             
             present(activityVC, animated: true)
         } else if indexPath.row == 1 {

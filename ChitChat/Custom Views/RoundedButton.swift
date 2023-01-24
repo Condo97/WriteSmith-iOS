@@ -8,6 +8,7 @@
 import UIKit
 
 class RoundedButton: UIButton {
+    
     @IBInspectable open var hasArrow: Bool = false {
         didSet {
             if hasArrow {

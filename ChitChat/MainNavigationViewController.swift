@@ -12,11 +12,6 @@ class MainNavigationViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if !UserDefaults.standard.bool(forKey: Constants.userDefaultHasFinishedIntro) {
-            setNavigationBarHidden(true, animated: false)
-            
-            let mainViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introStart")
-            viewControllers = [mainViewController]
-        }
+        
     }
 }

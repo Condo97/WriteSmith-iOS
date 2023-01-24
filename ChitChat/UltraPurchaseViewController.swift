@@ -71,7 +71,17 @@ class UltraPurchaseViewController: UIViewController {
         annualGestureRecognizer.cancelsTouchesInView = false
         annualRoundedView.addGestureRecognizer(annualGestureRecognizer)
         
+        // Do setup server calls in case didFinishLaunchingWithOptions isn't called
+        if UserDefaults.standard.string(forKey: Constants.authTokenKey) == nil {
+            HTTPSHelper.registerUser(delegate: self)
+        }
         
+        if UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) == nil {
+            UserDefaults.standard.set("https://apple.com/", forKey: Constants.userDefaultStoredShareURL)
+        }
+        
+        HTTPSHelper.getDisplayPrice(delegate: self)
+        HTTPSHelper.getShareURL(delegate: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -413,6 +423,56 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
                     
                     restorePressed = false
                 }
+            }
+        }
+    }
+}
+
+extension UltraPurchaseViewController: HTTPSHelperDelegate {
+    func didRegisterUser(json: [String : Any]) {
+        if let body = json["Body"] as? [String: Any] {
+            if let authToken = body["authToken"] as? String {
+                UserDefaults.standard.set(authToken, forKey: Constants.authTokenKey)
+            }
+        }
+    }
+    
+    func didGetDisplayPrice(json: [String : Any]) {
+        if let body = json["Body"] as? [String: Any] {
+            if let weeklyDisplayPrice = body["weeklyDisplayPrice"] as? String {
+                if let annualDisplayPrice = body["annualDisplayPrice"] as? String {
+                    UserDefaults.standard.set(weeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+                    UserDefaults.standard.set(annualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+                } else {
+                    UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+                    UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+                }
+            } else {
+                UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+                UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+            }
+        } else {
+            UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+            UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+        }
+    }
+    
+    func getRemaining(json: [String : Any]) {
+        
+    }
+    
+    func getChat(json: [String : Any]) {
+        
+    }
+    
+    func getChatError() {
+        
+    }
+    
+    func didGetShareURL(json: [String : Any]) {
+        if let body = json["Body"] as? [String: Any] {
+            if let shareURL = body["shareURL"] as? String {
+                UserDefaults.standard.set(shareURL, forKey: Constants.userDefaultStoredShareURL)
             }
         }
     }

@@ -11,8 +11,13 @@ class ShadowView: UIView {
     
     @IBInspectable open var shadowColor: UIColor = Colors.userChatBubbleColor
     @IBInspectable open var shadowRadius: CGFloat = 20.0
-
-    override func draw(_ rect: CGRect) {
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         let shadow = CALayer()
         shadow.masksToBounds = false
@@ -20,9 +25,13 @@ class ShadowView: UIView {
         shadow.shadowRadius = shadowRadius
         shadow.shadowOpacity = 1.0
         shadow.shadowOffset = .zero
-        shadow.shadowPath = UIBezierPath(rect: rect).cgPath
+        shadow.shadowPath = UIBezierPath(rect: frame).cgPath
         
         layer.insertSublayer(shadow, at: 0)
         layer.insertSublayer(shadow, at: 1)
+    }
+
+    override func draw(_ rect: CGRect) {
+        
     }
 }

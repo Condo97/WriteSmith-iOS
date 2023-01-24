@@ -36,10 +36,18 @@
 		BB0DBAC2296AA50000D2DFB9 /* ChitChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBAC1296AA50000D2DFB9 /* ChitChatTests.swift */; };
 		BB0DBACC296AA50000D2DFB9 /* ChitChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBACB296AA50000D2DFB9 /* ChitChatUITests.swift */; };
 		BB0DBACE296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBACD296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift */; };
+		BB24FB26297C93CB00A933EA /* BottomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24FB25297C93CB00A933EA /* BottomTabBarViewController.swift */; };
+		BB24FB28297C992C00A933EA /* JustAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24FB27297C992C00A933EA /* JustAViewController.swift */; };
+		BB24FB2A297CAB4000A933EA /* EssayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24FB29297CAB3F00A933EA /* EssayViewController.swift */; };
+		BB5E915E297CF6C800DC7467 /* CDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E915D297CF6C800DC7467 /* CDHelper.swift */; };
+		BB5E9160297DB2A300DC7467 /* HalfRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E915F297DB2A300DC7467 /* HalfRoundedView.swift */; };
+		BB5E9162297DB62100DC7467 /* EssayEssayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E9161297DB62100DC7467 /* EssayEssayTableViewCell.swift */; };
+		BB5E9164297DCDED00DC7467 /* EssayEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */; };
 		BB720C90296AAB7800BEA070 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB720C8F296AAB7800BEA070 /* MainViewController.swift */; };
 		BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = BB720C92296B1EAD00BEA070 /* MessageKit */; };
 		BB7BC14E2974FC9200D34695 /* ChatTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7BC14D2974FC9200D34695 /* ChatTableView.swift */; };
 		BB7BC150297527EB00D34695 /* AttributedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7BC14F297527EA00D34695 /* AttributedLabel.swift */; };
+		BB9C2F51297CB7710026A441 /* EssayPromptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9C2F50297CB7710026A441 /* EssayPromptTableViewCell.swift */; };
 		BBA83E522977939600536FF9 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4A2977939600536FF9 /* mask.png */; };
 		BBA83E532977939600536FF9 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4A2977939600536FF9 /* mask.png */; };
 		BBA83E542977939600536FF9 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = BBA83E4A2977939600536FF9 /* mask.png */; };
@@ -85,9 +93,9 @@
 		BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638A296BCB6500868752 /* HTTPSHelper.swift */; };
 		BBC1638D296BD1F600868752 /* ChatStorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */; };
 		BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638E296BD98200868752 /* ChatTableViewCell.swift */; };
-		BBD65BB7296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
-		BBD65BB8296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
-		BBD65BB9296FDBB4001F730C /* shareImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BB6296FDBB4001F730C /* shareImage.gif */; };
+		BBC84684297EFF1E002493A5 /* BottomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC84683297EFF1E002493A5 /* BottomTabBar.swift */; };
+		BBC84686297F2960002493A5 /* EssayPremiumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC84685297F2960002493A5 /* EssayPremiumTableViewCell.swift */; };
+		BBD4D86C298063750031BBFA /* EssayLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4D86B298063750031BBFA /* EssayLoadingTableViewCell.swift */; };
 		BBD65BC029705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBB29705CCE001F730C /* Screenshot 2 Cropped.jpg */; };
 		BBD65BC129705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBB29705CCE001F730C /* Screenshot 2 Cropped.jpg */; };
 		BBD65BC229705CCF001F730C /* Screenshot 2 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BBB29705CCE001F730C /* Screenshot 2 Cropped.jpg */; };
@@ -162,9 +170,17 @@
 		BB0DBAC7296AA50000D2DFB9 /* ChitChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChitChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB0DBACB296AA50000D2DFB9 /* ChitChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChitChatUITests.swift; sourceTree = "<group>"; };
 		BB0DBACD296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChitChatUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BB24FB25297C93CB00A933EA /* BottomTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBarViewController.swift; sourceTree = "<group>"; };
+		BB24FB27297C992C00A933EA /* JustAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustAViewController.swift; sourceTree = "<group>"; };
+		BB24FB29297CAB3F00A933EA /* EssayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayViewController.swift; sourceTree = "<group>"; };
+		BB5E915D297CF6C800DC7467 /* CDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDHelper.swift; sourceTree = "<group>"; };
+		BB5E915F297DB2A300DC7467 /* HalfRoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfRoundedView.swift; sourceTree = "<group>"; };
+		BB5E9161297DB62100DC7467 /* EssayEssayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayEssayTableViewCell.swift; sourceTree = "<group>"; };
+		BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayEntryTableViewCell.swift; sourceTree = "<group>"; };
 		BB720C8F296AAB7800BEA070 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BB7BC14D2974FC9200D34695 /* ChatTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableView.swift; sourceTree = "<group>"; };
 		BB7BC14F297527EA00D34695 /* AttributedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedLabel.swift; sourceTree = "<group>"; };
+		BB9C2F50297CB7710026A441 /* EssayPromptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayPromptTableViewCell.swift; sourceTree = "<group>"; };
 		BBA83E4A2977939600536FF9 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
 		BBA83E4B2977939600536FF9 /* dead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dead.png; sourceTree = "<group>"; };
 		BBA83E4C2977939600536FF9 /* what.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = what.png; sourceTree = "<group>"; };
@@ -186,7 +202,10 @@
 		BBC1638A296BCB6500868752 /* HTTPSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSHelper.swift; sourceTree = "<group>"; };
 		BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStorageHelper.swift; sourceTree = "<group>"; };
 		BBC1638E296BD98200868752 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
-		BBD65BB6296FDBB4001F730C /* shareImage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = shareImage.gif; sourceTree = "<group>"; };
+		BBC84683297EFF1E002493A5 /* BottomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBar.swift; sourceTree = "<group>"; };
+		BBC84685297F2960002493A5 /* EssayPremiumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayPremiumTableViewCell.swift; sourceTree = "<group>"; };
+		BBC84687297F70E4002493A5 /* storeKitConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = storeKitConfiguration.storekit; sourceTree = "<group>"; };
+		BBD4D86B298063750031BBFA /* EssayLoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayLoadingTableViewCell.swift; sourceTree = "<group>"; };
 		BBD65BBB29705CCE001F730C /* Screenshot 2 Cropped.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Screenshot 2 Cropped.jpg"; sourceTree = "<group>"; };
 		BBD65BBC29705CCE001F730C /* Screenshot 2 Cropped.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Screenshot 2 Cropped.psd"; sourceTree = "<group>"; };
 		BBD65BBD29705CCE001F730C /* Screenshot 1 Cropped.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Screenshot 1 Cropped.psd"; sourceTree = "<group>"; };
@@ -261,7 +280,6 @@
 				BB04B400296E548E000BEC02 /* loadingDots.gif */,
 				BB04B3EC296E2E7B000BEC02 /* giftGif.gif */,
 				BB04B3F8296E38E0000BEC02 /* Ultra Image.jpg */,
-				BBD65BB6296FDBB4001F730C /* shareImage.gif */,
 				BBD65BEC2970766C001F730C /* arrowGif.gif */,
 				BBA8C21E2971F3C3009BDECC /* Tenjin */,
 				BBD65BBA29705CCE001F730C /* Screenshots for Inside the App */,
@@ -276,12 +294,17 @@
 				BB720C8F296AAB7800BEA070 /* MainViewController.swift */,
 				BBD65BE029706A02001F730C /* MainNavigationViewController.swift */,
 				BB04B3F0296E2EAE000BEC02 /* SettingsTableViewController.swift */,
+				BB24FB25297C93CB00A933EA /* BottomTabBarViewController.swift */,
+				BBC84683297EFF1E002493A5 /* BottomTabBar.swift */,
+				BB24FB27297C992C00A933EA /* JustAViewController.swift */,
+				BB24FB29297CAB3F00A933EA /* EssayViewController.swift */,
 				BB0A8C0E296D05FA0035F046 /* UltraPurchaseViewController.swift */,
 				BBD65BE829706F2C001F730C /* Intro1ViewController.swift */,
 				BBD65BDC2970655D001F730C /* Intro3ViewController.swift */,
 				BB0DBAAD296AA4FE00D2DFB9 /* Main.storyboard */,
 				BB0DBAB3296AA50000D2DFB9 /* Assets.xcassets */,
 				BB0DBAB5296AA50000D2DFB9 /* LaunchScreen.storyboard */,
+				BBC84687297F70E4002493A5 /* storeKitConfiguration.storekit */,
 				BB0DBAB8296AA50000D2DFB9 /* Info.plist */,
 				BB0DBAB0296AA4FE00D2DFB9 /* ChitChat.xcdatamodeld */,
 			);
@@ -364,7 +387,13 @@
 			children = (
 				BB7BC14D2974FC9200D34695 /* ChatTableView.swift */,
 				BBC1638E296BD98200868752 /* ChatTableViewCell.swift */,
+				BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */,
+				BB9C2F50297CB7710026A441 /* EssayPromptTableViewCell.swift */,
+				BB5E9161297DB62100DC7467 /* EssayEssayTableViewCell.swift */,
+				BBC84685297F2960002493A5 /* EssayPremiumTableViewCell.swift */,
+				BBD4D86B298063750031BBFA /* EssayLoadingTableViewCell.swift */,
 				BB0A8C08296CDB760035F046 /* RoundedView.swift */,
+				BB5E915F297DB2A300DC7467 /* HalfRoundedView.swift */,
 				BB0A8C0C296CE70E0035F046 /* ShadowView.swift */,
 				BB0A8C10296D063D0035F046 /* RoundedButton.swift */,
 				BBC16386296B5FF800868752 /* GradientView.swift */,
@@ -380,6 +409,7 @@
 				BBC1638A296BCB6500868752 /* HTTPSHelper.swift */,
 				BB04B3E8296DE2BD000BEC02 /* IAPHTTPSHelper.swift */,
 				BB04B3EA296DE8FF000BEC02 /* IAPManager.swift */,
+				BB5E915D297CF6C800DC7467 /* CDHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -516,7 +546,6 @@
 				BBA83E582977939600536FF9 /* what.png in Resources */,
 				BBD65BD02970648F001F730C /* Screenshot 3 Cropped.jpg in Resources */,
 				BBA83E552977939600536FF9 /* dead.png in Resources */,
-				BBD65BB7296FDBB4001F730C /* shareImage.gif in Resources */,
 				BBA83E6B2977968400536FF9 /* pencil1.png in Resources */,
 				BBD65BED2970766C001F730C /* arrowGif.gif in Resources */,
 				BB04B3ED296E2E7B000BEC02 /* giftGif.gif in Resources */,
@@ -530,7 +559,6 @@
 				BBD65BC429705CCF001F730C /* Screenshot 2 Cropped.psd in Resources */,
 				BBA83E742977968F00536FF9 /* pencil3.png in Resources */,
 				BB04B402296E548F000BEC02 /* loadingDots.gif in Resources */,
-				BBD65BB8296FDBB4001F730C /* shareImage.gif in Resources */,
 				BBA83E592977939600536FF9 /* what.png in Resources */,
 				BBD65BEE2970766C001F730C /* arrowGif.gif in Resources */,
 				BBD65BCA29705CCF001F730C /* Screenshot 1 Cropped.jpg in Resources */,
@@ -558,7 +586,6 @@
 				BBD65BC529705CCF001F730C /* Screenshot 2 Cropped.psd in Resources */,
 				BBA83E752977968F00536FF9 /* pencil3.png in Resources */,
 				BB04B403296E548F000BEC02 /* loadingDots.gif in Resources */,
-				BBD65BB9296FDBB4001F730C /* shareImage.gif in Resources */,
 				BBA83E5A2977939600536FF9 /* what.png in Resources */,
 				BBD65BEF2970766C001F730C /* arrowGif.gif in Resources */,
 				BBD65BCB29705CCF001F730C /* Screenshot 1 Cropped.jpg in Resources */,
@@ -589,12 +616,18 @@
 				BB0DBAB2296AA4FE00D2DFB9 /* ChitChat.xcdatamodeld in Sources */,
 				BBD65BDD2970655D001F730C /* Intro3ViewController.swift in Sources */,
 				BB0A8C0D296CE70E0035F046 /* ShadowView.swift in Sources */,
+				BB9C2F51297CB7710026A441 /* EssayPromptTableViewCell.swift in Sources */,
 				BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */,
+				BB5E9164297DCDED00DC7467 /* EssayEntryTableViewCell.swift in Sources */,
+				BB5E9162297DB62100DC7467 /* EssayEssayTableViewCell.swift in Sources */,
 				BB0DBAA8296AA4FE00D2DFB9 /* AppDelegate.swift in Sources */,
 				BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */,
+				BB24FB26297C93CB00A933EA /* BottomTabBarViewController.swift in Sources */,
 				BBC16387296B5FF800868752 /* GradientView.swift in Sources */,
+				BBC84686297F2960002493A5 /* EssayPremiumTableViewCell.swift in Sources */,
 				BBD65BE129706A02001F730C /* MainNavigationViewController.swift in Sources */,
 				BB7BC150297527EB00D34695 /* AttributedLabel.swift in Sources */,
+				BB24FB28297C992C00A933EA /* JustAViewController.swift in Sources */,
 				BB04B3EB296DE8FF000BEC02 /* IAPManager.swift in Sources */,
 				BB0DBAAA296AA4FE00D2DFB9 /* SceneDelegate.swift in Sources */,
 				BB720C90296AAB7800BEA070 /* MainViewController.swift in Sources */,
@@ -604,10 +637,15 @@
 				BBD65BE929706F2C001F730C /* Intro1ViewController.swift in Sources */,
 				BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedString.swift in Sources */,
 				BB089B082978A3F3003B8AAF /* Private.swift in Sources */,
+				BBD4D86C298063750031BBFA /* EssayLoadingTableViewCell.swift in Sources */,
+				BB24FB2A297CAB4000A933EA /* EssayViewController.swift in Sources */,
 				BB04B3F1296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */,
 				BBC16389296B601500868752 /* Constants.swift in Sources */,
 				BB04B3E9296DE2BD000BEC02 /* IAPHTTPSHelper.swift in Sources */,
 				BB0A8C11296D063D0035F046 /* RoundedButton.swift in Sources */,
+				BB5E915E297CF6C800DC7467 /* CDHelper.swift in Sources */,
+				BB5E9160297DB2A300DC7467 /* HalfRoundedView.swift in Sources */,
+				BBC84684297EFF1E002493A5 /* BottomTabBar.swift in Sources */,
 				BBA83E7729779E3A00536FF9 /* FaceConstants.swift in Sources */,
 				BB7BC14E2974FC9200D34695 /* ChatTableView.swift in Sources */,
 				BB04B3F5296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */,
@@ -796,7 +834,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;
@@ -835,7 +873,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChitChat/Info.plist;

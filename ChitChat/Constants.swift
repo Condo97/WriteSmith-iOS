@@ -17,8 +17,9 @@ struct Constants {
     static let userDefaultStoredIsPremium = "storedIsPremium"
     static let userDefaultStoredWeeklyDisplayPrice = "weeklyDisplayPrice"
     static let userDefaultStoredAnnualDisplayPrice = "annualDisplayPrice"
+    static let userDefaultStoredShareURL = "shareURL"
     
-    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
+//    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
     
     static let defaultWeeklyDisplayPrice = "2.99"
     static let defaultAnnualDisplayPrice = "29.99"
@@ -34,6 +35,18 @@ struct Constants {
     static let primaryFontNameBlack = "Avenir-Black"
     static let primaryFontNameBlackOblique = "Avenir-BlackOblique"
     static let secondaryFontName = "Avenir-Heavy"
+    
+    static let coreDataEssayEntityName = "Essay"
+    static let coreDataEssayIDObjectName = "id"
+    static let coreDataEssayPromptObjectName = "prompt"
+    static let coreDataEssayEssayObjectName = "essay"
+    static let coreDataEssayDateObjectName = "date"
+    static let coreDataEssayUserEditedObjectName = "userEdited"
+    
+    static let copyFooterText = "Made on WriteSmith - AI Writing Author!"
+    
+    static let shareBottomButtonNotSelectedImageName = "shareBottomButtonNotSelected"
+    static let premiumBottomButtonNotSelectedImageName = "premiumBottomButtonNotSelected"
 }
 
 struct HTTPSConstants {
@@ -48,6 +61,7 @@ struct HTTPSConstants {
     static let privacyPolicy = "/privacyPolicy.html"
     static let termsAndConditions = "/termsAndConditions.html"
     static let getDisplayPrice = "/getDisplayPrice"
+    static let getShareURL = "/getShareURL"
 }
 
 struct Colors {

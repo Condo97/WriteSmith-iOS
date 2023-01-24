@@ -35,4 +35,6 @@ class GradientView: UIView {
         
         
     }
+    
+    
 }

@@ -25,9 +25,11 @@ class MainViewController: UIViewController {
     @IBOutlet weak var adShadowView: ShadowView!
     
     @IBOutlet weak var adViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var promoViewHeightConstraint: NSLayoutConstraint!
+    
+    let promoViewHeightConstraintConstant = 50.0
     
     let inputPlaceholder = "Tap to start chatting..."
-    let copyFooterText = "Made on ChitChat - AI Chat With GPT"
     
     var rowsToType: [Int] = []
     var origin: CGFloat = 0.0
@@ -62,6 +64,7 @@ class MainViewController: UIViewController {
         
         interstitial?.fullScreenContentDelegate = self
         
+        adView.alpha = 0.0
         adViewHeightConstraint.constant = 0.0
         
         banner = GADBannerView(adSize: GADAdSizeBanner)
@@ -82,13 +85,6 @@ class MainViewController: UIViewController {
         // Setup "placeholder" for TextView
         inputTextView.text = inputPlaceholder
         inputTextView.textColor = .lightGray
-        
-        // Setup Navigation Bar Appearance (mmake it solid)
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = Colors.accentColor
-        navigationController?.navigationBar.standardAppearance = appearance;
-        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
         
         // Setup Keyboard Stuff
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -115,28 +111,31 @@ class MainViewController: UIViewController {
         }
         
         updateInputTextViewSize(textView: inputTextView)
+        updateTextViewSubmitButtonEnabled(textView: inputTextView)
         
         loadMenuBarItems()
         setLeftMenuBarItems()
-        setPremiumItems()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if firstLoad && !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-            firstLoad = false
-            goToUltraPurchase()
-        }
         
         doServerPremiumCheck()
         setPremiumItems()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
+        DispatchQueue.main.async{
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
+        }
         
         origin = self.view.frame.origin.y
+        
+        // Show Ultra Purchase on launch if not premium
+        if firstLoad && !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            firstLoad = false
+            goToUltraPurchase()
+        }
     }
     
     @IBAction func submitButton(_ sender: Any) {
@@ -208,7 +207,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func shareApp() {
-        let activityVC = UIActivityViewController(activityItems: [Constants.shareURL], applicationActivities: [])
+        let activityVC = UIActivityViewController(activityItems: [UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) ?? ""], applicationActivities: [])
         
         present(activityVC, animated: true)
     }
@@ -273,9 +272,17 @@ class MainViewController: UIViewController {
                         if let attributedText = cell.chatText.attributedText {
                             // Copy to Pasteboard
                             var text = attributedText.string
-                            text = "\(text)\n\n\(copyFooterText)"
                             
-                            UIPasteboard.general.string = attributedText.string
+                            //TODO: - Make the footer text an option in settings instead of disabling it for premium entirely
+                            if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+                                if let shareURL = UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) {
+                                    text = "\(text)\n\n\(Constants.copyFooterText)\n\(shareURL)"
+                                } else {
+                                    text = "\(text)\n\n\(Constants.copyFooterText)"
+                                }
+                            }
+                            
+                            UIPasteboard.general.string = text
                             
                             // Move label if too large
                             if cell.frame.height >= cell.copiedLabel.frame.height * 4 {
@@ -341,7 +348,11 @@ class MainViewController: UIViewController {
             // Share text at row
             var text = attributedText.string
             
-            text = "\(text)\n\n\(copyFooterText)"
+            if let shareURL = UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) {
+                text = "\(text)\n\n\(Constants.copyFooterText)\n\(shareURL)"
+            } else {
+                text = "\(text)\n\n\(Constants.copyFooterText)"
+            }
             
             let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: [])
             
@@ -365,6 +376,13 @@ class MainViewController: UIViewController {
     }
     
     func loadMenuBarItems() {
+        /* Setup Navigation Bar Appearance (mmake it solid) */
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = Colors.accentColor
+        navigationController?.navigationBar.standardAppearance = appearance;
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        
         /* Setup Logo Menu Bar Item */
         let logoImage = UIImage(named: "logoImage")
         let logoImageButton = UIButton(type: .custom)
@@ -388,7 +406,7 @@ class MainViewController: UIViewController {
         moreMenuBarItem = UIBarButtonItem(customView: moreImageButton)
         
         /* Setup Share Menu Bar Item */
-        let shareImage = UIImage.gifImageWithName("shareImage")
+        let shareImage = UIImage(named: "shareImage")?.withTintColor(Colors.userChatTextColor)
         let shareImageButton = UIButton(type: .custom)
         
         shareImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30, height: 30)
@@ -452,12 +470,28 @@ class MainViewController: UIViewController {
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
             rightBarButtonItems.append(proMenuBarItem)
         } else {
+            adView.alpha = 0.0
             adViewHeightConstraint.constant = 0.0
             adShadowView.isHidden = true
         }
         
         /* Put things in Right NavigationBar */
         navigationItem.rightBarButtonItems = rightBarButtonItems
+        
+        /* Update the tabView with correct image and button */
+        // Fix this and make it better lol
+        let tabBarItemIndex = (tabBarController?.tabBar.items?.count ?? 0) - 1
+        
+        if tabBarItemIndex < 0 {
+            print("Tab bar index is less than zero...")
+            return
+        }
+        
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            tabBarController?.tabBar.items![tabBarItemIndex].image = UIImage(named: Constants.premiumBottomButtonNotSelectedImageName)
+        } else {
+            tabBarController?.tabBar.items![tabBarItemIndex].image = UIImage(named: Constants.shareBottomButtonNotSelectedImageName)
+        }
     }
     
     func goToUltraPurchase() {
@@ -527,12 +561,16 @@ class MainViewController: UIViewController {
                 self.remainingShadowView.isHidden = true
                 self.promoView.isHidden = true
                 self.promoShadowView.isHidden = true
+                
+                self.promoViewHeightConstraint.constant = 0.0
             } else {
                 if self.remaining >= 0 {
                     self.remainingView.isHidden = false
                     self.remainingShadowView.isHidden = false
                     self.promoView.isHidden = false
                     self.promoShadowView.isHidden = false
+                    
+                    self.promoViewHeightConstraint.constant = self.promoViewHeightConstraintConstant
                     
                     self.chatsRemainingText.text = "You have \(self.remaining) chats remaining today..."
                     self.chatsRemainingText.textColor = .darkGray
@@ -555,8 +593,18 @@ class MainViewController: UIViewController {
                     self.remainingShadowView.isHidden = true
                     self.promoView.isHidden = true
                     self.promoShadowView.isHidden = true
+                    
+                    self.promoViewHeightConstraint.constant = self.promoViewHeightConstraintConstant
                 }
             }
+        }
+    }
+    
+    func updateTextViewSubmitButtonEnabled(textView: UITextView) {
+        if textView.text == "" || textView.textColor == .lightGray || textView.text == inputPlaceholder  {
+            submitButton.isEnabled = false
+        } else {
+            submitButton.isEnabled = true
         }
     }
     
@@ -585,12 +633,7 @@ extension MainViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         updateInputTextViewSize(textView: textView)
-        
-        if textView.text == "" || textView.textColor == .lightGray {
-            submitButton.isEnabled = false
-        } else {
-            submitButton.isEnabled = true
-        }
+        updateTextViewSubmitButtonEnabled(textView: textView)
     }
     
     func updateInputTextViewSize(textView: UITextView) {
@@ -755,8 +798,17 @@ extension MainViewController: HTTPSHelperDelegate {
             return
         }
         
+        var shouldCheckForPremium = false
+        if UserDefaults.standard.string(forKey: Constants.authTokenKey) == nil {
+            shouldCheckForPremium = true
+        }
+        
         HTTPSHelper.getRemaining(delegate: self, authToken: authToken)
         UserDefaults.standard.set(authToken, forKey: Constants.authTokenKey)
+        
+        if shouldCheckForPremium {
+            doServerPremiumCheck()
+        }
     }
     
     func didGetDisplayPrice(json: [String : Any]) {
@@ -866,14 +918,14 @@ extension MainViewController: HTTPSHelperDelegate {
             self.addChat(message: "There was an issue getting your chat. Please try a different prompt.", userSent: .ai)
         }
     }
+    
+    func didGetShareURL(json: [String : Any]) {
+        
+    }
 }
 
 //MARK: - In App Purchase Handling
 extension MainViewController: IAPHTTPSHelperDelegate {
-    func didGetIAPStuffFromServer(json: [String : Any]) {
-    }
-    
-    
     /* Received Products Did Load Notification
      - Called when IAPMAnager returns the subscription product */
     @objc func receivedProductsDidLoadNotification(notification: Notification) {
@@ -899,7 +951,13 @@ extension MainViewController: IAPHTTPSHelperDelegate {
                 let receiptString = receiptData.base64EncodedString(options: [])
                 print(receiptString)
                 
-                IAPHTTPSHelper.validateAndSaveReceipt(authToken: UserDefaults.standard.string(forKey: Constants.authTokenKey)!, receiptData: receiptData, delegate: self)
+                guard let authToken = UserDefaults.standard.string(forKey: Constants.authTokenKey) else {
+                    print("Didn't have authToken...")
+                    setPremiumToFalse()
+                    return
+                }
+                
+                IAPHTTPSHelper.validateAndSaveReceipt(authToken: authToken, receiptData: receiptData, delegate: self)
             } catch {
                 
             }
@@ -958,6 +1016,9 @@ extension MainViewController: IAPHTTPSHelperDelegate {
             }
         }
     }
+    
+    func didGetIAPStuffFromServer(json: [String : Any]) {
+    }
 }
 
 extension MainViewController: GADFullScreenContentDelegate {
@@ -979,19 +1040,27 @@ extension MainViewController: GADFullScreenContentDelegate {
 
 extension MainViewController: GADBannerViewDelegate {
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-            adViewHeightConstraint.constant = 50.0
-            adShadowView.isHidden = false
-            
-            bannerView.translatesAutoresizingMaskIntoConstraints = false
-            adView.addSubview(bannerView)
-            adView.addConstraints([NSLayoutConstraint(item: bannerView, attribute: .centerY, relatedBy: .equal, toItem: adView, attribute: .centerY, multiplier: 1, constant: 0), NSLayoutConstraint(item: bannerView, attribute: .centerX, relatedBy: .equal, toItem: adView, attribute: .centerX, multiplier: 1, constant: 0)])
+        DispatchQueue.main.async {
+            if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+                self.adViewHeightConstraint.constant = 50.0
+                self.adView.alpha = 1.0
+                self.adShadowView.isHidden = false
+                
+                bannerView.translatesAutoresizingMaskIntoConstraints = false
+                self.adView.addSubview(bannerView)
+                self.adView.addConstraints([NSLayoutConstraint(item: bannerView, attribute: .centerY, relatedBy: .equal, toItem: self.adView, attribute: .centerY, multiplier: 1, constant: 0), NSLayoutConstraint(item: bannerView, attribute: .centerX, relatedBy: .equal, toItem: self.adView, attribute: .centerX, multiplier: 1, constant: 0)])
+                
+                DispatchQueue.main.async {
+                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
+                }
+            }
         }
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
         
+        adView.alpha = 0.0
         adViewHeightConstraint.constant = 0.0
         adShadowView.isHidden = true
     }

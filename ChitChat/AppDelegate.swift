@@ -39,7 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             HTTPSHelper.registerUser(delegate: self)
         }
         
+        if UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) == nil {
+            UserDefaults.standard.set("https://apple.com/", forKey: Constants.userDefaultStoredShareURL)
+        }
+        
         HTTPSHelper.getDisplayPrice(delegate: self)
+        HTTPSHelper.getShareURL(delegate: self)
                 
         return true
     }
@@ -145,6 +150,14 @@ extension AppDelegate: HTTPSHelperDelegate {
     
     func getChatError() {
         
+    }
+    
+    func didGetShareURL(json: [String : Any]) {
+        if let body = json["Body"] as? [String: Any] {
+            if let shareURL = body["shareURL"] as? String {
+                UserDefaults.standard.set(shareURL, forKey: Constants.userDefaultStoredShareURL)
+            }
+        }
     }
 }
 
