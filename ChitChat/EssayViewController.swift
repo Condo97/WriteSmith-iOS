@@ -64,6 +64,8 @@ class EssayViewController: UIViewController {
         toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: toolbarHeight))
         toolbar.barStyle = .default
         toolbar.items = [UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelEditingPressed)), UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveEditingPressed))]
+        toolbar.tintColor = Colors.aiChatBubbleColor
+        toolbar.barTintColor = Colors.aiChatTextColor
         toolbar.sizeToFit()
         
         //TODO: - Delete button

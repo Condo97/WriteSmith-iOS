@@ -209,6 +209,7 @@
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="smH-qw-2uJ">
                                                     <rect key="frame" x="24" y="0.0" width="345" height="48"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="AIChatTextColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="LEK-45-mhW"/>
                                                     </constraints>
@@ -344,6 +345,7 @@
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ba6-Kx-Yhf">
                                                     <rect key="frame" x="24" y="14" width="345" height="300.33333333333331"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="AIChatTextColor"/>
                                                     <attributedString key="attributedText">
                                                         <fragment>
                                                             <string key="content">Write Essays, Lyrics Poems and More!
@@ -1692,13 +1694,13 @@ Cg
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B8F-lp-bol">
                                                     <rect key="frame" x="117" y="32.666666666666664" width="222" height="53.999999999999993"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ChitChat Ultra hasn't been activated." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sux-75-J18">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChitChat Ultra hasn't been activated." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sux-75-J18">
                                                             <rect key="frame" x="7" y="7" width="208" height="16"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="11"/>
                                                             <color key="textColor" name="UserChatBubbleColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tap to Claim 3 Days Free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8t-lW-8Wz">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap to Claim 3 Days Free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8t-lW-8Wz">
                                                             <rect key="frame" x="7" y="23" width="201" height="24"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                                             <color key="textColor" name="UserChatBubbleColor"/>
@@ -2111,8 +2113,8 @@ Cg
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wne-M3-lxI"/>
-        <segue reference="cCs-vG-REI"/>
+        <segue reference="2nk-f4-LWF"/>
+        <segue reference="R6Y-KJ-LHE"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="AIChatBubbleColor"/>
     <resources>
