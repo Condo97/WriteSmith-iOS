@@ -930,10 +930,19 @@ extension MainViewController: IAPHTTPSHelperDelegate {
      - Called when IAPMAnager returns the subscription product */
     @objc func receivedProductsDidLoadNotification(notification: Notification) {
         guard let product = IAPManager.shared.products?[0] else { return }
-        IAPManager.shared.purchaseProduct(product: product, success: {
+        IAPManager.shared.purchaseProduct(product: product, success: { transaction in
             /* Successfully Purchased Product */
             
             DispatchQueue.main.async {
+                if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: appStoreReceiptURL.path) {
+                    do {
+                        let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
+                        TenjinSDK.transaction(transaction, andReceipt: receiptData)
+                    } catch {
+                        print("Couldn't report weekly subscription to Tenjin!")
+                    }
+                }
+                
                 self.doServerPremiumCheck()
             }
         }, failure: {(Error) in })

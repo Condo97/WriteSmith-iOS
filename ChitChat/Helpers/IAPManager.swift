@@ -9,6 +9,7 @@ import UIKit
 import StoreKit
 
 public typealias SuccessBlock = () -> Void
+public typealias SuccessTransactionBlock = (SKPaymentTransaction?) -> Void
 public typealias FailureBlock = (Error?) -> Void
 
 let IAP_PRODUCTS_DID_LOAD_NOTIFICATION = Notification.Name("IAP_PRODUCTS_DID_LOAD_NOTIFICATION")
@@ -23,6 +24,7 @@ class IAPManager : NSObject{
     private var productIds : Set<String> = []
     
     private var successBlock : SuccessBlock?
+    private var successTransactionBlock : SuccessTransactionBlock?
     private var failureBlock : FailureBlock?
     
     private var refreshSubscriptionSuccessBlock : SuccessBlock?
@@ -41,7 +43,7 @@ class IAPManager : NSObject{
         return UserDefaults.standard.object(forKey: identifier) as? Date
     }
     
-    func purchaseProduct(product : SKProduct, success: @escaping SuccessBlock, failure: @escaping FailureBlock){
+    func purchaseProduct(product : SKProduct, success: @escaping SuccessTransactionBlock, failure: @escaping FailureBlock){
         
         guard SKPaymentQueue.canMakePayments() else {
             return
@@ -49,7 +51,7 @@ class IAPManager : NSObject{
         guard SKPaymentQueue.default().transactions.last?.transactionState != .purchasing else {
             return
         }
-        self.successBlock = success
+        self.successTransactionBlock = success
         self.failureBlock = failure
         let payment = SKPayment(product: product)
         SKPaymentQueue.default().add(payment)
@@ -211,6 +213,7 @@ extension IAPManager: SKPaymentTransactionObserver {
     private func notifyIsPurchased(transaction: SKPaymentTransaction) {
         refreshSubscriptionsStatus(callback: {
             self.successBlock?()
+            self.successTransactionBlock?(transaction)
             self.cleanUp()
         }) { (error) in
             // couldn't verify receipt
@@ -221,6 +224,7 @@ extension IAPManager: SKPaymentTransactionObserver {
     
     func cleanUp(){
         self.successBlock = nil
+        self.successTransactionBlock = nil
         self.failureBlock = nil
     }
 }

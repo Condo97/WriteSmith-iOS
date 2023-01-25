@@ -284,11 +284,20 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
                     return
                 }
                 
-                IAPManager.shared.purchaseProduct(product: products[weeklyIndex], success: {
+                IAPManager.shared.purchaseProduct(product: products[weeklyIndex], success: { (transaction) in
                     /* Successfully Purchased Product */
                     DispatchQueue.main.async {
                         // Log manual event to Tenjin
                         TenjinSDK.sendEvent(withName: "subWeekly")
+                        
+                        if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: appStoreReceiptURL.path) {
+                            do {
+                                let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
+                                TenjinSDK.transaction(transaction, andReceipt: receiptData)
+                            } catch {
+                                print("Couldn't report weekly subscription to Tenjin!")
+                            }
+                        }
                         
                         self.doServerPremiumCheck()
                     }
@@ -310,11 +319,20 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
                     return
                 }
                 
-                IAPManager.shared.purchaseProduct(product: products[annualIndex], success: {
+                IAPManager.shared.purchaseProduct(product: products[annualIndex], success: { transaction in
                     /* Successfully Purchased Product */
                     DispatchQueue.main.async {
                         // Log manual event to Tenjin
                         TenjinSDK.sendEvent(withName: "subAnnual")
+                        
+                        if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: appStoreReceiptURL.path) {
+                            do {
+                                let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
+                                TenjinSDK.transaction(transaction, andReceipt: receiptData)
+                            } catch {
+                                print("Couldn't report yearly subscription to Tenjin!")
+                            }
+                        }
                         
                         self.doServerPremiumCheck()
                     }
