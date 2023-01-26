@@ -1071,7 +1071,7 @@ Cg
                                                 <color key="backgroundColor" name="UserChatBubbleColor"/>
                                                 <color key="tintColor" name="UserChatTextColor"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Get 3 Days Free">
+                                                <buttonConfiguration key="configuration" style="plain" title="Get 3 Days Free...">
                                                     <fontDescription key="titleFontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
                                                 </buttonConfiguration>
                                                 <connections>
@@ -2126,8 +2126,8 @@ Cg
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2nk-f4-LWF"/>
-        <segue reference="R6Y-KJ-LHE"/>
+        <segue reference="wne-M3-lxI"/>
+        <segue reference="cCs-vG-REI"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="AIChatBubbleColor"/>
     <resources>
