@@ -40,13 +40,14 @@ class MainViewController: UIViewController {
     var proMenuBarItem = UIBarButtonItem()
     var navigationSpacer = UIBarButtonItem()
     
-    var firstLoad = false
+    var firstLoad = true
     var firstChat = true
     var isProcessingChat = false
     var submitSoftDisable = false
     var isLongPressForCopy = false
     
     var remaining = -1
+    var timeInterval = Constants.freeTypingTimeInterval
     
     var interstitial: GADRewardedInterstitialAd?
     var banner: GADBannerView!
@@ -135,6 +136,18 @@ class MainViewController: UIViewController {
         if firstLoad && !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
             firstLoad = false
             goToUltraPurchase()
+        }
+        
+        // Load first chats if there are no chats
+        if ChatStorageHelper.getAllChats().count == 0 {
+            addChat(message: "Hi! I'm Prof. Write, your AI writing companion...", userSent: .ai)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 2.4 : 1.2), execute: {
+                self.addChat(message: "Ask me to write lyrics, poems, essays and more. Talk to me like a human and ask me anything you'd ask your professor!", userSent: .ai)
+                DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 5.8 : 2.8), execute: {
+                    self.addChat(message: "I do better with more detail. Don't say, \"Essay on Belgium,\" say \"200 word essay on Belgium's cultural advances in the past 20 years.\" Remember, I'm your Professor, so use what I wrie as inspiration and never plagarize!", userSent: .ai)
+                })
+            })
         }
     }
     
@@ -720,6 +733,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let finalText = currentChat.text
         
+        // Get the time interval for the typing thread
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            timeInterval = Constants.freeTypingTimeInterval
+        } else {
+            timeInterval = Constants.premiumTypingTimeInterval
+        }
+        
         //TODO: - Wait, does this trigger submitSoftDisable even when the user text is being typed out?
         //TODO: - Need to remove rows from rowsToType once they are typed (Done?)
         if rowsToType.contains(indexPath.row) {
@@ -749,7 +769,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
                         }
                     }
-                    Thread.sleep(forTimeInterval: 5.0/100)
+                    
+                    Thread.sleep(forTimeInterval: self.timeInterval)
                 }
                 
                 //AI finished typing, soft enable button and remove row from needing to be typed

@@ -1289,6 +1289,14 @@ Cg
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rej-JB-joa" customClass="ShadowView" customModule="ChitChat" customModuleProvider="target">
                                                 <rect key="frame" x="14" y="0.0" width="365" height="70"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" name="AIChatTextColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p6H-pj-rs4" customClass="ShadowView" customModule="ChitChat" customModuleProvider="target">
                                                 <rect key="frame" x="14" y="78" width="365" height="70"/>
@@ -1393,6 +1401,11 @@ Cg
                                             <constraint firstItem="rej-JB-joa" firstAttribute="bottom" secondItem="k5Q-AD-jLb" secondAttribute="bottom" id="uRn-IO-pb3"/>
                                             <constraint firstItem="rej-JB-joa" firstAttribute="top" secondItem="k5Q-AD-jLb" secondAttribute="top" id="vU0-k4-Axn"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="p6H-pj-rs4"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uq6-4O-flI">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="183"/>
@@ -1634,14 +1647,14 @@ Cg
                     </view>
                     <navigationItem key="navigationItem" id="eSe-ja-BJ3"/>
                     <connections>
-                        <outlet property="annualActivityView" destination="7PL-Cm-x3A" id="2eT-XO-rww"/>
-                        <outlet property="annualRoundedView" destination="e7p-6o-h3f" id="vh0-2R-C2d"/>
-                        <outlet property="annualText" destination="C7r-9k-IWy" id="bt8-RN-EMv"/>
                         <outlet property="backgroundView" destination="l0r-Pf-luk" id="2AK-Nl-ZwK"/>
                         <outlet property="closeButton" destination="7NL-s3-xkg" id="qZY-dS-uAe"/>
                         <outlet property="everythingElseView" destination="9sZ-As-459" id="KW0-CE-xbm"/>
                         <outlet property="gradientView" destination="Zis-EH-kPh" id="hvz-ND-qpv"/>
                         <outlet property="imageView" destination="WJY-ZT-siG" id="kCy-lW-fgi"/>
+                        <outlet property="monthlyActivityView" destination="7PL-Cm-x3A" id="2eT-XO-rww"/>
+                        <outlet property="monthlyRoundedView" destination="e7p-6o-h3f" id="vh0-2R-C2d"/>
+                        <outlet property="monthlyText" destination="C7r-9k-IWy" id="bt8-RN-EMv"/>
                         <outlet property="ultraLabel" destination="JzP-RW-8RR" id="9oe-d3-yJz"/>
                         <outlet property="unleashLabel" destination="ZkE-jT-vqk" id="P9Z-3H-jPy"/>
                         <outlet property="weeklyActivityView" destination="j8U-ao-kNn" id="QZD-lv-g3X"/>

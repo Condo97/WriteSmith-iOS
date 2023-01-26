@@ -12,7 +12,8 @@ import SafariServices
 enum PlanType {
     case none
     case weekly
-    case annual
+    case monthly
+//    case annual
 }
 
 class UltraPurchaseViewController: UIViewController {
@@ -29,9 +30,9 @@ class UltraPurchaseViewController: UIViewController {
     @IBOutlet weak var weeklyText: UILabel!
     @IBOutlet weak var weeklyActivityView: UIActivityIndicatorView!
     
-    @IBOutlet weak var annualRoundedView: RoundedView!
-    @IBOutlet weak var annualText: UILabel!
-    @IBOutlet weak var annualActivityView: UIActivityIndicatorView!
+    @IBOutlet weak var monthlyRoundedView: RoundedView!
+    @IBOutlet weak var monthlyText: UILabel!
+    @IBOutlet weak var monthlyActivityView: UIActivityIndicatorView!
     
     var fromStart: Bool = false
     var restorePressed: Bool = false
@@ -47,7 +48,7 @@ class UltraPurchaseViewController: UIViewController {
         super.viewDidLoad()
                 
         let weeklyDisplayPrice = (UserDefaults.standard.string(forKey: Constants.userDefaultStoredWeeklyDisplayPrice) ?? Constants.defaultWeeklyDisplayPrice) as String
-        let annualDisplayPrice = (UserDefaults.standard.string(forKey: Constants.userDefaultStoredAnnualDisplayPrice) ?? Constants.defaultAnnualDisplayPrice) as String
+        let monthlyDisplayPrice = (UserDefaults.standard.string(forKey: Constants.userDefaultStoredMonthlyDisplayPrice) ?? Constants.defaultMonthlyDisplayPrice) as String
         
         // Setup Weekly Text
         let weeklyString = NSMutableAttributedString()
@@ -61,15 +62,15 @@ class UltraPurchaseViewController: UIViewController {
         weeklyRoundedView.addGestureRecognizer(weeklyGestureRecognizer)
         
         // Setup Annual Text
-        let annualString = NSMutableAttributedString()
-        annualString.normalAndBig("Annual - \(annualDisplayPrice) / year\n", size: 22.0)
-        annualString.secondarySmaller("That's 70% Off Weekly!")
-        annualText.attributedText = annualString
+        let monthlyString = NSMutableAttributedString()
+        monthlyString.normalAndBig("Monthly - \(monthlyDisplayPrice) / month\n", size: 22.0)
+        monthlyString.secondarySmaller("That's 30% Off Weekly!")
+        monthlyText.attributedText = monthlyString
         
         // Setup Annual Gesture Recognizer
-        let annualGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedAnnual))
-        annualGestureRecognizer.cancelsTouchesInView = false
-        annualRoundedView.addGestureRecognizer(annualGestureRecognizer)
+        let monthlyGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedMonthly))
+        monthlyGestureRecognizer.cancelsTouchesInView = false
+        monthlyRoundedView.addGestureRecognizer(monthlyGestureRecognizer)
         
         // Do setup server calls in case didFinishLaunchingWithOptions isn't called
         if UserDefaults.standard.string(forKey: Constants.authTokenKey) == nil {
@@ -80,12 +81,24 @@ class UltraPurchaseViewController: UIViewController {
             UserDefaults.standard.set("https://apple.com/", forKey: Constants.userDefaultStoredShareURL)
         }
         
+        // Setup close button fade in
+        closeButton.alpha = 0.5
+        closeButton.setBackgroundImage(UIImage.init(systemName: "xmark"), for: .normal)
+        
         HTTPSHelper.getDisplayPrice(delegate: self)
         HTTPSHelper.getShareURL(delegate: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // Do close button fade in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 4, animations: {
+                self.closeButton.alpha = 1.0
+                self.closeButton.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            })
+        })
         
         if shouldRestoreFromSettings {
             restorePurchases()
@@ -96,16 +109,16 @@ class UltraPurchaseViewController: UIViewController {
         closeButton.isEnabled = false
         buttonsAreSoftDisabled = true
         weeklyRoundedView.alpha = 0.5
-        annualRoundedView.alpha = 0.5
+        monthlyRoundedView.alpha = 0.5
     }
     
     func enableButtons() {
         closeButton.isEnabled = true
         buttonsAreSoftDisabled = false
         weeklyRoundedView.alpha = 1.0
-        annualRoundedView.alpha = 1.0
+        monthlyRoundedView.alpha = 1.0
         weeklyActivityView.stopAnimating()
-        annualActivityView.stopAnimating()
+        monthlyActivityView.stopAnimating()
     }
     
     func getIAPStuffFromServer() {
@@ -132,13 +145,13 @@ class UltraPurchaseViewController: UIViewController {
         }
     }
     
-    @objc func tappedAnnual(sender: Any) {
+    @objc func tappedMonthly(sender: Any) {
         if !buttonsAreSoftDisabled {
-            bounce(sender: annualRoundedView)
+            bounce(sender: monthlyRoundedView)
             
             restorePressed = false
-            selectedPlanType = .annual
-            annualActivityView.startAnimating()
+            selectedPlanType = .monthly
+            monthlyActivityView.startAnimating()
             disableButtons()
             getIAPStuffFromServer()
         }
@@ -193,9 +206,11 @@ class UltraPurchaseViewController: UIViewController {
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if segue.identifier == "toMainView" {
-             if let nav = segue.destination as? UINavigationController {
-                 if let detailVC = nav.topViewController as? MainViewController {
-                     detailVC.firstLoad = false
+             if let tabBarController = segue.destination as? BottomTabBarViewController {
+                 if let nav = tabBarController.viewControllers?[tabBarController.firstViewController] as? UINavigationController {
+                     if let detailVC = nav.topViewController as? MainViewController {
+                         detailVC.firstLoad = false
+                     }
                  }
              }
          }
@@ -254,8 +269,8 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
             let product = products[i]
             if product.productIdentifier == Constants.weeklyProductIdentifier {
                 productsToIndex[.weekly] = i
-            } else if product.productIdentifier == Constants.annualProductIdentifier {
-                productsToIndex[.annual] = i
+            } else if product.productIdentifier == Constants.monthlyProductIdentifier {
+                productsToIndex[.monthly] = i
             }
         }
         
@@ -313,24 +328,24 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
                     }))
                     self.present(alertController, animated: true)
                 })
-            } else if selectedPlanType == .annual {
-                guard let annualIndex = productsToIndex[.annual] else {
+            } else if selectedPlanType == .monthly {
+                guard let monthlyIndex = productsToIndex[.monthly] else {
                     enableButtons()
                     return
                 }
                 
-                IAPManager.shared.purchaseProduct(product: products[annualIndex], success: { transaction in
+                IAPManager.shared.purchaseProduct(product: products[monthlyIndex], success: { transaction in
                     /* Successfully Purchased Product */
                     DispatchQueue.main.async {
                         // Log manual event to Tenjin
-                        TenjinSDK.sendEvent(withName: "subAnnual")
+                        TenjinSDK.sendEvent(withName: "subMonthly")
                         
                         if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: appStoreReceiptURL.path) {
                             do {
                                 let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
                                 TenjinSDK.transaction(transaction, andReceipt: receiptData)
                             } catch {
-                                print("Couldn't report yearly subscription to Tenjin!")
+                                print("Couldn't report monthly subscription to Tenjin!")
                             }
                         }
                         
@@ -460,18 +475,18 @@ extension UltraPurchaseViewController: HTTPSHelperDelegate {
             if let weeklyDisplayPrice = body["weeklyDisplayPrice"] as? String {
                 if let annualDisplayPrice = body["annualDisplayPrice"] as? String {
                     UserDefaults.standard.set(weeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-                    UserDefaults.standard.set(annualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+                    UserDefaults.standard.set(annualDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
                 } else {
                     UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-                    UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+                    UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
                 }
             } else {
                 UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-                UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+                UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
             }
         } else {
             UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-            UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+            UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
         }
     }
     

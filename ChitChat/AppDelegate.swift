@@ -122,21 +122,21 @@ extension AppDelegate: HTTPSHelperDelegate {
     
     func didGetDisplayPrice(json: [String : Any]) {
         if let body = json["Body"] as? [String: Any] {
-            if let weeklyDisplayPrice = body["weeklyDisplayPrice"] as? String {
-                if let annualDisplayPrice = body["annualDisplayPrice"] as? String {
+            if let weeklyDisplayPrice = body[Constants.bodyWeeklyDisplayPriceName] as? String {
+                if let monthlyDisplayPrice = body[Constants.bodyMonthlyDisplayPriceName] as? String {
                     UserDefaults.standard.set(weeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-                    UserDefaults.standard.set(annualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+                    UserDefaults.standard.set(monthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
                 } else {
                     UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-                    UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+                    UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
                 }
             } else {
                 UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-                UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+                UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
             }
         } else {
             UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-            UserDefaults.standard.set(Constants.defaultAnnualDisplayPrice, forKey: Constants.userDefaultStoredAnnualDisplayPrice)
+            UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
         }
     }
     

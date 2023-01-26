@@ -9,6 +9,8 @@ import UIKit
 
 class BottomTabBarViewController: UITabBarController {
     
+    let firstViewController = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
@@ -23,7 +25,7 @@ class BottomTabBarViewController: UITabBarController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        selectedIndex = 1
+        selectedIndex = firstViewController
     }
     
     override func viewWillLayoutSubviews() {
