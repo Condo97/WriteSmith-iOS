@@ -1349,14 +1349,14 @@ Cg
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7r-9k-IWy">
                                                         <rect key="frame" x="0.0" y="0.0" width="365" height="66"/>
                                                         <attributedString key="attributedText">
-                                                            <fragment content="Annual - 59.99 / year ">
+                                                            <fragment content="Monthly - 59.99 / month ">
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <font key="NSFont" metaFont="system" size="21"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
-                                                            <fragment content="(70% Off Weekly!)">
+                                                            <fragment content="(30% Off Weekly!)">
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <font key="NSFont" metaFont="cellTitle"/>
