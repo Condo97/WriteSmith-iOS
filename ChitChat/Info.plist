@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>Instead of a survey, Chit Chat automatically tells us where you found out about us.</string>
+	<string>Instead of a survey, WriteSmith automatically tells us where you found out about us.</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>SKAdNetworkItems</key>

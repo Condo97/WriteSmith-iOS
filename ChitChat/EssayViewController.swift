@@ -647,6 +647,11 @@ extension EssayViewController: EntryEssayTableViewCellDelegate {
         
         disableButtons()
         
+        // Update entry to placeholder text and update size
+        cell.textView.text = inputPlaceholder
+        cell.textView.textColor = .lightGray
+        updateInputTextViewSize(textView: cell.textView)
+        
         HTTPSHelper.getChat(delegate: self, authToken: authToken, inputText: inputText)
         
         if !isProcessingChat {
@@ -992,14 +997,17 @@ extension EssayViewController: UITextViewDelegate {
             let size = CGSize(width: textView.frame.size.width, height: .infinity)
             let estimatedSize = textView.sizeThatFits(size)
             
+            textView.constraints.forEach{ (constraint) in
+                if constraint.firstAttribute == .height {
+                    self.tableView.beginUpdates()
+                    constraint.constant = estimatedSize.height
+                    self.tableView.endUpdates()
+                }
+            }
+            
             guard textView.contentSize.height < 70.0 else { textView.isScrollEnabled = true; return }
             
             textView.isScrollEnabled = false
-            textView.constraints.forEach{ (constraint) in
-                if constraint.firstAttribute == .height {
-                    constraint.constant = estimatedSize.height
-                }
-            }
         }
     }
     
@@ -1038,3 +1046,4 @@ extension EssayViewController: UITextViewDelegate {
         }
     }
 }
+

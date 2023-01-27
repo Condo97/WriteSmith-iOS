@@ -182,7 +182,10 @@ class MainViewController: UIViewController {
         
         HTTPSHelper.getChat(delegate: self, authToken: authToken, inputText: inputTextView.text)
         addChat(message: inputTextView.text, userSent: .user)
-        inputTextView.text = ""
+        
+        // Set inputTextView to placeholder and update its size
+        inputTextView.text = inputPlaceholder
+        inputTextView.textColor = .lightGray
         updateInputTextViewSize(textView: inputTextView)
         
         if !isProcessingChat {
@@ -590,7 +593,7 @@ class MainViewController: UIViewController {
                     self.upgradeNowText.textColor = .darkGray
                     
                     //TODO: - If remaining % 5 is 0 then serve an ad
-                    if self.remaining % 5 == 0 && !self.firstChat {
+                    if self.remaining % 4 - 2 == 0 && !self.firstChat {
                         if self.interstitial != nil {
                             //Display ad
                             self.interstitial?.present(fromRootViewController: self) {
@@ -653,14 +656,15 @@ extension MainViewController: UITextViewDelegate {
         let size = CGSize(width: textView.frame.size.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
         
-        guard textView.contentSize.height < 70.0 else { textView.isScrollEnabled = true; return }
-        
-        textView.isScrollEnabled = false
-        textView.constraints.forEach{ (constraint) in
+        textView.constraints.forEach { (constraint) in
             if constraint.firstAttribute == .height {
                 constraint.constant = estimatedSize.height
             }
         }
+        
+        guard textView.contentSize.height < 70.0 else { textView.isScrollEnabled = true; return }
+        
+        textView.isScrollEnabled = false
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
