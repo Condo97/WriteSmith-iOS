@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -105,7 +106,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYy-E3-hqc">
-                                                    <rect key="frame" x="307" y="11.666666666666666" width="24" height="24.666666666666686"/>
+                                                    <rect key="frame" x="307" y="11.666666666666666" width="24" height="24.666666666666671"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="PYy-E3-hqc" secondAttribute="height" multiplier="1:1" id="9Ew-T2-WvO"/>
                                                         <constraint firstAttribute="width" constant="24" id="I7Q-fa-tdQ"/>
@@ -638,17 +639,43 @@ Cg
             <objects>
                 <viewController id="deI-j5-RKq" customClass="JustAViewController" customModule="ChitChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="feS-9p-vyR">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="749"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0n9-S2-7M9">
+                                <rect key="frame" x="0.0" y="52" width="393" height="614"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cah-kh-xZe">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="52"/>
+                                <color key="backgroundColor" name="ChatBackgroundColor"/>
+                                <color key="tintColor" name="AIChatBubbleColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="R7u-EW-4SW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="BO0-Io-14y"/>
                         <color key="backgroundColor" name="ChatBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BO0-Io-14y" firstAttribute="bottom" secondItem="0n9-S2-7M9" secondAttribute="bottom" id="2Tg-3f-Dr4"/>
+                            <constraint firstItem="BO0-Io-14y" firstAttribute="trailing" secondItem="0n9-S2-7M9" secondAttribute="trailing" id="Gww-48-Aoa"/>
+                            <constraint firstItem="BO0-Io-14y" firstAttribute="trailing" secondItem="cah-kh-xZe" secondAttribute="trailing" id="JO1-PP-7VJ"/>
+                            <constraint firstItem="0n9-S2-7M9" firstAttribute="top" secondItem="cah-kh-xZe" secondAttribute="bottom" id="R3r-Hr-0yr"/>
+                            <constraint firstItem="cah-kh-xZe" firstAttribute="top" secondItem="BO0-Io-14y" secondAttribute="top" id="RRq-W7-Mvw"/>
+                            <constraint firstItem="0n9-S2-7M9" firstAttribute="leading" secondItem="BO0-Io-14y" secondAttribute="leading" id="oWh-LV-jfw"/>
+                            <constraint firstItem="cah-kh-xZe" firstAttribute="leading" secondItem="BO0-Io-14y" secondAttribute="leading" id="pR1-Iq-2Fz"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="premiumBottomButtonNotSelected" selectedImage="premiumBottomButtonNotSelected" id="x8j-wJ-9IZ"/>
+                    <tabBarItem key="tabBarItem" title="" image="savedNotSelected" selectedImage="savedSelected" id="oZc-dR-Rak">
+                        <color key="badgeColor" name="AIChatTextColor"/>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="QqM-bH-CDP"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4yl-LI-4gV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1034" y="1477"/>
+            <point key="canvasLocation" x="-107.63358778625954" y="1476.7605633802818"/>
         </scene>
         <!--Bottom Tab Bar View Controller-->
         <scene sceneID="Ffx-01-Tve">
@@ -665,7 +692,7 @@ Cg
                     <connections>
                         <segue destination="Z9n-3X-Yvr" kind="relationship" relationship="viewControllers" id="wQS-PO-hRr"/>
                         <segue destination="4wX-f6-Fx4" kind="relationship" relationship="viewControllers" id="wjO-cg-Wti"/>
-                        <segue destination="deI-j5-RKq" kind="relationship" relationship="viewControllers" id="ZTn-cv-iVZ"/>
+                        <segue destination="nQ3-UX-qgC" kind="relationship" relationship="viewControllers" id="ZTn-cv-iVZ"/>
                         <segue destination="kYQ-hg-YGZ" kind="presentation" identifier="toUltraPurchase" modalPresentationStyle="fullScreen" id="Fxw-2h-jyj"/>
                         <segue destination="L6j-RB-Sjf" kind="presentation" identifier="toIntro" animates="NO" modalPresentationStyle="fullScreen" id="m4e-bu-f2a"/>
                     </connections>
@@ -2124,10 +2151,30 @@ Cg
             </objects>
             <point key="canvasLocation" x="-1034.3511450381679" y="793.66197183098598"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="B7P-VF-9Hi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nQ3-UX-qgC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="savedNotSelected" selectedImage="savedSelected" id="x8j-wJ-9IZ"/>
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ZS9-m9-h1l">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="deI-j5-RKq" kind="relationship" relationship="rootViewController" id="1vO-GV-Mvf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8dc-lH-WHF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1034.3511450381679" y="1476.7605633802818"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2nk-f4-LWF"/>
-        <segue reference="R6Y-KJ-LHE"/>
+        <segue reference="wne-M3-lxI"/>
+        <segue reference="cCs-vG-REI"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="AIChatBubbleColor"/>
     <resources>
@@ -2147,7 +2194,8 @@ Cg
         <image name="paperclip" catalog="system" width="121" height="128"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="person.3" catalog="system" width="128" height="62"/>
-        <image name="premiumBottomButtonNotSelected" width="60" height="60"/>
+        <image name="savedNotSelected" width="60" height="60"/>
+        <image name="savedSelected" width="60" height="60"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="square.and.pencil.circle.fill" catalog="system" width="128" height="123"/>
         <image name="square.on.square.dashed" catalog="system" width="128" height="116"/>
@@ -2176,5 +2224,8 @@ Cg
         <namedColor name="UserChatTextColor">
             <color red="0.875" green="0.875" blue="0.875" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
