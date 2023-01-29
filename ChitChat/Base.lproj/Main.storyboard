@@ -2178,9 +2178,9 @@ Cg
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="AIChatBubbleColor"/>
     <resources>
-        <image name="Screenshot 1 Cropped.jpg" width="1284" height="2078"/>
-        <image name="Screenshot 2 Cropped.jpg" width="1284" height="2078"/>
-        <image name="Screenshot 3 Cropped.jpg" width="1284" height="2078"/>
+        <image name="Screenshot 1 Cropped.jpg" width="1242" height="2208"/>
+        <image name="Screenshot 2 Cropped.jpg" width="1242" height="2208"/>
+        <image name="Screenshot 3 Cropped.jpg" width="1242" height="2208"/>
         <image name="Ultra Image.jpg" width="1024" height="1024"/>
         <image name="aiChatImage" width="168.66667175292969" height="168.66667175292969"/>
         <image name="arrow.2.circlepath" catalog="system" width="128" height="104"/>
