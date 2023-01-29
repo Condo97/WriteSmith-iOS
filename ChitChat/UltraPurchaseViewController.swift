@@ -309,6 +309,7 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
                             do {
                                 let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
                                 TenjinSDK.transaction(transaction, andReceipt: receiptData)
+                                TenjinSDK.updatePostbackConversionValue(Int32(UserDefaults.standard.string(forKey: Constants.userDefaultStoredWeeklyDisplayPrice) ?? Constants.defaultWeeklyDisplayPrice) ?? 3)
                             } catch {
                                 print("Couldn't report weekly subscription to Tenjin!")
                             }
@@ -344,6 +345,7 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
                             do {
                                 let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
                                 TenjinSDK.transaction(transaction, andReceipt: receiptData)
+                                TenjinSDK.updatePostbackConversionValue(Int32(UserDefaults.standard.string(forKey: Constants.userDefaultStoredMonthlyDisplayPrice) ?? Constants.defaultWeeklyDisplayPrice) ?? 10)
                             } catch {
                                 print("Couldn't report monthly subscription to Tenjin!")
                             }

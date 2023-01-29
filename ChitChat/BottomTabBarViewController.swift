@@ -36,7 +36,7 @@ class BottomTabBarViewController: UITabBarController {
 extension BottomTabBarViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
-        if viewController.isKind(of: JustAViewController.self) {
+        if viewController.isKind(of: FavoritesNavigationViewController.self) {
             // If not premium, take to premium purchase, if premium, share
             // TODO: - Make the "premium" or "share" button favorites, and make it show but say they need to subscribe if not subscriped to premium
             if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {

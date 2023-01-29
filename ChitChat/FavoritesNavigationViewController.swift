@@ -1,13 +1,13 @@
 //
-//  JustAViewController.swift
+//  FavoritesNavigationViewController.swift
 //  ChitChat
 //
-//  Created by Alex Coundouriotis on 1/21/23.
+//  Created by Alex Coundouriotis on 1/29/23.
 //
 
 import UIKit
 
-class JustAViewController: UIViewController {
+class FavoritesNavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

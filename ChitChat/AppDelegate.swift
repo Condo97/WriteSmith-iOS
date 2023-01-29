@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
                         ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
                             DispatchQueue.main.async {
-                                TenjinSDK.getInstance("UN4PPH4ZU5Z3S6BDDJZZCXLPPFFJ5XLP")
+                                TenjinSDK.getInstance("UN4PPH4ZU5Z3S6BDDJZZCXLPPFFJ5XLP", andSharedSecret: Private.sharedSecret)
                                 TenjinSDK.connect()
                                 TenjinSDK.debugLogs()
                                 TenjinSDK.sendEvent(withName: "test_event")
