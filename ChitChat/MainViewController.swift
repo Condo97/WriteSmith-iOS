@@ -194,6 +194,9 @@ class MainViewController: UIViewController {
             tableView.insertRows(at: [IndexPath(row: tableView.numberOfRows(inSection: 0), section: 0)], with: .automatic)
             tableView.endUpdates()
         }
+        
+        // Show Ad if Not Premium
+        loadGAD()
     }
     
     @IBAction func promoButton(_ sender: Any) {
@@ -592,8 +595,8 @@ class MainViewController: UIViewController {
                     self.chatsRemainingText.textColor = .darkGray
                     self.upgradeNowText.textColor = .darkGray
                     
-                    //TODO: - If remaining % 5 is 0 then serve an ad
-                    if self.remaining % 4 - 2 == 0 && !self.firstChat {
+                    // Show ad every other time
+                    if self.remaining % 2 - 1 == 0 && !self.firstChat {
                         if self.interstitial != nil {
                             //Display ad
                             self.interstitial?.present(fromRootViewController: self) {
@@ -812,14 +815,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MainViewController: HTTPSHelperDelegate {
-    func didRegisterUser(json: [String : Any]) {
-        guard let body = json["Body"] as? [String: Any] else {
-            print("Error! No Body in response...\n\(json)")
+    func didRegisterUser(json: [String : Any]?) {
+        guard let body = json?["Body"] as? [String: Any] else {
+            print("Error! No Body in response...\n\(String(describing: json))")
             return
         }
         
         guard let authToken = body["authToken"] as? String else {
-            print("Error! No AuthToken in response...\n\(json)")
+            print("Error! No AuthToken in response...\n\(String(describing: json))")
             return
         }
         
@@ -836,18 +839,14 @@ extension MainViewController: HTTPSHelperDelegate {
         }
     }
     
-    func didGetDisplayPrice(json: [String : Any]) {
-        
-    }
-    
-    func getRemaining(json: [String : Any]) {
-        guard let body = json["Body"] as? [String: Any] else {
-            print("Error! No Body in response...\n\(json)")
+    func getRemaining(json: [String : Any]?) {
+        guard let body = json?["Body"] as? [String: Any] else {
+            print("Error! No Body in response...\n\(String(describing: json))")
             return
         }
         
         guard let remaining = body["remaining"] as? Int else {
-            print("Error! No AuthToken in response...\n\(json)")
+            print("Error! No AuthToken in response...\n\(String(describing: json))")
             return
         }
         
@@ -855,7 +854,11 @@ extension MainViewController: HTTPSHelperDelegate {
         updateRemainingText()
     }
     
-    func getChat(json: [String : Any]) {
+    func didGetAndSaveImportantConstants(json: [String : Any]?) {
+        
+    }
+    
+    func getChat(json: [String : Any]?) {
         if UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
             submitButton.isEnabled = true
         }
@@ -865,30 +868,30 @@ extension MainViewController: HTTPSHelperDelegate {
             tableView.deleteRows(at: [IndexPath(row: tableView.numberOfRows(inSection: 0) - 1, section: 0)], with: .none)
         }
         
-        guard let success = json["Success"] as? Int else {
-            print("Error! No success in response...\n\(json)")
+        guard let success = json?["Success"] as? Int else {
+            print("Error! No success in response...\n\(String(describing: json))")
             return
         }
         
         if success == 1 {
             //Everything's good!
-            guard let body = json["Body"] as? [String: Any] else {
-                print("Error! No Body in response...\n\(json)")
+            guard let body = json?["Body"] as? [String: Any] else {
+                print("Error! No Body in response...\n\(String(describing: json))")
                 return
             }
             
             guard let output = body["output"] as? String else {
-                print("Error! No Output in response...\n\(json)")
+                print("Error! No Output in response...\n\(String(describing: json))")
                 return
             }
             
             guard let remaining = body["remaining"] as? Int else {
-                print("Error! No Remaining in response...\n\(json)")
+                print("Error! No Remaining in response...\n\(String(describing: json))")
                 return
             }
             
             guard let finishReason = body["finishReason"] as? String else {
-                print("Error! No Finish Reason in response...\n\(json)")
+                print("Error! No Finish Reason in response...\n\(String(describing: json))")
                 return
             }
             
@@ -910,13 +913,13 @@ extension MainViewController: HTTPSHelperDelegate {
             addChat(message: trimmedOutput, userSent: .ai)
         } else if success == 51 {
             //Too many chats generated
-            guard let body = json["Body"] as? [String: Any] else {
+            guard let body = json?["Body"] as? [String: Any] else {
                 print("Wait... a body is supposed to be sent here, hm")
                 return
             }
             
             guard let output = body["output"] as? String else {
-                print("Error! No output in body...\n\(json)")
+                print("Error! No output in body...\n\(String(describing: json))")
                 return
             }
             
@@ -929,7 +932,7 @@ extension MainViewController: HTTPSHelperDelegate {
             
             addChat(message: output, userSent: .ai)
         } else {
-            print("Error! Unhandled error number...\n\(json)")
+            print("Error! Unhandled error number...\n\(String(describing: json))")
         }
     }
     
@@ -942,10 +945,6 @@ extension MainViewController: HTTPSHelperDelegate {
             
             self.addChat(message: "There was an issue getting your chat. Please try a different prompt.", userSent: .ai)
         }
-    }
-    
-    func didGetShareURL(json: [String : Any]) {
-        
     }
 }
 

@@ -8,12 +8,13 @@
 import Foundation
 
 protocol HTTPSHelperDelegate: AnyObject {
-    func didRegisterUser(json: [String: Any])
-    func didGetDisplayPrice(json: [String: Any])
-    func getRemaining(json: [String: Any])
-    func getChat(json: [String: Any])
+    func didRegisterUser(json: [String: Any]?)
+    func didGetAndSaveImportantConstants(json: [String: Any]?)
+//    func didGetDisplayPrice(json: [String: Any])
+    func getRemaining(json: [String: Any]?)
+    func getChat(json: [String: Any]?)
     func getChatError()
-    func didGetShareURL(json: [String: Any])
+//    func didGetShareURL(json: [String: Any])
 }
 
 class HTTPSHelper {
@@ -35,7 +36,7 @@ class HTTPSHelper {
                 DispatchQueue.main.async {
                     do {
                         let json = try JSONSerialization.jsonObject(with: data, options:[]) as? [String: Any]
-                        delegate?.didRegisterUser(json: json!)
+                        delegate?.didRegisterUser(json: json)
                     } catch {
                         print("Error serializing registerUesr() JSON from data")
                     }
@@ -46,8 +47,8 @@ class HTTPSHelper {
         task.resume()
     }
     
-    static func getDisplayPrice(delegate: HTTPSHelperDelegate?) {
-        let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getDisplayPrice)")!
+    static func getAndSaveImportantConstants(delegate: HTTPSHelperDelegate?) {
+        let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getImportantConstants)")!
         let postBody = "{}"
         
         var request = URLRequest(url: url)
@@ -64,7 +65,40 @@ class HTTPSHelper {
                 DispatchQueue.main.async {
                     do {
                         let json = try JSONSerialization.jsonObject(with: data, options:[]) as? [String: Any]
-                        delegate?.didGetDisplayPrice(json: json!)
+                        
+                        // Let's just save all the stuff here, why not
+                        if let body = json?["Body"] as? [String: Any] {
+                            
+                            // Save Share URL
+                            if let shareURL = body[HTTPSResponseConstants.shareURL] as? String {
+                                UserDefaults.standard.set(shareURL, forKey: Constants.userDefaultStoredShareURL)
+                            }
+                            
+                            // Save Free Essay Cap
+                            if let essayCap = body[HTTPSResponseConstants.freeEssayCap] as? Int {
+                                UserDefaults.standard.set(essayCap, forKey: Constants.userDefaultStoredFreeEssayCap)
+                            }
+                            
+                            // Save Weekly Display Price
+                            if let weeklyDisplayPrice = body[HTTPSResponseConstants.weeklyDisplayPrice] as? String {
+                                if let monthlyDisplayPrice = body[HTTPSResponseConstants.monthlyDisplayPrice] as? String {
+                                    UserDefaults.standard.set(weeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+                                    UserDefaults.standard.set(monthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
+                                } else {
+                                    UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+                                    UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
+                                }
+                            } else {
+                                UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+                                UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
+                            }
+                        } else {
+                            UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+                            UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
+                        }
+                        
+                        // Now once it's done call the delgate
+                        delegate?.didGetAndSaveImportantConstants(json: json)
                     } catch {
                         print("Error serializing registerUesr() JSON from data")
                     }
@@ -98,7 +132,7 @@ class HTTPSHelper {
                 DispatchQueue.main.async {
                     do {
                         let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                        delegate.getRemaining(json: json!)
+                        delegate.getRemaining(json: json)
                     } catch {
                         print("Error serializing getRemaining() JSON from data")
                     }
@@ -134,38 +168,9 @@ class HTTPSHelper {
                 DispatchQueue.main.async {
                     do {
                         let json = try JSONSerialization.jsonObject(with: data, options:[]) as? [String: Any]
-                        delegate.getChat(json: json!)
+                        delegate.getChat(json: json)
                     } catch {
                         print("Error serializing getChat() JSON from data")
-                    }
-                }
-            }
-        })
-        
-        task.resume()
-    }
-    
-    static func getShareURL(delegate: HTTPSHelperDelegate?) {
-        let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getShareURL)")!
-        let postBody = "{}"
-        
-        var request = URLRequest(url: url)
-        
-        request.httpMethod = "POST"
-        request.httpBody = postBody.data(using: .utf8)
-        
-        let session = URLSession.shared
-        let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
-            if let error = error {
-                print("ERRROR")
-                print(error)
-            } else if let data = data {
-                DispatchQueue.main.async {
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options:[]) as? [String: Any]
-                        delegate?.didGetShareURL(json: json!)
-                    } catch {
-                        print("Error serializing registerUesr() JSON from data")
                     }
                 }
             }

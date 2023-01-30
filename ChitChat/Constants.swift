@@ -18,6 +18,7 @@ struct Constants {
     static let userDefaultStoredWeeklyDisplayPrice = "weeklyDisplayPrice"
     static let userDefaultStoredMonthlyDisplayPrice = "monthlyDisplayPrice"
 //    static let userDefaultStoredAnnualDisplayPrice = "annualDisplayPrice"
+    static let userDefaultStoredFreeEssayCap = "freeEssayCap"
     static let userDefaultStoredShareURL = "shareURL"
     
 //    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
@@ -32,9 +33,6 @@ struct Constants {
     static let weeklyProductIdentifier = "chitchatultra"
     static let monthlyProductIdentifier = "ultramonthly"
 //    static let annualProductIdentifier = "chitchatultrayearly"
-    
-    static let bodyWeeklyDisplayPriceName = "weeklyDisplayPrice"
-    static let bodyMonthlyDisplayPriceName = "monthlyDisplayPrice"
     
     static let borderWidth = CGFloat(0.0)
     static let cornerRadius = 14.0
@@ -69,8 +67,14 @@ struct HTTPSConstants {
     static let getIAPStuff = "/getIAPStuff"
     static let privacyPolicy = "/privacyPolicy.html"
     static let termsAndConditions = "/termsAndConditions.html"
-    static let getDisplayPrice = "/getDisplayPrice"
-    static let getShareURL = "/getShareURL"
+    static let getImportantConstants = "/getImportantConstants"
+}
+
+struct HTTPSResponseConstants {
+    static let shareURL = "shareURL"
+    static let weeklyDisplayPrice = "weeklyDisplayPrice"
+    static let monthlyDisplayPrice = "monthlyDisplayPrice"
+    static let freeEssayCap = "freeEssayCap"
 }
 
 struct Colors {

@@ -31,9 +31,10 @@ class EssayViewController: UIViewController {
     
     var essays: [NSManagedObject] = []
     var origin: CGFloat = 0.0
+    let toolbarHeight = 48.0
     
     let inputPlaceholder = "Enter a prompt..."
-    let toolbarHeight = 48.0
+    var freeInputPlaceholder = "Enter a prompt to try..."
     
     var isProcessingChat = false
     var firstChat = false
@@ -129,7 +130,15 @@ class EssayViewController: UIViewController {
         CDHelper.appendEssay(prompt: prompt, essay: essay, date: Date(), userEdited: false, essayArray: &essays, success: {
             // Insert new section
             DispatchQueue.main.async {
-                self.tableView.insertSections(IndexSet(integer: 1 /* the first section */), with: .top)
+                if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+                    // Insert section below premium section but at top if not premium
+                    self.tableView.insertSections(IndexSet(integer: 2), with: .top)
+                } else {
+                    // Insert section at top if premium
+                    self.tableView.insertSections(IndexSet(integer: 1 /* the first section */), with: .top)
+                }
+                
+                
             }
         })
     }
@@ -253,7 +262,7 @@ class EssayViewController: UIViewController {
     }
     
     func updateTextViewSubmitButtonEnabled(textView: UITextView) {
-        if textView.text == "" || textView.textColor == .lightGray || textView.text == inputPlaceholder {
+        if textView.text == "" || textView.textColor == .lightGray || (textView.text == inputPlaceholder || textView.text == freeInputPlaceholder) {
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EssayEntryTableViewCell
             cell.submitButton.isEnabled = false
         } else {
@@ -320,11 +329,11 @@ extension EssayViewController: UITableViewDelegate, UITableViewDataSource {
      */
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-            return 2
-        }
-        
         var value = essays.count + 1
+        
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            value += 1
+        }
         
         if isProcessingChat {
             value += 1
@@ -334,7 +343,9 @@ extension EssayViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+        
+        // If the user is not premium, then it needs to make sure the section is 1 when not processing chat and 2 when processing chat
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) && ((section == 1 && !isProcessingChat) || (section == 2 && isProcessingChat)) {
             return 1
         }
         
@@ -362,17 +373,20 @@ extension EssayViewController: UITableViewDelegate, UITableViewDataSource {
         
         // Show premium row and disabled header row
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-            if indexPath.section == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "entry", for: indexPath) as! EssayEntryTableViewCell
-                
-                // Setup "placeholder" for TextView
-                cell.textView.text = inputPlaceholder
-                cell.textView.textColor = .lightGray
-                cell.submitButton.isEnabled = false
-                cell.textView.isEditable = false
-                
-                return cell
-            } else if indexPath.section == 1 {
+//            if indexPath.section == 0 {
+//                let cell = tableView.dequeueReusableCell(withIdentifier: "entry", for: indexPath) as! EssayEntryTableViewCell
+//                
+//                // Setup "placeholder" for TextView
+//                cell.textView.text = inputPlaceholder
+//                cell.textView.textColor = .lightGray
+//                cell.submitButton.isEnabled = false
+//                cell.textView.isEditable = false
+//                
+//                return cell
+//            } else
+            
+            // Show the essayPremiumTableViewCell, moving it down a section if isProcessingChat
+            if (!isProcessingChat && indexPath.section == 1) || (isProcessingChat && indexPath.section == 2) {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "premium", for: indexPath) as! EssayPremiumTableViewCell
                 
                 cell.delegate = self
@@ -388,7 +402,7 @@ extension EssayViewController: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             
             // Setup "placeholder" for TextView
-            cell.textView.text = inputPlaceholder
+            cell.textView.text = UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? inputPlaceholder : freeInputPlaceholder
             cell.textView.textColor = .lightGray
             cell.textView.delegate = self
             cell.submitButton.isEnabled = false
@@ -416,6 +430,13 @@ extension EssayViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             
+            // Hide delete button if not premium, show if premium
+            if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+                cell.deleteButtonWidthConstraint.constant = 0
+            } else {
+                cell.deleteButtonWidthConstraint.constant = cell.shareButtonWidthConstraint.constant
+            }
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium
             dateFormatter.timeStyle = .short
@@ -423,6 +444,11 @@ extension EssayViewController: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             cell.title.text = prompt
             cell.date.text = dateFormatter.string(from: date)
+            
+            // Update halfRoundedView layout
+            cell.halfRoundedView.setNeedsDisplay()
+            cell.setNeedsLayout()
+            cell.layoutIfNeeded()
             
             if userEdited {
                 cell.editedLabel.alpha = 1.0
@@ -442,6 +468,11 @@ extension EssayViewController: UITableViewDelegate, UITableViewDataSource {
             cell.essayTextView.text = essay
             cell.essayTextView.inputAccessoryView = toolbar
             
+            // Update halfRoundedView layout
+            cell.halfRoundedView.setNeedsDisplay()
+            cell.setNeedsLayout()
+            cell.layoutIfNeeded()
+            
             return cell
         }
         
@@ -456,7 +487,10 @@ extension EssayViewController: UITableViewDelegate, UITableViewDataSource {
         
         // Check if the "show more" was tapped
         if indexPath.row == 1 {
-            let cell = tableView.cellForRow(at: indexPath) as! EssayEssayTableViewCell
+            guard let cell = tableView.cellForRow(at: indexPath) as? EssayEssayTableViewCell else {
+                print("Not an EssayEssayTableViewCell tapped...")
+                return
+            }
             
             if cell.essayHeightConstraint.priority >= .defaultHigh {
                 // Expand Essay to Show More
@@ -520,13 +554,19 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
             return
         }
         
+        // There will be an extra section if user is not premium
+        var premiumPurchaseSectionShowing = 0
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            premiumPurchaseSectionShowing = 1
+        }
+        
         // Just to note, this would be essays.count - section - 1 + 1, -1 for the .count and +1 for the entry section
-        if essays.count - section < 0 {
+        if essays.count - section + premiumPurchaseSectionShowing < 0 {
             print("Could not find essay to copy because it is out of range...")
             return
         }
         
-        let currentEssay = essays[essays.count - section]
+        let currentEssay = essays[essays.count - section + premiumPurchaseSectionShowing]
         guard let essayText = currentEssay.value(forKey: Constants.coreDataEssayEssayObjectName) as? String else {
             print("Could not cast the essay as String when trying to copy...")
             return
@@ -549,6 +589,8 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
             }
         }
         
+        UIPasteboard.general.string = text
+        
         // Animate Copy
         UIView.animate(withDuration: 0.2, delay: 0.0, animations: {
             essayCell.copiedLabel.alpha = 1.0
@@ -566,13 +608,19 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
             return
         }
         
+        // There will be an extra section if user is not premium
+        var premiumPurchaseSectionShowing = 0
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            premiumPurchaseSectionShowing = 1
+        }
+        
         // Just to note, this would be essays.count - section - 1 + 1, -1 for the .count and +1 for the entry section
-        if essays.count - section < 0 {
+        if essays.count - section + premiumPurchaseSectionShowing < 0 {
             print("Could not find essay to share because it is out of range...")
             return
         }
         
-        let currentEssay = essays[essays.count - section]
+        let currentEssay = essays[essays.count - section + premiumPurchaseSectionShowing]
         guard let promptText = currentEssay.value(forKey: Constants.coreDataEssayPromptObjectName) as? String else {
             print("Could not cast the prompt as String when trying to share...")
             return
@@ -624,6 +672,18 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
 
 extension EssayViewController: EntryEssayTableViewCellDelegate {
     func didPressSubmitButton(sender: Any) {
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            if essays.count >= UserDefaults.standard.integer(forKey: Constants.userDefaultStoredFreeEssayCap) {
+                let ac = UIAlertController(title: "Upgrade", message: "You've reached the limit for free essays. Please upgrade to get unlimited full-length essays.\n\n(3-Day Free Trial)", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "Upgrade", style: .default, handler: { action in
+                    self.goToUltraPurchase()
+                }))
+                ac.addAction(UIAlertAction(title: "Close", style: .cancel))
+                present(ac, animated: true)
+                return
+            }
+        }
+        
         //TODO: - Ask the server and save
         guard let authToken = UserDefaults.standard.string(forKey: Constants.authTokenKey) else {
             HTTPSHelper.registerUser(delegate: self)
@@ -648,11 +708,9 @@ extension EssayViewController: EntryEssayTableViewCellDelegate {
         disableButtons()
         
         // Update entry to placeholder text and update size
-        cell.textView.text = inputPlaceholder
+        cell.textView.text = UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? inputPlaceholder : freeInputPlaceholder
         cell.textView.textColor = .lightGray
         updateInputTextViewSize(textView: cell.textView)
-        
-        HTTPSHelper.getChat(delegate: self, authToken: authToken, inputText: inputText)
         
         if !isProcessingChat {
             isProcessingChat = true
@@ -660,6 +718,8 @@ extension EssayViewController: EntryEssayTableViewCellDelegate {
             tableView.insertSections(IndexSet(integer: 1), with: .none)
             tableView.endUpdates()
         }
+        
+        HTTPSHelper.getChat(delegate: self, authToken: authToken, inputText: inputText)
     }
 }
 
@@ -698,13 +758,20 @@ extension EssayViewController: EssayEssayTableViewCellDelegate {
             print("Could not find section of cell to save edits...")
             return
         }
+        
+        // There will be an extra section if user is not premium
+        var premiumPurchaseSectionShowing = 0
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            premiumPurchaseSectionShowing = 1
+        }
+        
         // Just to note, this would be essays.count - section - 1 + 1, -1 for the .count and +1 for the entry section
-        if essays.count - section < 0 {
+        if essays.count - section + premiumPurchaseSectionShowing < 0 {
             print("Could not find essay to save edits to because it is out of range...")
             return
         }
         
-        let currentEssay = essays[essays.count - section]
+        let currentEssay = essays[essays.count - section + premiumPurchaseSectionShowing]
         guard let id = currentEssay.value(forKey: Constants.coreDataEssayIDObjectName) as? Int else {
             print("Could not cast the ID as Int when trying to save edits...")
             return
@@ -793,19 +860,21 @@ extension EssayViewController: IAPHTTPSHelperDelegate {
     
     func switchToPremium() {
         // Remove 2 sections, add entry and any stored essays
-        let count = essays.count
+        let premiumCount = essays.count
+        let freeCount = essays.count + 1
         tableView.beginUpdates()
-        tableView.deleteSections(IndexSet(integersIn: 0...1), with: .none)
-        tableView.insertSections(IndexSet(integersIn: 0...count), with: .none)
+        tableView.deleteSections(IndexSet(integersIn: 0...freeCount), with: .none)
+        tableView.insertSections(IndexSet(integersIn: 0...premiumCount), with: .none)
         tableView.endUpdates()
     }
     
     func switchToStandard() {
         // Remove entry and all stored essay sections, add 2 sections
-        let count = essays.count
+        let premiumCount = essays.count
+        let freeCount = essays.count + 1
         tableView.beginUpdates()
-        tableView.deleteSections(IndexSet(integersIn: 0...count), with: .none)
-        tableView.insertSections(IndexSet(integersIn: 0...1), with: .none)
+        tableView.deleteSections(IndexSet(integersIn: 0...premiumCount), with: .none)
+        tableView.insertSections(IndexSet(integersIn: 0...freeCount), with: .none)
         tableView.endUpdates()
     }
     
@@ -864,15 +933,15 @@ extension EssayViewController: IAPHTTPSHelperDelegate {
 }
 
 extension EssayViewController: HTTPSHelperDelegate {
-    func didRegisterUser(json: [String : Any]) {
+    func didRegisterUser(json: [String : Any]?) {
         // Register user if they don't have an authToken stored
-        guard let body = json["Body"] as? [String: Any] else {
-            print("Error! No Body in response...\n\(json)")
+        guard let body = json?["Body"] as? [String: Any] else {
+            print("Error! No Body in response...\n\(String(describing: json))")
             return
         }
         
         guard let authToken = body["authToken"] as? String else {
-            print("Error! No AuthToken in response...\n\(json)")
+            print("Error! No AuthToken in response...\n\(String(describing: json))")
             return
         }
         
@@ -880,14 +949,15 @@ extension EssayViewController: HTTPSHelperDelegate {
         UserDefaults.standard.set(authToken, forKey: Constants.authTokenKey)
     }
     
-    func didGetDisplayPrice(json: [String : Any]) {
-    }
-    
-    func getRemaining(json: [String : Any]) {
+    func getRemaining(json: [String : Any]?) {
         //TODO: - Handle remaining chats, maybe need to do something new for essay view, or just make it fully premium? Maybe fully premium to start?
     }
     
-    func getChat(json: [String : Any]) {
+    func didGetAndSaveImportantConstants(json: [String : Any]?) {
+        
+    }
+    
+    func getChat(json: [String : Any]?) {
         enableButtons()
         
         if isProcessingChat {
@@ -895,30 +965,25 @@ extension EssayViewController: HTTPSHelperDelegate {
             tableView.deleteSections(IndexSet(integer: 1), with: .none)
         }
         
-        guard let success = json["Success"] as? Int else {
-            print("Error! No success in response...\n\(json)")
+        guard let success = json?["Success"] as? Int else {
+            print("Error! No success in response...\n\(String(describing: json))")
             return
         }
         
         if success == 1 {
             //Everything's good!
-            guard let body = json["Body"] as? [String: Any] else {
-                print("Error! No Body in response...\n\(json)")
+            guard let body = json?["Body"] as? [String: Any] else {
+                print("Error! No Body in response...\n\(String(describing: json))")
                 return
             }
             
             guard let output = body["output"] as? String else {
-                print("Error! No Output in response...\n\(json)")
-                return
-            }
-            
-            guard let remaining = body["remaining"] as? Int else {
-                print("Error! No Remaining in response...\n\(json)")
+                print("Error! No Output in response...\n\(String(describing: json))")
                 return
             }
             
             guard let finishReason = body["finishReason"] as? String else {
-                print("Error! No Finish Reason in response...\n\(json)")
+                print("Error! No Finish Reason in response...\n\(String(describing: json))")
                 return
             }
             
@@ -943,15 +1008,6 @@ extension EssayViewController: HTTPSHelperDelegate {
             tempPrompt = ""
         } else if success == 51 {
             //Too many chats generated
-            guard let body = json["Body"] as? [String: Any] else {
-                print("Wait... a body is supposed to be sent here, hm")
-                return
-            }
-            
-            guard let output = body["output"] as? String else {
-                print("Error! No output in body...\n\(json)")
-                return
-            }
             
             let ac = UIAlertController(title: "Limit Reached", message: "You've reached your daily chat limit. Upgrade for unlimited chats...", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Close", style: .cancel))
@@ -962,7 +1018,7 @@ extension EssayViewController: HTTPSHelperDelegate {
             
 //            addEssay(message: output, userSent: .ai)
         } else {
-            print("Error! Unhandled error number...\n\(json)")
+            print("Error! Unhandled error number...\n\(String(describing: json))")
         }
     }
     
@@ -974,9 +1030,6 @@ extension EssayViewController: HTTPSHelperDelegate {
                 self.tableView.deleteRows(at: [IndexPath(row: self.tableView.numberOfRows(inSection: 0) - 1, section: 0)], with: .none)
             }
         }
-    }
-    
-    func didGetShareURL(json: [String : Any]) {
     }
 }
 
@@ -1038,7 +1091,7 @@ extension EssayViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView == (tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as! EssayEntryTableViewCell).textView {
             if textView.text == "" {
-                textView.text = inputPlaceholder
+                textView.text = UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? inputPlaceholder : freeInputPlaceholder
                 textView.textColor = .lightGray
             }
             

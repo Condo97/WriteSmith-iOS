@@ -85,8 +85,9 @@ class UltraPurchaseViewController: UIViewController {
         closeButton.alpha = 0.5
         closeButton.setBackgroundImage(UIImage.init(systemName: "xmark"), for: .normal)
         
-        HTTPSHelper.getDisplayPrice(delegate: self)
-        HTTPSHelper.getShareURL(delegate: self)
+        HTTPSHelper.getAndSaveImportantConstants(delegate: self)
+//        HTTPSHelper.getDisplayPrice(delegate: self)
+//        HTTPSHelper.getShareURL(delegate: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -464,39 +465,43 @@ extension UltraPurchaseViewController: IAPHTTPSHelperDelegate {
 }
 
 extension UltraPurchaseViewController: HTTPSHelperDelegate {
-    func didRegisterUser(json: [String : Any]) {
-        if let body = json["Body"] as? [String: Any] {
+    func didRegisterUser(json: [String : Any]?) {
+        if let body = json?["Body"] as? [String: Any] {
             if let authToken = body["authToken"] as? String {
                 UserDefaults.standard.set(authToken, forKey: Constants.authTokenKey)
             }
         }
     }
     
-    func didGetDisplayPrice(json: [String : Any]) {
-        if let body = json["Body"] as? [String: Any] {
-            if let weeklyDisplayPrice = body[Constants.bodyWeeklyDisplayPriceName] as? String {
-                if let monthlyDisplayPrice = body[Constants.bodyMonthlyDisplayPriceName] as? String {
-                    UserDefaults.standard.set(weeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-                    UserDefaults.standard.set(monthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
-                } else {
-                    UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-                    UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
-                }
-            } else {
-                UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-                UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
-            }
-        } else {
-            UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
-            UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
-        }
-    }
+//    func didGetDisplayPrice(json: [String : Any]) {
+//        if let body = json["Body"] as? [String: Any] {
+//            if let weeklyDisplayPrice = body[Constants.bodyWeeklyDisplayPriceName] as? String {
+//                if let monthlyDisplayPrice = body[Constants.bodyMonthlyDisplayPriceName] as? String {
+//                    UserDefaults.standard.set(weeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+//                    UserDefaults.standard.set(monthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
+//                } else {
+//                    UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+//                    UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
+//                }
+//            } else {
+//                UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+//                UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
+//            }
+//        } else {
+//            UserDefaults.standard.set(Constants.defaultWeeklyDisplayPrice, forKey: Constants.userDefaultStoredWeeklyDisplayPrice)
+//            UserDefaults.standard.set(Constants.defaultMonthlyDisplayPrice, forKey: Constants.userDefaultStoredMonthlyDisplayPrice)
+//        }
+//    }
     
-    func getRemaining(json: [String : Any]) {
+    func getRemaining(json: [String : Any]?) {
         
     }
     
-    func getChat(json: [String : Any]) {
+    func didGetAndSaveImportantConstants(json: [String : Any]?) {
+        
+    }
+    
+    func getChat(json: [String : Any]?) {
         
     }
     
@@ -504,12 +509,12 @@ extension UltraPurchaseViewController: HTTPSHelperDelegate {
         
     }
     
-    func didGetShareURL(json: [String : Any]) {
-        if let body = json["Body"] as? [String: Any] {
-            if let shareURL = body["shareURL"] as? String {
-                UserDefaults.standard.set(shareURL, forKey: Constants.userDefaultStoredShareURL)
-            }
-        }
-    }
+//    func didGetShareURL(json: [String : Any]) {
+//        if let body = json["Body"] as? [String: Any] {
+//            if let shareURL = body["shareURL"] as? String {
+//                UserDefaults.standard.set(shareURL, forKey: Constants.userDefaultStoredShareURL)
+//            }
+//        }
+//    }
 }
 

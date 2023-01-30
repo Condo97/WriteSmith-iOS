@@ -18,6 +18,9 @@ class EssayPromptTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var editedLabel: UILabel!
+    @IBOutlet weak var halfRoundedView: HalfRoundedView!
+    @IBOutlet weak var deleteButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var shareButtonWidthConstraint: NSLayoutConstraint!
     
     var delegate: EssayPromptTableViewCellDelegate!
     
