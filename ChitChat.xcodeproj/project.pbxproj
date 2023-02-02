@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB04B34629886C8D001FDA28 /* textRecognitionTest.png in Resources */ = {isa = PBXBuildFile; fileRef = BB04B34529886C8D001FDA28 /* textRecognitionTest.png */; };
 		BB04B3E9296DE2BD000BEC02 /* IAPHTTPSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3E8296DE2BD000BEC02 /* IAPHTTPSHelper.swift */; };
 		BB04B3EB296DE8FF000BEC02 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB04B3EA296DE8FF000BEC02 /* IAPManager.swift */; };
 		BB04B3ED296E2E7B000BEC02 /* giftGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3EC296E2E7B000BEC02 /* giftGif.gif */; };
@@ -40,6 +41,8 @@
 		BB0DBACE296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DBACD296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift */; };
 		BB24FB26297C93CB00A933EA /* BottomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24FB25297C93CB00A933EA /* BottomTabBarViewController.swift */; };
 		BB24FB2A297CAB4000A933EA /* EssayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24FB29297CAB3F00A933EA /* EssayViewController.swift */; };
+		BB329B4B298B409000B3824D /* SillyCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB329B4A298B409000B3824D /* SillyCropView.swift */; };
+		BB329B4D298B799B00B3824D /* UIImage+Rotated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB329B4C298B799B00B3824D /* UIImage+Rotated.swift */; };
 		BB5E915E297CF6C800DC7467 /* CDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E915D297CF6C800DC7467 /* CDHelper.swift */; };
 		BB5E9160297DB2A300DC7467 /* HalfRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E915F297DB2A300DC7467 /* HalfRoundedView.swift */; };
 		BB5E9162297DB62100DC7467 /* EssayEssayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E9161297DB62100DC7467 /* EssayEssayTableViewCell.swift */; };
@@ -120,6 +123,7 @@
 		BBE878F629864BFE001FB2AE /* Screenshot 3 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBE878ED29864BFE001FB2AE /* Screenshot 3 Cropped.jpg */; };
 		BBEA8A24296E88C100DF37F8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = BBEA8A23296E88C100DF37F8 /* GoogleMobileAds */; };
 		BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedString.swift */; };
+		BBEE697A2988A3FB00BA7E6D /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE69792988A3FB00BA7E6D /* CameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +144,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB04B34529886C8D001FDA28 /* textRecognitionTest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textRecognitionTest.png; sourceTree = "<group>"; };
 		BB04B3E8296DE2BD000BEC02 /* IAPHTTPSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHTTPSHelper.swift; sourceTree = "<group>"; };
 		BB04B3EA296DE8FF000BEC02 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		BB04B3EC296E2E7B000BEC02 /* giftGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = giftGif.gif; sourceTree = "<group>"; };
@@ -169,6 +174,8 @@
 		BB0DBACD296AA50000D2DFB9 /* ChitChatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChitChatUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BB24FB25297C93CB00A933EA /* BottomTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBarViewController.swift; sourceTree = "<group>"; };
 		BB24FB29297CAB3F00A933EA /* EssayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayViewController.swift; sourceTree = "<group>"; };
+		BB329B4A298B409000B3824D /* SillyCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SillyCropView.swift; sourceTree = "<group>"; };
+		BB329B4C298B799B00B3824D /* UIImage+Rotated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Rotated.swift"; sourceTree = "<group>"; };
 		BB5E915D297CF6C800DC7467 /* CDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDHelper.swift; sourceTree = "<group>"; };
 		BB5E915F297DB2A300DC7467 /* HalfRoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfRoundedView.swift; sourceTree = "<group>"; };
 		BB5E9161297DB62100DC7467 /* EssayEssayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayEssayTableViewCell.swift; sourceTree = "<group>"; };
@@ -210,6 +217,7 @@
 		BBE878EC29864BFE001FB2AE /* Screenshot 1 Cropped.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Screenshot 1 Cropped.jpg"; sourceTree = "<group>"; };
 		BBE878ED29864BFE001FB2AE /* Screenshot 3 Cropped.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Screenshot 3 Cropped.jpg"; sourceTree = "<group>"; };
 		BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
+		BBEE69792988A3FB00BA7E6D /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +284,7 @@
 				BB04B3F8296E38E0000BEC02 /* Ultra Image.jpg */,
 				BBD65BEC2970766C001F730C /* arrowGif.gif */,
 				BBA8C21E2971F3C3009BDECC /* Tenjin */,
+				BB04B34529886C8D001FDA28 /* textRecognitionTest.png */,
 				BBD65BBA29705CCE001F730C /* Screenshots for Inside the App */,
 				BB0DBAA7296AA4FE00D2DFB9 /* AppDelegate.swift */,
 				BB0DBAA9296AA4FE00D2DFB9 /* SceneDelegate.swift */,
@@ -285,6 +294,7 @@
 				BBD65BD4297064ED001F730C /* Extensions */,
 				BBD65BD5297064FB001F730C /* Custom Views */,
 				BBD65BD62970650B001F730C /* Helpers */,
+				BBEE697B2988A45300BA7E6D /* CropStuff */,
 				BB720C8F296AAB7800BEA070 /* MainViewController.swift */,
 				BBD65BE029706A02001F730C /* MainNavigationViewController.swift */,
 				BB04B3F0296E2EAE000BEC02 /* SettingsTableViewController.swift */,
@@ -293,6 +303,7 @@
 				BB0A7E6F298715A300CB252F /* FavoritesViewController.swift */,
 				BB0A7E71298715B900CB252F /* FavoritesNavigationViewController.swift */,
 				BB24FB29297CAB3F00A933EA /* EssayViewController.swift */,
+				BBEE69792988A3FB00BA7E6D /* CameraViewController.swift */,
 				BB0A8C0E296D05FA0035F046 /* UltraPurchaseViewController.swift */,
 				BBD65BE829706F2C001F730C /* Intro1ViewController.swift */,
 				BBD65BDC2970655D001F730C /* Intro3ViewController.swift */,
@@ -371,6 +382,7 @@
 			children = (
 				BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */,
 				BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedString.swift */,
+				BB329B4C298B799B00B3824D /* UIImage+Rotated.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -388,6 +400,7 @@
 				BB0A8C08296CDB760035F046 /* RoundedView.swift */,
 				BB5E915F297DB2A300DC7467 /* HalfRoundedView.swift */,
 				BB0A8C0C296CE70E0035F046 /* ShadowView.swift */,
+				BB329B4A298B409000B3824D /* SillyCropView.swift */,
 				BB0A8C10296D063D0035F046 /* RoundedButton.swift */,
 				BBC16386296B5FF800868752 /* GradientView.swift */,
 				BB7BC14F297527EA00D34695 /* AttributedLabel.swift */,
@@ -405,6 +418,13 @@
 				BB5E915D297CF6C800DC7467 /* CDHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BBEE697B2988A45300BA7E6D /* CropStuff */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CropStuff;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -527,6 +547,7 @@
 				BBA83E522977939600536FF9 /* mask.png in Resources */,
 				BBA83E642977939600536FF9 /* mad.png in Resources */,
 				BBA83E6F2977968900536FF9 /* pencil2.png in Resources */,
+				BB04B34629886C8D001FDA28 /* textRecognitionTest.png in Resources */,
 				BBA83E5E2977939600536FF9 /* nomouth.png in Resources */,
 				BBA83E732977968F00536FF9 /* pencil3.png in Resources */,
 				BB0DBAB4296AA50000D2DFB9 /* Assets.xcassets in Resources */,
@@ -606,6 +627,7 @@
 				BB9C2F51297CB7710026A441 /* EssayPromptTableViewCell.swift in Sources */,
 				BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */,
 				BB5E9164297DCDED00DC7467 /* EssayEntryTableViewCell.swift in Sources */,
+				BB329B4D298B799B00B3824D /* UIImage+Rotated.swift in Sources */,
 				BB5E9162297DB62100DC7467 /* EssayEssayTableViewCell.swift in Sources */,
 				BB0DBAA8296AA4FE00D2DFB9 /* AppDelegate.swift in Sources */,
 				BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */,
@@ -627,6 +649,7 @@
 				BBD4D86C298063750031BBFA /* EssayLoadingTableViewCell.swift in Sources */,
 				BB24FB2A297CAB4000A933EA /* EssayViewController.swift in Sources */,
 				BB04B3F1296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */,
+				BB329B4B298B409000B3824D /* SillyCropView.swift in Sources */,
 				BBC16389296B601500868752 /* Constants.swift in Sources */,
 				BB04B3E9296DE2BD000BEC02 /* IAPHTTPSHelper.swift in Sources */,
 				BB0A8C11296D063D0035F046 /* RoundedButton.swift in Sources */,
@@ -635,6 +658,7 @@
 				BB5E9160297DB2A300DC7467 /* HalfRoundedView.swift in Sources */,
 				BBC84684297EFF1E002493A5 /* BottomTabBar.swift in Sources */,
 				BBA83E7729779E3A00536FF9 /* FaceConstants.swift in Sources */,
+				BBEE697A2988A3FB00BA7E6D /* CameraViewController.swift in Sources */,
 				BB7BC14E2974FC9200D34695 /* ChatTableView.swift in Sources */,
 				BB04B3F5296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */,
 			);

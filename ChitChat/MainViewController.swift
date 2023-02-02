@@ -23,9 +23,13 @@ class MainViewController: UIViewController {
     @IBOutlet weak var upgradeNowText: UILabel!
     @IBOutlet weak var adView: UIView!
     @IBOutlet weak var adShadowView: ShadowView!
+    @IBOutlet weak var cameraButton: UIButton!
+    
+    @IBOutlet weak var inputBackgroundView: RoundedView!
     
     @IBOutlet weak var adViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var promoViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cameraButtonHeightConstraint: NSLayoutConstraint!
     
     let promoViewHeightConstraintConstant = 50.0
     
@@ -82,6 +86,7 @@ class MainViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         
         submitButton.isEnabled = false
+        cameraButton.isEnabled = true
         
         // Setup "placeholder" for TextView
         inputTextView.text = inputPlaceholder
@@ -125,11 +130,20 @@ class MainViewController: UIViewController {
         setPremiumItems()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if inputTextView.text == inputPlaceholder {
+            cameraButtonHeightConstraint.constant = inputBackgroundView.frame.height
+        }
+        
         DispatchQueue.main.async{
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
         }
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // Set origin for keyboard
         origin = self.view.frame.origin.y
         
         // Show Ultra Purchase on launch if not premium
@@ -173,9 +187,11 @@ class MainViewController: UIViewController {
         //Button is enabled BUT shows a popup when pressed
         if UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
             submitButton.isEnabled = false
+            cameraButton.isEnabled = false
         } else {
             DispatchQueue.main.async {
                 self.submitButton.alpha = 0.8
+                self.cameraButton.alpha = 0.8
                 self.submitSoftDisable = true
             }
         }
@@ -201,6 +217,22 @@ class MainViewController: UIViewController {
     
     @IBAction func promoButton(_ sender: Any) {
         goToUltraPurchase()
+    }
+    
+    @IBAction func cameraButton(_ sender: Any) {
+        dismissKeyboard()
+        
+        if submitSoftDisable {
+            let alert = UIAlertController(title: "3 Days Free", message: "Scan while chats are typing! Try Ultra for 3 days free today.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Try Now", style: .default, handler: { action in
+                self.goToUltraPurchase()
+            }))
+            present(alert, animated: true)
+            return
+        }
+        
+        performSegue(withIdentifier: "toPictureView", sender: nil)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -237,6 +269,14 @@ class MainViewController: UIViewController {
     
     @objc func upgradeSelector(notification: NSNotification) {
         goToUltraPurchase()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPictureView" {
+            if let detailVC = segue.destination as? CameraViewController {
+                detailVC.delegate = self
+            }
+        }
     }
     
     // Touches began
@@ -783,6 +823,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 //AI finished typing, soft enable button and remove row from needing to be typed
                 DispatchQueue.main.async {
                     self.submitButton.alpha = 1.0
+                    self.cameraButton.alpha = 1.0
                     self.submitSoftDisable = false
                     self.rowsToType.remove(at: self.rowsToType.firstIndex(of: indexPath.row)!)
                 }
@@ -811,6 +852,41 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return tableView.rowHeight
+    }
+}
+
+extension MainViewController: CameraViewControllerDelegate {
+    func didGetScan(text: String) {
+        guard let authToken = UserDefaults.standard.string(forKey: Constants.authTokenKey) else {
+            HTTPSHelper.registerUser(delegate: self)
+            return
+        }
+        
+        //Button is disabled until response for premium
+        //Button is enabled BUT shows a popup when pressed
+        if UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+            submitButton.isEnabled = false
+            cameraButton.isEnabled = false
+        } else {
+            DispatchQueue.main.async {
+                self.submitButton.alpha = 0.8
+                self.cameraButton.alpha = 0.8
+                self.submitSoftDisable = true
+            }
+        }
+         
+        HTTPSHelper.getChat(delegate: self, authToken: authToken, inputText: text)
+        addChat(message: text, userSent: .user)
+        
+        if !isProcessingChat {
+            isProcessingChat = true
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: tableView.numberOfRows(inSection: 0), section: 0)], with: .automatic)
+            tableView.endUpdates()
+        }
+        
+        // Show Ad if Not Premium
+        loadGAD()
     }
 }
 
@@ -861,6 +937,7 @@ extension MainViewController: HTTPSHelperDelegate {
     func getChat(json: [String : Any]?) {
         if UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
             submitButton.isEnabled = true
+            cameraButton.isEnabled = true
         }
         
         if isProcessingChat {

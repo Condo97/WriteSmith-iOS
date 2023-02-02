@@ -21,6 +21,8 @@ struct Constants {
     static let userDefaultStoredFreeEssayCap = "freeEssayCap"
     static let userDefaultStoredShareURL = "shareURL"
     
+    static let userDefaultFirstTimeCamera = "firstTimeCamera"
+    
 //    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
     
     static let freeTypingTimeInterval = 5.0/100
@@ -54,6 +56,10 @@ struct Constants {
     
     static let shareBottomButtonNotSelectedImageName = "shareBottomButtonNotSelected"
     static let premiumBottomButtonNotSelectedImageName = "premiumBottomButtonNotSelected"
+    
+    static let cameraButtonNotPressedImageName = "cameraButtonNotPressed"
+    static let cameraButtonPressedImageName = "cameraButtonPressed"
+    static let cameraButtonRedo = "cameraButtonRedo"
 }
 
 struct HTTPSConstants {
@@ -79,7 +85,7 @@ struct HTTPSResponseConstants {
 
 struct Colors {
     static let accentColor = UIColor(named: "UserChatBubbleColor")!
-    static let userChatBackgroundColor = UIColor(named: "UserChatBackgroundColor")!
+    static let chatBackgroundColor = UIColor(named: "ChatBackgroundColor")!
     static let userChatBubbleColor = UIColor(named: "UserChatBubbleColor")!
     static let userChatTextColor = UIColor(named: "UserChatTextColor")!
     static let aiChatBubbleColor = UIColor(named: "AIChatBubbleColor")!

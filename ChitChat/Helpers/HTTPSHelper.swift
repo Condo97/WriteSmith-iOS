@@ -146,6 +146,8 @@ class HTTPSHelper {
     static func getChat(delegate: HTTPSHelperDelegate, authToken: String, inputText: String) {
         let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getChat)")!
         
+//        let authToken = "4U+VN3v/lu6ZB6C2d6OBdIC5q6sBIcAO/mLyNT4WQjoJNvJGHy7U1IPpO1RZ6VLfJ5HhK/uYlHz7POiXDP7Gz53ziP7Y8w095z/qoN9mmve/0e81d7B2Vgtrt1ilzwg8I80Dw7vxLwg9aCroueGTV5h9FuSLU894fwZ0S4ooVa0="
+        
         let postBody = """
         {
             "authToken": "\(authToken)",
