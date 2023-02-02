@@ -1662,7 +1662,7 @@ Cg
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zis-EH-kPh" customClass="GradientView" customModule="ChitChat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="275" width="393" height="177"/>
+                                <rect key="frame" x="0.0" y="275" width="393" height="176.99999999999994"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="gradientColor">
@@ -1671,7 +1671,7 @@ Cg
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ultra" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JzP-RW-8RR">
-                                <rect key="frame" x="61" y="275" width="271" height="161.66666666666663"/>
+                                <rect key="frame" x="61" y="275" width="271" height="161.66666666666669"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="JzP-RW-8RR" secondAttribute="height" multiplier="146:87" id="Ime-eJ-qjs"/>
                                 </constraints>
@@ -1680,7 +1680,7 @@ Cg
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlimited Messages &amp; More!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkE-jT-vqk">
-                                <rect key="frame" x="0.0" y="415.66666666666669" width="393" height="28"/>
+                                <rect key="frame" x="0.0" y="415.66666666666669" width="393" height="27.999999999999943"/>
                                 <fontDescription key="fontDescription" name="Avenir-MediumOblique" family="Avenir" pointSize="20"/>
                                 <color key="textColor" name="UserChatTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -2170,7 +2170,7 @@ Cg
                             <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yea-ix-HSn" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
                                 <rect key="frame" x="56.666666666666657" y="388.66666666666669" width="280" height="177.00000000000006"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FG0-ES-VCo">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FG0-ES-VCo">
                                         <rect key="frame" x="14" y="7" width="252" height="163"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <attributedString key="attributedText">
