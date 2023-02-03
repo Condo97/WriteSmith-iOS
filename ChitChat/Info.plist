@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Instead of a survey, WriteSmith automatically tells us where you found out about us.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Enable access to photos to scan questions, prompts, and more.</string>
 	<key>NSCameraUsageDescription</key>

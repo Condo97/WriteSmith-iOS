@@ -31,6 +31,9 @@ class MainViewController: UIViewController {
     @IBOutlet weak var promoViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var cameraButtonHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var submitButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var submitButtonCenterYConstraint: NSLayoutConstraint!
+    
     let promoViewHeightConstraintConstant = 50.0
     
     let inputPlaceholder = "Tap to start chatting..."
@@ -56,6 +59,8 @@ class MainViewController: UIViewController {
     var interstitial: GADRewardedInterstitialAd?
     var banner: GADBannerView!
     var failedToLoadInterstitial = false
+    
+    var cameraButtonHeightConstraintSet = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,10 +138,6 @@ class MainViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if inputTextView.text == inputPlaceholder {
-            cameraButtonHeightConstraint.constant = inputBackgroundView.frame.height
-        }
-        
         DispatchQueue.main.async{
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
         }
@@ -145,6 +146,13 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         // Set origin for keyboard
         origin = self.view.frame.origin.y
+        
+        // Set the camera button constraints
+        if !cameraButtonHeightConstraintSet && inputTextView.text == inputPlaceholder {
+            cameraButtonHeightConstraint.constant = inputBackgroundView.frame.height
+            
+            cameraButtonHeightConstraintSet = true
+        }
         
         // Show Ultra Purchase on launch if not premium
         if firstLoad && !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
@@ -705,9 +713,21 @@ extension MainViewController: UITextViewDelegate {
             }
         }
         
-        guard textView.contentSize.height < 70.0 else { textView.isScrollEnabled = true; return }
-        
-        textView.isScrollEnabled = false
+        if textView.contentSize.height < 70.0 {
+            // It's one line so should not be scrollable
+            textView.isScrollEnabled = false
+            
+            // Align submit button to Center Y
+            submitButtonBottomConstraint.priority = .defaultLow
+            submitButtonCenterYConstraint.priority = UILayoutPriority(1000)
+        } else {
+            // It's more than one line so should be scrollable
+            textView.isScrollEnabled = true
+            
+            // Align submit button to bottom
+            submitButtonBottomConstraint.priority = UILayoutPriority(1000)
+            submitButtonCenterYConstraint.priority = .defaultLow
+        }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

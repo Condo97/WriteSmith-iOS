@@ -1125,6 +1125,7 @@ Cg
                                         <color key="backgroundColor" name="UserChatBubbleColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="mEz-xa-3yT" secondAttribute="bottom" constant="14" id="6qo-Nw-1d4"/>
+                                            <constraint firstItem="ebw-3H-E13" firstAttribute="bottom" secondItem="mEz-xa-3yT" secondAttribute="bottom" priority="999" id="7kd-O4-ZFv"/>
                                             <constraint firstAttribute="trailing" secondItem="ebw-3H-E13" secondAttribute="trailing" constant="14" id="NfW-BC-6sL"/>
                                             <constraint firstItem="ebw-3H-E13" firstAttribute="leading" secondItem="mEz-xa-3yT" secondAttribute="trailing" constant="7" id="bEG-Yv-a2P"/>
                                             <constraint firstItem="ebw-3H-E13" firstAttribute="centerY" secondItem="mEz-xa-3yT" secondAttribute="centerY" id="la4-Os-eYI"/>
@@ -1170,8 +1171,8 @@ Cg
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ipR-mO-2rY" firstAttribute="leading" secondItem="SBf-oX-BNp" secondAttribute="trailing" constant="7" id="0ft-Xu-fhf"/>
-                                    <constraint firstItem="SBf-oX-BNp" firstAttribute="top" secondItem="ipR-mO-2rY" secondAttribute="top" id="7yw-i7-JO7"/>
                                     <constraint firstAttribute="bottom" secondItem="HTw-V1-cSW" secondAttribute="bottom" constant="21" id="BVE-Qi-87l"/>
+                                    <constraint firstItem="SBf-oX-BNp" firstAttribute="bottom" secondItem="ipR-mO-2rY" secondAttribute="bottom" id="CXK-47-D5t"/>
                                     <constraint firstAttribute="trailing" secondItem="ipR-mO-2rY" secondAttribute="trailing" constant="24" id="KFj-oc-6VK"/>
                                     <constraint firstItem="HTw-V1-cSW" firstAttribute="top" secondItem="ipR-mO-2rY" secondAttribute="bottom" constant="14" id="KjD-Oz-d81"/>
                                     <constraint firstItem="515-7U-PKB" firstAttribute="height" secondItem="HTw-V1-cSW" secondAttribute="height" id="Ozf-ci-wFf"/>
@@ -1251,6 +1252,8 @@ Cg
                         <outlet property="remainingShadowView" destination="0O5-8u-YqV" id="6Id-MB-LR5"/>
                         <outlet property="remainingView" destination="zjO-lF-Ljf" id="4Mh-xL-j9a"/>
                         <outlet property="submitButton" destination="ebw-3H-E13" id="YIC-eB-NK7"/>
+                        <outlet property="submitButtonBottomConstraint" destination="7kd-O4-ZFv" id="vR9-ad-60A"/>
+                        <outlet property="submitButtonCenterYConstraint" destination="la4-Os-eYI" id="NMo-22-i1I"/>
                         <outlet property="tableView" destination="qLG-Gu-PvP" id="Cve-wH-kIT"/>
                         <outlet property="upgradeNowText" destination="ohx-NE-H3Z" id="EUZ-nZ-Igo"/>
                         <segue destination="kYQ-hg-YGZ" kind="presentation" identifier="toUltraPurchase" modalPresentationStyle="fullScreen" id="cCs-vG-REI"/>

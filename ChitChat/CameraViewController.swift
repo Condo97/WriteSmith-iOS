@@ -282,11 +282,15 @@ class CameraViewController: UIViewController {
                 return
             }
             
+            let trimmedString = combinedStrings.trimmingCharacters(in: .whitespaces)
+            
             if self.delegate != nil {
-                self.delegate.didGetScan(text: combinedStrings)
+                self.delegate.didGetScan(text: trimmedString)
                 self.dismiss(animated: true)
             }
         })
+        
+        request.recognitionLevel = .accurate
         
         do {
             try requestHandler.perform([request])
