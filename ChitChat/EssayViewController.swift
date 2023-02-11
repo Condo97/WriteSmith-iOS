@@ -138,7 +138,6 @@ class EssayViewController: UIViewController {
                     self.tableView.insertSections(IndexSet(integer: 1 /* the first section */), with: .top)
                 }
                 
-                
             }
         })
     }

@@ -866,7 +866,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChitChat/Tenjin",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 3.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -906,7 +906,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChitChat/Tenjin",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 3.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";

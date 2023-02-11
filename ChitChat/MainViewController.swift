@@ -144,6 +144,9 @@ class MainViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // Call setPremiumItems again, so that it will be called when the Premium window is closed. Redundant, can fix. Must also be called in viewWillAppear to limit jerky UI changes.
+        setPremiumItems()
+        
         // Set origin for keyboard
         origin = self.view.frame.origin.y
         
@@ -171,6 +174,9 @@ class MainViewController: UIViewController {
                 })
             })
         }
+        
+        // Redundant
+        doServerPremiumCheck()
     }
     
     @IBAction func submitButton(_ sender: Any) {
@@ -313,7 +319,6 @@ class MainViewController: UIViewController {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        touchUpOrMoved(touches: touches, with: event)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -559,6 +564,10 @@ class MainViewController: UIViewController {
         } else {
             tabBarController?.tabBar.items![tabBarItemIndex].image = UIImage(named: Constants.shareBottomButtonNotSelectedImageName)
         }
+        
+        /* If user just became premium, or the opposite, recalculate cell height */
+        //TODO: - Make a separate function for only things that need to be recalculated/redone when user immediately purchases premium
+        
     }
     
     func goToUltraPurchase() {
