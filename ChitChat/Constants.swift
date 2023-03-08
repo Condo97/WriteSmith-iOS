@@ -67,7 +67,6 @@ struct HTTPSConstants {
     static let registerUesr = "/registerUser"
     static let getRemaining = "/getRemaining"
     static let getChat = "/getChat"
-    static let getProducts = "/getProducts"
     static let validateSaveUpdateReceipt = "/validateAndUpdateReceipt"
     static let getGenerateImage = "/getImageUrlFromGenerateUrl"
     static let getIAPStuff = "/getIAPStuff"

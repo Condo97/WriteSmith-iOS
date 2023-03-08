@@ -56,7 +56,7 @@ class MainViewController: UIViewController {
     var remaining = -1
     var timeInterval = Constants.freeTypingTimeInterval
     
-    var interstitial: GADRewardedInterstitialAd?
+    var interstitial: GADInterstitialAd?
     var banner: GADBannerView!
     var failedToLoadInterstitial = false
     
@@ -68,10 +68,12 @@ class MainViewController: UIViewController {
         // For Testing
         //        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "417bf2ca112515b09c600668985dbf2b" ]
         
+        // Setup delegates
         inputTextView.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         
+        // Setup ad view and ads
         interstitial?.fullScreenContentDelegate = self
         
         adView.alpha = 0.0
@@ -656,12 +658,12 @@ class MainViewController: UIViewController {
                     if self.remaining % 2 - 1 == 0 && !self.firstChat {
                         if self.interstitial != nil {
                             //Display ad
-                            self.interstitial?.present(fromRootViewController: self) {
-                                let reward = self.interstitial?.adReward
-                                if reward?.amount == 0 {
-                                    //TODO: - Handle early ad close
-                                }
-                            }
+                            self.interstitial?.present(fromRootViewController: self) //{
+//                                let reward = self.interstitial?.adReward
+//                                if reward?.amount == 0 {
+//                                    //TODO: - Handle early ad close
+//                                }
+                            //}
                         }
                     }
                 } else {
@@ -689,7 +691,7 @@ class MainViewController: UIViewController {
         
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
             let request = GADRequest()
-            GADRewardedInterstitialAd.load(withAdUnitID: Private.rewardedInterstitialID, request: request, completionHandler: { [self] ad, error in
+            GADInterstitialAd.load(withAdUnitID: Private.interstitialID, request: request, completionHandler: { [self] ad, error in
                 if let error = error {
                     print("Failed to load ad with error: \(error.localizedDescription)")
                     self.failedToLoadInterstitial = true
