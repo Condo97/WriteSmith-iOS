@@ -25,8 +25,11 @@ struct Constants {
     
 //    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
     
-    static let freeTypingTimeInterval = 5.0/100
-    static let premiumTypingTimeInterval = 2.0/100
+    static let reviewFrequency = 5
+    static let adFrequency = 4
+    
+    static let freeTypingTimeInterval = 2.4/100
+    static let premiumTypingTimeInterval = 1.0/100
     
     static let defaultWeeklyDisplayPrice = "5.99"
     static let defaultMonthlyDisplayPrice = "14.99"

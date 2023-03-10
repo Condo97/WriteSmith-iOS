@@ -592,7 +592,7 @@ class MainViewController: UIViewController {
         tableView.insertRows(at: [IndexPath(row: row, section: 0)], with: animation)
         tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
         
-        if ChatStorageHelper.getAllChats().count % 5 == 0 && !firstChat {
+        if ChatStorageHelper.getAllChats().count % Constants.reviewFrequency == 0 && !firstChat {
             if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
                 DispatchQueue.main.async {
                     SKStoreReviewController.requestReview(in: scene)
@@ -653,19 +653,6 @@ class MainViewController: UIViewController {
                     self.chatsRemainingText.text = "You have \(self.remaining) chats remaining today..."
                     self.chatsRemainingText.textColor = .darkGray
                     self.upgradeNowText.textColor = .darkGray
-                    
-                    // Show ad every other time
-                    if self.remaining % 2 - 1 == 0 && !self.firstChat {
-                        if self.interstitial != nil {
-                            //Display ad
-                            self.interstitial?.present(fromRootViewController: self) //{
-//                                let reward = self.interstitial?.adReward
-//                                if reward?.amount == 0 {
-//                                    //TODO: - Handle early ad close
-//                                }
-                            //}
-                        }
-                    }
                 } else {
                     self.remainingView.isHidden = true
                     self.remainingShadowView.isHidden = true
@@ -1019,6 +1006,21 @@ extension MainViewController: HTTPSHelperDelegate {
             firstChat = false
             updateRemainingText()
             addChat(message: trimmedOutput, userSent: .ai)
+            
+            if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
+                // Show ad at certain frequency
+                if self.remaining % Constants.adFrequency == 0 && !self.firstChat {
+                    if self.interstitial != nil {
+                        //Display ad
+                        self.interstitial?.present(fromRootViewController: self) //{
+                        //                                let reward = self.interstitial?.adReward
+                        //                                if reward?.amount == 0 {
+                        //                                    //TODO: - Handle early ad close
+                        //                                }
+                        //}
+                    }
+                }
+            }
         } else if success == 51 {
             //Too many chats generated
             guard let body = json?["Body"] as? [String: Any] else {
