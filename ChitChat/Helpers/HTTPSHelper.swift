@@ -151,9 +151,9 @@ class HTTPSHelper {
         let postBody = """
         {
             "authToken": "\(authToken)",
-            "inputText": "\(inputText.replacingOccurrences(of: "\n", with: ""))"
+            "inputText": "\(inputText.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\"", with: "”"))"
         }
-        """
+        """ // Replace occurances of \", which are automatically made from standard quotations from user input
         var request = URLRequest(url: url)
         
         request.httpMethod = "POST"

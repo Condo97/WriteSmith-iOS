@@ -591,14 +591,6 @@ class MainViewController: UIViewController {
         
         tableView.insertRows(at: [IndexPath(row: row, section: 0)], with: animation)
         tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
-        
-        if ChatStorageHelper.getAllChats().count % Constants.reviewFrequency == 0 && !firstChat {
-            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                DispatchQueue.main.async {
-                    SKStoreReviewController.requestReview(in: scene)
-                }
-            }
-        }
     }
     
     func setBubbleImage(imageView: UIImageView, isUser: Bool) {
@@ -642,25 +634,28 @@ class MainViewController: UIViewController {
                 
                 self.promoViewHeightConstraint.constant = 0.0
             } else {
-                if self.remaining >= 0 {
-                    self.remainingView.isHidden = false
-                    self.remainingShadowView.isHidden = false
-                    self.promoView.isHidden = false
-                    self.promoShadowView.isHidden = false
-                    
-                    self.promoViewHeightConstraint.constant = self.promoViewHeightConstraintConstant
-                    
-                    self.chatsRemainingText.text = "You have \(self.remaining) chats remaining today..."
-                    self.chatsRemainingText.textColor = .darkGray
-                    self.upgradeNowText.textColor = .darkGray
-                } else {
-                    self.remainingView.isHidden = true
-                    self.remainingShadowView.isHidden = true
-                    self.promoView.isHidden = true
-                    self.promoShadowView.isHidden = true
-                    
-                    self.promoViewHeightConstraint.constant = self.promoViewHeightConstraintConstant
-                }
+//                if self.remaining >= 0 {
+                self.remainingView.isHidden = false
+                self.remainingShadowView.isHidden = false
+                self.promoView.isHidden = false
+                self.promoShadowView.isHidden = false
+                
+                self.promoViewHeightConstraint.constant = self.promoViewHeightConstraintConstant
+                
+                self.chatsRemainingText.text = "You have \(self.remaining < 0 ? 0 : self.remaining) chat\(self.remaining == 1 ? "" : "s") remaining today..."
+                self.chatsRemainingText.textColor = .darkGray
+                self.upgradeNowText.textColor = .darkGray
+//                }
+                
+                // Why is this here
+//                else {
+//                    self.remainingView.isHidden = true
+//                    self.remainingShadowView.isHidden = true
+//                    self.promoView.isHidden = true
+//                    self.promoShadowView.isHidden = true
+//
+//                    self.promoViewHeightConstraint.constant = self.promoViewHeightConstraintConstant
+//                }
             }
         }
     }
@@ -940,7 +935,7 @@ extension MainViewController: HTTPSHelperDelegate {
         }
         
         guard let remaining = body["remaining"] as? Int else {
-            print("Error! No AuthToken in response...\n\(String(describing: json))")
+            print("Error! No remaining in response...\n\(String(describing: json))")
             return
         }
         
@@ -1007,17 +1002,26 @@ extension MainViewController: HTTPSHelperDelegate {
             updateRemainingText()
             addChat(message: trimmedOutput, userSent: .ai)
             
-            if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-                // Show ad at certain frequency
-                if self.remaining % Constants.adFrequency == 0 && !self.firstChat {
-                    if self.interstitial != nil {
-                        //Display ad
-                        self.interstitial?.present(fromRootViewController: self) //{
-                        //                                let reward = self.interstitial?.adReward
-                        //                                if reward?.amount == 0 {
-                        //                                    //TODO: - Handle early ad close
-                        //                                }
-                        //}
+            // Show ad at certain frequency
+            if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) && self.remaining % Constants.adFrequency == 0 && !self.firstChat {
+                if self.interstitial != nil {
+                    //Display ad
+                    self.interstitial?.present(fromRootViewController: self) //{
+                    //                                let reward = self.interstitial?.adReward
+                    //                                if reward?.amount == 0 {
+                    //                                    //TODO: - Handle early ad close
+                    //                                }
+                    //}
+                } else {
+                    loadGAD() // Load if insertional is nil I guess lol
+                }
+            } else {
+                // Otherwise show review prompt at certain frequency
+                if ChatStorageHelper.getAllChats().count % Constants.reviewFrequency == 0 && !firstChat {
+                    if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                        DispatchQueue.main.async {
+                            SKStoreReviewController.requestReview(in: scene)
+                        }
                     }
                 }
             }

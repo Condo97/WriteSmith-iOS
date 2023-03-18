@@ -66,12 +66,17 @@ struct Constants {
 }
 
 struct HTTPSConstants {
-    static let chitChatServer = "https://chitchatserver.com"
+    #if DEBUG
+        static let chitChatServer = "https://chitchatserver.com/dev"
+    #else
+        static let chitChatServer = "https://chitchatserver.com/v1"
+    #endif
+    
     static let registerUesr = "/registerUser"
     static let getRemaining = "/getRemaining"
     static let getChat = "/getChat"
     static let validateSaveUpdateReceipt = "/validateAndUpdateReceipt"
-    static let getGenerateImage = "/getImageUrlFromGenerateUrl"
+//    static let getGenerateImage = "/getImageUrlFromGenerateUrl"
     static let getIAPStuff = "/getIAPStuff"
     static let privacyPolicy = "/privacyPolicy.html"
     static let termsAndConditions = "/termsAndConditions.html"
