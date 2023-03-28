@@ -18,20 +18,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
+        // TODO: - Remove these!
+        #if DEBUG
+//        UserDefaults.standard.set(false, forKey: Constants.userDefaultHasFinishedIntro)
+        #endif
+        
         // Set initial view controller
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultHasFinishedIntro) {
             
             guard let windowScene = scene as? UIWindowScene else { return }
             let window = UIWindow(windowScene: windowScene)
-            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introStart") as! Intro1ViewController
-            let navigation = UINavigationController(rootViewController: viewController)
-            window.rootViewController = navigation
+            
+            let iinc = IntroInteractiveNavigationController()
+            iinc.presentationSpecification = IntroInteractivePresentationSpecification()
+            
+            window.rootViewController = iinc
             self.window = window
             window.makeKeyAndVisible()
-            
-//            if let topViewController = UIApplication.shared.scene
-//            let introVC = mainStoryboard.instantiateViewController(withIdentifier: "introVC") as! Intro1ViewController
-//            self.window?.rootViewController = introVC
         }
     }
 
