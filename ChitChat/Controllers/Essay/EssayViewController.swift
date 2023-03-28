@@ -218,6 +218,7 @@ class EssayViewController: UIViewController {
         
         let image = UIImage(named: "logoImage")
         imageView.image = image
+        imageView.tintColor = Colors.elementTextColor
         navigationItem.titleView = imageView
     }
     
