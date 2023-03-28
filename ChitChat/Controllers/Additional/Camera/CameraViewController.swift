@@ -42,6 +42,9 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var scanButton: RoundedButton!
     @IBOutlet weak var scanIntroText: RoundedView!
     
+    @IBOutlet weak var tapToScanImageView: UIImageView!
+    @IBOutlet weak var tapToScanImageViewVerticalSpaceConstraint: NSLayoutConstraint!
+    
     struct InitialCropViewConstraintConstants {
         let leading = 40.0
         let trailing = 40.0
@@ -84,6 +87,9 @@ class CameraViewController: UIViewController {
             dismiss(animated: true)
             return
         }
+        
+        // Add gesture recognizer to tapToScanImageView to make it a lil easier :)
+        tapToScanImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cameraButtonPressed)))
         
         deInitializeCropView()
         
@@ -211,21 +217,7 @@ class CameraViewController: UIViewController {
     }
     
     @IBAction func cameraButton(_ sender: Any) {
-        if cameraButton.backgroundImage(for: .normal) == UIImage(named: Constants.cameraButtonNotPressedImageName) || cameraButton.backgroundImage(for: .normal) == UIImage(named: Constants.cameraButtonPressedImageName) {
-            // Camera was enabled, so take the photo
-            guard let capturePhotoOutput = self.capturePhotoOutput else { return }
-            
-            let photoSettings = AVCapturePhotoSettings()
-            photoSettings.isAutoStillImageStabilizationEnabled = true
-            photoSettings.isHighResolutionPhotoEnabled = true
-            photoSettings.flashMode = .auto
-            
-            capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
-        } else {
-            // Camera was not enabled, so delete the picture and redo
-            startUpCameraAgain()
-            deInitializeCropView()
-        }
+        cameraButtonPressed()
     }
     
     @IBAction func cancelButton(_ sender: Any) {
@@ -299,6 +291,31 @@ class CameraViewController: UIViewController {
         }
     }
     
+    @objc func cameraButtonPressed() {
+        if cameraButton.backgroundImage(for: .normal) == UIImage(named: Constants.cameraButtonNotPressedImageName) || cameraButton.backgroundImage(for: .normal) == UIImage(named: Constants.cameraButtonPressedImageName) {
+            // Camera was enabled, so take the photo
+            guard let capturePhotoOutput = self.capturePhotoOutput else { return }
+            
+            // Set photoSettings
+            let photoSettings = AVCapturePhotoSettings()
+            photoSettings.isAutoStillImageStabilizationEnabled = true
+            photoSettings.isHighResolutionPhotoEnabled = true
+            photoSettings.flashMode = .auto
+            
+            // Capture the photo
+            capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
+        } else {
+            // Camera was not enabled, so delete the picture and redo
+            startUpCameraAgain()
+            deInitializeCropView()
+            
+            // Show Tap to Scan button
+            UIView.animate(withDuration: 0.2, animations: {
+                self.tapToScanImageView.alpha = 1.0
+            })
+        }
+    }
+    
     func initializeCropView(with image: UIImage, _ fromCamera: Bool, _ contentMode: UIView.ContentMode) {
         // Adjust the UI elements
         shouldCrop = true
@@ -310,13 +327,19 @@ class CameraViewController: UIViewController {
         
         scanIntroText.alpha = 0.0
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, animations: {
-            self.scanButton.alpha = 1.0
-            self.scanButtonHeightConstraint.constant = self.defaultScanButtonHeight
-            self.scanButtonTopSpaceConstraint.constant = self.defaultScanButtonTopSpace
-            
-            self.scanButton.setNeedsDisplay()
+        // Hide Tap to Scan button
+        UIView.animate(withDuration: 0.2, animations: {
+            self.tapToScanImageView.alpha = 0.0
         })
+        
+        // Show "Scan Selection" button
+//        UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
+        self.scanButton.alpha = 1.0
+        self.scanButtonHeightConstraint.constant = self.defaultScanButtonHeight
+        self.scanButtonTopSpaceConstraint.constant = self.defaultScanButtonTopSpace
+        
+        self.scanButton.setNeedsDisplay()
+//        })
         
         // Ensure the capture session has stopped
         captureSession?.stopRunning()
