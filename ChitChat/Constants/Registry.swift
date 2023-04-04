@@ -41,6 +41,35 @@ struct Registry {
                 }
             }
             
+            struct Essay {
+                struct Cells {
+                    static let body = XIB_ReuseID(
+                        xibName: "BodyEssayCell",
+                        reuseID: "bodyEssayCell"
+                    )
+                    
+                    static let entry = XIB_ReuseID(
+                        xibName: "EntryEssayCel",
+                        reuseID: "entryEssayCell"
+                    )
+                    
+                    static let loading = XIB_ReuseID(
+                        xibName: "LoadingEssayCell",
+                        reuseID: "loadingEssayCell"
+                    )
+                    
+                    static let premium = XIB_ReuseID(
+                        xibName: "PremiumEssayCell",
+                        reuseID: "premiumEssayCell"
+                    )
+                    
+                    static let prompt = XIB_ReuseID(
+                        xibName: "PromptEssayCell",
+                        reuseID: "promptEssayCell"
+                    )
+                }
+            }
+            
             struct Simple {
                 struct Cells {
                     static let label = XIB_ReuseID(

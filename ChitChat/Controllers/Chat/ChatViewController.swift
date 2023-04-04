@@ -41,7 +41,7 @@ class ChatViewController: UIViewController {
     let chatSection = 0
     let spacerSection = 1
     
-    let chatTableViewManager: ChatTableViewManagerProtocol = ChatTableViewManager()
+    let chatTableViewManager: SourcedTableViewManagerProtocol = SourcedTableViewManager()
     
 //    var chatRowSources: [[UITableViewCellSource]] = [[]]
     
@@ -60,7 +60,10 @@ class ChatViewController: UIViewController {
     var isLongPressForShare = false
     
     var remaining = -1
+    
     var timeInterval = Constants.freeTypingTimeInterval
+    
+    var premiumStructureUpdater = PremiumStructureUpdater()
     
     var interstitial: GADInterstitialAd?
     var banner: GADBannerView!
@@ -80,6 +83,9 @@ class ChatViewController: UIViewController {
         
         /* Set TableView touchDelegate */
         tableView.touchDelegate = self
+        
+        /* Set premiumStructureUpdater updateDelegate */
+        premiumStructureUpdater.updateDelegate = self
         
         /* Setup ChatCell Nibs TODO: Should this just be in ChatTableView? How can this be dynamic? */
         RegistryHelper.register(Registry.View.TableView.Chat.Cells.user, to: tableView)
@@ -116,12 +122,6 @@ class ChatViewController: UIViewController {
         longPressGestureRecognizer.minimumPressDuration = 1.0
         tableView.addGestureRecognizer(longPressGestureRecognizer)
         
-        if UserDefaults.standard.string(forKey: Constants.authTokenKey) == nil {
-            HTTPSHelper.registerUser(delegate: self)
-        } else {
-            HTTPSHelper.getRemaining(delegate: self, authToken: UserDefaults.standard.string(forKey: Constants.authTokenKey)!)
-        }
-        
         // Setup ad view and ads
         interstitial?.fullScreenContentDelegate = self
         
@@ -140,10 +140,10 @@ class ChatViewController: UIViewController {
         
         // Set up cell source at index 0
         let allChats = ChatStorageHelper.getAllChats()
-        chatTableViewManager.chatRowSources.insert(ChatTableViewCellSourceMaker.makeChatTableViewCellSourceArray(fromChatObjectArray: allChats), at: chatSection)
+        chatTableViewManager.sources.insert(ChatTableViewCellSourceMaker.makeChatTableViewCellSourceArray(fromChatObjectArray: allChats), at: chatSection)
         
         // Set up default tiered padding source at index 1 in spacerSection
-        chatTableViewManager.chatRowSources.insert([TieredPaddingTableViewCellSource()], at: spacerSection)
+        chatTableViewManager.sources.insert([TieredPaddingTableViewCellSource()], at: spacerSection)
         
         
         // Initial updates
@@ -157,8 +157,8 @@ class ChatViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        doServerPremiumCheck()
-        setPremiumItems()
+        // Full update on premium structure updater
+        premiumStructureUpdater.fullUpdate()
     }
     
     override func viewDidLayoutSubviews() {
@@ -172,9 +172,6 @@ class ChatViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // Call setPremiumItems again, so that it will be called when the Premium window is closed. Redundant, can fix. Must also be called in viewWillAppear to limit jerky UI changes.
-        setPremiumItems()
-        
         // Set origin for keyboard
         origin = self.view.frame.origin.y
         
@@ -193,60 +190,23 @@ class ChatViewController: UIViewController {
         
         // Load first chats if there are no chats
         if ChatStorageHelper.getAllChats().count == 0 {
-            addChat(message: "Hi! I'm Prof. Write, your AI writing companion...", userSent: .ai)
+            self.addChat(message: "Hi! I'm Prof. Write, your AI writing companion...", userSent: .ai)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 1.7 : 1.0), execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 2.4 : 1.0), execute: {
                 self.addChat(message: "Ask me to write lyrics, poems, essays and more. Talk to me like a human and ask me anything you'd ask your professor!", userSent: .ai)
-                DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 3.2 : 1.4), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 5.2 : 1.4), execute: {
                     self.addChat(message: "I do better with more detail. Don't say, \"Essay on Belgium,\" say \"200 word essay on Belgium's cultural advances in the past 20 years.\" Remember, I'm your Professor, so use what I write as inspiration and never plagiarize!", userSent: .ai)
                 })
             })
         }
-        
-        // Redundant
-        doServerPremiumCheck()
     }
     
     @IBAction func submitButton(_ sender: Any) {
         dismissKeyboard()
         
-        if submitSoftDisable {
-            let alert = UIAlertController(title: "3 Days Free", message: "Send messages faster! Try Ultra for 3 days free today.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Try Now", style: .default, handler: { action in
-                self.goToUltraPurchase()
-            }))
-            present(alert, animated: true)
-            return
-        }
-        
-        guard let authToken = UserDefaults.standard.string(forKey: Constants.authTokenKey) else {
-            HTTPSHelper.registerUser(delegate: self)
-            return
-        }
-        
-        //Button is disabled until response for premium
-        //Button is enabled BUT shows a popup when pressed
-        if UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-            submitButton.isEnabled = false
-            cameraButton.isEnabled = false
-        } else {
-            softDisable()
-        }
-        
-        HTTPSHelper.getChat(delegate: self, authToken: authToken, inputText: inputTextView.text)
-        addChat(message: inputTextView.text, userSent: .user)
-        
-        // Set inputTextView to placeholder and update its size
-        inputTextView.text = inputPlaceholder
-        inputTextView.textColor = .lightText //TODO: - Make this a constant
-        updateInputTextViewSize(textView: inputTextView)
-        
-        // Start processing animation
-        startProcessingAnimation()
-        
-        // Show Ad if Not Premium
-        loadGAD()
+        // Get input text
+        let inputText = inputTextView.text!
+        generateChat(inputText: inputText)
     }
     
     @IBAction func promoButton(_ sender: Any) {
@@ -435,41 +395,118 @@ class ChatViewController: UIViewController {
         
     }
     
-    func setPremiumItems() {
-        /* Update the text that says how many chats are remaining for user */
-        updateRemainingText()
-        
-        /* Setup Right Bar Button Items and Top Ad View */
-        var rightBarButtonItems:[UIBarButtonItem] = []
-        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-            rightBarButtonItems.append(proMenuBarItem)
-        } else {
-            adView.alpha = 0.0
-            adViewHeightConstraint.constant = 0.0
-            adShadowView.isHidden = true
-        }
-        
-        /* Put things in Right NavigationBar */
-        navigationItem.rightBarButtonItems = rightBarButtonItems
-        
-        /* Update the tabView with correct image and button */
-        // Fix this and make it better lol
-        let tabBarItemIndex = (tabBarController?.tabBar.items?.count ?? 0) - 1
-        
-        if tabBarItemIndex < 0 {
-            print("Tab bar index is less than zero...")
+    func generateChat(inputText: String) {
+        if submitSoftDisable {
+            let alert = UIAlertController(title: "3 Days Free", message: "Send messages faster! Try Ultra for 3 days free today.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Try Now", style: .default, handler: { action in
+                self.goToUltraPurchase()
+            }))
+            present(alert, animated: true)
             return
         }
         
-        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-            tabBarController?.tabBar.items![tabBarItemIndex].image = UIImage(named: Constants.premiumBottomButtonNotSelectedImageName)
-        } else {
-            tabBarController?.tabBar.items![tabBarItemIndex].image = UIImage(named: Constants.shareBottomButtonNotSelectedImageName)
+        //Button is disabled until response for premium
+        //Button is enabled BUT shows a popup when pressed
+        PremiumHelper.ensure(completion: {isPremium in
+            if isPremium {
+                self.submitButton.isEnabled = false
+                self.cameraButton.isEnabled = false
+            } else {
+                self.softDisable()
+            }
+        })
+        
+        // Add user's chat
+        addChat(message: inputText, userSent: .user)
+        
+        // Set inputTextView to placeholder and update its size
+        inputTextView.text = inputPlaceholder
+        inputTextView.textColor = .lightText //TODO: - Make this a constant
+        updateInputTextViewSize(textView: inputTextView)
+        
+        // Start processing animation
+        startProcessingAnimation()
+        
+        // Show Ad if Not Premium
+        loadGAD()
+        
+        // Get chat response
+        ChatRequestHelper.get(inputText: inputText, completion: {responseText, finishReason, remaining in
+            // Stop the processing animation (won't stop if already stopped)
+            self.stopProcessingAnimation()
+            
+            // Trim the firt \n\n off of output if it exists TODO: Do this fix
+            var trimmedResponseText = responseText
+            
+            if let firstOccurence = responseText.range(of: "\n\n") {
+                trimmedResponseText.removeSubrange(responseText.startIndex..<firstOccurence.upperBound)
+            }
+            
+            //TODO: Delete this!
+            if inputText == "Are you GPT4?" {
+                trimmedResponseText = "Yes I am GPT-4!"
+            }
+            
+            // Append length finish reason additional text if finish reason is length
+            if finishReason == FinishReasons.length && !PremiumHelper.get() {
+                trimmedResponseText += Constants.lengthFinishReasonAdditionalText
+            }
+            
+            // Update remaining text and instance variable
+            self.updateRemaining(remaining: remaining)
+            
+            // Set firstChat to false
+            self.firstChat = false
+            
+            // Add response chat
+            self.addChat(message: trimmedResponseText, userSent: .ai)
+            
+            // Enable submit and camera button and show review prompt at frequency for premium users and stop soft disable, show ad at frequency, and present limit reached alert if needed for free users
+            PremiumHelper.ensure(completion: {isPremium in
+                if isPremium {
+                    self.submitButton.isEnabled = true
+                    self.cameraButton.isEnabled = true
+                    
+                    self.showReviewAtFrequency()
+                } else {
+                    self.softEnable()
+                    
+                    self.showAdAtFrequency()
+                    
+                    if finishReason == FinishReasons.limit {
+                        let ac = UIAlertController(title: "Limit Reached", message: "You've reached your daily chat limit. Upgrade for unlimited chats...", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "Close", style: .cancel))
+                        ac.addAction(UIAlertAction(title: "Upgrade", style: .default, handler: { action in
+                            self.goToUltraPurchase()
+                        }))
+                        self.present(ac, animated: true)
+                    }
+                }
+            })
+        })
+    }
+    
+    func showReviewAtFrequency() {
+        if ChatStorageHelper.getAllChats().count % Constants.reviewFrequency == 0 && !firstChat {
+            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                DispatchQueue.main.async {
+                    SKStoreReviewController.requestReview(in: scene)
+                }
+            }
         }
-        
-        /* If user just became premium, or the opposite, recalculate cell height */
-        //TODO: - Make a separate function for only things that need to be recalculated/redone when user immediately purchases premium
-        
+    }
+    
+    func showAdAtFrequency() {
+        if self.remaining % Constants.adFrequency == 0 && !self.firstChat {
+            if self.interstitial != nil {
+                //Display ad
+                self.interstitial?.present(fromRootViewController: self)
+            } else {
+                // Load if interstitial is nil
+                loadGAD()
+            }
+        }
     }
     
     func goToUltraPurchase() {
@@ -492,14 +529,18 @@ class ChatViewController: UIViewController {
         if !isProcessingChat {
             isProcessingChat = true
             
-            // Save if should scroll and insert loading row
-            let shouldScroll = tableView.isAtBottom(bottomHeightOffset: (tableView.cellForRow(at: IndexPath(row: tableView.numberOfRows(inSection: chatSection) - 1, section: chatSection))?.frame.height ?? 0) + 40.0)
-            
-            tableView.insertManagedRow(bySource: LoadingTableViewCellSource(), at: IndexPath(row: tableView.numberOfRows(inSection: chatSection), section: chatSection), with: .none)
-            
-            // Do scroll!
-            if shouldScroll {
-                tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false) // TODO: - Do scrolling queue or something
+            // Do these on main thread
+            DispatchQueue.main.async {
+                // Save if should scroll and insert loading row
+                let shouldScroll = self.tableView.isAtBottom(bottomHeightOffset: (self.tableView.cellForRow(at: IndexPath(row: self.tableView.numberOfRows(inSection: self.chatSection) - 1, section: self.chatSection))?.frame.height ?? 0) + 40.0)
+                
+                // Insert loading cell source
+                self.tableView.insertManagedRow(bySource: LoadingTableViewCellSource(), at: IndexPath(row: self.tableView.numberOfRows(inSection: self.chatSection), section: self.chatSection), with: .none)
+                
+                // Do scroll!
+                if shouldScroll {
+                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false) // TODO: - Do scrolling queue or something
+                }
             }
         }
     }
@@ -508,14 +549,17 @@ class ChatViewController: UIViewController {
         if isProcessingChat {
             isProcessingChat = false
             
-            tableView.deleteManagedRow(at: IndexPath(row: tableView.numberOfRows(inSection: chatSection) - 1, section: chatSection), with: .none)
+            // Delete loading row on main queue
+            DispatchQueue.main.async {
+                self.tableView.deleteManagedRow(at: IndexPath(row: self.tableView.numberOfRows(inSection: self.chatSection) - 1, section: self.chatSection), with: .none)
+            }
         }
     }
     
     func addChat(message: String, userSent: ChatSender) {
         // Create chatObject and chatTableViewCellSource
         let chatObject = ChatObject(text: message, sender: userSent)
-        var source = ChatTableViewCellSource(chat: chatObject)
+        let source = ChatTableViewCellSource(chat: chatObject)
         
         // Append the chat to CoreData or UserDefaults or whatever I use rn TODO: Convert to CoreData!
         ChatStorageHelper.appendChat(chatObject: chatObject)
@@ -525,9 +569,6 @@ class ChatViewController: UIViewController {
         if !isProcessingChat && userSent == .ai {
             animation = .none
         }
-        
-        // Save if user should scroll if tableView is at (or near) the bottom
-        let shouldScroll = tableView.isAtBottom()
         
         // Create and start a new Typewriter for the AI response
         if userSent == .ai {
@@ -543,20 +584,22 @@ class ChatViewController: UIViewController {
                     }
                     
                     // Try to scroll if content height has increased and at bottom TODO: - Is this cool to do if there are multiple filling at once? What if there is some sort of future update?
-                    let expectedTypingLabelSize = NSString(string: currentText).boundingRect(
-                        with: CGSize(width: source.typingLabel!.frame.size.width, height: .infinity),
-                        options: .usesLineFragmentOrigin,
-                        attributes: [.font: source.typingLabel!.font!],
-                        context: nil)
-                    if prevExpectedHeight < expectedTypingLabelSize.height {
-                        // Reload for size enlargement
-                        self.tableView.reloadData()
-                        
-                        if self.tableView.isAtBottom() {
-                            self.tableView.reallyScrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
+                    if source.typingLabel != nil {
+                        let expectedTypingLabelSize = NSString(string: currentText).boundingRect(
+                            with: CGSize(width: source.typingLabel!.frame.size.width, height: .infinity),
+                            options: .usesLineFragmentOrigin,
+                            attributes: [.font: source.typingLabel!.font!],
+                            context: nil)
+                        if prevExpectedHeight < expectedTypingLabelSize.height {
+                            // Reload for size enlargement
+                            self.tableView.reloadData()
+                            
+                            if self.tableView.isAtBottom() {
+                                self.tableView.reallyScrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
+                            }
+                            
+                            prevExpectedHeight = expectedTypingLabelSize.height
                         }
-                        
-                        prevExpectedHeight = expectedTypingLabelSize.height
                     }
                     
                     // Update the label in the tableView!
@@ -569,36 +612,21 @@ class ChatViewController: UIViewController {
             source.typewriter = typewriter
         }
         
-        // Insert row and append created source to chatRowSources!
-        tableView.appendManagedRow(bySource: source, inSection: chatSection, with: animation)
-        
-        // Do the scroll if the user was at the bottom of the tableView before the insertion
-        if shouldScroll {
-            tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
-        }
-    }
-    
-    func updateRemainingText() {
+        // Do scrolling and insertion on main thread
         DispatchQueue.main.async {
-            if UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-                self.remainingView.isHidden = true
-                self.remainingShadowView.isHidden = true
-                self.promoView.isHidden = true
-                self.promoShadowView.isHidden = true
-                
-                self.promoViewHeightConstraint.constant = 0.0
-            } else {
-                self.remainingView.isHidden = false
-                self.remainingShadowView.isHidden = false
-                self.promoView.isHidden = false
-                self.promoShadowView.isHidden = false
-                
-                self.promoViewHeightConstraint.constant = self.promoViewHeightConstraintConstant
-                
-                self.chatsRemainingText.text = "You have \(self.remaining < 0 ? 0 : self.remaining) chat\(self.remaining == 1 ? "" : "s") remaining today..."
+            // Save if user should scroll if tableView is at (or near) the bottom
+            let shouldScroll = self.tableView.isAtBottom()
+            
+            // Insert row and append created source to chatRowSources!
+            self.tableView.appendManagedRow(bySource: source, inSection: self.chatSection, with: animation)
+            
+            // Do the scroll if the user was at the bottom of the tableView before the insertion
+            if shouldScroll {
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
             }
         }
     }
+        
     
     func updateTextViewSubmitButtonEnabled(textView: UITextView) {
         if textView.text == "" || textView.textColor == .lightText || textView.text == inputPlaceholder  {

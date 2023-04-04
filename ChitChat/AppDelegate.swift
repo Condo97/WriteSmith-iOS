@@ -36,17 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         GADMobileAds.sharedInstance().start()
         
-        if UserDefaults.standard.string(forKey: Constants.authTokenKey) == nil {
-            HTTPSHelper.registerUser(delegate: self)
-        }
+        // If no authToken, register the user and update the authToken in UserDefaults
+        AuthHelper.ensure(completion: nil)
         
-        if UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) == nil {
-            UserDefaults.standard.set("https://apple.com/", forKey: Constants.userDefaultStoredShareURL)
-        }
-        
-        HTTPSHelper.getAndSaveImportantConstants(delegate: self)
-        //        HTTPSHelper.getDisplayPrice(delegate: self)
-        //        HTTPSHelper.getShareURL(delegate: self)
+        // Update imported constants
+        ConstantsHelper.update()
         
         return true
     }
@@ -111,31 +105,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-}
-
-extension AppDelegate: HTTPSHelperDelegate {
-    func didRegisterUser(json: [String : Any]?) {
-        if let body = json?["Body"] as? [String: Any] {
-            if let authToken = body["authToken"] as? String {
-                UserDefaults.standard.set(authToken, forKey: Constants.authTokenKey)
-            }
-        }
-    }
-    
-    func didGetAndSaveImportantConstants(json: [String : Any]?) {
-        
-    }
-    
-    func getRemaining(json: [String : Any]?) {
-        
-    }
-    
-    func getChat(json: [String : Any]?) {
-        
-    }
-    
-    func getChatError() {
-        
-    }
 }
 

@@ -1,5 +1,5 @@
 //
-//  IntroInteractiveChatTableViewController.swift
+//  SourcedTableViewController.swift
 //  ChitChat
 //
 //  Created by Alex Coundouriotis on 3/22/23.
@@ -8,23 +8,23 @@
 import Foundation
 
 /***
- Just holds the chatRowSources!
+ Just holds the sources!
  */
-class ChatTableViewManager: NSObject {
-    var chatRowSources: [[UITableViewCellSource]] = []
+class SourcedTableViewManager: NSObject {
+    var sources: [[UITableViewCellSource]] = []
 }
 
 /***
  UITableViewDelegate and UITableViewDataSource
  */
-extension ChatTableViewManager: ChatTableViewManagerProtocol {
+extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return chatRowSources.count
+        return sources.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chatRowSources[section].count
+        return sources[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

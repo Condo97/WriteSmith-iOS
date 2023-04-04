@@ -14,12 +14,14 @@ struct Constants {
     static let pastChatStorageUserDefaultKey = "pastChatStorageUserDefaultKey"
     static let authTokenKey = "authTokenKey"
     static let userDefaultHasFinishedIntro = "hasFinishedIntro"
-    static let userDefaultStoredIsPremium = "storedIsPremium"
     static let userDefaultStoredWeeklyDisplayPrice = "weeklyDisplayPrice"
     static let userDefaultStoredMonthlyDisplayPrice = "monthlyDisplayPrice"
 //    static let userDefaultStoredAnnualDisplayPrice = "annualDisplayPrice"
     static let userDefaultStoredFreeEssayCap = "freeEssayCap"
     static let userDefaultStoredShareURL = "shareURL"
+    
+    static let userDefaultStoredPremiumLastCheckDate = "premiumLastCheckDate"
+    static let userDefaultStoredIsPremium = "storedIsPremium"
     
     static let userDefaultFirstTimeCamera = "firstTimeCamera"
     
@@ -34,6 +36,10 @@ struct Constants {
     static let defaultTypingUpdateLetterCountFactor = 200
     static let introTypingUpdateLetterCountFactor = 100
     
+    static let premiumCheckCooldownSeconds = 300.0
+    
+    static let defaultShareURL = "https://apps.apple.com/us/app/writesmith-ai-essay-helper/id1664039953"
+    static let defaultFreeEssayCap = 4
     static let defaultWeeklyDisplayPrice = "5.99"
     static let defaultMonthlyDisplayPrice = "14.99"
 //    static let defaultAnnualDisplayPrice = "29.99"
@@ -60,6 +66,7 @@ struct Constants {
     
     static let copyFooterText = "Made on WriteSmith - AI Writing Author!"
     
+    static let lengthFinishReasonAdditionalText = "...\n\nThis answer is too long for your plan. Please upgrade to Ultra for unlimited length."
     
     static let cameraButtonNotPressedImageName = "cameraButtonNotPressed"
     static let cameraButtonPressedImageName = "cameraButtonPressed"
@@ -97,12 +104,12 @@ struct UIConstants {
 
 struct HTTPSConstants {
     #if DEBUG
-        static let chitChatServer = "https://chitchatserver.com"
+        static let chitChatServer = "https://chitchatserver.com/v1"
     #else
         static let chitChatServer = "https://chitchatserver.com/v1"
     #endif
     
-    static let registerUesr = "/registerUser"
+    static let registerUser = "/registerUser"
     static let getRemaining = "/getRemaining"
     static let getChat = "/getChat"
     static let validateSaveUpdateReceipt = "/validateAndUpdateReceipt"
@@ -136,6 +143,7 @@ struct Colors {
 
 struct FinishReasons {
     static let length = "length"
+    static let limit = "limit"
     static let stop = "stop"
 }
 

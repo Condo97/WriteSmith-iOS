@@ -14,7 +14,7 @@ public typealias FailureBlock = (Error?) -> Void
 
 let IAP_PRODUCTS_DID_LOAD_NOTIFICATION = Notification.Name("IAP_PRODUCTS_DID_LOAD_NOTIFICATION")
 
-class IAPManager : NSObject{
+class IAPManager : NSObject {
     
     private var sharedSecret = ""
     @objc static let shared = IAPManager()
@@ -105,6 +105,24 @@ class IAPManager : NSObject{
                 self.cleanUpRefeshReceiptBlocks()
             }
             }.resume()
+    }
+    
+    /* Gets local receiptString or nil if unsuccessful */
+    func getLocalReceiptString() -> String? {
+        guard let appStoreReceiptURL = Bundle.main.appStoreReceiptURL else {
+            return nil
+        }
+        
+        guard FileManager.default.fileExists(atPath: appStoreReceiptURL.path) else {
+            return nil
+        }
+        
+        do {
+            let receiptData = try Data(contentsOf: appStoreReceiptURL)
+            return receiptData.base64EncodedString()
+        } catch {
+            return nil
+        }
     }
     
     /* It's the most simple way to get latest expiration date. Consider this code as for learning purposes. You shouldn't use current code in production apps.

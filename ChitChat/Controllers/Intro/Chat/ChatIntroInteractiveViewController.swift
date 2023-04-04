@@ -10,8 +10,8 @@ import UIKit
 
 class ChatIntroInteractiveViewController: IntroInteractiveViewController, LoadableViewController {
         
-    let chatTableViewManager: ChatTableViewManagerProtocol = ChatTableViewManager()
-    let choiceTableViewManager: ChatTableViewManagerProtocol = ChatTableViewManager()
+    let chatTableViewManager: SourcedTableViewManagerProtocol = SourcedTableViewManager()
+    let choiceTableViewManager: SourcedTableViewManagerProtocol = SourcedTableViewManager()
     
     var rootView: ChatIntroInteractiveView!
     var headerLabelSources: [LabelTableViewCellSource] = []
@@ -52,19 +52,19 @@ class ChatIntroInteractiveViewController: IntroInteractiveViewController, Loadab
         /* Append Sources */
         
         // Has starting chats, just as chatObjects maybe, in an array for the chatTableView
-        chatTableViewManager.chatRowSources.append(ChatTableViewCellSourceMaker.makeChatTableViewCellSourceArray(fromChatObjectArray: chats))
+        chatTableViewManager.sources.append(ChatTableViewCellSourceMaker.makeChatTableViewCellSourceArray(fromChatObjectArray: chats))
         
         // Insert padding in first section of chatRowSources in chatTableViewManager
-        chatTableViewManager.chatRowSources[0].insert(PaddingTableViewCellSource(padding: 40.0), at: 0)
+        chatTableViewManager.sources[0].insert(PaddingTableViewCellSource(padding: 40.0), at: 0)
         
         // Insert all objects in headerLabelSources startnig at the first row in the first section of chatRowSources in chatTableViewManager
-        chatTableViewManager.chatRowSources[0].insert(contentsOf: headerLabelSources, at: 0)
+        chatTableViewManager.sources[0].insert(contentsOf: headerLabelSources, at: 0)
         
         // Add padding in section 1 of chatRowSources in chatTableViewManager
-        chatTableViewManager.chatRowSources.append([PaddingTableViewCellSource(padding: 40.0)])
+        chatTableViewManager.sources.append([PaddingTableViewCellSource(padding: 40.0)])
         
         // Has choices, just as chatObjects too maybe, for the choiceTableView
-        choiceTableViewManager.chatRowSources.append(ChatTableViewCellSourceMaker.makeChatTableViewCellSourceArray(fromChatObjectArray: choices))
+        choiceTableViewManager.sources.append(ChatTableViewCellSourceMaker.makeChatTableViewCellSourceArray(fromChatObjectArray: choices))
         
         // Insert label source as first row in the first section of choiceTableViewManager chatRowSources
         let labelSource = LabelTableViewCellSource(
@@ -75,10 +75,10 @@ class ChatIntroInteractiveViewController: IntroInteractiveViewController, Loadab
             topSpaceConstraintConstant: 14.0,
             bottomSpaceConstraintConstant: 7.0
         )
-        choiceTableViewManager.chatRowSources[0].insert(labelSource, at: 0)
+        choiceTableViewManager.sources[0].insert(labelSource, at: 0)
         
         // Append padding source in first section of chatRowSources in choiceTableViewManager
-        choiceTableViewManager.chatRowSources[0].append(PaddingTableViewCellSource(padding: 40.0))
+        choiceTableViewManager.sources[0].append(PaddingTableViewCellSource(padding: 40.0))
         
         // TODO: - ChoiceTableViewManager to manage the selection and insertion and stuff
             // The choiceTableView has to have a delegate method for the selection index and rows need to bounce when tapped... Could this just be done in chatTableView or ChatTableViewManager? I mean there is already a tap thing right?

@@ -55,10 +55,16 @@
 		BB4A9CC529CEB8F80033BA00 /* LabelChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB4A9CC429CEB8F80033BA00 /* LabelChatCell.xib */; };
 		BB4A9CCA29CEBBCB0033BA00 /* LoadableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4A9CC929CEBBCB0033BA00 /* LoadableTableViewCell.swift */; };
 		BB4A9CCD29CECBAB0033BA00 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4A9CCC29CECBAB0033BA00 /* LabelTableViewCell.swift */; };
+		BB556B6C29D9DD4F00351563 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB556B6B29D9DD4F00351563 /* IAPHelper.swift */; };
+		BB556B6E29D9E01400351563 /* PremiumStructureUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB556B6D29D9E01400351563 /* PremiumStructureUpdater.swift */; };
+		BB556B7029D9E7A300351563 /* PremiumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB556B6F29D9E7A300351563 /* PremiumHelper.swift */; };
+		BB556B7229D9EFCD00351563 /* ChatViewController+PremiumStructureUpdaterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB556B7129D9EFCD00351563 /* ChatViewController+PremiumStructureUpdaterDelegate.swift */; };
+		BB556B7429D9F82800351563 /* ChatRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB556B7329D9F82800351563 /* ChatRequestHelper.swift */; };
+		BB556B7629DA222900351563 /* EssayViewController+PremiumStructureUpdaterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB556B7529DA222900351563 /* EssayViewController+PremiumStructureUpdaterDelegate.swift */; };
 		BB5ABC6C29CB7DAA003A1E7E /* loadingDots.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB5ABC6B29CB7DAA003A1E7E /* loadingDots.gif */; };
 		BB5E915E297CF6C800DC7467 /* CDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E915D297CF6C800DC7467 /* CDHelper.swift */; };
 		BB5E9160297DB2A300DC7467 /* HalfRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E915F297DB2A300DC7467 /* HalfRoundedView.swift */; };
-		BB5E9162297DB62100DC7467 /* EssayEssayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E9161297DB62100DC7467 /* EssayEssayTableViewCell.swift */; };
+		BB5E9162297DB62100DC7467 /* EssayBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E9161297DB62100DC7467 /* EssayBodyTableViewCell.swift */; };
 		BB5E9164297DCDED00DC7467 /* EssayEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */; };
 		BB720C90296AAB7800BEA070 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB720C8F296AAB7800BEA070 /* ChatViewController.swift */; };
 		BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = BB720C92296B1EAD00BEA070 /* MessageKit */; };
@@ -128,18 +134,39 @@
 		BBA8C2272971FA08009BDECC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBA8C2262971FA08009BDECC /* AdSupport.framework */; };
 		BBC16387296B5FF800868752 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC16386296B5FF800868752 /* GradientView.swift */; };
 		BBC16389296B601500868752 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC16388296B601500868752 /* Constants.swift */; };
-		BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638A296BCB6500868752 /* HTTPSHelper.swift */; };
 		BBC1638D296BD1F600868752 /* ChatStorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */; };
 		BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC1638E296BD98200868752 /* ChatTableViewCell.swift */; };
 		BBC84684297EFF1E002493A5 /* GlobalTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC84683297EFF1E002493A5 /* GlobalTabBar.swift */; };
 		BBC84686297F2960002493A5 /* EssayPremiumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC84685297F2960002493A5 /* EssayPremiumTableViewCell.swift */; };
+		BBC9AB0829D4DDCC00A16CE2 /* BodyEssayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBC9AB0729D4DDCC00A16CE2 /* BodyEssayCell.xib */; };
+		BBC9AB0A29D4DE3D00A16CE2 /* EntryEssayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBC9AB0929D4DE3D00A16CE2 /* EntryEssayCell.xib */; };
+		BBC9AB0C29D4DEAD00A16CE2 /* PromptEssayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBC9AB0B29D4DEAD00A16CE2 /* PromptEssayCell.xib */; };
+		BBC9AB0E29D4DFB300A16CE2 /* PremiumEssayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBC9AB0D29D4DFB300A16CE2 /* PremiumEssayCell.xib */; };
+		BBC9AB1029D4DFEC00A16CE2 /* LoadingEssayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBC9AB0F29D4DFEC00A16CE2 /* LoadingEssayCell.xib */; };
+		BBC9AB1229D4E1B400A16CE2 /* EssayViewController+UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB1129D4E1B400A16CE2 /* EssayViewController+UITextViewDelegate.swift */; };
+		BBC9AB1929D4E22700A16CE2 /* EssayViewController+EssayPremiumTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB1829D4E22700A16CE2 /* EssayViewController+EssayPremiumTableViewCellDelegate.swift */; };
+		BBC9AB1B29D4E26F00A16CE2 /* EssayViewController+EssayBodyTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB1A29D4E26F00A16CE2 /* EssayViewController+EssayBodyTableViewCellDelegate.swift */; };
+		BBC9AB1D29D4E29A00A16CE2 /* EssayViewController+EntryEssayTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB1C29D4E29A00A16CE2 /* EssayViewController+EntryEssayTableViewCellDelegate.swift */; };
+		BBC9AB1F29D4E2C000A16CE2 /* EssayViewController+EssayPromptTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB1E29D4E2C000A16CE2 /* EssayViewController+EssayPromptTableViewCellDelegate.swift */; };
+		BBC9AB2429D4EED600A16CE2 /* HTTPSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB2329D4EED600A16CE2 /* HTTPSClient.swift */; };
+		BBC9AB2F29D521CB00A16CE2 /* RegisterUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB2E29D521CB00A16CE2 /* RegisterUserResponse.swift */; };
+		BBC9AB3129D535C400A16CE2 /* GetChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB3029D535C400A16CE2 /* GetChatResponse.swift */; };
+		BBC9AB3329D5430E00A16CE2 /* ValidateAndUpdateReceiptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB3229D5430E00A16CE2 /* ValidateAndUpdateReceiptResponse.swift */; };
+		BBC9AB3629D550CB00A16CE2 /* GetRemainingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB3529D550CB00A16CE2 /* GetRemainingResponse.swift */; };
+		BBC9AB3829D552AC00A16CE2 /* GetImportantConstantsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB3729D552AC00A16CE2 /* GetImportantConstantsResponse.swift */; };
+		BBC9AB3A29D5F84300A16CE2 /* GetIAPStuffResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB3929D5F84300A16CE2 /* GetIAPStuffResponse.swift */; };
+		BBC9AB3C29D5F94100A16CE2 /* GetChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB3B29D5F94100A16CE2 /* GetChatRequest.swift */; };
+		BBC9AB3E29D5FAD100A16CE2 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB3D29D5FAD100A16CE2 /* AuthRequest.swift */; };
+		BBC9AB4029D5FB5E00A16CE2 /* ValidateAndUpdateReceiptRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB3F29D5FB5E00A16CE2 /* ValidateAndUpdateReceiptRequest.swift */; };
+		BBC9AB4229D6061900A16CE2 /* HTTPSConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB4129D6061900A16CE2 /* HTTPSConnector.swift */; };
+		BBC9AB4429D6115500A16CE2 /* BlankRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB4329D6115500A16CE2 /* BlankRequest.swift */; };
+		BBC9AB4629D61B2400A16CE2 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB4529D61B2400A16CE2 /* AuthHelper.swift */; };
+		BBC9AB4829D61B5B00A16CE2 /* ConstantsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB4729D61B5B00A16CE2 /* ConstantsHelper.swift */; };
 		BBD4D86C298063750031BBFA /* EssayLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4D86B298063750031BBFA /* EssayLoadingTableViewCell.swift */; };
 		BBD65BED2970766C001F730C /* arrowGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BEC2970766C001F730C /* arrowGif.gif */; };
 		BBD65BEE2970766C001F730C /* arrowGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BEC2970766C001F730C /* arrowGif.gif */; };
 		BBD65BEF2970766C001F730C /* arrowGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBD65BEC2970766C001F730C /* arrowGif.gif */; };
 		BBDC4E4929C80B4F00204CD7 /* ChatViewController+GADDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E4829C80B4F00204CD7 /* ChatViewController+GADDelegate.swift */; };
-		BBDC4E4B29C80BCB00204CD7 /* ChatViewController+IAPHTTPSHelperDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E4A29C80BCB00204CD7 /* ChatViewController+IAPHTTPSHelperDelegate.swift */; };
-		BBDC4E4D29C80C0600204CD7 /* ChatViewController+HTTPSHelperDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E4C29C80C0600204CD7 /* ChatViewController+HTTPSHelperDelegate.swift */; };
 		BBDC4E4F29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E4E29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift */; };
 		BBDC4E5329C80C7700204CD7 /* ChatViewController+UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E5229C80C7700204CD7 /* ChatViewController+UITextViewDelegate.swift */; };
 		BBDC4E5929C8165F00204CD7 /* UITableView+IsAtBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E5829C8165F00204CD7 /* UITableView+IsAtBottom.swift */; };
@@ -154,8 +181,8 @@
 		BBDC4ED629CA2EB000204CD7 /* UIImage+Stacked.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4ED529CA2EB000204CD7 /* UIImage+Stacked.swift */; };
 		BBDC4ED829CAB1BC00204CD7 /* ChatIntroInteractiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4ED729CAB1BC00204CD7 /* ChatIntroInteractiveViewController.swift */; };
 		BBDC4EDC29CAB30800204CD7 /* BubbleImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4EDB29CAB30800204CD7 /* BubbleImageMaker.swift */; };
-		BBDC4EDE29CAB72200204CD7 /* ChatTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4EDD29CAB72200204CD7 /* ChatTableViewManager.swift */; };
-		BBDC4EE129CABDEE00204CD7 /* ChatTableViewManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4EE029CABDEE00204CD7 /* ChatTableViewManagerProtocol.swift */; };
+		BBDC4EDE29CAB72200204CD7 /* SourcedTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4EDD29CAB72200204CD7 /* SourcedTableViewManager.swift */; };
+		BBDC4EE129CABDEE00204CD7 /* SourcedTableViewManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4EE029CABDEE00204CD7 /* SourcedTableViewManagerProtocol.swift */; };
 		BBDC4EE329CAD9E100204CD7 /* Bounceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4EE229CAD9E100204CD7 /* Bounceable.swift */; };
 		BBDC4EE529CADCF400204CD7 /* ChatViewController+ChatTableViewTouchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4EE429CADCF400204CD7 /* ChatViewController+ChatTableViewTouchDelegate.swift */; };
 		BBE878EE29864BFE001FB2AE /* Screenshot 2 Cropped.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBE878EB29864BFD001FB2AE /* Screenshot 2 Cropped.jpg */; };
@@ -239,10 +266,16 @@
 		BB4A9CC429CEB8F80033BA00 /* LabelChatCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelChatCell.xib; sourceTree = "<group>"; };
 		BB4A9CC929CEBBCB0033BA00 /* LoadableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableTableViewCell.swift; sourceTree = "<group>"; };
 		BB4A9CCC29CECBAB0033BA00 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		BB556B6B29D9DD4F00351563 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		BB556B6D29D9E01400351563 /* PremiumStructureUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumStructureUpdater.swift; sourceTree = "<group>"; };
+		BB556B6F29D9E7A300351563 /* PremiumHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumHelper.swift; sourceTree = "<group>"; };
+		BB556B7129D9EFCD00351563 /* ChatViewController+PremiumStructureUpdaterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+PremiumStructureUpdaterDelegate.swift"; sourceTree = "<group>"; };
+		BB556B7329D9F82800351563 /* ChatRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequestHelper.swift; sourceTree = "<group>"; };
+		BB556B7529DA222900351563 /* EssayViewController+PremiumStructureUpdaterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EssayViewController+PremiumStructureUpdaterDelegate.swift"; sourceTree = "<group>"; };
 		BB5ABC6B29CB7DAA003A1E7E /* loadingDots.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loadingDots.gif; sourceTree = "<group>"; };
 		BB5E915D297CF6C800DC7467 /* CDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDHelper.swift; sourceTree = "<group>"; };
 		BB5E915F297DB2A300DC7467 /* HalfRoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfRoundedView.swift; sourceTree = "<group>"; };
-		BB5E9161297DB62100DC7467 /* EssayEssayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayEssayTableViewCell.swift; sourceTree = "<group>"; };
+		BB5E9161297DB62100DC7467 /* EssayBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayBodyTableViewCell.swift; sourceTree = "<group>"; };
 		BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayEntryTableViewCell.swift; sourceTree = "<group>"; };
 		BB720C8F296AAB7800BEA070 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		BB7357E629CFFBCD00C67189 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
@@ -289,17 +322,38 @@
 		BBA8C2262971FA08009BDECC /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		BBC16386296B5FF800868752 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		BBC16388296B601500868752 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		BBC1638A296BCB6500868752 /* HTTPSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSHelper.swift; sourceTree = "<group>"; };
 		BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStorageHelper.swift; sourceTree = "<group>"; };
 		BBC1638E296BD98200868752 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		BBC84683297EFF1E002493A5 /* GlobalTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalTabBar.swift; sourceTree = "<group>"; };
 		BBC84685297F2960002493A5 /* EssayPremiumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayPremiumTableViewCell.swift; sourceTree = "<group>"; };
 		BBC84687297F70E4002493A5 /* storeKitConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = storeKitConfiguration.storekit; sourceTree = "<group>"; };
+		BBC9AB0729D4DDCC00A16CE2 /* BodyEssayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyEssayCell.xib; sourceTree = "<group>"; };
+		BBC9AB0929D4DE3D00A16CE2 /* EntryEssayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryEssayCell.xib; sourceTree = "<group>"; };
+		BBC9AB0B29D4DEAD00A16CE2 /* PromptEssayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PromptEssayCell.xib; sourceTree = "<group>"; };
+		BBC9AB0D29D4DFB300A16CE2 /* PremiumEssayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumEssayCell.xib; sourceTree = "<group>"; };
+		BBC9AB0F29D4DFEC00A16CE2 /* LoadingEssayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingEssayCell.xib; sourceTree = "<group>"; };
+		BBC9AB1129D4E1B400A16CE2 /* EssayViewController+UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EssayViewController+UITextViewDelegate.swift"; sourceTree = "<group>"; };
+		BBC9AB1829D4E22700A16CE2 /* EssayViewController+EssayPremiumTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EssayViewController+EssayPremiumTableViewCellDelegate.swift"; sourceTree = "<group>"; };
+		BBC9AB1A29D4E26F00A16CE2 /* EssayViewController+EssayBodyTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EssayViewController+EssayBodyTableViewCellDelegate.swift"; sourceTree = "<group>"; };
+		BBC9AB1C29D4E29A00A16CE2 /* EssayViewController+EntryEssayTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EssayViewController+EntryEssayTableViewCellDelegate.swift"; sourceTree = "<group>"; };
+		BBC9AB1E29D4E2C000A16CE2 /* EssayViewController+EssayPromptTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EssayViewController+EssayPromptTableViewCellDelegate.swift"; sourceTree = "<group>"; };
+		BBC9AB2329D4EED600A16CE2 /* HTTPSClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSClient.swift; sourceTree = "<group>"; };
+		BBC9AB2E29D521CB00A16CE2 /* RegisterUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserResponse.swift; sourceTree = "<group>"; };
+		BBC9AB3029D535C400A16CE2 /* GetChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatResponse.swift; sourceTree = "<group>"; };
+		BBC9AB3229D5430E00A16CE2 /* ValidateAndUpdateReceiptResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateAndUpdateReceiptResponse.swift; sourceTree = "<group>"; };
+		BBC9AB3529D550CB00A16CE2 /* GetRemainingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRemainingResponse.swift; sourceTree = "<group>"; };
+		BBC9AB3729D552AC00A16CE2 /* GetImportantConstantsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetImportantConstantsResponse.swift; sourceTree = "<group>"; };
+		BBC9AB3929D5F84300A16CE2 /* GetIAPStuffResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIAPStuffResponse.swift; sourceTree = "<group>"; };
+		BBC9AB3B29D5F94100A16CE2 /* GetChatRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatRequest.swift; sourceTree = "<group>"; };
+		BBC9AB3D29D5FAD100A16CE2 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
+		BBC9AB3F29D5FB5E00A16CE2 /* ValidateAndUpdateReceiptRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateAndUpdateReceiptRequest.swift; sourceTree = "<group>"; };
+		BBC9AB4129D6061900A16CE2 /* HTTPSConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSConnector.swift; sourceTree = "<group>"; };
+		BBC9AB4329D6115500A16CE2 /* BlankRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankRequest.swift; sourceTree = "<group>"; };
+		BBC9AB4529D61B2400A16CE2 /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
+		BBC9AB4729D61B5B00A16CE2 /* ConstantsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsHelper.swift; sourceTree = "<group>"; };
 		BBD4D86B298063750031BBFA /* EssayLoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayLoadingTableViewCell.swift; sourceTree = "<group>"; };
 		BBD65BEC2970766C001F730C /* arrowGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = arrowGif.gif; sourceTree = "<group>"; };
 		BBDC4E4829C80B4F00204CD7 /* ChatViewController+GADDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+GADDelegate.swift"; sourceTree = "<group>"; };
-		BBDC4E4A29C80BCB00204CD7 /* ChatViewController+IAPHTTPSHelperDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+IAPHTTPSHelperDelegate.swift"; sourceTree = "<group>"; };
-		BBDC4E4C29C80C0600204CD7 /* ChatViewController+HTTPSHelperDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+HTTPSHelperDelegate.swift"; sourceTree = "<group>"; };
 		BBDC4E4E29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+CameraViewControllerDelegate.swift"; sourceTree = "<group>"; };
 		BBDC4E5229C80C7700204CD7 /* ChatViewController+UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+UITextViewDelegate.swift"; sourceTree = "<group>"; };
 		BBDC4E5829C8165F00204CD7 /* UITableView+IsAtBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+IsAtBottom.swift"; sourceTree = "<group>"; };
@@ -313,8 +367,8 @@
 		BBDC4ED529CA2EB000204CD7 /* UIImage+Stacked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Stacked.swift"; sourceTree = "<group>"; };
 		BBDC4ED729CAB1BC00204CD7 /* ChatIntroInteractiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatIntroInteractiveViewController.swift; sourceTree = "<group>"; };
 		BBDC4EDB29CAB30800204CD7 /* BubbleImageMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleImageMaker.swift; sourceTree = "<group>"; };
-		BBDC4EDD29CAB72200204CD7 /* ChatTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewManager.swift; sourceTree = "<group>"; };
-		BBDC4EE029CABDEE00204CD7 /* ChatTableViewManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewManagerProtocol.swift; sourceTree = "<group>"; };
+		BBDC4EDD29CAB72200204CD7 /* SourcedTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcedTableViewManager.swift; sourceTree = "<group>"; };
+		BBDC4EE029CABDEE00204CD7 /* SourcedTableViewManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcedTableViewManagerProtocol.swift; sourceTree = "<group>"; };
 		BBDC4EE229CAD9E100204CD7 /* Bounceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bounceable.swift; sourceTree = "<group>"; };
 		BBDC4EE429CADCF400204CD7 /* ChatViewController+ChatTableViewTouchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+ChatTableViewTouchDelegate.swift"; sourceTree = "<group>"; };
 		BBE878EB29864BFD001FB2AE /* Screenshot 2 Cropped.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Screenshot 2 Cropped.jpg"; sourceTree = "<group>"; };
@@ -468,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				BB0F04A629CCFD8700C89A0A /* ChatTableView */,
+				BBC9AB0229D4DCEA00A16CE2 /* EssayTableView */,
 				BB4A9CC729CEB9F40033BA00 /* SimpleTableView */,
 			);
 			path = TableView;
@@ -490,6 +545,7 @@
 				BB0F04BE29CD271A00C89A0A /* Intro */,
 				BB0F04C129CD272900C89A0A /* Premium */,
 				BB9D6ED529CECDA300706F08 /* Simple */,
+				BBC9AB2629D4F87800A16CE2 /* WriteSmith Server */,
 				BBDC4ECC29C949EE00204CD7 /* UITableViewCellSource.swift */,
 				BB0F042B29CBF4DD00C89A0A /* PresentationSpecification.swift */,
 			);
@@ -538,6 +594,9 @@
 				BB0F04C829CD284300C89A0A /* Intro */,
 				BB0F04C729CD283D00C89A0A /* Premium */,
 				BB92A63429CD62FC002E000F /* LoadableViewController.swift */,
+				BB556B6D29D9E01400351563 /* PremiumStructureUpdater.swift */,
+				BBDC4EDD29CAB72200204CD7 /* SourcedTableViewManager.swift */,
+				BBDC4EE029CABDEE00204CD7 /* SourcedTableViewManagerProtocol.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -546,8 +605,6 @@
 			isa = PBXGroup;
 			children = (
 				BB0F04CD29CD28EC00C89A0A /* Extensions */,
-				BBDC4EDD29CAB72200204CD7 /* ChatTableViewManager.swift */,
-				BBDC4EE029CABDEE00204CD7 /* ChatTableViewManagerProtocol.swift */,
 				BB720C8F296AAB7800BEA070 /* ChatViewController.swift */,
 			);
 			path = Chat;
@@ -577,6 +634,7 @@
 		BB0F04C929CD284600C89A0A /* Essay */ = {
 			isa = PBXGroup;
 			children = (
+				BBC9AB1329D4E1BC00A16CE2 /* Extensions */,
 				BB24FB29297CAB3F00A933EA /* EssayViewController.swift */,
 			);
 			path = Essay;
@@ -605,9 +663,8 @@
 			children = (
 				BBDC4EE429CADCF400204CD7 /* ChatViewController+ChatTableViewTouchDelegate.swift */,
 				BBDC4E4829C80B4F00204CD7 /* ChatViewController+GADDelegate.swift */,
-				BBDC4E4A29C80BCB00204CD7 /* ChatViewController+IAPHTTPSHelperDelegate.swift */,
-				BBDC4E4C29C80C0600204CD7 /* ChatViewController+HTTPSHelperDelegate.swift */,
 				BBDC4E4E29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift */,
+				BB556B7129D9EFCD00351563 /* ChatViewController+PremiumStructureUpdaterDelegate.swift */,
 				BBDC4E5229C80C7700204CD7 /* ChatViewController+UITextViewDelegate.swift */,
 			);
 			path = Extensions;
@@ -661,7 +718,7 @@
 			children = (
 				BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */,
 				BB9C2F50297CB7710026A441 /* EssayPromptTableViewCell.swift */,
-				BB5E9161297DB62100DC7467 /* EssayEssayTableViewCell.swift */,
+				BB5E9161297DB62100DC7467 /* EssayBodyTableViewCell.swift */,
 				BBC84685297F2960002493A5 /* EssayPremiumTableViewCell.swift */,
 				BBD4D86B298063750031BBFA /* EssayLoadingTableViewCell.swift */,
 			);
@@ -867,6 +924,64 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BBC9AB0229D4DCEA00A16CE2 /* EssayTableView */ = {
+			isa = PBXGroup;
+			children = (
+				BBC9AB0729D4DDCC00A16CE2 /* BodyEssayCell.xib */,
+				BBC9AB0929D4DE3D00A16CE2 /* EntryEssayCell.xib */,
+				BBC9AB0F29D4DFEC00A16CE2 /* LoadingEssayCell.xib */,
+				BBC9AB0D29D4DFB300A16CE2 /* PremiumEssayCell.xib */,
+				BBC9AB0B29D4DEAD00A16CE2 /* PromptEssayCell.xib */,
+			);
+			path = EssayTableView;
+			sourceTree = "<group>";
+		};
+		BBC9AB1329D4E1BC00A16CE2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BBC9AB1129D4E1B400A16CE2 /* EssayViewController+UITextViewDelegate.swift */,
+				BBC9AB1829D4E22700A16CE2 /* EssayViewController+EssayPremiumTableViewCellDelegate.swift */,
+				BBC9AB1A29D4E26F00A16CE2 /* EssayViewController+EssayBodyTableViewCellDelegate.swift */,
+				BBC9AB1C29D4E29A00A16CE2 /* EssayViewController+EntryEssayTableViewCellDelegate.swift */,
+				BBC9AB1E29D4E2C000A16CE2 /* EssayViewController+EssayPromptTableViewCellDelegate.swift */,
+				BB556B7529DA222900351563 /* EssayViewController+PremiumStructureUpdaterDelegate.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BBC9AB2629D4F87800A16CE2 /* WriteSmith Server */ = {
+			isa = PBXGroup;
+			children = (
+				BBC9AB3429D5440800A16CE2 /* Request */,
+				BBC9AB2729D4F88C00A16CE2 /* Response */,
+			);
+			path = "WriteSmith Server";
+			sourceTree = "<group>";
+		};
+		BBC9AB2729D4F88C00A16CE2 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				BBC9AB3029D535C400A16CE2 /* GetChatResponse.swift */,
+				BBC9AB3929D5F84300A16CE2 /* GetIAPStuffResponse.swift */,
+				BBC9AB3729D552AC00A16CE2 /* GetImportantConstantsResponse.swift */,
+				BBC9AB3529D550CB00A16CE2 /* GetRemainingResponse.swift */,
+				BBC9AB2E29D521CB00A16CE2 /* RegisterUserResponse.swift */,
+				BBC9AB3229D5430E00A16CE2 /* ValidateAndUpdateReceiptResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		BBC9AB3429D5440800A16CE2 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				BBC9AB3D29D5FAD100A16CE2 /* AuthRequest.swift */,
+				BBC9AB4329D6115500A16CE2 /* BlankRequest.swift */,
+				BBC9AB3B29D5F94100A16CE2 /* GetChatRequest.swift */,
+				BBC9AB3F29D5FB5E00A16CE2 /* ValidateAndUpdateReceiptRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		BBD65BBA29705CCE001F730C /* Screenshots for Inside the App */ = {
 			isa = PBXGroup;
 			children = (
@@ -905,12 +1020,18 @@
 		BBD65BD62970650B001F730C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				BB5E915D297CF6C800DC7467 /* CDHelper.swift */,
+				BBC9AB4529D61B2400A16CE2 /* AuthHelper.swift */,
+				BBC9AB4729D61B5B00A16CE2 /* ConstantsHelper.swift */,
+				BB556B7329D9F82800351563 /* ChatRequestHelper.swift */,
 				BBC1638C296BD1F600868752 /* ChatStorageHelper.swift */,
-				BBC1638A296BCB6500868752 /* HTTPSHelper.swift */,
+				BB5E915D297CF6C800DC7467 /* CDHelper.swift */,
+				BBC9AB4129D6061900A16CE2 /* HTTPSConnector.swift */,
+				BBC9AB2329D4EED600A16CE2 /* HTTPSClient.swift */,
 				BB04B3E8296DE2BD000BEC02 /* IAPHTTPSHelper.swift */,
 				BB04B3EA296DE8FF000BEC02 /* IAPManager.swift */,
+				BB556B6F29D9E7A300351563 /* PremiumHelper.swift */,
 				BB92A62B29CD504A002E000F /* RegistryHelper.swift */,
+				BB556B6B29D9DD4F00351563 /* IAPHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1106,12 +1227,16 @@
 				BB04B3F9296E38E1000BEC02 /* Ultra Image1.jpg in Resources */,
 				BBA83E5B2977939600536FF9 /* smile.png in Resources */,
 				BBA71D4029D2276B007B0D99 /* Ultra Image Brain Text Dark.png in Resources */,
+				BBC9AB1029D4DFEC00A16CE2 /* LoadingEssayCell.xib in Resources */,
 				BBDC4EC029C8F96200204CD7 /* Assets.xcassets in Resources */,
 				BB0F043E29CC0D9900C89A0A /* LoadingChatCell.xib in Resources */,
+				BBC9AB0829D4DDCC00A16CE2 /* BodyEssayCell.xib in Resources */,
 				BB0F044F29CC1AD300C89A0A /* PaddingChatCell.xib in Resources */,
 				BB0DBAB7296AA50000D2DFB9 /* LaunchScreen.storyboard in Resources */,
+				BBC9AB0C29D4DEAD00A16CE2 /* PromptEssayCell.xib in Resources */,
 				BB0F041929CB987F00C89A0A /* ChatIntroInteractiveView.xib in Resources */,
 				BBA83E522977939600536FF9 /* mask.png in Resources */,
+				BBC9AB0E29D4DFB300A16CE2 /* PremiumEssayCell.xib in Resources */,
 				BBA83E642977939600536FF9 /* mad.png in Resources */,
 				BBA83E6F2977968900536FF9 /* pencil2.png in Resources */,
 				BB04B34629886C8D001FDA28 /* textRecognitionTest.png in Resources */,
@@ -1126,6 +1251,7 @@
 				BBA83E582977939600536FF9 /* what.png in Resources */,
 				BBA83E552977939600536FF9 /* dead.png in Resources */,
 				BB5ABC6C29CB7DAA003A1E7E /* loadingDots.gif in Resources */,
+				BBC9AB0A29D4DE3D00A16CE2 /* EntryEssayCell.xib in Resources */,
 				BBA83E6B2977968400536FF9 /* pencil1.png in Resources */,
 				BBD65BED2970766C001F730C /* arrowGif.gif in Resources */,
 				BB04B3ED296E2E7B000BEC02 /* giftGif.gif in Resources */,
@@ -1189,42 +1315,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBDC4EE129CABDEE00204CD7 /* ChatTableViewManagerProtocol.swift in Sources */,
+				BBDC4EE129CABDEE00204CD7 /* SourcedTableViewManagerProtocol.swift in Sources */,
 				BB0DBAB2296AA4FE00D2DFB9 /* ChitChat.xcdatamodeld in Sources */,
 				BB0A8C0D296CE70E0035F046 /* ShadowView.swift in Sources */,
 				BB0F041B29CBA7F900C89A0A /* IntroInteractiveNavigationController.swift in Sources */,
 				BBDC4ECD29C949EE00204CD7 /* UITableViewCellSource.swift in Sources */,
 				BB9C2F51297CB7710026A441 /* EssayPromptTableViewCell.swift in Sources */,
 				BB92A63729CD6E31002E000F /* EssayIntroInteractiveView.swift in Sources */,
+				BBC9AB1B29D4E26F00A16CE2 /* EssayViewController+EssayBodyTableViewCellDelegate.swift in Sources */,
 				BB9D6EEE29CF67C100706F08 /* ScrollViewScroller+Convenience.swift in Sources */,
-				BBDC4E4D29C80C0600204CD7 /* ChatViewController+HTTPSHelperDelegate.swift in Sources */,
-				BBC1638B296BCB6500868752 /* HTTPSHelper.swift in Sources */,
+				BBC9AB1F29D4E2C000A16CE2 /* EssayViewController+EssayPromptTableViewCellDelegate.swift in Sources */,
 				BB4A9CC329CEAEF40033BA00 /* TieredPaddingTableViewCellSource.swift in Sources */,
 				BB0F042E29CBF63700C89A0A /* PreloadedResponseChatObject.swift in Sources */,
+				BB556B7629DA222900351563 /* EssayViewController+PremiumStructureUpdaterDelegate.swift in Sources */,
 				BBDC4E4929C80B4F00204CD7 /* ChatViewController+GADDelegate.swift in Sources */,
 				BB5E9164297DCDED00DC7467 /* EssayEntryTableViewCell.swift in Sources */,
+				BBC9AB2F29D521CB00A16CE2 /* RegisterUserResponse.swift in Sources */,
 				BB329B4D298B799B00B3824D /* UIImage+Rotated.swift in Sources */,
-				BB5E9162297DB62100DC7467 /* EssayEssayTableViewCell.swift in Sources */,
+				BB5E9162297DB62100DC7467 /* EssayBodyTableViewCell.swift in Sources */,
 				BBDC4ECB29C9480D00204CD7 /* ChatTableViewCellSourceMaker.swift in Sources */,
 				BB92A62C29CD504A002E000F /* RegistryHelper.swift in Sources */,
 				BB0DBAA8296AA4FE00D2DFB9 /* AppDelegate.swift in Sources */,
+				BBC9AB3A29D5F84300A16CE2 /* GetIAPStuffResponse.swift in Sources */,
 				BB9D6EE529CF63E600706F08 /* UIScrollView+ScrollToBottom.swift in Sources */,
 				BBDC4ED629CA2EB000204CD7 /* UIImage+Stacked.swift in Sources */,
 				BB9D6ED829CECDCA00706F08 /* LabelTableViewCellSource.swift in Sources */,
 				BBDC4E5929C8165F00204CD7 /* UITableView+IsAtBottom.swift in Sources */,
 				BB92A62E29CD5106002E000F /* XIB_ReuseID.swift in Sources */,
+				BBC9AB4629D61B2400A16CE2 /* AuthHelper.swift in Sources */,
 				BB9D6EEB29CF67C100706F08 /* CollectionViewScrollOffsetProvider.swift in Sources */,
 				BBDC4EC429C9450F00204CD7 /* ChatObject.swift in Sources */,
+				BBC9AB4429D6115500A16CE2 /* BlankRequest.swift in Sources */,
 				BBC1638F296BD98200868752 /* ChatTableViewCell.swift in Sources */,
+				BBC9AB3C29D5F94100A16CE2 /* GetChatRequest.swift in Sources */,
 				BB7357E729CFFBCD00C67189 /* LoadingTableViewCell.swift in Sources */,
 				BB92A63B29CE3353002E000F /* ChatIntroInteractiveViewController+ChatTableViewTouchDelegate.swift in Sources */,
 				BB24FB26297C93CB00A933EA /* GlobalTabBarViewController.swift in Sources */,
 				BB0A7E70298715A300CB252F /* FavoritesViewController.swift in Sources */,
 				BBC16387296B5FF800868752 /* GradientView.swift in Sources */,
 				BBC84686297F2960002493A5 /* EssayPremiumTableViewCell.swift in Sources */,
+				BB556B6E29D9E01400351563 /* PremiumStructureUpdater.swift in Sources */,
 				BBA71D2429D13CEB007B0D99 /* PulsatingDotAnimator.swift in Sources */,
 				BB7BC150297527EB00D34695 /* AttributedLabel.swift in Sources */,
 				BB04B3EB296DE8FF000BEC02 /* IAPManager.swift in Sources */,
+				BBC9AB4029D5FB5E00A16CE2 /* ValidateAndUpdateReceiptRequest.swift in Sources */,
 				BB0DBAAA296AA4FE00D2DFB9 /* SceneDelegate.swift in Sources */,
 				BB7357E929D000CB00C67189 /* DotsView.swift in Sources */,
 				BB720C90296AAB7800BEA070 /* ChatViewController.swift in Sources */,
@@ -1233,9 +1367,13 @@
 				BBDC4E4F29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift in Sources */,
 				BBDC4E5B29C82CE900204CD7 /* Typewriter.swift in Sources */,
 				BBDC4ED829CAB1BC00204CD7 /* ChatIntroInteractiveViewController.swift in Sources */,
-				BBDC4EDE29CAB72200204CD7 /* ChatTableViewManager.swift in Sources */,
+				BBDC4EDE29CAB72200204CD7 /* SourcedTableViewManager.swift in Sources */,
+				BBC9AB3629D550CB00A16CE2 /* GetRemainingResponse.swift in Sources */,
 				BBA71D3C29D15DD0007B0D99 /* IntroInteractiveViewController+IntroInteractiveViewDelegate.swift in Sources */,
+				BBC9AB3E29D5FAD100A16CE2 /* AuthRequest.swift in Sources */,
 				BB0A8C0F296D05FA0035F046 /* UltraPurchaseViewController.swift in Sources */,
+				BB556B7029D9E7A300351563 /* PremiumHelper.swift in Sources */,
+				BBC9AB3329D5430E00A16CE2 /* ValidateAndUpdateReceiptResponse.swift in Sources */,
 				BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedStringBuilder.swift in Sources */,
 				BB0F043729CC083D00C89A0A /* EssayIntroInteractiveViewController.swift in Sources */,
 				BB089B082978A3F3003B8AAF /* Private.swift in Sources */,
@@ -1243,10 +1381,12 @@
 				BB24FB2A297CAB4000A933EA /* EssayViewController.swift in Sources */,
 				BB9D6EED29CF67C100706F08 /* ScrollViewScroller.swift in Sources */,
 				BB4A9CCD29CECBAB0033BA00 /* LabelTableViewCell.swift in Sources */,
+				BB556B6C29D9DD4F00351563 /* IAPHelper.swift in Sources */,
 				BBDC4E5329C80C7700204CD7 /* ChatViewController+UITextViewDelegate.swift in Sources */,
 				BB92A63129CD5F45002E000F /* ChatIntroInteractiveView.swift in Sources */,
 				BB7357EF29D00D7900C67189 /* PulsatingDotsAnimation.swift in Sources */,
 				BB0F04D029CD2AC500C89A0A /* Registry.swift in Sources */,
+				BBC9AB4829D61B5B00A16CE2 /* ConstantsHelper.swift in Sources */,
 				BB9D6EEF29CF67C100706F08 /* TableViewScrollOffsetProvider.swift in Sources */,
 				BBDC4EE529CADCF400204CD7 /* ChatViewController+ChatTableViewTouchDelegate.swift in Sources */,
 				BB04B3F1296E2EAE000BEC02 /* SettingsTableViewController.swift in Sources */,
@@ -1257,19 +1397,27 @@
 				BB04B3E9296DE2BD000BEC02 /* IAPHTTPSHelper.swift in Sources */,
 				BB0F042929CBF46C00C89A0A /* IntroInteractivePresentationSpecification.swift in Sources */,
 				BB0F043029CBF69700C89A0A /* Chat.swift in Sources */,
+				BBC9AB3129D535C400A16CE2 /* GetChatResponse.swift in Sources */,
 				BBDC4ED429C9594700204CD7 /* LoadingTableViewCellSource.swift in Sources */,
 				BB92A63529CD62FC002E000F /* LoadableViewController.swift in Sources */,
-				BBDC4E4B29C80BCB00204CD7 /* ChatViewController+IAPHTTPSHelperDelegate.swift in Sources */,
+				BB556B7229D9EFCD00351563 /* ChatViewController+PremiumStructureUpdaterDelegate.swift in Sources */,
 				BB0A8C11296D063D0035F046 /* RoundedButton.swift in Sources */,
 				BB4A9CCA29CEBBCB0033BA00 /* LoadableTableViewCell.swift in Sources */,
 				BB5E915E297CF6C800DC7467 /* CDHelper.swift in Sources */,
+				BBC9AB2429D4EED600A16CE2 /* HTTPSClient.swift in Sources */,
 				BB0A7E72298715B900CB252F /* FavoritesNavigationViewController.swift in Sources */,
+				BBC9AB1229D4E1B400A16CE2 /* EssayViewController+UITextViewDelegate.swift in Sources */,
 				BB9D6EEC29CF67C100706F08 /* ScrollViewScrollOffsetProvider.swift in Sources */,
 				BB5E9160297DB2A300DC7467 /* HalfRoundedView.swift in Sources */,
 				BB7357EB29D0027500C67189 /* DotView.swift in Sources */,
 				BBC84684297EFF1E002493A5 /* GlobalTabBar.swift in Sources */,
 				BBA83E7729779E3A00536FF9 /* FaceConstants.swift in Sources */,
 				BBDC4EC229C943B300204CD7 /* ChatTableViewCellSource.swift in Sources */,
+				BB556B7429D9F82800351563 /* ChatRequestHelper.swift in Sources */,
+				BBC9AB4229D6061900A16CE2 /* HTTPSConnector.swift in Sources */,
+				BBC9AB1929D4E22700A16CE2 /* EssayViewController+EssayPremiumTableViewCellDelegate.swift in Sources */,
+				BBC9AB3829D552AC00A16CE2 /* GetImportantConstantsResponse.swift in Sources */,
+				BBC9AB1D29D4E29A00A16CE2 /* EssayViewController+EntryEssayTableViewCellDelegate.swift in Sources */,
 				BBEE697A2988A3FB00BA7E6D /* CameraViewController.swift in Sources */,
 				BB0F045329CC1B9D00C89A0A /* PaddingTableViewCellSource.swift in Sources */,
 				BB0F04A129CCF14F00C89A0A /* IntroInteractiveViewControllerDelegate.swift in Sources */,

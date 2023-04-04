@@ -23,8 +23,8 @@ extension ChatIntroInteractiveViewController: ChatTableViewTouchDelegate {
                 
                 // If there are no more ChatTableViewCellSource objects in choiceTableView manager, animate its height going to 0 TODO: make this better and more efficient
                 var containsChatRowSource = false
-                for i in 0..<(rootView.choiceTableView.manager?.chatRowSources.count)! {
-                    let sources = rootView.choiceTableView.manager?.chatRowSources[i]
+                for i in 0..<(rootView.choiceTableView.manager?.sources.count)! {
+                    let sources = rootView.choiceTableView.manager?.sources[i]
                     for j in 0..<sources!.count {
                         if sources![j] is ChatTableViewCellSource {
                             containsChatRowSource = true

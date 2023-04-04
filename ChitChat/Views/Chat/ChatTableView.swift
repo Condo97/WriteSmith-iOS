@@ -17,7 +17,7 @@ protocol ChatTableViewTouchDelegate {
  */
 class ChatTableView: UITableView {
     
-    var manager: ChatTableViewManagerProtocol? {
+    var manager: SourcedTableViewManagerProtocol? {
         // Automatically set the delegate and datasource when manager is set!
         didSet {
             delegate = manager
@@ -32,8 +32,8 @@ class ChatTableView: UITableView {
         // This only works if dataSource is ChatTableViewManagerProtocol... Make this more universal TODO: -
         
         if manager != nil {
-            manager!.chatRowSources[section].append(source)
-            insertRows(at: [IndexPath(row: manager!.chatRowSources[section].count - 1, section: section)], with: animation)
+            manager!.sources[section].append(source)
+            insertRows(at: [IndexPath(row: manager!.sources[section].count - 1, section: section)], with: animation)
         }
     }
     
@@ -41,7 +41,7 @@ class ChatTableView: UITableView {
         //        tableView.beginUpdates()
         // This only works if dataSource is ChatTableViewManagerProtocol... Make this more universal TODO: -
         if manager != nil {
-            manager!.chatRowSources[indexPath.section].insert(source, at: indexPath.row)
+            manager!.sources[indexPath.section].insert(source, at: indexPath.row)
             insertRows(at: [indexPath], with: animation)
         }
     }
@@ -49,7 +49,7 @@ class ChatTableView: UITableView {
     func deleteManagedRow(at indexPath: IndexPath, with animation: UITableView.RowAnimation) {
         // This only works if dataSource is ChatTableViewManagerProtocol... Make this more universal TODO: -
         if manager != nil {
-            manager!.chatRowSources[indexPath.section].remove(at: indexPath.row)
+            manager!.sources[indexPath.section].remove(at: indexPath.row)
             deleteRows(at: [indexPath], with: animation)
         }
     }

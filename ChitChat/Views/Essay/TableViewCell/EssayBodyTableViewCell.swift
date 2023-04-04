@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol EssayEssayTableViewCellDelegate: AnyObject {
-    func didPressShowLess(cell: EssayEssayTableViewCell)
-    func essayTextDidChange(cell: EssayEssayTableViewCell, textView: UITextView)
-    func essayTextDidBeginEditing(cell: EssayEssayTableViewCell, textView: UITextView)
-    func essayTextDidEndEditing(cell: EssayEssayTableViewCell, textView: UITextView)
+protocol EssayBodyTableViewCellDelegate: AnyObject {
+    func didPressShowLess(cell: EssayBodyTableViewCell)
+    func essayTextDidChange(cell: EssayBodyTableViewCell, textView: UITextView)
+    func essayTextDidBeginEditing(cell: EssayBodyTableViewCell, textView: UITextView)
+    func essayTextDidEndEditing(cell: EssayBodyTableViewCell, textView: UITextView)
 }
 
-class EssayEssayTableViewCell: UITableViewCell {
+class EssayBodyTableViewCell: UITableViewCell {
 
     @IBOutlet weak var essayTextView: UITextView!
     @IBOutlet weak var essayHeightConstraint: NSLayoutConstraint!
@@ -25,7 +25,7 @@ class EssayEssayTableViewCell: UITableViewCell {
     @IBOutlet weak var showMoreSolidView: UIView!
     @IBOutlet weak var copiedLabel: UILabel!
     
-    var delegate: EssayEssayTableViewCellDelegate!
+    var delegate: EssayBodyTableViewCellDelegate!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,7 +46,7 @@ class EssayEssayTableViewCell: UITableViewCell {
     }
 }
 
-extension EssayEssayTableViewCell: UITextViewDelegate {
+extension EssayBodyTableViewCell: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         delegate.essayTextDidChange(cell: self, textView: textView)
     }
