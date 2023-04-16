@@ -8,12 +8,14 @@
 import Foundation
 
 protocol SourcedTableViewManagerProtocol: UITableViewDelegate, UITableViewDataSource {
-    var sources: [[UITableViewCellSource]] { get set }
+    var sources: [[TableViewCellSource]] { get set }
+    
+    var delegate: SourcedTableViewManagerDelegate? { get set }
 }
 
 extension SourcedTableViewManagerProtocol {
     
-    func sourceFrom(indexPath: IndexPath) -> UITableViewCellSource? {
+    func sourceFrom(indexPath: IndexPath) -> TableViewCellSource? {
         guard sources.indices.contains(indexPath.section) else {
             return nil
         }

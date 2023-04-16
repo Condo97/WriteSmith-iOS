@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIViewController" customModule="ChitChat" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="P8f-3v-ud4" id="3Td-ZF-oPV"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="P8f-3v-ud4" customClass="EssayView" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zVl-LA-69J" customClass="EssayTableView" customModule="ChitChat" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="59" width="393" height="739"/>
+                    <color key="backgroundColor" name="ChatBackgroundColor"/>
+                    <color key="sectionIndexBackgroundColor" name="ChatBackgroundColor"/>
+                    <sections/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S8q-XH-xxU" customClass="GradientView" customModule="ChitChat" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="758" width="393" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="J42-U2-Qv0"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="gradientColor">
+                            <color key="value" name="ChatBackgroundColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="reversed" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIW-RT-vBI">
+                    <rect key="frame" x="0.0" y="798" width="393" height="20"/>
+                    <color key="backgroundColor" name="ChatBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Ek8-qX-CqA"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="XAq-WU-7xT"/>
+            <color key="backgroundColor" name="ChatBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="XAq-WU-7xT" firstAttribute="bottom" secondItem="bIW-RT-vBI" secondAttribute="bottom" id="7ps-Yv-zMs"/>
+                <constraint firstItem="zVl-LA-69J" firstAttribute="top" secondItem="XAq-WU-7xT" secondAttribute="top" id="Bd9-dS-OWP"/>
+                <constraint firstItem="XAq-WU-7xT" firstAttribute="trailing" secondItem="S8q-XH-xxU" secondAttribute="trailing" id="Pmz-Ns-Cap"/>
+                <constraint firstItem="bIW-RT-vBI" firstAttribute="top" secondItem="S8q-XH-xxU" secondAttribute="bottom" id="Vqu-O3-Cpd"/>
+                <constraint firstItem="bIW-RT-vBI" firstAttribute="top" secondItem="zVl-LA-69J" secondAttribute="bottom" id="cvW-u0-r7m"/>
+                <constraint firstItem="S8q-XH-xxU" firstAttribute="leading" secondItem="XAq-WU-7xT" secondAttribute="leading" id="hZW-0D-HQf"/>
+                <constraint firstItem="XAq-WU-7xT" firstAttribute="trailing" secondItem="zVl-LA-69J" secondAttribute="trailing" id="iCk-hD-Nd2"/>
+                <constraint firstItem="bIW-RT-vBI" firstAttribute="leading" secondItem="XAq-WU-7xT" secondAttribute="leading" id="prN-fm-fVX"/>
+                <constraint firstItem="zVl-LA-69J" firstAttribute="leading" secondItem="XAq-WU-7xT" secondAttribute="leading" id="s24-71-m3b"/>
+                <constraint firstItem="XAq-WU-7xT" firstAttribute="trailing" secondItem="bIW-RT-vBI" secondAttribute="trailing" id="wcE-b5-PaH"/>
+            </constraints>
+            <connections>
+                <outlet property="bottomViewThatTableViewIsAlignedTo" destination="bIW-RT-vBI" id="emh-i6-6lC"/>
+                <outlet property="tableView" destination="zVl-LA-69J" id="mhV-rX-zlb"/>
+                <outlet property="tableViewBottomConstraint" destination="cvW-u0-r7m" id="ws6-4g-s9G"/>
+            </connections>
+            <point key="canvasLocation" x="-158" y="-1"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="ChatBackgroundColor">
+            <color red="0.91199999999999992" green="0.94999999999999996" blue="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

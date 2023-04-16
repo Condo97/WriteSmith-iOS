@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIViewController">
+            <connections>
+                <outlet property="view" destination="8La-Jf-346" id="uX8-Wf-Pui"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="8La-Jf-346" customClass="ChatView" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mvY-B7-WIM" customClass="ChatTableView" customModule="ChitChat" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="109" width="393" height="669"/>
+                    <color key="backgroundColor" name="ChatBackgroundColor"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3cF-wD-8ee" customClass="GradientView" customModule="ChitChat" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="647" width="393" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="JzN-hB-53X"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="gradientColor">
+                            <color key="value" name="ChatBackgroundColor"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZz-DX-M1g" customClass="ShadowView" customModule="ChitChat" customModuleProvider="target">
+                    <rect key="frame" x="24" y="609" width="345" height="28"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="GuB-yv-oOW"/>
+                    </constraints>
+                </view>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBV-f4-U4u">
+                    <rect key="frame" x="0.0" y="687" width="393" height="91"/>
+                    <color key="backgroundColor" name="ChatBackgroundColor"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLa-Cf-BcE" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                    <rect key="frame" x="24" y="609" width="345" height="28"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have blank chats remaining today..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aNo-zW-ZLx">
+                            <rect key="frame" x="14" y="0.0" width="211" height="28"/>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                            <color key="textColor" name="ElementTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrade Now!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Iwc-Cj-Gf8">
+                            <rect key="frame" x="234" y="0.0" width="97" height="28"/>
+                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                            <color key="textColor" name="ElementTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" name="ElementBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="aNo-zW-ZLx" firstAttribute="leading" secondItem="iLa-Cf-BcE" secondAttribute="leading" constant="14" id="95b-5Q-csx"/>
+                        <constraint firstItem="Iwc-Cj-Gf8" firstAttribute="top" secondItem="iLa-Cf-BcE" secondAttribute="top" id="Axd-LP-9aj"/>
+                        <constraint firstAttribute="trailing" secondItem="Iwc-Cj-Gf8" secondAttribute="trailing" constant="14" id="MAd-RW-FA3"/>
+                        <constraint firstAttribute="bottom" secondItem="Iwc-Cj-Gf8" secondAttribute="bottom" id="PCk-Pr-7Gw"/>
+                        <constraint firstAttribute="bottom" secondItem="aNo-zW-ZLx" secondAttribute="bottom" id="WRB-o7-kiR"/>
+                        <constraint firstItem="aNo-zW-ZLx" firstAttribute="top" secondItem="iLa-Cf-BcE" secondAttribute="top" id="pMo-cl-0cf"/>
+                        <constraint firstAttribute="height" constant="28" id="pu0-lY-ZdZ"/>
+                        <constraint firstItem="Iwc-Cj-Gf8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aNo-zW-ZLx" secondAttribute="trailing" constant="7" id="t8V-16-0zL"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r2V-Ft-M8I">
+                    <rect key="frame" x="0.0" y="637" width="393" height="141"/>
+                    <subviews>
+                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="avf-sx-U2f" customClass="ShadowView" customModule="ChitChat" customModuleProvider="target">
+                            <rect key="frame" x="73" y="14" width="296" height="42"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVb-S9-E8B" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                            <rect key="frame" x="24" y="14" width="42" height="42"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEa-7V-bCm">
+                                    <rect key="frame" x="11" y="13.333333333333336" width="20" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="yEa-7V-bCm" secondAttribute="height" multiplier="1.1:1" id="bYl-HX-qzm"/>
+                                    </constraints>
+                                    <color key="tintColor" name="AIChatBubbleColor"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" backgroundImage="camera.viewfinder" catalog="system"/>
+                                    <connections>
+                                        <action selector="cameraButton:" destination="8La-Jf-346" eventType="touchUpInside" id="hoL-KX-vFC"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" name="ElementBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="yEa-7V-bCm" firstAttribute="leading" secondItem="oVb-S9-E8B" secondAttribute="leading" constant="11" id="0X5-EN-BGH"/>
+                                <constraint firstAttribute="width" secondItem="oVb-S9-E8B" secondAttribute="height" multiplier="1:1" id="4iZ-mm-K2e"/>
+                                <constraint firstAttribute="height" constant="42" id="CJ9-tD-KxN"/>
+                                <constraint firstItem="yEa-7V-bCm" firstAttribute="centerX" secondItem="oVb-S9-E8B" secondAttribute="centerX" id="CUc-BD-f4D"/>
+                                <constraint firstItem="yEa-7V-bCm" firstAttribute="centerY" secondItem="oVb-S9-E8B" secondAttribute="centerY" id="cqh-ua-06f"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGD-WT-vj1" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                            <rect key="frame" x="73" y="14" width="296" height="42"/>
+                            <subviews>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lqH-7X-Xmk">
+                                    <rect key="frame" x="14" y="11" width="231" height="20"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" name="UserChatTextColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="SIg-Gs-NaR"/>
+                                    </constraints>
+                                    <color key="textColor" name="UserChatTextColor"/>
+                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvV-EV-3cX">
+                                    <rect key="frame" x="252" y="6.9999999999999982" width="30" height="28.666666666666664"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="rvV-EV-3cX" secondAttribute="height" multiplier="1:1" id="18u-eE-yRr"/>
+                                        <constraint firstAttribute="width" constant="30" id="Jd4-hs-hiz"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <color key="tintColor" name="UserChatTextColor"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" backgroundImage="arrow.up.circle.fill" catalog="system"/>
+                                    <connections>
+                                        <action selector="submitButton:" destination="8La-Jf-346" eventType="touchUpInside" id="us2-Z2-8tD"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" name="ElementBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="rvV-EV-3cX" firstAttribute="bottom" secondItem="lqH-7X-Xmk" secondAttribute="bottom" priority="999" id="4L1-fq-mqV"/>
+                                <constraint firstAttribute="trailing" secondItem="rvV-EV-3cX" secondAttribute="trailing" constant="14" id="8f1-Yh-s2l"/>
+                                <constraint firstAttribute="bottom" secondItem="lqH-7X-Xmk" secondAttribute="bottom" constant="11" id="8zK-kg-wOM"/>
+                                <constraint firstItem="lqH-7X-Xmk" firstAttribute="top" secondItem="fGD-WT-vj1" secondAttribute="top" constant="11" id="C6v-rk-Wtl"/>
+                                <constraint firstItem="lqH-7X-Xmk" firstAttribute="leading" secondItem="fGD-WT-vj1" secondAttribute="leading" constant="14" id="DSo-sc-9Dk"/>
+                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="240" id="WA1-Wk-vTB"/>
+                                <constraint firstItem="rvV-EV-3cX" firstAttribute="centerY" secondItem="lqH-7X-Xmk" secondAttribute="centerY" id="nk9-v5-Ofy"/>
+                                <constraint firstItem="rvV-EV-3cX" firstAttribute="leading" secondItem="lqH-7X-Xmk" secondAttribute="trailing" constant="7" id="sv7-dp-OcA"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7LK-cQ-SlI" customClass="ShadowView" customModule="ChitChat" customModuleProvider="target">
+                            <rect key="frame" x="24" y="70" width="345" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OK3-kx-yYI" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                            <rect key="frame" x="24" y="70" width="345" height="50"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cE-nV-koA" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
+                                    <color key="backgroundColor" name="AIChatBubbleColor"/>
+                                    <color key="tintColor" name="ElementBackgroundColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="Get 3 Days Free...">
+                                        <fontDescription key="titleFontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
+                                    </buttonConfiguration>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" name="ElementBackgroundColor"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="promoButton:" destination="8La-Jf-346" eventType="touchUpInside" id="5fk-wD-NJu"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="8TS-sG-luZ"/>
+                                <constraint firstItem="1cE-nV-koA" firstAttribute="top" secondItem="OK3-kx-yYI" secondAttribute="top" id="CWo-aW-Nhw"/>
+                                <constraint firstItem="1cE-nV-koA" firstAttribute="leading" secondItem="OK3-kx-yYI" secondAttribute="leading" id="HYg-3U-108"/>
+                                <constraint firstAttribute="bottom" secondItem="1cE-nV-koA" secondAttribute="bottom" id="JbW-ze-uAh"/>
+                                <constraint firstAttribute="trailing" secondItem="1cE-nV-koA" secondAttribute="trailing" id="XMl-7S-zVU"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="7LK-cQ-SlI" firstAttribute="height" secondItem="OK3-kx-yYI" secondAttribute="height" id="2VC-Fk-Fam"/>
+                        <constraint firstItem="7LK-cQ-SlI" firstAttribute="centerY" secondItem="OK3-kx-yYI" secondAttribute="centerY" id="4Qb-KK-Tf1"/>
+                        <constraint firstItem="avf-sx-U2f" firstAttribute="height" secondItem="fGD-WT-vj1" secondAttribute="height" id="Coy-rp-Hug"/>
+                        <constraint firstItem="avf-sx-U2f" firstAttribute="width" secondItem="fGD-WT-vj1" secondAttribute="width" id="EjG-AO-DrG"/>
+                        <constraint firstItem="oVb-S9-E8B" firstAttribute="leading" secondItem="r2V-Ft-M8I" secondAttribute="leading" constant="24" id="MK0-WP-6ty"/>
+                        <constraint firstAttribute="bottom" secondItem="OK3-kx-yYI" secondAttribute="bottom" constant="21" id="Ne4-PC-lBa"/>
+                        <constraint firstItem="fGD-WT-vj1" firstAttribute="leading" secondItem="oVb-S9-E8B" secondAttribute="trailing" constant="7" id="RKG-yc-cZc"/>
+                        <constraint firstItem="7LK-cQ-SlI" firstAttribute="centerX" secondItem="OK3-kx-yYI" secondAttribute="centerX" id="Su6-D9-1d2"/>
+                        <constraint firstItem="fGD-WT-vj1" firstAttribute="top" secondItem="r2V-Ft-M8I" secondAttribute="top" constant="14" id="a0N-0B-GFQ"/>
+                        <constraint firstAttribute="trailing" secondItem="OK3-kx-yYI" secondAttribute="trailing" constant="24" id="bJW-Og-GKe"/>
+                        <constraint firstItem="avf-sx-U2f" firstAttribute="centerY" secondItem="fGD-WT-vj1" secondAttribute="centerY" id="cOx-3l-SQ6"/>
+                        <constraint firstAttribute="trailing" secondItem="fGD-WT-vj1" secondAttribute="trailing" constant="24" id="jzK-s8-D6m"/>
+                        <constraint firstItem="7LK-cQ-SlI" firstAttribute="width" secondItem="OK3-kx-yYI" secondAttribute="width" id="kVT-KD-qdy"/>
+                        <constraint firstItem="OK3-kx-yYI" firstAttribute="leading" secondItem="r2V-Ft-M8I" secondAttribute="leading" constant="24" id="lVo-vf-gMu"/>
+                        <constraint firstItem="avf-sx-U2f" firstAttribute="centerX" secondItem="fGD-WT-vj1" secondAttribute="centerX" id="rHQ-Nr-KcU"/>
+                        <constraint firstItem="oVb-S9-E8B" firstAttribute="bottom" secondItem="fGD-WT-vj1" secondAttribute="bottom" id="wSB-w2-nfn"/>
+                        <constraint firstItem="OK3-kx-yYI" firstAttribute="top" secondItem="fGD-WT-vj1" secondAttribute="bottom" constant="14" id="yeT-Uc-SZH"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GR9-qZ-ec3" customClass="ShadowView" customModule="ChitChat" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="59" width="393" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odG-yy-Ta1">
+                    <rect key="frame" x="0.0" y="59" width="393" height="50"/>
+                    <color key="backgroundColor" name="ChatBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Zgt-mD-MmT"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="g9t-ux-eeJ"/>
+            <color key="backgroundColor" name="ChatBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="PZz-DX-M1g" firstAttribute="top" secondItem="iLa-Cf-BcE" secondAttribute="top" id="0qL-l0-7HJ"/>
+                <constraint firstItem="3cF-wD-8ee" firstAttribute="leading" secondItem="g9t-ux-eeJ" secondAttribute="leading" id="6ff-34-EZ7"/>
+                <constraint firstItem="GR9-qZ-ec3" firstAttribute="leading" secondItem="odG-yy-Ta1" secondAttribute="leading" id="7bO-Kq-dkL"/>
+                <constraint firstItem="hBV-f4-U4u" firstAttribute="trailing" secondItem="r2V-Ft-M8I" secondAttribute="trailing" id="8Ol-XT-lob"/>
+                <constraint firstItem="g9t-ux-eeJ" firstAttribute="trailing" secondItem="3cF-wD-8ee" secondAttribute="trailing" id="9VY-OY-qWv"/>
+                <constraint firstItem="r2V-Ft-M8I" firstAttribute="trailing" secondItem="g9t-ux-eeJ" secondAttribute="trailing" id="C8Q-pP-lS7"/>
+                <constraint firstItem="GR9-qZ-ec3" firstAttribute="top" secondItem="odG-yy-Ta1" secondAttribute="top" id="CKG-98-ICu"/>
+                <constraint firstItem="iLa-Cf-BcE" firstAttribute="leading" secondItem="g9t-ux-eeJ" secondAttribute="leading" constant="24" id="DiV-Gu-et5"/>
+                <constraint firstItem="GR9-qZ-ec3" firstAttribute="trailing" secondItem="odG-yy-Ta1" secondAttribute="trailing" id="EGZ-sG-Rsw"/>
+                <constraint firstItem="hBV-f4-U4u" firstAttribute="top" secondItem="3cF-wD-8ee" secondAttribute="bottom" id="H2s-Ax-EGw"/>
+                <constraint firstItem="odG-yy-Ta1" firstAttribute="top" secondItem="g9t-ux-eeJ" secondAttribute="top" id="KOX-LO-tsu"/>
+                <constraint firstItem="g9t-ux-eeJ" firstAttribute="trailing" secondItem="mvY-B7-WIM" secondAttribute="trailing" id="YUf-If-QZS"/>
+                <constraint firstItem="g9t-ux-eeJ" firstAttribute="trailing" secondItem="odG-yy-Ta1" secondAttribute="trailing" id="a4H-YH-T6Z"/>
+                <constraint firstItem="mvY-B7-WIM" firstAttribute="leading" secondItem="g9t-ux-eeJ" secondAttribute="leading" id="asA-mT-VTX"/>
+                <constraint firstItem="GR9-qZ-ec3" firstAttribute="bottom" secondItem="odG-yy-Ta1" secondAttribute="bottom" id="b1q-Or-4xj"/>
+                <constraint firstItem="odG-yy-Ta1" firstAttribute="leading" secondItem="g9t-ux-eeJ" secondAttribute="leading" id="gXt-NR-sr8"/>
+                <constraint firstItem="r2V-Ft-M8I" firstAttribute="bottom" secondItem="mvY-B7-WIM" secondAttribute="bottom" id="iJ1-j7-fhK"/>
+                <constraint firstItem="r2V-Ft-M8I" firstAttribute="top" secondItem="iLa-Cf-BcE" secondAttribute="bottom" id="inj-xu-OgB"/>
+                <constraint firstItem="hBV-f4-U4u" firstAttribute="bottom" secondItem="g9t-ux-eeJ" secondAttribute="bottom" constant="-40" id="jTk-kY-XTR"/>
+                <constraint firstItem="PZz-DX-M1g" firstAttribute="trailing" secondItem="iLa-Cf-BcE" secondAttribute="trailing" id="k2v-Mi-v9z"/>
+                <constraint firstItem="PZz-DX-M1g" firstAttribute="leading" secondItem="iLa-Cf-BcE" secondAttribute="leading" id="kdS-rR-2tw"/>
+                <constraint firstItem="g9t-ux-eeJ" firstAttribute="bottom" secondItem="r2V-Ft-M8I" secondAttribute="bottom" constant="40" id="pDT-Hy-8fZ"/>
+                <constraint firstItem="hBV-f4-U4u" firstAttribute="top" secondItem="r2V-Ft-M8I" secondAttribute="top" constant="50" id="pzh-li-L3y"/>
+                <constraint firstItem="r2V-Ft-M8I" firstAttribute="leading" secondItem="g9t-ux-eeJ" secondAttribute="leading" id="s3l-mW-q9X"/>
+                <constraint firstItem="mvY-B7-WIM" firstAttribute="top" secondItem="odG-yy-Ta1" secondAttribute="bottom" id="sgY-92-rQz"/>
+                <constraint firstItem="PZz-DX-M1g" firstAttribute="bottom" secondItem="iLa-Cf-BcE" secondAttribute="bottom" id="yaM-VH-gCP"/>
+                <constraint firstItem="g9t-ux-eeJ" firstAttribute="trailing" secondItem="iLa-Cf-BcE" secondAttribute="trailing" constant="24" id="yeI-Mk-PIV"/>
+                <constraint firstItem="hBV-f4-U4u" firstAttribute="leading" secondItem="r2V-Ft-M8I" secondAttribute="leading" id="zRn-is-yMh"/>
+            </constraints>
+            <connections>
+                <outlet property="adShadowView" destination="GR9-qZ-ec3" id="ekT-2c-xhW"/>
+                <outlet property="adView" destination="odG-yy-Ta1" id="3iR-Wh-rV1"/>
+                <outlet property="adViewHeightConstraint" destination="Zgt-mD-MmT" id="9Ec-Uf-aSB"/>
+                <outlet property="bottomView" destination="r2V-Ft-M8I" id="Bz6-7b-fHd"/>
+                <outlet property="cameraButton" destination="yEa-7V-bCm" id="kga-nZ-fD8"/>
+                <outlet property="cameraButtonHeightConstraint" destination="CJ9-tD-KxN" id="hhv-Lg-7qU"/>
+                <outlet property="chatsRemainingText" destination="aNo-zW-ZLx" id="2h1-yB-ByE"/>
+                <outlet property="inputBackgroundView" destination="fGD-WT-vj1" id="hnJ-BK-WW5"/>
+                <outlet property="inputTextView" destination="lqH-7X-Xmk" id="OfF-Yh-zn1"/>
+                <outlet property="promoShadowView" destination="7LK-cQ-SlI" id="lNV-KD-0zm"/>
+                <outlet property="promoView" destination="OK3-kx-yYI" id="KaF-HQ-R19"/>
+                <outlet property="promoViewHeightConstraint" destination="8TS-sG-luZ" id="qMj-AL-PGR"/>
+                <outlet property="remainingShadowView" destination="PZz-DX-M1g" id="Fo3-TE-bNQ"/>
+                <outlet property="remainingView" destination="iLa-Cf-BcE" id="wYy-cV-g7A"/>
+                <outlet property="submitButton" destination="rvV-EV-3cX" id="XKE-jj-kP2"/>
+                <outlet property="submitButtonBottomConstraint" destination="4L1-fq-mqV" id="j9S-8j-RE7"/>
+                <outlet property="submitButtonCenterYConstraint" destination="nk9-v5-Ofy" id="bFI-wL-KlO"/>
+                <outlet property="tableView" destination="mvY-B7-WIM" id="FaZ-B1-28G"/>
+                <outlet property="upgradeNowText" destination="Iwc-Cj-Gf8" id="FKO-0u-aLJ"/>
+            </connections>
+            <point key="canvasLocation" x="-25" y="20"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow.up.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="camera.viewfinder" catalog="system" width="128" height="115"/>
+        <namedColor name="AIChatBubbleColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ChatBackgroundColor">
+            <color red="0.91199999999999992" green="0.94999999999999996" blue="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ElementBackgroundColor">
+            <color red="0.0" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ElementTextColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="UserChatTextColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

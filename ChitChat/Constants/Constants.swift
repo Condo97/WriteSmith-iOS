@@ -12,20 +12,25 @@ struct Constants {
     static let bottomButtonGradient = UIColor(named: "BottomButtonGradient")!
     static let chatStorageUserDefaultKey = "chatStorageUserDefaultKey"
     static let pastChatStorageUserDefaultKey = "pastChatStorageUserDefaultKey"
-    static let authTokenKey = "authTokenKey"
+    static let userDefaultStoredAuthTokenKey = "authTokenKey"
+    
     static let userDefaultHasFinishedIntro = "hasFinishedIntro"
     static let userDefaultStoredWeeklyDisplayPrice = "weeklyDisplayPrice"
     static let userDefaultStoredMonthlyDisplayPrice = "monthlyDisplayPrice"
-//    static let userDefaultStoredAnnualDisplayPrice = "annualDisplayPrice"
+    //    static let userDefaultStoredAnnualDisplayPrice = "annualDisplayPrice"
     static let userDefaultStoredFreeEssayCap = "freeEssayCap"
     static let userDefaultStoredShareURL = "shareURL"
     
     static let userDefaultStoredPremiumLastCheckDate = "premiumLastCheckDate"
     static let userDefaultStoredIsPremium = "storedIsPremium"
     
-    static let userDefaultFirstTimeCamera = "firstTimeCamera"
+    static let userDefaultStoredGeneratedChatsRemaining = "generatedChatsRemaining"
     
-//    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
+    static let userDefaultNotFirstLaunch = "notFirstLaunch"
+    static let userDefaultNotFirstCamera = "firstTimeCamera"
+    
+    
+    //    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
     
     static let reviewFrequency = 5
     static let adFrequency = 4
@@ -36,17 +41,17 @@ struct Constants {
     static let defaultTypingUpdateLetterCountFactor = 200
     static let introTypingUpdateLetterCountFactor = 100
     
-    static let premiumCheckCooldownSeconds = 300.0
+    static let premiumCheckCooldownSeconds = 20.0
     
     static let defaultShareURL = "https://apps.apple.com/us/app/writesmith-ai-essay-helper/id1664039953"
     static let defaultFreeEssayCap = 4
     static let defaultWeeklyDisplayPrice = "5.99"
     static let defaultMonthlyDisplayPrice = "14.99"
-//    static let defaultAnnualDisplayPrice = "29.99"
+    //    static let defaultAnnualDisplayPrice = "29.99"
     
     static let weeklyProductIdentifier = "chitchatultra"
     static let monthlyProductIdentifier = "ultramonthly"
-//    static let annualProductIdentifier = "chitchatultrayearly"
+    //    static let annualProductIdentifier = "chitchatultrayearly"
     
     static let mainStoryboardName = "Main"
     static let ultraPurchaseViewStoryboardIdentifier = "ultraPurchaseView"
@@ -68,23 +73,68 @@ struct Constants {
     
     static let lengthFinishReasonAdditionalText = "...\n\nThis answer is too long for your plan. Please upgrade to Ultra for unlimited length."
     
-    static let cameraButtonNotPressedImageName = "cameraButtonNotPressed"
-    static let cameraButtonPressedImageName = "cameraButtonPressed"
-    static let cameraButtonRedo = "cameraButtonRedo"
-    
-    static let chatBottomButtonTopSelectedImageName = "chatButtonTopSelected"
-    static let chatBottomButtonTopNotSelectedImageName = "chatButtonTopNotSelected"
-    static let chatBottomButtonBottomImageName = "chatButtonBottom"
-    
     static let defaultTypingUpdateLetterCount = 1
     
-    static let loadingDotsImageName = "loadingDots"
+    struct Essay {
+        struct View {
+            struct Table {
+                struct Cell {
+                    struct Prompt {
+                        static let defaultEditedText = "Edited"
+                    }
+                }
+            }
+        }
+    }
     
-    static let shareBottomButtonNotSelectedImageName = "shareBottomButtonNotSelected"
-    static let premiumBottomButtonNotSelectedImageName = "premiumBottomButtonNotSelected"
+    struct Settings {
+        struct View {
+            struct Table {
+                struct Cell {
+                    struct UltraPurchase {
+                        static let giftImageName = Constants.ImageName.giftGif
+                        static let defaultTitleText = "Tap to Claim 3 Days Free"
+                        static let defaultTopLabelText = "WriteSmith Ultra hasn't been activated"
+                    }
+                    
+                    struct Settings {
+                        static let shareText = "Share App With Friends"
+                        static let termsOfUseText = "Terms of Use"
+                        static let privacyPolicyText = "Privacy Policy"
+                        static let restorePurchasesText = "Restore Purchases"
+                        
+                        static let shareSystemImageName = "person.3"
+                        static let termsOfUseSystemImageName = "newspaper"
+                        static let privacyPolicySystemImageName = "paperclip"
+                        static let restorePurchasesSystemImageName = "arrow.2.circlepath"
+                    }
+                }
+            }
+        }
+    }
     
-    static let ultraLightImageName = "UltraLight"
-    static let ultraDarkImageName = "UltraDark"
+    struct ImageName {
+        static let cameraButtonNotPressed = "cameraButtonNotPressed"
+        static let cameraButtonPressed = "cameraButtonPressed"
+        static let cameraButtonRedo = "cameraButtonRedo"
+        
+        static let chatBottomButtonTopSelected = "chatButtonTopSelected"
+        static let chatBottomButtonTopNotSelected = "chatButtonTopNotSelected"
+        static let chatBottomButtonBottom = "chatButtonBottom"
+        
+        static let essayBottomButtonNotSelected = "writeBottomButtonNotSelected"
+        static let essayBottomButtonSelected = "writeBottomButtonSelected"
+        
+        static let giftGif = "giftGif"
+        
+        static let loadingDotsImageName = "loadingDots"
+        
+        static let shareBottomButtonNotSelected = "shareBottomButtonNotSelected"
+        static let premiumBottomButtonNotSelected = "premiumBottomButtonNotSelected"
+        
+        static let ultraLight = "UltraLight"
+        static let ultraDark = "UltraDark"
+    }
 }
 
 struct UIConstants {

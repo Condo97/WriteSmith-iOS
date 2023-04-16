@@ -8,10 +8,20 @@
 import Foundation
 
 /***
+ Communicates table view actions
+ */
+protocol SourcedTableViewManagerDelegate {
+    func didSelectSourceAt(source: TableViewCellSource, indexPath: IndexPath)
+}
+
+/***
  Just holds the sources!
  */
 class SourcedTableViewManager: NSObject {
-    var sources: [[UITableViewCellSource]] = []
+    var sources: [[TableViewCellSource]] = []
+    
+    var delegate: SourcedTableViewManagerDelegate?
+    
 }
 
 /***
@@ -41,6 +51,14 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        
+        let source = sourceFrom(indexPath: indexPath)
+        
+        if let selectableSource = source as? SelectableTableViewCellSource {
+            selectableSource.didSelect(tableView, indexPath)
+        }
+        
+        delegate?.didSelectSourceAt(source: sourceFrom(indexPath: indexPath)!, indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -57,4 +75,27 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
         
         return tableView.rowHeight
     }
+    
+    //MARK: Non-relevant default implementations
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return ""
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+    
 }

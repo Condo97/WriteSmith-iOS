@@ -23,19 +23,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        UserDefaults.standard.set(false, forKey: Constants.userDefaultHasFinishedIntro)
         #endif
         
-        // Set initial view controller
-        if !UserDefaults.standard.bool(forKey: Constants.userDefaultHasFinishedIntro) {
-            
-            guard let windowScene = scene as? UIWindowScene else { return }
-            let window = UIWindow(windowScene: windowScene)
-            
-            let iinc = IntroInteractiveNavigationController()
-            iinc.presentationSpecification = IntroInteractivePresentationSpecification()
-            
-            window.rootViewController = iinc
-            self.window = window
-            window.makeKeyAndVisible()
-        }
+        // Set initial view controller, not using this right now
+//        if !UserDefaults.standard.bool(forKey: Constants.userDefaultHasFinishedIntro) {
+//
+//            guard let windowScene = scene as? UIWindowScene else { return }
+//            let window = UIWindow(windowScene: windowScene)
+//
+//            let iinc = IntroInteractiveNavigationController()
+//            iinc.presentationSpecification = IntroInteractivePresentationSpecification()
+//
+//            window.rootViewController = iinc
+//            self.window = window
+//            window.makeKeyAndVisible()
+//        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

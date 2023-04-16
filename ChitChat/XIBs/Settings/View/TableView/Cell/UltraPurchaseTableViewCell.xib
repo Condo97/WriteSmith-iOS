@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ultraPurchaseTableViewCell" rowHeight="119" id="BDI-y0-t4L" customClass="UltraPurchaseTableViewCell" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="374" height="119"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BDI-y0-t4L" id="VDZ-fl-veP">
+                <rect key="frame" x="0.0" y="0.0" width="374" height="119"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a2a-P6-v3Q" customClass="ShadowView" customModule="ChitChat" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="119"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <real key="value" value="7"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ezm-Nv-VPp">
+                        <rect key="frame" x="20" y="18" width="83" height="83"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="ezm-Nv-VPp" secondAttribute="height" multiplier="1:1" id="5Em-bQ-N2o"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qXB-o4-aXA">
+                        <rect key="frame" x="110" y="33" width="220" height="53"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChitChat Ultra hasn't been activated." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUn-Vm-dym">
+                                <rect key="frame" x="0.0" y="7" width="213" height="16"/>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="11"/>
+                                <color key="textColor" name="AIChatTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Claim 3 Days Free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQd-ba-ZCV">
+                                <rect key="frame" x="0.0" y="23" width="213" height="23"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                <color key="textColor" name="AIChatTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FQd-ba-ZCV" firstAttribute="leading" secondItem="qXB-o4-aXA" secondAttribute="leading" id="0hQ-9s-ufI"/>
+                            <constraint firstItem="QUn-Vm-dym" firstAttribute="leading" secondItem="qXB-o4-aXA" secondAttribute="leading" id="Fkl-i4-L8b"/>
+                            <constraint firstAttribute="trailing" secondItem="FQd-ba-ZCV" secondAttribute="trailing" constant="7" id="K4z-Nk-kDF"/>
+                            <constraint firstItem="FQd-ba-ZCV" firstAttribute="top" secondItem="QUn-Vm-dym" secondAttribute="bottom" id="LE7-qk-b9h"/>
+                            <constraint firstAttribute="bottom" secondItem="FQd-ba-ZCV" secondAttribute="bottom" constant="7" id="LTc-nm-1hj"/>
+                            <constraint firstItem="QUn-Vm-dym" firstAttribute="top" secondItem="qXB-o4-aXA" secondAttribute="top" constant="7" id="Mcc-va-hHh"/>
+                            <constraint firstAttribute="trailing" secondItem="QUn-Vm-dym" secondAttribute="trailing" constant="7" id="hYw-8S-eqL"/>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="VxL-mo-mPE">
+                        <rect key="frame" x="330" y="46.666666666666664" width="30" height="26.333333333333336"/>
+                        <color key="tintColor" name="AIChatTextColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="VxL-mo-mPE" secondAttribute="height" id="G1M-u5-Ckh"/>
+                            <constraint firstAttribute="width" constant="30" id="qjg-u5-XtR"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ezm-Nv-VPp" firstAttribute="top" secondItem="VDZ-fl-veP" secondAttribute="topMargin" constant="7" id="AiU-9O-1HR"/>
+                    <constraint firstItem="VxL-mo-mPE" firstAttribute="leading" secondItem="qXB-o4-aXA" secondAttribute="trailing" id="Fr8-jq-hR1"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ezm-Nv-VPp" secondAttribute="bottom" constant="7" id="QLF-jz-AT3"/>
+                    <constraint firstItem="VxL-mo-mPE" firstAttribute="centerY" secondItem="VDZ-fl-veP" secondAttribute="centerY" id="eIq-7z-3A6"/>
+                    <constraint firstItem="ezm-Nv-VPp" firstAttribute="leading" secondItem="VDZ-fl-veP" secondAttribute="leadingMargin" id="i1u-RO-rxa"/>
+                    <constraint firstAttribute="trailing" secondItem="VxL-mo-mPE" secondAttribute="trailing" constant="14" id="nYt-ni-gEg"/>
+                    <constraint firstItem="qXB-o4-aXA" firstAttribute="centerY" secondItem="VDZ-fl-veP" secondAttribute="centerY" id="oR6-nn-ehS"/>
+                    <constraint firstItem="qXB-o4-aXA" firstAttribute="leading" secondItem="ezm-Nv-VPp" secondAttribute="trailing" constant="7" id="z1M-Ri-zMa"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" name="AIChatBubbleColor"/>
+            <connections>
+                <outlet property="giftImageView" destination="ezm-Nv-VPp" id="K8x-CI-dXv"/>
+                <outlet property="titleLabel" destination="FQd-ba-ZCV" id="3zh-XO-Jom"/>
+                <outlet property="topTextLabel" destination="QUn-Vm-dym" id="dan-im-4Cw"/>
+            </connections>
+            <point key="canvasLocation" x="5" y="19"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
+        <namedColor name="AIChatBubbleColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AIChatTextColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

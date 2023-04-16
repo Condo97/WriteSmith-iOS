@@ -9,6 +9,6 @@ import Foundation
 
 protocol LoadableTableViewCell {
 
-    func loadWithSource(_ source: UITableViewCellSource)
+    func loadWithSource(_ source: TableViewCellSource)
     
 }
