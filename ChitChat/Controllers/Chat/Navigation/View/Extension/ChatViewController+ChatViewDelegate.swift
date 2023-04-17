@@ -20,6 +20,7 @@ extension ChatViewController: ChatViewDelegate {
         generateChat(inputText: inputText)
         
         dismissKeyboard()
+        updateTextViewSubmitButtonEnabled(textView: <#T##UITextView#>)
     }
     
     func promoButtonPressed() {

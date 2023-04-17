@@ -39,6 +39,7 @@ class ChatView: UIView {
     @IBOutlet weak var submitButtonCenterYConstraint: NSLayoutConstraint!
     
     var delegate: ChatViewDelegate?
+    var inputPlaceholder: String?
     
     @IBAction func submitButton(_ sender: Any) {
         delegate?.submitButtonPressed()
@@ -50,6 +51,42 @@ class ChatView: UIView {
     
     @IBAction func cameraButton(_ sender: Any) {
         delegate?.cameraButtonPressed()
+    }
+    
+    //MARK: InputTextField Functions
+    
+    func inputTextFieldStartWriting() {
+        if inputTextView.text == inputPlaceholder {
+            inputTextFieldSetToBlank()
+        }
+    }
+    
+    func inputTextFieldCurrentlyWriting() {
+        if inputTextView.text == "" {
+            submitButton.isEnabled = false
+        } else {
+            submitButton.isEnabled = true
+        }
+    }
+    
+    func inputTextFieldFinishedWriting() {
+        if inputTextView.text == "" {
+            inputTextFieldSetToPlaceholder()
+        }
+    }
+    
+    func inputTextField() {
+        inputTextFieldSetToPlaceholder()
+    }
+    
+    private func inputTextFieldSetToPlaceholder() {
+        inputTextView.text = inputPlaceholder
+        inputTextView.tintColor = .lightText
+    }
+    
+    private func inputTextFieldSetToBlank() {
+        inputTextView.text = ""
+        inputTextView.tintColor = Colors.elementTextColor
     }
     
 }

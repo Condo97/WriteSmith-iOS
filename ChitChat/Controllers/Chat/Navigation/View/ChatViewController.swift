@@ -13,8 +13,6 @@ class ChatViewController: HeaderViewController {
     
     let promoViewHeightConstraintConstant = 50.0
     
-    let inputPlaceholder = "Tap to start chatting..."
-    
     let chatSection = 0
     let spacerSection = 1
     
@@ -42,6 +40,7 @@ class ChatViewController: HeaderViewController {
     lazy var rootView: ChatView = {
         let view = RegistryHelper.instantiateAsView(nibName: Registry.Chat.View.chat, owner: self) as! ChatView
         view.delegate = self
+        view.inputPlaceholder = "Tap to start chatting..."
         return view
     }()
     
@@ -73,8 +72,7 @@ class ChatViewController: HeaderViewController {
         rootView.cameraButton.isEnabled = true
         
         // Setup "placeholder" for TextView
-        rootView.inputTextView.text = inputPlaceholder
-        rootView.inputTextView.textColor = .lightText
+        rootView.inputTextFieldOnSubmit()
         
         // Setup Keyboard Stuff
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -350,8 +348,10 @@ class ChatViewController: HeaderViewController {
             
             // Enable submit and camera button and show review prompt at frequency for premium users and stop soft disable, show ad at frequency, and present limit reached alert if needed for free users
             if PremiumHelper.get() {
-                self.rootView.submitButton.isEnabled = true
-                self.rootView.cameraButton.isEnabled = true
+                DispatchQueue.main.async {
+                    self.rootView.submitButton.isEnabled = true
+                    self.rootView.cameraButton.isEnabled = true
+                }
                 
                 self.showReviewAtFrequency()
             } else {
@@ -376,9 +376,11 @@ class ChatViewController: HeaderViewController {
     
     func showReviewAtFrequency() {
         if ChatStorageHelper.getAllChats().count % Constants.reviewFrequency == 0 && !firstChat {
-            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                DispatchQueue.main.async {
-                    SKStoreReviewController.requestReview(in: scene)
+            DispatchQueue.main.async {
+                if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                    DispatchQueue.main.async {
+                        SKStoreReviewController.requestReview(in: scene)
+                    }
                 }
             }
         }
@@ -540,14 +542,6 @@ class ChatViewController: HeaderViewController {
         })
         
         view.endEditing(true)
-    }
-    
-    func updateTextViewSubmitButtonEnabled(textView: UITextView) {
-        if textView.text == "" || textView.textColor == .lightText || textView.text == inputPlaceholder  {
-            rootView.submitButton.isEnabled = false
-        } else {
-            rootView.submitButton.isEnabled = true
-        }
     }
     
     func loadGAD() {
