@@ -71,7 +71,7 @@
 		BB5E9164297DCDED00DC7467 /* EssayEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */; };
 		BB720C90296AAB7800BEA070 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB720C8F296AAB7800BEA070 /* ChatViewController.swift */; };
 		BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = BB720C92296B1EAD00BEA070 /* MessageKit */; };
-		BB7357E729CFFBCD00C67189 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7357E629CFFBCD00C67189 /* LoadingTableViewCell.swift */; };
+		BB7357E729CFFBCD00C67189 /* ChatLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7357E629CFFBCD00C67189 /* ChatLoadingTableViewCell.swift */; };
 		BB7357E929D000CB00C67189 /* DotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7357E829D000CB00C67189 /* DotsView.swift */; };
 		BB7357EB29D0027500C67189 /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7357EA29D0027500C67189 /* DotView.swift */; };
 		BB7357EF29D00D7900C67189 /* PulsatingDotsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7357EE29D00D7900C67189 /* PulsatingDotsAnimation.swift */; };
@@ -217,7 +217,7 @@
 		BBC9AB4429D6115500A16CE2 /* BlankRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB4329D6115500A16CE2 /* BlankRequest.swift */; };
 		BBC9AB4629D61B2400A16CE2 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB4529D61B2400A16CE2 /* AuthHelper.swift */; };
 		BBC9AB4829D61B5B00A16CE2 /* ConstantsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9AB4729D61B5B00A16CE2 /* ConstantsHelper.swift */; };
-		BBD4D86C298063750031BBFA /* EssayLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4D86B298063750031BBFA /* EssayLoadingTableViewCell.swift */; };
+		BBD4D86C298063750031BBFA /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4D86B298063750031BBFA /* LoadingTableViewCell.swift */; };
 		BBD50C7D29EB567A00C61B86 /* UpdatingViewController+GeneratedChatsRemainingUpdaterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50C7C29EB567A00C61B86 /* UpdatingViewController+GeneratedChatsRemainingUpdaterDelegate.swift */; };
 		BBD50C7F29EB80B800C61B86 /* UpdaterBroadcaster+GeneratedChatsRemainingUpdaterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50C7E29EB80B800C61B86 /* UpdaterBroadcaster+GeneratedChatsRemainingUpdaterDelegate.swift */; };
 		BBD50C8129EC519800C61B86 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50C8029EC519800C61B86 /* IAPManager.swift */; };
@@ -237,7 +237,7 @@
 		BBDC4EC429C9450F00204CD7 /* ChatObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4EC329C9450F00204CD7 /* ChatObject.swift */; };
 		BBDC4ECB29C9480D00204CD7 /* TableViewCellSourceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4ECA29C9480D00204CD7 /* TableViewCellSourceFactory.swift */; };
 		BBDC4ECD29C949EE00204CD7 /* TableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4ECC29C949EE00204CD7 /* TableViewCellSource.swift */; };
-		BBDC4ED429C9594700204CD7 /* LoadingTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4ED329C9594700204CD7 /* LoadingTableViewCellSource.swift */; };
+		BBDC4ED429C9594700204CD7 /* LoadingChatTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4ED329C9594700204CD7 /* LoadingChatTableViewCellSource.swift */; };
 		BBDC4ED629CA2EB000204CD7 /* UIImage+Stacked.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4ED529CA2EB000204CD7 /* UIImage+Stacked.swift */; };
 		BBDC4ED829CAB1BC00204CD7 /* ChatIntroInteractiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4ED729CAB1BC00204CD7 /* ChatIntroInteractiveViewController.swift */; };
 		BBDC4EDC29CAB30800204CD7 /* BubbleImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4EDB29CAB30800204CD7 /* BubbleImageMaker.swift */; };
@@ -341,7 +341,7 @@
 		BB5E9161297DB62100DC7467 /* EssayBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayBodyTableViewCell.swift; sourceTree = "<group>"; };
 		BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayEntryTableViewCell.swift; sourceTree = "<group>"; };
 		BB720C8F296AAB7800BEA070 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		BB7357E629CFFBCD00C67189 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
+		BB7357E629CFFBCD00C67189 /* ChatLoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLoadingTableViewCell.swift; sourceTree = "<group>"; };
 		BB7357E829D000CB00C67189 /* DotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsView.swift; sourceTree = "<group>"; };
 		BB7357EA29D0027500C67189 /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
 		BB7357EE29D00D7900C67189 /* PulsatingDotsAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulsatingDotsAnimation.swift; sourceTree = "<group>"; };
@@ -466,7 +466,7 @@
 		BBC9AB4329D6115500A16CE2 /* BlankRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankRequest.swift; sourceTree = "<group>"; };
 		BBC9AB4529D61B2400A16CE2 /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
 		BBC9AB4729D61B5B00A16CE2 /* ConstantsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsHelper.swift; sourceTree = "<group>"; };
-		BBD4D86B298063750031BBFA /* EssayLoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayLoadingTableViewCell.swift; sourceTree = "<group>"; };
+		BBD4D86B298063750031BBFA /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		BBD50C7C29EB567A00C61B86 /* UpdatingViewController+GeneratedChatsRemainingUpdaterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UpdatingViewController+GeneratedChatsRemainingUpdaterDelegate.swift"; sourceTree = "<group>"; };
 		BBD50C7E29EB80B800C61B86 /* UpdaterBroadcaster+GeneratedChatsRemainingUpdaterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UpdaterBroadcaster+GeneratedChatsRemainingUpdaterDelegate.swift"; sourceTree = "<group>"; };
 		BBD50C8029EC519800C61B86 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
@@ -483,7 +483,7 @@
 		BBDC4EC329C9450F00204CD7 /* ChatObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatObject.swift; sourceTree = "<group>"; };
 		BBDC4ECA29C9480D00204CD7 /* TableViewCellSourceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellSourceFactory.swift; sourceTree = "<group>"; };
 		BBDC4ECC29C949EE00204CD7 /* TableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellSource.swift; sourceTree = "<group>"; };
-		BBDC4ED329C9594700204CD7 /* LoadingTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCellSource.swift; sourceTree = "<group>"; };
+		BBDC4ED329C9594700204CD7 /* LoadingChatTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingChatTableViewCellSource.swift; sourceTree = "<group>"; };
 		BBDC4ED529CA2EB000204CD7 /* UIImage+Stacked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Stacked.swift"; sourceTree = "<group>"; };
 		BBDC4ED729CAB1BC00204CD7 /* ChatIntroInteractiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatIntroInteractiveViewController.swift; sourceTree = "<group>"; };
 		BBDC4EDB29CAB30800204CD7 /* BubbleImageMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleImageMaker.swift; sourceTree = "<group>"; };
@@ -816,7 +816,6 @@
 			children = (
 				BB5E9161297DB62100DC7467 /* EssayBodyTableViewCell.swift */,
 				BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */,
-				BBD4D86B298063750031BBFA /* EssayLoadingTableViewCell.swift */,
 				BBC84685297F2960002493A5 /* EssayPremiumTableViewCell.swift */,
 				BB9C2F50297CB7710026A441 /* EssayPromptTableViewCell.swift */,
 			);
@@ -1136,6 +1135,7 @@
 			isa = PBXGroup;
 			children = (
 				BBC4D1F729E5C22A0006D337 /* CollectionTableViewCell.swift */,
+				BBD4D86B298063750031BBFA /* LoadingTableViewCell.swift */,
 				BB4A9CCC29CECBAB0033BA00 /* LabelTableViewCell.swift */,
 				BB8B184C29E6190600964724 /* ImageTextTableViewCell.swift */,
 			);
@@ -1273,7 +1273,7 @@
 			isa = PBXGroup;
 			children = (
 				BBDC4EC129C943B300204CD7 /* ChatTableViewCellSource.swift */,
-				BBDC4ED329C9594700204CD7 /* LoadingTableViewCellSource.swift */,
+				BBDC4ED329C9594700204CD7 /* LoadingChatTableViewCellSource.swift */,
 				BB0F045229CC1B9D00C89A0A /* PaddingTableViewCellSource.swift */,
 				BB4A9CC229CEAEF40033BA00 /* TieredPaddingTableViewCellSource.swift */,
 			);
@@ -1980,7 +1980,7 @@
 			isa = PBXGroup;
 			children = (
 				BBC1638E296BD98200868752 /* ChatTableViewCell.swift */,
-				BB7357E629CFFBCD00C67189 /* LoadingTableViewCell.swift */,
+				BB7357E629CFFBCD00C67189 /* ChatLoadingTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -2260,7 +2260,7 @@
 				BBC9AB3C29D5F94100A16CE2 /* GetChatRequest.swift in Sources */,
 				BB8B18D929EB4D6D00964724 /* GeneratedChatsRemainingUpdaterDelegate.swift in Sources */,
 				BBD50C7F29EB80B800C61B86 /* UpdaterBroadcaster+GeneratedChatsRemainingUpdaterDelegate.swift in Sources */,
-				BB7357E729CFFBCD00C67189 /* LoadingTableViewCell.swift in Sources */,
+				BB7357E729CFFBCD00C67189 /* ChatLoadingTableViewCell.swift in Sources */,
 				BB92A63B29CE3353002E000F /* ChatIntroInteractiveViewController+ChatTableViewTouchDelegate.swift in Sources */,
 				BB24FB26297C93CB00A933EA /* GlobalTabBarController.swift in Sources */,
 				BB0A7E70298715A300CB252F /* FavoritesViewController.swift in Sources */,
@@ -2304,7 +2304,7 @@
 				BB8B18A829E9084800964724 /* EssayView.swift in Sources */,
 				BB8B18C629EB00DB00964724 /* CameraViewController+CameraViewDelegate.swift in Sources */,
 				BB089B082978A3F3003B8AAF /* Private.swift in Sources */,
-				BBD4D86C298063750031BBFA /* EssayLoadingTableViewCell.swift in Sources */,
+				BBD4D86C298063750031BBFA /* LoadingTableViewCell.swift in Sources */,
 				BBD50C8129EC519800C61B86 /* IAPManager.swift in Sources */,
 				BB24FB2A297CAB4000A933EA /* EssayViewController.swift in Sources */,
 				BB9D6EED29CF67C100706F08 /* ScrollViewScroller.swift in Sources */,
@@ -2331,7 +2331,7 @@
 				BB0F043029CBF69700C89A0A /* Chat.swift in Sources */,
 				BBD50C8329EC532D00C61B86 /* LoadingState.swift in Sources */,
 				BBC9AB3129D535C400A16CE2 /* GetChatResponse.swift in Sources */,
-				BBDC4ED429C9594700204CD7 /* LoadingTableViewCellSource.swift in Sources */,
+				BBDC4ED429C9594700204CD7 /* LoadingChatTableViewCellSource.swift in Sources */,
 				BBC4D1DE29E5B08B0006D337 /* ManagedTableView.swift in Sources */,
 				BB8B187A29E75ACE00964724 /* SettingsSourcedTableViewManager.swift in Sources */,
 				BB0A8C11296D063D0035F046 /* RoundedButton.swift in Sources */,

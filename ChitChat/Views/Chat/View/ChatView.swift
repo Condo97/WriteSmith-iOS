@@ -38,11 +38,29 @@ class ChatView: UIView {
     @IBOutlet weak var submitButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var submitButtonCenterYConstraint: NSLayoutConstraint!
     
+    let SOFT_DISABLE_OPACITY = 0.4
+    
     var delegate: ChatViewDelegate?
     var inputPlaceholder: String?
     
+    var isGenerating: Bool = false
+    var softDisable: Bool = false {
+        didSet {
+            if softDisable {
+                DispatchQueue.main.async {
+                    // Soft disable set, so change button opacity to SOFT_DISABLE_OPACITY
+                    self.submitButton.alpha = self.SOFT_DISABLE_OPACITY
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.submitButton.alpha = 1.0
+                }
+            }
+        }
+    }
+    
     var isBlankWithPlaceholder: Bool {
-        inputTextView.text == inputPlaceholder 
+        inputTextView.text == inputPlaceholder
     }
     
     @IBAction func submitButton(_ sender: Any) {
@@ -59,38 +77,99 @@ class ChatView: UIView {
     
     //MARK: InputTextField Functions
     
+    /***
+     Using InputTextField Functions
+     
+     Call inputTextViewStartedWriting on textViewDidBeginEditing
+     Call inputTextViewCurrentlyWriting on textViewDidChange
+     Call inputTextViewFinishedWriting on textViewDidEndEditing
+     Call inputTextViewOnSubmit when user submits button
+     Call inputTextViewOnFinishedGenerating when the chat finishes generating
+     Call inputTextViewOnFinishedTyping when the chat finishes typing
+     
+     Check isPremium and softDisable on submit button
+        If !isPremium and !softDisable, generate the chat
+        If !isPremium and softDisable, show the alert
+        if isPremium regardless of softDisable, generate the chat
+     */
+    
     func inputTextViewStartWriting() {
+        // Set inputTextView to blank
         if inputTextView.text == inputPlaceholder {
             inputTextViewSetToBlank()
         }
     }
     
     func inputTextViewCurrentlyWriting() {
-        if inputTextView.text == "" {
-            submitButton.isEnabled = false
+        // If text field is blank or isGenerating is true, set the submit button to disabled
+        if inputTextView.text == "" || isGenerating {
+            DispatchQueue.main.async {
+                self.submitButton.isEnabled = false
+            }
         } else {
-            submitButton.isEnabled = true
+            DispatchQueue.main.async {
+                self.submitButton.isEnabled = true
+            }
         }
     }
     
     func inputTextViewFinishedWriting() {
+        // Set inputTextView to placeholder
         if inputTextView.text == "" {
             inputTextViewSetToPlaceholder()
         }
     }
     
-    func inputTextViewOnSubmit() {
+    func inputTextViewOnSubmit(isPremium: Bool) {
+        // Set inputTextView to placeholder
         inputTextViewSetToPlaceholder()
+        
+        // Set isGenerating to true
+        isGenerating = true
+        
+        // Soft disable or full disable
+        if !isPremium {
+            softDisable = true
+        } else {
+            DispatchQueue.main.async {
+                self.submitButton.isEnabled = false
+                self.cameraButton.isEnabled = false
+            }
+        }
     }
     
-    private func inputTextViewSetToPlaceholder() {
-        inputTextView.text = inputPlaceholder
-        inputTextView.tintColor = .lightText
+    func inputTextViewOnFinishedGenerating() {
+        // Set isGenerating to false
+        isGenerating = false
+        
+        DispatchQueue.main.async {
+            // If there is text in inputTextView, reenable submitButton
+            if self.inputTextView.text.count > 0 || self.inputTextView.text == self.inputPlaceholder {
+                self.submitButton.isEnabled = true
+            }
+        
+            // Set cameraButton to enabled, specifically for the hard disable from premium
+            self.cameraButton.isEnabled = true
+        }
     }
     
-    private func inputTextViewSetToBlank() {
-        inputTextView.text = ""
-        inputTextView.tintColor = Colors.elementTextColor
+    func inputTextViewOnFinishedTyping() {
+        // Set softDisable to disabled, specifically for the soft disable from free
+        softDisable = false
+    }
+    
+    func inputTextViewSetToPlaceholder() {
+        DispatchQueue.main.async {
+            self.inputTextView.text = self.inputPlaceholder
+            self.inputTextView.tintColor = .lightText
+        }
+    }
+    
+    func inputTextViewSetToBlank() {
+        DispatchQueue.main.async {
+            self.inputTextView.text = ""
+            self.inputTextView.tintColor = Colors.elementTextColor
+        }
     }
     
 }

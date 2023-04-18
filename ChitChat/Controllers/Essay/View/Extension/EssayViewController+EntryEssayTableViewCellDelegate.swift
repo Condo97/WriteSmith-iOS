@@ -11,17 +11,21 @@ extension EssayViewController: EntryEssayTableViewCellDelegate {
     
     func didPressSubmitButton(sender: Any) {
         // If not premium and there are more essays than cap give the user an upgrade prompt
-        AuthHelper.ensure(completion: {isPremium in
+        if !PremiumHelper.get() {
             if self.essays.count >= UserDefaults.standard.integer(forKey: Constants.userDefaultStoredFreeEssayCap) {
                 let ac = UIAlertController(title: "Upgrade", message: "You've reached the limit for free essays. Please upgrade to get unlimited full-length essays.\n\n(3-Day Free Trial)", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Upgrade", style: .default, handler: { action in
                     self.goToUltraPurchase()
                 }))
                 ac.addAction(UIAlertAction(title: "Close", style: .cancel))
-                self.present(ac, animated: true)
+                
+                DispatchQueue.main.async {
+                    self.present(ac, animated: true)
+                }
+                
                 return
             }
-        })
+        }
         
         guard let cell = rootView.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? EssayEntryTableViewCell else {
             print("Entry cell not visible! Not generating chat...")

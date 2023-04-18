@@ -1,35 +1,37 @@
 //
-//  LoadingChatTableViewCell.swift
+//  EssayLoadingTableViewCell.swift
 //  ChitChat
 //
-//  Created by Alex Coundouriotis on 3/26/23.
+//  Created by Alex Coundouriotis on 1/24/23.
 //
 
-import Foundation
+import UIKit
 
 class LoadingTableViewCell: UITableViewCell, LoadableTableViewCell {
-    
-    @IBOutlet weak var bubbleImageView: UIImageView!
-    @IBOutlet weak var profileImageView: UIImageView!
-    
+
     @IBOutlet weak var loadingView: UIView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
     func loadWithSource(_ source: TableViewCellSource) {
-        if let loadingSource = source as? LoadingTableViewCellSource {
+        if let loadingSource = source as? LoadingEssayTableViewCellSource {
+            // Setup loadingSource pulsatingDotsAnimation if necessary
             if loadingSource.pulsatingDotsAnimation == nil {
                 loadingSource.pulsatingDotsAnimation = PulsatingDotsAnimation.createAnimation(frame: self.loadingView.bounds, amount: 4, duration: 1, color: loadingSource.dotColor)
             }
             
             loadingSource.pulsatingDotsAnimation?.start()
             loadingView.addSubview(loadingSource.pulsatingDotsAnimation!.dotsView)
-            
         }
-        
-        // Load bubbleImageView with aiChatBubbleColor tint and loadingImageView with the loadingDots gif
-        bubbleImageView.image = BubbleImageMaker.makeBubbleImage(userSent: false)
-        bubbleImageView.tintColor = Colors.aiChatBubbleColor
-        
-        // TODO: Set profileImageView dynamically
     }
-    
+
 }

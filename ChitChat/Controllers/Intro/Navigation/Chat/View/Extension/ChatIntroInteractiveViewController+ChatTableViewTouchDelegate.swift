@@ -50,7 +50,7 @@ extension ChatIntroInteractiveViewController: ManagedTableViewTouchDelegate {
                 rootView.chatTableView.appendManagedRow(bySource: source!, inSection: section, with: .fade)
                 
                 // Insert loading row source, +1 to row count becuase of appended chat row source
-                rootView.chatTableView.insertManagedRow(bySource: LoadingTableViewCellSource(), at: IndexPath(row: rowCount + 1, section: section), with: .fade)
+                rootView.chatTableView.insertManagedRow(bySource: LoadingChatTableViewCellSource(), at: IndexPath(row: rowCount + 1, section: section), with: .fade)
                 
                 // Enable scrolling for chatTableView (disabled in IB)
                 rootView.chatTableView.isScrollEnabled = true

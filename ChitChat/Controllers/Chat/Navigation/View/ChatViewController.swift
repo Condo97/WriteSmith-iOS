@@ -24,7 +24,6 @@ class ChatViewController: HeaderViewController {
     var shouldScroll = true
     var firstChat = true
     var isProcessingChat = false
-    var submitSoftDisable = false
     var isLongPressForShare = false
     
     var remaining = -1
@@ -72,7 +71,7 @@ class ChatViewController: HeaderViewController {
         rootView.cameraButton.isEnabled = true
         
         // Setup "placeholder" for TextView
-        rootView.inputTextViewOnSubmit()
+        rootView.inputTextViewSetToPlaceholder()
         
         // Setup Keyboard Stuff
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -123,9 +122,6 @@ class ChatViewController: HeaderViewController {
             shouldShowUltra = false
             UserDefaults.standard.set(true, forKey: Constants.userDefaultNotFirstLaunch)
         }
-        
-        // Set input text to placeholder, by using same behavior as submit
-        rootView.inputTextViewOnSubmit()
         
         // Initial updates
         updateInputTextViewSize(textView: rootView.inputTextView)
@@ -289,32 +285,8 @@ class ChatViewController: HeaderViewController {
     }
     
     func generateChat(inputText: String) {
-        if submitSoftDisable {
-            let alert = UIAlertController(title: "3 Days Free", message: "Send messages faster! Try Ultra for 3 days free today.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Try Now", style: .default, handler: { action in
-                self.goToUltraPurchase()
-            }))
-            present(alert, animated: true)
-            return
-        }
-        
-        //Button is disabled until response for premium
-        //Button is enabled BUT shows a popup when pressed
-        if PremiumHelper.get() {
-            self.rootView.submitButton.isEnabled = false
-            self.rootView.cameraButton.isEnabled = false
-        } else {
-            self.softDisable()
-        }
-        
         // Add user's chat
         addChat(message: inputText, userSent: .user)
-        
-        // Set inputTextView to placeholder and update its size
-//        rootView.inputTextView.text = inputPlaceholder
-//        rootView.inputTextView.textColor = .lightText //TODO: - Make this a constant
-//        updateInputTextViewSize(textView: rootView.inputTextView)
         
         // Start processing animation
         startProcessingAnimation()
@@ -348,17 +320,13 @@ class ChatViewController: HeaderViewController {
             // Add response chat
             self.addChat(message: trimmedResponseText, userSent: .ai)
             
+            // Call inputTextViewOnFinishedGenerating to enable submitButton and cameraButton
+            self.rootView.inputTextViewOnFinishedGenerating()
+            
             // Enable submit and camera button and show review prompt at frequency for premium users and stop soft disable, show ad at frequency, and present limit reached alert if needed for free users
             if PremiumHelper.get() {
-                DispatchQueue.main.async {
-                    self.rootView.submitButton.isEnabled = true
-                    self.rootView.cameraButton.isEnabled = true
-                }
-                
                 self.showReviewAtFrequency()
             } else {
-                self.softEnable()
-                
                 self.showAdAtFrequency()
                 
                 if finishReason == FinishReasons.limit {
@@ -417,22 +385,6 @@ class ChatViewController: HeaderViewController {
         navigationController?.pushViewController(SettingsPresentationSpecification().presentableViewController, animated: true)
     }
     
-    func softEnable() {
-        DispatchQueue.main.async {
-            self.rootView.submitButton.alpha = 1.0
-            self.rootView.cameraButton.alpha = 1.0
-            self.submitSoftDisable = false
-        }
-    }
-    
-    func softDisable() {
-        DispatchQueue.main.async {
-            self.rootView.submitButton.alpha = 0.8
-            self.rootView.cameraButton.alpha = 0.8
-            self.submitSoftDisable = true
-        }
-    }
-    
     func startProcessingAnimation() {
         if !isProcessingChat {
             isProcessingChat = true
@@ -443,7 +395,7 @@ class ChatViewController: HeaderViewController {
                 let shouldScroll = self.rootView.tableView.isAtBottom(bottomHeightOffset: (self.rootView.tableView.cellForRow(at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.chatSection) - 1, section: self.chatSection))?.frame.height ?? 0) + 40.0)
                 
                 // Insert loading cell source
-                self.rootView.tableView.insertManagedRow(bySource: LoadingTableViewCellSource(), at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.chatSection), section: self.chatSection), with: .none)
+                self.rootView.tableView.insertManagedRow(bySource: LoadingChatTableViewCellSource(), at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.chatSection), section: self.chatSection), with: .none)
                 
                 // Do scroll!
                 if shouldScroll {
@@ -486,7 +438,8 @@ class ChatViewController: HeaderViewController {
                 DispatchQueue.main.async {
                     // One more tick after it is invalidated (suspended)
                     if !typewriter.isValid() {
-                        self.softEnable()
+                        // Call inputTextViewOnFinishedTyping to disable softDisable
+                        self.rootView.inputTextViewOnFinishedTyping()
                         
                         // TODO: - Is this a good place for this, especially for preimum if there are multiple chats filling?
                     }

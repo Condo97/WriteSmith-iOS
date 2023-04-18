@@ -28,14 +28,16 @@ extension EssayViewController: UITextViewDelegate {
     
     func updateInputTextViewSize(textView: UITextView) {
         if textView == (rootView.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as! EssayEntryTableViewCell).textView {
-            let size = CGSize(width: textView.frame.size.width, height: .infinity)
-            let estimatedSize = textView.sizeThatFits(size)
-            
-            textView.constraints.forEach{ (constraint) in
-                if constraint.firstAttribute == .height {
-                    self.rootView.tableView.beginUpdates()
-                    constraint.constant = estimatedSize.height
-                    self.rootView.tableView.endUpdates()
+            DispatchQueue.main.async {
+                let size = CGSize(width: textView.frame.size.width, height: .infinity)
+                let estimatedSize = textView.sizeThatFits(size)
+                
+                textView.constraints.forEach{ (constraint) in
+                    if constraint.firstAttribute == .height {
+                        self.rootView.tableView.beginUpdates()
+                        constraint.constant = estimatedSize.height
+                        self.rootView.tableView.endUpdates()
+                    }
                 }
             }
             

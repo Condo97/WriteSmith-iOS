@@ -10,6 +10,20 @@ import Foundation
 extension ChatViewController: ChatViewDelegate {
     
     func submitButtonPressed() {
+        // Immediately dismiss keyboard
+        dismissKeyboard()
+        
+        // Ensure submitSoftDisable is not pressed, otherwise show upgrade prompt and return
+        guard !rootView.softDisable else {
+            let alert = UIAlertController(title: "3 Days Free", message: "Send messages faster! Try Ultra for 3 days free today.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Try Now", style: .default, handler: { action in
+                self.goToUltraPurchase()
+            }))
+            present(alert, animated: true)
+            return
+        }
+        
         // Get input text
         let inputText = rootView.inputTextView.text!
         
@@ -19,8 +33,8 @@ extension ChatViewController: ChatViewDelegate {
         
         generateChat(inputText: inputText)
         
-        dismissKeyboard()
-        rootView.inputTextViewOnSubmit()
+        // Dismiss keyboard and call inputTextViewOnSubmit to handle softDisable or ßubmit and camera disable
+        rootView.inputTextViewOnSubmit(isPremium: PremiumHelper.get())
     }
     
     func promoButtonPressed() {
@@ -28,9 +42,10 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func cameraButtonPressed() {
+        // Immediately dismiss keyboard
         dismissKeyboard()
         
-        if submitSoftDisable {
+        guard !rootView.softDisable else {
             let alert = UIAlertController(title: "3 Days Free", message: "Scan while chats are typing! Try Ultra for 3 days free today.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Try Now", style: .default, handler: { action in

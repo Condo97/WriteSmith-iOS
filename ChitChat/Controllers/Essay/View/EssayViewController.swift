@@ -119,11 +119,11 @@ class EssayViewController: HeaderViewController {
         super.updatePremium(isPremium: isPremium)
         
         DispatchQueue.main.async {
-            // If last cell in essaySection is essayPremiumTableViewCell and is premium, then remove it, and if the last cell in essaySection is not essayPremiumTableViewCell and is not premium, then add it
+            // If last cell in essaySection is essayPremiumTableViewCell and is premium, then remove it, and if the last cell in essaySection is not essayPremiumTableViewCell but not nil and user is not premium, then add it
             let lastCell = self.rootView.tableView.cellForRow(at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.essaySection) - 1, section: self.essaySection))
             if lastCell is EssayPremiumTableViewCell && isPremium {
                 self.removePremiumCell()
-            } else if !(lastCell is EssayPremiumTableViewCell) && !isPremium {
+            } else if lastCell != nil && !(lastCell is EssayPremiumTableViewCell) && !isPremium {
                 self.insertPremiumCell()
             }
         }
