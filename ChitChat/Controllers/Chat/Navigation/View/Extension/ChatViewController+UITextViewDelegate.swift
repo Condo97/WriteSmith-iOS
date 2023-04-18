@@ -10,8 +10,11 @@ import Foundation
 extension ChatViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        updateInputTextViewSize(textView: textView)
-        updateTextViewSubmitButtonEnabled(textView: textView)
+        // If textView is inputTextView, update the size and call currently writing
+        if textView == rootView.inputTextView {
+            updateInputTextViewSize(textView: textView)
+            rootView.inputTextViewCurrentlyWriting()
+        }
     }
     
     func updateInputTextViewSize(textView: UITextView) {
@@ -51,16 +54,16 @@ extension ChatViewController: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == .lightText {
-            textView.text = ""
-            textView.textColor = Colors.elementTextColor
+        // If textView is inputTextView, then call started writing
+        if textView == rootView.inputTextView {
+            rootView.inputTextViewStartWriting()
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text == "" {
-            textView.text = inputPlaceholder
-            textView.textColor = .lightText
+        // If textView is inputTextView, then call fiished writing
+        if textView == rootView.inputTextView {
+            rootView.inputTextViewFinishedWriting()
         }
     }
 }

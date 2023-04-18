@@ -41,6 +41,10 @@ class ChatView: UIView {
     var delegate: ChatViewDelegate?
     var inputPlaceholder: String?
     
+    var isBlankWithPlaceholder: Bool {
+        inputTextView.text == inputPlaceholder 
+    }
+    
     @IBAction func submitButton(_ sender: Any) {
         delegate?.submitButtonPressed()
     }
@@ -55,13 +59,13 @@ class ChatView: UIView {
     
     //MARK: InputTextField Functions
     
-    func inputTextFieldStartWriting() {
+    func inputTextViewStartWriting() {
         if inputTextView.text == inputPlaceholder {
-            inputTextFieldSetToBlank()
+            inputTextViewSetToBlank()
         }
     }
     
-    func inputTextFieldCurrentlyWriting() {
+    func inputTextViewCurrentlyWriting() {
         if inputTextView.text == "" {
             submitButton.isEnabled = false
         } else {
@@ -69,22 +73,22 @@ class ChatView: UIView {
         }
     }
     
-    func inputTextFieldFinishedWriting() {
+    func inputTextViewFinishedWriting() {
         if inputTextView.text == "" {
-            inputTextFieldSetToPlaceholder()
+            inputTextViewSetToPlaceholder()
         }
     }
     
-    func inputTextField() {
-        inputTextFieldSetToPlaceholder()
+    func inputTextViewOnSubmit() {
+        inputTextViewSetToPlaceholder()
     }
     
-    private func inputTextFieldSetToPlaceholder() {
+    private func inputTextViewSetToPlaceholder() {
         inputTextView.text = inputPlaceholder
         inputTextView.tintColor = .lightText
     }
     
-    private func inputTextFieldSetToBlank() {
+    private func inputTextViewSetToBlank() {
         inputTextView.text = ""
         inputTextView.tintColor = Colors.elementTextColor
     }

@@ -72,7 +72,7 @@ class ChatViewController: HeaderViewController {
         rootView.cameraButton.isEnabled = true
         
         // Setup "placeholder" for TextView
-        rootView.inputTextFieldOnSubmit()
+        rootView.inputTextViewOnSubmit()
         
         // Setup Keyboard Stuff
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -124,9 +124,11 @@ class ChatViewController: HeaderViewController {
             UserDefaults.standard.set(true, forKey: Constants.userDefaultNotFirstLaunch)
         }
         
+        // Set input text to placeholder, by using same behavior as submit
+        rootView.inputTextViewOnSubmit()
+        
         // Initial updates
         updateInputTextViewSize(textView: rootView.inputTextView)
-        updateTextViewSubmitButtonEnabled(textView: rootView.inputTextView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -152,7 +154,7 @@ class ChatViewController: HeaderViewController {
         origin = self.view.frame.origin.y
         
         // Set the camera button constraints
-        if !cameraButtonHeightConstraintSet && rootView.inputTextView.text == inputPlaceholder {
+        if !cameraButtonHeightConstraintSet && rootView.isBlankWithPlaceholder {
             rootView.cameraButtonHeightConstraint.constant = rootView.inputBackgroundView.frame.height
             
             cameraButtonHeightConstraintSet = true
