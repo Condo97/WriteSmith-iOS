@@ -10,17 +10,77 @@ import Foundation
 class TableViewCellSourceFactory: Any {
     
     /***
+     Conversation Table View Cell Source
+     */
+    
+    static func makeSortedDateGroupSectionedConversationItemTableViewCellSourceArray(from conversationArray: [Conversation], indicating previousConversationToIndicate: Conversation?, delegate: ConversationItemTableViewCellDelegate) -> [[ConversationItemTableViewCellSource]] {
+        // Get sourceArray
+        var sourceArray = makeConversationItemTableViewCellSourceArray(from: conversationArray, indicating: previousConversationToIndicate, delegate: delegate)
+        
+        // Remove all where mostRecentChatDate is nil
+        sourceArray.removeAll(where: { $0.mostRecentChatDate == nil })
+        
+        // Sort sourceArray
+        sourceArray.sort(by: { $0.mostRecentChatDate! > $1.mostRecentChatDate! })
+        
+        return deriveDateGroupSectionedConversationItemTableViewCellSourceArray(from: sourceArray)
+    }
+    
+    private static func deriveDateGroupSectionedConversationItemTableViewCellSourceArray(from conversationSourceArray: [ConversationItemTableViewCellSource]) -> [[ConversationItemTableViewCellSource]] {
+        var sectionedSourceArray: [[ConversationItemTableViewCellSource]] = [[]]
+        
+        // Add expected section count
+        DateGroupRange.allCases.forEach({ body in
+            sectionedSourceArray.append([])
+        })
+        
+        print("Sectioned Source Array Count - \(sectionedSourceArray.count)")
+        
+        for conversationSource in conversationSourceArray {
+            // TODO: Handle if no chats or if mostRecentChatDate is nil, currently it just doesn't add them to the source
+            if conversationSource.conversationObject.chats!.count > 0 || conversationSource.mostRecentChatDate != nil {
+                //TODO: Make sure that it is doing the local date for the startOfDay
+                let calendar = Calendar(identifier: .gregorian)
+                let daysAgo = calendar.dateComponents([.day], from: calendar.startOfDay(for: conversationSource.mostRecentChatDate!), to: calendar.startOfDay(for: Date())).day!
+                
+                sectionedSourceArray[DateGroupRange.ordered.firstIndex(of: DateGroupRange.get(fromDaysAgo: daysAgo)!)!].append(conversationSource)
+            }
+        }
+        
+        return sectionedSourceArray
+    }
+    
+    private static func makeConversationItemTableViewCellSourceArray(from conversationArray: [Conversation], indicating previousConversationToIndicate: Conversation?, delegate: ConversationItemTableViewCellDelegate) -> [ConversationItemTableViewCellSource] {
+        var sourceArray: [ConversationItemTableViewCellSource] = []
+        
+        for obj in conversationArray {
+            // Append ConversationItemTableViewCellSource with obj as conversationObject, shouldShowPreviouslyEditedIndicatorImage as true if previousConversationToIndicate is not nil and obj is equal to previousConversationToIndicate, and delegate as the delegate
+            sourceArray.append(ConversationItemTableViewCellSource(
+                conversationObject: obj,
+                shouldShowPreviouslyEditedIndicatorImage: previousConversationToIndicate != nil && obj == previousConversationToIndicate,
+                delegate: delegate)
+            )
+        }
+        
+        return sourceArray
+    }
+    
+    
+    /***
      Chat Table View Cell Source
      */
     
-    static func makeChatTableViewCellSource(fromChatObject chatObject: Chat) -> ChatTableViewCellSource {
-        return makeChatTableViewCellSourceArray(fromChatObjectArray: [chatObject])[0]
+    static func makeChatTableViewCellSource(from chat: Chat) -> ChatTableViewCellSource {
+        ChatTableViewCellSource(chat: chat)
     }
     
-    static func makeChatTableViewCellSourceArray(fromChatObjectArray chatObjectArray: [Chat]) -> [ChatTableViewCellSource] {
+    static func makeChatTableViewCellSourceArray(from conversation: Conversation) -> [ChatTableViewCellSource] {
         var sourceArray: [ChatTableViewCellSource] = []
         
-        for obj in chatObjectArray {
+        // Get sorted chats in conversation
+        let sortedChatArray = ChatCDHelper.getOrderedChatArray(from: conversation)
+        
+        for obj in sortedChatArray {
             sourceArray.append(ChatTableViewCellSource(chat: obj, typewriter: nil))
         }
         
@@ -67,7 +127,7 @@ class TableViewCellSourceFactory: Any {
         dateFormatter.timeStyle = .short
         
         for obj in essayObjectArray {
-            sourceArray.append(PromptEssayTableViewCellSource(delegate: delegate, titleText: obj.prompt ?? "", dateText: dateFormatter.string(from: obj.date!), editedText: (obj.userEdited ? Constants.Essay.View.Table.Cell.Prompt.defaultEditedText : nil)))
+            sourceArray.append(PromptEssayTableViewCellSource(delegate: delegate, titleText: obj.prompt ?? "", dateText: dateFormatter.string(from: obj.date!), editedText: (obj.userEdited ? Constants.Essay.View.Table.Cell.Prompt.defaultEditedText : nil), shouldShowDeleteButton: PremiumHelper.get()))
         }
         
         return sourceArray

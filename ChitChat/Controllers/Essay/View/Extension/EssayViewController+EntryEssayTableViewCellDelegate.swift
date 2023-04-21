@@ -36,12 +36,10 @@ extension EssayViewController: EntryEssayTableViewCellDelegate {
             return
         }
         
-        // Disable buttons
-        disableButtons()
+        // Call textViewOnSubmit
+        cell.textViewOnSubmit(useTryPlaceholder: !PremiumHelper.get())
         
-        // Update entry to placeholder text and update size
-        cell.textView.text = UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? inputPlaceholder : freeInputPlaceholder
-        cell.textView.textColor = .lightText
+        // Update entry size
         updateInputTextViewSize(textView: cell.textView)
         
         // Insert loading section at top of essaySection
@@ -53,11 +51,12 @@ extension EssayViewController: EntryEssayTableViewCellDelegate {
             self.rootView.tableView.endUpdates()
         }
         
-        ChatRequestHelper.get(inputText: inputText, completion: {responseText, finishReason, remaining in
+        ChatRequestHelper.get(inputText: inputText, conversationID: nil, completion: {responseText, finishReason, conversationID, remaining in
+            // Call textViewOnFinishedGenerating
+            cell.textViewOnFinishedGenerating()
+            
+            //TODO: Do something with conversationID
             DispatchQueue.main.async {
-                // Enable buttons
-                self.enableButtons()
-                
                 // Delete loading section if isProcessingChat
                 if self.isProcessingChat {
                     self.isProcessingChat = false
@@ -82,7 +81,7 @@ extension EssayViewController: EntryEssayTableViewCellDelegate {
                 self.firstChat = false
                 
                 // Add essay
-                self.addEssay(prompt: inputText, essay: trimmedResponseText, userSent: .ai)
+                self.addEssay(prompt: inputText, essayText: trimmedResponseText)
                 
                 // If user is not premium, and finish reason is limit, show a limit reached alert
                 //            if !PremiumHelper.get() {

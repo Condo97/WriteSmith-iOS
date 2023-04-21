@@ -25,7 +25,9 @@ class StackedPresentingNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationBar.isHidden = true
+        
         guard let viewControllersToPresent = stackedPresentationSpecification?.stackedViewControllers else  {
             onEmpty(self)
             return

@@ -68,7 +68,26 @@ struct Registry {
                 }
             }
             
-            static let tableViewIn = "ManagedTableViewInView"
+            static let managedTableViewIn = "ManagedTableViewInView"
+            static let managedInsetGroupedTableViewIn = "ManagedInsetGroupedTableViewInView"
+        }
+    }
+    
+    struct Conversation {
+        struct View {
+            struct Table {
+                struct Cell {
+                    static let create = XIB_ReuseID(
+                        xibName: "ConversationCreateTableViewCell",
+                        reuseID: "conversationCreateTableViewCell"
+                    )
+                    
+                    static let item = XIB_ReuseID(
+                        xibName: "ConversationItemTableViewCell",
+                        reuseID: "conversationItemTableViewCell"
+                    )
+                }
+            }
         }
     }
     
@@ -120,9 +139,9 @@ struct Registry {
         }
     }
     
-    struct IntroInteractive {
+    struct Intro {
         struct View {
-            static let chat = "ChatIntroInteractiveView"
+            static let intro = "IntroView"
         }
     }
     

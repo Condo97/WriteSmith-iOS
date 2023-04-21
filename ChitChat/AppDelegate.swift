@@ -44,6 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Update imported constants
         ConstantsHelper.update()
         
+        // Do migration if necessary
+        if !UserDefaults.standard.bool(forKey: Constants.Migration.userDefaultStoredV3_5MigrationComplete) {
+            if V3_5MigrationHandler.migrate() {
+                UserDefaults.standard.set(true, forKey: Constants.Migration.userDefaultStoredV3_5MigrationComplete)
+            }
+        }
+        
         return true
     }
     

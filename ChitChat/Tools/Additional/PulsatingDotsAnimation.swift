@@ -87,19 +87,4 @@ class PulsatingDotsAnimation: Any {
         })
     }
     
-    private func startRecursiveAnimation(dotIndex: Int, increasing: Bool) {
-        if isAnimating {
-            
-//            dotsView.dots[dotIndex].layer.add(animation, forKey: nil)
-            
-//            UIView.animate(withDuration: pulseSpeed, delay: 0.0, animations: {
-//                let tempMultiplier = increasing ? 1.0 : 1.0 / self.pulseMultiplier
-//
-//                self.dotsView.resize(at: dotIndex, by: tempMultiplier)
-//            }, completion: { success in
-//                self.startRecursiveAnimation(dotIndex: dotIndex, increasing: !increasing)
-//            })
-        }
-    }
-    
 }

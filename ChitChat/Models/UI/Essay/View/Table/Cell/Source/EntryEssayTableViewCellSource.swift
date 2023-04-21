@@ -14,12 +14,12 @@ class EntryEssayTableViewCellSource: TableViewCellSource {
     var cellDelegate: EntryEssayTableViewCellDelegate
     var textViewDelegate: UITextViewDelegate
     
-    var initialText: String
+    var useTryPlaceholderWhenLoaded: Bool
     
-    init(cellDelegate: EntryEssayTableViewCellDelegate, textViewDelegate: UITextViewDelegate, initialText: String) {
+    init(cellDelegate: EntryEssayTableViewCellDelegate, textViewDelegate: UITextViewDelegate, useTryPlaceholderWhenLoaded: Bool) {
         self.cellDelegate = cellDelegate
         self.textViewDelegate = textViewDelegate
-        self.initialText = initialText
+        self.useTryPlaceholderWhenLoaded = useTryPlaceholderWhenLoaded
     }
 
 }

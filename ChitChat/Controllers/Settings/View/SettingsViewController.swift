@@ -8,7 +8,7 @@
 import UIKit
 import SafariServices
 
-class SettingsViewController: ManagedTableViewInViewController {
+class SettingsViewController: ManagedInsetGroupTableViewInViewController {
     
     let ultraPurchaseSection = 0
     let settingsSection = 1

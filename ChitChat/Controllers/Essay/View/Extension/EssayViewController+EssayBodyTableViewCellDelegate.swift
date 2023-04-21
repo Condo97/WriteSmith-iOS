@@ -71,20 +71,12 @@ extension EssayViewController: EssayBodyTableViewCellDelegate {
             return
         }
         
+        // Get current essay
         let objectIndex = row / 2
-        if essays.count - 1 - objectIndex < 0 {
-            print("Could not find essay to save edits to because it is out of range...")
-            return
-        }
+        let currentEssay = essays[objectIndex]
         
-        let currentEssay = essays[essays.count - 1 - objectIndex]
-        guard let id = currentEssay.value(forKey: Constants.coreDataEssayIDObjectName) as? Int else {
-            print("Could not cast the ID as Int when trying to save edits...")
-            return
-        }
-        
-        guard let essayText = currentEssay.value(forKey: Constants.coreDataEssayEssayObjectName) as? String else {
-            print("Could not cast the essay as String when trying to save edits...")
+        guard let essayText = currentEssay.essay else {
+            print("Essay was nil when trying to save edits...")
             return
         }
         
@@ -107,7 +99,15 @@ extension EssayViewController: EssayBodyTableViewCellDelegate {
             present(ac, animated: true)
             
         } else if shouldSaveEdit == .save {
-            CDHelper.updateEssay(id: id, newEssay: textView.text, userEdited: true, essayArray: &essays)
+            
+            // Update the currentEssay essayText
+            currentEssay.essay = textView.text
+            
+            // Save the Essay
+            guard EssayCDHelper.saveContext() else {
+                print("Could not save the essay in context...")
+                return
+            }
             
             // Show the "- Edited" text of the Prompt cell
             guard let section = rootView.tableView.indexPath(for: cell)?.section else {

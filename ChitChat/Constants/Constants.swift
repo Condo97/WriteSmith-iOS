@@ -26,6 +26,10 @@ struct Constants {
     
     static let userDefaultStoredGeneratedChatsRemaining = "generatedChatsRemaining"
     
+    static let userDefaultStoredConversationToResume = "conversationToResume"
+    
+    static let userDefaultStoredShouldNotLoadFirstConversationChats = "shouldNotLoadFirstConversationChats"
+    
     static let userDefaultNotFirstLaunch = "notFirstLaunch"
     static let userDefaultNotFirstCamera = "firstTimeCamera"
     
@@ -54,26 +58,51 @@ struct Constants {
     //    static let annualProductIdentifier = "chitchatultrayearly"
     
     static let mainStoryboardName = "Main"
+    static let mainVCStoryboardName = "mainVC"
     static let ultraPurchaseViewStoryboardIdentifier = "ultraPurchaseView"
     
     static let primaryFontName = "Avenir-Book"
+    static let primaryFontNameMedium = "Avenir-Medium"
     static let primaryFontNameBold = "Avenir-Heavy"
     static let primaryFontNameBlack = "Avenir-Black"
     static let primaryFontNameBlackOblique = "Avenir-BlackOblique"
     static let secondaryFontName = "Avenir-Heavy"
-    
-    static let coreDataEssayEntityName = "Essay"
-    static let coreDataEssayIDObjectName = "id"
-    static let coreDataEssayPromptObjectName = "prompt"
-    static let coreDataEssayEssayObjectName = "essay"
-    static let coreDataEssayDateObjectName = "date"
-    static let coreDataEssayUserEditedObjectName = "userEdited"
     
     static let copyFooterText = "Made on WriteSmith - AI Writing Author!"
     
     static let lengthFinishReasonAdditionalText = "...\n\nThis answer is too long for your plan. Please upgrade to Ultra for unlimited length."
     
     static let defaultTypingUpdateLetterCount = 1
+    
+    struct Migration {
+        static let userDefaultStoredV3_5MigrationComplete = "storedV3_5MigrationComplete"
+    }
+    
+    
+    struct Chat {
+        struct View {
+            struct Table {
+                struct Cell {
+                    
+                }
+            }
+        }
+        
+        struct Sender {
+            static let user = "user"
+            static let ai = "ai"
+        }
+    }
+    
+    struct Conversation {
+        struct View {
+            struct Table {
+                struct Cell {
+                    
+                }
+            }
+        }
+    }
     
     struct Essay {
         struct View {
@@ -85,6 +114,8 @@ struct Constants {
                 }
             }
         }
+        
+        static let entityName = "Essay"
     }
     
     struct Settings {
@@ -124,6 +155,11 @@ struct Constants {
         
         static let essayBottomButtonNotSelected = "writeBottomButtonNotSelected"
         static let essayBottomButtonSelected = "writeBottomButtonSelected"
+        
+        static let introScreenshot1 = "introScreenshot1"
+        static let introScreenshot2 = "introScreenshot2"
+        static let introScreenshot3 = "introScreenshot3"
+        static let introScreenshot4 = "introScreenshot4"
         
         static let giftGif = "giftGif"
         
@@ -195,10 +231,5 @@ struct FinishReasons {
     static let length = "length"
     static let limit = "limit"
     static let stop = "stop"
-}
-
-enum ChatSender: Codable {
-    case user
-    case ai
 }
 

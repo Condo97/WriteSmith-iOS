@@ -12,10 +12,12 @@ class ChatTableViewCellSource: TableViewCellSource {
     
     var reuseIdentifier: String {
         switch chat.sender {
-        case .user:
+        case Constants.Chat.Sender.user:
             return Registry.Chat.View.TableView.Cell.user.reuseID
-        case .ai:
+        case Constants.Chat.Sender.ai:
             return Registry.Chat.View.TableView.Cell.ai.reuseID
+        default:
+            fatalError("Invalid chat sender.")
         }
     }
     
@@ -30,4 +32,5 @@ class ChatTableViewCellSource: TableViewCellSource {
         self.chat = chat
         self.typewriter = typewriter
     }
+    
 }

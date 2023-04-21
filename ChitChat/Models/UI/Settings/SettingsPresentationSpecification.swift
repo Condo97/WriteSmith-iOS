@@ -10,7 +10,7 @@ import SafariServices
 
 class SettingsPresentationSpecification: PresentationSpecification {
     
-    var presentableViewController: UIViewController
+    var viewController: UIViewController
     
     class SettingsImages {
         lazy var share = UIImage(systemName: Constants.Settings.View.Table.Cell.Settings.shareSystemImageName)!
@@ -19,7 +19,7 @@ class SettingsPresentationSpecification: PresentationSpecification {
         lazy var restorePurchases = UIImage(systemName: Constants.Settings.View.Table.Cell.Settings.restorePurchasesSystemImageName)!
     }
     
-    let managedTableViewInViewController: SettingsViewController = SettingsViewController.Builder<SettingsViewController>(sourcedTableViewManager: SettingsSourcedTableViewManager())
+    let managedInsetGroupedTableViewInViewController: SettingsViewController = SettingsViewController.Builder<SettingsViewController>(sourcedTableViewManager: SettingsSourcedTableViewManager())
         .set(sources: [
             [
                 UltraPurchaseTableViewCellSource(didSelect: { tableView, indexPath in
@@ -121,7 +121,7 @@ class SettingsPresentationSpecification: PresentationSpecification {
         .build()
     
     init() {
-        presentableViewController = managedTableViewInViewController
+        viewController = managedInsetGroupedTableViewInViewController
     }
     
 }

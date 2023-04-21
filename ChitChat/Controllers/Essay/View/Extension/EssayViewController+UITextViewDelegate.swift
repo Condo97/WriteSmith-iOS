@@ -10,19 +10,13 @@ import Foundation
 extension EssayViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        // Is it the input text field?
-        if textView == (rootView.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as! EssayEntryTableViewCell).textView {
-            updateInputTextViewSize(textView: textView)
-            
-            // If there is text in the textView enable submitButton, otherwise disableSubmitButton
-            let entryCell = rootView.tableView.cellForRow(at: IndexPath(row: 0, section: entrySection)) as! EssayEntryTableViewCell
-            if textView.text.count != 0 {
-                entryCell.submitButton.isEnabled = true
-            } else {
-                entryCell.submitButton.isEnabled = false
+        // Get the entry cell
+        if let entryCell = rootView.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? EssayEntryTableViewCell {
+            // Is it the input text field?
+            if textView == entryCell.textView {
+                entryCell.textViewCurrentlyWriting()
+                updateInputTextViewSize(textView: textView)
             }
-            
-            return
         }
     }
     
@@ -61,14 +55,18 @@ extension EssayViewController: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView == (rootView.tableView.cellForRow(at: IndexPath(row: 0, section: entrySection)) as! EssayEntryTableViewCell).textView {
-            setPlaceholderTextViewToBlank(textView: textView)
+        if let entryCell = rootView.tableView.cellForRow(at: IndexPath(row: 0, section: entrySection)) as? EssayEntryTableViewCell {
+            if textView == entryCell.textView {
+                entryCell.textViewStartWriting()
+            }
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView == ((rootView.tableView.cellForRow(at: IndexPath(row: 0, section: entrySection))) as! EssayEntryTableViewCell).textView {
-            setBlankTextViewToPlaceholder(textView: textView)
+        if let entryCell = rootView.tableView.cellForRow(at: IndexPath(row: 0, section: entrySection)) as? EssayEntryTableViewCell {
+            if textView == entryCell.textView {
+                entryCell.textViewFinishedWriting(useTryPlaceholder: !PremiumHelper.get())
+            }
         }
     }
 }

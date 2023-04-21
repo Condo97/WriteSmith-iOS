@@ -1,14 +1,14 @@
 //
-//  TableViewInView.swift
+//  ManagedTableViewInView.swift
 //  ChitChat
 //
-//  Created by Alex Coundouriotis on 4/11/23.
+//  Created by Alex Coundouriotis on 4/19/23.
 //
 
-import UIKit
+import Foundation
 
 class ManagedTableViewInView: UIView {
-
+    
     @IBOutlet weak var tableView: ManagedTableView!
-
+    
 }
