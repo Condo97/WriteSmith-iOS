@@ -11,7 +11,7 @@ import SafariServices
 extension UltraViewController: UltraViewDelegate {
     
     func closeButtonPressed() {
-        dismiss(animated: true)
+        closeUltraView()
     }
     
     func privacyPolicyButton() {

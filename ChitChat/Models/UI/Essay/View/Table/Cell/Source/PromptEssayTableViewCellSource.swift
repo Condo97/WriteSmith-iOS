@@ -15,12 +15,14 @@ class PromptEssayTableViewCellSource: TableViewCellSource {
     var titleText: String
     var dateText: String
     var editedText: String?
+    var shouldShowDeleteButton: Bool
     
-    init(delegate: EssayPromptTableViewCellDelegate, titleText: String, dateText: String, editedText: String?) {
+    init(delegate: EssayPromptTableViewCellDelegate, titleText: String, dateText: String, editedText: String?, shouldShowDeleteButton: Bool) {
         self.delegate = delegate
         self.titleText = titleText
         self.dateText = dateText
         self.editedText = editedText
+        self.shouldShowDeleteButton = shouldShowDeleteButton
     }
     
 }

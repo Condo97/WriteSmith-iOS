@@ -19,23 +19,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         // TODO: - Remove these!
-        #if DEBUG
+//        #if DEBUG
 //        UserDefaults.standard.set(false, forKey: Constants.userDefaultHasFinishedIntro)
-        #endif
+//        #endif
         
-        // Set initial view controller, not using this right now
-//        if !UserDefaults.standard.bool(forKey: Constants.userDefaultHasFinishedIntro) {
-//
-//            guard let windowScene = scene as? UIWindowScene else { return }
-//            let window = UIWindow(windowScene: windowScene)
-//
-//            let iinc = IntroInteractiveNavigationController()
-//            iinc.presentationSpecification = IntroInteractivePresentationSpecification()
-//
-//            window.rootViewController = iinc
-//            self.window = window
-//            window.makeKeyAndVisible()
-//        }
+        // Set initial view controller
+        if !UserDefaults.standard.bool(forKey: Constants.userDefaultHasFinishedIntro) {
+
+            guard let windowScene = scene as? UIWindowScene else { return }
+            let window = UIWindow(windowScene: windowScene)
+            
+            let spnc = StackedPresentingNavigationController()
+            spnc.stackedPresentationSpecification = IntroPresentationSpecification()
+            spnc.onEmpty = { navigationController in
+                let uvc = UltraViewController()
+                uvc.fromStart = true
+                
+                navigationController.pushViewController(uvc, animated: true)
+            }
+
+            window.rootViewController = spnc
+            self.window = window
+            window.makeKeyAndVisible()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

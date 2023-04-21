@@ -30,16 +30,13 @@ class EssayViewController: HeaderViewController {
     var origin: CGFloat = 0.0
     let toolbarHeight = 48.0
     
-    let inputPlaceholder = "Enter a prompt..."
-    var freeInputPlaceholder = "Enter a prompt to try..."
-    
     var isProcessingChat = false
     var firstChat = false
     var wasPremium = false
-    var buttonsShouldEnable = true
     var tempPrompt = ""
     
     var observerID: Int?
+    
     
     lazy var rootView: EssayView = {
         let view = RegistryHelper.instantiateAsView(nibName: Registry.Essay.View.essay, owner: self) as! EssayView
@@ -72,11 +69,11 @@ class EssayViewController: HeaderViewController {
         RegistryHelper.register(Registry.Essay.View.Table.Cell.prompt, to: rootView.tableView)
         
         /* Get All Essays */
-        CDHelper.getAllEssays(essayArray: &essays)
+        essays = EssayCDHelper.getAllEssaysReversed()! //TODO: Should this be unwrapped?
         
         /* Setup Sources */
         // Set entry source and delegate
-        rootView.tableView.manager!.sources.append([EntryEssayTableViewCellSource(cellDelegate: self, textViewDelegate: self, initialText: PremiumHelper.get() ? inputPlaceholder : freeInputPlaceholder)])
+        rootView.tableView.manager!.sources.append([EntryEssayTableViewCellSource(cellDelegate: self, textViewDelegate: self, useTryPlaceholderWhenLoaded: !PremiumHelper.get())])
         
         // Set prompt and body
         rootView.tableView.manager!.sources.append(TableViewCellSourceFactory.makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObjectArray: essays, delegate: self, inputAccessoryView: toolbar)!)
@@ -85,7 +82,6 @@ class EssayViewController: HeaderViewController {
         if !PremiumHelper.get() {
             rootView.tableView.manager!.sources[essaySection].append(PremiumEssayTableViewCellSource(delegate: self))
         }
-        
         
         // Setup Keyboard Stuff
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -119,6 +115,15 @@ class EssayViewController: HeaderViewController {
         super.updatePremium(isPremium: isPremium)
         
         DispatchQueue.main.async {
+            // Set shouldShowDeleteButton to isPremium in all prompt sources
+            for sourceArray in self.sourcedTableViewManager.sources {
+                for source in sourceArray {
+                    if let promptSource = source as? PromptEssayTableViewCellSource {
+                        promptSource.shouldShowDeleteButton = isPremium
+                    }
+                }
+            }
+            
             // If last cell in essaySection is essayPremiumTableViewCell and is premium, then remove it, and if the last cell in essaySection is not essayPremiumTableViewCell but not nil and user is not premium, then add it
             let lastCell = self.rootView.tableView.cellForRow(at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.essaySection) - 1, section: self.essaySection))
             if lastCell is EssayPremiumTableViewCell && isPremium {
@@ -130,51 +135,43 @@ class EssayViewController: HeaderViewController {
         
     }
     
-    func enableButtons() {
-        // Enable submit button
-        buttonsShouldEnable = true
+    override func setLeftMenuBarItems() {
+        super.setLeftMenuBarItems()
         
-        // If cell is loaded, do it now!
-        DispatchQueue.main.async {
-            if let cell = self.rootView.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? EssayEntryTableViewCell {
-                cell.submitButton.isEnabled = true
-                cell.textView.isEditable = true
-            }
+        // Remove first left bar button item if it is there
+        if navigationItem.leftBarButtonItems!.count > 0 {
+            navigationItem.leftBarButtonItems!.remove(at: 0)
         }
-    }
-    
-    func disableButtons() {
-        // Disable submit button
-        buttonsShouldEnable = false
         
-        // If cell is loaded, do it now!
-        if let cell = rootView.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? EssayEntryTableViewCell {
-            cell.submitButton.isEnabled = false
-            cell.textView.isEditable = false
-        }
+        //TODO: Swap this with the three lines, since the gear is shown on more views
+        // Insert gear button with openSettings target as first left bar button item
+        let settingsMenuBarButtonImage = UIImage(systemName: "gear")
+        let settingsMenuBarButton = UIButton(type: .custom)
+        settingsMenuBarButton.frame = CGRect(x: 0.0, y: 0.0, width: 30.0, height: 28.0)
+        settingsMenuBarButton.tintColor = Colors.elementTextColor
+        settingsMenuBarButton.setBackgroundImage(settingsMenuBarButtonImage, for: .normal)
+        settingsMenuBarButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
+        let settingsMenuBarItem = UIBarButtonItem(customView: settingsMenuBarButton)
+        
+        navigationItem.leftBarButtonItems!.insert(settingsMenuBarItem, at: 0)
     }
     
-    func setPlaceholderTextViewToBlank(textView: UITextView) {
-        if textView.text == inputPlaceholder || textView.text == freeInputPlaceholder {
-            textView.text = ""
-            textView.textColor = Colors.userChatTextColor
-        }
-    }
-    
-    func setBlankTextViewToPlaceholder(textView: UITextView) {
-        if textView.text == "" {
-            textView.text = UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? inputPlaceholder : freeInputPlaceholder
-            textView.textColor = .lightText
-        }
+    @objc func openSettings() {
+        // Push to settings TODO: Move this!
+        navigationController?.pushViewController(SettingsPresentationSpecification().viewController, animated: true)
     }
     
     func goToUltraPurchase() {
         UltraViewControllerPresenter.presentOnTop(animated: true)
     }
     
-    func addEssay(prompt: String, essay: String, userSent: ChatSender) {
+    func addEssay(prompt: String, essayText: String) {
         // Save Essay
-        CDHelper.appendEssay(prompt: prompt, essay: essay, date: Date(), userEdited: false, essayArray: &essays, success: {
+        if let essay = EssayCDHelper.appendEssay(prompt: prompt, essayText: essayText, date: Date(), userEdited: false) {
+            
+            // Create newEssay in managed context
+            essays.append(essay)
+            
             DispatchQueue.main.async {
                 // Get source array containing prompt source and body source for the inserted essay
                 let sourceArray = TableViewCellSourceFactory.makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObject: self.essays.last!, delegate: self, inputAccessoryView: self.toolbar)!
@@ -188,7 +185,7 @@ class EssayViewController: HeaderViewController {
                 self.rootView.tableView.insertManagedRow(bySource: sourceArray[1], at: IndexPath(row: 1, section: self.essaySection), with: .automatic)
                 self.rootView.tableView.endUpdates()
             }
-        })
+        }
     }
     
     func insertPremiumCell() {
@@ -360,13 +357,11 @@ class EssayViewController: HeaderViewController {
 //    }
     
     @objc func cancelEditingPressed() {
-        //TODO: - Cancel editing
         shouldSaveEdit = .cancel
         dismissKeyboard()
     }
     
     @objc func saveEditingPressed(sender: Any) {
-        //TODO: - Save editing
         shouldSaveEdit = .save
         dismissKeyboard()
     }

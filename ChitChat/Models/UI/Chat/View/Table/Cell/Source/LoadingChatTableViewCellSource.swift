@@ -5,7 +5,8 @@
 //  Created by Alex Coundouriotis on 3/20/23.
 //
 
-class LoadingChatTableViewCellSource: TableViewCellSource {
+class LoadingChatTableViewCellSource: LoadingTableViewCellSource {
+    
     var reuseIdentifier: String = Registry.Chat.View.TableView.Cell.loading.reuseID
     
     var pulsatingDotsAnimation: PulsatingDotsAnimation?
@@ -18,4 +19,9 @@ class LoadingChatTableViewCellSource: TableViewCellSource {
     init(dotColor: UIColor) {
         self.dotColor = dotColor
     }
+    
+    func setPulsatingDotsAnimation(_ pulsatingDotsAnimation: PulsatingDotsAnimation) {
+        self.pulsatingDotsAnimation = pulsatingDotsAnimation
+    }
+    
 }

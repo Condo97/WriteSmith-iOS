@@ -9,6 +9,6 @@ import Foundation
 
 protocol PresentationSpecification {
     
-    var presentableViewController: UIViewController { get set }
+    var viewController: UIViewController { get set }
     
 }

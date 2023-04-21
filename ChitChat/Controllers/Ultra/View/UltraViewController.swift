@@ -164,6 +164,18 @@ class UltraViewController: UpdatingViewController {
         }
     }
     
+    func closeUltraView() {
+        // If from start, instantiate GlobalTabBarController as mainVC from storyboard, otherwise just dismiss
+        if fromStart {
+            let mainVC = UIStoryboard.init(name: Constants.mainStoryboardName, bundle: Bundle.main).instantiateViewController(withIdentifier: Constants.mainVCStoryboardName) as! GlobalTabBarController
+            mainVC.modalPresentationStyle = .fullScreen
+            mainVC.fromStart = true
+            present(mainVC, animated: true)
+        } else {
+            dismiss(animated: true)
+        }
+    }
+    
     func disableButtons() {
         DispatchQueue.main.async {
             self.rootView.closeButton.isEnabled = false
@@ -314,7 +326,7 @@ extension UltraViewController: IAPHTTPSHelperDelegate {
                             (PremiumUpdater.sharedBroadcaster.updater as! PremiumUpdater).validateAndUpdateReceiptWithFullUpdate(receiptString: receiptData.base64EncodedString(), completion: {
                                 DispatchQueue.main.async {
                                     self.enableButtons()
-                                    self.dismiss(animated: true)
+                                    self.closeUltraView()
                                 }
                             })
                         }
@@ -332,7 +344,6 @@ extension UltraViewController: IAPHTTPSHelperDelegate {
             }
         }
     }
-    
     
     
     private func showIAPErrorAndEnableButtonsOrRetry(alertBody: String) {

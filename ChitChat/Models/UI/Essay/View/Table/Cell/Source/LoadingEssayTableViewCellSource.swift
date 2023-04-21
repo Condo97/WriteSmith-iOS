@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoadingEssayTableViewCellSource: TableViewCellSource {
+class LoadingEssayTableViewCellSource: LoadingTableViewCellSource {
     
     var reuseIdentifier: String = Registry.Essay.View.Table.Cell.loading.reuseID
     
@@ -20,6 +20,10 @@ class LoadingEssayTableViewCellSource: TableViewCellSource {
     
     init(dotColor: UIColor) {
         self.dotColor = dotColor
+    }
+    
+    func setPulsatingDotsAnimation(_ pulsatingDotsAnimation: PulsatingDotsAnimation) {
+        self.pulsatingDotsAnimation = pulsatingDotsAnimation
     }
     
 }

@@ -28,7 +28,7 @@ class HeaderViewController: UpdatingViewController {
         let moreImage = UIImage(systemName: "line.3.horizontal")
         let moreImageButton = UIButton(type: .custom)
         
-        moreImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30, height: 30)
+        moreImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0)
         moreImageButton.setBackgroundImage(moreImage, for: .normal)
         moreImageButton.addTarget(self, action: #selector(openMenu), for: .touchUpInside)
         moreImageButton.tintColor = Colors.elementTextColor
@@ -39,7 +39,7 @@ class HeaderViewController: UpdatingViewController {
         let shareImage = UIImage(named: "shareImage")?.withTintColor(Colors.elementTextColor)
         let shareImageButton = UIButton(type: .custom)
         
-        shareImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30, height: 30)
+        shareImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0)
         shareImageButton.setBackgroundImage(shareImage, for: .normal)
         shareImageButton.addTarget(self, action: #selector(shareApp), for: .touchUpInside)
         shareImageButton.tintColor = Colors.elementTextColor
@@ -50,9 +50,9 @@ class HeaderViewController: UpdatingViewController {
         //TODO: - New Pro Image
         let proImage = UIImage.gifImageWithName(Constants.ImageName.giftGif)
         let proImageButton = RoundedButton(type: .custom)
-        proImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30, height: 30)
+        proImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0)
         proImageButton.tintColor = Colors.elementTextColor
-        proImageButton.setImage(proImage, for: .normal)
+        proImageButton.setBackgroundImage(proImage, for: .normal)
         proImageButton.addTarget(self, action: #selector(ultraPressed), for: .touchUpInside)
         
         proMenuBarItem = UIBarButtonItem(customView: proImageButton)
@@ -62,19 +62,19 @@ class HeaderViewController: UpdatingViewController {
         navigationSpacer.width = 14
         
         /* Setup More */
-        moreMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 28).isActive = true
-        moreMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28).isActive = true
+        moreMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 28.0).isActive = true
+        moreMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
         
         /* Setup Share */
-        shareMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 28).isActive = true
-        shareMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28).isActive = true
+        shareMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 28.0).isActive = true
+        shareMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
         
         /* Setup Constraints */
         
         proMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 34).isActive = true
         proMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 34).isActive = true
         
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 140, height: 80))
+        let imageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 140.0, height: 80.0))
         imageView.contentMode = .scaleAspectFit
         
         // Setup logoImage
@@ -98,6 +98,20 @@ class HeaderViewController: UpdatingViewController {
         
     }
     
+    @objc func openMenu() {
+        
+    }
+    
+    @objc func shareApp() {
+        let activityVC = UIActivityViewController(activityItems: [UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) ?? ""], applicationActivities: [])
+        
+        present(activityVC, animated: true)
+    }
+    
+    @objc func ultraPressed() {
+        UltraViewControllerPresenter.presentOnTop(animated: true)
+    }
+    
     func setLeftMenuBarItems() {
         /* Put things in left navigationBar. Phew! */
         navigationItem.leftBarButtonItems = [moreMenuBarItem, shareMenuBarItem, navigationSpacer]
@@ -114,20 +128,6 @@ class HeaderViewController: UpdatingViewController {
         }
         
         self.navigationItem.rightBarButtonItems = rightBarButtonItems
-    }
-    
-    @objc func openMenu() {
-        navigationController?.pushViewController(SettingsPresentationSpecification().presentableViewController, animated: true)
-    }
-    
-    @objc func shareApp() {
-        let activityVC = UIActivityViewController(activityItems: [UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) ?? ""], applicationActivities: [])
-        
-        present(activityVC, animated: true)
-    }
-    
-    @objc func ultraPressed() {
-        UltraViewControllerPresenter.presentOnTop(animated: true)
     }
     
 }

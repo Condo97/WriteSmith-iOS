@@ -9,8 +9,13 @@ import UIKit
 import StoreKit
 import GoogleMobileAds
 
+protocol ChatViewControllerDelegate {
+    func popAndPushToNewConversation()
+}
+
 class ChatViewController: HeaderViewController {
     
+    // Constants
     let promoViewHeightConstraintConstant = 50.0
     
     let chatSection = 0
@@ -18,9 +23,9 @@ class ChatViewController: HeaderViewController {
     
     let chatTableViewManager: SourcedTableViewManagerProtocol = SourcedTableViewManager()
     
+    // Instance variables
     var origin: CGFloat = 0.0
     
-    var shouldShowUltra = true
     var shouldScroll = true
     var firstChat = true
     var isProcessingChat = false
@@ -35,6 +40,18 @@ class ChatViewController: HeaderViewController {
     var interstitial: GADInterstitialAd?
     var banner: GADBannerView!
     var failedToLoadInterstitial = false
+    
+    // Initialization variables
+    var currentConversation: Conversation? {
+        didSet {
+            ConversationResumingManager.conversation = currentConversation
+        }
+    }
+    
+    var shouldShowUltra = false
+    var loadFirstConversationChats = false
+    var delegate: ChatViewControllerDelegate?
+    
     
     lazy var rootView: ChatView = {
         let view = RegistryHelper.instantiateAsView(nibName: Registry.Chat.View.chat, owner: self) as! ChatView
@@ -64,11 +81,16 @@ class ChatViewController: HeaderViewController {
         RegistryHelper.register(Registry.Chat.View.TableView.Cell.loading, to: rootView.tableView)
         
         /* Setup UI Stuff */
+        // Set tableView estimated row height and row height to automatic dimension
         rootView.tableView.estimatedRowHeight = 44.0
         rootView.tableView.rowHeight = UITableView.automaticDimension
         
+        // Set submitButton to be enabled and cameraButton to be not enabled
         rootView.submitButton.isEnabled = false
         rootView.cameraButton.isEnabled = true
+        
+        // Set the navigationController view backgroundColor so when the keyboard shows there won't be a black space during the animation due to the different speeds of keyboard and view animation
+        navigationController!.view.backgroundColor = Colors.chatBackgroundColor
         
         // Setup "placeholder" for TextView
         rootView.inputTextViewSetToPlaceholder()
@@ -110,9 +132,9 @@ class ChatViewController: HeaderViewController {
             loadGAD()
         }
         
-        // Set up cell source at index 0
-        let allChats = ChatStorageHelper.getAllChats()
-        chatTableViewManager.sources.insert(TableViewCellSourceFactory.makeChatTableViewCellSourceArray(fromChatObjectArray: allChats), at: chatSection)
+        /* Setup Cell Source */
+        // Insert all chats from conversation into sources
+        chatTableViewManager.sources.insert(TableViewCellSourceFactory.makeChatTableViewCellSourceArray(from: currentConversation!), at: chatSection)
         
         // Set up default tiered padding source at index 1 in spacerSection
         chatTableViewManager.sources.insert([TieredPaddingTableViewCellSource()], at: spacerSection)
@@ -143,11 +165,6 @@ class ChatViewController: HeaderViewController {
                 self.rootView.tableView.reallyScrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
             }
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        // Set origin for keyboard
-        origin = self.view.frame.origin.y
         
         // Set the camera button constraints
         if !cameraButtonHeightConstraintSet && rootView.isBlankWithPlaceholder {
@@ -155,6 +172,11 @@ class ChatViewController: HeaderViewController {
             
             cameraButtonHeightConstraintSet = true
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // Set origin for keyboard
+        origin = self.view.frame.origin.y
         
         // Show Ultra Purchase on launch if not premium
         if shouldShowUltra && !PremiumHelper.get() {
@@ -162,16 +184,14 @@ class ChatViewController: HeaderViewController {
             goToUltraPurchase()
         }
         
-        // Load first chats if there are no chats
-        if ChatStorageHelper.getAllChats().count == 0 {
-            self.addChat(message: "Hi! I'm Prof. Write, your AI writing companion...", userSent: .ai)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 2.4 : 1.0), execute: {
-                self.addChat(message: "Ask me to write lyrics, poems, essays and more. Talk to me like a human and ask me anything you'd ask your professor!", userSent: .ai)
-                DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 5.2 : 1.4), execute: {
-                    self.addChat(message: "I do better with more detail. Don't say, \"Essay on Belgium,\" say \"200 word essay on Belgium's cultural advances in the past 20 years.\" Remember, I'm your Professor, so use what I write as inspiration and never plagiarize!", userSent: .ai)
-                })
-            })
+        // Show first conversation chats or add chat from first chat generator TODO: This all should be done somewhere else
+        if loadFirstConversationChats {
+            showFirstConversationChats()
+        } else {
+            // Only add if there are no chats in the conversation
+            if currentConversation?.chats?.count == 0 {
+                addChat(message: FirstChatGenerator.getRandomFirstChat(), sender: Constants.Chat.Sender.ai)
+            }
         }
     }
     
@@ -217,15 +237,38 @@ class ChatViewController: HeaderViewController {
         }
     }
     
+    override func setRightMenuBarItems() {
+        super.setRightMenuBarItems()
+        
+        // Add plus to right bar button items on right
+        let plusButtonImage = UIImage(systemName: "plus.bubble")
+        let plusButton = UIButton(type: .custom)
+        plusButton.frame = CGRect(x: 0, y: 0, width: 30, height: 26)
+        plusButton.tintColor = Colors.elementTextColor
+        plusButton.setBackgroundImage(plusButtonImage, for: .normal)
+        plusButton.addTarget(self, action: #selector(addConversationPressed), for: .touchUpInside)
+        let plusBarButtonItem = UIBarButtonItem(customView: plusButton)
+        
+        // Set as first rightBarButtonItem
+        navigationItem.rightBarButtonItems?.insert(plusBarButtonItem, at: 0)
+    }
+    
+    override func openMenu() {
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            // Delay the movement by a fraction to avoid a black box since it goes up quicker now
-            UIView.animate(withDuration: 0.11, delay: 0.05, options: .curveEaseInOut, animations: {
-                if self.view.frame.origin.y == self.origin {
-                    //TODO: - In the previous version, the -tabBarController.tabBar.frame.size.height wasn't necessary, but now it is otherwise a black box the size of the tabBar will show up
-                    self.view.frame.origin.y -= (keyboardSize.height - self.tabBarController!.tabBar.frame.size.height)
+            if self.view.frame.origin.y == self.origin {
+                //TODO: - In the previous version, the -tabBarController.tabBar.frame.size.height wasn't necessary, but now it is otherwise a black box the size of the tabBar will show up
+                if let tabBarController = UIApplication.shared.topmostViewController()?.tabBarController {
+                    self.view.frame.origin.y -= (keyboardSize.height - tabBarController.tabBar.frame.size.height)
+                } else {
+                    view.endEditing(true)
                 }
-            })
+            }
         }
     }
     
@@ -284,9 +327,13 @@ class ChatViewController: HeaderViewController {
         }
     }
     
+    @objc func addConversationPressed(_ sender: Any) {
+        delegate?.popAndPushToNewConversation()
+    }
+    
     func generateChat(inputText: String) {
         // Add user's chat
-        addChat(message: inputText, userSent: .user)
+        addChat(message: inputText, sender: Constants.Chat.Sender.user)
         
         // Start processing animation
         startProcessingAnimation()
@@ -295,7 +342,13 @@ class ChatViewController: HeaderViewController {
         loadGAD()
         
         // Get chat response
-        ChatRequestHelper.get(inputText: inputText, completion: {responseText, finishReason, remaining in
+        ChatRequestHelper.get(inputText: inputText, conversationID: Int(currentConversation!.conversationID), completion: { responseText, finishReason, conversationID, remaining in
+            // Set currentConversation's conversationID and save the current context if conversationID is not nil
+            if conversationID != nil {
+                self.currentConversation!.conversationID = Int64(conversationID!)
+                ConversationCDHelper.saveContext()
+            }
+            
             // Stop the processing animation (won't stop if already stopped)
             self.stopProcessingAnimation()
             
@@ -318,7 +371,7 @@ class ChatViewController: HeaderViewController {
             self.firstChat = false
             
             // Add response chat
-            self.addChat(message: trimmedResponseText, userSent: .ai)
+            self.addChat(message: trimmedResponseText, sender: Constants.Chat.Sender.ai)
             
             // Call inputTextViewOnFinishedGenerating to enable submitButton and cameraButton
             self.rootView.inputTextViewOnFinishedGenerating()
@@ -344,8 +397,22 @@ class ChatViewController: HeaderViewController {
         })
     }
     
+    func showFirstConversationChats() {
+        // Load first chats if there are no chats
+        if currentConversation!.chats!.count == 0 {
+            self.addChat(message: "Hi! I'm Prof. Write, your AI writing companion...", sender: Constants.Chat.Sender.ai)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 2.4 : 1.0), execute: {
+                self.addChat(message: "Ask me to write lyrics, poems, essays and more. Talk to me like a human and ask me anything you'd ask your professor!", sender: Constants.Chat.Sender.ai)
+                DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 5.2 : 1.4), execute: {
+                    self.addChat(message: "I do better with more detail. Don't say, \"Essay on Belgium,\" say \"200 word essay on Belgium's cultural advances in the past 20 years.\" Remember, I'm your Professor, so use what I write as inspiration and never plagiarize!", sender: Constants.Chat.Sender.ai)
+                })
+            })
+        }
+    }
+    
     func showReviewAtFrequency() {
-        if ChatStorageHelper.getAllChats().count % Constants.reviewFrequency == 0 && !firstChat {
+        if currentConversation!.chats!.count % Constants.reviewFrequency == 0 && !firstChat {
             DispatchQueue.main.async {
                 if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
                     DispatchQueue.main.async {
@@ -382,7 +449,7 @@ class ChatViewController: HeaderViewController {
     }
     
     func goToSettingsView() {
-        navigationController?.pushViewController(SettingsPresentationSpecification().presentableViewController, animated: true)
+        navigationController?.pushViewController(SettingsPresentationSpecification().viewController, animated: true)
     }
     
     func startProcessingAnimation() {
@@ -416,25 +483,22 @@ class ChatViewController: HeaderViewController {
         }
     }
     
-    func addChat(message: String, userSent: ChatSender) {
-        // Create chatObject and chatTableViewCellSource
-        let chatObject = ChatObject(text: message, sender: userSent)
-        let source = ChatTableViewCellSource(chat: chatObject)
+    func addChat(message: String, sender: String) {
+        // Create chat and source
+        let chat = ChatCDHelper.appendChat(sender: sender, text: message, to: currentConversation!)
+        let source = TableViewCellSourceFactory.makeChatTableViewCellSource(from: chat!)
         
-        // Append the chat to CoreData or UserDefaults or whatever I use rn TODO: Convert to CoreData!
-        ChatStorageHelper.appendChat(chatObject: chatObject)
-        
-        // Don't animate insertion if the previous row was a loading row
+        // Don't animate insertion if the previous row was a loading row, meaning the sender was ai TODO: Or should it just be not the user?
         var animation = UITableView.RowAnimation.automatic
-        if !isProcessingChat && userSent == .ai {
+        if !isProcessingChat && sender == Constants.Chat.Sender.ai {
             animation = .none
         }
         
         // Create and start a new Typewriter for the AI response
-        if userSent == .ai {
+        if sender == Constants.Chat.Sender.ai {
             var prevExpectedHeight: CGFloat = 0
             let timeInterval = UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? Constants.premiumTypingTimeInterval : Constants.freeTypingTimeInterval
-            let typewriter = Typewriter.start(text: chatObject.text, timeInterval: timeInterval, typingUpdateLetterCount: chatObject.text.count/Constants.defaultTypingUpdateLetterCountFactor + 1, block: { typewriter, currentText in
+            let typewriter = Typewriter.start(text: chat!.text!, timeInterval: timeInterval, typingUpdateLetterCount: chat!.text!.count/Constants.defaultTypingUpdateLetterCountFactor + 1, block: { typewriter, currentText in
                 DispatchQueue.main.async {
                     // One more tick after it is invalidated (suspended)
                     if !typewriter.isValid() {

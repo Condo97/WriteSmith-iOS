@@ -144,7 +144,7 @@ class ChatView: UIView {
         
         DispatchQueue.main.async {
             // If there is text in inputTextView, reenable submitButton
-            if self.inputTextView.text.count > 0 || self.inputTextView.text == self.inputPlaceholder {
+            if self.inputTextView.text.count > 0 && self.inputTextView.text != self.inputPlaceholder {
                 self.submitButton.isEnabled = true
             }
         
@@ -156,6 +156,13 @@ class ChatView: UIView {
     func inputTextViewOnFinishedTyping() {
         // Set softDisable to disabled, specifically for the soft disable from free
         softDisable = false
+        
+        DispatchQueue.main.async {
+            // If there is no text or text is the inputPlaceholder in inputTextView, disable the submitButton
+            if self.inputTextView.text.count == 0 || self.inputTextView.text == self.inputPlaceholder {
+                self.submitButton.isEnabled = false
+            }
+        }
     }
     
     func inputTextViewSetToPlaceholder() {

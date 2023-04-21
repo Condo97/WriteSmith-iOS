@@ -14,19 +14,17 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
             return
         }
         
-        // Ensure the requested essay is not out of range
+        // Get current essay
         let objectIndex = row / 2
-        if essays.count - 1 - objectIndex < 0 {
-            print("Could not find essay to copy because it is out of range...")
-            return
-        }
+        let currentEssay = essays[objectIndex]
         
-        let currentEssay = essays[essays.count - 1 - objectIndex]
-        guard let essayText = currentEssay.value(forKey: Constants.coreDataEssayEssayObjectName) as? String else {
+        // Get essay rtext
+        guard let essayText = currentEssay.essay else {
             print("Could not cast the essay as String when trying to copy...")
             return
         }
         
+        // Get essay body cell
         guard let essayBodyCell = rootView.tableView.cellForRow(at: IndexPath(row: row + 1, section: essaySection)) as? EssayBodyTableViewCell else {
             print("Could not locate the essay cell when trying to copy...")
             return
@@ -63,21 +61,19 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
             return
         }
         
-        // Ensure the requested essay is not out of range
+        // Get current essay
         let objectIndex = row / 2
-        if essays.count - 1 - objectIndex < 0 {
-            print("Could not find essay to copy because it is out of range...")
+        let currentEssay = essays[objectIndex]
+        
+        // Get prompt text
+        guard let promptText = currentEssay.prompt else {
+            print("Prompt was nil when trying to share...")
             return
         }
         
-        let currentEssay = essays[essays.count - 1 - objectIndex]
-        guard let promptText = currentEssay.value(forKey: Constants.coreDataEssayPromptObjectName) as? String else {
-            print("Could not cast the prompt as String when trying to share...")
-            return
-        }
-        
-        guard let essayText = currentEssay.value(forKey: Constants.coreDataEssayEssayObjectName) as? String else {
-            print("Could not cast the essay as String when trying to share...")
+        // Get essay text
+        guard let essayText = currentEssay.essay else {
+            print("Essay text was nil when trying to share...")
             return
         }
         
@@ -99,19 +95,12 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
             
             // Ensure the requested essay is not out of range
             let objectIndex = row / 2
-            if self.essays.count - 1 - objectIndex < 0 {
-                print("Could not find essay to copy because it is out of range...")
-                return
-            }
             
             // Actually delete the row and CD object
-            let currentEssay = self.essays[self.essays.count - 1 - objectIndex]
-            guard let id = currentEssay.value(forKey: Constants.coreDataEssayIDObjectName) as? Int else {
-                print("Could not cast the ID as Int when trying to delete...")
-                return
-            }
+            let currentEssay = self.essays[objectIndex]
             
-            CDHelper.deleteEssay(id: id, essayArray: &self.essays, success: {
+            // Delete essay and update tableView if successful
+            if EssayCDHelper.deleteEssay(currentEssay) {
                 DispatchQueue.main.async {
                     // Delete at same index twice to remove both the prompt and body
                     self.rootView.tableView.beginUpdates()
@@ -122,9 +111,9 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
                     self.rootView.tableView.deleteManagedRow(at: IndexPath(row: row, section: self.essaySection), with: .automatic)
                     self.rootView.tableView.endUpdates()
                 }
-            })
-            
+            }
         }))
+        
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
     }

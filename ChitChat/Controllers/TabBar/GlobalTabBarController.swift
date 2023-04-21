@@ -11,8 +11,16 @@ class GlobalTabBarController: UITabBarController {
     
     let firstViewController = 1
     
+    var fromStart = false
+    
     lazy var essayTab: UINavigationController = UINavigationController(rootViewController: EssayViewController())
-    lazy var writeTab: UINavigationController = UINavigationController(rootViewController: ChatViewController())
+    lazy var writeTab: UINavigationController = {
+        let conversationViewController = ConversationViewController()
+        conversationViewController.shouldShowUltra = false
+        conversationViewController.pushToConversation = true
+        
+        return UINavigationController(rootViewController: conversationViewController)
+    }()
     lazy var favoritesTab: FavoritesViewController = FavoritesViewController()
     
     var observerID: Int?
