@@ -53,7 +53,7 @@ class SettingsPresentationSpecification: PresentationSpecification {
                         config.entersReaderIfAvailable = true
                         
                         // Create url
-                        let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.termsAndConditions)")!
+                        let url = URL(string: "\(HTTPSConstants.chitChatServerStaticFiles)\(HTTPSConstants.termsAndConditions)")!
                         
                         // Instantiate safari view controller with url and configuration
                         let vc = SFSafariViewController(url: url, configuration: config)
@@ -78,7 +78,7 @@ class SettingsPresentationSpecification: PresentationSpecification {
                         config.entersReaderIfAvailable = true
                         
                         // Create url
-                        let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.privacyPolicy)")!
+                        let url = URL(string: "\(HTTPSConstants.chitChatServerStaticFiles)\(HTTPSConstants.privacyPolicy)")!
                         
                         // Instantiate safari view controller with url and configuration
                         let vc = SFSafariViewController(url: url, configuration: config)

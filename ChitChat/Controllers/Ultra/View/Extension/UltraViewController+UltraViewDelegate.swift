@@ -18,7 +18,7 @@ extension UltraViewController: UltraViewDelegate {
         let config = SFSafariViewController.Configuration()
         config.entersReaderIfAvailable = true
         
-        let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.privacyPolicy)")!
+        let url = URL(string: "\(HTTPSConstants.chitChatServerStaticFiles)\(HTTPSConstants.privacyPolicy)")!
         let vc = SFSafariViewController(url: url, configuration: config)
         present(vc, animated: true)
     }
@@ -27,7 +27,7 @@ extension UltraViewController: UltraViewDelegate {
         let config = SFSafariViewController.Configuration()
         config.entersReaderIfAvailable = true
         
-        let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.termsAndConditions)")!
+        let url = URL(string: "\(HTTPSConstants.chitChatServerStaticFiles)\(HTTPSConstants.termsAndConditions)")!
         let vc = SFSafariViewController(url: url, configuration: config)
         present(vc, animated: true)
     }

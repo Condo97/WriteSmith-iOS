@@ -26,18 +26,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Set initial view controller
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultHasFinishedIntro) {
 
+            // Get window from windowScene
             guard let windowScene = scene as? UIWindowScene else { return }
             let window = UIWindow(windowScene: windowScene)
             
+            // Create StackedPresentingNavigationController to present intro
             let spnc = StackedPresentingNavigationController()
             spnc.stackedPresentationSpecification = IntroPresentationSpecification()
             spnc.onEmpty = { navigationController in
+                // Load UltraViewController and set from start
                 let uvc = UltraViewController()
                 uvc.fromStart = true
                 
+                // Set userDefaultHasFinishedIntro to true when uesr finishes the intro
+                UserDefaults.standard.set(true, forKey: Constants.userDefaultHasFinishedIntro)
+                
+                // Push to UltraViewController
                 navigationController.pushViewController(uvc, animated: true)
             }
-
+            
+            // Set window's rootViewController to StackedPresentingNavigationController
             window.rootViewController = spnc
             self.window = window
             window.makeKeyAndVisible()

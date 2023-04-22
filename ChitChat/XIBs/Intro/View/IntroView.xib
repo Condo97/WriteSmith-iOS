@@ -24,7 +24,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="58" id="2qx-hI-kRy"/>
                     </constraints>
-                    <color key="tintColor" name="UserChatBubbleColor"/>
+                    <color key="tintColor" name="ElementBackgroundColor"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Next...">
                         <fontDescription key="titleFontDescription" name="Avenir-Heavy" family="Avenir" pointSize="24"/>
@@ -55,9 +55,6 @@
     <resources>
         <namedColor name="ElementBackgroundColor">
             <color red="0.0" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="UserChatBubbleColor">
-            <color red="0.0" green="0.6588235294117647" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="UserChatTextColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

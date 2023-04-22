@@ -195,6 +195,8 @@ struct HTTPSConstants {
         static let chitChatServer = "https://chitchatserver.com/v1"
     #endif
     
+    static let chitChatServerStaticFiles = "https://chitchatserver.com"
+    
     static let registerUser = "/registerUser"
     static let getRemaining = "/getRemaining"
     static let getChat = "/getChat"
