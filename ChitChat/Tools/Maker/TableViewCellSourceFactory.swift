@@ -13,7 +13,7 @@ class TableViewCellSourceFactory: Any {
      Conversation Table View Cell Source
      */
     
-    static func makeSortedDateGroupSectionedConversationItemTableViewCellSourceArray(from conversationArray: [Conversation], indicating previousConversationToIndicate: Conversation?, delegate: ConversationItemTableViewCellDelegate) -> [[ConversationItemTableViewCellSource]] {
+    static func makeSortedDateGroupSectionedConversationItemTableViewCellSourceArray(from conversationArray: [Conversation], indicating previousConversationToIndicate: Conversation?, delegate: ConversationItemTableViewCellSourceDelegate) -> [[ConversationItemTableViewCellSource]] {
         // Get sourceArray
         var sourceArray = makeConversationItemTableViewCellSourceArray(from: conversationArray, indicating: previousConversationToIndicate, delegate: delegate)
         
@@ -27,7 +27,7 @@ class TableViewCellSourceFactory: Any {
     }
     
     private static func deriveDateGroupSectionedConversationItemTableViewCellSourceArray(from conversationSourceArray: [ConversationItemTableViewCellSource]) -> [[ConversationItemTableViewCellSource]] {
-        var sectionedSourceArray: [[ConversationItemTableViewCellSource]] = [[]]
+        var sectionedSourceArray: [[ConversationItemTableViewCellSource]] = []
         
         // Add expected section count
         DateGroupRange.allCases.forEach({ body in
@@ -50,7 +50,7 @@ class TableViewCellSourceFactory: Any {
         return sectionedSourceArray
     }
     
-    private static func makeConversationItemTableViewCellSourceArray(from conversationArray: [Conversation], indicating previousConversationToIndicate: Conversation?, delegate: ConversationItemTableViewCellDelegate) -> [ConversationItemTableViewCellSource] {
+    private static func makeConversationItemTableViewCellSourceArray(from conversationArray: [Conversation], indicating previousConversationToIndicate: Conversation?, delegate: ConversationItemTableViewCellSourceDelegate) -> [ConversationItemTableViewCellSource] {
         var sourceArray: [ConversationItemTableViewCellSource] = []
         
         for obj in conversationArray {
@@ -92,16 +92,16 @@ class TableViewCellSourceFactory: Any {
      Essay Table View Cell Source
      */
     
-    static func makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObject essayObject: Essay, delegate: Any, inputAccessoryView: UIView?) -> [TableViewCellSource]? {
+    static func makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObject essayObject: Essay, delegate: Any, inputAccessoryView: UIView?) -> [CellSource]? {
         return makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObjectArray: [essayObject], delegate: delegate, inputAccessoryView: inputAccessoryView)
     }
     
-    static func makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObjectArray essayObjectArray: [Essay], delegate: Any, inputAccessoryView: UIView?) -> [TableViewCellSource]? {
+    static func makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObjectArray essayObjectArray: [Essay], delegate: Any, inputAccessoryView: UIView?) -> [CellSource]? {
         guard let promptDelegate = delegate as? EssayPromptTableViewCellDelegate, let bodyDelegate = delegate as? EssayBodyTableViewCellDelegate else {
             return nil
         }
         
-        var sourceArray: [TableViewCellSource] = []
+        var sourceArray: [CellSource] = []
         
         for obj in essayObjectArray {
             // Append prompt first

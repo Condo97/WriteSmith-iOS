@@ -21,7 +21,7 @@ class ChatViewController: HeaderViewController {
     let chatSection = 0
     let spacerSection = 1
     
-    let chatTableViewManager: SourcedTableViewManagerProtocol = SourcedTableViewManager()
+    let sourcedTableViewManager: SourcedTableViewManagerProtocol = SourcedTableViewManager()
     
     // Instance variables
     var origin: CGFloat = 0.0
@@ -69,12 +69,12 @@ class ChatViewController: HeaderViewController {
         
         /* Setup Delegates */
         rootView.inputTextView.delegate = self
-        rootView.tableView.manager = chatTableViewManager
+        rootView.tableView.manager = sourcedTableViewManager
         
         /* Set TableView touchDelegate */
         rootView.tableView.touchDelegate = self
         
-        /* Setup ChatCell Nibs TODO: Should this just be in ChatTableView? How can this be dynamic? */
+        /* Register Nibs TODO: Should this just be in ChatTableView? How can this be dynamic? */
         RegistryHelper.register(Registry.Chat.View.TableView.Cell.user, to: rootView.tableView)
         RegistryHelper.register(Registry.Chat.View.TableView.Cell.ai, to: rootView.tableView)
         RegistryHelper.register(Registry.Chat.View.TableView.Cell.padding, to: rootView.tableView)
@@ -134,10 +134,10 @@ class ChatViewController: HeaderViewController {
         
         /* Setup Cell Source */
         // Insert all chats from conversation into sources
-        chatTableViewManager.sources.insert(TableViewCellSourceFactory.makeChatTableViewCellSourceArray(from: currentConversation!), at: chatSection)
+        sourcedTableViewManager.sources.insert(TableViewCellSourceFactory.makeChatTableViewCellSourceArray(from: currentConversation!), at: chatSection)
         
         // Set up default tiered padding source at index 1 in spacerSection
-        chatTableViewManager.sources.insert([TieredPaddingTableViewCellSource()], at: spacerSection)
+        sourcedTableViewManager.sources.insert([TieredPaddingTableViewCellSource()], at: spacerSection)
         
         // If first time launch, set shouldShowUltra to false
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultNotFirstLaunch) {
@@ -294,7 +294,7 @@ class ChatViewController: HeaderViewController {
         
         if indexPath != nil && gestureRecognizer.state == .began {
             // Get the cell tapped
-            let cell = rootView.tableView.cellForRow(at: indexPath!) as! ChatTableViewCell
+            let cell = rootView.tableView.cellForRow(at: indexPath!) as! ChatBubbleTableViewCell
             
             // Make sure cell has chatText
             guard let chatText = cell.chatText else {
@@ -318,12 +318,10 @@ class ChatViewController: HeaderViewController {
                 text = "\(text)\n\n\(Constants.copyFooterText)"
             }
             
-            let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: [])
-            
-            present(activityVC, animated: true)
+            ShareViewHelper.share(text, viewController: self)
             
             // Unbounce cell since it is a ChatTableViewCell which is always Bounceable
-            cell.endBounce()
+            cell.endBounce(completion: nil)
         }
     }
     
@@ -582,5 +580,6 @@ class ChatViewController: HeaderViewController {
             })
         }
     }
+    
 }
 

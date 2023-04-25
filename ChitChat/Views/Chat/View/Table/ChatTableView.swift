@@ -18,14 +18,14 @@ class ChatTableView: ManagedTableView {
     func bounceAt(indexPath: IndexPath) {
         // Get the Bounceable cell if it is and unbounce
         if let cell = self.cellForRow(at: indexPath) as? Bounceable {
-            cell.beginBounce()
+            cell.beginBounce() {}
         }
     }
     
     func unbounceAt(indexPath: IndexPath) {
         // Get the Bounceable cell if it is and unbounce
         if let cell = self.cellForRow(at: indexPath) as? Bounceable {
-            cell.endBounce()
+            cell.endBounce() {}
         }
     }
 }
@@ -56,7 +56,7 @@ extension ChatTableView {
                         return
                     }
                     
-                    cell.beginBounce()
+                    cell.beginBounce() {}
                 }
             }
         }

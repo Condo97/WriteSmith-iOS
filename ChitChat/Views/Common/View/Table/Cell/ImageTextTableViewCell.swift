@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImageTextTableViewCell: UITableViewCell, LoadableTableViewCell {
+class ImageTextTableViewCell: UITableViewCell, LoadableCell {
 
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -23,7 +23,7 @@ class ImageTextTableViewCell: UITableViewCell, LoadableTableViewCell {
         // Configure the view for the selected state
     }
     
-    func loadWithSource(_ source: TableViewCellSource) {
+    func loadWithSource(_ source: CellSource) {
         if let imageTextTableViewCellSource = source as? ImageTextTableViewCellSource {
             iconImageView.image = imageTextTableViewCellSource.image
             titleLabel.attributedText = imageTextTableViewCellSource.text

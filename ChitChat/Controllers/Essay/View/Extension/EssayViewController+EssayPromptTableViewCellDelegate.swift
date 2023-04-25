@@ -79,9 +79,7 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
         
         let text = "Prompt: \(promptText)\n\n\(essayText)\n\n\(Constants.copyFooterText)"
         
-        let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: [])
-        
-        present(activityVC, animated: true)
+        ShareViewHelper.share(text, viewController: self)
     }
     
     func didPressDeleteRow(cell: EssayPromptTableViewCell) {

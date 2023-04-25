@@ -23,7 +23,7 @@ class ManagedTableView: UITableView {
         }
     }
     
-    func appendManagedRow(bySource source: TableViewCellSource, inSection section: Int, with animation: UITableView.RowAnimation) {
+    func appendManagedRow(bySource source: CellSource, inSection section: Int, with animation: UITableView.RowAnimation) {
         // This only works if dataSource is ChatTableViewManagerProtocol... Make this more universal TODO: -
         
         if manager != nil {
@@ -35,7 +35,7 @@ class ManagedTableView: UITableView {
         }
     }
     
-    func insertManagedRow(bySource source: TableViewCellSource, at indexPath: IndexPath, with animation: UITableView.RowAnimation) {
+    func insertManagedRow(bySource source: CellSource, at indexPath: IndexPath, with animation: UITableView.RowAnimation) {
         //        tableView.beginUpdates()
         // This only works if dataSource is ChatTableViewManagerProtocol... Make this more universal TODO: -
         if manager != nil {

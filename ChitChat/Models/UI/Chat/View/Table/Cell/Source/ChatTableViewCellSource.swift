@@ -5,12 +5,13 @@
 //  Created by Alex Coundouriotis on 3/20/23.
 //
 
-class ChatTableViewCellSource: TableViewCellSource {
+class ChatTableViewCellSource: CellSource {
     
     var typingLabel: UILabel?
     var typingUpdateLetterCount: Int = Constants.defaultTypingUpdateLetterCount 
     
-    var reuseIdentifier: String {
+    var collectionViewCellReuseIdentifier: String?
+    var tableViewCellReuseIdentifier: String? {
         switch chat.sender {
         case Constants.Chat.Sender.user:
             return Registry.Chat.View.TableView.Cell.user.reuseID

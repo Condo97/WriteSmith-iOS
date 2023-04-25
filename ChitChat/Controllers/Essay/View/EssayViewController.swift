@@ -44,6 +44,8 @@ class EssayViewController: HeaderViewController {
     }()!
     
     override func loadView() {
+        super.loadView()
+        
         view = rootView
     }
     

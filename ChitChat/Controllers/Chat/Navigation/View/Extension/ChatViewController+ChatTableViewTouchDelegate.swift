@@ -11,7 +11,7 @@ extension ChatViewController: ManagedTableViewTouchDelegate {
     
     func tappedIndexPath(_ indexPath: IndexPath, tableView: UITableView, touch: UITouch) {
         
-        guard let chatCell = tableView.cellForRow(at: indexPath) as? ChatTableViewCell else {
+        guard let chatCell = tableView.cellForRow(at: indexPath) as? ChatBubbleTableViewCell else {
             return
         }
                 
@@ -22,18 +22,7 @@ extension ChatViewController: ManagedTableViewTouchDelegate {
                 // Show copy text at location
                 if let attributedText = chatCell.chatText.attributedText {
                     // Copy to Pasteboard
-                    var text = attributedText.string
-                    
-                    //TODO: - Make the footer text an option in settings instead of disabling it for premium entirely
-                    if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-                        if let shareURL = UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) {
-                            text = "\(text)\n\n\(Constants.copyFooterText)\n\(shareURL)"
-                        } else {
-                            text = "\(text)\n\n\(Constants.copyFooterText)"
-                        }
-                    }
-                    
-                    UIPasteboard.general.string = text
+                    PasteboardHelper.copy(attributedText.string, showFooter: !PremiumHelper.get())
                     
                     // Move label if too large
                     if chatCell.frame.height >= chatCell.copiedLabel.frame.height * 4 {

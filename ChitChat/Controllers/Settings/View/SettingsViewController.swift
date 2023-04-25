@@ -8,7 +8,7 @@
 import UIKit
 import SafariServices
 
-class SettingsViewController: ManagedInsetGroupTableViewInViewController {
+class SettingsViewController: ManagedTableViewInViewController {
     
     let ultraPurchaseSection = 0
     let settingsSection = 1
@@ -17,9 +17,6 @@ class SettingsViewController: ManagedInsetGroupTableViewInViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        /* Set TableView Manager */
-        rootView.tableView.manager = sourcedTableViewManager
         
         /* Setup Logo imageView and image */
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 140, height: 80))

@@ -9,7 +9,8 @@ import UIKit
 
 class LoadingEssayTableViewCellSource: LoadingTableViewCellSource {
     
-    var reuseIdentifier: String = Registry.Essay.View.Table.Cell.loading.reuseID
+    var collectionViewCellReuseIdentifier: String?
+    var tableViewCellReuseIdentifier: String? = Registry.Essay.View.Table.Cell.loading.reuseID
     
     var pulsatingDotsAnimation: PulsatingDotsAnimation?
     var dotColor: UIColor

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="creationExploreTableViewCell" rowHeight="148" id="W7j-Bt-x0W" customClass="CreationExploreTableViewCell" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="148"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W7j-Bt-x0W" id="kkQ-iK-eFV">
+                <rect key="frame" x="0.0" y="0.0" width="393" height="148"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGN-8Z-hsW" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                        <rect key="frame" x="14" y="14" width="365" height="86"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2c-zZ-HTI">
+                                <rect key="frame" x="0.0" y="0.0" width="365" height="86"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="B2c-zZ-HTI" firstAttribute="leading" secondItem="qGN-8Z-hsW" secondAttribute="leading" id="eAB-x8-byh"/>
+                            <constraint firstItem="B2c-zZ-HTI" firstAttribute="top" secondItem="qGN-8Z-hsW" secondAttribute="top" id="gNl-kz-bo1"/>
+                            <constraint firstAttribute="bottom" secondItem="B2c-zZ-HTI" secondAttribute="bottom" id="yRO-Qt-zs3"/>
+                            <constraint firstAttribute="trailing" secondItem="B2c-zZ-HTI" secondAttribute="trailing" id="zVV-mE-g6z"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpE-Wb-LUb" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
+                        <rect key="frame" x="300" y="100" width="79" height="30"/>
+                        <color key="backgroundColor" name="AIChatBubbleColor"/>
+                        <color key="tintColor" name="ElementBackgroundColor"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title=" Share">
+                            <imageReference key="image" image="square.and.arrow.up" catalog="system" symbolScale="small"/>
+                            <fontDescription key="titleFontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="shareButtonPressed:" destination="W7j-Bt-x0W" eventType="touchUpInside" id="rtS-9f-d1m"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pX5-kH-dQy" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
+                        <rect key="frame" x="207" y="100" width="79" height="30"/>
+                        <color key="backgroundColor" name="AIChatBubbleColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Lce-d0-cLN"/>
+                        </constraints>
+                        <color key="tintColor" name="ElementBackgroundColor"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title=" Copy">
+                            <imageReference key="image" image="doc.on.doc" catalog="system" symbolScale="small"/>
+                            <fontDescription key="titleFontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="copyButtonPressed:" destination="W7j-Bt-x0W" eventType="touchUpInside" id="C7e-QI-VRK"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQ8-V0-rOq" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
+                        <rect key="frame" x="207" y="100" width="79" height="30"/>
+                        <color key="backgroundColor" name="AIChatBubbleColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="ESE-EB-ThT"/>
+                        </constraints>
+                        <color key="tintColor" name="ElementBackgroundColor"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title=" Copied!">
+                            <fontDescription key="titleFontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                        </buttonConfiguration>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="qGN-8Z-hsW" firstAttribute="leading" secondItem="kkQ-iK-eFV" secondAttribute="leading" constant="14" id="5WZ-KS-uns"/>
+                    <constraint firstItem="qGN-8Z-hsW" firstAttribute="top" secondItem="kkQ-iK-eFV" secondAttribute="top" constant="14" id="GXR-N3-aG6"/>
+                    <constraint firstAttribute="trailing" secondItem="qGN-8Z-hsW" secondAttribute="trailing" constant="14" id="Jmm-Td-jk4"/>
+                    <constraint firstItem="PQ8-V0-rOq" firstAttribute="trailing" secondItem="pX5-kH-dQy" secondAttribute="trailing" id="NZs-jh-o0c"/>
+                    <constraint firstItem="zpE-Wb-LUb" firstAttribute="height" secondItem="pX5-kH-dQy" secondAttribute="height" id="SnG-Cg-w3U"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="pX5-kH-dQy" secondAttribute="bottom" constant="7" id="VBW-1u-B59"/>
+                    <constraint firstItem="zpE-Wb-LUb" firstAttribute="centerY" secondItem="pX5-kH-dQy" secondAttribute="centerY" id="YfO-pS-EZ3"/>
+                    <constraint firstItem="PQ8-V0-rOq" firstAttribute="top" secondItem="pX5-kH-dQy" secondAttribute="top" id="bAI-gp-HcU"/>
+                    <constraint firstItem="zpE-Wb-LUb" firstAttribute="trailing" secondItem="qGN-8Z-hsW" secondAttribute="trailing" id="c5k-tH-3Jx"/>
+                    <constraint firstItem="PQ8-V0-rOq" firstAttribute="leading" secondItem="pX5-kH-dQy" secondAttribute="leading" id="eDE-DW-Io6"/>
+                    <constraint firstItem="pX5-kH-dQy" firstAttribute="top" secondItem="qGN-8Z-hsW" secondAttribute="bottom" id="fm3-lJ-W29"/>
+                    <constraint firstItem="PQ8-V0-rOq" firstAttribute="bottom" secondItem="pX5-kH-dQy" secondAttribute="bottom" id="gu5-X5-goe"/>
+                    <constraint firstItem="zpE-Wb-LUb" firstAttribute="width" secondItem="pX5-kH-dQy" secondAttribute="width" id="swT-Bd-nyZ"/>
+                    <constraint firstItem="zpE-Wb-LUb" firstAttribute="leading" secondItem="pX5-kH-dQy" secondAttribute="trailing" constant="14" id="wbf-3Z-2UQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="copiedButtonOverlay" destination="PQ8-V0-rOq" id="0uC-Ul-Bos"/>
+                <outlet property="copyButton" destination="pX5-kH-dQy" id="eL2-43-slo"/>
+                <outlet property="shareButton" destination="zpE-Wb-LUb" id="UIr-Ea-wSV"/>
+                <outlet property="textView" destination="B2c-zZ-HTI" id="YJI-7p-DTM"/>
+            </connections>
+            <point key="canvasLocation" x="72.51908396946564" y="47.183098591549296"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="doc.on.doc" catalog="system" width="116" height="128"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <namedColor name="AIChatBubbleColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ElementBackgroundColor">
+            <color red="0.0" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -32,11 +32,8 @@ class SettingsPresentationSpecification: PresentationSpecification {
             [
                 ImageTextTableViewCellSource(
                     didSelect: { tableView, indexPath in
-                        // Create share activity VC
-                        let activityVC = UIActivityViewController(activityItems: [UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) ?? ""], applicationActivities: [])
-                        
-                        // Present on the topVC
-                        UIApplication.shared.topmostViewController()?.present(activityVC, animated: true)
+                        // Show share app popup
+                        ShareViewHelper.shareApp(viewController: UIApplication.shared.topmostViewController()!)
                     },
                     image: SettingsImages().share,
                     text: NSMutableAttributedStringBuilder()
@@ -116,9 +113,9 @@ class SettingsPresentationSpecification: PresentationSpecification {
                         .get())
             ]
         ])
-        .register(Registry.Settings.View.TableView.Cell.ultraPurchase)
-        .register(Registry.Common.View.TableView.Cell.imageText)
-        .build()
+        .register(Registry.Settings.View.Table.Cell.ultraPurchase)
+        .register(Registry.Common.View.Table.Cell.imageText)
+        .build(managedTableViewNibName: Registry.Common.View.managedInsetGroupedTableViewIn)
     
     init() {
         viewController = managedInsetGroupedTableViewInViewController

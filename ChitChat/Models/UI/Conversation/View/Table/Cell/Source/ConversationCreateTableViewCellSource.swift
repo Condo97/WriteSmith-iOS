@@ -7,13 +7,14 @@
 
 import Foundation
 
-class ConversationCreateTableViewCellSource: TableViewCellSource, SelectableTableViewCellSource {
+class ConversationCreateTableViewCellSource: CellSource, SelectableCellSource {
     
-    var reuseIdentifier: String = Registry.Conversation.View.Table.Cell.create.reuseID
+    var collectionViewCellReuseIdentifier: String?
+    var tableViewCellReuseIdentifier: String? = Registry.Conversation.View.Table.Cell.create.reuseID
     
-    var didSelect: (UITableView, IndexPath)->Void
+    var didSelect: ((UIView, IndexPath)->Void)?
     
-    init(didSelect: @escaping (UITableView, IndexPath)->Void) {
+    init(didSelect: @escaping (UIView, IndexPath)->Void) {
         self.didSelect = didSelect
     }
     

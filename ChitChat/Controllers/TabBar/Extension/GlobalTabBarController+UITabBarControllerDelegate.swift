@@ -18,9 +18,8 @@ extension GlobalTabBarController: UITabBarControllerDelegate {
                 //TODO: This sorta thing is repeated a lot
                 UltraViewControllerPresenter.presentOnTop(animated: true)
             } else {
-                let activityVC = UIActivityViewController(activityItems: [UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) ?? ""], applicationActivities: [])
-                
-                present(activityVC, animated: true)
+                // Show share app popup
+                ShareViewHelper.shareApp(viewController: self)
             }
             
             return false

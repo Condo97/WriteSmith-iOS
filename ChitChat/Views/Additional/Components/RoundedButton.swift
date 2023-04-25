@@ -8,13 +8,15 @@
 import UIKit
 
 class RoundedButton: UIButton {
-    
+        
     @IBInspectable open var hasArrow: Bool = false {
         didSet {
             if hasArrow {
                 buttonArrowImageView = UIImageView()
-                buttonArrowImageView.image = UIImage.gifImageWithName("arrowGif")
-                buttonArrowImageView.alpha = 0.5
+//                buttonArrowImageView.image = UIImage.gifImageWithName("arrowGif")
+                buttonArrowImageView.image = UIImage(systemName: "arrow.forward")
+                buttonArrowImageView.tintColor = tintColor
+                buttonArrowImageView.alpha = 1.0
                 
                 addSubview(buttonArrowImageView)
             }
@@ -24,7 +26,9 @@ class RoundedButton: UIButton {
     @IBInspectable open var hasActivityView: Bool = false {
         didSet {
             if hasActivityView {
-                activityView = UIActivityIndicatorView(frame: CGRect(x: frame.size.width - accessoryWidth - accessoryInset, y: (frame.size.height - accessoryHeight) / 2, width: accessoryWidth, height: accessoryHeight))
+                activityView = UIActivityIndicatorView()
+                activityView.style = .medium
+                activityView.color = tintColor
                 activityView.hidesWhenStopped = true
                 activityView.stopAnimating()
                 addSubview(activityView)
@@ -53,9 +57,13 @@ class RoundedButton: UIButton {
     var checkmark = UIImageView()
     
     /* For arrow and activity view */
-    let accessoryWidth = 42.0
-    let accessoryHeight = 42.0
-    let accessoryInset = 24.0
+    let activityAccessoryWidth = 24.0
+    let activityAccessoryHeight = 24.0
+    
+    let arrowAccessoryWidth = 30.0
+    let arrowAccessoryHeight = 24.0
+    
+    let accessoryInset = 42.0
     
     
     // Only override draw() if you perform custom drawing.
@@ -88,8 +96,12 @@ class RoundedButton: UIButton {
             self.setAttributedTitle(NSAttributedString(string: self.titleLabel?.text ?? "", attributes: [.font: font!]), for: .normal)
         }
         
+        if hasActivityView {
+            activityView.frame = CGRect(x: frame.size.width - (activityAccessoryWidth / 2) - accessoryInset, y: (frame.size.height - activityAccessoryHeight) / 2, width: activityAccessoryWidth, height: activityAccessoryHeight)
+        }
+        
         if hasArrow {
-            buttonArrowImageView.frame = CGRect(x: frame.size.width - accessoryWidth - accessoryInset, y: (frame.size.height - accessoryHeight) / 2, width: accessoryWidth, height: accessoryHeight)
+            buttonArrowImageView.frame = CGRect(x: frame.size.width - (arrowAccessoryWidth / 2) - accessoryInset, y: (frame.size.height - arrowAccessoryHeight) / 2, width: arrowAccessoryWidth, height: arrowAccessoryHeight)
         }
         
         if hasCheckmark {
@@ -114,4 +126,40 @@ class RoundedButton: UIButton {
             sender.transform = CGAffineTransform(scaleX: 1, y: 1)
         }, completion: nil)
     }
+    
+    func startAnimatingActivityView() {
+        // Check if there is an arrow and if so hide it until stopAnimatingActivityView is called
+        DispatchQueue.main.async {
+            if self.hasArrow {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.buttonArrowImageView.alpha = 0.0
+                }, completion: { boolean in
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.activityView.startAnimating()
+                    })
+                })
+            } else {
+                self.activityView.startAnimating()
+            }
+        }
+        
+    }
+    
+    func stopAnimatingActivityView() {
+        // Check if there is an arrow and if so unhide it
+        DispatchQueue.main.async {
+            if self.hasArrow {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.activityView.stopAnimating()
+                }, completion: { boolean in
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.buttonArrowImageView.alpha = 1.0
+                    })
+                })
+            } else {
+                self.activityView.stopAnimating()
+            }
+        }
+    }
 }
+

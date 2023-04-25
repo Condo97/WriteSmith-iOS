@@ -7,9 +7,10 @@
 
 import UIKit
 
-class EntryEssayTableViewCellSource: TableViewCellSource {
+class EntryEssayTableViewCellSource: CellSource {
     
-    var reuseIdentifier: String = Registry.Essay.View.Table.Cell.entry.reuseID
+    var collectionViewCellReuseIdentifier: String? = nil
+    var tableViewCellReuseIdentifier: String? = Registry.Essay.View.Table.Cell.entry.reuseID
     
     var cellDelegate: EntryEssayTableViewCellDelegate
     var textViewDelegate: UITextViewDelegate

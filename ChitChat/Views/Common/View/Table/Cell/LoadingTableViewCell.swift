@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoadingTableViewCell: UITableViewCell, LoadableTableViewCell {
+class LoadingTableViewCell: UITableViewCell, LoadableCell {
 
     @IBOutlet weak var loadingView: UIView!
     
@@ -22,7 +22,7 @@ class LoadingTableViewCell: UITableViewCell, LoadableTableViewCell {
         // Configure the view for the selected state
     }
     
-    func loadWithSource(_ source: TableViewCellSource) {
+    func loadWithSource(_ source: CellSource) {
         if let loadingSource = source as? LoadingTableViewCellSource {
             // Setup loadingSource pulsatingDotsAnimation if necessary
             if loadingSource.pulsatingDotsAnimation == nil {

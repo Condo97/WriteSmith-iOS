@@ -14,6 +14,16 @@ class RegistryHelper {
     }
     
     
+    static func register(_ xib_reuseID: XIB_ReuseID, to collectionView: UICollectionView) {
+        register([xib_reuseID], to: collectionView)
+    }
+    
+    static func register(_ xib_reuseIDs: [XIB_ReuseID], to collectionView: UICollectionView) {
+        xib_reuseIDs.forEach({ xib_reuseID in
+            collectionView.register(UINib(nibName: xib_reuseID.xibName, bundle: nil), forCellWithReuseIdentifier: xib_reuseID.reuseID)
+        })
+    }
+    
     static func register(_ xib_reuseID: XIB_ReuseID, to tableView: UITableView) {
         register([xib_reuseID], to: tableView)
     }

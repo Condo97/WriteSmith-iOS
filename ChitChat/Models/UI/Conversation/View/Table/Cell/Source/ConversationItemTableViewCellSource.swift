@@ -7,11 +7,17 @@
 
 import Foundation
 
-class ConversationItemTableViewCellSource: TableViewCellSource, SelectableTableViewCellSource {
+protocol ConversationItemTableViewCellSourceDelegate {
+    //TODO: Should this protocol be moved since it doesn't actually use the ConversationItemTableViewCell class directly, only the source?
+    func didSelect(conversation: Conversation)
+}
+
+class ConversationItemTableViewCellSource: CellSource, SelectableCellSource {
     
-    var reuseIdentifier: String = Registry.Conversation.View.Table.Cell.item.reuseID
+    var collectionViewCellReuseIdentifier: String?
+    var tableViewCellReuseIdentifier: String? = Registry.Conversation.View.Table.Cell.item.reuseID
     
-    var didSelect: (UITableView, IndexPath) -> Void
+    var didSelect: ((UIView, IndexPath)->Void)?
     
     var conversationObject: Conversation
     var mostRecentChatDate: Date?
@@ -23,16 +29,16 @@ class ConversationItemTableViewCellSource: TableViewCellSource, SelectableTableV
     
     var shouldShowPreviousConversationIndicator: Bool
     
-    var delegate: ConversationItemTableViewCellDelegate
+    var delegate: ConversationItemTableViewCellSourceDelegate
     
     
-    convenience init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellDelegate) {
+    convenience init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellSourceDelegate) {
         let backgroundColor: UIColor = .white
         
         self.init(conversationObject: conversationObject, shouldShowPreviouslyEditedIndicatorImage: shouldShowPreviouslyEditedIndicatorImage, delegate: delegate, backgroundColor: backgroundColor)
     }
     
-    convenience init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellDelegate, backgroundColor: UIColor) {
+    convenience init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellSourceDelegate, backgroundColor: UIColor) {
         // Set conversation name to last chat's text and formattedDate to last chat's date, plus store date in source for easier ordering TODO: Something better! :)
         var lastChatDate: Date?
         var lastChatText = ""
@@ -60,7 +66,7 @@ class ConversationItemTableViewCellSource: TableViewCellSource, SelectableTableV
         self.init(conversationObject: conversationObject, shouldShowPreviouslyEditedIndicatorImage: shouldShowPreviouslyEditedIndicatorImage, delegate: delegate, mostRecentChatDate: lastChatDate, formattedTitle: lastChatText, formattedDate: formattedDate, backgroundColor: backgroundColor)
     }
     
-    init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellDelegate, mostRecentChatDate: Date?, formattedTitle: String, formattedDate: String, backgroundColor: UIColor) {
+    init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellSourceDelegate, mostRecentChatDate: Date?, formattedTitle: String, formattedDate: String, backgroundColor: UIColor) {
         self.conversationObject = conversationObject
         self.shouldShowPreviousConversationIndicator = shouldShowPreviouslyEditedIndicatorImage
         self.delegate = delegate

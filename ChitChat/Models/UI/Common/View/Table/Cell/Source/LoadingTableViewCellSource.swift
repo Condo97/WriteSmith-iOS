@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LoadingTableViewCellSource: TableViewCellSource {
+protocol LoadingTableViewCellSource: CellSource {
     
     var pulsatingDotsAnimation: PulsatingDotsAnimation? { get set }
     var dotColor: UIColor { get set }

@@ -13,7 +13,8 @@ class GlobalTabBarController: UITabBarController {
     
     var fromStart = false
     
-    lazy var essayTab: UINavigationController = UINavigationController(rootViewController: EssayViewController())
+    lazy var essayTab: UINavigationController = UINavigationController(rootViewController: ExplorePresentationSpecification().viewController)
+//        lazy var essayTab: UINavigationController = UINavigationController(rootViewController: EssayViewController())
     lazy var writeTab: UINavigationController = {
         let conversationViewController = ConversationViewController()
         conversationViewController.shouldShowUltra = false

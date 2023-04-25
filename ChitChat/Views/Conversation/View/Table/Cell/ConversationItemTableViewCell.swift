@@ -7,12 +7,7 @@
 
 import Foundation
 
-protocol ConversationItemTableViewCellDelegate {
-    //TODO: Should this protocol be moved since it doesn't actually use the ConversationItemTableViewCell class directly, only the source?
-    func didSelect(conversation: Conversation)
-}
-
-class ConversationItemTableViewCell: UITableViewCell, LoadableTableViewCell {
+class ConversationItemTableViewCell: UITableViewCell, LoadableCell {
     
     @IBOutlet weak var conversationNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -21,7 +16,7 @@ class ConversationItemTableViewCell: UITableViewCell, LoadableTableViewCell {
     let DEFAULT_PREVIOUS_CONVERSATION_INDICATOR_WIDTH_CONSTRAINT_CONSTANT: CGFloat = 40.0
     
     
-    func loadWithSource(_ source: TableViewCellSource) {
+    func loadWithSource(_ source: CellSource) {
         
         // Setup with source
         if let conversationSource = source as? ConversationItemTableViewCellSource {

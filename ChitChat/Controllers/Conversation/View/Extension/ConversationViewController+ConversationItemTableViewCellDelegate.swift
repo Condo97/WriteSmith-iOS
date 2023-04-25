@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension ConversationViewController: ConversationItemTableViewCellDelegate {
+extension ConversationViewController: ConversationItemTableViewCellSourceDelegate {
     
     func didSelect(conversation: Conversation) {
         pushWith(conversation: conversation, animated: true)

@@ -5,9 +5,10 @@
 //  Created by Alex Coundouriotis on 3/23/23.
 //
 
-class PaddingTableViewCellSource: TableViewCellSource {
+class PaddingTableViewCellSource: CellSource {
     
-    let reuseIdentifier: String = Registry.Chat.View.TableView.Cell.padding.reuseID
+    var collectionViewCellReuseIdentifier: String?
+    let tableViewCellReuseIdentifier: String? = Registry.Chat.View.TableView.Cell.padding.reuseID
     
     var padding: CGFloat
     

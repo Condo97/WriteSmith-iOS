@@ -49,11 +49,11 @@ struct Registry {
     
     struct Common {
         struct View {
-            struct TableView {
+            struct Table {
                 struct Cell {
-                    static let collection = XIB_ReuseID(
-                        xibName: "CollectionTableViewCell",
-                        reuseID: "collectionTableViewCell"
+                    static let managedCollectionView = XIB_ReuseID(
+                        xibName: "ManagedCollectionViewTableViewCell",
+                        reuseID: "managedCollectionViewTableViewCell"
                     )
                     
                     static let imageText = XIB_ReuseID(
@@ -64,6 +64,11 @@ struct Registry {
                     static let label = XIB_ReuseID(
                         xibName: "LabelChatTableViewCell",
                         reuseID: "labelChatTableViewCell"
+                    )
+                    
+                    static let textView = XIB_ReuseID(
+                        xibName: "TextViewTableViewCell",
+                        reuseID: "textViewTableViewCell"
                     )
                 }
             }
@@ -128,14 +133,37 @@ struct Registry {
     
     struct Explore {
         struct View {
-            struct CollectionView {
+            struct Collection {
                 struct Cell {
-                    static let smallSquare = XIB_ReuseID(
-                        xibName: "SmallSquareCollectionViewCell",
-                        reuseID: "smallSquareCollectionViewCell"
+                    static let item = XIB_ReuseID(
+                        xibName: "ItemExploreCollectionViewCell",
+                        reuseID: "itemExploreCollectionViewCell"
                     )
                 }
             }
+            
+            struct Table {
+                struct Cell {
+                    struct Item {
+                        static let component = XIB_ReuseID(
+                            xibName: "ComponentItemExploreTableViewCell",
+                            reuseID: "componentItemExploreTableViewCell"
+                        )
+                        
+                        static let header = XIB_ReuseID(
+                            xibName: "HeaderItemExploreTableViewCell",
+                            reuseID: "headerItemExploreTableViewCell"
+                        )
+                    }
+                    
+                    static let creation = XIB_ReuseID(
+                        xibName: "CreationExploreTableViewCell",
+                        reuseID: "creationExploreTableViewCell"
+                    )
+                }
+            }
+            
+            static let itemExplore = "ItemExploreView"
         }
     }
     
@@ -147,7 +175,7 @@ struct Registry {
     
     struct Settings {
         struct View {
-            struct TableView {
+            struct Table {
                 struct Cell {
                     static let ultraPurchase = XIB_ReuseID(
                         xibName: "UltraPurchaseTableViewCell",

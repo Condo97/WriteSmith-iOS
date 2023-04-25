@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="wqe-N9-TRG" customClass="ItemExploreView" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ia8-7R-yxO" customClass="ManagedTableView" customModule="ChitChat" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="59" width="393" height="653"/>
+                    <color key="backgroundColor" name="ChatBackgroundColor"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Th7-jr-Wth">
+                    <rect key="frame" x="0.0" y="712" width="393" height="58"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5W-Ra-IwP" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
+                            <rect key="frame" x="24" y="0.0" width="345" height="58"/>
+                            <color key="backgroundColor" name="ElementBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="58" id="G1q-Hj-9Ex"/>
+                            </constraints>
+                            <color key="tintColor" name="ElementTextColor"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Generate">
+                                <fontDescription key="titleFontDescription" name="Avenir-Heavy" family="Avenir" pointSize="21"/>
+                            </buttonConfiguration>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="hasArrow" value="YES"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="hasActivityView" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="generateButtonPressed:" destination="wqe-N9-TRG" eventType="touchUpInside" id="oy8-j9-Ma8"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" name="ChatBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="d5W-Ra-IwP" firstAttribute="leading" secondItem="Th7-jr-Wth" secondAttribute="leading" constant="24" id="WTY-ln-d1I"/>
+                        <constraint firstItem="d5W-Ra-IwP" firstAttribute="top" secondItem="Th7-jr-Wth" secondAttribute="top" id="Wj6-m7-cXN"/>
+                        <constraint firstAttribute="bottom" secondItem="d5W-Ra-IwP" secondAttribute="bottom" id="w8d-rV-OjN"/>
+                        <constraint firstAttribute="trailing" secondItem="d5W-Ra-IwP" secondAttribute="trailing" constant="24" id="wMe-45-roK"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="gradientColor">
+                            <color key="value" name="ChatBackgroundColor"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCC-vO-cJD" customClass="GradientView" customModule="ChitChat" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="664" width="393" height="48"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="MXD-le-FkC"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="gradientColor">
+                            <color key="value" name="ChatBackgroundColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="reversed" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Pnj-nq-PeO"/>
+            <color key="backgroundColor" name="ChatBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Pnj-nq-PeO" firstAttribute="trailing" secondItem="BCC-vO-cJD" secondAttribute="trailing" id="6NF-BS-3t0"/>
+                <constraint firstItem="Th7-jr-Wth" firstAttribute="leading" secondItem="Pnj-nq-PeO" secondAttribute="leading" id="7VB-ox-VL3"/>
+                <constraint firstItem="ia8-7R-yxO" firstAttribute="leading" secondItem="Pnj-nq-PeO" secondAttribute="leading" id="9ui-e3-9XJ"/>
+                <constraint firstItem="Pnj-nq-PeO" firstAttribute="trailing" secondItem="ia8-7R-yxO" secondAttribute="trailing" id="Bs6-SJ-HDo"/>
+                <constraint firstItem="Pnj-nq-PeO" firstAttribute="bottom" secondItem="Th7-jr-Wth" secondAttribute="bottom" constant="48" id="GJg-Ac-4Z1"/>
+                <constraint firstItem="Th7-jr-Wth" firstAttribute="top" secondItem="ia8-7R-yxO" secondAttribute="bottom" id="LM3-Qo-rwa"/>
+                <constraint firstItem="ia8-7R-yxO" firstAttribute="top" secondItem="Pnj-nq-PeO" secondAttribute="top" id="P6P-fW-fgT"/>
+                <constraint firstItem="BCC-vO-cJD" firstAttribute="leading" secondItem="Pnj-nq-PeO" secondAttribute="leading" id="SUQ-gg-5by"/>
+                <constraint firstItem="Pnj-nq-PeO" firstAttribute="trailing" secondItem="Th7-jr-Wth" secondAttribute="trailing" id="Xam-pi-W2E"/>
+                <constraint firstItem="Th7-jr-Wth" firstAttribute="top" secondItem="BCC-vO-cJD" secondAttribute="bottom" id="dok-qK-LYX"/>
+            </constraints>
+            <connections>
+                <outlet property="generateButton" destination="d5W-Ra-IwP" id="Hxn-WZ-kSu"/>
+                <outlet property="tableView" destination="ia8-7R-yxO" id="d9U-3H-kQ1"/>
+            </connections>
+            <point key="canvasLocation" x="-137" y="-106"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="ChatBackgroundColor">
+            <color red="0.91200000047683716" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ElementBackgroundColor">
+            <color red="0.0" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ElementTextColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -7,15 +7,16 @@
 
 import UIKit
 
-class BodyEssayTableViewCellSource: TableViewCellSource, SelectableTableViewCellSource {
+class BodyEssayTableViewCellSource: CellSource, SelectableCellSource {
     
-    var reuseIdentifier: String = Registry.Essay.View.Table.Cell.body.reuseID
+    var collectionViewCellReuseIdentifier: String?
+    var tableViewCellReuseIdentifier: String? = Registry.Essay.View.Table.Cell.body.reuseID
     
     var delegate: EssayBodyTableViewCellDelegate
     var text: String
     var inputAccessoryView: UIView?
     
-    var didSelect: (UITableView, IndexPath) -> Void
+    var didSelect: ((UIView, IndexPath)->Void)?
     
     init(delegate: EssayBodyTableViewCellDelegate, text: String, inputAccessoryView: UIView?) {
         self.delegate = delegate
@@ -23,11 +24,15 @@ class BodyEssayTableViewCellSource: TableViewCellSource, SelectableTableViewCell
         self.inputAccessoryView = inputAccessoryView
         
         // Set up select code, where if the cell is selected it will tell the delegate to run didPressShowMore.. kinda neat!
-        didSelect = { tableView, indexPath in
-            if let bodyCell = tableView.cellForRow(at: indexPath) as? EssayBodyTableViewCell {
-                delegate.didPressShowMore(cell: bodyCell)
+        didSelect = { view, indexPath in
+            if let tableView = view as? UITableView {
+                if let bodyCell = tableView.cellForRow(at: indexPath) as? EssayBodyTableViewCell {
+                    delegate.didPressShowMore(cell: bodyCell)
+                } else {
+                    print("Tried to select cell but it wasn't an EssayBodyTableViewCell")
+                }
             } else {
-                print("Tried to select cell but it wasn't an EssayBodyTableViewCell")
+                fatalError("View in didSelect block not a UITableView!")
             }
         }
     }

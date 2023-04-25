@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class LabelTableViewCell: UITableViewCell, LoadableTableViewCell {
+class LabelTableViewCell: UITableViewCell, LoadableCell {
     
     @IBOutlet weak var label: UILabel!
     
@@ -16,7 +16,7 @@ class LabelTableViewCell: UITableViewCell, LoadableTableViewCell {
     @IBOutlet weak var topSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomSpaceConstraint: NSLayoutConstraint!
     
-    func loadWithSource(_ source: TableViewCellSource) {
+    func loadWithSource(_ source: CellSource) {
         if let labelSource = source as? LabelTableViewCellSource {
             // Setup label text, font, and color
             label.text = labelSource.text

@@ -7,9 +7,11 @@
 
 import Foundation
 
-class LabelTableViewCellSource: TableViewCellSource {
+class LabelTableViewCellSource: CellSource {
     
-    var reuseIdentifier: String = Registry.Common.View.TableView.Cell.label.reuseID
+    var collectionViewCellReuseIdentifier: String?
+    var tableViewCellReuseIdentifier: String? = Registry.Common.View.Table.Cell.label.reuseID
+    
     var text: String
     var font: UIFont
     var color: UIColor

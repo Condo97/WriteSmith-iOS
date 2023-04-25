@@ -12,7 +12,7 @@ class ConversationViewController: HeaderViewController {
     // Constants
     let conversationSection = 0
     
-    let conversationTableViewManager: SourcedTableViewManagerProtocol = ConversationSourcedTableViewManager()
+    let conversationTableViewManager: ConversationSourcedTableViewManager = ConversationSourcedTableViewManager()
     
     // Instance variables
     var shouldShowUltra = true
@@ -23,8 +23,8 @@ class ConversationViewController: HeaderViewController {
     var pushToConversation = false
     
     
-    lazy var rootView: ManagedInsetGroupedTableViewInView = {
-        let view = RegistryHelper.instantiateAsView(nibName: Registry.Common.View.managedInsetGroupedTableViewIn, owner: self) as! ManagedInsetGroupedTableViewInView
+    lazy var rootView: ManagedTableViewInView = {
+        let view = RegistryHelper.instantiateAsView(nibName: Registry.Common.View.managedInsetGroupedTableViewIn, owner: self) as! ManagedTableViewInView
         view.tableView.backgroundColor = Colors.chatBackgroundColor
         return view
     }()
@@ -61,10 +61,36 @@ class ConversationViewController: HeaderViewController {
         // Set sources to date group sectioned conversation item sources
         conversationTableViewManager.sources = TableViewCellSourceFactory.makeSortedDateGroupSectionedConversationItemTableViewCellSourceArray(from: allConversations!, indicating: previousSelectedConversation, delegate: self)
         
+        // Function to get ordered display string from date group range array
+        func orderedDateGroupRangeToDisplayStringArray(dateGroupRangeArray: [DateGroupRange]) -> [String] {
+            var titleStringArray: [String] = []
+            for i in 0..<dateGroupRangeArray.count {
+                titleStringArray.append(dateGroupRangeArray[i].displayString)
+            }
+            return titleStringArray
+        }
+        
+        // Set ordered section header titles
+        conversationTableViewManager.orderedSectionHeaderTitles = orderedDateGroupRangeToDisplayStringArray(dateGroupRangeArray: DateGroupRange.ordered)
+        
+        // Remove blank source arrays and headers
+        var i = 0
+        while (i < conversationTableViewManager.sources.count) {
+            if conversationTableViewManager.sources[i].isEmpty {
+                conversationTableViewManager.sources.remove(at: i)
+                conversationTableViewManager.orderedSectionHeaderTitles?.remove(at: i)
+            } else {
+                i += 1
+            }
+        }
+        
         // Insert Create source in array at section index 0
         conversationTableViewManager.sources.insert([ConversationCreateTableViewCellSource(didSelect: { tableView, indexPath in
             self.pushWith(conversation: ConversationCDHelper.appendConversation()!, animated: true)
         })], at: 0)
+        
+        // Insert blank section header title for the create section
+        conversationTableViewManager.orderedSectionHeaderTitles?.insert("", at: 0)
         
         
         // Reload data on main thread
