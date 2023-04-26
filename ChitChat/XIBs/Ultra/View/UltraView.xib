@@ -127,17 +127,18 @@
                                                 <constraint firstAttribute="bottom" secondItem="cte-op-SkW" secondAttribute="bottom" id="zHU-8k-jXC"/>
                                             </constraints>
                                         </view>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="NWD-lC-Q3E">
-                                            <rect key="frame" x="342" y="25" width="20" height="20"/>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="NWD-lC-Q3E">
+                                            <rect key="frame" x="345" y="25" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" name="UserChatBubbleColor"/>
                                     <constraints>
                                         <constraint firstItem="rC8-G1-KUL" firstAttribute="centerY" secondItem="agN-mv-I4l" secondAttribute="centerY" id="1rc-co-vX3"/>
-                                        <constraint firstItem="NWD-lC-Q3E" firstAttribute="centerY" secondItem="agN-mv-I4l" secondAttribute="centerY" id="8bk-v0-4fY"/>
                                         <constraint firstAttribute="height" constant="70" id="HDF-Mi-ytW"/>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="I5I-5j-Gbv"/>
+                                        <constraint firstItem="NWD-lC-Q3E" firstAttribute="centerY" secondItem="agN-mv-I4l" secondAttribute="centerY" id="RqS-Ov-U01"/>
                                         <constraint firstItem="rC8-G1-KUL" firstAttribute="centerX" secondItem="agN-mv-I4l" secondAttribute="centerX" id="Ww4-CN-AAc"/>
+                                        <constraint firstAttribute="trailing" secondItem="NWD-lC-Q3E" secondAttribute="trailing" constant="21" id="XsY-mK-4Zo"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u7o-c0-gdr" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
@@ -164,12 +165,12 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="OlC-Za-VTR">
-                                            <rect key="frame" x="342" y="25" width="20" height="20"/>
+                                            <rect key="frame" x="345" y="25" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="70" id="3Gl-g2-oMm"/>
-                                        <constraint firstItem="OlC-Za-VTR" firstAttribute="trailing" secondItem="ne2-jG-Vyo" secondAttribute="trailing" constant="-24" id="69d-ub-cH6"/>
+                                        <constraint firstItem="OlC-Za-VTR" firstAttribute="trailing" secondItem="ne2-jG-Vyo" secondAttribute="trailing" constant="-21" id="69d-ub-cH6"/>
                                         <constraint firstItem="ne2-jG-Vyo" firstAttribute="top" secondItem="u7o-c0-gdr" secondAttribute="top" id="Chx-AY-IHi"/>
                                         <constraint firstItem="OlC-Za-VTR" firstAttribute="centerY" secondItem="u7o-c0-gdr" secondAttribute="centerY" id="Yyx-I4-N8b"/>
                                         <constraint firstAttribute="bottom" secondItem="ne2-jG-Vyo" secondAttribute="bottom" constant="4" id="a3r-iM-Kmf"/>
@@ -469,7 +470,7 @@ Cancel Anytime</string>
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ChatBackgroundColor">
-            <color red="0.91200000047683716" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.90980392156862744" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ElementBackgroundColor">
             <color red="0.0" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
