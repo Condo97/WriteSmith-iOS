@@ -31,7 +31,9 @@ class UltraView: UIView {
     @IBOutlet weak var noCommitmentsCheckLabel: UILabel!
     
     @IBOutlet weak var weeklyRoundedView: RoundedView!
-    @IBOutlet weak var weeklyText: UILabel!
+//    @IBOutlet weak var weeklyText: UILabel!
+    @IBOutlet weak var weeklyTopText: UILabel!
+    @IBOutlet weak var weeklyBottomText: UILabel!
     @IBOutlet weak var weeklyActivityView: UIActivityIndicatorView!
     
     @IBOutlet weak var monthlyRoundedView: RoundedView!

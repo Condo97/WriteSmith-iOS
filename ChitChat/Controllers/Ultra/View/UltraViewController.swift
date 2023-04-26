@@ -88,12 +88,16 @@ class UltraViewController: UpdatingViewController {
         
         
         // Setup Weekly "Button" Text
-        let weeklyString = NSMutableAttributedStringBuilder()
-            .boldAndBig("Start Free Trial & Plan\n")
-            .secondarySmaller("3 Day Trial - Then \(weeklyDisplayPrice) / week")
-            .addGlobalAttribute(.foregroundColor, value: Colors.userChatTextColor)
-            .get()
-        rootView.weeklyText.attributedText = weeklyString
+        let topWeeklyString = "3 Day Trial - Then \(weeklyDisplayPrice) / week"
+        let bottomWeeklyString = "Start Free Trial & Plan"
+//        let weeklyString = NSMutableAttributedStringBuilder()
+//            .boldAndBig("Start Free Trial & Plan\n")
+//            .secondarySmaller("3 Day Trial - Then \(weeklyDisplayPrice) / week")
+//            .addGlobalAttribute(.foregroundColor, value: Colors.userChatTextColor)
+//            .get()
+//        rootView.weeklyText.attributedText = weeklyString
+        rootView.weeklyTopText.text = topWeeklyString
+        rootView.weeklyBottomText.text = bottomWeeklyString
         
         // Setup Weekly Gesture Recognizer
         let weeklyGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedWeekly))

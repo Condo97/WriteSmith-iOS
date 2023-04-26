@@ -21,7 +21,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fa3-pL-yNa">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                    <color key="backgroundColor" name="AIChatBubbleColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UqB-Al-lhU">
                     <rect key="frame" x="0.0" y="440" width="414" height="456"/>
@@ -100,42 +100,44 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agN-mv-I4l" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
                                     <rect key="frame" x="14" y="0.0" width="386" height="70"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmk-Nf-TrP">
-                                            <rect key="frame" x="0.0" y="0.0" width="386" height="66"/>
-                                            <attributedString key="attributedText">
-                                                <fragment>
-                                                    <string key="content">Start Free Trial &amp; Plan
-</string>
-                                                    <attributes>
-                                                        <color key="NSColor" red="1" green="0.94399410486221313" blue="0.99056917428970337" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" metaFont="system" size="21"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                                <fragment content="3 Day Trial - Then 3.99 / week">
-                                                    <attributes>
-                                                        <color key="NSColor" red="1" green="0.94399410486221313" blue="0.99056917428970337" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" metaFont="system" size="14"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="NWD-lC-Q3E">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rC8-G1-KUL">
+                                            <rect key="frame" x="52.5" y="11.5" width="281.5" height="47.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Day Trial - Then 3.99 / week" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmk-Nf-TrP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="281.5" height="27.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="20"/>
+                                                    <color key="textColor" red="0.90980392156862744" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Free Trial &amp; Plan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cte-op-SkW">
+                                                    <rect key="frame" x="0.0" y="22.5" width="281.5" height="25"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                                    <color key="textColor" red="0.90980392160000001" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="cte-op-SkW" secondAttribute="trailing" id="1nq-nK-O0y"/>
+                                                <constraint firstAttribute="trailing" secondItem="wmk-Nf-TrP" secondAttribute="trailing" id="2H2-Tj-Rrn"/>
+                                                <constraint firstItem="cte-op-SkW" firstAttribute="leading" secondItem="rC8-G1-KUL" secondAttribute="leading" id="8Xt-iN-Zwt"/>
+                                                <constraint firstItem="wmk-Nf-TrP" firstAttribute="bottom" secondItem="cte-op-SkW" secondAttribute="top" constant="5" id="A2V-Sw-4Vt"/>
+                                                <constraint firstItem="wmk-Nf-TrP" firstAttribute="leading" secondItem="rC8-G1-KUL" secondAttribute="leading" id="DHt-1U-M6p"/>
+                                                <constraint firstItem="wmk-Nf-TrP" firstAttribute="top" secondItem="rC8-G1-KUL" secondAttribute="top" id="Qta-TD-krO"/>
+                                                <constraint firstAttribute="bottom" secondItem="cte-op-SkW" secondAttribute="bottom" id="zHU-8k-jXC"/>
+                                            </constraints>
+                                        </view>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="NWD-lC-Q3E">
                                             <rect key="frame" x="342" y="25" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" name="UserChatBubbleColor"/>
                                     <constraints>
+                                        <constraint firstItem="rC8-G1-KUL" firstAttribute="centerY" secondItem="agN-mv-I4l" secondAttribute="centerY" id="1rc-co-vX3"/>
                                         <constraint firstItem="NWD-lC-Q3E" firstAttribute="centerY" secondItem="agN-mv-I4l" secondAttribute="centerY" id="8bk-v0-4fY"/>
                                         <constraint firstAttribute="height" constant="70" id="HDF-Mi-ytW"/>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="I5I-5j-Gbv"/>
-                                        <constraint firstAttribute="bottom" secondItem="wmk-Nf-TrP" secondAttribute="bottom" constant="4" id="KAl-1A-1Xl"/>
-                                        <constraint firstAttribute="trailing" secondItem="wmk-Nf-TrP" secondAttribute="trailing" id="ZUV-5m-LvO"/>
-                                        <constraint firstItem="wmk-Nf-TrP" firstAttribute="leading" secondItem="agN-mv-I4l" secondAttribute="leading" id="gV1-8Z-SKW"/>
-                                        <constraint firstItem="wmk-Nf-TrP" firstAttribute="top" secondItem="agN-mv-I4l" secondAttribute="top" id="mhR-RY-Tkm"/>
-                                        <constraint firstItem="NWD-lC-Q3E" firstAttribute="trailing" secondItem="wmk-Nf-TrP" secondAttribute="trailing" constant="-24" id="sPi-7G-wKF"/>
+                                        <constraint firstItem="rC8-G1-KUL" firstAttribute="centerX" secondItem="agN-mv-I4l" secondAttribute="centerX" id="Ww4-CN-AAc"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u7o-c0-gdr" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
@@ -148,14 +150,14 @@
                                                     <attributes>
                                                         <color key="NSColor" red="0.0" green="0.66666666669999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" metaFont="system" size="21"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="1" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="(30% Off Weekly!)">
                                                     <attributes>
                                                         <color key="NSColor" red="0.0" green="0.66666666669999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" metaFont="cellTitle"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="1" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>
@@ -417,7 +419,7 @@ Cancel Anytime</string>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="orA-My-MCs"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" name="ChatBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="UqB-Al-lhU" secondAttribute="bottom" id="1bK-5e-gu9"/>
                 <constraint firstItem="xOh-E4-P48" firstAttribute="trailing" secondItem="orA-My-MCs" secondAttribute="trailing" id="3Mk-vD-nzc"/>
@@ -452,21 +454,22 @@ Cancel Anytime</string>
                 <outlet property="unleashLabel" destination="vvx-g9-LTk" id="eER-GP-xoh"/>
                 <outlet property="unlockCheckLabel" destination="WSW-Qw-Dat" id="99f-d0-pRz"/>
                 <outlet property="weeklyActivityView" destination="NWD-lC-Q3E" id="2US-YD-cBc"/>
+                <outlet property="weeklyBottomText" destination="cte-op-SkW" id="LcN-U6-VPd"/>
                 <outlet property="weeklyRoundedView" destination="agN-mv-I4l" id="Olj-zV-QJd"/>
-                <outlet property="weeklyText" destination="wmk-Nf-TrP" id="ogQ-dz-2Om"/>
+                <outlet property="weeklyTopText" destination="wmk-Nf-TrP" id="hhk-Aj-ybJ"/>
             </connections>
-            <point key="canvasLocation" x="-396" y="-94"/>
+            <point key="canvasLocation" x="-397.10144927536237" y="-94.419642857142847"/>
         </view>
     </objects>
     <resources>
         <image name="Ultra Image.png" width="1024" height="1088"/>
         <image name="checkmark.square.fill" catalog="system" width="128" height="114"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
-        <namedColor name="AIChatBubbleColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="AIChatTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ChatBackgroundColor">
+            <color red="0.91200000047683716" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ElementBackgroundColor">
             <color red="0.0" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
