@@ -219,7 +219,6 @@
 		BBD50CDD29EF9F3D00C61B86 /* ManagedTableViewInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CDC29EF9F3D00C61B86 /* ManagedTableViewInView.swift */; };
 		BBD50CE529EFA10200C61B86 /* ConversationItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBD50CE429EFA10200C61B86 /* ConversationItemTableViewCell.xib */; };
 		BBD50CEE29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CEC29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift */; };
-		BBD50CEF29EFA4B000C61B86 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CED29EFA4B000C61B86 /* ChatTableViewCell.swift */; };
 		BBD50CF329EFA59800C61B86 /* ConversationItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CF229EFA59800C61B86 /* ConversationItemTableViewCell.swift */; };
 		BBD50CFA29EFA6D100C61B86 /* ConversationItemTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CF929EFA6D100C61B86 /* ConversationItemTableViewCellSource.swift */; };
 		BBD50CFE29EFA92B00C61B86 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CFD29EFA92B00C61B86 /* ConversationViewController.swift */; };
@@ -268,6 +267,7 @@
 		BBEA8A24296E88C100DF37F8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = BBEA8A23296E88C100DF37F8 /* GoogleMobileAds */; };
 		BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedStringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedStringBuilder.swift */; };
 		BBEE697A2988A3FB00BA7E6D /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE69792988A3FB00BA7E6D /* CameraViewController.swift */; };
+		BBF6314029F8A05200E9F0C2 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6313F29F8A05200E9F0C2 /* ChatTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -479,7 +479,6 @@
 		BBD50CDC29EF9F3D00C61B86 /* ManagedTableViewInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTableViewInView.swift; sourceTree = "<group>"; };
 		BBD50CE429EFA10200C61B86 /* ConversationItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationItemTableViewCell.xib; sourceTree = "<group>"; };
 		BBD50CEC29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLoadingTableViewCell.swift; sourceTree = "<group>"; };
-		BBD50CED29EFA4B000C61B86 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		BBD50CF229EFA59800C61B86 /* ConversationItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationItemTableViewCell.swift; sourceTree = "<group>"; };
 		BBD50CF929EFA6D100C61B86 /* ConversationItemTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationItemTableViewCellSource.swift; sourceTree = "<group>"; };
 		BBD50CFD29EFA92B00C61B86 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -524,6 +523,7 @@
 		BBE011C329F3505800CD7A64 /* introScreenshot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = introScreenshot2.png; sourceTree = "<group>"; };
 		BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedStringBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedStringBuilder.swift; sourceTree = "<group>"; };
 		BBEE69792988A3FB00BA7E6D /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		BBF6313F29F8A05200E9F0C2 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1877,7 +1877,7 @@
 			isa = PBXGroup;
 			children = (
 				BBD50CEC29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift */,
-				BBD50CED29EFA4B000C61B86 /* ChatTableViewCell.swift */,
+				BBF6313F29F8A05200E9F0C2 /* ChatTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2419,6 +2419,7 @@
 				BB333F2029E615E6003AE7AD /* ManagedInsetGroupedTableViewInView.swift in Sources */,
 				BB8B18D529EB396800964724 /* GeneratedChatsRemainingHelper.swift in Sources */,
 				BB329B4D298B799B00B3824D /* UIImage+Rotated.swift in Sources */,
+				BBF6314029F8A05200E9F0C2 /* ChatTableViewCell.swift in Sources */,
 				BB5E9162297DB62100DC7467 /* EssayBodyTableViewCell.swift in Sources */,
 				BBC4D20E29E5F83A0006D337 /* UltraView.swift in Sources */,
 				BBD50D1929F30E3600C61B86 /* V3_5MigrationHandler.swift in Sources */,
@@ -2560,7 +2561,6 @@
 				BB04B3F5296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */,
 				BB0F042C29CBF4DD00C89A0A /* StackedPresentationSpecification.swift in Sources */,
 				BBC4D1F829E5C22A0006D337 /* CollectionTableViewCell.swift in Sources */,
-				BBD50CEF29EFA4B000C61B86 /* ChatTableViewCell.swift in Sources */,
 				BBC4D1FD29E5C5D70006D337 /* GlobalTabBarController+UITabBarControllerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
