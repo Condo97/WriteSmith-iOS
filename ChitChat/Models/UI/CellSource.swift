@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CellSource {
+protocol CellSource: AnyObject {
     
     var collectionViewCellReuseIdentifier: String? { get }
     var tableViewCellReuseIdentifier: String? { get }

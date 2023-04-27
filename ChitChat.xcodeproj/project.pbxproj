@@ -111,6 +111,11 @@
 		BB8B18D929EB4D6D00964724 /* GeneratedChatsRemainingUpdaterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B18D829EB4D6D00964724 /* GeneratedChatsRemainingUpdaterDelegate.swift */; };
 		BB92A62C29CD504A002E000F /* RegistryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92A62B29CD504A002E000F /* RegistryHelper.swift */; };
 		BB92A62E29CD5106002E000F /* XIB_ReuseID.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92A62D29CD5106002E000F /* XIB_ReuseID.swift */; };
+		BB96EBB829F8A8CB002CC223 /* ChatLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBB629F8A8CB002CC223 /* ChatLoadingTableViewCell.swift */; };
+		BB96EBB929F8A8CB002CC223 /* ChatBubbleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBB729F8A8CB002CC223 /* ChatBubbleTableViewCell.swift */; };
+		BB96EBBE29F8CDE3002CC223 /* DoneToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBBD29F8CDE3002CC223 /* DoneToolbarController.swift */; };
+		BB96EBC229F9A1A1002CC223 /* ExploreItemViewController+ComponentItemTableViewCellSourceEditingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBC129F9A1A1002CC223 /* ExploreItemViewController+ComponentItemTableViewCellSourceEditingDelegate.swift */; };
+		BB96EBC629F9B89F002CC223 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBC529F9B89F002CC223 /* PlaceholderTextView.swift */; };
 		BB9C2F51297CB7710026A441 /* EssayPromptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9C2F50297CB7710026A441 /* EssayPromptTableViewCell.swift */; };
 		BB9D6ED829CECDCA00706F08 /* LabelTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D6ED729CECDCA00706F08 /* LabelTableViewCellSource.swift */; };
 		BB9D6EE529CF63E600706F08 /* UIScrollView+ScrollToBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D6EE429CF63E600706F08 /* UIScrollView+ScrollToBottom.swift */; };
@@ -244,8 +249,6 @@
 		BBD50CDB29EF9DF400C61B86 /* ManagedTableViewInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBD50CDA29EF9DF400C61B86 /* ManagedTableViewInView.xib */; };
 		BBD50CDD29EF9F3D00C61B86 /* ManagedTableViewInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CDC29EF9F3D00C61B86 /* ManagedTableViewInView.swift */; };
 		BBD50CE529EFA10200C61B86 /* ConversationItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBD50CE429EFA10200C61B86 /* ConversationItemTableViewCell.xib */; };
-		BBD50CEE29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CEC29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift */; };
-		BBD50CEF29EFA4B000C61B86 /* ChatBubbleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CED29EFA4B000C61B86 /* ChatBubbleTableViewCell.swift */; };
 		BBD50CF329EFA59800C61B86 /* ConversationItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CF229EFA59800C61B86 /* ConversationItemTableViewCell.swift */; };
 		BBD50CFA29EFA6D100C61B86 /* ConversationItemTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CF929EFA6D100C61B86 /* ConversationItemTableViewCellSource.swift */; };
 		BBD50CFE29EFA92B00C61B86 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CFD29EFA92B00C61B86 /* ConversationViewController.swift */; };
@@ -427,6 +430,11 @@
 		BB8B18D829EB4D6D00964724 /* GeneratedChatsRemainingUpdaterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedChatsRemainingUpdaterDelegate.swift; sourceTree = "<group>"; };
 		BB92A62B29CD504A002E000F /* RegistryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryHelper.swift; sourceTree = "<group>"; };
 		BB92A62D29CD5106002E000F /* XIB_ReuseID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XIB_ReuseID.swift; sourceTree = "<group>"; };
+		BB96EBB629F8A8CB002CC223 /* ChatLoadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLoadingTableViewCell.swift; sourceTree = "<group>"; };
+		BB96EBB729F8A8CB002CC223 /* ChatBubbleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBubbleTableViewCell.swift; sourceTree = "<group>"; };
+		BB96EBBD29F8CDE3002CC223 /* DoneToolbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneToolbarController.swift; sourceTree = "<group>"; };
+		BB96EBC129F9A1A1002CC223 /* ExploreItemViewController+ComponentItemTableViewCellSourceEditingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExploreItemViewController+ComponentItemTableViewCellSourceEditingDelegate.swift"; sourceTree = "<group>"; };
+		BB96EBC529F9B89F002CC223 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
 		BB9C2F50297CB7710026A441 /* EssayPromptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayPromptTableViewCell.swift; sourceTree = "<group>"; };
 		BB9D6ED729CECDCA00706F08 /* LabelTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCellSource.swift; sourceTree = "<group>"; };
 		BB9D6EE429CF63E600706F08 /* UIScrollView+ScrollToBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+ScrollToBottom.swift"; sourceTree = "<group>"; };
@@ -539,8 +547,6 @@
 		BBD50CDA29EF9DF400C61B86 /* ManagedTableViewInView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManagedTableViewInView.xib; sourceTree = "<group>"; };
 		BBD50CDC29EF9F3D00C61B86 /* ManagedTableViewInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTableViewInView.swift; sourceTree = "<group>"; };
 		BBD50CE429EFA10200C61B86 /* ConversationItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationItemTableViewCell.xib; sourceTree = "<group>"; };
-		BBD50CEC29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLoadingTableViewCell.swift; sourceTree = "<group>"; };
-		BBD50CED29EFA4B000C61B86 /* ChatBubbleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBubbleTableViewCell.swift; sourceTree = "<group>"; };
 		BBD50CF229EFA59800C61B86 /* ConversationItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationItemTableViewCell.swift; sourceTree = "<group>"; };
 		BBD50CF929EFA6D100C61B86 /* ConversationItemTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationItemTableViewCellSource.swift; sourceTree = "<group>"; };
 		BBD50CFD29EFA92B00C61B86 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -790,6 +796,7 @@
 				BB0F04D729CD38EB00C89A0A /* Settings */,
 				BBDC4E3D29C7DC6000204CD7 /* TabBar */,
 				BB0F04C729CD283D00C89A0A /* Ultra */,
+				BB96EBBD29F8CDE3002CC223 /* DoneToolbarController.swift */,
 				BBC7411F29F486DD00B3F41D /* SourcedCollectionViewManager.swift */,
 				BBC7411D29F484DA00B3F41D /* SourcedCollectionViewManagerProtocol.swift */,
 				BBDC4EDD29CAB72200204CD7 /* SourcedTableViewManager.swift */,
@@ -858,6 +865,7 @@
 				BBD50C8629EC60E000C61B86 /* SubscriptionPeriod.swift */,
 				BBDC4E5A29C82CE900204CD7 /* Typewriter.swift */,
 				BB92A62D29CD5106002E000F /* XIB_ReuseID.swift */,
+				BB96EBC529F9B89F002CC223 /* PlaceholderTextView.swift */,
 			);
 			path = Additional;
 			sourceTree = "<group>";
@@ -1588,6 +1596,15 @@
 			path = Remaining;
 			sourceTree = "<group>";
 		};
+		BB96EBB529F8A8CB002CC223 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BB96EBB629F8A8CB002CC223 /* ChatLoadingTableViewCell.swift */,
+				BB96EBB729F8A8CB002CC223 /* ChatBubbleTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		BB9D6ED529CECDA300706F08 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -1786,7 +1803,7 @@
 		BBC4D20029E5CDC70006D337 /* Table */ = {
 			isa = PBXGroup;
 			children = (
-				BBD50CEB29EFA4B000C61B86 /* Cell */,
+				BB96EBB529F8A8CB002CC223 /* Cell */,
 				BB7BC14D2974FC9200D34695 /* ChatTableView.swift */,
 			);
 			path = Table;
@@ -1877,6 +1894,7 @@
 			isa = PBXGroup;
 			children = (
 				BBF6313829F875AD00E9F0C2 /* ExploreGeneratedViewController+CreationExploreTableViewCellDelegate.swift */,
+				BB96EBC129F9A1A1002CC223 /* ExploreItemViewController+ComponentItemTableViewCellSourceEditingDelegate.swift */,
 				BBC7415729F506D900B3F41D /* ExploreItemViewController+ItemExploreViewDelegate.swift */,
 				BBB351AE29F6F4D000CC15CD /* ExploreViewController+ItemCellSourceDelegate.swift */,
 			);
@@ -2019,15 +2037,6 @@
 			isa = PBXGroup;
 			children = (
 				BBD50CF229EFA59800C61B86 /* ConversationItemTableViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		BBD50CEB29EFA4B000C61B86 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				BBD50CED29EFA4B000C61B86 /* ChatBubbleTableViewCell.swift */,
-				BBD50CEC29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2559,7 +2568,6 @@
 				BB0A8C0D296CE70E0035F046 /* ShadowView.swift in Sources */,
 				BBDC4ECD29C949EE00204CD7 /* CellSource.swift in Sources */,
 				BB9C2F51297CB7710026A441 /* EssayPromptTableViewCell.swift in Sources */,
-				BBD50CEE29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift in Sources */,
 				BB8B184D29E6190600964724 /* ImageTextTableViewCell.swift in Sources */,
 				BBC9AB1B29D4E26F00A16CE2 /* EssayViewController+EssayBodyTableViewCellDelegate.swift in Sources */,
 				BB8B18D129EB22CD00964724 /* PremiumUpdaterDelegate.swift in Sources */,
@@ -2603,6 +2611,7 @@
 				BBC7413F29F4AA8D00B3F41D /* ContextMenu.swift in Sources */,
 				BBDC4ED629CA2EB000204CD7 /* UIImage+Stacked.swift in Sources */,
 				BBD50C8A29EE59BC00C61B86 /* CDClient.swift in Sources */,
+				BB96EBC629F9B89F002CC223 /* PlaceholderTextView.swift in Sources */,
 				BB9D6ED829CECDCA00706F08 /* LabelTableViewCellSource.swift in Sources */,
 				BBF6312229F7749500E9F0C2 /* IndentedHeaderSourcedTableViewManager.swift in Sources */,
 				BBDC4E5929C8165F00204CD7 /* UITableView+IsAtBottom.swift in Sources */,
@@ -2623,6 +2632,7 @@
 				BBC16387296B5FF800868752 /* GradientView.swift in Sources */,
 				BBC84686297F2960002493A5 /* EssayPremiumTableViewCell.swift in Sources */,
 				BBC7411A29F482BF00B3F41D /* ExplorePresentationSpecification.swift in Sources */,
+				BB96EBB929F8A8CB002CC223 /* ChatBubbleTableViewCell.swift in Sources */,
 				BBE011BA29F339C400CD7A64 /* ConversationCreateTableViewCellSource.swift in Sources */,
 				BBC4D1DC29E5B0630006D337 /* EssayTableView.swift in Sources */,
 				BB556B6E29D9E01400351563 /* PremiumUpdater.swift in Sources */,
@@ -2635,6 +2645,7 @@
 				BB04B3EB296DE8FF000BEC02 /* IAPManagerOld.swift in Sources */,
 				BBC9AB4029D5FB5E00A16CE2 /* ValidateAndUpdateReceiptRequest.swift in Sources */,
 				BB0DBAAA296AA4FE00D2DFB9 /* SceneDelegate.swift in Sources */,
+				BB96EBC229F9A1A1002CC223 /* ExploreItemViewController+ComponentItemTableViewCellSourceEditingDelegate.swift in Sources */,
 				BB7357E929D000CB00C67189 /* DotsView.swift in Sources */,
 				BB720C90296AAB7800BEA070 /* ChatViewController.swift in Sources */,
 				BBC7415C29F5BABC00B3F41D /* ComponentItemTableViewCellSource.swift in Sources */,
@@ -2646,6 +2657,7 @@
 				BB0A8C09296CDB760035F046 /* RoundedView.swift in Sources */,
 				BBDC4E4F29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift in Sources */,
 				BB8B18C829EB159100964724 /* GeneratedChatsRemainingUpdater.swift in Sources */,
+				BB96EBBE29F8CDE3002CC223 /* DoneToolbarController.swift in Sources */,
 				BBD50D3529F326C400C61B86 /* IntroPresentationSpecification.swift in Sources */,
 				BBDC4E5B29C82CE900204CD7 /* Typewriter.swift in Sources */,
 				BB8B189429E89D0100964724 /* IdentifiableObject.swift in Sources */,
@@ -2689,6 +2701,7 @@
 				BBF6313529F8571800E9F0C2 /* DelegateSource.swift in Sources */,
 				BBDC4EE529CADCF400204CD7 /* ChatViewController+ChatTableViewTouchDelegate.swift in Sources */,
 				BB04B3F1296E2EAE000BEC02 /* SettingsViewController.swift in Sources */,
+				BB96EBB829F8A8CB002CC223 /* ChatLoadingTableViewCell.swift in Sources */,
 				BB8B18BC29EA1BAC00964724 /* EssaySourcedTableViewManager.swift in Sources */,
 				BBDC4EE329CAD9E100204CD7 /* Bounceable.swift in Sources */,
 				BB329B4B298B409000B3824D /* SillyCropView.swift in Sources */,
@@ -2756,7 +2769,6 @@
 				BB04B3F5296E2FC4000BEC02 /* UIImage+GIF.swift in Sources */,
 				BB0F042C29CBF4DD00C89A0A /* StackedPresentationSpecification.swift in Sources */,
 				BBC4D1F829E5C22A0006D337 /* CollectionTableViewCell.swift in Sources */,
-				BBD50CEF29EFA4B000C61B86 /* ChatBubbleTableViewCell.swift in Sources */,
 				BBC4D1FD29E5C5D70006D337 /* GlobalTabBarController+UITabBarControllerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

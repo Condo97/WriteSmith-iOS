@@ -21,17 +21,17 @@
                         <rect key="frame" x="24" y="42" width="345" height="48"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RiZ-ys-eVg">
-                                <rect key="frame" x="7" y="7" width="331" height="34"/>
+                                <rect key="frame" x="14" y="14" width="317" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" name="AIChatBubbleColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="RiZ-ys-eVg" secondAttribute="bottom" constant="7" id="56i-Y9-z3F"/>
+                            <constraint firstAttribute="bottom" secondItem="RiZ-ys-eVg" secondAttribute="bottom" constant="14" id="56i-Y9-z3F"/>
                             <constraint firstAttribute="height" constant="48" id="Hh1-Np-GWs"/>
-                            <constraint firstItem="RiZ-ys-eVg" firstAttribute="leading" secondItem="Lps-JF-Fki" secondAttribute="leading" constant="7" id="TY8-bO-mh3"/>
-                            <constraint firstItem="RiZ-ys-eVg" firstAttribute="top" secondItem="Lps-JF-Fki" secondAttribute="top" constant="7" id="rSU-dj-Tf9"/>
-                            <constraint firstAttribute="trailing" secondItem="RiZ-ys-eVg" secondAttribute="trailing" constant="7" id="xG0-pU-iKw"/>
+                            <constraint firstItem="RiZ-ys-eVg" firstAttribute="leading" secondItem="Lps-JF-Fki" secondAttribute="leading" constant="14" id="TY8-bO-mh3"/>
+                            <constraint firstItem="RiZ-ys-eVg" firstAttribute="top" secondItem="Lps-JF-Fki" secondAttribute="top" constant="14" id="rSU-dj-Tf9"/>
+                            <constraint firstAttribute="trailing" secondItem="RiZ-ys-eVg" secondAttribute="trailing" constant="14" id="xG0-pU-iKw"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBA-vW-iHk">
@@ -43,8 +43,14 @@
                         <color key="textColor" name="AIChatTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEO-zg-VMB">
+                        <rect key="frame" x="75" y="6.6666666666666679" width="9.3333333333333286" height="29.000000000000004"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="21"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1k5-mw-INk">
-                        <rect key="frame" x="82" y="6" width="28" height="28"/>
+                        <rect key="frame" x="84.333333333333329" y="6" width="28" height="28"/>
                         <color key="tintColor" name="ElementBackgroundColor"/>
                         <buttonConfiguration key="configuration" style="plain" image="questionmark.circle" catalog="system"/>
                         <connections>
@@ -55,14 +61,16 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Lps-JF-Fki" secondAttribute="trailing" constant="24" id="4MZ-TZ-g7Z"/>
+                    <constraint firstItem="bEO-zg-VMB" firstAttribute="leading" secondItem="BBA-vW-iHk" secondAttribute="trailing" id="9DS-v8-JcN"/>
                     <constraint firstItem="Lps-JF-Fki" firstAttribute="leading" secondItem="cZi-it-PIK" secondAttribute="leading" constant="24" id="AbV-Iq-6hK"/>
                     <constraint firstAttribute="bottom" secondItem="Lps-JF-Fki" secondAttribute="bottom" constant="7" id="Bve-lF-tV7"/>
                     <constraint firstItem="1k5-mw-INk" firstAttribute="bottom" secondItem="BBA-vW-iHk" secondAttribute="bottom" constant="-1" id="LJe-9C-cFR"/>
                     <constraint firstItem="1k5-mw-INk" firstAttribute="height" secondItem="BBA-vW-iHk" secondAttribute="height" id="TBd-aN-efD"/>
+                    <constraint firstItem="bEO-zg-VMB" firstAttribute="centerY" secondItem="BBA-vW-iHk" secondAttribute="centerY" id="YeD-bE-Qpb"/>
                     <constraint firstItem="1k5-mw-INk" firstAttribute="width" secondItem="1k5-mw-INk" secondAttribute="height" multiplier="1:1" id="Zha-Cz-egH"/>
-                    <constraint firstItem="1k5-mw-INk" firstAttribute="leading" secondItem="BBA-vW-iHk" secondAttribute="trailing" constant="7" id="g6B-ga-m9o"/>
                     <constraint firstItem="Lps-JF-Fki" firstAttribute="top" secondItem="BBA-vW-iHk" secondAttribute="bottom" constant="7" id="iD3-47-xAW"/>
                     <constraint firstItem="BBA-vW-iHk" firstAttribute="top" secondItem="cZi-it-PIK" secondAttribute="top" constant="7" id="sg2-H2-8zF"/>
+                    <constraint firstItem="bEO-zg-VMB" firstAttribute="trailing" secondItem="1k5-mw-INk" secondAttribute="leading" id="tyw-ZA-JBX"/>
                     <constraint firstItem="BBA-vW-iHk" firstAttribute="leading" secondItem="cZi-it-PIK" secondAttribute="leading" constant="24" id="vkw-HQ-WaT"/>
                 </constraints>
             </tableViewCellContentView>
@@ -70,6 +78,7 @@
             <connections>
                 <outlet property="detailButton" destination="1k5-mw-INk" id="I6K-12-MEH"/>
                 <outlet property="headerLabel" destination="BBA-vW-iHk" id="kj0-RD-ctE"/>
+                <outlet property="requiredLabel" destination="bEO-zg-VMB" id="TUc-qp-9ci"/>
                 <outlet property="view" destination="RiZ-ys-eVg" id="fFg-6a-8Id"/>
                 <outlet property="viewHeightConstraint" destination="Hh1-Np-GWs" id="ueH-1J-y9f"/>
             </connections>

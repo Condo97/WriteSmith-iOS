@@ -12,6 +12,8 @@ class ExploreItemViewController: HeaderViewController {
     // Instance variables
     var sourcedTableViewManager: SourcedTableViewManagerProtocol = SourcedTableViewManager()
     
+    var requiredComponentSources: [ComponentItemTableViewCellSource] = []
+    
     // Initialization variables
     var itemSource: ItemSource?
     var orderedSectionHeaderTitles: [String]?
@@ -39,6 +41,49 @@ class ExploreItemViewController: HeaderViewController {
         /* Register nibs */
         RegistryHelper.register(Registry.Explore.View.Table.Cell.Item.header, to: rootView.tableView)
         RegistryHelper.register(Registry.Explore.View.Table.Cell.Item.component, to: rootView.tableView)
+        
+        /* Set required component sources and editing delegates */
+        for sourceArray in sourcedTableViewManager.sources {
+            for source in sourceArray {
+                if let componentSource = source as? ComponentItemTableViewCellSource {
+                    // Set editingDelegate to self
+                    componentSource.editingDelegate = self
+                    
+                    // Add to required component sources array if true
+                    if componentSource.required {
+                        requiredComponentSources.append(componentSource)
+                    }
+                }
+            }
+        }
+        
+        /* Call autoSetButtonEnabled */
+        autoSetButtonEnabled()
+        
+    }
+    
+    override func setLeftMenuBarItems() {
+        navigationItem.leftBarButtonItems = nil
+    }
+    
+    @objc func backButtonPressed(_ sender: Any) {
+        // Pop to root view controller
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func autoSetButtonEnabled() {
+        // Set button as enabled if there are no objects in requiredComponentSources, otherwise set as not enabled
+        if requiredComponentSources.count == 0 {
+            // TODO: - Enable button
+            DispatchQueue.main.async {
+                self.rootView.generateButton.isEnabled = true
+            }
+        } else {
+            // TODO: - Disable button
+            DispatchQueue.main.async {
+                self.rootView.generateButton.isEnabled = false
+            }
+        }
         
     }
     

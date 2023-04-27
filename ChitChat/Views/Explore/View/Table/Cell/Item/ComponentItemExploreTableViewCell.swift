@@ -10,9 +10,12 @@ import Foundation
 class ComponentItemExploreTableViewCell: UITableViewCell, LoadableCell {
     
     @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var requiredLabel: UILabel!
     @IBOutlet weak var detailButton: UIButton!
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
+    
+    let DEFAULT_REQUIRED_LABEL_TEXT = "*"
     
     var detailAlertController: UIAlertController?
     
@@ -32,6 +35,13 @@ class ComponentItemExploreTableViewCell: UITableViewCell, LoadableCell {
         if let componentSource = source as? ComponentItemTableViewCellSource {
             // Set header text
             headerLabel.text = componentSource.headerText
+            
+            // Set requiredLabel text
+            if componentSource.required {
+                requiredLabel.text = DEFAULT_REQUIRED_LABEL_TEXT
+            } else {
+                requiredLabel.text = ""
+            }
             
             // If detailTitle or detialText are nil, hide the detailButton, otherwise show it and load the alertController
             if componentSource.detailTitle == nil || componentSource.detailText == nil {

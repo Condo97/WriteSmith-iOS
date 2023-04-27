@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol ComponentItemTableViewCellSourceEditingDelegate {
+    func finishedEditing(source: ComponentItemTableViewCellSource)
+}
+
 protocol ComponentItemTableViewCellSource: CellSource {
     
     // "What would you like to summarize?"
@@ -24,6 +28,11 @@ protocol ComponentItemTableViewCellSource: CellSource {
     var detailTitle: String? { get set } // Title for the detail view shown on button press
     var detailText: String? { get set } // Text for the detail view shown on button press
     
+    var required: Bool { get set } // Indicates if the field should be filled before creating
+    
+    var editingDelegate: ComponentItemTableViewCellSourceEditingDelegate? { get set } // Delegate that communicates when the component view finishes editing
+    
+        
     // View and computed variable representing its value
     var view: UIView { get set } // View that represents the component the user interacts with
     var viewHeight: CGFloat { get set } // Height for that view which will be set via constraint

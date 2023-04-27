@@ -24,6 +24,9 @@ class HeaderViewController: UpdatingViewController {
         navigationController?.navigationBar.standardAppearance = appearance;
         navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
         
+        /* Set tintColor */
+        navigationController?.navigationBar.tintColor = Colors.elementTextColor
+        
         /* Setup Menu Menu Bar Item */
         let moreImage = UIImage(systemName: "line.3.horizontal")
         let moreImageButton = UIButton(type: .custom)
@@ -77,7 +80,7 @@ class HeaderViewController: UpdatingViewController {
         let imageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 140.0, height: 80.0))
         imageView.contentMode = .scaleAspectFit
         
-        // Setup logoImage
+        /* Setup Logo Image */
         let image = UIImage(named: "logoImage")
         imageView.image = image
         imageView.tintColor = Colors.elementTextColor

@@ -18,10 +18,24 @@ class ExploreGeneratedViewController: ManagedHeaderUpdatingTableViewInViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set tableView separator style and color
+        /* Set tableView separator style and color */
         rootView.tableView.separatorStyle = .singleLine
         rootView.tableView.separatorColor = Colors.aiChatBubbleColor
         
+        /* Remove middle objects in navigation stack so the back button returns to rootView https://stackoverflow.com/questions/46087057/pop-to-the-root-view-controller-when-the-navigation-bars-built-in-back-button-i */
+        if let rootVC = navigationController?.viewControllers.first {
+            navigationController?.viewControllers = [rootVC, self]
+        }
+        
+    }
+    
+    override func setLeftMenuBarItems() {
+        navigationItem.leftBarButtonItems = nil
+    }
+    
+    @objc func backButtonPressed(_ sender: Any) {
+        // Pop to root view controller
+        navigationController?.popToRootViewController(animated: true)
     }
     
     
