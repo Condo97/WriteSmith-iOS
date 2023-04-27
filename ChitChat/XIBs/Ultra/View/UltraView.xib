@@ -420,7 +420,7 @@ Cancel Anytime</string>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="orA-My-MCs"/>
-            <color key="backgroundColor" name="ChatBackgroundColor"/>
+            <color key="backgroundColor" name="AIChatBubbleColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="UqB-Al-lhU" secondAttribute="bottom" id="1bK-5e-gu9"/>
                 <constraint firstItem="xOh-E4-P48" firstAttribute="trailing" secondItem="orA-My-MCs" secondAttribute="trailing" id="3Mk-vD-nzc"/>
@@ -466,11 +466,11 @@ Cancel Anytime</string>
         <image name="Ultra Image.png" width="1024" height="1088"/>
         <image name="checkmark.square.fill" catalog="system" width="128" height="114"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <namedColor name="AIChatBubbleColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="AIChatTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="ChatBackgroundColor">
-            <color red="0.90980392156862744" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ElementBackgroundColor">
             <color red="0.0" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

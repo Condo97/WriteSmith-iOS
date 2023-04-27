@@ -28,8 +28,6 @@ class ConversationItemTableViewCell: UITableViewCell, LoadableTableViewCell {
             conversationNameLabel.text = conversationSource.formattedTitle
             dateLabel.text = conversationSource.formattedDate
             
-            backgroundColor = conversationSource.backgroundColor
-            
             previousConversationIndicatorWidthConstraint.constant = conversationSource.shouldShowPreviousConversationIndicator ? DEFAULT_PREVIOUS_CONVERSATION_INDICATOR_WIDTH_CONSTRAINT_CONSTANT : 0.0
         }
     }

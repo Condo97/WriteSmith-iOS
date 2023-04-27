@@ -19,20 +19,12 @@ class ConversationItemTableViewCellSource: TableViewCellSource, SelectableTableV
     var formattedTitle: String
     var formattedDate: String
     
-    var backgroundColor: UIColor
-    
     var shouldShowPreviousConversationIndicator: Bool
     
     var delegate: ConversationItemTableViewCellDelegate
     
     
     convenience init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellDelegate) {
-        let backgroundColor: UIColor = .white
-        
-        self.init(conversationObject: conversationObject, shouldShowPreviouslyEditedIndicatorImage: shouldShowPreviouslyEditedIndicatorImage, delegate: delegate, backgroundColor: backgroundColor)
-    }
-    
-    convenience init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellDelegate, backgroundColor: UIColor) {
         // Set conversation name to last chat's text and formattedDate to last chat's date, plus store date in source for easier ordering TODO: Something better! :)
         var lastChatDate: Date?
         var lastChatText = ""
@@ -57,17 +49,16 @@ class ConversationItemTableViewCellSource: TableViewCellSource, SelectableTableV
             formattedDate = dateFormatter.string(from: lastChat.date!)
         }
         
-        self.init(conversationObject: conversationObject, shouldShowPreviouslyEditedIndicatorImage: shouldShowPreviouslyEditedIndicatorImage, delegate: delegate, mostRecentChatDate: lastChatDate, formattedTitle: lastChatText, formattedDate: formattedDate, backgroundColor: backgroundColor)
+        self.init(conversationObject: conversationObject, shouldShowPreviouslyEditedIndicatorImage: shouldShowPreviouslyEditedIndicatorImage, delegate: delegate, mostRecentChatDate: lastChatDate, formattedTitle: lastChatText, formattedDate: formattedDate)
     }
     
-    init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellDelegate, mostRecentChatDate: Date?, formattedTitle: String, formattedDate: String, backgroundColor: UIColor) {
+    init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellDelegate, mostRecentChatDate: Date?, formattedTitle: String, formattedDate: String) {
         self.conversationObject = conversationObject
         self.shouldShowPreviousConversationIndicator = shouldShowPreviouslyEditedIndicatorImage
         self.delegate = delegate
         self.mostRecentChatDate = mostRecentChatDate
         self.formattedTitle = formattedTitle
         self.formattedDate = formattedDate
-        self.backgroundColor = backgroundColor
         
         didSelect = { tableView, indexPath in
             delegate.didSelect(conversation: conversationObject)
