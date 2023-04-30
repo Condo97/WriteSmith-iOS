@@ -21,7 +21,7 @@ class ChatViewController: HeaderViewController {
     let chatSection = 0
     let spacerSection = 1
     
-    let sourcedTableViewManager: SourcedTableViewManagerProtocol = SourcedTableViewManager()
+    let sourcedTableViewManager: SourcedTableViewManagerProtocol = SmallBlankHeaderSourcedTableViewManager()
     
     // Instance variables
     var origin: CGFloat = 0.0
@@ -254,6 +254,10 @@ class ChatViewController: HeaderViewController {
     }
     
     override func openMenu() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Pop view controller to go to Conversation view
         DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)
         }
@@ -277,14 +281,19 @@ class ChatViewController: HeaderViewController {
     }
     
     @objc func dismissKeyboardSelector(sender: UITapGestureRecognizer) {
+        // Dissmisses keyboard if anything on the screen is tapped besides submitButton
         if rootView.hitTest(sender.location(in: self.view), with: nil) == rootView.submitButton  {
             return
         }
         
+        // Dismiss keyboard
         dismissKeyboard()
     }
     
     @objc func upgradeSelector(notification: NSNotification) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
         UltraViewControllerPresenter.presentOnTop(animated: true)
     }
     
@@ -293,8 +302,13 @@ class ChatViewController: HeaderViewController {
         let indexPath = rootView.tableView.indexPathForRow(at: location)
         
         if indexPath != nil && gestureRecognizer.state == .began {
-            // Get the cell tapped
-            let cell = rootView.tableView.cellForRow(at: indexPath!) as! ChatBubbleTableViewCell
+            // Do haptic
+            HapticHelper.doMediumHaptic()
+            
+            // Get the cell tapped as ChatBubbleTableViewCell
+            guard let cell = rootView.tableView.cellForRow(at: indexPath!) as? ChatBubbleTableViewCell else {
+                return
+            }
             
             // Make sure cell has chatText
             guard let chatText = cell.chatText else {
@@ -326,6 +340,10 @@ class ChatViewController: HeaderViewController {
     }
     
     @objc func addConversationPressed(_ sender: Any) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Pop and push to new conversation
         delegate?.popAndPushToNewConversation()
     }
     
@@ -341,6 +359,9 @@ class ChatViewController: HeaderViewController {
         
         // Get chat response
         ChatRequestHelper.get(inputText: inputText, conversationID: Int(currentConversation!.conversationID), completion: { responseText, finishReason, conversationID, remaining in
+            // Do haptic
+            HapticHelper.doLightHaptic()
+            
             // Set currentConversation's conversationID and save the current context if conversationID is not nil
             if conversationID != nil {
                 self.currentConversation!.conversationID = Int64(conversationID!)

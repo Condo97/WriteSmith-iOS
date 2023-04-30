@@ -18,7 +18,10 @@ protocol SourcedCollectionViewManagerDelegate {
  Just holds the sources :)
  */
 class SourcedCollectionViewManager: NSObject {
+    //Instance variables
     var sources: [[CellSource]] = []
+    
+    var hapticsEnabled: Bool = true
     
     var delegate: SourcedCollectionViewManagerDelegate?
     
@@ -50,15 +53,29 @@ extension SourcedCollectionViewManager: SourcedCollectionViewManagerProtocol {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Deselet item
         collectionView.deselectItem(at: indexPath, animated: false)
         
+        // Get source from indexPath
         let source = sourceFrom(indexPath: indexPath)
         
+        // If source is selectable, call didSelect
         if let selectableSource = source as? SelectableCellSource {
             selectableSource.didSelect?(collectionView, indexPath)
         }
         
+        // If hapticsEnabled, do a haptic
+        if hapticsEnabled {
+            // Do haptic
+            HapticHelper.doLightHaptic()
+        }
+        
+        // Call delegate
         delegate?.didSelectSourceAt(source: source!, indexPath: indexPath)
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return
+//    }
     
 }

@@ -153,6 +153,8 @@ struct Constants {
         static let chatBottomButtonTopNotSelected = "chatButtonTopNotSelected"
         static let chatBottomButtonBottom = "chatButtonBottom"
         
+        static let giftGif = "giftGif"
+        
         static let essayBottomButtonNotSelected = "writeBottomButtonNotSelected"
         static let essayBottomButtonSelected = "writeBottomButtonSelected"
         
@@ -161,15 +163,17 @@ struct Constants {
         static let introScreenshot3 = "introScreenshot3"
         static let introScreenshot4 = "introScreenshot4"
         
-        static let giftGif = "giftGif"
-        
         static let loadingDotsImageName = "loadingDots"
         
         static let shareBottomButtonNotSelected = "shareBottomButtonNotSelected"
+        static let sparkleLightGif = "sparkleLightGif"
+        static let sparkleDarkGif = "sparkleDarkGif"
+        
         static let premiumBottomButtonNotSelected = "premiumBottomButtonNotSelected"
         
-        static let ultraLight = "UltraLight"
         static let ultraDark = "UltraDark"
+        static let ultraLight = "UltraLight"
+        static let ultraRectangle = "ultraRectangle"
     }
 }
 

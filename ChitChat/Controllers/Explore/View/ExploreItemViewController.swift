@@ -66,11 +66,6 @@ class ExploreItemViewController: HeaderViewController {
         navigationItem.leftBarButtonItems = nil
     }
     
-    @objc func backButtonPressed(_ sender: Any) {
-        // Pop to root view controller
-        navigationController?.popToRootViewController(animated: true)
-    }
-    
     func autoSetButtonEnabled() {
         // Set button as enabled if there are no objects in requiredComponentSources, otherwise set as not enabled
         if requiredComponentSources.count == 0 {

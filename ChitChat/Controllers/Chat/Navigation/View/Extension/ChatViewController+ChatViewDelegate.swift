@@ -10,6 +10,9 @@ import Foundation
 extension ChatViewController: ChatViewDelegate {
     
     func submitButtonPressed() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
         // Immediately dismiss keyboard
         dismissKeyboard()
         

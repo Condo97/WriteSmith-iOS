@@ -22,7 +22,8 @@ class GlobalTabBarController: UITabBarController {
         
         return UINavigationController(rootViewController: conversationViewController)
     }()
-    lazy var favoritesTab: FavoritesViewController = FavoritesViewController()
+    lazy var favoritesTab: UINavigationController = UINavigationController(rootViewController: EssayViewController())
+//    lazy var favoritesTab: FavoritesViewController = FavoritesViewController()
     
     var observerID: Int?
     

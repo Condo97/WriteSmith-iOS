@@ -10,6 +10,9 @@ import Foundation
 extension EssayViewController: EntryEssayTableViewCellDelegate {
     
     func didPressSubmitButton(sender: Any) {
+        // Do haptic
+        HapticHelper.doMediumHaptic()
+        
         // If not premium and there are more essays than cap give the user an upgrade prompt
         if !PremiumHelper.get() {
             if self.essays.count >= UserDefaults.standard.integer(forKey: Constants.userDefaultStoredFreeEssayCap) {

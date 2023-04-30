@@ -10,6 +10,9 @@ import Foundation
 extension EssayViewController: EssayBodyTableViewCellDelegate {
     
     func didPressShowMore(cell: EssayBodyTableViewCell) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
         // Show more
         if cell.essayHeightConstraint.priority >= .defaultHigh {
             // Expand Essay to Show More
@@ -34,6 +37,9 @@ extension EssayViewController: EssayBodyTableViewCellDelegate {
     }
     
     func didPressShowLess(cell: EssayBodyTableViewCell) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
         // Show less
         UIView.performWithoutAnimation {
             rootView.tableView.beginUpdates()
@@ -58,6 +64,8 @@ extension EssayViewController: EssayBodyTableViewCellDelegate {
     }
     
     func essayTextDidBeginEditing(cell: EssayBodyTableViewCell, textView: UITextView) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
         
     }
     

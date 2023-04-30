@@ -97,7 +97,6 @@
 		BB8B18B429EA0CAE00964724 /* LoadingEssayTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B18B329EA0CAE00964724 /* LoadingEssayTableViewCellSource.swift */; };
 		BB8B18B629EA0CBB00964724 /* PremiumEssayTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B18B529EA0CBB00964724 /* PremiumEssayTableViewCellSource.swift */; };
 		BB8B18B829EA0CC600964724 /* PromptEssayTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B18B729EA0CC500964724 /* PromptEssayTableViewCellSource.swift */; };
-		BB8B18BC29EA1BAC00964724 /* EssaySourcedTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B18BB29EA1BAC00964724 /* EssaySourcedTableViewManager.swift */; };
 		BB8B18C029EA4EDA00964724 /* UpdatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B18BF29EA4EDA00964724 /* UpdatingViewController.swift */; };
 		BB8B18C229EA5BE800964724 /* GlobalTabBarController+PremiumUpdaterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B18C129EA5BE800964724 /* GlobalTabBarController+PremiumUpdaterDelegate.swift */; };
 		BB8B18C629EB00DB00964724 /* CameraViewController+CameraViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B18C529EB00DB00964724 /* CameraViewController+CameraViewDelegate.swift */; };
@@ -116,6 +115,23 @@
 		BB96EBBE29F8CDE3002CC223 /* DoneToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBBD29F8CDE3002CC223 /* DoneToolbarController.swift */; };
 		BB96EBC229F9A1A1002CC223 /* ExploreItemViewController+ComponentItemTableViewCellSourceEditingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBC129F9A1A1002CC223 /* ExploreItemViewController+ComponentItemTableViewCellSourceEditingDelegate.swift */; };
 		BB96EBC629F9B89F002CC223 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBC529F9B89F002CC223 /* PlaceholderTextView.swift */; };
+		BB96EBC929FAFD5C002CC223 /* EssaySmallBlankHeaderSourcedTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBC829FAFD5C002CC223 /* EssaySmallBlankHeaderSourcedTableViewManager.swift */; };
+		BB96EBD029FB0ADE002CC223 /* RoundedViewLabelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB96EBCF29FB0ADE002CC223 /* RoundedViewLabelCollectionViewCell.xib */; };
+		BB96EBD529FB0BAF002CC223 /* RoundedViewLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBD429FB0BAF002CC223 /* RoundedViewLabelCollectionViewCell.swift */; };
+		BB96EBD729FB0C32002CC223 /* ExploreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB96EBD629FB0C32002CC223 /* ExploreView.xib */; };
+		BB96EBD929FB0CEF002CC223 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBD829FB0CEF002CC223 /* ExploreView.swift */; };
+		BB96EBDE29FB1213002CC223 /* ButtonCollectionViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBDD29FB1213002CC223 /* ButtonCollectionViewCellSource.swift */; };
+		BB96EBE329FC24AE002CC223 /* sparkleLightGif old.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB96EBE229FC24AD002CC223 /* sparkleLightGif old.gif */; };
+		BB96EBE529FC24C1002CC223 /* sprkleDarkGif old.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB96EBE429FC24C1002CC223 /* sprkleDarkGif old.gif */; };
+		BB96EBE829FC5128002CC223 /* UltraNavigationItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB96EBE729FC5128002CC223 /* UltraNavigationItemView.xib */; };
+		BB96EBEA29FC581A002CC223 /* UltraNavigationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBE929FC581A002CC223 /* UltraNavigationItemView.swift */; };
+		BB96EBED29FC61FE002CC223 /* sparkleLightGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB96EBEC29FC61FE002CC223 /* sparkleLightGif.gif */; };
+		BB96EBEF29FC6205002CC223 /* sparkleDarkGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BB96EBEE29FC6205002CC223 /* sparkleDarkGif.gif */; };
+		BB96EBF329FD8E04002CC223 /* ExploreCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBF229FD8E04002CC223 /* ExploreCollectionTableViewCell.swift */; };
+		BB96EBF529FD8E5C002CC223 /* ExploreCollectionTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBF429FD8E5C002CC223 /* ExploreCollectionTableViewCellSource.swift */; };
+		BB96EBF729FD9113002CC223 /* ExploreCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB96EBF629FD9113002CC223 /* ExploreCollectionTableViewCell.xib */; };
+		BB96EBF929FD952F002CC223 /* ExploreIndentedHeaderSourcedTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBF829FD952F002CC223 /* ExploreIndentedHeaderSourcedTableViewManager.swift */; };
+		BB96EBFE29FDEAED002CC223 /* HapticHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBFD29FDEAED002CC223 /* HapticHelper.swift */; };
 		BB9C2F51297CB7710026A441 /* EssayPromptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9C2F50297CB7710026A441 /* EssayPromptTableViewCell.swift */; };
 		BB9D6ED829CECDCA00706F08 /* LabelTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D6ED729CECDCA00706F08 /* LabelTableViewCellSource.swift */; };
 		BB9D6EE529CF63E600706F08 /* UIScrollView+ScrollToBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D6EE429CF63E600706F08 /* UIScrollView+ScrollToBottom.swift */; };
@@ -199,7 +215,6 @@
 		BBC7414F29F4C19300B3F41D /* ItemExploreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBC7414E29F4C19300B3F41D /* ItemExploreView.xib */; };
 		BBC7415129F4C25900B3F41D /* ItemExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC7415029F4C25900B3F41D /* ItemExploreView.swift */; };
 		BBC7415329F4C34100B3F41D /* ManagedTableViewInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC7415229F4C34100B3F41D /* ManagedTableViewInViewController.swift */; };
-		BBC7415529F4C5CA00B3F41D /* HeadedSourcedTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC7415429F4C5CA00B3F41D /* HeadedSourcedTableViewManager.swift */; };
 		BBC7415829F506D900B3F41D /* ExploreItemViewController+ItemExploreViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC7415729F506D900B3F41D /* ExploreItemViewController+ItemExploreViewDelegate.swift */; };
 		BBC7415C29F5BABC00B3F41D /* ComponentItemTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC7415B29F5BABC00B3F41D /* ComponentItemTableViewCellSource.swift */; };
 		BBC7415E29F5BBDF00B3F41D /* DropdownComponentItemExploreTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC7415D29F5BBDF00B3F41D /* DropdownComponentItemExploreTableViewCellSource.swift */; };
@@ -416,7 +431,6 @@
 		BB8B18B329EA0CAE00964724 /* LoadingEssayTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingEssayTableViewCellSource.swift; sourceTree = "<group>"; };
 		BB8B18B529EA0CBB00964724 /* PremiumEssayTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumEssayTableViewCellSource.swift; sourceTree = "<group>"; };
 		BB8B18B729EA0CC500964724 /* PromptEssayTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptEssayTableViewCellSource.swift; sourceTree = "<group>"; };
-		BB8B18BB29EA1BAC00964724 /* EssaySourcedTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssaySourcedTableViewManager.swift; sourceTree = "<group>"; };
 		BB8B18BF29EA4EDA00964724 /* UpdatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatingViewController.swift; sourceTree = "<group>"; };
 		BB8B18C129EA5BE800964724 /* GlobalTabBarController+PremiumUpdaterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlobalTabBarController+PremiumUpdaterDelegate.swift"; sourceTree = "<group>"; };
 		BB8B18C529EB00DB00964724 /* CameraViewController+CameraViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraViewController+CameraViewDelegate.swift"; sourceTree = "<group>"; };
@@ -435,6 +449,23 @@
 		BB96EBBD29F8CDE3002CC223 /* DoneToolbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneToolbarController.swift; sourceTree = "<group>"; };
 		BB96EBC129F9A1A1002CC223 /* ExploreItemViewController+ComponentItemTableViewCellSourceEditingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExploreItemViewController+ComponentItemTableViewCellSourceEditingDelegate.swift"; sourceTree = "<group>"; };
 		BB96EBC529F9B89F002CC223 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
+		BB96EBC829FAFD5C002CC223 /* EssaySmallBlankHeaderSourcedTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssaySmallBlankHeaderSourcedTableViewManager.swift; sourceTree = "<group>"; };
+		BB96EBCF29FB0ADE002CC223 /* RoundedViewLabelCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoundedViewLabelCollectionViewCell.xib; sourceTree = "<group>"; };
+		BB96EBD429FB0BAF002CC223 /* RoundedViewLabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedViewLabelCollectionViewCell.swift; sourceTree = "<group>"; };
+		BB96EBD629FB0C32002CC223 /* ExploreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExploreView.xib; sourceTree = "<group>"; };
+		BB96EBD829FB0CEF002CC223 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+		BB96EBDD29FB1213002CC223 /* ButtonCollectionViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCellSource.swift; sourceTree = "<group>"; };
+		BB96EBE229FC24AD002CC223 /* sparkleLightGif old.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "sparkleLightGif old.gif"; sourceTree = "<group>"; };
+		BB96EBE429FC24C1002CC223 /* sprkleDarkGif old.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "sprkleDarkGif old.gif"; sourceTree = "<group>"; };
+		BB96EBE729FC5128002CC223 /* UltraNavigationItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UltraNavigationItemView.xib; sourceTree = "<group>"; };
+		BB96EBE929FC581A002CC223 /* UltraNavigationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltraNavigationItemView.swift; sourceTree = "<group>"; };
+		BB96EBEC29FC61FE002CC223 /* sparkleLightGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sparkleLightGif.gif; sourceTree = "<group>"; };
+		BB96EBEE29FC6205002CC223 /* sparkleDarkGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sparkleDarkGif.gif; sourceTree = "<group>"; };
+		BB96EBF229FD8E04002CC223 /* ExploreCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCollectionTableViewCell.swift; sourceTree = "<group>"; };
+		BB96EBF429FD8E5C002CC223 /* ExploreCollectionTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCollectionTableViewCellSource.swift; sourceTree = "<group>"; };
+		BB96EBF629FD9113002CC223 /* ExploreCollectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreCollectionTableViewCell.xib; sourceTree = "<group>"; };
+		BB96EBF829FD952F002CC223 /* ExploreIndentedHeaderSourcedTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreIndentedHeaderSourcedTableViewManager.swift; sourceTree = "<group>"; };
+		BB96EBFD29FDEAED002CC223 /* HapticHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticHelper.swift; sourceTree = "<group>"; };
 		BB9C2F50297CB7710026A441 /* EssayPromptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayPromptTableViewCell.swift; sourceTree = "<group>"; };
 		BB9D6ED729CECDCA00706F08 /* LabelTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCellSource.swift; sourceTree = "<group>"; };
 		BB9D6EE429CF63E600706F08 /* UIScrollView+ScrollToBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+ScrollToBottom.swift"; sourceTree = "<group>"; };
@@ -496,7 +527,6 @@
 		BBC7414E29F4C19300B3F41D /* ItemExploreView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemExploreView.xib; sourceTree = "<group>"; };
 		BBC7415029F4C25900B3F41D /* ItemExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemExploreView.swift; sourceTree = "<group>"; };
 		BBC7415229F4C34100B3F41D /* ManagedTableViewInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTableViewInViewController.swift; sourceTree = "<group>"; };
-		BBC7415429F4C5CA00B3F41D /* HeadedSourcedTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadedSourcedTableViewManager.swift; sourceTree = "<group>"; };
 		BBC7415729F506D900B3F41D /* ExploreItemViewController+ItemExploreViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExploreItemViewController+ItemExploreViewDelegate.swift"; sourceTree = "<group>"; };
 		BBC7415B29F5BABC00B3F41D /* ComponentItemTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentItemTableViewCellSource.swift; sourceTree = "<group>"; };
 		BBC7415D29F5BBDF00B3F41D /* DropdownComponentItemExploreTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownComponentItemExploreTableViewCellSource.swift; sourceTree = "<group>"; };
@@ -800,7 +830,6 @@
 				BBC7411F29F486DD00B3F41D /* SourcedCollectionViewManager.swift */,
 				BBC7411D29F484DA00B3F41D /* SourcedCollectionViewManagerProtocol.swift */,
 				BBDC4EDD29CAB72200204CD7 /* SourcedTableViewManager.swift */,
-				BBC7415429F4C5CA00B3F41D /* HeadedSourcedTableViewManager.swift */,
 				BBDC4EE029CABDEE00204CD7 /* SourcedTableViewManagerProtocol.swift */,
 			);
 			path = Controllers;
@@ -982,6 +1011,7 @@
 		BB2213BC29F704CA00901B65 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
+				BB96EBD329FB0B9D002CC223 /* Cell */,
 				BB2213BD29F704D500901B65 /* ManagedCollectionView.swift */,
 			);
 			path = Collection;
@@ -1052,6 +1082,7 @@
 				BB333F0529E60B14003AE7AD /* Collection */,
 				BB333F0629E60B27003AE7AD /* Table */,
 				BBC7415029F4C25900B3F41D /* ItemExploreView.swift */,
+				BB96EBD829FB0CEF002CC223 /* ExploreView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1113,7 +1144,7 @@
 			isa = PBXGroup;
 			children = (
 				BBC9AB1329D4E1BC00A16CE2 /* Extension */,
-				BB8B18BA29EA1B9300964724 /* Table */,
+				BB96EBC729FAFD4D002CC223 /* Table */,
 				BB24FB29297CAB3F00A933EA /* EssayViewController.swift */,
 			);
 			path = View;
@@ -1217,6 +1248,7 @@
 			isa = PBXGroup;
 			children = (
 				BB333F0829E60BA1003AE7AD /* View */,
+				BB96EBE929FC581A002CC223 /* UltraNavigationItemView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1350,6 +1382,7 @@
 		BB8B185D29E652EF00964724 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BB96EBDA29FB1201002CC223 /* Collection */,
 				BB8B185E29E652F500964724 /* Table */,
 			);
 			path = View;
@@ -1420,6 +1453,7 @@
 			children = (
 				BBC7416129F5BE4E00B3F41D /* Component */,
 				BBC7415B29F5BABC00B3F41D /* ComponentItemTableViewCellSource.swift */,
+				BB96EBF429FD8E5C002CC223 /* ExploreCollectionTableViewCellSource.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1537,14 +1571,6 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
-		BB8B18BA29EA1B9300964724 /* Table */ = {
-			isa = PBXGroup;
-			children = (
-				BB8B18BB29EA1BAC00964724 /* EssaySourcedTableViewManager.swift */,
-			);
-			path = Table;
-			sourceTree = "<group>";
-		};
 		BB8B18C329EA5BEC00964724 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -1603,6 +1629,76 @@
 				BB96EBB729F8A8CB002CC223 /* ChatBubbleTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		BB96EBC729FAFD4D002CC223 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				BB96EBC829FAFD5C002CC223 /* EssaySmallBlankHeaderSourcedTableViewManager.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		BB96EBD129FB0AE9002CC223 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				BB96EBD229FB0AEE002CC223 /* Cell */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		BB96EBD229FB0AEE002CC223 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BB96EBCF29FB0ADE002CC223 /* RoundedViewLabelCollectionViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		BB96EBD329FB0B9D002CC223 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BB96EBD429FB0BAF002CC223 /* RoundedViewLabelCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		BB96EBDA29FB1201002CC223 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				BB96EBDB29FB1205002CC223 /* Cell */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		BB96EBDB29FB1205002CC223 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BB96EBDC29FB1208002CC223 /* Source */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		BB96EBDC29FB1208002CC223 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				BB96EBDD29FB1213002CC223 /* ButtonCollectionViewCellSource.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		BB96EBEB29FC61CE002CC223 /* Ultra */ = {
+			isa = PBXGroup;
+			children = (
+				BB96EBEC29FC61FE002CC223 /* sparkleLightGif.gif */,
+				BB96EBEE29FC6205002CC223 /* sparkleDarkGif.gif */,
+				BB96EBE229FC24AD002CC223 /* sparkleLightGif old.gif */,
+				BB96EBE429FC24C1002CC223 /* sprkleDarkGif old.gif */,
+				BBA71D3D29D22767007B0D99 /* Ultra Image Brain Text.png */,
+				BBA71D3F29D2276B007B0D99 /* Ultra Image Brain Text Dark.png */,
+				BB04B3F8296E38E0000BEC02 /* Ultra Image1.jpg */,
+			);
+			path = Ultra;
 			sourceTree = "<group>";
 		};
 		BB9D6ED529CECDA300706F08 /* Common */ = {
@@ -1744,6 +1840,7 @@
 			isa = PBXGroup;
 			children = (
 				BBC4D20429E5F71E0006D337 /* View */,
+				BB96EBE729FC5128002CC223 /* UltraNavigationItemView.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1761,6 +1858,7 @@
 			children = (
 				BBC7414429F4AE1300B3F41D /* ComponentItemExploreTableViewCell.xib */,
 				BBF6312929F834D400E9F0C2 /* CreationExploreTableViewCell.xib */,
+				BB96EBF629FD9113002CC223 /* ExploreCollectionTableViewCell.xib */,
 				BBC7414C29F4B86500B3F41D /* HeaderItemExploreTableViewCell.xib */,
 			);
 			path = Cell;
@@ -1780,6 +1878,7 @@
 			children = (
 				BBC7413129F4A5CF00B3F41D /* Item */,
 				BBF6312C29F8361F00E9F0C2 /* CreationExploreTableViewCell.swift */,
+				BB96EBF229FD8E04002CC223 /* ExploreCollectionTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1820,6 +1919,7 @@
 		BBC4D20429E5F71E0006D337 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BB96EBD129FB0AE9002CC223 /* Collection */,
 				BB4A9CC729CEB9F40033BA00 /* Table */,
 				BBD50CDA29EF9DF400C61B86 /* ManagedTableViewInView.xib */,
 				BB333F1C29E613E4003AE7AD /* ManagedInsetGroupedTableViewInView.xib */,
@@ -1833,6 +1933,7 @@
 				BBC4D1E429E5BCFF0006D337 /* Collection */,
 				BBC4D1EE29E5BF810006D337 /* Table */,
 				BBC7414E29F4C19300B3F41D /* ItemExploreView.xib */,
+				BB96EBD629FB0C32002CC223 /* ExploreView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2256,6 +2357,7 @@
 				BB556B7329D9F82800351563 /* ChatRequestHelper.swift */,
 				BBD50CD429EF935E00C61B86 /* ChatStorageHelperLegacy.swift */,
 				BB8B18D429EB396800964724 /* GeneratedChatsRemainingHelper.swift */,
+				BB96EBFD29FDEAED002CC223 /* HapticHelper.swift */,
 				BB556B6B29D9DD4F00351563 /* IAPHelper.swift */,
 				BBC9AB4129D6061900A16CE2 /* HTTPSConnector.swift */,
 				BBC9AB2329D4EED600A16CE2 /* HTTPSClient.swift */,
@@ -2273,17 +2375,15 @@
 		BBDC4E2629C6CD4400204CD7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BBD65BEC2970766C001F730C /* arrowGif.gif */,
+				BB04B3EC296E2E7B000BEC02 /* giftGif.gif */,
+				BB5ABC6B29CB7DAA003A1E7E /* loadingDots.gif */,
 				BBA83E6A2977968400536FF9 /* pencil1.png */,
 				BBA83E6E2977968900536FF9 /* pencil2.png */,
 				BBA83E722977968E00536FF9 /* pencil3.png */,
 				BBA83E492977939600536FF9 /* Smith Faces */,
-				BB04B3EC296E2E7B000BEC02 /* giftGif.gif */,
-				BBA71D3D29D22767007B0D99 /* Ultra Image Brain Text.png */,
-				BBA71D3F29D2276B007B0D99 /* Ultra Image Brain Text Dark.png */,
-				BB04B3F8296E38E0000BEC02 /* Ultra Image1.jpg */,
-				BBD65BEC2970766C001F730C /* arrowGif.gif */,
 				BB04B34529886C8D001FDA28 /* textRecognitionTest.png */,
-				BB5ABC6B29CB7DAA003A1E7E /* loadingDots.gif */,
+				BB96EBEB29FC61CE002CC223 /* Ultra */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -2339,6 +2439,7 @@
 		BBF6312029F7745C00E9F0C2 /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				BB96EBF829FD952F002CC223 /* ExploreIndentedHeaderSourcedTableViewManager.swift */,
 				BBF6312129F7749500E9F0C2 /* IndentedHeaderSourcedTableViewManager.swift */,
 				BBF6313629F8688700E9F0C2 /* SmallBlankHeaderSourcedTableViewManager.swift */,
 			);
@@ -2464,6 +2565,7 @@
 				BB04B3F9296E38E1000BEC02 /* Ultra Image1.jpg in Resources */,
 				BBA83E5B2977939600536FF9 /* smile.png in Resources */,
 				BBC7412429F499F000B3F41D /* TextViewTableViewCell.xib in Resources */,
+				BB96EBEF29FC6205002CC223 /* sparkleDarkGif.gif in Resources */,
 				BBA71D4029D2276B007B0D99 /* Ultra Image Brain Text Dark.png in Resources */,
 				BBC9AB1029D4DFEC00A16CE2 /* LoadingEssayTableViewCell.xib in Resources */,
 				BBDC4EC029C8F96200204CD7 /* Assets.xcassets in Resources */,
@@ -2473,17 +2575,20 @@
 				BB0F044F29CC1AD300C89A0A /* PaddingChatTableViewCell.xib in Resources */,
 				BB0DBAB7296AA50000D2DFB9 /* LaunchScreen.storyboard in Resources */,
 				BBC9AB0C29D4DEAD00A16CE2 /* PromptEssayTableViewCell.xib in Resources */,
+				BB96EBE829FC5128002CC223 /* UltraNavigationItemView.xib in Resources */,
 				BBA83E522977939600536FF9 /* mask.png in Resources */,
 				BBC9AB0E29D4DFB300A16CE2 /* PremiumEssayTableViewCell.xib in Resources */,
 				BB8B18AA29E9086800964724 /* EssayView.xib in Resources */,
 				BBA83E642977939600536FF9 /* mad.png in Resources */,
 				BBA83E6F2977968900536FF9 /* pencil2.png in Resources */,
 				BB04B34629886C8D001FDA28 /* textRecognitionTest.png in Resources */,
+				BB96EBD029FB0ADE002CC223 /* RoundedViewLabelCollectionViewCell.xib in Resources */,
 				BBA83E5E2977939600536FF9 /* nomouth.png in Resources */,
 				BBE011C229F344E300CD7A64 /* introScreenshot4.png in Resources */,
 				BBA83E732977968F00536FF9 /* pencil3.png in Resources */,
 				BBC4D1FF29E5CD830006D337 /* ChatView.xib in Resources */,
 				BB0F043A29CC0D5A00C89A0A /* UserChatTableViewCell.xib in Resources */,
+				BB96EBED29FC61FE002CC223 /* sparkleLightGif.gif in Resources */,
 				BBC7414F29F4C19300B3F41D /* ItemExploreView.xib in Resources */,
 				BBA71D3E29D22767007B0D99 /* Ultra Image Brain Text.png in Resources */,
 				BBE011B829F3386400CD7A64 /* ConversationCreateTableViewCell.xib in Resources */,
@@ -2494,6 +2599,7 @@
 				BBA83E672977939600536FF9 /* cuirous.png in Resources */,
 				BBD50D2529F3238900C61B86 /* IntroView.xib in Resources */,
 				BBD50CDB29EF9DF400C61B86 /* ManagedTableViewInView.xib in Resources */,
+				BB96EBE529FC24C1002CC223 /* sprkleDarkGif old.gif in Resources */,
 				BB333F2729E61692003AE7AD /* ImageTextTableViewCell.xib in Resources */,
 				BBC7414029F4AA8D00B3F41D /* ContextMenuCell.xib in Resources */,
 				BB0DBAAF296AA4FE00D2DFB9 /* Main.storyboard in Resources */,
@@ -2503,13 +2609,16 @@
 				BBA83E552977939600536FF9 /* dead.png in Resources */,
 				BB333EFD29E60A3B003AE7AD /* CameraView.xib in Resources */,
 				BB5ABC6C29CB7DAA003A1E7E /* loadingDots.gif in Resources */,
+				BB96EBE329FC24AE002CC223 /* sparkleLightGif old.gif in Resources */,
 				BBC9AB0A29D4DE3D00A16CE2 /* EntryEssayTableViewCell.xib in Resources */,
 				BBA83E6B2977968400536FF9 /* pencil1.png in Resources */,
 				BBF6312A29F834D400E9F0C2 /* CreationExploreTableViewCell.xib in Resources */,
+				BB96EBD729FB0C32002CC223 /* ExploreView.xib in Resources */,
 				BBC4D20B29E5F7B70006D337 /* UltraView.xib in Resources */,
 				BBD65BED2970766C001F730C /* arrowGif.gif in Resources */,
 				BB04B3ED296E2E7B000BEC02 /* giftGif.gif in Resources */,
 				BBD50CE529EFA10200C61B86 /* ConversationItemTableViewCell.xib in Resources */,
+				BB96EBF729FD9113002CC223 /* ExploreCollectionTableViewCell.xib in Resources */,
 				BB4A9CC529CEB8F80033BA00 /* LabelChatTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2570,6 +2679,7 @@
 				BB9C2F51297CB7710026A441 /* EssayPromptTableViewCell.swift in Sources */,
 				BB8B184D29E6190600964724 /* ImageTextTableViewCell.swift in Sources */,
 				BBC9AB1B29D4E26F00A16CE2 /* EssayViewController+EssayBodyTableViewCellDelegate.swift in Sources */,
+				BB96EBD529FB0BAF002CC223 /* RoundedViewLabelCollectionViewCell.swift in Sources */,
 				BB8B18D129EB22CD00964724 /* PremiumUpdaterDelegate.swift in Sources */,
 				BB9D6EEE29CF67C100706F08 /* ScrollViewScroller+Convenience.swift in Sources */,
 				BB8B186E29E65E1700964724 /* ImageTextTableViewCellSource.swift in Sources */,
@@ -2588,6 +2698,7 @@
 				BBD50D0529F0631F00C61B86 /* ConversationViewController+ConversationItemTableViewCellDelegate.swift in Sources */,
 				BBC9AB2F29D521CB00A16CE2 /* RegisterUserResponse.swift in Sources */,
 				BB8B18A229E8D93700964724 /* UIViewController+TopmostViewController.swift in Sources */,
+				BB96EBEA29FC581A002CC223 /* UltraNavigationItemView.swift in Sources */,
 				BBD50CCF29EF4AFB00C61B86 /* ChatCDHelper.swift in Sources */,
 				BBD50CFE29EFA92B00C61B86 /* ConversationViewController.swift in Sources */,
 				BB8B18D529EB396800964724 /* GeneratedChatsRemainingHelper.swift in Sources */,
@@ -2625,8 +2736,10 @@
 				BBC7415829F506D900B3F41D /* ExploreItemViewController+ItemExploreViewDelegate.swift in Sources */,
 				BBC7416729F5ED6C00B3F41D /* ExploreGeneratedViewController.swift in Sources */,
 				BBD50C7F29EB80B800C61B86 /* UpdaterBroadcaster+GeneratedChatsRemainingUpdaterDelegate.swift in Sources */,
+				BB96EBFE29FDEAED002CC223 /* HapticHelper.swift in Sources */,
 				BBB351AF29F6F4D000CC15CD /* ExploreViewController+ItemCellSourceDelegate.swift in Sources */,
 				BB24FB26297C93CB00A933EA /* GlobalTabBarController.swift in Sources */,
+				BB96EBF929FD952F002CC223 /* ExploreIndentedHeaderSourcedTableViewManager.swift in Sources */,
 				BB05249A29F6FFD7008C19DE /* ExploreViewController.swift in Sources */,
 				BB0A7E70298715A300CB252F /* FavoritesViewController.swift in Sources */,
 				BBC16387296B5FF800868752 /* GradientView.swift in Sources */,
@@ -2637,7 +2750,6 @@
 				BBC4D1DC29E5B0630006D337 /* EssayTableView.swift in Sources */,
 				BB556B6E29D9E01400351563 /* PremiumUpdater.swift in Sources */,
 				BBA71D2429D13CEB007B0D99 /* PulsatingDotAnimator.swift in Sources */,
-				BBC7415529F4C5CA00B3F41D /* HeadedSourcedTableViewManager.swift in Sources */,
 				BB333F0F29E60C7D003AE7AD /* CameraView.swift in Sources */,
 				BB8B18A629E8E2E800964724 /* UltraViewControllerPresenter.swift in Sources */,
 				BB7BC150297527EB00D34695 /* AttributedLabel.swift in Sources */,
@@ -2655,6 +2767,7 @@
 				BBC7412029F486DD00B3F41D /* SourcedCollectionViewManager.swift in Sources */,
 				BBC4D20229E5CDD80006D337 /* ChatView.swift in Sources */,
 				BB0A8C09296CDB760035F046 /* RoundedView.swift in Sources */,
+				BB96EBC929FAFD5C002CC223 /* EssaySmallBlankHeaderSourcedTableViewManager.swift in Sources */,
 				BBDC4E4F29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift in Sources */,
 				BB8B18C829EB159100964724 /* GeneratedChatsRemainingUpdater.swift in Sources */,
 				BB96EBBE29F8CDE3002CC223 /* DoneToolbarController.swift in Sources */,
@@ -2702,7 +2815,6 @@
 				BBDC4EE529CADCF400204CD7 /* ChatViewController+ChatTableViewTouchDelegate.swift in Sources */,
 				BB04B3F1296E2EAE000BEC02 /* SettingsViewController.swift in Sources */,
 				BB96EBB829F8A8CB002CC223 /* ChatLoadingTableViewCell.swift in Sources */,
-				BB8B18BC29EA1BAC00964724 /* EssaySourcedTableViewManager.swift in Sources */,
 				BBDC4EE329CAD9E100204CD7 /* Bounceable.swift in Sources */,
 				BB329B4B298B409000B3824D /* SillyCropView.swift in Sources */,
 				BBC16389296B601500868752 /* Constants.swift in Sources */,
@@ -2713,6 +2825,7 @@
 				BBF6313729F8688700E9F0C2 /* SmallBlankHeaderSourcedTableViewManager.swift in Sources */,
 				BBD50D3129F324CB00C61B86 /* IntroView.swift in Sources */,
 				BBD50C8329EC532D00C61B86 /* LoadingState.swift in Sources */,
+				BB96EBD929FB0CEF002CC223 /* ExploreView.swift in Sources */,
 				BBD50D1F29F3125E00C61B86 /* ChatObjectProtocolLegacy.swift in Sources */,
 				BBD50CD529EF935E00C61B86 /* ChatStorageHelperLegacy.swift in Sources */,
 				BBC9AB3129D535C400A16CE2 /* GetChatResponse.swift in Sources */,
@@ -2723,6 +2836,7 @@
 				BBC4D1DE29E5B08B0006D337 /* ManagedTableView.swift in Sources */,
 				BBD50CDD29EF9F3D00C61B86 /* ManagedTableViewInView.swift in Sources */,
 				BBC7416929F63F3E00B3F41D /* ManagedHeaderUpdatingTableViewInViewController.swift in Sources */,
+				BB96EBDE29FB1213002CC223 /* ButtonCollectionViewCellSource.swift in Sources */,
 				BB8B187A29E75ACE00964724 /* SettingsSourcedTableViewManager.swift in Sources */,
 				BBC7414129F4AA8D00B3F41D /* ContextMenuCell.swift in Sources */,
 				BB0A8C11296D063D0035F046 /* RoundedButton.swift in Sources */,
@@ -2751,11 +2865,13 @@
 				BB556B7429D9F82800351563 /* ChatRequestHelper.swift in Sources */,
 				BB8B18B229EA0C9F00964724 /* EntryEssayTableViewCellSource.swift in Sources */,
 				BBC9AB4229D6061900A16CE2 /* HTTPSConnector.swift in Sources */,
+				BB96EBF529FD8E5C002CC223 /* ExploreCollectionTableViewCellSource.swift in Sources */,
 				BB8B18C229EA5BE800964724 /* GlobalTabBarController+PremiumUpdaterDelegate.swift in Sources */,
 				BBD50D2129F3127E00C61B86 /* ChatSenderLegacy.swift in Sources */,
 				BB8B18B629EA0CBB00964724 /* PremiumEssayTableViewCellSource.swift in Sources */,
 				BBC9AB1929D4E22700A16CE2 /* EssayViewController+EssayPremiumTableViewCellDelegate.swift in Sources */,
 				BBD50D1629F2EFFE00C61B86 /* LoadingTableViewCellSource.swift in Sources */,
+				BB96EBF329FD8E04002CC223 /* ExploreCollectionTableViewCell.swift in Sources */,
 				BB2213BE29F704D500901B65 /* ManagedCollectionView.swift in Sources */,
 				BBC9AB3829D552AC00A16CE2 /* GetImportantConstantsResponse.swift in Sources */,
 				BBC9AB1D29D4E29A00A16CE2 /* EssayViewController+EntryEssayTableViewCellDelegate.swift in Sources */,

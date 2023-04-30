@@ -9,7 +9,9 @@ import Foundation
 
 class SmallBlankHeaderSourcedTableViewManager: SourcedTableViewManager {
     
-    let BLANK_HEADER_HEIGHT: CGFloat = 20
+    var BLANK_HEADER_HEIGHT: CGFloat {
+        10
+    }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         let height = super.tableView(tableView, estimatedHeightForHeaderInSection: section)
@@ -24,6 +26,10 @@ class SmallBlankHeaderSourcedTableViewManager: SourcedTableViewManager {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return self.tableView(tableView, estimatedHeightForHeaderInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
     }
     
 }

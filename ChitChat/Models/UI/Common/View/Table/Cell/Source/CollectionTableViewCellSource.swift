@@ -14,20 +14,26 @@ protocol CollectionTableViewCellSourceDelegate {
 class CollectionTableViewCellSource: CellSource {
     
     var collectionViewCellReuseIdentifier: String?
-    var tableViewCellReuseIdentifier: String? = Registry.Common.View.Table.Cell.managedCollectionView.reuseID
+    var tableViewCellReuseIdentifier: String? {
+        Registry.Common.View.Table.Cell.managedCollectionView.reuseID
+    }
     
     var sourcedCollectionViewManager: SourcedCollectionViewManager
     
     var registry: [XIB_ReuseID]?
     
-    init(sourcedCollectionViewManager: SourcedCollectionViewManager, registry: [XIB_ReuseID]?) {
+    convenience init(_ collectionTableViewCellSource: CollectionTableViewCellSource) {
+        self.init(sourcedCollectionViewManager: collectionTableViewCellSource.sourcedCollectionViewManager, registry: collectionTableViewCellSource.registry)
+    }
+    
+    required init(sourcedCollectionViewManager: SourcedCollectionViewManager, registry: [XIB_ReuseID]?) {
         self.sourcedCollectionViewManager = sourcedCollectionViewManager
         self.registry = registry
     }
     
     //MARK: Builder methods
     
-    class Builder {
+    class Builder<T: CollectionTableViewCellSource> {
         
         var collectionSources: [[CellSource]] = []
         var registry: [XIB_ReuseID] = []
@@ -42,11 +48,11 @@ class CollectionTableViewCellSource: CellSource {
             return self
         }
         
-        func build() -> CollectionTableViewCellSource {
+        func build() -> T {
             let sourcedCollectionViewManager = SourcedCollectionViewManager()
             sourcedCollectionViewManager.sources = collectionSources
             
-            return CollectionTableViewCellSource(sourcedCollectionViewManager: sourcedCollectionViewManager, registry: registry)
+            return T(sourcedCollectionViewManager: sourcedCollectionViewManager, registry: registry)
         }
         
     }

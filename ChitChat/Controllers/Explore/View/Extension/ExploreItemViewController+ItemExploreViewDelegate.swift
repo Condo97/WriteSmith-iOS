@@ -46,6 +46,9 @@ extension ExploreItemViewController: ItemExploreViewDelegate {
             DispatchQueue.main.async {
                 // TODO: - Save creation and stuff
                 
+                // Do success haptic - light haptic happens on button release
+//                HapticHelper.doSuccessHaptic()
+                
                 // Enable roundedButton and stop animating activityView
                 roundedButton?.stopAnimatingActivityView()
                 roundedButton?.isEnabled = true

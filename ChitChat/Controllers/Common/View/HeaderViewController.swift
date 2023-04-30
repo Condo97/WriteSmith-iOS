@@ -11,7 +11,7 @@ class HeaderViewController: UpdatingViewController {
     
     var moreMenuBarItem = UIBarButtonItem()
     var shareMenuBarItem = UIBarButtonItem()
-    var proMenuBarItem = UIBarButtonItem()
+    var ultraMenuBarItem = UIBarButtonItem()
     var navigationSpacer = UIBarButtonItem()
     
     override func viewDidLoad() {
@@ -27,55 +27,33 @@ class HeaderViewController: UpdatingViewController {
         /* Set tintColor */
         navigationController?.navigationBar.tintColor = Colors.elementTextColor
         
-        /* Setup Menu Menu Bar Item */
-        let moreImage = UIImage(systemName: "line.3.horizontal")
-        let moreImageButton = UIButton(type: .custom)
-        
-        moreImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0)
-        moreImageButton.setBackgroundImage(moreImage, for: .normal)
-        moreImageButton.addTarget(self, action: #selector(openMenu), for: .touchUpInside)
-        moreImageButton.tintColor = Colors.elementTextColor
-        
-        moreMenuBarItem = UIBarButtonItem(customView: moreImageButton)
-        
-        /* Setup Share Menu Bar Item */
-        let shareImage = UIImage(named: "shareImage")?.withTintColor(Colors.elementTextColor)
-        let shareImageButton = UIButton(type: .custom)
-        
-        shareImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0)
-        shareImageButton.setBackgroundImage(shareImage, for: .normal)
-        shareImageButton.addTarget(self, action: #selector(shareApp), for: .touchUpInside)
-        shareImageButton.tintColor = Colors.elementTextColor
-        
-        shareMenuBarItem = UIBarButtonItem(customView: shareImageButton)
-        
-        /* Setup Pro Menu Bar Item */
-        //TODO: - New Pro Image
-        let proImage = UIImage.gifImageWithName(Constants.ImageName.giftGif)
-        let proImageButton = RoundedButton(type: .custom)
-        proImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0)
-        proImageButton.tintColor = Colors.elementTextColor
-        proImageButton.setBackgroundImage(proImage, for: .normal)
-        proImageButton.addTarget(self, action: #selector(ultraPressed), for: .touchUpInside)
-        
-        proMenuBarItem = UIBarButtonItem(customView: proImageButton)
+        /* Setup Menu Bar Items */
+        moreMenuBarItem = createMoreMenuBarItem()
+        shareMenuBarItem = createShareMenuBarItem()
+        ultraMenuBarItem = createUltraMenuBarItem()
         
         /* Setup Navigation Spacer */
         navigationSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         navigationSpacer.width = 14
         
-        /* Setup More */
+        /* Setup More Constraints */
         moreMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 28.0).isActive = true
         moreMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
         
-        /* Setup Share */
+        /* Setup Share Constraints */
         shareMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 28.0).isActive = true
         shareMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
         
-        /* Setup Constraints */
-        
-        proMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 34).isActive = true
-        proMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        /* Setup Ultra Constraints */
+        ultraMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 48.0).isActive = true
+        ultraMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
+        ultraMenuBarItem.customView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 24.0, right: 0)
+        if let ultraView = ultraMenuBarItem.customView as? UltraNavigationItemView {
+            let verticalOffset: CGFloat = 1.0
+            
+            ultraView.topSpaceConstraint.constant = -verticalOffset
+            ultraView.bottomSpaceConstraint.constant = -verticalOffset
+        }
         
         let imageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 140.0, height: 80.0))
         imageView.contentMode = .scaleAspectFit
@@ -101,16 +79,84 @@ class HeaderViewController: UpdatingViewController {
         
     }
     
+    override func updateGeneratedChatsRemaining(remaining: Int) {
+        super.updateGeneratedChatsRemaining(remaining: remaining)
+        
+        // Update remaining bar item on main thread
+        DispatchQueue.main.async {
+            // Check if ultraMenuBarItem is in rightBarButtonItems and if not, setRightMenuBarItems
+            if !self.navigationItem.rightBarButtonItems!.contains(where: { $0 === self.ultraMenuBarItem }) {
+                self.setRightMenuBarItems()
+            }
+            
+            // Set remaining text
+            if let ultraView = self.ultraMenuBarItem.customView as? UltraNavigationItemView {
+                ultraView.label.text = "\(remaining)"
+            }
+        }
+    }
+    
     @objc func openMenu() {
         
     }
     
     @objc func shareApp() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Show share popup
         ShareViewHelper.shareApp(viewController: self)
     }
     
     @objc func ultraPressed() {
+        // Bounce ultraBarItemView
+        if let ultraView = ultraMenuBarItem.customView as? UltraNavigationItemView {
+            ultraView.bounce(completion: nil)
+        }
+        
+        // Present ultraViewController
         UltraViewControllerPresenter.presentOnTop(animated: true)
+    }
+    
+    private func createMoreMenuBarItem() -> UIBarButtonItem {
+        /* Setup Menu Menu Bar Item */
+        let moreImage = UIImage(systemName: "line.3.horizontal")
+        let moreImageButton = UIButton(type: .custom)
+        
+        moreImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0)
+        moreImageButton.setBackgroundImage(moreImage, for: .normal)
+        moreImageButton.addTarget(self, action: #selector(openMenu), for: .touchUpInside)
+        moreImageButton.tintColor = Colors.elementTextColor
+        
+        return UIBarButtonItem(customView: moreImageButton)
+    }
+    
+    private func createShareMenuBarItem() -> UIBarButtonItem {
+        /* Setup Share Menu Bar Item */
+        let shareImage = UIImage(named: "shareImage")?.withTintColor(Colors.elementTextColor)
+        let shareImageButton = UIButton(type: .custom)
+        
+        shareImageButton.frame = CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0)
+        shareImageButton.setBackgroundImage(shareImage, for: .normal)
+        shareImageButton.addTarget(self, action: #selector(shareApp), for: .touchUpInside)
+        shareImageButton.tintColor = Colors.elementTextColor
+        
+        return UIBarButtonItem(customView: shareImageButton)
+    }
+    
+    private func createUltraMenuBarItem() -> UIBarButtonItem {
+        /* Setup Pro Menu Bar Item */
+        let HEIGHT: CGFloat = 24.0
+        let WIDTH: CGFloat = HEIGHT * 2
+        
+        let ultraNavigationItemView = RegistryHelper.instantiateAsView(nibName: Registry.Common.ultraNavigationItemView, owner: self) as! UltraNavigationItemView
+        ultraNavigationItemView.frame = CGRect(x: 0, y: 0, width: WIDTH, height: HEIGHT)
+        ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleLightGif)
+        ultraNavigationItemView.label.text = String(describing: GeneratedChatsRemainingHelper.get())
+        
+        ultraNavigationItemView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ultraPressed)))
+        
+        return UIBarButtonItem(customView: ultraNavigationItemView)
     }
     
     func setLeftMenuBarItems() {
@@ -125,7 +171,8 @@ class HeaderViewController: UpdatingViewController {
         
         // If not premium, show proMenuBarItem
         if !PremiumHelper.get() {
-            rightBarButtonItems.append(self.proMenuBarItem)
+            rightBarButtonItems.append(UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: #selector(ultraPressed)))
+            rightBarButtonItems.append(self.ultraMenuBarItem)
         }
         
         self.navigationItem.rightBarButtonItems = rightBarButtonItems

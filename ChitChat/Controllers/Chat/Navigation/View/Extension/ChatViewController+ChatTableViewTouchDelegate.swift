@@ -10,7 +10,6 @@ import Foundation
 extension ChatViewController: ManagedTableViewTouchDelegate {
     
     func tappedIndexPath(_ indexPath: IndexPath, tableView: UITableView, touch: UITouch) {
-        
         guard let chatCell = tableView.cellForRow(at: indexPath) as? ChatBubbleTableViewCell else {
             return
         }

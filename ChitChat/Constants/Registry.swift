@@ -49,6 +49,15 @@ struct Registry {
     
     struct Common {
         struct View {
+            struct Collection {
+                struct Cell {
+                    static let roundedViewLabelCollectionViewCell = XIB_ReuseID(
+                        xibName: "RoundedViewLabelCollectionViewCell",
+                        reuseID: "roundedViewLabelCollectionViewCell"
+                    )
+                }
+            }
+            
             struct Table {
                 struct Cell {
                     static let managedCollectionView = XIB_ReuseID(
@@ -76,6 +85,8 @@ struct Registry {
             static let managedTableViewIn = "ManagedTableViewInView"
             static let managedInsetGroupedTableViewIn = "ManagedInsetGroupedTableViewInView"
         }
+        
+        static let ultraNavigationItemView = "UltraNavigationItemView"
     }
     
     struct Conversation {
@@ -156,6 +167,11 @@ struct Registry {
                         )
                     }
                     
+                    static let collection = XIB_ReuseID(
+                        xibName: "ExploreCollectionTableViewCell",
+                        reuseID: "exploreCollectionTableViewCell"
+                    )
+                    
                     static let creation = XIB_ReuseID(
                         xibName: "CreationExploreTableViewCell",
                         reuseID: "creationExploreTableViewCell"
@@ -164,6 +180,7 @@ struct Registry {
             }
             
             static let itemExplore = "ItemExploreView"
+            static let explore = "ExploreView"
         }
     }
     

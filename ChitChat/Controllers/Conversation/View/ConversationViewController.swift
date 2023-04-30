@@ -134,15 +134,21 @@ class ConversationViewController: HeaderViewController {
     }
     
     @objc func editButtonPressed(_ sender: UIBarButtonItem) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Toggle isEditing
         rootView.tableView.isEditing = !rootView.tableView.isEditing
         
         if rootView.tableView.isEditing {
+            // If currently editing, show "Done"
             DispatchQueue.main.async {
                 sender.title = "Done"
                 sender.setTitleTextAttributes([.font: UIFont(name: Constants.primaryFontNameBold, size: 17.0)!], for: .normal)
                 sender.setTitleTextAttributes([.font: UIFont(name: Constants.primaryFontNameBold, size: 17.0)!], for: .selected)
             }
         } else {
+            // If not editing, show "Edit"
             DispatchQueue.main.async {
                 sender.title = "Edit"
                 sender.setTitleTextAttributes([.font: UIFont(name: Constants.primaryFontNameMedium, size: 17.0)!], for: .normal)
@@ -152,6 +158,9 @@ class ConversationViewController: HeaderViewController {
     }
     
     @objc func openSettings() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
         // Push to settings
         navigationController?.pushViewController(SettingsPresentationSpecification().viewController, animated: true)
     }

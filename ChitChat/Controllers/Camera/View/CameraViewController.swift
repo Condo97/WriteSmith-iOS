@@ -199,6 +199,8 @@ class CameraViewController: UIViewController {
     }
     
     @objc func cameraButtonSelector() {
+        // cameraButtonPressed already does a haptic, also this isn't even working rn lol
+        
         cameraButtonPressed()
     }
     

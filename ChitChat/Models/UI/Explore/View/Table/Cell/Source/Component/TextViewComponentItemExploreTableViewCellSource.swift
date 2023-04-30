@@ -79,6 +79,9 @@ class TextViewComponentItemExploreTableViewCellSource: NSObject, ComponentItemTa
 extension TextViewComponentItemExploreTableViewCellSource: DoneToolbarControllerDelegate {
     
     func doneToolbarButtonPressed(_ sender: Any) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
         // Call finished editing on editing delegate
         editingDelegate?.finishedEditing(source: self)
         

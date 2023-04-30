@@ -8,8 +8,10 @@
 import Foundation
 
 extension ChatViewController: CameraViewControllerDelegate {
+    
     func didGetScan(text: String) {
         generateChat(inputText: text)
     }
+    
 }
 

@@ -27,11 +27,22 @@ class ConversationSourcedTableViewManager: SourcedTableViewManager {
                 
                 // Get item source from indexPath
                 if let itemSource = sourceFrom(indexPath: indexPath) as? ConversationItemTableViewCellSource {
-                    // Delete conversationObject from CoreData
-                    ConversationCDHelper.deleteConversation(itemSource.conversationObject)
+                    // Show alert to double check before deleting
+                    let ac = UIAlertController(title: "Delete Conversation", message: "Are you sure you want to delete this conversation?", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { action in
+                        // Do haptic
+                        HapticHelper.doMediumHaptic()
+                        
+                        // Delete conversationObject from CoreData
+                        ConversationCDHelper.deleteConversation(itemSource.conversationObject)
+                        
+                        // Delete managed row
+                        managedTableView.deleteManagedRow(at: indexPath, with: .none)
+                    }))
+                    ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                    }))
                     
-                    // Delete managed row
-                    managedTableView.deleteManagedRow(at: indexPath, with: .none)
+                    UIApplication.shared.topmostViewController()?.present(ac, animated: true)
                 }
             }
         }

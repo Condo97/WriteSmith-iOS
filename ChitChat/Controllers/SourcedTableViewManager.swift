@@ -20,11 +20,13 @@ protocol SourcedTableViewManagerDelegate {
 class SourcedTableViewManager: NSObject {
     // Constants
     private let DEFAULT_HEADER_HEIGHT: CGFloat = 40.0
-    private let FIRST_ROW_HEADER_HIGHT_ADDITION: CGFloat = 40.0
+    private let FIRST_SECTION_HEADER_HIGHT_ADDITION: CGFloat = 0.0
     
     // Instance variables
     var sources: [[CellSource]] = []
     var orderedSectionHeaderTitles: [String]?
+    
+    var hapticsEnabled: Bool = true
     
     var delegate: SourcedTableViewManagerDelegate?
     
@@ -58,10 +60,18 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
+        // Get source from indexPath
         let source = sourceFrom(indexPath: indexPath)
         
+        // If source is selectable, call didSelect
         if let selectableSource = source as? SelectableCellSource {
             selectableSource.didSelect?(tableView, indexPath)
+        }
+        
+        // If hapticsEnabled, do a haptic
+        if hapticsEnabled {
+            // Do haptic
+            HapticHelper.doLightHaptic()
         }
         
         delegate?.didSelectSourceAt(source: source!, indexPath: indexPath)
@@ -83,8 +93,8 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        // Ensure there should be section headers, otherwise return 0 as height
-        guard orderedSectionHeaderTitles != nil else {
+        // Ensure there should be section headers, otherwise return 0
+        guard orderedSectionHeaderTitles != nil && orderedSectionHeaderTitles!.count > 0 else {
             return 0
         }
         
@@ -100,7 +110,7 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
         
         // Return default header height plus first row header height addition for first section, then return default header height
         if section == 0 {
-            return DEFAULT_HEADER_HEIGHT + FIRST_ROW_HEADER_HIGHT_ADDITION
+            return DEFAULT_HEADER_HEIGHT + FIRST_SECTION_HEADER_HIGHT_ADDITION
         }
         
         return DEFAULT_HEADER_HEIGHT

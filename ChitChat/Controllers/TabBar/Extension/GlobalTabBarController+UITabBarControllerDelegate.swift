@@ -8,6 +8,7 @@
 import Foundation
 
 extension GlobalTabBarController: UITabBarControllerDelegate {
+    
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
         // If the favorites button is selected, show ultra screen or share depending on tier... Favorites is not even implemented by the way, it's just there as a placeholder for now
@@ -26,6 +27,11 @@ extension GlobalTabBarController: UITabBarControllerDelegate {
         }
         
         return true
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
     }
     
 }

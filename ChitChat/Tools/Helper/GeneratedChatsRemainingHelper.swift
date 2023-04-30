@@ -16,9 +16,4 @@ class GeneratedChatsRemainingHelper: Any {
         return UserDefaults.standard.integer(forKey: Constants.userDefaultStoredGeneratedChatsRemaining)
     }
     
-    /***
-     Ensures the 
-     */
-    
-    
 }

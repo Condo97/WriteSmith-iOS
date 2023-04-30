@@ -21,6 +21,10 @@ extension Bounceable {
     
     // Bounce TableView Cell
     func beginBounce(completion: (()->Void)?) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Animate bounce
         UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
             self.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
         }) { boolean in
@@ -29,6 +33,7 @@ extension Bounceable {
     }
     
     func endBounce(completion: (()->Void)?) {
+        // Animate unbounce
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
             self.transform = CGAffineTransform(scaleX: 1, y: 1)
         }) { boolean in

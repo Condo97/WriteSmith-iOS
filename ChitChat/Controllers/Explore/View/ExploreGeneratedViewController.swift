@@ -33,9 +33,9 @@ class ExploreGeneratedViewController: ManagedHeaderUpdatingTableViewInViewContro
         navigationItem.leftBarButtonItems = nil
     }
     
-    @objc func backButtonPressed(_ sender: Any) {
-        // Pop to root view controller
-        navigationController?.popToRootViewController(animated: true)
+    override func viewWillDisappear(_ animated: Bool) {
+        // Do haptic here
+        HapticHelper.doLightHaptic()
     }
     
     

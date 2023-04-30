@@ -8,7 +8,12 @@
 import Foundation
 
 extension EssayViewController: EssayPromptTableViewCellDelegate {
+    
     func didPressCopyText(cell: EssayPromptTableViewCell) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Get row or return
         guard let row = rootView.tableView.indexPath(for: cell)?.row else {
             print("Could not find row of cell to copy...")
             return
@@ -55,7 +60,10 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
     }
     
     func didPressShare(cell: EssayPromptTableViewCell) {
-        // Share row with appended footer text
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Get row or return
         guard let row = rootView.tableView.indexPath(for: cell)?.row else {
             print("Could not find row of cell to share...")
             return
@@ -77,15 +85,22 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
             return
         }
         
+        // Append footer text TODO: - Should this be changed to check for ultra?
         let text = "Prompt: \(promptText)\n\n\(essayText)\n\n\(Constants.copyFooterText)"
         
         ShareViewHelper.share(text, viewController: self)
     }
     
     func didPressDeleteRow(cell: EssayPromptTableViewCell) {
+        // Do haptic
+        HapticHelper.doWarningHaptic()
+        
         //TODO: - Delete row
         let ac = UIAlertController(title: "Delete", message: "Are you sure you'd like to delete this Essay?", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { UIAlertAction in
+            // Do haptic
+            HapticHelper.doMediumHaptic()
+            
             guard let row = self.rootView.tableView.indexPath(for: cell)?.row else {
                 print("Could not find row of cell to delete...")
                 return
@@ -112,7 +127,11 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
             }
         }))
         
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            // Do haptic
+            HapticHelper.doLightHaptic()
+        }))
         present(ac, animated: true)
     }
+    
 }

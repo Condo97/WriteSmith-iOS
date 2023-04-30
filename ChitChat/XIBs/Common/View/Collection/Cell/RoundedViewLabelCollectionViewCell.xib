@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="roundedViewLabelCollectionViewCell" id="qQB-Ag-i2g" customClass="RoundedViewLabelCollectionViewCell" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="292" height="98"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wRa-b4-3qO">
+                <rect key="frame" x="0.0" y="0.0" width="292" height="98"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eyy-Nq-2xj" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="292" height="98"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asdfadsfasdfadf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VU0-Fi-8P6">
+                                <rect key="frame" x="14" y="7" width="264" height="84"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="AIChatBubbleColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="VU0-Fi-8P6" secondAttribute="bottom" constant="7" id="0iW-Bl-bCV"/>
+                            <constraint firstItem="VU0-Fi-8P6" firstAttribute="leading" secondItem="Eyy-Nq-2xj" secondAttribute="leading" constant="14" id="0mD-N2-el9"/>
+                            <constraint firstItem="VU0-Fi-8P6" firstAttribute="top" secondItem="Eyy-Nq-2xj" secondAttribute="top" constant="7" id="Frp-bj-AvH"/>
+                            <constraint firstAttribute="trailing" secondItem="VU0-Fi-8P6" secondAttribute="trailing" constant="14" id="tqB-5G-jML"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Eyy-Nq-2xj" secondAttribute="trailing" id="3Ms-Oz-y9r"/>
+                    <constraint firstItem="Eyy-Nq-2xj" firstAttribute="top" secondItem="wRa-b4-3qO" secondAttribute="top" id="UNn-QW-bSg"/>
+                    <constraint firstItem="Eyy-Nq-2xj" firstAttribute="leading" secondItem="wRa-b4-3qO" secondAttribute="leading" id="ngU-Eb-uT7"/>
+                    <constraint firstAttribute="bottom" secondItem="Eyy-Nq-2xj" secondAttribute="bottom" id="poV-o5-uZD"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <size key="customSize" width="292" height="98"/>
+            <connections>
+                <outlet property="label" destination="VU0-Fi-8P6" id="hlq-Ow-bsL"/>
+                <outlet property="roundedView" destination="Eyy-Nq-2xj" id="GiZ-jK-wOm"/>
+            </connections>
+            <point key="canvasLocation" x="285.49618320610688" y="40.845070422535215"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="AIChatBubbleColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

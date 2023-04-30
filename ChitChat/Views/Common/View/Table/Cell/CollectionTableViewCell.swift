@@ -11,6 +11,7 @@ class CollectionTableViewCell: UITableViewCell, LoadableCell {
     
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionView: ManagedCollectionView!
+    @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
     
     func loadWithSource(_ source: CellSource) {

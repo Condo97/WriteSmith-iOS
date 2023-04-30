@@ -16,17 +16,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="393" height="155"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="QQX-y7-nYr" customClass="ManagedCollectionView" customModule="ChitChat" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="120"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="QQX-y7-nYr" customClass="ManagedCollectionView" customModule="ChitChat" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="69"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="120" id="x2X-1o-ejC"/>
+                            <constraint firstAttribute="height" constant="69" id="x2X-1o-ejC"/>
                         </constraints>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0dE-RF-quG">
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TuS-cL-2YF">
                             <size key="itemSize" width="170" height="120"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="24" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
                 </subviews>
@@ -41,6 +41,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="collectionView" destination="QQX-y7-nYr" id="yip-Zo-rml"/>
+                <outlet property="collectionViewFlowLayout" destination="TuS-cL-2YF" id="E7C-3E-Hem"/>
+                <outlet property="collectionViewHeightConstraint" destination="x2X-1o-ejC" id="H1T-4Q-4nj"/>
             </connections>
             <point key="canvasLocation" x="264.8854961832061" y="-253.16901408450707"/>
         </tableViewCell>

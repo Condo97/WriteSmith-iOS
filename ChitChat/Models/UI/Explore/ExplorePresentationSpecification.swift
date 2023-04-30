@@ -9,10 +9,10 @@ import Foundation
 
 class ExplorePresentationSpecification: PresentationSpecification {
     
-    var viewController: UIViewController = ExploreViewController.Builder<ExploreViewController>(sourcedTableViewManager: IndentedHeaderSourcedTableViewManager())
+    var viewController: UIViewController = ExploreViewController.Builder<ExploreViewController>(sourcedTableViewManager: ExploreIndentedHeaderSourcedTableViewManager())
         .set(sources: [
             [
-                CollectionTableViewCellSource.Builder()
+                ExploreCollectionTableViewCellSource.Builder<ExploreCollectionTableViewCellSource>()
                     .set(collectionSources: [
                         [
                             ItemSource(
@@ -42,7 +42,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                     .build()
             ],
             [
-                CollectionTableViewCellSource.Builder()
+                ExploreCollectionTableViewCellSource.Builder<ExploreCollectionTableViewCellSource>()
                     .set(collectionSources: [
                         [
                             ItemSource(
@@ -79,7 +79,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                     .build()
             ],
             [
-                CollectionTableViewCellSource.Builder()
+                ExploreCollectionTableViewCellSource.Builder<ExploreCollectionTableViewCellSource>()
                     .set(collectionSources: [
                         [
                             ItemSource(
@@ -170,7 +170,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
             "Food",
             "Entertainment"
         ])
-        .register(Registry.Common.View.Table.Cell.managedCollectionView)
-        .build(managedTableViewNibName: Registry.Common.View.managedTableViewIn)
+        .register(Registry.Explore.View.Table.Cell.collection)
+        .build(managedTableViewNibName: Registry.Explore.View.explore)
     
 }

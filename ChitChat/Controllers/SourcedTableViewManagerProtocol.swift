@@ -11,6 +11,8 @@ protocol SourcedTableViewManagerProtocol: UITableViewDelegate, UITableViewDataSo
     var sources: [[CellSource]] { get set }
     var orderedSectionHeaderTitles: [String]? { get set }
     
+    var hapticsEnabled: Bool { get set }
+    
     var delegate: SourcedTableViewManagerDelegate? { get set }
 }
 

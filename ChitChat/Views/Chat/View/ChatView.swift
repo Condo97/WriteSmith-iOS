@@ -96,6 +96,9 @@ class ChatView: UIView {
     func inputTextViewStartWriting() {
         // Set inputTextView to blank
         if inputTextView.text == inputPlaceholder {
+            // Do haptic
+            HapticHelper.doLightHaptic()
+            
             inputTextViewSetToBlank()
         }
     }

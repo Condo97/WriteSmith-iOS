@@ -91,6 +91,9 @@ extension TextFieldComponentItemExploreTableViewCellSource: UITextFieldDelegate 
 extension TextFieldComponentItemExploreTableViewCellSource: DoneToolbarControllerDelegate {
     
     func doneToolbarButtonPressed(_ sender: Any) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
         // Call finished editing on editing delegate
         editingDelegate?.finishedEditing(source: self)
         

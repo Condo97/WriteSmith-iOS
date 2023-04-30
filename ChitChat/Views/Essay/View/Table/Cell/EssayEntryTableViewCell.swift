@@ -71,6 +71,9 @@ class EssayEntryTableViewCell: UITableViewCell, LoadableCell {
     func textViewStartWriting() {
         // Set inputTextView to blank
         if textView.text == inputPlaceholder || textView.text == tryInputPlaceholder {
+            // Do haptic
+            HapticHelper.doLightHaptic()
+            
             textViewSetToBlank()
         }
     }

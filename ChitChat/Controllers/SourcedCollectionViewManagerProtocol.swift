@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SourcedCollectionViewManagerProtocol: UICollectionViewDelegate, UICollectionViewDataSource {
+protocol SourcedCollectionViewManagerProtocol: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var sources: [[CellSource]] { get set }
     
     var delegate: SourcedCollectionViewManagerDelegate? { get set }
