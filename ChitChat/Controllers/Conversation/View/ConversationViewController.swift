@@ -129,8 +129,8 @@ class ConversationViewController: HeaderViewController {
         editingBarButtonItem.setTitleTextAttributes([.font: UIFont(name: Constants.primaryFontNameMedium, size: 17.0)!], for: .normal)
         editingBarButtonItem.setTitleTextAttributes([.font: UIFont(name: Constants.primaryFontNameMedium, size: 17.0)!], for: .selected)
         
-        // Insert edit button item at first index of right menu bar items
-        navigationItem.rightBarButtonItems?.insert(editingBarButtonItem, at: 0)
+        // APpend edit button item to right menu bar items
+        navigationItem.rightBarButtonItems?.append(editingBarButtonItem)
     }
     
     @objc func editButtonPressed(_ sender: UIBarButtonItem) {

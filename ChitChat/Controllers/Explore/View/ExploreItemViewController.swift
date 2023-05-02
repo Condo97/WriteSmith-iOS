@@ -20,7 +20,7 @@ class ExploreItemViewController: HeaderViewController {
     
     
     lazy var rootView: ItemExploreView = {
-        let itemExploreView = RegistryHelper.instantiateAsView(nibName: Registry.Create.View.itemExplore, owner: self) as! ItemExploreView
+        let itemExploreView = RegistryHelper.instantiateAsView(nibName: Registry.Explore.View.itemExplore, owner: self) as! ItemExploreView
         itemExploreView.delegate = self
         return itemExploreView
     }()
@@ -39,8 +39,8 @@ class ExploreItemViewController: HeaderViewController {
         sourcedTableViewManager.orderedSectionHeaderTitles = orderedSectionHeaderTitles
         
         /* Register nibs */
-        RegistryHelper.register(Registry.Create.View.Table.Cell.Item.header, to: rootView.tableView)
-        RegistryHelper.register(Registry.Create.View.Table.Cell.Item.component, to: rootView.tableView)
+        RegistryHelper.register(Registry.Explore.View.Table.Cell.Item.header, to: rootView.tableView)
+        RegistryHelper.register(Registry.Explore.View.Table.Cell.Item.component, to: rootView.tableView)
         
         /* Set required component sources and editing delegates */
         for sourceArray in sourcedTableViewManager.sources {

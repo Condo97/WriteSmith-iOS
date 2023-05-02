@@ -63,7 +63,7 @@ extension ExploreItemViewController: ItemExploreViewDelegate {
                         ]
                     ])
                     .set(itemSource: self.itemSource!)
-                    .register(Registry.Create.View.Table.Cell.creation)
+                    .register(Registry.Explore.View.Table.Cell.creation)
                     .build(managedTableViewNibName: Registry.Common.View.managedTableViewIn)
                 
                 self.navigationController?.pushViewController(exploreGeneratedViewController, animated: true)

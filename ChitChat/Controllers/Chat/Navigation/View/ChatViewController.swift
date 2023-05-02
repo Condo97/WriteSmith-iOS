@@ -257,8 +257,8 @@ class ChatViewController: HeaderViewController {
         plusButton.addTarget(self, action: #selector(addConversationPressed), for: .touchUpInside)
         let plusBarButtonItem = UIBarButtonItem(customView: plusButton)
         
-        // Set as first rightBarButtonItem
-        navigationItem.rightBarButtonItems?.insert(plusBarButtonItem, at: 0)
+        // Append as last rightBarButtonItem
+        navigationItem.rightBarButtonItems?.append(plusBarButtonItem)
     }
     
     override func openMenu() {
