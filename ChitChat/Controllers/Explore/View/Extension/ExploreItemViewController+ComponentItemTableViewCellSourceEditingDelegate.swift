@@ -24,7 +24,7 @@ extension ExploreItemViewController: ComponentItemTableViewCellSourceEditingDele
         }
         
         // If the index is nil and the value text is blank, check if required, and if so add to requiredComponentSources and proceed
-        else if index == nil && (source.value == nil || source.value!.count == 0) {
+        else if index == nil && (source.value == nil || source.value!.count == 0) && source.required {
             requiredComponentSources.append(source)
         }
         

@@ -44,13 +44,13 @@ extension ComponentItemTableViewCellSource {
     
     var collectionViewCellReuseIdentifier: String? {
         get {
-            Registry.Explore.View.Collection.Cell.item.reuseID
+            Registry.Create.View.Collection.Cell.item.reuseID
         }
     }
     
     var tableViewCellReuseIdentifier: String? {
         get {
-            Registry.Explore.View.Table.Cell.Item.component.reuseID
+            Registry.Create.View.Table.Cell.Item.component.reuseID
         }
     }
     

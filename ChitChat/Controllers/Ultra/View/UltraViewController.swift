@@ -157,10 +157,10 @@ class UltraViewController: UpdatingViewController {
     func setupUltraImageView() {
         if traitCollection.userInterfaceStyle != .dark {
             // Light image
-            rootView.imageView.image = UIImage(named: Constants.ImageName.ultraLight)
+            rootView.imageView.image = UIImage(named: Constants.ImageName.Ultra.ultraLight)
         } else {
             // Dark image
-            rootView.imageView.image = UIImage(named: Constants.ImageName.ultraDark)
+            rootView.imageView.image = UIImage(named: Constants.ImageName.Ultra.ultraDark)
         }
     }
     

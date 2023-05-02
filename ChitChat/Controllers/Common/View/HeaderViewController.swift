@@ -96,6 +96,20 @@ class HeaderViewController: UpdatingViewController {
         }
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        // Set the ultra sparkle gif if the mode changed from dark to light or so
+        // TODO: - This code is repeated
+        
+        let userInterfaceStyle = traitCollection.userInterfaceStyle
+        if let ultraNavigationItemView = ultraMenuBarItem.customView as? UltraNavigationItemView {
+            if userInterfaceStyle == .dark {
+                ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleDarkGif)
+            } else {
+                ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleLightGif)
+            }
+        }
+    }
+    
     @objc func openMenu() {
         
     }
@@ -146,14 +160,28 @@ class HeaderViewController: UpdatingViewController {
     
     private func createUltraMenuBarItem() -> UIBarButtonItem {
         /* Setup Pro Menu Bar Item */
+        // Set height and width
         let HEIGHT: CGFloat = 24.0
         let WIDTH: CGFloat = HEIGHT * 2
         
+        // Get userInterfaceStyle
+        let userInterfaceStyle = traitCollection.userInterfaceStyle
+        
+        // Setup ultra navigation item
         let ultraNavigationItemView = RegistryHelper.instantiateAsView(nibName: Registry.Common.ultraNavigationItemView, owner: self) as! UltraNavigationItemView
         ultraNavigationItemView.frame = CGRect(x: 0, y: 0, width: WIDTH, height: HEIGHT)
-        ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleLightGif)
+        
+        // Set label text to generated chats remaining
         ultraNavigationItemView.label.text = String(describing: GeneratedChatsRemainingHelper.get())
         
+        // Set image to light or dark sprakles depending on userInterfaceStyle
+        if userInterfaceStyle == .dark {
+            ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleDarkGif)
+        } else {
+            ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleLightGif)
+        }
+        
+        // Ådd gesture recognizer to ultraNavigationItemView and return as bar button item
         ultraNavigationItemView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ultraPressed)))
         
         return UIBarButtonItem(customView: ultraNavigationItemView)

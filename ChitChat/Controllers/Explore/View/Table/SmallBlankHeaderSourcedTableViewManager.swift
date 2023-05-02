@@ -9,7 +9,7 @@ import Foundation
 
 class SmallBlankHeaderSourcedTableViewManager: SourcedTableViewManager {
     
-    var BLANK_HEADER_HEIGHT: CGFloat {
+    var blankHeaderHeight: CGFloat {
         10
     }
     
@@ -18,7 +18,7 @@ class SmallBlankHeaderSourcedTableViewManager: SourcedTableViewManager {
         
         // If height is 0 from the super call return BLANK_HEADER_HEIGHT, otherwise return height
         if height <= 0 {
-            return BLANK_HEADER_HEIGHT
+            return blankHeaderHeight
         }
         
         return height

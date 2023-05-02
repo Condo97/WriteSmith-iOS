@@ -20,7 +20,7 @@ class ExploreItemViewController: HeaderViewController {
     
     
     lazy var rootView: ItemExploreView = {
-        let itemExploreView = RegistryHelper.instantiateAsView(nibName: Registry.Explore.View.itemExplore, owner: self) as! ItemExploreView
+        let itemExploreView = RegistryHelper.instantiateAsView(nibName: Registry.Create.View.itemExplore, owner: self) as! ItemExploreView
         itemExploreView.delegate = self
         return itemExploreView
     }()
@@ -39,8 +39,8 @@ class ExploreItemViewController: HeaderViewController {
         sourcedTableViewManager.orderedSectionHeaderTitles = orderedSectionHeaderTitles
         
         /* Register nibs */
-        RegistryHelper.register(Registry.Explore.View.Table.Cell.Item.header, to: rootView.tableView)
-        RegistryHelper.register(Registry.Explore.View.Table.Cell.Item.component, to: rootView.tableView)
+        RegistryHelper.register(Registry.Create.View.Table.Cell.Item.header, to: rootView.tableView)
+        RegistryHelper.register(Registry.Create.View.Table.Cell.Item.component, to: rootView.tableView)
         
         /* Set required component sources and editing delegates */
         for sourceArray in sourcedTableViewManager.sources {
@@ -53,12 +53,15 @@ class ExploreItemViewController: HeaderViewController {
                     if componentSource.required {
                         requiredComponentSources.append(componentSource)
                     }
+                    
+                    // Call finishedEditing on each componentSource in case there is text in any of the fields to potentially enable generate button
+                    finishedEditing(source: componentSource)
                 }
             }
         }
         
-        /* Call autoSetButtonEnabled */
-        autoSetButtonEnabled()
+        /* Set tap gesture recognizer to dismiss keyboard */
+        rootView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedScreen)))
         
     }
     
@@ -80,6 +83,10 @@ class ExploreItemViewController: HeaderViewController {
             }
         }
         
+    }
+    
+    @objc func tappedScreen(_ sender: Any) {
+        rootView.endEditing(true)
     }
     
     //MARK: Builder Functions

@@ -28,11 +28,10 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="58" id="G1q-Hj-9Ex"/>
                             </constraints>
+                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="21"/>
                             <color key="tintColor" name="ElementTextColor"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Generate">
-                                <fontDescription key="titleFontDescription" name="Avenir-Heavy" family="Avenir" pointSize="21"/>
-                            </buttonConfiguration>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Generate"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="hasArrow" value="YES"/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="hasActivityView" value="YES"/>
@@ -56,16 +55,15 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCC-vO-cJD" customClass="GradientView" customModule="ChitChat" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="664" width="393" height="48"/>
+                    <rect key="frame" x="0.0" y="688" width="393" height="24"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="MXD-le-FkC"/>
+                        <constraint firstAttribute="height" constant="24" id="MXD-le-FkC"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="gradientColor">
                             <color key="value" name="ChatBackgroundColor"/>
                         </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="reversed" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>

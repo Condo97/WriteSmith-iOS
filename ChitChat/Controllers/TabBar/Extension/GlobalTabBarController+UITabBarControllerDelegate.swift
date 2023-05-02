@@ -17,6 +17,7 @@ extension GlobalTabBarController: UITabBarControllerDelegate {
             // TODO: - Make the "premium" or "share" button favorites, and make it show but say they need to subscribe if not subscriped to premium
             if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
                 //TODO: This sorta thing is repeated a lot
+                
                 UltraViewControllerPresenter.presentOnTop(animated: true)
             } else {
                 // Show share app popup
@@ -24,6 +25,17 @@ extension GlobalTabBarController: UITabBarControllerDelegate {
             }
             
             return false
+        }
+        
+        // If the Write button is selected again and top view in the navigation controller is conversation view, then transition to the most recent conversation and return false so the tabBar doesn't push
+        if let vcAsNavController = viewController as? UINavigationController {
+            if let topVC = vcAsNavController.topViewController {
+                if let conversationVC = topVC as? ConversationViewController {
+                    conversationVC.pushWith(conversation: ConversationResumingManager.conversation ?? ConversationCDHelper.appendConversation()!, animated: true)
+                    
+                    return false
+                }
+            }
         }
         
         return true

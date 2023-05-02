@@ -11,7 +11,7 @@ extension GlobalTabBarController: PremiumUpdaterDelegate {
     
     func updatePremium(isPremium: Bool) {
         DispatchQueue.main.async {
-            self.updateFavoritesTabBarItem()
+//            self.updateFavoritesTabBarItem()
         }
     }
     

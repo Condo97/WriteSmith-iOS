@@ -31,6 +31,8 @@ class TextViewComponentItemExploreTableViewCellSource: NSObject, ComponentItemTa
     var view: UIView = {
         let textView = PlaceholderTextView()
         textView.font = UIFont(name: Constants.primaryFontName, size: 15.0)
+        textView.backgroundColor = .clear
+        textView.textColor = Colors.aiChatTextColor
         return textView
     }()
     var viewHeight: CGFloat = 140
@@ -38,6 +40,14 @@ class TextViewComponentItemExploreTableViewCellSource: NSObject, ComponentItemTa
     var value: String? {
         get {
             if let textView = view as? UITextView {
+                if let placeholderTextView = textView as? PlaceholderTextView {
+                    // If the textView is a PlaceholderTextView, ensure the text is not equal to placeholder, otherwise return nil
+                    guard !placeholderTextView.textIsPlaceholder() else {
+                        return nil
+                    }
+                }
+                
+                // Return the textView's value
                 return textView.text
             }
             
@@ -52,6 +62,10 @@ class TextViewComponentItemExploreTableViewCellSource: NSObject, ComponentItemTa
     
     convenience init(headerText: String, promptPrefix: String, required: Bool) {
         self.init(headerText: headerText, promptPrefix: promptPrefix, detailTitle: nil, detailText: nil, required: required)
+    }
+    
+    convenience init(headerText: String, promptPrefix: String, detailTitle: String?, detailText: String?) {
+        self.init(headerText: headerText, promptPrefix: promptPrefix, detailTitle: detailTitle, detailText: detailText, required: false)
     }
     
     init(headerText: String, promptPrefix: String, detailTitle: String?, detailText: String?, required: Bool) {
@@ -69,6 +83,7 @@ class TextViewComponentItemExploreTableViewCellSource: NSObject, ComponentItemTa
         doneToolbarController.delegate = self
         if let textView = view as? PlaceholderTextView {
             textView.inputPlaceholder = inputPlaceholder
+            textView.inputTextViewSetToPlaceholder()
             textView.inputAccessoryView = doneToolbarController.toolbar
             textView.delegate = self
         }
@@ -82,9 +97,6 @@ extension TextViewComponentItemExploreTableViewCellSource: DoneToolbarController
         // Do haptic
         HapticHelper.doLightHaptic()
         
-        // Call finished editing on editing delegate
-        editingDelegate?.finishedEditing(source: self)
-        
         // End editing on view to dismiss keyboard
         view.endEditing(true)
     }
@@ -96,7 +108,9 @@ extension TextViewComponentItemExploreTableViewCellSource: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         // Clear the input placeholder text
         if let placeholderTextView = textView as? PlaceholderTextView {
-            placeholderTextView.inputTextViewSetToBlank()
+            if placeholderTextView.textIsPlaceholder() {
+                placeholderTextView.inputTextViewSetToBlank()
+            }
         }
     }
     
@@ -107,6 +121,9 @@ extension TextViewComponentItemExploreTableViewCellSource: UITextViewDelegate {
                 placeholderTextView.inputTextViewSetToPlaceholder()
             }
         }
+        
+        // Call finished editing on editing delegate
+        editingDelegate?.finishedEditing(source: self)
     }
     
 }

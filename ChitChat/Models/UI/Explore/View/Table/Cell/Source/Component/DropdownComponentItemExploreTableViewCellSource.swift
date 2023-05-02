@@ -33,6 +33,7 @@ class DropdownComponentItemExploreTableViewCellSource: ComponentItemTableViewCel
         let label = UILabel()
         label.font = UIFont(name: Constants.primaryFontName, size: 15.0)
         label.isUserInteractionEnabled = true
+        label.textColor = Colors.aiChatTextColor
         return label
     }()
     var viewHeight: CGFloat = 48
@@ -46,6 +47,10 @@ class DropdownComponentItemExploreTableViewCellSource: ComponentItemTableViewCel
     
     convenience init(headerText: String, promptPrefix: String, required: Bool, dropdownItems: [ContextMenuItem]) {
         self.init(headerText: headerText, promptPrefix: promptPrefix, detailTitle: nil, detailText: nil, required: required, dropdownItems: dropdownItems)
+    }
+    
+    convenience init(headerText: String, promptPrefix: String, detailTitle: String?, detailText: String?, dropdownItems: [ContextMenuItem]) {
+        self.init(headerText: headerText, promptPrefix: promptPrefix, detailTitle: detailTitle, detailText: detailText, required: false, dropdownItems: dropdownItems)
     }
     
     init(headerText: String, promptPrefix: String, detailTitle: String?, detailText: String?, required: Bool, dropdownItems: [ContextMenuItem]) {

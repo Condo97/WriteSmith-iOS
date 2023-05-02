@@ -13,6 +13,8 @@ class TextFieldComponentItemExploreTableViewCellSource: NSObject,  ComponentItem
     // Constants
     private let inputPlaceholder = "Tap to start typing..."
     
+    private let PLACEHOLDER_TEXT_ALPHA: CGFloat = 0.4
+    
     // Initialization variables
     private let doneToolbarController: DoneToolbarController
     
@@ -30,6 +32,8 @@ class TextFieldComponentItemExploreTableViewCellSource: NSObject,  ComponentItem
     var view: UIView = {
         let textField = UITextField()
         textField.font = UIFont(name: Constants.primaryFontName, size: 15.0)
+        textField.backgroundColor = .clear
+        textField.textColor = Colors.aiChatTextColor
         return textField
     }()
     var viewHeight: CGFloat = 48
@@ -53,6 +57,10 @@ class TextFieldComponentItemExploreTableViewCellSource: NSObject,  ComponentItem
         self.init(headerText: headerText, promptPrefix: promptPrefix, detailTitle: nil, detailText: nil, required: required)
     }
     
+    convenience init(headerText: String, promptPrefix: String, detailTitle: String?, detailText: String?) {
+        self.init(headerText: headerText, promptPrefix: promptPrefix, detailTitle: detailTitle, detailText: detailText, required: false)
+    }
+    
     init(headerText: String, promptPrefix: String, detailTitle: String?, detailText: String?, required: Bool) {
         self.headerText = headerText
         self.promptPrefix = promptPrefix
@@ -66,7 +74,7 @@ class TextFieldComponentItemExploreTableViewCellSource: NSObject,  ComponentItem
         // Set doneToolbarController and textField delegate after super.init() call
         doneToolbarController.delegate = self
         if let textField = view as? UITextField {
-            textField.placeholder = inputPlaceholder
+            textField.attributedPlaceholder = NSAttributedString(string: inputPlaceholder, attributes: [.foregroundColor: Colors.aiChatTextColor.withAlphaComponent(PLACEHOLDER_TEXT_ALPHA)])
             textField.inputAccessoryView = doneToolbarController.toolbar
             textField.delegate = self
         }
@@ -77,13 +85,15 @@ class TextFieldComponentItemExploreTableViewCellSource: NSObject,  ComponentItem
 extension TextFieldComponentItemExploreTableViewCellSource: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Call finished editing on editing delegate
-        editingDelegate?.finishedEditing(source: self)
-        
         // End editing on textField and return false
         textField.endEditing(true)
         
         return false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // Call finished editing on editing delegate
+        editingDelegate?.finishedEditing(source: self)
     }
     
 }
@@ -93,9 +103,6 @@ extension TextFieldComponentItemExploreTableViewCellSource: DoneToolbarControlle
     func doneToolbarButtonPressed(_ sender: Any) {
         // Do haptic
         HapticHelper.doLightHaptic()
-        
-        // Call finished editing on editing delegate
-        editingDelegate?.finishedEditing(source: self)
         
         // End editing on view to dismiss keyboard
         view.endEditing(true)

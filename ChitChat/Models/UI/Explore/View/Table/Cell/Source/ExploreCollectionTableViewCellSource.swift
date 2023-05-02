@@ -10,7 +10,7 @@ import Foundation
 class ExploreCollectionTableViewCellSource: CollectionTableViewCellSource {
     
     override var tableViewCellReuseIdentifier: String? {
-        Registry.Explore.View.Table.Cell.collection.reuseID
+        Registry.Create.View.Table.Cell.collection.reuseID
     }
     
     var oneRow: Bool

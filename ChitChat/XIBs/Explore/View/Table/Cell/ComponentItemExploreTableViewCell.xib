@@ -34,19 +34,19 @@
                             <constraint firstAttribute="trailing" secondItem="RiZ-ys-eVg" secondAttribute="trailing" constant="14" id="xG0-pU-iKw"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBA-vW-iHk">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BBA-vW-iHk">
                         <rect key="frame" x="24" y="7" width="51" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="aka-4q-jo5"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="21"/>
-                        <color key="textColor" name="AIChatTextColor"/>
+                        <color key="textColor" name="TextOnBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEO-zg-VMB">
                         <rect key="frame" x="75" y="6.6666666666666679" width="9.3333333333333286" height="29.000000000000004"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="21"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" name="TextOnBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1k5-mw-INk">
@@ -71,6 +71,7 @@
                     <constraint firstItem="Lps-JF-Fki" firstAttribute="top" secondItem="BBA-vW-iHk" secondAttribute="bottom" constant="7" id="iD3-47-xAW"/>
                     <constraint firstItem="BBA-vW-iHk" firstAttribute="top" secondItem="cZi-it-PIK" secondAttribute="top" constant="7" id="sg2-H2-8zF"/>
                     <constraint firstItem="bEO-zg-VMB" firstAttribute="trailing" secondItem="1k5-mw-INk" secondAttribute="leading" id="tyw-ZA-JBX"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1k5-mw-INk" secondAttribute="trailing" constant="24" id="vW5-gf-Vve"/>
                     <constraint firstItem="BBA-vW-iHk" firstAttribute="leading" secondItem="cZi-it-PIK" secondAttribute="leading" constant="24" id="vkw-HQ-WaT"/>
                 </constraints>
             </tableViewCellContentView>
@@ -90,11 +91,11 @@
         <namedColor name="AIChatBubbleColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="AIChatTextColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="ElementBackgroundColor">
             <color red="0.0" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextOnBackgroundColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

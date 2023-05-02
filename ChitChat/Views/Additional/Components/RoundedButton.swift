@@ -15,7 +15,7 @@ class RoundedButton: UIButton {
                 buttonArrowImageView = UIImageView()
 //                buttonArrowImageView.image = UIImage.gifImageWithName("arrowGif")
                 buttonArrowImageView.image = UIImage(systemName: "arrow.forward")
-                buttonArrowImageView.tintColor = tintColor
+                buttonArrowImageView.tintColor = titleColor(for: state)
                 buttonArrowImageView.alpha = 1.0
                 
                 addSubview(buttonArrowImageView)
@@ -102,6 +102,8 @@ class RoundedButton: UIButton {
         
         if hasArrow {
             buttonArrowImageView.frame = CGRect(x: frame.size.width - (arrowAccessoryWidth / 2) - accessoryInset, y: (frame.size.height - arrowAccessoryHeight) / 2, width: arrowAccessoryWidth, height: arrowAccessoryHeight)
+            
+            buttonArrowImageView.tintColor = titleColor(for: state)
         }
         
         if hasCheckmark {

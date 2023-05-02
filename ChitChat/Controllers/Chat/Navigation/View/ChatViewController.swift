@@ -137,7 +137,7 @@ class ChatViewController: HeaderViewController {
         sourcedTableViewManager.sources.insert(TableViewCellSourceFactory.makeChatTableViewCellSourceArray(from: currentConversation!), at: chatSection)
         
         // Set up default tiered padding source at index 1 in spacerSection
-        sourcedTableViewManager.sources.insert([TieredPaddingTableViewCellSource()], at: spacerSection)
+//        sourcedTableViewManager.sources.insert([TieredPaddingTableViewCellSource()], at: spacerSection)
         
         // If first time launch, set shouldShowUltra to false
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultNotFirstLaunch) {
@@ -162,7 +162,8 @@ class ChatViewController: HeaderViewController {
         
         if shouldScroll {
             DispatchQueue.main.async{
-                self.rootView.tableView.reallyScrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
+                self.rootView.tableView.scrollToBottomRow(animated: false)
+//                self.rootView.tableView.reallyScrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
             }
         }
         
@@ -208,6 +209,13 @@ class ChatViewController: HeaderViewController {
 
             // Set promoViewHeightConstraint
             self.rootView.promoViewHeightConstraint.constant = isPremium ? 0.0 : self.promoViewHeightConstraintConstant
+            
+            // Set tableView manager footer height
+            if let stvm = self.sourcedTableViewManager as? SourcedTableViewManager {
+                self.rootView.tableView.beginUpdates()
+                stvm.lastSectionFooterHeightAddition = isPremium ? Constants.Chat.View.Table.ultraFooterHeight : Constants.Chat.View.Table.freeFooterHeight
+                self.rootView.tableView.endUpdates()
+            }
 
             // Set adView visibility if premium
             if isPremium {
@@ -485,7 +493,8 @@ class ChatViewController: HeaderViewController {
                 
                 // Do scroll!
                 if shouldScroll {
-                    self.rootView.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false) // TODO: - Do scrolling queue or something
+                    self.rootView.tableView.scrollToBottomRow(animated: false)
+//                    self.rootView.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false) // TODO: - Do scrolling queue or something
                 }
             }
         }
@@ -539,7 +548,8 @@ class ChatViewController: HeaderViewController {
                             self.rootView.tableView.reloadData()
                             
                             if self.rootView.tableView.isAtBottom() {
-                                self.rootView.tableView.reallyScrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
+                                self.rootView.tableView.scrollToBottomRow(animated: false)
+//                                self.rootView.tableView.reallyScrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
                             }
                             
                             prevExpectedHeight = expectedTypingLabelSize.height
@@ -548,8 +558,6 @@ class ChatViewController: HeaderViewController {
                     
                     // Update the label in the tableView!
                     source.typingLabel?.text = currentText
-                    
-//                    self.rootView.tableView.reloadData() // TODO: - Reload data at
                 }
             })
             
@@ -566,7 +574,8 @@ class ChatViewController: HeaderViewController {
             
             // Do the scroll if the user was at the bottom of the tableView before the insertion
             if shouldScroll {
-                self.rootView.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
+                self.rootView.tableView.scrollToBottomRow(animated: false)
+//                self.rootView.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
             }
         }
     }

@@ -30,7 +30,8 @@ extension ExploreItemViewController: ItemExploreViewDelegate {
         for sourceArray in rootView.tableView.manager!.sources {
             for source in sourceArray {
                 if let componentSource = source as? ComponentItemTableViewCellSource {
-                    if let value = componentSource.value {
+                    // Ensure componentSource value is not nil and is not blank
+                    if let value = componentSource.value, value != "" {
                         queryString += "\(componentSource.promptPrefix) \(value)"
                         queryString += separator
                     }
@@ -62,7 +63,7 @@ extension ExploreItemViewController: ItemExploreViewDelegate {
                         ]
                     ])
                     .set(itemSource: self.itemSource!)
-                    .register(Registry.Explore.View.Table.Cell.creation)
+                    .register(Registry.Create.View.Table.Cell.creation)
                     .build(managedTableViewNibName: Registry.Common.View.managedTableViewIn)
                 
                 self.navigationController?.pushViewController(exploreGeneratedViewController, animated: true)

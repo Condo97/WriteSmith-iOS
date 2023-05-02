@@ -16,6 +16,6 @@ extension UITableView {
     func isAtBottom(bottomHeightOffset: Double) -> Bool {
         let standardBottomHeightOffset = 48.0 //TODO: - Move this
         
-        return self.contentSize.height <= self.contentOffset.y + self.frame.size.height + standardBottomHeightOffset + bottomHeightOffset
+        return self.contentSize.height <= self.contentOffset.y + self.frame.size.height - standardBottomHeightOffset - bottomHeightOffset
     }
 }

@@ -18,15 +18,18 @@ protocol SourcedTableViewManagerDelegate {
  Just holds the sources!
  */
 class SourcedTableViewManager: NSObject {
-    // Constants
-    private let DEFAULT_HEADER_HEIGHT: CGFloat = 40.0
-    private let FIRST_SECTION_HEADER_HIGHT_ADDITION: CGFloat = 0.0
-    
     // Instance variables
     var sources: [[CellSource]] = []
     var orderedSectionHeaderTitles: [String]?
     
     var hapticsEnabled: Bool = true
+    var showsFooter: Bool = true
+    
+    var defaultHeaderHeight: CGFloat = 40.0
+    var firstSectionHeaderHeightAddition: CGFloat = 0.0
+    
+    var defaultFooterHeight: CGFloat = 0.0
+    var lastSectionFooterHeightAddition: CGFloat = 80.0
     
     var delegate: SourcedTableViewManagerDelegate?
     
@@ -110,10 +113,29 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
         
         // Return default header height plus first row header height addition for first section, then return default header height
         if section == 0 {
-            return DEFAULT_HEADER_HEIGHT + FIRST_SECTION_HEADER_HIGHT_ADDITION
+            return defaultHeaderHeight + firstSectionHeaderHeightAddition
         }
         
-        return DEFAULT_HEADER_HEIGHT
+        return defaultHeaderHeight
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+        // Ensure that the footer should be shown, otherwise return 0 as height
+        guard showsFooter else {
+            return 0
+        }
+        
+        // Ensure there are sources in the section, otherwise return 0 as height
+        guard sources[section].count > 0 else {
+            return 0
+        }
+        
+        // If the section is equal to the index of the last element in the source array, return default footer height plus last section footer height addition
+        if section == sources.count - 1 {
+            return defaultFooterHeight + lastSectionFooterHeightAddition
+        }
+        
+        return defaultFooterHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -139,7 +161,7 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
         
         // Create view using header title
         let view: UIView = UIView()
-        let label = UILabel(frame: CGRect(x: 0, y: self.tableView(tableView, heightForHeaderInSection: section) - DEFAULT_HEADER_HEIGHT, width: 240, height: 30))
+        let label = UILabel(frame: CGRect(x: 0, y: self.tableView(tableView, heightForHeaderInSection: section) - defaultHeaderHeight, width: 240, height: 30))
 
         label.font = UIFont(name: Constants.primaryFontNameBold, size: 24.0)
         label.text = orderedSectionHeaderTitles![section]
@@ -147,6 +169,15 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
         view.addSubview(label)
         
         return view
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        // Ensure that the footer should be shown, otherwise return 0 as height
+        guard showsFooter else {
+            return nil
+        }
+        
+        return UIView()
     }
     
     //MARK: Non-relevant default implementations
@@ -159,16 +190,12 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
         return nil
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        return tableView.estimatedSectionFooterHeight
-    }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return self.tableView(tableView, estimatedHeightForHeaderInSection: section)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return self.tableView(tableView, estimatedHeightForFooterInSection: section)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

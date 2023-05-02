@@ -26,7 +26,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3VP-u3-8al">
                             <rect key="frame" x="237" y="5" width="238" height="230"/>
                             <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="14"/>
-                            <color key="textColor" name="HeaderTextColor"/>
+                            <color key="textColor" name="TopBarBackgroundColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -74,8 +74,8 @@
         <namedColor name="ElementTextColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="HeaderTextColor">
-            <color red="0.0" green="0.49000000953674316" blue="0.49000000953674316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="TopBarBackgroundColor">
+            <color red="0.0" green="0.49399998784065247" blue="0.49399998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

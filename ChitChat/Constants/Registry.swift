@@ -142,7 +142,7 @@ struct Registry {
         }
     }
     
-    struct Explore {
+    struct Create {
         struct View {
             struct Collection {
                 struct Cell {

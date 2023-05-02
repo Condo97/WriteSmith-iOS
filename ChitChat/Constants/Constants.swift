@@ -85,6 +85,9 @@ struct Constants {
                 struct Cell {
                     
                 }
+                
+                static let freeFooterHeight = 240.0
+                static let ultraFooterHeight = 140.0
             }
         }
         
@@ -145,18 +148,45 @@ struct Constants {
     }
     
     struct ImageName {
+        struct BottomBarImages {
+            static let chatBottomButtonTopSelected = "chatButtonTopSelected"
+            static let chatBottomButtonTopNotSelected = "chatButtonTopNotSelected"
+            static let chatBottomButtonBottom = "chatButtonBottom"
+            
+            static let createBottomButton = "createBottomButton"
+            static let createBottomButtonSelected = "createBottomButtonSelected"
+            
+            static let essayBottomButtonNotSelected = "writeBottomButtonNotSelected"
+            static let essayBottomButtonSelected = "writeBottomButtonSelected"
+            
+            static let premiumBottomButtonNotSelected = "premiumBottomButtonNotSelected"
+            
+            static let shareBottomButtonNotSelected = "shareBottomButtonNotSelected"
+            
+            static let sparkleDarkBottomBarBackgroundColor = "sparkleDarkBottomBarBackgroundColor"
+            static let sparkleDarkElementTextColor = "sparkleDarkElementTextColor"
+            static let sparkleLightBottomBarBackgroundColor = "sparkleLightBottomBarBackgroundColor"
+            static let sparkleLightElementTextColor = "sparkleLightElementTextColor"
+        }
+        
+        struct ItemSourceImages {
+            static let instagram = "Instagram"
+            static let linkedIn = "LinkedIn"
+            static let tikTok = "TikTok"
+            static let twitter = "Twitter"
+        }
+        
+        struct Ultra {
+            static let ultraDark = "UltraDark"
+            static let ultraLight = "UltraLight"
+            static let ultraRectangle = "ultraRectangle"
+        }
+        
         static let cameraButtonNotPressed = "cameraButtonNotPressed"
         static let cameraButtonPressed = "cameraButtonPressed"
         static let cameraButtonRedo = "cameraButtonRedo"
         
-        static let chatBottomButtonTopSelected = "chatButtonTopSelected"
-        static let chatBottomButtonTopNotSelected = "chatButtonTopNotSelected"
-        static let chatBottomButtonBottom = "chatButtonBottom"
-        
         static let giftGif = "giftGif"
-        
-        static let essayBottomButtonNotSelected = "writeBottomButtonNotSelected"
-        static let essayBottomButtonSelected = "writeBottomButtonSelected"
         
         static let introScreenshot1 = "introScreenshot1"
         static let introScreenshot2 = "introScreenshot2"
@@ -165,15 +195,8 @@ struct Constants {
         
         static let loadingDotsImageName = "loadingDots"
         
-        static let shareBottomButtonNotSelected = "shareBottomButtonNotSelected"
         static let sparkleLightGif = "sparkleLightGif"
         static let sparkleDarkGif = "sparkleDarkGif"
-        
-        static let premiumBottomButtonNotSelected = "premiumBottomButtonNotSelected"
-        
-        static let ultraDark = "UltraDark"
-        static let ultraLight = "UltraLight"
-        static let ultraRectangle = "ultraRectangle"
     }
 }
 
@@ -228,7 +251,6 @@ struct Colors {
     static let aiChatTextColor = UIColor(named: "AIChatTextColor")!
     static let elementBackgroundColor = UIColor(named: "ElementBackgroundColor")!
     static let elementTextColor = UIColor(named: "ElementTextColor")!
-    static let headerTextColor = UIColor(named: "HeaderTextColor")!
     static let topBarBackgroundColor = UIColor(named: "TopBarBackgroundColor")!
     static let bottomBarBackgroundColor = UIColor(named: "BottomBarBackgroundColor")!
 }
