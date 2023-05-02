@@ -75,6 +75,7 @@
                     <constraint firstItem="QxJ-uc-lpw" firstAttribute="top" secondItem="sjw-tR-W9K" secondAttribute="top" constant="14" id="tlr-AF-8tl"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" name="BottomBarBackgroundColor"/>
             <connections>
                 <outlet property="conversationNameLabel" destination="KuO-MQ-koq" id="3W6-Cd-BCR"/>
                 <outlet property="dateLabel" destination="clI-gR-k5M" id="WeI-40-7uY"/>
@@ -88,6 +89,9 @@
         <image name="rectangle.and.pencil.and.ellipsis" catalog="system" width="128" height="80"/>
         <namedColor name="AIChatTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BottomBarBackgroundColor">
+            <color red="0.0" green="0.49019607843137253" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ElementTextColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

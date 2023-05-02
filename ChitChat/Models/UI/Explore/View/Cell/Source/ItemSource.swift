@@ -13,8 +13,8 @@ protocol ItemCellSourceDelegate {
 
 class ItemSource: CellSource, SelectableCellSource {
     
-    var collectionViewCellReuseIdentifier: String? = Registry.Create.View.Collection.Cell.item.reuseID
-    var tableViewCellReuseIdentifier: String? = Registry.Create.View.Table.Cell.Item.header.reuseID
+    var collectionViewCellReuseIdentifier: String? = Registry.Explore.View.Collection.Cell.item.reuseID
+    var tableViewCellReuseIdentifier: String? = Registry.Explore.View.Table.Cell.Item.header.reuseID
     
     var didSelect: ((UIView, IndexPath)->Void)? // Action called on cell selection
     

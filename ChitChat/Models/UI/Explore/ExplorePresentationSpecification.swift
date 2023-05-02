@@ -53,7 +53,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                                 ])
                         ]
                     ])
-                    .register(collectionXIB_ReuseID: Registry.Create.View.Collection.Cell.item)
+                    .register(collectionXIB_ReuseID: Registry.Explore.View.Collection.Cell.item)
                     .build()
             ],
             
@@ -122,7 +122,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                                 ]),
                         ]
                     ])
-                    .register(collectionXIB_ReuseID: Registry.Create.View.Collection.Cell.item)
+                    .register(collectionXIB_ReuseID: Registry.Explore.View.Collection.Cell.item)
                     .build()
             ],
             
@@ -203,7 +203,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                                 ])
                         ]
                     ])
-                    .register(collectionXIB_ReuseID: Registry.Create.View.Collection.Cell.item)
+                    .register(collectionXIB_ReuseID: Registry.Explore.View.Collection.Cell.item)
                     .build()
             ],
             
@@ -299,7 +299,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                                 ])
                         ]
                     ])
-                    .register(collectionXIB_ReuseID: Registry.Create.View.Collection.Cell.item)
+                    .register(collectionXIB_ReuseID: Registry.Explore.View.Collection.Cell.item)
                     .build()
             ],
             
@@ -383,7 +383,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                                 ])
                         ]
                     ])
-                    .register(collectionXIB_ReuseID: Registry.Create.View.Collection.Cell.item)
+                    .register(collectionXIB_ReuseID: Registry.Explore.View.Collection.Cell.item)
                     .build()
             ],
             
@@ -436,7 +436,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                                 ])
                         ]
                     ])
-                    .register(collectionXIB_ReuseID: Registry.Create.View.Collection.Cell.item)
+                    .register(collectionXIB_ReuseID: Registry.Explore.View.Collection.Cell.item)
                     .build()
             ],
             
@@ -542,7 +542,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                                 ]),
                         ]
                     ])
-                    .register(collectionXIB_ReuseID: Registry.Create.View.Collection.Cell.item)
+                    .register(collectionXIB_ReuseID: Registry.Explore.View.Collection.Cell.item)
                     .build()
             ],
             
@@ -604,7 +604,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                                 ])
                         ]
                     ])
-                    .register(collectionXIB_ReuseID: Registry.Create.View.Collection.Cell.item)
+                    .register(collectionXIB_ReuseID: Registry.Explore.View.Collection.Cell.item)
                     .build()
             ],
             
@@ -662,7 +662,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                                 ])
                         ]
                     ])
-                    .register(collectionXIB_ReuseID: Registry.Create.View.Collection.Cell.item)
+                    .register(collectionXIB_ReuseID: Registry.Explore.View.Collection.Cell.item)
                     .build()
             ],
             
@@ -726,7 +726,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
                                 ])
                         ]
                     ])
-                    .register(collectionXIB_ReuseID: Registry.Create.View.Collection.Cell.item)
+                    .register(collectionXIB_ReuseID: Registry.Explore.View.Collection.Cell.item)
                     .build()
             ]
         ])
@@ -742,7 +742,7 @@ class ExplorePresentationSpecification: PresentationSpecification {
             "Food",
             "Entertainment"
         ])
-        .register(Registry.Create.View.Table.Cell.collection)
-        .build(managedTableViewNibName: Registry.Create.View.explore)
+        .register(Registry.Explore.View.Table.Cell.collection)
+        .build(managedTableViewNibName: Registry.Explore.View.explore)
     
 }
