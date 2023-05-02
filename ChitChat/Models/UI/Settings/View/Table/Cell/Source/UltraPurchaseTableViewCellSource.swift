@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UltraPurchaseTableViewCellSource: SelectableCellSource {
+class UltraPurchaseTableViewCellSource: SelectableCellSource, TieredVisibilityCellSource {
     
     var collectionViewCellReuseIdentifier: String?
     var tableViewCellReuseIdentifier: String? = Registry.Settings.View.Table.Cell.ultraPurchase.reuseID
@@ -16,6 +16,9 @@ class UltraPurchaseTableViewCellSource: SelectableCellSource {
     
     var titleText: String
     var topLabelText: String
+    
+    var shouldShowOnPremium: Bool = false
+    var shouldShowOnFree: Bool = true
     
     var didSelect: ((UIView, IndexPath)->Void)?
     

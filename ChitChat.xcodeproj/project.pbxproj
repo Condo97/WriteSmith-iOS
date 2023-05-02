@@ -327,6 +327,7 @@
 		BBF6313929F875AD00E9F0C2 /* ExploreGeneratedViewController+CreationExploreTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6313829F875AD00E9F0C2 /* ExploreGeneratedViewController+CreationExploreTableViewCellDelegate.swift */; };
 		BBF6313C29F8778500E9F0C2 /* PasteboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6313B29F8778500E9F0C2 /* PasteboardHelper.swift */; };
 		BBF6313E29F8790400E9F0C2 /* ShareViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6313D29F8790300E9F0C2 /* ShareViewHelper.swift */; };
+		BBF9A85E2A017182005D5BF8 /* TieredVisibilityCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF9A85D2A017182005D5BF8 /* TieredVisibilityCellSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -642,6 +643,7 @@
 		BBF6313829F875AD00E9F0C2 /* ExploreGeneratedViewController+CreationExploreTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExploreGeneratedViewController+CreationExploreTableViewCellDelegate.swift"; sourceTree = "<group>"; };
 		BBF6313B29F8778500E9F0C2 /* PasteboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardHelper.swift; sourceTree = "<group>"; };
 		BBF6313D29F8790300E9F0C2 /* ShareViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewHelper.swift; sourceTree = "<group>"; };
+		BBF9A85D2A017182005D5BF8 /* TieredVisibilityCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieredVisibilityCellSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1335,6 +1337,7 @@
 				BBDC4ECC29C949EE00204CD7 /* CellSource.swift */,
 				BBF6313429F8571800E9F0C2 /* DelegateSource.swift */,
 				BB8B189929E8BB9900964724 /* SelectableCellSource.swift */,
+				BBF9A85D2A017182005D5BF8 /* TieredVisibilityCellSource.swift */,
 				BB0F042B29CBF4DD00C89A0A /* StackedPresentationSpecification.swift */,
 				BB8B189529E8AA1600964724 /* PresentationSpecification.swift */,
 			);
@@ -2729,6 +2732,7 @@
 				BBD50D0529F0631F00C61B86 /* ConversationViewController+ConversationItemTableViewCellDelegate.swift in Sources */,
 				BBC9AB2F29D521CB00A16CE2 /* RegisterUserResponse.swift in Sources */,
 				BB8B18A229E8D93700964724 /* UIViewController+TopmostViewController.swift in Sources */,
+				BBF9A85E2A017182005D5BF8 /* TieredVisibilityCellSource.swift in Sources */,
 				BB96EBEA29FC581A002CC223 /* UltraNavigationItemView.swift in Sources */,
 				BBD50CCF29EF4AFB00C61B86 /* ChatCDHelper.swift in Sources */,
 				BBD50CFE29EFA92B00C61B86 /* ConversationViewController.swift in Sources */,

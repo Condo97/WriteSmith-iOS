@@ -28,22 +28,22 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ezm-Nv-VPp">
-                        <rect key="frame" x="20" y="18" width="83" height="83"/>
+                        <rect key="frame" x="13" y="18" width="83" height="83"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="ezm-Nv-VPp" secondAttribute="height" multiplier="1:1" id="5Em-bQ-N2o"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qXB-o4-aXA">
-                        <rect key="frame" x="110" y="33" width="220" height="53"/>
+                        <rect key="frame" x="96" y="33" width="234" height="53"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChitChat Ultra hasn't been activated." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUn-Vm-dym">
-                                <rect key="frame" x="0.0" y="7" width="213" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChitChat Ultra hasn't been activated." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QUn-Vm-dym">
+                                <rect key="frame" x="0.0" y="7" width="227" height="16"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="11"/>
                                 <color key="textColor" name="AIChatTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Claim 3 Days Free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQd-ba-ZCV">
-                                <rect key="frame" x="0.0" y="23" width="213" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Claim 3 Days Free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FQd-ba-ZCV">
+                                <rect key="frame" x="0.0" y="23" width="227" height="23"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                 <color key="textColor" name="AIChatTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -74,10 +74,10 @@
                     <constraint firstItem="VxL-mo-mPE" firstAttribute="leading" secondItem="qXB-o4-aXA" secondAttribute="trailing" id="Fr8-jq-hR1"/>
                     <constraint firstAttribute="bottomMargin" secondItem="ezm-Nv-VPp" secondAttribute="bottom" constant="7" id="QLF-jz-AT3"/>
                     <constraint firstItem="VxL-mo-mPE" firstAttribute="centerY" secondItem="VDZ-fl-veP" secondAttribute="centerY" id="eIq-7z-3A6"/>
-                    <constraint firstItem="ezm-Nv-VPp" firstAttribute="leading" secondItem="VDZ-fl-veP" secondAttribute="leadingMargin" id="i1u-RO-rxa"/>
+                    <constraint firstItem="ezm-Nv-VPp" firstAttribute="leading" secondItem="VDZ-fl-veP" secondAttribute="leadingMargin" constant="-7" id="i1u-RO-rxa"/>
                     <constraint firstAttribute="trailing" secondItem="VxL-mo-mPE" secondAttribute="trailing" constant="14" id="nYt-ni-gEg"/>
                     <constraint firstItem="qXB-o4-aXA" firstAttribute="centerY" secondItem="VDZ-fl-veP" secondAttribute="centerY" id="oR6-nn-ehS"/>
-                    <constraint firstItem="qXB-o4-aXA" firstAttribute="leading" secondItem="ezm-Nv-VPp" secondAttribute="trailing" constant="7" id="z1M-Ri-zMa"/>
+                    <constraint firstItem="qXB-o4-aXA" firstAttribute="leading" secondItem="ezm-Nv-VPp" secondAttribute="trailing" id="z1M-Ri-zMa"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" name="AIChatBubbleColor"/>

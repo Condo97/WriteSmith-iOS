@@ -30,6 +30,33 @@ class SettingsViewController: ManagedTableViewInViewController {
         /* Set NavigationController Tint Color */
         navigationController?.navigationBar.tintColor = Colors.elementTextColor
         
+        /* Loop through sources, delete any TieredVisibilityCellSource where shouldShowOnPremium == false */
+        var i = 0
+        var j = 0
+        while i < sourcedTableViewManager.sources.count {
+            while j < sourcedTableViewManager.sources[i].count {
+                let source = sourcedTableViewManager.sources[i][j]
+                
+                if let tieredVisibilitySource = source as? TieredVisibilityCellSource {
+                    if (tieredVisibilitySource.shouldShowOnFree && PremiumHelper.get()) || (tieredVisibilitySource.shouldShowOnPremium && !PremiumHelper.get()) {
+                        // Should now show this source, so remove it from sources
+                        
+                        sourcedTableViewManager.sources[i].remove(at: j)
+                    } else {
+                        j += 1
+                    }
+                } else {
+                    j += 1
+                }
+            }
+            
+            if sourcedTableViewManager.sources[i].count == 0 {
+                sourcedTableViewManager.sources.remove(at: i)
+            } else {
+                i += 1
+            }
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
