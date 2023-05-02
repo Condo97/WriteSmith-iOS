@@ -91,7 +91,7 @@ class HeaderViewController: UpdatingViewController {
             
             // Set remaining text
             if let ultraView = self.ultraMenuBarItem.customView as? UltraNavigationItemView {
-                ultraView.label.text = "\(remaining)"
+                ultraView.label.text = "\(remaining < 0 ? 0 : remaining)"
             }
         }
     }
@@ -172,7 +172,8 @@ class HeaderViewController: UpdatingViewController {
         ultraNavigationItemView.frame = CGRect(x: 0, y: 0, width: WIDTH, height: HEIGHT)
         
         // Set label text to generated chats remaining
-        ultraNavigationItemView.label.text = String(describing: GeneratedChatsRemainingHelper.get())
+        let remaining = GeneratedChatsRemainingHelper.get()
+        ultraNavigationItemView.label.text = String(describing: remaining < 0 ? 0 : remaining)
         
         // Set image to light or dark sprakles depending on userInterfaceStyle
         if userInterfaceStyle == .dark {
