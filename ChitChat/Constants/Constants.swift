@@ -251,6 +251,7 @@ struct Colors {
     static let aiChatTextColor = UIColor(named: "AIChatTextColor")!
     static let elementBackgroundColor = UIColor(named: "ElementBackgroundColor")!
     static let elementTextColor = UIColor(named: "ElementTextColor")!
+    static let textOnBackgroundColor = UIColor(named: "TextOnBackgroundColor")!
     static let topBarBackgroundColor = UIColor(named: "TopBarBackgroundColor")!
     static let bottomBarBackgroundColor = UIColor(named: "BottomBarBackgroundColor")!
 }

@@ -165,6 +165,7 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
 
         label.font = UIFont(name: Constants.primaryFontNameBold, size: 24.0)
         label.text = orderedSectionHeaderTitles![section]
+        label.textColor = Colors.textOnBackgroundColor
 
         view.addSubview(label)
         
