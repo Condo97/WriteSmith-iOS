@@ -63,10 +63,47 @@ class ExploreItemViewController: HeaderViewController {
         /* Set tap gesture recognizer to dismiss keyboard */
         rootView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedScreen)))
         
+        /* Register for keyboard notifications */
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func setLeftMenuBarItems() {
         navigationItem.leftBarButtonItems = nil
+    }
+    
+    @objc func tappedScreen(_ sender: Any) {
+        rootView.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        if let newFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if rootView.tableView.contentInset.bottom == 0 {
+                // Calculate extra height from tabBar
+                let extraHeight = tabBarController?.tabBar.frame.size.height ?? 0
+                
+                // Show Keyboard
+                let insets = UIEdgeInsets(top: 0, left: 0, bottom: newFrame.height - extraHeight, right: 0)
+                
+                rootView.tableView.contentInset = insets
+                rootView.tableView.scrollIndicatorInsets = insets
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        if rootView.tableView.contentInset.bottom != 0 {
+            // Hide Keyboard -> Reset TableView insets
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            
+            rootView.tableView.contentInset = insets
+            rootView.tableView.scrollIndicatorInsets = insets
+        }
     }
     
     func autoSetButtonEnabled() {
@@ -83,10 +120,6 @@ class ExploreItemViewController: HeaderViewController {
             }
         }
         
-    }
-    
-    @objc func tappedScreen(_ sender: Any) {
-        rootView.endEditing(true)
     }
     
     //MARK: Builder Functions
