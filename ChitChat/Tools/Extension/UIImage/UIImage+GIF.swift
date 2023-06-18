@@ -24,17 +24,29 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 extension UIImage {
     
+    /***
+     Gif Creation
+     */
+    
     public class func gifImageWithData(_ data: Data) -> UIImage? {
+        gifImageWithData(data, timeMultiplier: 1)
+    }
+    
+    public class func gifImageWithData(_ data: Data, timeMultiplier: Double) -> UIImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
             print("image doesn't exist")
             return nil
         }
         
-        return UIImage.animatedImageWithSource(source)
+        return UIImage.animatedImageWithSource(source, timeMultiplier: timeMultiplier)
     }
     
-    public class func gifImageWithURL(_ gifUrl:String) -> UIImage? {
-        guard let bundleURL:URL = URL(string: gifUrl)
+    public class func gifImageWithURL(_ gifUrl: String) -> UIImage? {
+        gifImageWithURL(gifUrl, timeMultiplier: 1)
+    }
+    
+    public class func gifImageWithURL(_ gifUrl:String, timeMultiplier: Double) -> UIImage? {
+        guard let bundleURL: URL = URL(string: gifUrl)
             else {
                 print("image named \"\(gifUrl)\" doesn't exist")
                 return nil
@@ -44,10 +56,14 @@ extension UIImage {
             return nil
         }
         
-        return gifImageWithData(imageData)
+        return gifImageWithData(imageData, timeMultiplier: timeMultiplier)
     }
     
     public class func gifImageWithName(_ name: String) -> UIImage? {
+        gifImageWithName(name, timeMultiplier: 1)
+    }
+    
+    public class func gifImageWithName(_ name: String, timeMultiplier: Double) -> UIImage? {
         guard let bundleURL = Bundle.main
             .url(forResource: name, withExtension: "gif") else {
                 print("SwiftGif: This image named \"\(name)\" does not exist")
@@ -58,8 +74,100 @@ extension UIImage {
             return nil
         }
         
-        return gifImageWithData(imageData)
+        return gifImageWithData(imageData, timeMultiplier:  timeMultiplier)
     }
+    
+    /***
+     First Frame
+     */
+    
+    public class func gifFirstFrameWithData(_ data: Data) -> UIImage? {
+        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
+            print("image doesn't exist")
+            return nil
+        }
+        
+        guard let cgImage = CGImageSourceCreateImageAtIndex(source, 0, nil) else {
+            print("Cannot create cgImage from source")
+            return nil
+        }
+        
+        return UIImage(cgImage: cgImage)
+    }
+    
+    public class func gifFirstFrameWithURL(_ gifUrl: String) -> UIImage? {
+        guard let bundleURL: URL = URL(string: gifUrl) else {
+            print("image named \"\(gifUrl)\" doesn't exist")
+            return nil
+        }
+        
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
+            print("image named \"\(gifUrl)\" into NSData")
+            return nil
+        }
+        
+        return gifFirstFrameWithData(imageData)
+    }
+    
+    public class func gifFirstFrameWithName(_ name: String) -> UIImage? {
+        guard let bundleURL = Bundle.main
+            .url(forResource: name, withExtension: "gif") else {
+                print("SwiftGif: This image named \"\(name)\" does not exist")
+                return nil
+        }
+        
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
+            print("SwiftGif: Cannot turn image named \"\(name)\" into NSData")
+            return nil
+        }
+        
+        return gifFirstFrameWithData(imageData)
+    }
+    
+    /**
+     Gif To Array
+     */
+    
+    public class func gifToArrayWithData(_ data: Data) -> [UIImage]? {
+        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else  {
+            print("image doesn't exist")
+            return nil
+        }
+        
+        return gifToArrayWithSource(source)
+    }
+    
+    public class func gifToArrayWithURL(_ gifUrl: String) -> [UIImage]? {
+        guard let bundleURL: URL = URL(string: gifUrl) else {
+            print("image named \"\(gifUrl)\" doesn't exist")
+            return nil
+        }
+        
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
+            print("image named \"\(gifUrl)\" into NSData")
+            return nil
+        }
+        
+        return gifToArrayWithData(imageData)
+    }
+    
+    public class func gifToArrayWithName(_ name: String) -> [UIImage]? {
+        guard let bundleURL = Bundle.main.url(forResource: name, withExtension: "gif") else {
+            print("SwiftGif: This image named \"\(name)\" does not exist")
+            return nil
+        }
+        
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
+            print("SwiftGif: Cannot turn image named \"\(name)\" into NSData")
+            return nil
+        }
+        
+        return gifToArrayWithData(imageData)
+    }
+    
+    /***
+     Private Methods
+     */
     
     class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
@@ -134,7 +242,7 @@ extension UIImage {
         return gcd
     }
     
-    class func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
+    class func animatedImageWithSource(_ source: CGImageSource, timeMultiplier: Double) -> UIImage? {
         let count = CGImageSourceGetCount(source)
         var images = [CGImage]()
         var delays = [Int]()
@@ -146,7 +254,7 @@ extension UIImage {
             
             let delaySeconds = UIImage.delayForImageAtIndex(Int(i),
                 source: source)
-            delays.append(Int(delaySeconds * 340.0)) // Seconds to ms
+            delays.append(Int(delaySeconds * 340.0 * timeMultiplier)) // Seconds to ms
         }
         
         let duration: Int = {
@@ -178,4 +286,19 @@ extension UIImage {
         
         return animation
     }
+    
+    private class func gifToArrayWithSource(_ source: CGImageSource) -> [UIImage] {
+        let count = CGImageSourceGetCount(source)
+        var images: [UIImage] = []
+        
+        for i in 0..<count {
+            if let image = CGImageSourceCreateImageAtIndex(source, i, nil) {
+                images.append(UIImage(cgImage: image))
+            }
+        }
+        
+        return images
+        
+    }
+    
 }

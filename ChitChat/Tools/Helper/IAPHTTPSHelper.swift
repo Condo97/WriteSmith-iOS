@@ -12,7 +12,7 @@ protocol IAPHTTPSHelperDelegate: AnyObject {
     func didGetIAPStuffFromServer(json: [String: Any]) throws
 }
 
-struct IAPHTTPSHelper {
+class IAPHTTPSHelper {
 //    static func validateAndSaveReceipt(authToken: String, receiptData: Data, delegate: IAPHTTPSHelperDelegate) {
 //        let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.validateSaveUpdateReceipt)")!
 //        let postBody = """
@@ -46,6 +46,8 @@ struct IAPHTTPSHelper {
 //
 //        task.resume()
 //    }
+    
+    
     
     static func getIAPStuffFromServer(authToken: String, delegate: IAPHTTPSHelperDelegate) {
         let url = URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getIAPStuff)")!

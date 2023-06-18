@@ -23,7 +23,6 @@ class SettingsPresentationSpecification: PresentationSpecification {
         .set(sources: [
             [
                 UltraPurchaseTableViewCellSource(didSelect: { tableView, indexPath in
-//                    UIApplication.shared.connectedScenes.first?.inputViewController?.present(ultraPurchaseViewController, animated: true)
                     //TODO: Fix because it's deprecated
                     // Present on the topVC
                     UltraViewControllerPresenter.presentOnTop(animated: true)
@@ -93,18 +92,7 @@ class SettingsPresentationSpecification: PresentationSpecification {
                         .get()),
                 ImageTextTableViewCellSource(
                     didSelect: { tableView, indexPath in
-                        // Instantiate ultraPurchaseViewController
-                        let ultraPurchaseViewController = UltraViewController()
-                        
-                        // Set modal presentation style as full screen
-                        ultraPurchaseViewController.modalPresentationStyle = .overFullScreen
-                        
-                        // Set restore pressed to automatically restore once ultra view is loaded
-                        ultraPurchaseViewController.restorePressed = true
-                        
-                        //TODO: Fix because it's deprecated
-                        // Present on the topVC
-                        UIApplication.shared.topmostViewController()?.present(ultraPurchaseViewController, animated: true)
+                        UltraViewControllerPresenter.presentOnTop(animated: true, shouldRestoreFromSettings: true)
                     },
                     image: SettingsImages().restorePurchases,
                     text: NSMutableAttributedStringBuilder()

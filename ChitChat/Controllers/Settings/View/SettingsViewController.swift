@@ -63,18 +63,4 @@ class SettingsViewController: ManagedTableViewInViewController {
         restorePressed = false
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        //Set shouldRestoreFromSettings to true in UltraPurchaesViewController if restore was pressed
-        if segue.identifier == "toUltraPurchase" && restorePressed {
-            if let detailVC = segue.destination as? UltraViewController {
-                detailVC.shouldRestoreFromSettings = true
-            }
-        }
-    }
-    
-    func goToUltraPurchase() {
-        UltraViewControllerPresenter.presentOnTop(animated: true)
-    }
-    
 }

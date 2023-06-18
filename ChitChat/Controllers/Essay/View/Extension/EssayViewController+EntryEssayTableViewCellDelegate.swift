@@ -17,6 +17,7 @@ extension EssayViewController: EntryEssayTableViewCellDelegate {
         if !PremiumHelper.get() {
             if self.essays.count >= UserDefaults.standard.integer(forKey: Constants.userDefaultStoredFreeEssayCap) {
                 let ac = UIAlertController(title: "Upgrade", message: "You've reached the limit for free essays. Please upgrade to get unlimited full-length essays.\n\n(3-Day Free Trial)", preferredStyle: .alert)
+                ac.view.tintColor = Colors.alertTintColor
                 ac.addAction(UIAlertAction(title: "Upgrade", style: .default, handler: { action in
                     self.goToUltraPurchase()
                 }))
@@ -54,7 +55,11 @@ extension EssayViewController: EntryEssayTableViewCellDelegate {
             self.rootView.tableView.endUpdates()
         }
         
-        ChatRequestHelper.get(inputText: inputText, conversationID: nil, completion: {responseText, finishReason, conversationID, remaining in
+//        #warning("DON'T FORGET TO DO THIS!")
+//        let usePaidModel = GPTModelHelper.getCurrentChatModel() == .paid
+        let currentModel = GPTModelHelper.getCurrentChatModel()
+        
+        ChatRequestHelper.get(inputText: inputText, conversationID: nil, model: currentModel, completion: {responseText, finishReason, conversationID, remaining in
             // Call textViewOnFinishedGenerating
             cell.textViewOnFinishedGenerating()
             

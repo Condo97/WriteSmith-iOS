@@ -43,6 +43,7 @@ struct Registry {
                 }
             }
             
+            static let chatGPTModelSelection = "ChatGPTModelSelectionView"
             static let chat = "ChatView"
         }
     }

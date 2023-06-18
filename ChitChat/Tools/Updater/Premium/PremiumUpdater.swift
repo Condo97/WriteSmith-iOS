@@ -9,40 +9,31 @@ import Foundation
 
 class PremiumUpdater: Updater {
     
+    // TODO: This probably should be somewhere else I think
+    let activeSubscriptionState: Int = 1;
+    
     var updaterDelegate: Any?
     
     required init() {
         
     }
     
-    func fullUpdate(completion: (()->Void)?) {
-        // Do an full update from the WriteSmith server, should only be called once per load
-        ensure(completion: {isPremium in
-            // Call updateDelegate
-//            self.updaterDelegate?.updatePremium(isPremium: isPremium)
-            if let premiumUpdaterDelegate = self.updaterDelegate as? PremiumUpdaterDelegate {
-                premiumUpdaterDelegate.updatePremium(isPremium: isPremium)
-            }
-            
-            completion?()
-        })
+    func forceUpdate() async throws {
+        // TODO: Is there a way to decouple this from AuthHelper, or is it just fine?
+        try await forceUpdate(authToken: try await AuthHelper.ensure())
     }
     
-    func validateAndUpdateReceiptWithFullUpdate(receiptString: String, completion:(()->Void)?) {
-        // Create validate and update receipt request
-        let validateAndUpdateReceiptRequest = ValidateAndUpdateReceiptRequest(authToken: AuthHelper.get()!, receiptString: receiptString)
+    func forceUpdate(authToken: String) async throws {
+        let isPremium = try await ensure(authToken: authToken)
         
-        // Validate and update receipt
-        HTTPSConnector.validateAndUpdateReceipt(request: validateAndUpdateReceiptRequest, completion: { validateAndUpdateReceiptResponse in
-            
-            // Update is premium in user defaults with the value in the response
-            self.updateIsPremiumInUserDefaults(validateAndUpdateReceiptResponse.body.isPremium)
-            
-            // Call full update with completion block
-            self.fullUpdate(completion: {
-                completion?()
-            })
-        })
+        notifyDelegate(isPremium: isPremium)
+    }
+    
+    func registerTransaction(authToken: String, transactionID: UInt64) async throws -> Bool {
+        // Register transaction and get isPremium
+        let isPremium = try await TransactionHTTPSConnector.registerTransaction(authToken: authToken, transactionID: transactionID).body.isPremium
+        
+        return updateIsPremiumInUserDefaults(isPremium)
     }
     
     //MARK: Private methods
@@ -50,61 +41,69 @@ class PremiumUpdater: Updater {
     /***
      Ensures the user is premium by checking with WriteSmith server and updating UserDefaults values if necessary
      */
-    private func ensure(completion: @escaping (Bool)->Void) {
-        ensure(forceCheck: false, completion: completion)
+    private func ensure(authToken: String) async throws -> Bool {
+        return try await ensure(authToken: authToken, forceCheck: false)
     }
 
     /***
      Ensures the user is premium by checking with WriteSmith server and updating UserDefaults when either the cooldown finishes or if forceCheck is true
      */
-    private func ensure(forceCheck: Bool, completion: @escaping (Bool)->Void) {
+    private func ensure(authToken: String, forceCheck: Bool) async throws -> Bool {
         // Get last time premium was checked
         if !forceCheck, let lastCheckDate = UserDefaults.standard.object(forKey: Constants.userDefaultStoredPremiumLastCheckDate) as? Date {
             // If it has been longer than the premiumCheckCooldownSeconds, check with the server again, otherwise just return the storedIsPremium value
             if -lastCheckDate.timeIntervalSinceNow > Constants.premiumCheckCooldownSeconds {
                 // If receiptString is valid, do the server check, otherwise user is not premium
 
-                doServerPremiumCheck(completion: completion)
+                return try await doServerPremiumCheck(authToken: authToken)
             } else {
                 // Not time to do server check, so just return the current receipt
-                completion(getIsPremiumFromUserDefaults())
+                return getIsPremiumFromUserDefaults()
             }
         } else {
             // If forceCheck is false and there is no check date, check the server
-            doServerPremiumCheck(completion: completion)
+            return try await doServerPremiumCheck(authToken: authToken)
         }
     }
 
-    private func doServerPremiumCheck(completion: @escaping (Bool)->Void) {
-        if let receiptString = IAPHelper.getLocalReceiptString() {
-            // Get the authToken
-            AuthHelper.ensure(completion: {authToken in
-                // Create request and send to server
-                let validateAndUpdateReceiptRequest = ValidateAndUpdateReceiptRequest(authToken: authToken, receiptString: receiptString)
-                HTTPSConnector.validateAndUpdateReceipt(request: validateAndUpdateReceiptRequest, completion: {validateAndUpdateReceiptResponse in
-                    // Phew! Set and return if the user is Premium
-                    let isPremium = validateAndUpdateReceiptResponse.body.isPremium
-
-                    completion(self.updateIsPremiumInUserDefaults(isPremium))
-                })
-            })
-        } else {
-            // Since receiptString doesn't exist, user is not premium
-            completion(updateIsPremiumInUserDefaults(false))
-        }
+    private func doServerPremiumCheck(authToken: String) async throws -> Bool {
+        // Build authRequest
+        let authRequest = AuthRequest(authToken: authToken)
+        
+        // Get isPremium in response from server
+        let isPremiumResponse = try await HTTPSConnector.getIsPremium(request: authRequest)
+        
+        // Update isPremium in user defaults
+        return updateIsPremiumInUserDefaults(isPremiumResponse.body.isPremium)
     }
 
     private func getIsPremiumFromUserDefaults() -> Bool {
         return UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium)
     }
     
+    private func notifyDelegate(isPremium: Bool) {
+        if let premiumUpdaterDelegate = self.updaterDelegate as? PremiumUpdaterDelegate {
+            premiumUpdaterDelegate.updatePremium(isPremium: isPremium)
+        }
+    }
+    
     @discardableResult
     private func updateIsPremiumInUserDefaults(_ isPremium: Bool) -> Bool {
+        // If isPremium was changed, set willNotifyDelegate to true to call delegate after setting isPremium and check date in user defaults
+        var willNotifyDelegate = false
+        if UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) != isPremium {
+            willNotifyDelegate = true
+        }
+        
         // Update userDefaultStoredIsPremium
         UserDefaults.standard.set(isPremium, forKey: Constants.userDefaultStoredIsPremium)
 
         // Update last premium check date
         UserDefaults.standard.set(Date(), forKey: Constants.userDefaultStoredPremiumLastCheckDate)
+        
+        if willNotifyDelegate {
+            notifyDelegate(isPremium: isPremium)
+        }
 
         return isPremium
     }

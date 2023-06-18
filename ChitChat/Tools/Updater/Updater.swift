@@ -13,6 +13,6 @@ protocol Updater {
     
     init()
     
-    func fullUpdate(completion: (()->Void)?)
+    func forceUpdate() async throws
     
 }

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIViewController" customModule="ChitChat" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="GLt-pk-MaL" id="Und-Ql-8yn"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="GLt-pk-MaL" customClass="ChatGPTModelSelectionView" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0P8-ae-dxH">
+                    <rect key="frame" x="14" y="364" width="365" height="440"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJe-46-CIh" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                            <rect key="frame" x="4" y="4" width="357" height="364"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgC-ub-8We" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
+                                    <rect key="frame" x="14" y="234" width="329" height="54"/>
+                                    <color key="backgroundColor" name="ElementTextColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="54" id="5EV-dW-auE"/>
+                                    </constraints>
+                                    <color key="tintColor" name="ElementBackgroundColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain">
+                                        <attributedString key="attributedTitle">
+                                            <fragment content="Enable">
+                                                <attributes>
+                                                    <font key="NSFont" size="20" name="Avenir-Book"/>
+                                                    <font key="NSOriginalFont" size="20" name="Avenir-Book"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <font key="NSFont" size="20" name="Avenir-Heavy"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="GPT-3 Turbo">
+                                                <attributes>
+                                                    <font key="NSFont" size="20" name="Avenir-Black"/>
+                                                    <font key="NSOriginalFont" size="20" name="Avenir-Black"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                    </buttonConfiguration>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" name="ElementBackgroundColor"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="hasCheckmark" value="NO"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="freeModelButtonPressed:" destination="GLt-pk-MaL" eventType="touchUpInside" id="MGW-LG-yJ9"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9g-GU-59K" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
+                                    <rect key="frame" x="14" y="296" width="329" height="54"/>
+                                    <color key="backgroundColor" name="ElementBackgroundColor"/>
+                                    <color key="tintColor" name="ElementTextColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain">
+                                        <attributedString key="attributedTitle">
+                                            <fragment content="Enable">
+                                                <attributes>
+                                                    <font key="NSFont" size="20" name="Avenir-Book"/>
+                                                    <font key="NSOriginalFont" size="20" name="Avenir-Book"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <font key="NSFont" size="20" name="Avenir-Heavy"/>
+                                                    <font key="NSOriginalFont" size="20" name="Avenir-Heavy"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="Pro GPT-4">
+                                                <attributes>
+                                                    <font key="NSFont" size="20" name="Avenir-Black"/>
+                                                    <font key="NSOriginalFont" size="20" name="Avenir-Black"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                    </buttonConfiguration>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="hasCheckmark" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="paidModelButtonPressed:" destination="GLt-pk-MaL" eventType="touchUpInside" id="Cgn-4A-wMl"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbv-nO-dlp" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                                    <rect key="frame" x="14" y="14" width="329" height="206"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqG-HQ-pQ4">
+                                            <rect key="frame" x="24" y="4" width="281" height="198"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <attributedString key="attributedText">
+                                                <fragment>
+                                                    <string key="content">Choose Model
+</string>
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <font key="NSFont" size="24" name="Avenir-Black"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment>
+                                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <font key="NSFont" size="14" name="Avenir-Book"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="GPT-3 Turbo:">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <font key="NSFont" size="14" name="Avenir-HeavyOblique"/>
+                                                        <font key="NSOriginalFont" size="14" name="Avenir-HeavyOblique"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment>
+                                                    <string key="content"> The ultimate blend of speed and creativity.
+
+</string>
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <font key="NSFont" size="14" name="Avenir-Book"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="Pro GPT-4:">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <font key="NSFont" size="14" name="Avenir-HeavyOblique"/>
+                                                        <font key="NSOriginalFont" size="14" name="Avenir-HeavyOblique"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content=" Upgrade your writing with this game-changing leap forward in AI intelligence.">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <font key="NSFont" size="14" name="Avenir-Book"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" name="AIChatBubbleColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="bqG-HQ-pQ4" secondAttribute="bottom" constant="4" id="8PP-0X-8dR"/>
+                                        <constraint firstItem="bqG-HQ-pQ4" firstAttribute="top" secondItem="zbv-nO-dlp" secondAttribute="top" constant="4" id="E1h-tc-bEs"/>
+                                        <constraint firstAttribute="trailing" secondItem="bqG-HQ-pQ4" secondAttribute="trailing" constant="24" id="L1o-uh-JNP"/>
+                                        <constraint firstItem="bqG-HQ-pQ4" firstAttribute="leading" secondItem="zbv-nO-dlp" secondAttribute="leading" constant="24" id="XFS-cm-gqP"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" name="ChatBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="R9g-GU-59K" firstAttribute="leading" secondItem="cJe-46-CIh" secondAttribute="leading" constant="14" id="1oe-cs-Mb0"/>
+                                <constraint firstAttribute="bottom" secondItem="R9g-GU-59K" secondAttribute="bottom" constant="14" id="7j1-7j-7k0"/>
+                                <constraint firstItem="R9g-GU-59K" firstAttribute="top" secondItem="kgC-ub-8We" secondAttribute="bottom" constant="8" id="9lO-w4-OCF"/>
+                                <constraint firstAttribute="trailing" secondItem="zbv-nO-dlp" secondAttribute="trailing" constant="14" id="Gi5-dT-izs"/>
+                                <constraint firstItem="kgC-ub-8We" firstAttribute="top" secondItem="zbv-nO-dlp" secondAttribute="bottom" constant="14" id="HVU-yy-EMf"/>
+                                <constraint firstAttribute="trailing" secondItem="R9g-GU-59K" secondAttribute="trailing" constant="14" id="Nqs-nn-uX3"/>
+                                <constraint firstItem="kgC-ub-8We" firstAttribute="height" secondItem="R9g-GU-59K" secondAttribute="height" id="cmB-zR-CkC"/>
+                                <constraint firstItem="zbv-nO-dlp" firstAttribute="leading" secondItem="cJe-46-CIh" secondAttribute="leading" constant="14" id="mvi-pc-dC5"/>
+                                <constraint firstAttribute="trailing" secondItem="kgC-ub-8We" secondAttribute="trailing" constant="14" id="ogh-h5-kTb"/>
+                                <constraint firstItem="zbv-nO-dlp" firstAttribute="top" secondItem="cJe-46-CIh" secondAttribute="top" constant="14" id="poi-39-Wbo"/>
+                                <constraint firstItem="kgC-ub-8We" firstAttribute="leading" secondItem="cJe-46-CIh" secondAttribute="leading" constant="14" id="zXk-Sz-T9z"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="24"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPK-p1-PUg" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                            <rect key="frame" x="4" y="382" width="357" height="54"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2u-ae-u7I" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="357" height="54"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" name="ElementBackgroundColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain">
+                                        <attributedString key="attributedTitle">
+                                            <fragment content="Close">
+                                                <attributes>
+                                                    <font key="NSFont" size="24" name="Avenir-Medium"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="closeButtonPressed:" destination="GLt-pk-MaL" eventType="touchUpInside" id="rXS-gE-Qup"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" name="AIChatBubbleColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Z2u-ae-u7I" secondAttribute="trailing" id="Fzs-lu-RcL"/>
+                                <constraint firstAttribute="bottom" secondItem="Z2u-ae-u7I" secondAttribute="bottom" id="GAc-3G-3ht"/>
+                                <constraint firstItem="Z2u-ae-u7I" firstAttribute="top" secondItem="lPK-p1-PUg" secondAttribute="top" id="MvL-P4-JYg"/>
+                                <constraint firstItem="Z2u-ae-u7I" firstAttribute="leading" secondItem="lPK-p1-PUg" secondAttribute="leading" id="jo3-GI-nNS"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="lPK-p1-PUg" firstAttribute="height" secondItem="R9g-GU-59K" secondAttribute="height" id="ITG-XU-tIr"/>
+                        <constraint firstAttribute="trailing" secondItem="lPK-p1-PUg" secondAttribute="trailing" constant="4" id="Lsf-9k-nhV"/>
+                        <constraint firstItem="cJe-46-CIh" firstAttribute="leading" secondItem="0P8-ae-dxH" secondAttribute="leading" constant="4" id="LyD-M3-0qt"/>
+                        <constraint firstItem="lPK-p1-PUg" firstAttribute="top" secondItem="cJe-46-CIh" secondAttribute="bottom" constant="14" id="Met-xu-Qcl"/>
+                        <constraint firstAttribute="bottom" secondItem="lPK-p1-PUg" secondAttribute="bottom" constant="4" id="Twg-yR-GTr"/>
+                        <constraint firstAttribute="trailing" secondItem="cJe-46-CIh" secondAttribute="trailing" constant="4" id="VsL-5n-w6a"/>
+                        <constraint firstAttribute="height" constant="440" id="bb2-0s-b8j"/>
+                        <constraint firstItem="lPK-p1-PUg" firstAttribute="leading" secondItem="0P8-ae-dxH" secondAttribute="leading" constant="4" id="mkN-Pk-f9C"/>
+                        <constraint firstItem="cJe-46-CIh" firstAttribute="top" secondItem="0P8-ae-dxH" secondAttribute="top" constant="4" id="v92-Ah-rIc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="PHl-66-EuX"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="PHl-66-EuX" firstAttribute="trailing" secondItem="0P8-ae-dxH" secondAttribute="trailing" constant="14" id="Acn-2L-HGD"/>
+                <constraint firstItem="PHl-66-EuX" firstAttribute="bottom" secondItem="0P8-ae-dxH" secondAttribute="bottom" constant="14" id="EmP-YL-hhH"/>
+                <constraint firstItem="0P8-ae-dxH" firstAttribute="leading" secondItem="PHl-66-EuX" secondAttribute="leading" constant="14" id="d2x-Kb-H0d"/>
+            </constraints>
+            <connections>
+                <outlet property="closeButton" destination="Z2u-ae-u7I" id="Mgn-qJ-foK"/>
+                <outlet property="freeModelButton" destination="kgC-ub-8We" id="Ssp-fg-USb"/>
+                <outlet property="paidModelButton" destination="R9g-GU-59K" id="e24-ej-KmV"/>
+                <outlet property="popupView" destination="0P8-ae-dxH" id="mTZ-CY-PEB"/>
+            </connections>
+            <point key="canvasLocation" x="362" y="-663"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="AIChatBubbleColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ChatBackgroundColor">
+            <color red="0.91200000047683716" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ElementBackgroundColor">
+            <color red="0.0" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ElementTextColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

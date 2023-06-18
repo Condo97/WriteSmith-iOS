@@ -33,8 +33,15 @@ class UpdatingViewController: UIViewController {
         updatePremium(isPremium: PremiumHelper.get())
         
         /* Do full premium and remaining update */
-        PremiumUpdater.sharedBroadcaster.fullUpdate()
-        GeneratedChatsRemainingUpdater.sharedBroadcaster.fullUpdate()
+        Task {
+            do {
+                try await PremiumUpdater.sharedBroadcaster.fullUpdate()
+                try await GeneratedChatsRemainingUpdater.sharedBroadcaster.fullUpdate()
+            } catch {
+                print("Error updating premium and generated chats remaining in UpdatingViewController")
+                print(error.localizedDescription)
+            }
+        }
         
     }
 

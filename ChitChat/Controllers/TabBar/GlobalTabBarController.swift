@@ -117,6 +117,8 @@ class GlobalTabBarController: UITabBarController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
         // Switch write tab bar item from dark to light and so
         let writeTabBarItem = UITabBarItem(
             title: nil,

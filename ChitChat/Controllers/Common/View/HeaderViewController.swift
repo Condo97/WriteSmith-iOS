@@ -97,10 +97,14 @@ class HeaderViewController: UpdatingViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
         // Set the ultra sparkle gif if the mode changed from dark to light or so
         // TODO: - This code is repeated
         
         let userInterfaceStyle = traitCollection.userInterfaceStyle
+        
+        // TODO: Do this better, it also calls a copy pasted code during setup
         if let ultraNavigationItemView = ultraMenuBarItem.customView as? UltraNavigationItemView {
             if userInterfaceStyle == .dark {
                 ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleDarkGif)

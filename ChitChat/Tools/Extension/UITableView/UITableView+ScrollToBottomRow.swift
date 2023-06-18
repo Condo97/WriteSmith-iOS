@@ -22,4 +22,17 @@ extension UITableView {
         scrollToRow(at: IndexPath(row: lastRow, section: lastSection), at: .bottom, animated: animated)
     }
     
+    func scrollToBottomUsingOffset(animated: Bool) {
+        guard self.contentSize.height >= self.frame.height else {
+            return
+        }
+        
+        let targetContentOffsetY = self.contentSize.height - self.frame.height
+        let animationDuration = animated ? 0.2 : 0.0
+        
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.contentOffset.y = targetContentOffsetY
+        })
+    }
+    
 }

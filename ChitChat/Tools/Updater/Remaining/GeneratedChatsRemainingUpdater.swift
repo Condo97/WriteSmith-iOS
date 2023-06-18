@@ -15,6 +15,22 @@ class GeneratedChatsRemainingUpdater: Updater {
         
     }
     
+    func forceUpdate() async throws {
+        let authToken = try await AuthHelper.ensure()
+        
+        let authRequest = AuthRequest(authToken: authToken)
+        
+        let getRemainingResponse = try await HTTPSConnector.getRemaining(request: authRequest)
+        
+        if let remainingUpdaterDelegate = self.updaterDelegate as? GeneratedChatsRemainingUpdaterDelegate {
+            let remaining = getRemainingResponse.body.remaining
+            
+            remainingUpdaterDelegate.updateGeneratedChatsRemaining(remaining: updateGeneratedChatsRemainingInUserDefaults(remaining))
+        }
+        
+    }
+    
+    #warning("Legacy need to delete")
     func fullUpdate(completion: (()->Void)?) {
         // Get authToken and get remaining
         AuthHelper.ensure(completion: {authToken in

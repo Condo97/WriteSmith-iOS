@@ -7,8 +7,9 @@
 
 import Foundation
 import StoreKit
+import UIKit
 
-class IAPManager: NSObject {
+class IAPManager: Any {
     
     static var storeKitTaskHandle: Task<Void, Error>?
     
@@ -22,7 +23,7 @@ class IAPManager: NSObject {
         let storeProducts = try await Product.products(for: Set(productIDs))
         
         return storeProducts
-    }
+}
     
     static func getSubscriptionPeriod(product: Product) -> SubscriptionPeriod? {
         if let subscription = product.subscription {
@@ -89,6 +90,41 @@ class IAPManager: NSObject {
         
     }
     
+//    static func refreshReceipt() async {
+//        class ReceiptRefreshRequestWrapper: NSObject, SKRequestDelegate {
+//            
+//            private var completion: ((Bool)->Void)?
+//            
+//            func doReceiptRefresh(completion: @escaping (Bool)->Void) {
+//                self.completion = completion
+//                
+//                let request = SKReceiptRefreshRequest()
+//                request.delegate = self
+//                request.start()
+//            }
+//            
+//            func requestDidFinish(_ request: SKRequest) {
+//                completion?(true)
+//            }
+//            
+//            func request(_ request: SKRequest, didFailWithError error: Error) {
+//                print("Error refreshing receipt: \(error.localizedDescription)")
+//                completion?(false)
+//            }
+//        }
+//        
+//        await withCheckedContinuation { continuation in
+//            ReceiptRefreshRequestWrapper().doReceiptRefresh(completion: { success in
+//                print("First")
+//                continuation.resume()
+//            })
+//        }
+//        
+////        ReceiptRefreshRequestWrapper().doReceiptRefresh()
+//        
+//        print("Second")
+//    }
+    
     static func startStoreKitListener() {
         storeKitTaskHandle = listenForStoreKitUpdates()
     }
@@ -98,17 +134,38 @@ class IAPManager: NSObject {
             for await result in Transaction.updates {
                 switch result {
                 case .verified(let Transaction):
-                    print("Transaction verified in IAPManager")
-                    
                     await Transaction.finish()
+                    
+                    print("Transaction verified in IAPManager listenForStoreKitUpdates")
                     
                     //TODO: Update isPremium, or do a server check with the new receipt
                     return
                 case .unverified:
-                    print("Transaction unverified in IAPManager")
+                    print("Transaction unverified in IAPManager listenForStoreKitUpdates")
                 }
             }
         }
+    }
+    
+    static func getVerifiedTransactions() async -> [Transaction] {
+        var transactionList: [Transaction] = []
+        
+        for await result in Transaction.currentEntitlements {
+            do {
+                switch result {
+                case .verified(let Transaction):
+                    await Transaction.finish()
+                    
+                    print("Transaction verified in IAPManager getVerifiedTransactions")
+                    
+                    transactionList.append(Transaction)
+                case .unverified:
+                    print("Tranaction unverified in IAPManager getVerifiedTransactions")
+                }
+            }
+        }
+        
+        return transactionList
     }
     
 }

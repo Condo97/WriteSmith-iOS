@@ -22,12 +22,14 @@ protocol UltraViewControllerDelegate {
 
 class UltraViewController: UpdatingViewController {
     
+    // Instance variables
     private var productLoadingState = LoadingState<[Product]>.idle {
         didSet {
             print("Product Loading State thing")
         }
     }
     
+    // Initialization variables
     var delegate: UltraViewControllerDelegate?
     
     var selectedSubscriptionPeriod: SubscriptionPeriod?
@@ -36,6 +38,7 @@ class UltraViewController: UpdatingViewController {
     var restorePressed: Bool = false
     var shouldRestoreFromSettings: Bool = false
     var buttonsAreSoftDisabled: Bool = false
+    
     
     lazy var rootView: UltraView = {
         RegistryHelper.instantiateAsView(nibName: Registry.Ultra.View.ultra, owner: self) as? UltraView
@@ -51,7 +54,7 @@ class UltraViewController: UpdatingViewController {
         let weeklyDisplayPrice = (UserDefaults.standard.string(forKey: Constants.userDefaultStoredWeeklyDisplayPrice) ?? Constants.defaultWeeklyDisplayPrice) as String
         let monthlyDisplayPrice = (UserDefaults.standard.string(forKey: Constants.userDefaultStoredMonthlyDisplayPrice) ?? Constants.defaultMonthlyDisplayPrice) as String
         
-        /* Setup RootView Delegate */
+        /* Setup Delegates */
         rootView.delegate = self
         
         // Setup imageView which is the brain
@@ -150,8 +153,18 @@ class UltraViewController: UpdatingViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
         // If changed from light to dark or vice versa, update the ultraImageView with the correct image
         setupUltraImageView()
+    }
+    
+    override func updatePremium(isPremium: Bool) {
+        enableButtons()
+        
+        if isPremium {
+            closeUltraView()
+        }
     }
     
     func setupUltraImageView() {
@@ -167,12 +180,16 @@ class UltraViewController: UpdatingViewController {
     func closeUltraView() {
         // If from start, instantiate GlobalTabBarController as mainVC from storyboard, otherwise just dismiss
         if fromStart {
-            let mainVC = UIStoryboard.init(name: Constants.mainStoryboardName, bundle: Bundle.main).instantiateViewController(withIdentifier: Constants.mainVCStoryboardName) as! GlobalTabBarController
-            mainVC.modalPresentationStyle = .fullScreen
-            mainVC.fromStart = true
-            present(mainVC, animated: true)
+            DispatchQueue.main.async {
+                let mainVC = UIStoryboard.init(name: Constants.mainStoryboardName, bundle: Bundle.main).instantiateViewController(withIdentifier: Constants.mainVCStoryboardName) as! GlobalTabBarController
+                mainVC.modalPresentationStyle = .fullScreen
+                mainVC.fromStart = true
+                self.present(mainVC, animated: true)
+            }
         } else {
-            dismiss(animated: true)
+            DispatchQueue.main.async {
+                self.dismiss(animated: true)
+            }
         }
     }
     
@@ -201,6 +218,7 @@ class UltraViewController: UpdatingViewController {
             IAPHTTPSHelper.getIAPStuffFromServer(authToken: authToken, delegate: self)
         } else {
             let alertController = UIAlertController(title: "Can't Reach Sever", message: "Please make sure your internet connection is enabled and try again later.", preferredStyle: .alert)
+            alertController.view.tintColor = Colors.alertTintColor
             alertController.addAction(UIAlertAction(title: "Close", style: .cancel))
             present(alertController, animated: true)
             
@@ -247,6 +265,7 @@ class UltraViewController: UpdatingViewController {
     
     func showGeneralIAPErrorAndUnhide() {
         let alert = UIAlertController(title: "Error Subscribing", message: "Please try subscribing again.", preferredStyle: .alert)
+        alert.view.tintColor = Colors.alertTintColor
         alert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: { Action in
             self.enableButtons()
         }))
@@ -325,20 +344,40 @@ extension UltraViewController: IAPHTTPSHelperDelegate {
                         // Purchase the product!
                         let transaction = try await IAPManager.purchase(productToPurchase!)
                         
-                        if let receiptURL = Bundle.main.appStoreReceiptURL, let receiptData = try? Data(contentsOf: receiptURL) {
-                            // Validate and update recept with full update TODO: Should this be forced downcast, or is there a better way to do something like this? Maybe subclassing Broadcaster?
-                            (PremiumUpdater.sharedBroadcaster.updater as! PremiumUpdater).validateAndUpdateReceiptWithFullUpdate(receiptString: receiptData.base64EncodedString(), completion: {
-                                DispatchQueue.main.async {
-                                    self.enableButtons()
-                                    self.closeUltraView()
-                                }
-                            })
+                        // Register the transaction ID with the server using PremiumUpdater sharedBroadcaster, so all listeners are notified! :D
+                        let isPremium = try await (PremiumUpdater.sharedBroadcaster.updater as! PremiumUpdater).registerTransaction(authToken: try await AuthHelper.ensure(), transactionID: transaction.id)
+                        
+                        // Enable buttons and close ultra view!
+                        DispatchQueue.main.async {
+                            self.enableButtons()
+                            self.closeUltraView()
                         }
                         
+                        
+                        //
+                        
+//                        PremiumUpdater.sharedBroadcaster.updater.
+//                        PremiumUpdater.sharedBroadcaster.updater.forceUpdate()
+                        
+//                        await IAPManager.refreshReceipt()
+                        
+                        // Send the transaction id to server instead of receipt string
+                        
+//
+//                        if let receiptURL = Bundle.main.appStoreReceiptURL, let receiptData = try? Data(contentsOf: receiptURL) {
+//                            try await (PremiumUpdater.sharedBroadcaster.updater as! PremiumUpdater).validateAndUpdateReceiptWithFullUpdate(receiptString: receiptData.base64EncodedString())
+//
+//                            DispatchQueue.main.async {
+//                                self.enableButtons()
+//                                self.closeUltraView()
+//                            }
+//                        } else {
+//                            self.showGeneralIAPErrorAndUnhide()
+//                        }
                     } catch {
                         productLoadingState = .failed(error)
                         
-                        enableButtons()
+                        showGeneralIAPErrorAndUnhide()
                     }
                 }
 
@@ -352,6 +391,7 @@ extension UltraViewController: IAPHTTPSHelperDelegate {
     
     private func showIAPErrorAndEnableButtonsOrRetry(alertBody: String) {
         let alert = UIAlertController(title: "Error Subscribing", message: alertBody, preferredStyle: .alert)
+        alert.view.tintColor = Colors.alertTintColor
         alert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: { Action in
             self.enableButtons()
         }))

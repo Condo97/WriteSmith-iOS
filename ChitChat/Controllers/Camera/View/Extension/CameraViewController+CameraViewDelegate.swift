@@ -100,6 +100,7 @@ extension CameraViewController: CameraViewDelegate {
             // If there was no text found, present an alertcontroller and allow the user to try cropping again
             if combinedStrings == "" {
                 let ac = UIAlertController(title: "No Text Found", message: "Could not find text in the selection. Please try again.", preferredStyle: .alert)
+                ac.view.tintColor = Colors.alertTintColor
                 ac.addAction(UIAlertAction(title: "Done", style: .cancel))
                 self.present(ac, animated: true)
                 return

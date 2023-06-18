@@ -116,6 +116,7 @@ class CameraViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultNotFirstCamera) {
             let ac = UIAlertController(title: "Important - Scan Text!", message: "Easily scan prompts, questions and more.\n\nWorks with multiple choice, true/false, and open ended question types.", preferredStyle: .alert)
+            ac.view.tintColor = Colors.alertTintColor
             ac.addAction(UIAlertAction(title: "Confirm", style: .cancel))
             present(ac, animated: true)
             
@@ -367,6 +368,7 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
             rootView.cameraButton.setBackgroundImage(UIImage(named: Constants.ImageName.cameraButtonRedo), for: .normal)
         } else {
             let ac = UIAlertController(title: "Could Not Get Image", message: "There was an issue getting your image. Please try again.", preferredStyle: .alert)
+            ac.view.tintColor = Colors.alertTintColor
             ac.addAction(UIAlertAction(title: "Done", style: .cancel))
             present(ac, animated: true)
         }

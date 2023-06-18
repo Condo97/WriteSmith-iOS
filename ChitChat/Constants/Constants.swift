@@ -24,6 +24,8 @@ struct Constants {
     static let userDefaultStoredPremiumLastCheckDate = "premiumLastCheckDate"
     static let userDefaultStoredIsPremium = "storedIsPremium"
     
+    static let userDefaultStoredChatGPTModel = "chatGPTModel"
+    
     static let userDefaultStoredGeneratedChatsRemaining = "generatedChatsRemaining"
     
     static let userDefaultStoredConversationToResume = "conversationToResume"
@@ -32,6 +34,8 @@ struct Constants {
     
     static let userDefaultNotFirstLaunch = "notFirstLaunch"
     static let userDefaultNotFirstCamera = "firstTimeCamera"
+    
+    static let userDefaultStoredSettingReduceMotion = "settingReduceMotion"
     
     
     //    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
@@ -224,15 +228,18 @@ struct HTTPSConstants {
     
     static let chitChatServerStaticFiles = "https://chitchatserver.com"
     
-    static let registerUser = "/registerUser"
-    static let getRemaining = "/getRemaining"
     static let getChat = "/getChat"
+    static let getIAPStuff = "/getIAPStuff"
+    static let getIsPremium = "/getIsPremium"
+    static let getRemaining = "/getRemaining"
+    static let registerTransaction = "/registerTransaction"
+    static let registerUser = "/registerUser"
     static let validateSaveUpdateReceipt = "/validateAndUpdateReceipt"
 //    static let getGenerateImage = "/getImageUrlFromGenerateUrl"
-    static let getIAPStuff = "/getIAPStuff"
+
+    static let getImportantConstants = "/getImportantConstants"
     static let privacyPolicy = "/privacyPolicy.html"
     static let termsAndConditions = "/termsAndConditions.html"
-    static let getImportantConstants = "/getImportantConstants"
 }
 
 struct HTTPSResponseConstants {
@@ -240,6 +247,16 @@ struct HTTPSResponseConstants {
     static let weeklyDisplayPrice = "weeklyDisplayPrice"
     static let monthlyDisplayPrice = "monthlyDisplayPrice"
     static let freeEssayCap = "freeEssayCap"
+}
+
+struct WebSocketConstants {
+    #if DEBUG
+        static let chitChatWebSocketServer = "wss://chitchatserver.com/v1"
+    #else
+        static let chitChatWebSocketServer = "wss://chitchatserver.com/v1"
+    #endif
+    
+    static let getChatStream = "/getChatStream"
 }
 
 struct Colors {
@@ -254,6 +271,7 @@ struct Colors {
     static let textOnBackgroundColor = UIColor(named: "TextOnBackgroundColor")!
     static let topBarBackgroundColor = UIColor(named: "TopBarBackgroundColor")!
     static let bottomBarBackgroundColor = UIColor(named: "BottomBarBackgroundColor")!
+    static let alertTintColor = userChatBubbleColor.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
 }
 
 struct FinishReasons {

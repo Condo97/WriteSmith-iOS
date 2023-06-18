@@ -42,8 +42,12 @@ extension ExploreItemViewController: ItemExploreViewDelegate {
         // Remove last separator
         queryString.removeLast(separator.count)
         
+//        #warning("DON'T FORGET TO DO THIS!")
+//        let usePaidModel = GPTModelHelper.getCurrentChatModel() == .paid
+        let currentModel = GPTModelHelper.getCurrentChatModel()
+        
         // Generate, build source, and push to generated on save
-        ChatRequestHelper.get(inputText: queryString, conversationID: nil, completion: { responseText, finishReason, conversationID, remaining in
+        ChatRequestHelper.get(inputText: queryString, conversationID: nil, model: currentModel, completion: { responseText, finishReason, conversationID, remaining in
             DispatchQueue.main.async {
                 // TODO: - Save creation and stuff
                 

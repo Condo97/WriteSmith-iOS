@@ -97,6 +97,7 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
         
         //TODO: - Delete row
         let ac = UIAlertController(title: "Delete", message: "Are you sure you'd like to delete this Essay?", preferredStyle: .alert)
+        ac.view.tintColor = Colors.alertTintColor
         ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { UIAlertAction in
             // Do haptic
             HapticHelper.doMediumHaptic()

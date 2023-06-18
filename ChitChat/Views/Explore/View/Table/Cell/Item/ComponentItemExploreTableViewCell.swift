@@ -53,6 +53,7 @@ class ComponentItemExploreTableViewCell: UITableViewCell, LoadableCell {
                     title: componentSource.detailTitle,
                     message: componentSource.detailText,
                     preferredStyle: .actionSheet)
+                detailAlertController?.view.tintColor = Colors.alertTintColor
                 detailAlertController?.addAction(UIAlertAction(
                     title: "Close", style: .cancel))
             }

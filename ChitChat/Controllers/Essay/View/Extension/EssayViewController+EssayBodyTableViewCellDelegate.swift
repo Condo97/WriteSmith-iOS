@@ -96,6 +96,7 @@ extension EssayViewController: EssayBodyTableViewCellDelegate {
         if shouldSaveEdit == .none {
             // Prompt the user confirming if they'd like to save or not
             let ac = UIAlertController(title: "Unsaved Edits", message: "You edited this essay. Would you like to save your edits?", preferredStyle: .alert)
+            ac.view.tintColor = Colors.alertTintColor
             ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { UIAlertAction in
                 self.shouldSaveEdit = .cancel
                 self.essayTextDidEndEditing(cell: cell, textView: textView)

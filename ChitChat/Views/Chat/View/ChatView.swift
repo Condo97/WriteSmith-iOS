@@ -29,6 +29,8 @@ class ChatView: UIView {
     @IBOutlet weak var adShadowView: ShadowView!
     @IBOutlet weak var cameraButton: UIButton!
     
+    @IBOutlet weak var gptModelView: GPTModelView!
+    
     @IBOutlet weak var inputBackgroundView: RoundedView!
     
     @IBOutlet weak var adViewHeightConstraint: NSLayoutConstraint!
