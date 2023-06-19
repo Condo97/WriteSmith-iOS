@@ -102,6 +102,8 @@ class ChatViewController: HeaderViewController {
         // Set the navigationController view backgroundColor so when the keyboard shows there won't be a black space during the animation due to the different speeds of keyboard and view animation
         navigationController!.view.backgroundColor = Colors.chatBackgroundColor
         
+        print("hi")
+        
         // Setup "placeholder" for TextView
         rootView.inputTextViewSetToPlaceholder()
         
