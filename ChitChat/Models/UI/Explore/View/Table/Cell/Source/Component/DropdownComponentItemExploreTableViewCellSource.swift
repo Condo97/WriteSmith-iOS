@@ -88,7 +88,7 @@ extension DropdownComponentItemExploreTableViewCellSource: ContextMenuDelegate {
     
     func contextMenuDidSelect(_ contextMenu: ContextMenu, cell: ContextMenuCell, targetedView: UIView, didSelect item: ContextMenuItem, forRowAt index: Int) -> Bool {
         // Set value to item title
-        value = item.title
+        value = item.contextStringTitle
         
         // Set label text to value and alpha to 1.0
         if let label = view as? UILabel {

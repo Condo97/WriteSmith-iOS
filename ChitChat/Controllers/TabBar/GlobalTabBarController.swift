@@ -17,7 +17,7 @@ class GlobalTabBarController: UITabBarController {
     //        lazy var essayTab: UINavigationController = UINavigationController(rootViewController: EssayViewController())
     lazy var writeTab: UINavigationController = {
         let conversationViewController = ConversationViewController()
-        conversationViewController.shouldShowUltra = false
+        conversationViewController.shouldShowUltra = true
         conversationViewController.pushToConversation = true
         
         return UINavigationController(rootViewController: conversationViewController)

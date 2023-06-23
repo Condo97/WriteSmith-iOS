@@ -155,7 +155,7 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
         }
         
         // Ensure there is text for the section in orderedSectionHeaderTitles
-        guard orderedSectionHeaderTitles![section].title != "" else {
+        guard orderedSectionHeaderTitles![section] != "" else {
             return nil
         }
         

@@ -53,7 +53,7 @@ open class ContextMenuCell: UITableViewCell {
     
     open func setup(){
         if let label = self.titleLabel {
-            label.text = item.title
+            label.text = item.contextStringTitle
             if let menuConstants = style {
                 label.textColor = menuConstants.LabelDefaultColor
                 label.font = menuConstants.LabelDefaultFont

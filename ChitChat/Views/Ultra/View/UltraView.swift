@@ -38,6 +38,9 @@ class UltraView: UIView {
     @IBOutlet weak var monthlyText: UILabel!
     @IBOutlet weak var monthlyActivityView: UIActivityIndicatorView!
     
+    @IBOutlet weak var closeLoadingOverlay: UIView!
+    @IBOutlet weak var closeLoadingOverlayIndicator: UIActivityIndicatorView!
+    
     var delegate: UltraViewDelegate?
     
     @IBAction func closeButton(_ sender: Any) {

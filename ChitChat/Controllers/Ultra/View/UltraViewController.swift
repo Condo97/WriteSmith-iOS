@@ -120,9 +120,13 @@ class UltraViewController: UpdatingViewController {
             UserDefaults.standard.set("https://apple.com/", forKey: Constants.userDefaultStoredShareURL)
         }
         
+        // Set close loading overlay to transparent, this is only used when the user closes out on the first Ultra show
+        rootView.closeLoadingOverlay.alpha = 0.0
+        
         // Setup close button fade in
         rootView.closeButton.alpha = 0.5
-        rootView.closeButton.setBackgroundImage(UIImage.init(systemName: "xmark"), for: .normal)
+//        rootView.closeButton.setBackgroundImage(UIImage.init(systemName: "xmark"), for: .normal)
+        rootView.closeButton.setBackgroundImage(UIImage.init(systemName: "xmark.circle.fill"), for: .normal)
         
     }
     
@@ -181,10 +185,16 @@ class UltraViewController: UpdatingViewController {
         // If from start, instantiate GlobalTabBarController as mainVC from storyboard, otherwise just dismiss
         if fromStart {
             DispatchQueue.main.async {
-                let mainVC = UIStoryboard.init(name: Constants.mainStoryboardName, bundle: Bundle.main).instantiateViewController(withIdentifier: Constants.mainVCStoryboardName) as! GlobalTabBarController
-                mainVC.modalPresentationStyle = .fullScreen
-                mainVC.fromStart = true
-                self.present(mainVC, animated: true)
+                // Start close loading animation
+                self.rootView.closeLoadingOverlayIndicator.startAnimating()
+                UIView.animate(withDuration: 0.1, animations: {
+                    self.rootView.closeLoadingOverlay.alpha = 1.0
+                }, completion: {completion in
+                    let mainVC = UIStoryboard.init(name: Constants.mainStoryboardName, bundle: Bundle.main).instantiateViewController(withIdentifier: Constants.mainVCStoryboardName) as! GlobalTabBarController
+                    mainVC.modalPresentationStyle = .fullScreen
+                    mainVC.fromStart = true
+                    self.present(mainVC, animated: true)
+                })
             }
         } else {
             DispatchQueue.main.async {

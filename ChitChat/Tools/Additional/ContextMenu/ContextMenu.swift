@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol ContextMenuItem {
-    var title : String {
+    var contextStringTitle : String {
         get
     }
     var image : UIImage? {
@@ -24,18 +24,18 @@ extension ContextMenuItem {
 }
 
 extension String : ContextMenuItem {
-    public var title: String {
+    public var contextStringTitle: String {
         get {
             return "\(self)"
         }
     }
 }
 public struct ContextMenuItemWithImage: ContextMenuItem {
-    public var title: String
+    public var contextStringTitle: String
     public var image: UIImage?
     
     public init(title: String, image: UIImage) {
-        self.title = title
+        self.contextStringTitle = title
         self.image = image
     }
 }
