@@ -82,13 +82,13 @@ class ExploreItemViewController: HeaderViewController {
     }
     
     @objc func keyboardWillShow(_ notification: NSNotification) {
-        if let newFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if rootView.tableView.contentInset.bottom == 0 {
                 // Calculate extra height from tabBar
                 let extraHeight = tabBarController?.tabBar.frame.size.height ?? 0
                 
                 // Show Keyboard
-                let insets = UIEdgeInsets(top: 0, left: 0, bottom: newFrame.height - extraHeight, right: 0)
+                let insets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight.height - extraHeight, right: 0)
                 
                 rootView.tableView.contentInset = insets
                 rootView.tableView.scrollIndicatorInsets = insets

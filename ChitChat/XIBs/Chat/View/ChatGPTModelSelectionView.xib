@@ -258,7 +258,7 @@ Cg
                 <outlet property="paidModelButton" destination="R9g-GU-59K" id="e24-ej-KmV"/>
                 <outlet property="popupView" destination="0P8-ae-dxH" id="mTZ-CY-PEB"/>
             </connections>
-            <point key="canvasLocation" x="362" y="-663"/>
+            <point key="canvasLocation" x="413" y="-718"/>
         </view>
     </objects>
     <resources>

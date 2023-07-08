@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol SourcedCollectionViewManagerProtocol: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var sources: [[CellSource]] { get set }
