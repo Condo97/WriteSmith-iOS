@@ -112,6 +112,9 @@ class RoundedButton: UIButton {
         }
             
         self.addTarget(self, action: #selector(self.bounce(sender:)), for: .touchDown)
+        self.addTarget(self, action: #selector(self.bounce(sender:)), for: .touchDragInside)
+        self.addTarget(self, action: #selector(self.bounceRelease(sender:)), for: .touchCancel)
+        self.addTarget(self, action: #selector(self.bounceRelease(sender:)), for: .touchDragOutside)
         self.addTarget(self, action: #selector(self.bounceRelease(sender:)), for: .touchUpInside)
     }
     
