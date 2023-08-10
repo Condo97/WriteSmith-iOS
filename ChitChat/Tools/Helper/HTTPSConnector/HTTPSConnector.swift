@@ -9,6 +9,17 @@ import Foundation
 
 class HTTPSConnector {
     
+    static func deleteChat(request: DeleteChatRequest) async throws -> StatusResponse {
+        let (data, response) = try await HTTPSClient.post(
+            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.deleteChat)")!,
+            body: request,
+            headers: nil)
+        
+        let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)
+        
+        return statusResponse
+    }
+    
     static func registerUser() async throws -> RegisterUserResponse {
         let (data, response) = try await HTTPSClient.post(
             url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.registerUser)")!,

@@ -12,7 +12,16 @@ extension ConversationViewController: ChatViewControllerDelegate {
     func popAndPushToNewConversation() {
         DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: false)
-            self.pushWith(conversation: ConversationCDHelper.appendConversation()!, animated: false)
+            
+            Task {
+                guard let newConversation = try? await ConversationCDHelper.appendConversation() else {
+                    // TODO: Handle errors
+                    print("Could not append conversation in ConversationViewController ChatViewControllerDelegate popAndPushToNewConversation!")
+                    return
+                }
+                
+                self.pushWith(conversation: newConversation, animated: false)
+            }
         }
     }
     

@@ -20,6 +20,10 @@ class ChatLoadingTableViewCell: LoadingTableViewCell {
             bubbleImageView.image = BubbleImageMaker.makeBubbleImage(userSent: false)
             bubbleImageView.tintColor = Colors.aiChatBubbleColor
             
+            if let loadingChatSource = loadingSource as? LoadingChatTableViewCellSource {
+                loadingChatSource.view = self
+            }
+            
             // TODO: Set profileImageView dynamically
         }
     }

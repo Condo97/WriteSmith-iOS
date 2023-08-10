@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -52,7 +52,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pX5-kH-dQy" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
-                        <rect key="frame" x="207" y="100" width="79" height="30"/>
+                        <rect key="frame" x="214" y="100" width="79" height="30"/>
                         <color key="backgroundColor" name="AIChatBubbleColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Lce-d0-cLN"/>
@@ -68,7 +68,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQ8-V0-rOq" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
-                        <rect key="frame" x="207" y="100" width="79" height="30"/>
+                        <rect key="frame" x="214" y="100" width="79" height="30"/>
                         <color key="backgroundColor" name="AIChatBubbleColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="ESE-EB-ThT"/>
@@ -78,6 +78,22 @@
                         <buttonConfiguration key="configuration" style="plain" title=" Copied!">
                             <fontDescription key="titleFontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                         </buttonConfiguration>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HWO-oP-k6Q" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
+                        <rect key="frame" x="108.33333333333331" y="100" width="98.666666666666686" height="30"/>
+                        <color key="backgroundColor" name="AIChatBubbleColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="4aU-cJ-Yjl"/>
+                        </constraints>
+                        <color key="tintColor" name="ElementBackgroundColor"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title=" Upgrade">
+                            <imageReference key="image" image="sparkles" catalog="system" symbolScale="small"/>
+                            <fontDescription key="titleFontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="upgradeButtonPressed:" destination="W7j-Bt-x0W" eventType="touchUpInside" id="Ly8-D0-a4O"/>
+                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -90,12 +106,15 @@
                     <constraint firstAttribute="bottomMargin" secondItem="pX5-kH-dQy" secondAttribute="bottom" constant="7" id="VBW-1u-B59"/>
                     <constraint firstItem="zpE-Wb-LUb" firstAttribute="centerY" secondItem="pX5-kH-dQy" secondAttribute="centerY" id="YfO-pS-EZ3"/>
                     <constraint firstItem="PQ8-V0-rOq" firstAttribute="top" secondItem="pX5-kH-dQy" secondAttribute="top" id="bAI-gp-HcU"/>
+                    <constraint firstItem="HWO-oP-k6Q" firstAttribute="height" secondItem="pX5-kH-dQy" secondAttribute="height" id="blQ-nZ-MUg"/>
                     <constraint firstItem="zpE-Wb-LUb" firstAttribute="trailing" secondItem="qGN-8Z-hsW" secondAttribute="trailing" id="c5k-tH-3Jx"/>
                     <constraint firstItem="PQ8-V0-rOq" firstAttribute="leading" secondItem="pX5-kH-dQy" secondAttribute="leading" id="eDE-DW-Io6"/>
                     <constraint firstItem="pX5-kH-dQy" firstAttribute="top" secondItem="qGN-8Z-hsW" secondAttribute="bottom" id="fm3-lJ-W29"/>
+                    <constraint firstItem="HWO-oP-k6Q" firstAttribute="centerY" secondItem="pX5-kH-dQy" secondAttribute="centerY" id="fqa-55-sxc"/>
                     <constraint firstItem="PQ8-V0-rOq" firstAttribute="bottom" secondItem="pX5-kH-dQy" secondAttribute="bottom" id="gu5-X5-goe"/>
+                    <constraint firstItem="pX5-kH-dQy" firstAttribute="leading" secondItem="HWO-oP-k6Q" secondAttribute="trailing" constant="7" id="opF-Z1-bYk"/>
                     <constraint firstItem="zpE-Wb-LUb" firstAttribute="width" secondItem="pX5-kH-dQy" secondAttribute="width" id="swT-Bd-nyZ"/>
-                    <constraint firstItem="zpE-Wb-LUb" firstAttribute="leading" secondItem="pX5-kH-dQy" secondAttribute="trailing" constant="14" id="wbf-3Z-2UQ"/>
+                    <constraint firstItem="zpE-Wb-LUb" firstAttribute="leading" secondItem="pX5-kH-dQy" secondAttribute="trailing" constant="7" id="wbf-3Z-2UQ"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -104,12 +123,14 @@
                 <outlet property="copyButton" destination="pX5-kH-dQy" id="eL2-43-slo"/>
                 <outlet property="shareButton" destination="zpE-Wb-LUb" id="UIr-Ea-wSV"/>
                 <outlet property="textView" destination="B2c-zZ-HTI" id="YJI-7p-DTM"/>
+                <outlet property="upgradeButton" destination="HWO-oP-k6Q" id="C5U-XG-VOH"/>
             </connections>
             <point key="canvasLocation" x="72.51908396946564" y="47.183098591549296"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="doc.on.doc" catalog="system" width="116" height="128"/>
+        <image name="sparkles" catalog="system" width="115" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <namedColor name="AIChatBubbleColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

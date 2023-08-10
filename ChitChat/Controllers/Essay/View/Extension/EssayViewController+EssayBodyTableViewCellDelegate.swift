@@ -81,7 +81,7 @@ extension EssayViewController: EssayBodyTableViewCellDelegate {
         
         // Get current essay
         let objectIndex = row / 2
-        let currentEssay = essays[objectIndex]
+        var currentEssay = essays[objectIndex]
         
         guard let essayText = currentEssay.essay else {
             print("Essay was nil when trying to save edits...")
@@ -108,30 +108,29 @@ extension EssayViewController: EssayBodyTableViewCellDelegate {
             present(ac, animated: true)
             
         } else if shouldSaveEdit == .save {
-            
-            // Update the currentEssay essayText
-            currentEssay.essay = textView.text
-            
-            // Save the Essay
-            guard EssayCDHelper.saveContext() else {
-                print("Could not save the essay in context...")
-                return
+            // Update and save the currentEssay essayText
+            Task {
+                do {
+                    try await EssayCDHelper.updateEssay(&currentEssay, withText: essayText)
+                } catch {
+                    print("Could not update and save essay in EssayViewController EssayBodyTableVIewCellDelegate essayTextDidEndEditing!")
+                }
+                
+                // Show the "- Edited" text of the Prompt cell
+                guard let section = rootView.tableView.indexPath(for: cell)?.section else {
+                    print("Couldn't get the section for the edit text update... should update next time user loads this view...")
+                    shouldSaveEdit = .none
+                    return
+                }
+                
+                guard let promptCell = rootView.tableView.cellForRow(at: IndexPath(row: 0, section: section)) as? EssayPromptTableViewCell else {
+                    print("Couldn't update edit text here... should update next time user loads this view...")
+                    shouldSaveEdit = .none
+                    return
+                }
+                
+                promptCell.editedLabel.alpha = 1.0
             }
-            
-            // Show the "- Edited" text of the Prompt cell
-            guard let section = rootView.tableView.indexPath(for: cell)?.section else {
-                print("Couldn't get the section for the edit text update... should update next time user loads this view...")
-                shouldSaveEdit = .none
-                return
-            }
-            
-            guard let promptCell = rootView.tableView.cellForRow(at: IndexPath(row: 0, section: section)) as? EssayPromptTableViewCell else {
-                print("Couldn't update edit text here... should update next time user loads this view...")
-                shouldSaveEdit = .none
-                return
-            }
-            
-            promptCell.editedLabel.alpha = 1.0
             
         } else {
             textView.text = essayText

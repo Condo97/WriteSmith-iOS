@@ -111,19 +111,23 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
             let objectIndex = row / 2
             
             // Actually delete the row and CD object
-            let currentEssay = self.essays[objectIndex]
+            var currentEssay = self.essays[objectIndex]
             
             // Delete essay and update tableView if successful
-            if EssayCDHelper.deleteEssay(currentEssay) {
-                DispatchQueue.main.async {
-                    // Delete at same index twice to remove both the prompt and body
-                    self.rootView.tableView.beginUpdates()
-                    self.rootView.tableView.deleteManagedRow(at: IndexPath(row: row, section: self.essaySection), with: .automatic)
-                    self.rootView.tableView.endUpdates()
+            Task {
+                do {
+                    try await EssayCDHelper.deleteEssay(&currentEssay)
                     
-                    self.rootView.tableView.beginUpdates()
-                    self.rootView.tableView.deleteManagedRow(at: IndexPath(row: row, section: self.essaySection), with: .automatic)
-                    self.rootView.tableView.endUpdates()
+                    DispatchQueue.main.async {
+                        // Delete at same index twice to remove both the prompt and body
+                        self.sourcedTableViewManager.sources[self.essaySection].remove(at: row)
+                        self.sourcedTableViewManager.sources[self.essaySection].remove(at: row)
+                        
+                        self.rootView.tableView.reloadData()
+                    }
+                } catch {
+                    // TODO: Handle error
+                    print("Could not delete essay in EssayViewController EssayPromptTableViewCellDelegate didPressDeleteRow... \(error)")
                 }
             }
         }))

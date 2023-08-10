@@ -12,58 +12,57 @@ class ConversationCDHelper: Any {
     
     static let conversationEntityName = String(describing: Conversation.self)
     
-    static func appendConversation() -> Conversation? {
-        return appendConversation(conversationID: -1)
+    static func appendConversation() async throws -> Conversation? {
+        return try await appendConversation(conversationID: Int64(Constants.defaultConversationID))
     }
     
-    static func appendConversation(conversationID: Int64) -> Conversation? {
-        return appendConversation(conversationID: conversationID, behavior: nil)
+    static func appendConversation(conversationID: Int64) async throws -> Conversation? {
+        return try await appendConversation(conversationID: conversationID, behavior: nil)
     }
     
-    static func appendConversation(conversationID: Int64, behavior: String?) -> Conversation? {
-        do {
-            // Could also do it this way, but I think the way I have it now is cooler!
+    static func appendConversation(conversationID: Int64, behavior: String?) async throws -> Conversation? {
+        // Could also do it this way, but I think the way I have it now is cooler!
 //            let keyValueMap: Dictionary<String, Any> = [
 //                #keyPath(Conversation.conversationID):conversationID,
 //                #keyPath(Conversation.behavior):behavior!
 //            ]
-            
+        
 //            return try CDClient.append(keyValueMap: keyValueMap, in: conversationEntityName) as! Conversation
-
-            let conversation = try CDClient.insert(named: conversationEntityName) as! Conversation
-
-            conversation.conversationID = conversationID
-            conversation.behavior = behavior
-
-            do {
-                try CDClient.saveContext()
-
-                return conversation
-            } catch {
-                print("Error saving context when appending Conversation... \(error)")
-
-                return nil
-            }
+        
+        // Unwrap, build and save conversation and return, otherwise return nil
+        guard let conversation = try await CDClient.buildAndSave(
+            named: conversationEntityName,
+            builder: {mo in
+                guard let conversation = mo as? Conversation else {
+                    return
+                }
+                
+                conversation.conversationID = conversationID
+                conversation.behavior = behavior
+            }) as? Conversation else {
+            return nil
+        }
+        
+        return conversation
+    }
+    
+    static func convertToPermanentID(_ conversation: Conversation) async throws {
+        try await CDClient.convertToPermanentID(managedObject: conversation)
+    }
+    
+    static func getConversationBy(idURL: URL) async -> Conversation? {
+        do {
+            return try await CDClient.get(managedObjectIDURLRepresentation: idURL) as? Conversation
         } catch {
-            print("Error inserting Conversation... \(error)")
+            print("Error getting conversation by idURL... \(error)")
             
             return nil
         }
     }
     
-    static func getConversationBy(idURL: URL) -> Conversation? {
+    static func getConversationBy(conversationID: Int64) async -> Conversation? {
         do {
-            return try CDClient.getByIDURL(idURL, in: conversationEntityName) as? Conversation
-        } catch {
-            print("Error getting conversation by idURL")
-            
-            return nil
-        }
-    }
-    
-    static func getConversationBy(conversationID: Int64) -> Conversation? {
-        do {
-            let conversations = try CDClient.getAll(in: conversationEntityName, where: [#keyPath(Conversation.conversationID): conversationID]) as! [Conversation]
+            let conversations = try await CDClient.getAll(in: conversationEntityName, where: [#keyPath(Conversation.conversationID): conversationID]) as! [Conversation]
             
             if conversations.count == 0 {
                 print("No conversations for conversationID")
@@ -82,9 +81,9 @@ class ConversationCDHelper: Any {
         }
     }
     
-    static func getAllConversations() -> [Conversation]? {
+    static func getAllConversations() async -> [Conversation]? {
         do {
-            return try CDClient.getAll(in: conversationEntityName) as? [Conversation]
+            return try await CDClient.getAll(in: conversationEntityName) as? [Conversation]
         } catch {
             print("Error getting all Conversations... \(error)")
             
@@ -92,30 +91,33 @@ class ConversationCDHelper: Any {
         }
     }
     
-    @discardableResult
-    static func deleteConversation(_ conversation: Conversation) -> Bool {
-        do {
-            try CDClient.delete(conversation)
-            
-            return true
-        } catch {
-            print("Error deleting Conversation... \(error)")
-            
-            return false
-        }
+    static func deleteConversation(_ conversation: Conversation) async throws {
+        try await CDClient.delete(managedObjectID: conversation.objectID)
     }
     
-    @discardableResult
-    static func saveContext() -> Bool {
-        do {
-            try CDClient.saveContext()
-            
-            return true
-        } catch {
-            print("Error saving Conversation... \(error)")
-            
-            return false
+    static func updateConversation(_ conversation: inout Conversation, withConversationID conversationID: Int64) async throws {
+        // Update using CDClient
+        guard let conversationNewContext = try await CDClient.update(
+            managedObjectID: conversation.objectID,
+            updater: {mo in
+                guard let conversation = mo as? Conversation else {
+                    return
+                }
+                
+                conversation.conversationID = conversationID
+            }) as? Conversation else {
+                return
+            }
+        
+        conversation = conversationNewContext
+    }
+    
+    static func sync(_ conversation: inout Conversation) async throws {
+        guard let conversationNewContext = try await CDClient.get(managedObjectID: conversation.objectID) as? Conversation else {
+            return
         }
+        
+        conversation = conversationNewContext
     }
     
 }

@@ -9,18 +9,20 @@ import Foundation
 
 class V3_5MigrationHandler {
     
-    static func migrate() -> Bool {
+    static func migrate() async {
         // Get all chats from ChatStorageHelperLegacy
         let chats = ChatStorageHelperLegacy.getAllChats()
         
         // Ensure there are chats in ChatStorageHelperLegacy
         guard chats.count > 0 else {
-            return true
+            return
         }
         
         // Take chats from ChatStorageHelperLegacy and put them in one conversation
-        let conversation = ConversationCDHelper.appendConversation()!
-        chats.forEach({ chatObjectLegacy in
+        guard var conversation = try? await ConversationCDHelper.appendConversation() else {
+            return
+        }
+        for chatObjectLegacy in chats {
             // Get sender string for chatObjectLegacy sender
             func getSenderString(sender: ChatSenderLegacy) -> String {
                 switch sender {
@@ -32,13 +34,16 @@ class V3_5MigrationHandler {
             }
             
             // Append Chat from chatObjectLegacy to conversation
-            ChatCDHelper.appendChat(sender: getSenderString(sender: chatObjectLegacy.sender), text: chatObjectLegacy.text, to: conversation)
-        })
+            do {
+                try await ChatCDHelper.appendChat(sender: getSenderString(sender: chatObjectLegacy.sender), text: chatObjectLegacy.text, to: &conversation)
+            } catch {
+                // TODO: Handle errors
+                print("Could not append chat from chatObjectLegacy to conversation!")
+            }
+        }
         
         // Set conversation as conversation in conversation resuming manager so that it will be loaded on first migration load
-        ConversationResumingManager.conversation = conversation
-        
-        return true
+        ConversationResumingManager.setConversation(conversation)
     }
     
 }

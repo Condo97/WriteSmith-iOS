@@ -30,29 +30,32 @@ class ConversationItemTableViewCellSource: CellSource, SelectableCellSource {
     var delegate: ConversationItemTableViewCellSourceDelegate
     
     
-    convenience init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellSourceDelegate) {
+    convenience init(conversationObject: inout Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellSourceDelegate) async {
         // Set conversation name to last chat's text and formattedDate to last chat's date, plus store date in source for easier ordering TODO: Something better! :)
         var lastChatDate: Date?
         var lastChatText = ""
         var formattedDate = ""
         
-        if conversationObject.chats!.count > 0 {
-            // Get ordered chat array
-            let orderedChatArray = ChatCDHelper.getOrderedChatArray(from: conversationObject)
-            
+        // Get and unwrap orderedChatArray if conversationObject has more than one chat
+        do {
+            if conversationObject.chats!.count > 0, let orderedChatArray = try await ChatCDHelper.getOrderedChatArray(from: &conversationObject) {
+                
 #warning("The last chat index may be changed if an initial chat is added!")
-            // Get lastChat
-            let lastChat = orderedChatArray[orderedChatArray.count - 1]
-            
-            // Set lastChatText
-            lastChatText = lastChat.text!
-            
-            // Set lastChatDate and formattedDate as lastChat's date, with formattedDate dateFormat as Sep 20, 4:10 PM
-            lastChatDate = lastChat.date
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM d, h:mm a"
-            formattedDate = dateFormatter.string(from: lastChat.date!)
+                // Get lastChat
+                let lastChat = orderedChatArray[orderedChatArray.count - 1]
+                
+                // Set lastChatText
+                lastChatText = lastChat.text!
+                
+                // Set lastChatDate and formattedDate as lastChat's date, with formattedDate dateFormat as Sep 20, 4:10 PM
+                lastChatDate = lastChat.date
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, h:mm a"
+                formattedDate = dateFormatter.string(from: lastChat.date!)
+            }
+        } catch {
+            print("Error getting ordered chat array in convenience init in ConversationItemTableViewCellSource... \(error)")
         }
         
         self.init(conversationObject: conversationObject, shouldShowPreviouslyEditedIndicatorImage: shouldShowPreviouslyEditedIndicatorImage, delegate: delegate, mostRecentChatDate: lastChatDate, formattedTitle: lastChatText, formattedDate: formattedDate)

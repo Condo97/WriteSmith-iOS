@@ -13,16 +13,19 @@ class CreationExploreTableViewCellSource: CellSource, DelegateSource {
     var tableViewCellReuseIdentifier: String? = Registry.Explore.View.Table.Cell.creation.reuseID
     
     var text: String
+    var upgradeButtonIsHidden: Bool
+    
     var delegate: CreationExploreTableViewCellDelegate?
     
     
-    convenience init(text: String) {
-        self.init(text: text, delegate: nil)
+    convenience init(text: String, upgradeButtonIsHidden: Bool) {
+        self.init(text: text, delegate: nil, upgradeButtonIsHidden: upgradeButtonIsHidden)
     }
     
-    init(text: String, delegate: CreationExploreTableViewCellDelegate?) {
+    init(text: String, delegate: CreationExploreTableViewCellDelegate?, upgradeButtonIsHidden: Bool) {
         self.text = text
         self.delegate = delegate
+        self.upgradeButtonIsHidden = upgradeButtonIsHidden
     }
     
 }

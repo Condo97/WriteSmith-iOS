@@ -63,7 +63,8 @@ extension ExploreItemViewController: ItemExploreViewDelegate {
                     .set(sources: [
                         [
                             CreationExploreTableViewCellSource(
-                                text: responseText)
+                                text: responseText,
+                                upgradeButtonIsHidden: PremiumHelper.get())
                         ]
                     ])
                     .set(itemSource: self.itemSource!)

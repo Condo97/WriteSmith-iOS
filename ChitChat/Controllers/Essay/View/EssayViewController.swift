@@ -74,18 +74,24 @@ class EssayViewController: HeaderViewController {
         RegistryHelper.register(Registry.Essay.View.Table.Cell.prompt, to: rootView.tableView)
         
         /* Get All Essays */
-        essays = EssayCDHelper.getAllEssaysReversed()! //TODO: Should this be unwrapped?
-        
-        /* Setup Sources */
-        // Set entry source and delegate
-        rootView.tableView.manager!.sources.append([EntryEssayTableViewCellSource(cellDelegate: self, textViewDelegate: self, useTryPlaceholderWhenLoaded: !PremiumHelper.get())])
-        
-        // Set prompt and body
-        rootView.tableView.manager!.sources.append(TableViewCellSourceFactory.makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObjectArray: essays, delegate: self, inputAccessoryView: toolbar)!)
-        
-        // If not premium, append premium source in the essaySection
-        if !PremiumHelper.get() {
-            rootView.tableView.manager!.sources[essaySection].append(PremiumEssayTableViewCellSource(delegate: self))
+        Task {
+            essays = await EssayCDHelper.getAllEssaysReversed() ?? [] //TODO: Should this be unwrapped like this?
+            
+            /* Setup Sources */
+            DispatchQueue.main.async {
+                // Set entry source and delegate
+                self.rootView.tableView.manager!.sources.append([EntryEssayTableViewCellSource(cellDelegate: self, textViewDelegate: self, useTryPlaceholderWhenLoaded: !PremiumHelper.get())])
+                
+                // Set prompt and body
+                self.rootView.tableView.manager!.sources.append(TableViewCellSourceFactory.makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObjectArray: self.essays, delegate: self, inputAccessoryView: self.toolbar)!)
+                
+                // If not premium, append premium source in the essaySection
+                if !PremiumHelper.get() {
+                    self.rootView.tableView.manager!.sources[self.essaySection].append(PremiumEssayTableViewCellSource(delegate: self))
+                }
+                
+                self.rootView.tableView.reloadData()
+            }
         }
         
         /* Setup Ordered Section Headers */
@@ -132,13 +138,7 @@ class EssayViewController: HeaderViewController {
                 }
             }
             
-            // If last cell in essaySection is essayPremiumTableViewCell and is premium, then remove it, and if the last cell in essaySection is not essayPremiumTableViewCell but not nil and user is not premium, then add it
-            let lastCell = self.rootView.tableView.cellForRow(at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.essaySection) - 1, section: self.essaySection))
-            if lastCell is EssayPremiumTableViewCell && isPremium {
-                self.removePremiumCell()
-            } else if lastCell != nil && !(lastCell is EssayPremiumTableViewCell) && !isPremium {
-                self.insertPremiumCell()
-            }
+            self.updatePremiumCellShowing()
         }
         
     }
@@ -212,9 +212,9 @@ class EssayViewController: HeaderViewController {
         UltraViewControllerPresenter.presentOnTop(animated: true)
     }
     
-    func addEssay(prompt: String, essayText: String) {
+    func addEssay(prompt: String, essayText: String) async throws {
         // Save Essay
-        if let essay = EssayCDHelper.appendEssay(prompt: prompt, essayText: essayText, date: Date(), userEdited: false) {
+        if let essay = try await EssayCDHelper.appendEssay(prompt: prompt, essayText: essayText, date: Date(), userEdited: false) {
             
             // Create newEssay in managed context
             essays.append(essay)
@@ -224,31 +224,55 @@ class EssayViewController: HeaderViewController {
                 let sourceArray = TableViewCellSourceFactory.makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObject: self.essays.last!, delegate: self, inputAccessoryView: self.toolbar)!
                 
                 // Insert prompt and body cells at top
-                self.rootView.tableView.beginUpdates()
-                self.rootView.tableView.insertManagedRow(bySource: sourceArray[0], at: IndexPath(row: 0, section: self.essaySection), with: .automatic)
-                self.rootView.tableView.endUpdates()
-                
-                self.rootView.tableView.beginUpdates()
-                self.rootView.tableView.insertManagedRow(bySource: sourceArray[1], at: IndexPath(row: 1, section: self.essaySection), with: .automatic)
-                self.rootView.tableView.endUpdates()
+                self.sourcedTableViewManager.sources[self.essaySection].insert(sourceArray[1], at: 0)
+                self.sourcedTableViewManager.sources[self.essaySection].insert(sourceArray[0], at: 0)
+                self.rootView.tableView.reloadData()
             }
         }
     }
     
-    func insertPremiumCell() {
-        DispatchQueue.main.async {
-            self.rootView.tableView.insertManagedRow(bySource: PremiumEssayTableViewCellSource(delegate: self), at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.essaySection), section: self.essaySection), with: .automatic)
-        }
-    }
+//    func insertPremiumCell() {
+//        DispatchQueue.main.async {
+//            self.sourcedTableViewManager.sources[self.essaySection].append(PremiumEssayTableViewCellSource(delegate: self))
+//
+//            self.rootView.tableView.reloadData()
+//        }
+//    }
+//
+//    func removePremiumCell() {
+//        DispatchQueue.main.async {
+//            let lastCellIndexPath = IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.essaySection) - 1, section: self.essaySection)
+//
+//            if self.rootView.tableView.cellForRow(at: lastCellIndexPath) is EssayPremiumTableViewCell {
+//                self.sourcedTableViewManager.sources[lastCellIndexPath.section].remove(at: lastCellIndexPath.row)
+//
+//                self.rootView.tableView.reloadData()
+//            } else {
+//                print("The last cell was not EssayPremiumTableViewCell, so it couldn't be deleted!")
+//            }
+//        }
+//    }
     
-    func removePremiumCell() {
-        DispatchQueue.main.async {
-            let lastCellIndexPath = IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.essaySection) - 1, section: self.essaySection)
-            
-            if self.rootView.tableView.cellForRow(at: lastCellIndexPath) is EssayPremiumTableViewCell {
-                self.rootView.tableView.deleteManagedRow(at: lastCellIndexPath, with: .automatic)
-            } else {
-                print("The last cell was not EssayPremiumTableViewCell, so it couldn't be deleted!")
+    func updatePremiumCellShowing() {
+        // Ensure the essaySection exists
+        guard sourcedTableViewManager.sources.count > self.essaySection else {
+            // TODO: Handle error if necessary
+            return
+        }
+        
+        // If sources contains premiumEssayTableViewCellSource and is premium then remove it, otherwise if it doesent and user is not premium, then add it
+        let containsPremiumEssayTableViewCellSource = self.sourcedTableViewManager.sources[self.essaySection].contains(where: {$0 is PremiumEssayTableViewCellSource})
+        if containsPremiumEssayTableViewCellSource && PremiumHelper.get() {
+            DispatchQueue.main.async {
+                self.sourcedTableViewManager.sources[self.essaySection].removeAll(where: {$0 is PremiumEssayTableViewCellSource})
+                
+                self.rootView.tableView.reloadData()
+            }
+        } else if !containsPremiumEssayTableViewCellSource && !PremiumHelper.get() {
+            DispatchQueue.main.async {
+                self.sourcedTableViewManager.sources[self.essaySection].append(PremiumEssayTableViewCellSource(delegate: self))
+                
+                self.rootView.tableView.reloadData()
             }
         }
     }

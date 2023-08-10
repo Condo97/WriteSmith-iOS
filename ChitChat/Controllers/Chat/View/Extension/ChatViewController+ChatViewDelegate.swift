@@ -35,10 +35,12 @@ extension ChatViewController: ChatViewDelegate {
         rootView.inputTextView.text = ""
         updateInputTextViewSize(textView: rootView.inputTextView)
         
-        generateChat(inputText: inputText)
-        
-        // Dismiss keyboard and call inputTextViewOnSubmit to handle softDisable or ßubmit and camera disable
+        // Dismiss keyboard and call inputTextViewOnSubmit to handle softDisable or submit and camera disable
         rootView.inputTextViewOnSubmit(isPremium: PremiumHelper.get())
+        
+        Task {
+            try await generateChat(inputText: inputText)
+        }
     }
     
     func promoButtonPressed() {

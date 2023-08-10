@@ -35,10 +35,21 @@ class ConversationSourcedTableViewManager: SourcedTableViewManager {
                         HapticHelper.doMediumHaptic()
                         
                         // Delete conversationObject from CoreData
-                        ConversationCDHelper.deleteConversation(itemSource.conversationObject)
-                        
-                        // Delete managed row
-                        managedTableView.deleteManagedRow(at: indexPath, with: .none)
+                        Task {
+                            do {
+                                try await ConversationCDHelper.deleteConversation(itemSource.conversationObject)
+                            } catch {
+                                // TODO: Handle deletion error
+                                print("Could not delete conversation in tableView in ConversationSourcedTableViewManager SourcedTalbeViewManager tableViewForRowAtIndexPath")
+                            }
+                            
+                            // Delete row
+                            DispatchQueue.main.async {
+                                self.sources[indexPath.section].remove(at: indexPath.row)
+                                
+                                tableView.reloadData()
+                            }
+                        }
                     }))
                     ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
                     }))

@@ -19,7 +19,7 @@ class ChatBubbleTableViewCell: UITableViewCell, Bounceable, LoadableCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -41,12 +41,20 @@ class ChatBubbleTableViewCell: UITableViewCell, Bounceable, LoadableCell {
         // TODO: - Look at this again, is this a good place to load the cell, or should it be somewhere else since it references ChatTableViewCelLSource?
         if let chatSource = source as? ChatTableViewCellSource {
             chatSource.typingLabel = chatText
+            chatSource.view = self
+//            chatText.text = chatSource.chat.text
             
-            if let typewriter = chatSource.typewriter, typewriter.isValid() {
-                chatText.text = typewriter.typingString
+            if chatSource.isTyping {
+                chatText.text = chatSource.typingText
             } else {
                 chatText.text = chatSource.chat.text
             }
+            
+//            if let typewriter = chatSource.typewriter, typewriter.isValid() {
+//                chatText.text = typewriter.typingString
+//            } else {
+//                chatText.text = chatSource.chat.text
+//            }
             
             setBubbleImage(isUser: chatSource.chat.sender == Constants.Chat.Sender.user)
         }

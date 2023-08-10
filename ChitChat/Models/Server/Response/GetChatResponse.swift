@@ -14,12 +14,16 @@ struct GetChatResponse: Codable {
         var outputText: String?
         var finishReason: String?
         var conversationID: Int?
+        var inputChatID: Int?
+        var outputChatID: Int?
         var remaining: Int?
         
         enum CodingKeys: String, CodingKey {
             case outputText = "output"
             case finishReason
             case conversationID
+            case inputChatID
+            case outputChatID
             case remaining
         }
         

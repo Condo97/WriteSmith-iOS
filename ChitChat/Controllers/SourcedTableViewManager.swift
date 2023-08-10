@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 /***
  Communicates table view actions
@@ -18,10 +19,20 @@ protocol SourcedTableViewManagerDelegate {
  Just holds the sources!
  */
 class SourcedTableViewManager: NSObject {
+    
     // Instance variables
-    var sources: [[CellSource]] = []
+    var sources: [[CellSource]] = [] {
+        didSet {
+            // If there is ever an empty inner array when setting sources, remove it
+            if sources.count == 1 && sources[0].count == 0 {
+                sources = []
+            }
+        }
+    }
     var orderedSectionHeaderTitles: [String]?
     
+    var allowsEditing: Bool = true
+    var allowsSelection: Bool = true
     var hapticsEnabled: Bool = true
     var showsFooter: Bool = true
     
@@ -62,36 +73,26 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        // Ensure allows selection otherwise return
+        guard allowsSelection else {
+            return
+        }
         
         // Get source from indexPath
-        let source = sourceFrom(indexPath: indexPath)
+        guard let source = sourceFrom(indexPath: indexPath) else {
+            print("Couldn't unwrap source.. why?")
+            return
+        }
         
         // If source is selectable, call didSelect
         if let selectableSource = source as? SelectableCellSource {
             selectableSource.didSelect?(tableView, indexPath)
         }
         
-        // If hapticsEnabled, do a haptic
-        if hapticsEnabled {
-            // Do haptic
-            HapticHelper.doLightHaptic()
-        }
-        
-        delegate?.didSelectSourceAt(source: source!, indexPath: indexPath)
+        delegate?.didSelectSourceAt(source: source, indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // If the current source is a PaddingTableViewCellSource, check if it is also a tieredPaddingSource and return either a height based on the tier or not otherwise return the default row height
-        if let paddingSource = sourceFrom(indexPath: indexPath) as? PaddingTableViewCellSource {
-            if let tieredPaddingSource = paddingSource as? TieredPaddingTableViewCellSource {
-                // If the source is a tieredPaddingSource, return the correct padding for the corresponding tier
-                return tieredPaddingSource.getPadding(isPremium: (UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium)))
-            }
-            
-            // If the source is a PaddingTableViewCellSource, return the padding
-            return paddingSource.padding
-        }
-        
         return tableView.rowHeight
     }
     
@@ -122,6 +123,11 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
     func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
         // Ensure that the footer should be shown, otherwise return 0 as height
         guard showsFooter else {
+            return 0
+        }
+        
+        // Ensure there are enough sections, otherwise return 0 as height
+        guard sources.count > section else {
             return 0
         }
         
@@ -181,6 +187,38 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
         return UIView()
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Ensure allowsEditing otherwise return false
+        guard allowsEditing else {
+            return false
+        }
+        
+        // Get source from indexPath
+        let source = sourceFrom(indexPath: indexPath)
+        
+        // If source is editable return canEdit, otherwise return false
+        if let editableSource = source as? EditableCellSource {
+            return editableSource.canEdit
+        }
+        
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // Ensure allowsEditing otherwise return
+        guard allowsEditing else {
+            return
+        }
+        
+        // Get source from indexPath
+        let source = sourceFrom(indexPath: indexPath)
+        
+        // If source is editable, call commit
+        if let editableSource = source as? EditableCellSource {
+            editableSource.commit?(tableView, indexPath, editingStyle)
+        }
+    }
+    
     //MARK: Non-relevant default implementations
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -203,11 +241,7 @@ extension SourcedTableViewManager: SourcedTableViewManagerProtocol {
         return self.tableView(tableView, estimatedHeightForFooterInSection: section)
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
     }
     

@@ -16,7 +16,7 @@ class ChatWebSocketConnector: WebSocketClient {
         // Setup headers from GetChatRequest TODO: Make this better lol
         var headers: [String: String] = [
             "authToken": request.authToken,
-            "inputText": request.inputText
+            "inputText": request.inputText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         ]
         
         if let conversationID = request.conversationID {

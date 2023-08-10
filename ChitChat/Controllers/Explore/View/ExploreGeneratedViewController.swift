@@ -38,6 +38,22 @@ class ExploreGeneratedViewController: ManagedHeaderUpdatingTableViewInViewContro
         HapticHelper.doLightHaptic()
     }
     
+    override func updatePremium(isPremium: Bool) {
+        super.updatePremium(isPremium: isPremium)
+        
+        sourcedTableViewManager.sources.forEach({sourceArray in
+            sourceArray.forEach({source in
+                if let creationSource = source as? CreationExploreTableViewCellSource {
+                    creationSource.upgradeButtonIsHidden = isPremium
+                }
+            })
+        })
+        
+        DispatchQueue.main.async {
+            self.rootView.tableView.reloadData()
+        }
+    }
+    
     
     class Builder<T: ExploreGeneratedViewController>: ManagedHeaderUpdatingTableViewInViewController.Builder<T> {
         

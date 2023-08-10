@@ -13,7 +13,7 @@ final class WriteSmithNewTests: XCTestCase {
     // Test the typewriter class
     func testTypewriter() throws {
         let text = "this is some text"
-        let t = Typewriter.start(text: text, timeInterval: 1.0, block: { typewriter, compltedText in
+        let t = TypewriterLegacy.start(text: text, timeInterval: 1.0, block: { typewriter, compltedText in
             
         })
         
@@ -21,7 +21,7 @@ final class WriteSmithNewTests: XCTestCase {
         
         group.enter()
         
-        let block: (Typewriter, String)->Void = { typewriter, completedText in
+        let block: (TypewriterLegacy, String)->Void = { typewriter, completedText in
             if !typewriter.isValid() {
                 group.leave()
             }

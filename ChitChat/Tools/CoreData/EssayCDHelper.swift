@@ -12,10 +12,10 @@ class EssayCDHelper: Any {
     
     static let essayEntityName = String(describing: Essay.self)
     
-    static func getLastEssayID() -> Int64? {
+    static func getLastEssayID() async -> Int64? {
         do {
             //TODO: Add predicate to only get the latest object
-            let essays = try CDClient.getAll(in: essayEntityName)
+            let essays = try await CDClient.getAll(in: essayEntityName)
             
             guard essays.count > 0 else {
                 print("No essays found when getting last essay ID...")
@@ -36,39 +36,37 @@ class EssayCDHelper: Any {
         }
     }
     
-    static func appendEssay(prompt: String, essayText: String, date: Date, userEdited: Bool) -> Essay? {
+    static func appendEssay(prompt: String, essayText: String, date: Date, userEdited: Bool) async throws -> Essay? {
         // Get lastID if it exists, otherwise set to 0
-        let id = getLastEssayID() ?? 0
+        let id = await getLastEssayID() ?? 0
         
         // Insert new Essay and set values
-        do {
-            let essay = try CDClient.insert(named: essayEntityName) as! Essay
-            
-            essay.id = id
-            essay.prompt = prompt
-            essay.essay = essayText
-            essay.date = date
-            essay.userEdited = userEdited
-            
-            do {
-                try CDClient.saveContext()
+        guard let essay = try await CDClient.buildAndSave(
+            named: essayEntityName,
+            builder: {mo in
+                guard let essay = mo as? Essay else {
+                    return
+                }
                 
-                return essay
-            } catch {
-                print("Error saving context when appending Essay... \(error)")
-                
-                return nil
-            }
-        } catch {
-            print("Error inserting new Essay object... \(error)")
-            
+                essay.id = id
+                essay.prompt = prompt
+                essay.essay = essayText
+                essay.date = date
+                essay.userEdited = userEdited
+            }) as? Essay else {
             return nil
         }
+        
+        return essay
     }
     
-    static func getAllEssaysReversed() -> [Essay]? {
+    static func deleteEssay(_ essay: inout Essay) async throws {
+        try await CDClient.delete(managedObjectID: essay.objectID)
+    }
+    
+    static func getAllEssaysReversed() async -> [Essay]? {
         do {
-            return try (CDClient.getAll(in: essayEntityName) as? [Essay])?.reversed()
+            return try await (CDClient.getAll(in: essayEntityName) as? [Essay])?.reversed()
         } catch {
             print("Error getting all Essays... \(error)")
             
@@ -76,27 +74,21 @@ class EssayCDHelper: Any {
         }
     }
     
-    static func deleteEssay(_ essay: Essay) -> Bool {
-        do {
-            try CDClient.delete(essay)
-            
-            return true
-        } catch {
-            print("Error deleting Essay... \(error)")
-            
-            return false
+    static func updateEssay(_ essay: inout Essay, withText text: String) async throws {
+        // Update essay
+        guard let essayNewContext = try await CDClient.update(
+            managedObjectID: essay.objectID,
+            updater: {mo in
+                guard let essay = mo as? Essay else {
+                    return
+                }
+                
+                essay.essay = text
+            }) as? Essay else {
+            return
         }
-    }
-    
-    static func saveContext() -> Bool {
-        do {
-            try CDClient.saveContext()
-            
-            return true
-        } catch {
-            print("Error saving Essay... \(error)")
-            
-            return false
-        }
+        
+        // Set essay to essay new context
+        essay = essayNewContext
     }
 }

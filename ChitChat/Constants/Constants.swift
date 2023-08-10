@@ -9,7 +9,16 @@ import UIKit
 import Foundation
 
 struct Constants {
+    
+    struct Additional {
+        static let coreDataModelName = "ChitChat"
+    }
+    
     static let bottomButtonGradient = UIColor(named: "BottomButtonGradient")!
+    
+    static let defaultChatID = -1
+    static let defaultConversationID = -1
+    
     static let chatStorageUserDefaultKey = "chatStorageUserDefaultKey"
     static let pastChatStorageUserDefaultKey = "pastChatStorageUserDefaultKey"
     static let userDefaultStoredAuthTokenKey = "authTokenKey"
@@ -43,7 +52,7 @@ struct Constants {
     static let reviewFrequency = 5
     static let adFrequency = 4
     
-    static let freeTypingTimeInterval = 4.0/100
+    static let freeTypingTimeInterval = 2.8/100
     static let premiumTypingTimeInterval = 2.0/100
     
     static let defaultTypingUpdateLetterCountFactor = 200
@@ -228,6 +237,7 @@ struct HTTPSConstants {
     
     static let chitChatServerStaticFiles = "https://chitchatserver.com"
     
+    static let deleteChat = "/deleteChat"
     static let getChat = "/getChat"
     static let getIAPStuff = "/getIAPStuff"
     static let getIsPremium = "/getIsPremium"

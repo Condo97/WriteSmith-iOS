@@ -143,12 +143,16 @@ class ExploreViewController: ManagedHeaderUpdatingTableViewInViewController {
             // Perform without animation
             UIView.performWithoutAnimation {
                 // Clear tableView
-                self.rootView.tableView.deleteAllManagedSources(with: .none)
+                self.sourcedTableViewManager.sources = []
+                
+                self.rootView.tableView.reloadData()
                 
                 // If section is not nil and > 0 and < topCollectionSources.count set to collection view cell with vertical collection view with just the sources from that section, otherwise set tableView to show all TODO: - Is it fine to have that 0 there?
                 if section != nil && section! > 0 && section! < self.topCollectionSources[0].count {
                     // Append the exploreCollectionTableViewCellSource for the section TODO: - Make this better
-                    self.rootView.tableView.appendManagedSections(bySources: [[ExploreCollectionTableViewCellSource(self.persistentSources![section! - 1 + self.HDR_POP_AMOUNT][0] as! ExploreCollectionTableViewCellSource)]], with: .none)
+                    self.sourcedTableViewManager.sources = [[ExploreCollectionTableViewCellSource(self.persistentSources![section! - 1 + self.HDR_POP_AMOUNT][0] as! ExploreCollectionTableViewCellSource)]]
+                    
+                    self.rootView.tableView.reloadData()
                     
                     // Set new collectionViewCellSource as not one row
                     // Set section header as the only section header in manager's orderedSectionHeaderTitles
@@ -163,7 +167,10 @@ class ExploreViewController: ManagedHeaderUpdatingTableViewInViewController {
                     self.rootView.tableView.reloadData()
                 } else {
                     self.rootView.tableView.manager?.orderedSectionHeaderTitles = self.persistentHeaders
-                    self.rootView.tableView.appendManagedSections(bySources: self.persistentSources!, with: .none)
+                    
+                    self.sourcedTableViewManager.sources = self.persistentSources!
+                    
+                    self.rootView.tableView.reloadData()
                 }
             }
         }

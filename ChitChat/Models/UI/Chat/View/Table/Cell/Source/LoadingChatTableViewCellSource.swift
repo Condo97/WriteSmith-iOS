@@ -10,6 +10,8 @@ class LoadingChatTableViewCellSource: LoadingTableViewCellSource {
     var collectionViewCellReuseIdentifier: String?
     var tableViewCellReuseIdentifier: String? = Registry.Chat.View.TableView.Cell.loading.reuseID
     
+    var view: UIView?
+    
     var pulsatingDotsAnimation: PulsatingDotsAnimation?
     var dotColor: UIColor
     

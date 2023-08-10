@@ -31,7 +31,11 @@ extension GlobalTabBarController: UITabBarControllerDelegate {
         if let vcAsNavController = viewController as? UINavigationController {
             if let topVC = vcAsNavController.topViewController {
                 if let conversationVC = topVC as? ConversationViewController {
-                    conversationVC.pushWith(conversation: ConversationResumingManager.conversation ?? ConversationCDHelper.appendConversation()!, animated: true)
+                    Task {
+                        if let conversationToResume = await ConversationResumingManager.getConversation() {
+                            conversationVC.pushWith(conversation: conversationToResume, animated: true)
+                        }
+                    }
                     
                     return false
                 }

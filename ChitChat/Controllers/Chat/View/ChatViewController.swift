@@ -22,7 +22,7 @@ class ChatViewController: HeaderViewController {
     let spacerSection = 1
     
     let sourcedTableViewManager: SourcedTableViewManagerProtocol = {
-        var sbhstvm = ChatSmallBlankHeaderSourcedTableViewManager()
+        var sbhstvm = SmallBlankHeaderSourcedTableViewManager()
         sbhstvm.blankHeaderHeight = 40.0
         return sbhstvm
     }()
@@ -52,7 +52,9 @@ class ChatViewController: HeaderViewController {
     // Initialization variables
     var currentConversation: Conversation? {
         didSet {
-            ConversationResumingManager.conversation = currentConversation
+            if let currentConversation = currentConversation {
+                ConversationResumingManager.setConversation(currentConversation)
+            }
         }
     }
     
@@ -150,11 +152,12 @@ class ChatViewController: HeaderViewController {
         }
         
         /* Setup Cell Source */
-        // Insert all chats from conversation into sources
-        sourcedTableViewManager.sources.insert(TableViewCellSourceFactory.makeChatTableViewCellSourceArray(from: currentConversation!), at: chatSection)
+        Task {
+            await setCellSource()
+        }
         
         // Set up default tiered padding source at index 1 in spacerSection
-//        sourcedTableViewManager.sources.insert([TieredPaddingTableViewCellSource()], at: spacerSection)
+        //        sourcedTableViewManager.sources.insert([TieredPaddingTableViewCellSource()], at: spacerSection)
         
         // If first time launch, set shouldShowUltra to false
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultNotFirstLaunch) {
@@ -177,18 +180,6 @@ class ChatViewController: HeaderViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if shouldScrollOnFirstAppear {
-            DispatchQueue.main.async{
-                let lastSection = self.rootView.tableView.numberOfSections - 1
-                if lastSection >= 0 {
-                    let lastRow = self.rootView.tableView.numberOfRows(inSection: lastSection) - 1
-                    if lastRow >= 0 {
-                        self.rootView.tableView.scrollToRow(at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.rootView.tableView.numberOfSections - 1) - 1, section: self.rootView.tableView.numberOfSections - 1), at: .bottom, animated: false)
-                    }
-                }
-            }
-        }
-        
         // Set the camera button constraints
         if !cameraButtonHeightConstraintSet && rootView.isBlankWithPlaceholder {
             rootView.cameraButtonHeightConstraint.constant = rootView.inputBackgroundView.frame.height
@@ -198,8 +189,10 @@ class ChatViewController: HeaderViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // Set shouldScrollOnFirstAppear to false, as it should have finished scrolling on the viewDidLayoutSubviews call right before viewDidAppear
-        shouldScrollOnFirstAppear = false
+        super.viewDidAppear(animated)
+        
+//        // Set shouldScrollOnFirstAppear to false, as it should have finished scrolling on the viewDidLayoutSubviews call right before viewDidAppear
+//        shouldScrollOnFirstAppear = false
         
         // Set origin for keyboard
         origin = self.view.frame.origin.y
@@ -212,11 +205,38 @@ class ChatViewController: HeaderViewController {
         
         // Show first conversation chats or add chat from first chat generator TODO: This all should be done somewhere else
         if loadFirstConversationChats {
-            showFirstConversationChats()
+            Task {
+                do {
+                    try await showFirstConversationChats()
+                } catch {
+                    // TODO: Handle error
+                    print("Error showing first conversation chats in viewDidAppear in ChatViewController... \(error)")
+                }
+            }
         } else {
             // Only add if there are no chats in the conversation
-            if currentConversation?.chats?.count == 0 {
-                addChat(message: FirstChatGenerator.getRandomFirstChat(), sender: Constants.Chat.Sender.ai)
+            DispatchQueue.main.async {
+                Task {
+                    if var currentConversation = self.currentConversation {
+                        do {
+                            if try await ChatCDHelper.getOrderedChatArray(from: &currentConversation)?.count == 0 {
+                                Task {
+                                    do {
+                                        let source = try await self.addChatSource(message: FirstChatGenerator.getRandomFirstChat(), sender: Constants.Chat.Sender.ai)
+                                        self.animateChatRowIn(view: source?.view)
+                                    } catch {
+                                        // TODO: Handle error
+                                        print("Error adding chat in viewDidAppear in ChatViewController... \(error)")
+                                    }
+                                }
+                            }
+                            self.currentConversation = currentConversation
+                        } catch {
+                            // TODO: Handle error
+                            print("Error unwrapping current conversation to new object in viewDidAppear in ChatViewController... \(error)")
+                        }
+                    }
+                }
             }
         }
     }
@@ -231,7 +251,7 @@ class ChatViewController: HeaderViewController {
             self.rootView.remainingShadowView.isHidden = isPremium
             self.rootView.promoView.isHidden = isPremium
             self.rootView.promoShadowView.isHidden = isPremium
-
+            
             // Set promoViewHeightConstraint
             self.rootView.promoViewHeightConstraint.constant = isPremium ? 0.0 : self.promoViewHeightConstraintConstant
             
@@ -241,7 +261,7 @@ class ChatViewController: HeaderViewController {
                 stvm.lastSectionFooterHeightAddition = isPremium ? Constants.Chat.View.Table.ultraFooterHeight : Constants.Chat.View.Table.freeFooterHeight
                 self.rootView.tableView.endUpdates()
             }
-
+            
             // Set adView visibility if premium
             if isPremium {
                 self.rootView.adView.alpha = 0.0
@@ -259,7 +279,7 @@ class ChatViewController: HeaderViewController {
         
         // Set instance remaining
         self.remaining = remaining
-
+        
         // Set chatsRemainingText on main queue
         DispatchQueue.main.async {
             self.rootView.chatsRemainingText.text = "You have \(remaining < 0 ? 0 : remaining) chat\(remaining == 1 ? "" : "s") remaining today..."
@@ -386,15 +406,99 @@ class ChatViewController: HeaderViewController {
         HapticHelper.doLightHaptic()
         
         // Pop and push to new conversation
-        delegate?.popAndPushToNewConversation()
+        UIView.performWithoutAnimation {
+            delegate?.popAndPushToNewConversation()
+        }
     }
     
-    func generateChat(inputText: String) {
+    func appendToSources(_ source: CellSource, section: Int) {
+        DispatchQueue.main.async {
+            if self.sourcedTableViewManager.sources.count > section {
+                self.sourcedTableViewManager.sources[section].append(source)
+                
+                UIView.performWithoutAnimation {
+                    self.rootView.tableView.reloadData()
+                }
+            } else {
+                self.sourcedTableViewManager.sources = [[source]]
+                
+                UIView.performWithoutAnimation {
+                    self.rootView.tableView.reloadData()
+                }
+//                Task {
+//                    await self.setCellSource()
+//                }
+            }
+            
+        }
+    }
+    
+    func deleteFromSources(_ source: CellSource, section: Int) {
+        DispatchQueue.main.async {
+            guard self.sourcedTableViewManager.sources.count > section else {
+                return
+            }
+            
+            self.sourcedTableViewManager.sources[section].removeAll(where: {$0 === source})
+            
+            UIView.performWithoutAnimation {
+                self.rootView.tableView.reloadData()
+            }
+        }
+    }
+    
+    func scrollToBottom(animated: Bool) {
+        DispatchQueue.main.async {
+            // Ensure there is at least one section and one row in that section, otherwise return
+            guard self.rootView.tableView.numberOfSections > 0 && self.rootView.tableView.numberOfRows(inSection: 0) > 0 else {
+                return
+            }
+            
+            // Scroll to the bottom row in the bottom section
+            self.rootView.tableView.scrollToRow(at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.rootView.tableView.numberOfSections - 1) - 1, section: self.rootView.tableView.numberOfSections - 1), at: .bottom, animated: animated)
+        }
+    }
+    
+    func setCellSource() async {
+        // Set sources as sourceArray and SmallBlankHeader if everything can be unwrapped and stuff
+        do {
+            if var currentConversation = self.currentConversation, let sourceArray = try await TableViewCellSourceFactory.makeChatTableViewCellSourceArray(from: &currentConversation, delegate: self) {
+                DispatchQueue.main.async {
+                    self.sourcedTableViewManager.sources = [sourceArray]
+                    
+                    UIView.performWithoutAnimation {
+                        self.rootView.tableView.reloadData()
+                    }
+                }
+                self.currentConversation = currentConversation
+            }
+            
+            // Scroll if necessary
+            if shouldScrollOnFirstAppear {
+                DispatchQueue.main.async{
+                    let lastSection = self.rootView.tableView.numberOfSections - 1
+                    if lastSection >= 0 {
+                        let lastRow = self.rootView.tableView.numberOfRows(inSection: lastSection) - 1
+                        if lastRow >= 0 {
+//                                self.rootView.tableView.scrollToBottom(animated: false)
+                            self.scrollToBottom(animated: false)
+                        }
+                    }
+                }
+            }
+        } catch {
+            print("Could not get sourceArray from currentConversation in viewDidLoad in ChatViewController... \(error)")
+        }
+    }
+    
+    func generateChat(inputText: String) async throws {
         // Add user's chat
-        addChat(message: inputText, sender: Constants.Chat.Sender.user)
+        let userChatSource = try await addChatSource(message: inputText, sender: Constants.Chat.Sender.user)
         
-        // Start processing animation
-        startProcessingAnimation()
+        // Start processing animation after a slight delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.startProcessingAnimation()
+        }
         
         // Show ad or review
         if (PremiumHelper.get()) {
@@ -412,10 +516,10 @@ class ChatViewController: HeaderViewController {
         let currentModel = GPTModelHelper.getCurrentChatModel()
         
         // Get the current conversationID
-//        var conversationID: Int?
-//        if let currentConversationUnwrapped = currentConversation {
-//            conversationID = Int(currentConversationUnwrapped.conversationID)
-//        }
+        //        var conversationID: Int?
+        //        if let currentConversationUnwrapped = currentConversation {
+        //            conversationID = Int(currentConversationUnwrapped.conversationID)
+        //        }
         
         // Build GetChatRequest
         let request = GetChatRequest(
@@ -431,269 +535,282 @@ class ChatViewController: HeaderViewController {
         // So basically how this is going to work is it will create a chat with no text, then it'll update that managed object as new text comes in, then it will save it once all messages are received
         
         /* Insert AI Chat Cell */
-        // Create chat and source
-        let chat = ChatCDHelper.appendChat(sender: Constants.Chat.Sender.ai, text: "", to: currentConversation!)
-        let source = TableViewCellSourceFactory.makeChatTableViewCellSource(from: chat!)
+        // Create source with chat inserted in it, setting currentConversation to updated conversation
+        guard let source: ChatTableViewCellSource = await {
+            do {
+                if var currentConversation = self.currentConversation, var chat = try await ChatCDHelper.appendChat(sender: Constants.Chat.Sender.ai, text: "", to: &currentConversation) {
+                    self.currentConversation = currentConversation
+                    
+                    return TableViewCellSourceFactory.makeChatTableViewCellSource(from: chat, isTyping: false, delegate: self)
+                }
+            } catch {
+                // TODO: Handle error
+                print("Could not unwrap currentConversation or create chat in source build in generateChat in ChatViewController... \(error)")
+            }
+            
+            return nil
+        }() else {
+            // TODO: Handle error, is stop processing animation enough?
+            stopProcessingAnimation()
+            
+            return
+        }
         
         /* Stream! */
         // Create a variable for the entire message
         var fullOutput: String = ""
         
-        // Do stream in a Task
-        Task {
-            // Create null string which may be sent instead of an actual null response from the server
-            let nullEquivalentString = "null"
-            
-            // Call "Finished Loading First Message" flow once when the messages load
-            var firstMessage = true
-            
-            // Previous expected typing label height TODO: Renaming "typing label"?
-            var previousExpectedTypingLabelHeight: CGFloat = 0.0
-            
-            // Important values to get as they come in
-            var finishReason: String?
-            var conversationID: Int?
-            var remaining: Int?
-            
-            do {
-                // Stream the messages to the chat cell
-                for try await message in stream {
-                    if (firstMessage) {
-                        /* Finished Loading First Message */
-                        // Do haptic
-                        HapticHelper.doLightHaptic()
-                        
-                        DispatchQueue.main.async {
-                            // Stop processing animation (won't "stop again" if already stopped)
-                            self.stopProcessingAnimation()
-                            
-                            // Append the response chat row
-                            self.rootView.tableView.appendManagedRow(bySource: source, inSection: self.chatSection, with: .none)
-                        }
-                        
-                        // Set firstChat to false
-                        self.firstChat = false
-                        
-                        // Call inputTextViewOnFinishedGenerating to enable submitButton and cameraButton
-                        rootView.inputTextViewOnFinishedGenerating()
-                        
-                        // Set firstMessage to false so all this is called once!
-                        firstMessage = false
-                    }
-                    
-                    /* Parse Message */
-                    // Parse message to messageData
-                    var messageData: Data? = nil
-                    switch(message) {
-                    case .data(let data):
-                        messageData = data
-                    case .string(let string):
-                        messageData = string.data(using: .utf8)
-                    @unknown default:
-                        print("Message wasn't string or data when parsing message stream! :O")
-                    }
-                    
-                    guard messageData != nil else {
-                        print("No messageData found in a message in message stream! Skipping...")
-                        continue
-                    }
-                    
-                    // Parse message to GetChatResponse
-                    let getChatResponse = try? JSONDecoder().decode(GetChatResponse.self, from: messageData!)
-                    
-                    // Ensure getChatResponse is not nil TODO: Should this be using do/catch?
-                    guard getChatResponse != nil else {
-                        print("GetChatResponse could not be parsed! Skipping...")
-                        continue
-                    }
-                    
-                    // Add outputText to fullOutput
-                    if let outputText = getChatResponse?.body.outputText {
-                        fullOutput += outputText
-                    }
-                    
-                    // Pull out any important values as they come in, only the first time they are received
-                    if let gcrFinishReason = getChatResponse?.body.finishReason {
-                        if gcrFinishReason.count > 0 && gcrFinishReason != nullEquivalentString && finishReason == nil {
-                            finishReason = gcrFinishReason
-                            
-                            // Show popup if finish reason is limit TODO: Move this lol
-                            if finishReason == FinishReasons.limit {
-                                let ac = UIAlertController(title: "Limit Reached", message: "You've reached your daily chat limit. Upgrade for unlimited chats...", preferredStyle: .alert)
-                                ac.view.tintColor = Colors.alertTintColor
-                                ac.addAction(UIAlertAction(title: "Close", style: .cancel))
-                                ac.addAction(UIAlertAction(title: "Upgrade", style: .default, handler: { action in
-                                    self.goToUltraPurchase()
-                                }))
-                                
-                                DispatchQueue.main.async {
-                                    self.present(ac, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    
-                    if let gcrConversationID = getChatResponse?.body.conversationID {
-                        if gcrConversationID > 0 && conversationID == nil {
-                            conversationID = gcrConversationID
-                        }
-                    }
-                    
-                    if let gcrRemaining = getChatResponse?.body.remaining {
-                        if remaining == nil {
-                            remaining = gcrRemaining
-                            
-                            // Also update the remaining chats text here.. shh TODO: lol
-                            updateGeneratedChatsRemaining(remaining: remaining!)
-                        }
-                    }
-                    
-                    /* Update Chat Display with Message */
+        // Create null string which may be sent instead of an actual null response from the server
+        let nullEquivalentString = "null"
+        
+        // Call "Finished Loading First Message" flow once when the messages load
+        var firstMessage = true
+        
+        // Previous expected typing label height TODO: Renaming "typing label"?
+        var previousExpectedTypingLabelHeight: CGFloat = 0.0
+        
+        // Important values to get as they come in
+        var finishReason: String?
+        var inputChatID: Int?
+        var outputChatID: Int?
+        var conversationID: Int?
+        var remaining: Int?
+        
+        do {
+            // Stream the messages to the chat cell
+            for try await message in stream {
+                if (firstMessage) {
+                    /* Finished Loading First Message */
+                    // Do haptic
+                    HapticHelper.doLightHaptic()
                     
                     DispatchQueue.main.async {
-                        // Get expected chat label size with full output
-                        if let width = source.typingLabel?.frame.size.width {
-                            let expectedTypingLabelSize = NSString(string: fullOutput)
-                                .boundingRect(
-                                    with: CGSize(width: width, height: .infinity),
-                                    options: .usesLineFragmentOrigin,
-                                    attributes: [.font: source.typingLabel?.font!],
-                                    context: nil
-                                )
+                        let shouldScroll = self.rootView.tableView.isAtBottom()
+                        
+                        // Stop processing animation (won't "stop again" if already stopped)
+                        self.stopProcessingAnimation()
+                        
+                        // Append the response chat row
+//                        self.sourcedTableViewManager.sources[self.chatSection].append(source)
+                        self.appendToSources(source, section: self.chatSection)
+                        
+                        UIView.performWithoutAnimation {
+                            self.rootView.tableView.reloadData()
+                        }
+                        
+                        if shouldScroll {
+//                            self.rootView.tableView.scrollToBottom(animated: false)
+                            self.scrollToBottom(animated: false)
+                        }
+                    }
+                    
+                    // Set firstChat to false
+                    self.firstChat = false
+                    
+                    // Call inputTextViewOnFinishedGenerating to enable submitButton and cameraButton
+                    rootView.inputTextViewOnFinishedGenerating()
+                    
+                    // Set firstMessage to false so all this is called once!
+                    firstMessage = false
+                }
+                
+                /* Parse Message */
+                // Parse message to messageData
+                var messageData: Data? = nil
+                switch(message) {
+                case .data(let data):
+                    messageData = data
+                case .string(let string):
+                    messageData = string.data(using: .utf8)
+                @unknown default:
+                    print("Message wasn't string or data when parsing message stream! :O")
+                }
+                
+                guard messageData != nil else {
+                    print("No messageData found in a message in message stream! Skipping...")
+                    continue
+                }
+                
+                // Parse message to GetChatResponse
+                let getChatResponse = try? JSONDecoder().decode(GetChatResponse.self, from: messageData!)
+                
+                // Ensure getChatResponse is not nil TODO: Should this be using do/catch?
+                guard getChatResponse != nil else {
+                    print("GetChatResponse could not be parsed! Skipping...")
+                    continue
+                }
+                
+                // Add outputText to fullOutput
+                if let outputText = getChatResponse?.body.outputText {
+                    fullOutput += outputText
+                }
+                
+                // Pull out any important values as they come in, only the first time they are received
+                if let gcrFinishReason = getChatResponse?.body.finishReason {
+                    if gcrFinishReason.count > 0 && gcrFinishReason != nullEquivalentString && finishReason == nil {
+                        finishReason = gcrFinishReason
+                        
+                        // Show popup if finish reason is limit TODO: Move this lol
+                        if finishReason == FinishReasons.limit {
+                            let ac = UIAlertController(title: "Limit Reached", message: "You've reached your daily chat limit. Upgrade for unlimited chats...", preferredStyle: .alert)
+                            ac.view.tintColor = Colors.alertTintColor
+                            ac.addAction(UIAlertAction(title: "Close", style: .cancel))
+                            ac.addAction(UIAlertAction(title: "Upgrade", style: .default, handler: { action in
+                                self.goToUltraPurchase()
+                            }))
                             
-                            if previousExpectedTypingLabelHeight < expectedTypingLabelSize.height {
-                                // Scroll to bottom if already at or near bottom
-                                if self.rootView.tableView.isAtBottom(bottomHeightOffset: expectedTypingLabelSize.height - previousExpectedTypingLabelHeight) {
-                                    self.rootView.tableView.scrollToBottomUsingOffset(animated: false)
+                            DispatchQueue.main.async {
+                                self.present(ac, animated: true)
+                            }
+                        }
+                    }
+                }
+                
+                if let gcrInputChatID = getChatResponse?.body.inputChatID {
+                    if gcrInputChatID > 0 && inputChatID == nil {
+                        inputChatID = gcrInputChatID
+                    }
+                }
+                
+                if let gcrOutputChatID = getChatResponse?.body.outputChatID {
+                    if gcrOutputChatID > 0 && outputChatID == nil {
+                        outputChatID = gcrOutputChatID
+                    }
+                }
+                
+                if let gcrConversationID = getChatResponse?.body.conversationID {
+                    if gcrConversationID > 0 && conversationID == nil {
+                        conversationID = gcrConversationID
+                    }
+                }
+                
+                if let gcrRemaining = getChatResponse?.body.remaining {
+                    if remaining == nil {
+                        remaining = gcrRemaining
+                        
+                        // Also update the remaining chats text here.. shh TODO: lol
+                        updateGeneratedChatsRemaining(remaining: remaining!)
+                    }
+                }
+                
+                /* Update Chat Display with Message */
+                
+                DispatchQueue.main.async {
+                    // Update typingLabel
+                    let shouldScroll = self.rootView.tableView.isAtBottom()
+                    UIView.performWithoutAnimation {
+                        self.rootView.tableView.performBatchUpdates({
+                            source.typingLabel?.text = fullOutput
+                        }, completion: {completion in
+                            if shouldScroll {
+                                if let width = source.typingLabel?.frame.size.width {
+                                    let expectedTypingLabelSize = NSString(string: fullOutput)
+                                        .boundingRect(
+                                            with: CGSize(width: width, height: .infinity),
+                                            options: .usesLineFragmentOrigin,
+                                            attributes: [.font: source.typingLabel!.font!],
+                                            context: nil
+                                        )
+                                    
+                                    if previousExpectedTypingLabelHeight < expectedTypingLabelSize.height {
+                                        //                                self.rootView.tableView.scrollToBottom(animated: false)
+                                        self.scrollToBottom(animated: false)
+                                    }
                                 }
                             }
-                            
-                        }
-                        
-                        print(fullOutput)
-                        
-                        self.rootView.tableView.beginUpdates()
-                        source.typingLabel?.text = fullOutput
-                        self.rootView.tableView.endUpdates()
-                        
-                        // Maybe reload data?
-                        //                        self.rootView.tableView.reloadData()
-                    }
-                }
-            } catch {
-                // TODO: Are there any errors that would make this function return early? I don't think so right now, I think it's just the error for when the connection is closed which is fine because that means that it has received all the messages
-            }
-            
-            /* Finished Receiving All Messages */
-            // Append finish reason text if finish reason is length
-            if finishReason == FinishReasons.length && !PremiumHelper.get() {
-                fullOutput += Constants.lengthFinishReasonAdditionalText
-                
-                // TODO: Animate this
-                DispatchQueue.main.async {
-                    self.rootView.tableView.beginUpdates()
-                    source.typingLabel?.text = fullOutput
-                    self.rootView.tableView.endUpdates()
-                    
-                    if let width = source.typingLabel?.frame.size.width {
-                        let expectedAdditionalTextSize = NSString(string: Constants.lengthFinishReasonAdditionalText)
-                            .boundingRect(
-                                with: CGSize(width: width, height: .infinity),
-                                options: .usesLineFragmentOrigin,
-                                attributes: [.font: source.typingLabel?.font!],
-                                context: nil
-                            )
-                        
-                        // TODO: There may have to be an offset here..
-                        if self.rootView.tableView.isAtBottom(bottomHeightOffset: expectedAdditionalTextSize.height) {
-                            self.rootView.tableView.scrollToBottomUsingOffset(animated: false)
-                        }
+                        })
                     }
                 }
             }
-            
-            // Call inputTextViewOnFinishedTyping to disable softDisable
-            rootView.inputTextViewOnFinishedTyping()
-            
-            // Package and save the complete chat to db
-            chat!.text = fullOutput
-            try? CDClient.saveContext()
+        } catch {
+            // TODO: Are there any errors that would make this function return early? I don't think so right now, I think it's just the error for when the connection is closed which is fine because that means that it has received all the messages
         }
         
-        /* Save Chat */
+        /* Finished Receiving All Messages */
+        // Append finish reason text if finish reason is length
+        if finishReason == FinishReasons.length && !PremiumHelper.get() {
+            fullOutput += Constants.lengthFinishReasonAdditionalText
+            
+            // TODO: Animate this
+            DispatchQueue.main.async {
+                self.rootView.tableView.beginUpdates()
+                source.typingLabel?.text = fullOutput
+                self.rootView.tableView.endUpdates()
+                
+                if let width = source.typingLabel?.frame.size.width {
+                    let expectedAdditionalTextSize = NSString(string: Constants.lengthFinishReasonAdditionalText)
+                        .boundingRect(
+                            with: CGSize(width: width, height: .infinity),
+                            options: .usesLineFragmentOrigin,
+                            attributes: [.font: source.typingLabel!.font!],
+                            context: nil
+                        )
+                    
+                    // TODO: There may have to be an offset here..
+                    if self.rootView.tableView.isAtBottom(bottomHeightOffset: expectedAdditionalTextSize.height) {
+//                        self.rootView.tableView.scrollToBottom(animated: false)
+//                        self.rootView.tableView.scrollToBottomUsingOffset(animated: false)
+                        self.scrollToBottom(animated: false)
+                    }
+                }
+            }
+        }
         
+        // Call inputTextViewOnFinishedTyping to disable softDisable
+        rootView.inputTextViewOnFinishedTyping()
         
-        
-//        // Get chat response
-//        ChatRequestHelper.get(inputText: inputText, conversationID: Int(currentConversation!.conversationID), model: currentModel, completion: { responseText, finishReason, conversationID, remaining in
-//            // Do haptic
-//            HapticHelper.doLightHaptic()
-//
-//            // Set currentConversation's conversationID and save the current context if conversationID is not nil
-//            if conversationID != nil {
-//                self.currentConversation!.conversationID = Int64(conversationID!)
-//                ConversationCDHelper.saveContext()
-//            }
-//
-//            // Stop the processing animation (won't stop if already stopped)
-//            self.stopProcessingAnimation()
-//
-//            // Trim the firt \n\n off of output if it exists TODO: Do this fix
-//            var trimmedResponseText = responseText
-//
-//            if let firstOccurence = responseText.range(of: "\n\n") {
-//                trimmedResponseText.removeSubrange(responseText.startIndex..<firstOccurence.upperBound)
-//            }
-//
-//            // Append length finish reason additional text if finish reason is length
-//            if finishReason == FinishReasons.length && !PremiumHelper.get() {
-//                trimmedResponseText += Constants.lengthFinishReasonAdditionalText
-//            }
-//
-//            // Update remaining text and instance variable
-//            self.updateGeneratedChatsRemaining(remaining: remaining)
-//
-//            // Set firstChat to false
-//            self.firstChat = false
-//
-//            // Add response chat
-//            self.addChat(message: trimmedResponseText, sender: Constants.Chat.Sender.ai)
-//
-//            // Call inputTextViewOnFinishedGenerating to enable submitButton and cameraButton
-//            self.rootView.inputTextViewOnFinishedGenerating()
-//
-//            // Enable submit and camera button and show review prompt at frequency for premium users and stop soft disable, show ad at frequency, and present limit reached alert if needed for free users
-//            if PremiumHelper.get() {
-//                self.showReviewAtFrequency()
-//            } else {
-//                self.showAdAtFrequency()
-//
-//                if finishReason == FinishReasons.limit {
-//                    let ac = UIAlertController(title: "Limit Reached", message: "You've reached your daily chat limit. Upgrade for unlimited chats...", preferredStyle: .alert)
-//                    ac.addAction(UIAlertAction(title: "Close", style: .cancel))
-//                    ac.addAction(UIAlertAction(title: "Upgrade", style: .default, handler: { action in
-//                        self.goToUltraPurchase()
-//                    }))
-//
-//                    DispatchQueue.main.async {
-//                        self.present(ac, animated: true)
-//                    }
-//                }
-//            }
-//        })
+        do {
+            // Package and save the complete chat, getting currentConversation and setting with new value
+            guard var currentConversation = self.currentConversation else {
+                // TODO: Handle errors
+                return
+            }
+            try await ConversationCDHelper.updateConversation(&currentConversation, withConversationID: Int64(conversationID ?? Constants.defaultConversationID))
+            self.currentConversation = currentConversation
+            
+            // Update the chat
+            try await ChatCDHelper.updateChat(&source.chat, withText: fullOutput)
+            
+            // Update the user chat ID as inputChatID
+            if userChatSource != nil {
+                try await ChatCDHelper.updateChat(&userChatSource!.chat, withChatID: Int64(inputChatID ?? Constants.defaultChatID))
+            }
+            
+            // Update the ai chat ID as outputChatID
+            try await ChatCDHelper.updateChat(&source.chat, withChatID: Int64(outputChatID ?? Constants.defaultChatID))
+            
+            DispatchQueue.main.async {
+                UIView.performWithoutAnimation {
+                    self.rootView.tableView.reloadData()
+                }
+            }
+        } catch {
+            // TODO: Handle errors
+            stopProcessingAnimation()
+            print("Error generting chat in ChatViewController... \(error)")
+        }
     }
     
-    func showFirstConversationChats() {
+    func showFirstConversationChats() async throws {
         // Load first chats if there are no chats
         if currentConversation!.chats!.count == 0 {
-            self.addChat(message: "Hi! I'm Prof. Write, your AI writing companion...", sender: Constants.Chat.Sender.ai)
+            try await addChatSource(message: "Hi! I'm Prof. Write, your AI writing companion...", sender: Constants.Chat.Sender.ai)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 2.4 : 2.0), execute: {
-                self.addChat(message: "Ask me to write lyrics, poems, essays and more. Talk to me like a human and ask me anything you'd ask your professor!", sender: Constants.Chat.Sender.ai)
-                DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 5.2 : 4.0), execute: {
-                    self.addChat(message: "I do better with more detail. Don't say, \"Essay on Belgium,\" say \"200 word essay on Belgium's cultural advances in the past 20 years.\" Remember, I'm your Professor, so use what I write as inspiration and never plagiarize!", sender: Constants.Chat.Sender.ai)
+            await withCheckedContinuation {continuation in
+                DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 1.9 : 1.4), execute: {
+                    continuation.resume()
                 })
-            })
+            }
+            
+            try await self.addChatSource(message: "Ask me to write lyrics, poems, essays and more. Talk to me like a human and ask me anything you'd ask your professor!", sender: Constants.Chat.Sender.ai)
+            
+            await withCheckedContinuation {continuation in
+                DispatchQueue.main.asyncAfter(deadline: .now() + (!UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? 3.8 : 2.7), execute: {
+                    continuation.resume()
+                })
+            }
+            
+            try await self.addChatSource(message: "I do better with more detail. Don't say, \"Essay on Belgium,\" say \"200 word essay on Belgium's cultural advances in the past 20 years.\" Remember, I'm your Professor, so use what I write as inspiration and never plagiarize!", sender: Constants.Chat.Sender.ai)
         }
     }
     
@@ -743,6 +860,16 @@ class ChatViewController: HeaderViewController {
         navigationController?.pushViewController(SettingsPresentationSpecification().viewController, animated: true)
     }
     
+    func deleteAllLoadingSources() {
+        DispatchQueue.main.async {
+            self.sourcedTableViewManager.sources[self.chatSection].removeAll(where: {$0 is LoadingTableViewCellSource})
+            
+            UIView.performWithoutAnimation {
+                self.rootView.tableView.reloadData()
+            }
+        }
+    }
+    
     func startProcessingAnimation() {
         if !isProcessingChat {
             isProcessingChat = true
@@ -753,12 +880,23 @@ class ChatViewController: HeaderViewController {
                 let shouldScroll = self.rootView.tableView.isAtBottom()//self.rootView.tableView.isAtBottom(bottomHeightOffset: (self.rootView.tableView.cellForRow(at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.chatSection) - 1, section: self.chatSection))?.frame.height ?? 0) + 40.0)
                 
                 // Insert loading cell source
-                self.rootView.tableView.insertManagedRow(bySource: LoadingChatTableViewCellSource(), at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.chatSection), section: self.chatSection), with: .none)
+                let loadingChatTableViewCellSource = LoadingChatTableViewCellSource()
+                self.sourcedTableViewManager.sources[self.chatSection].append(loadingChatTableViewCellSource)
+                
+                UIView.performWithoutAnimation {
+                    self.rootView.tableView.reloadData()
+                }
                 
                 // Do scroll!
                 if shouldScroll {
-                    self.rootView.tableView.scrollToBottomUsingOffset(animated: false)
-//                    self.rootView.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false) // TODO: - Do scrolling queue or something
+//                    self.rootView.tableView.scrollToBottom(animated: false)
+                    //                    self.rootView.tableView.scrollToBottomUsingOffset(animated: false)
+                    //                    self.rootView.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false) // TODO: - Do scrolling queue or something
+                    self.scrollToBottom(animated: false)
+                }
+                
+                DispatchQueue.main.async {
+                    self.animateChatRowIn(view: loadingChatTableViewCellSource.view)
                 }
             }
         }
@@ -769,72 +907,40 @@ class ChatViewController: HeaderViewController {
             isProcessingChat = false
             
             // Delete loading row
-            self.rootView.tableView.deleteManagedRow(at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.chatSection) - 1, section: self.chatSection), with: .none)
+            deleteAllLoadingSources()
         }
     }
     
-    func addChat(message: String, sender: String) {
-        // Create chat and source
-        let chat = ChatCDHelper.appendChat(sender: sender, text: message, to: currentConversation!)
-        let source = TableViewCellSourceFactory.makeChatTableViewCellSource(from: chat!)
-        
-        // Don't animate insertion if the previous row was a loading row, meaning the sender was ai TODO: Or should it just be not the user?
-        var animation = UITableView.RowAnimation.automatic
-        if !isProcessingChat && sender == Constants.Chat.Sender.ai {
-            animation = .none
+    @discardableResult
+    func addChatSource(message: String, sender: String) async throws -> ChatTableViewCellSource? {
+        func shouldType(chat: Chat) -> Bool {
+            chat.sender == Constants.Chat.Sender.ai
         }
         
-//        // Try to scroll to bottom
-//        DispatchQueue.main.async {
-//            let height = self.rootView.tableView.cellForRow(at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.chatSection) - 1, section: self.chatSection))!.frame.size.height
-//            if self.rootView.tableView.isAtBottom(bottomHeightOffset: height) {
-////                self.rootView.tableView.scrollToBottom(animated: false)
-//                self.rootView.tableView.contentOffset.y += height
-//            }
-//        }
-        
-        // Create and start a new Typewriter for the AI response
-        if sender == Constants.Chat.Sender.ai {
-            var prevExpectedHeight: CGFloat = 0
-            let timeInterval = UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? Constants.premiumTypingTimeInterval : Constants.freeTypingTimeInterval
-            let typewriter = Typewriter.start(text: chat!.text!, timeInterval: timeInterval, typingUpdateLetterCount: chat!.text!.count/Constants.defaultTypingUpdateLetterCountFactor + 1, block: { typewriter, currentText in
-                DispatchQueue.main.async {
-                    // One more tick after it is invalidated (suspended)
-                    if !typewriter.isValid() {
-                        // Call inputTextViewOnFinishedTyping to disable softDisable
-                        self.rootView.inputTextViewOnFinishedTyping()
-                        
-                        // TODO: - Is this a good place for this, especially for preimum if there are multiple chats filling?
-                    }
-                    
-                    // Try to scroll if content height has increased and at bottom TODO: - Is this cool to do if there are multiple filling at once? What if there is some sort of future update?
-                    if source.typingLabel != nil {
-                        let expectedTypingLabelSize = NSString(string: currentText).boundingRect(
-                            with: CGSize(width: source.typingLabel!.frame.size.width, height: .infinity),
-                            options: .usesLineFragmentOrigin,
-                            attributes: [.font: source.typingLabel!.font!],
-                            context: nil)
-                        if prevExpectedHeight < expectedTypingLabelSize.height {
-                            // Reload for size enlargement
-//                            self.rootView.tableView.reloadData()
-                            
-                            if self.rootView.tableView.isAtBottom(bottomHeightOffset: prevExpectedHeight) {
-                                self.rootView.tableView.scrollToBottomUsingOffset(animated: false)
-                            }
-                            
-                            // Reload for size enlargement
-                            self.rootView.tableView.reloadData()
-                            
-                            prevExpectedHeight = expectedTypingLabelSize.height
-                        }
-                    }
-                    
-                    // Update the label in the tableView!
-                    source.typingLabel?.text = currentText
-                }
-            })
+        // Create chat and source getting currentConversation and setting it to updated currentConversation
+        guard let source: ChatTableViewCellSource = try await {
+            // Unwrap currentConversation and chat
+            guard var currentConversation = currentConversation, let chat = try await ChatCDHelper.appendChat(sender: sender, text: message, to: &currentConversation) else {
+                // TODO: Handle errors, maybe throw one since this throws
+                return nil
+            }
             
-            source.typewriter = typewriter
+            // Update currentConversation to new context
+            self.currentConversation = currentConversation
+            
+            // Make source and return
+            return TableViewCellSourceFactory.makeChatTableViewCellSource(from: chat, isTyping: shouldType(chat: chat), delegate: self)
+        }() else {
+            // TODO: Handle errors, maybe throw one since this throws
+            return nil
+        }
+        
+        // Don't animate insertion if the previous row was a loading row, meaning it isProcessingChat and the sender was ai TODO: Or should it just be not the user?
+        var shouldAnimateIn: Bool
+        if isProcessingChat && sender == Constants.Chat.Sender.ai {
+            shouldAnimateIn = false
+        } else {
+            shouldAnimateIn = true
         }
         
         // Do scrolling and insertion on main thread
@@ -843,22 +949,119 @@ class ChatViewController: HeaderViewController {
             let shouldScroll = self.rootView.tableView.isAtBottom()
             
             // Insert row and append created source to chatRowSources!
-            self.rootView.tableView.appendManagedRow(bySource: source, inSection: self.chatSection, with: animation)
+            self.appendToSources(source, section: self.chatSection)
             
-            // Get calculated height of last cell if it is loaded and scroll to bottom if within the height of the last cell, and just don't mind scrolling if the last one isn't loaded beacuse it means that the user is not close enough to the bottom anyways :)
-            if let height = self.rootView.tableView.cellForRow(at: IndexPath(row: self.rootView.tableView.numberOfRows(inSection: self.chatSection) - 1, section: self.chatSection))?.frame.size.height {
-                if self.rootView.tableView.isAtBottom(bottomHeightOffset: height) {
-                    self.rootView.tableView.scrollToBottomUsingOffset(animated: false)
-                    //                self.rootView.tableView.contentOffset.y += height
-                }
+            if shouldScroll {
+                self.scrollToBottom(animated: false)
             }
             
-            // Do the scroll if the user was at the bottom of the tableView before the insertion
-//            if shouldScroll {
-//                self.rootView.tableView.scrollToBottomRow(animated: false)
-////                self.rootView.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
-//            }
+            // Do animate in animation
+            if shouldAnimateIn {
+                DispatchQueue.main.async {
+                    self.animateChatRowIn(view: source.view)
+                }
+            }
         }
+        
+        // Create and start a new Typewriter for the AI response
+        if sender == Constants.Chat.Sender.ai {
+            // Setup prevExpectedHeight and timeInterval for checking to scroll
+            var prevExpectedHeight: CGFloat = 0
+            let timeInterval = UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) ? Constants.premiumTypingTimeInterval : Constants.freeTypingTimeInterval
+
+            // Setup default width and font for checking to scroll
+            let defaultWidth = view.frame.size.width * 0.8
+            let defaultFont = UIFont(name: Constants.primaryFontName, size: 17.0)!
+
+            // Create writing task for typing letters
+            let writingTask = DispatchWorkItem {
+                // Type each letter!
+                for c in source.chat.text! {
+                    DispatchQueue.main.async {
+                        source.typingText.append(c)
+                        source.typingLabel?.text = source.typingText
+
+                        let expectedTypingLabelSize = NSString(string: source.typingText).boundingRect(
+                            with: CGSize(width: source.typingLabel?.frame.size.width ?? defaultWidth, height: .infinity),
+                            options: .usesLineFragmentOrigin,
+                            attributes: [.font: source.typingLabel?.font ?? defaultFont],
+                            context: nil)
+                        if prevExpectedHeight < expectedTypingLabelSize.height {
+                            // Reload for size enlargement
+                            //                            self.rootView.tableView.reloadData()
+
+                            if self.rootView.tableView.isAtBottom(bottomHeightOffset: prevExpectedHeight) {
+//                                self.rootView.tableView.scrollToBottomUsingOffset(animated: false)
+                                self.scrollToBottom(animated: false)
+                            }
+
+                            // Reload for size enlargement
+                            UIView.performWithoutAnimation {
+                                self.rootView.tableView.reloadData()
+                            }
+
+                            prevExpectedHeight = expectedTypingLabelSize.height
+                        }
+                    }
+
+                    Thread.sleep(forTimeInterval: timeInterval)
+                }
+
+                // Set source isTyping to false
+                source.isTyping = false
+            }
+
+            let queue: DispatchQueue = .init(label: "typing", qos: .userInteractive)
+            queue.async(execute: writingTask)
+            
+            //            let typewriter = Typewriter(
+            //                toTypeString: chat.text!,
+            //                delay: timeInterval,
+            //                typingUpdateLetterCount: chat.text!.count/Constants.defaultTypingUpdateLetterCountFactor + 1)
+            //
+            //            while let currentText = await typewriter.next() {
+            //                // Try to scroll if content height has increased and at bottom TODO: - Is this cool to do if there are multiple filling at once? What if there is some sort of future update?
+            //                if source.typingLabel != nil {
+            //                    let expectedTypingLabelSize = NSString(string: currentText).boundingRect(
+            //                        with: CGSize(width: source.typingLabel!.frame.size.width, height: .infinity),
+            //                        options: .usesLineFragmentOrigin,
+            //                        attributes: [.font: source.typingLabel!.font!],
+            //                        context: nil)
+            //                    if prevExpectedHeight < expectedTypingLabelSize.height {
+            //                        // Reload for size enlargement
+            //                        //                            self.rootView.tableView.reloadData()
+            //
+            //                        if self.rootView.tableView.isAtBottom(bottomHeightOffset: prevExpectedHeight) {
+            //                            self.rootView.tableView.scrollToBottomUsingOffset(animated: false)
+            //                        }
+            //
+            //                        // Reload for size enlargement
+            //                        self.rootView.tableView.reloadData()
+            //
+            //                        prevExpectedHeight = expectedTypingLabelSize.height
+            //                    }
+            //                }
+            //
+            //                // Update the label in the tableView!
+            //                source.typingLabel?.text = currentText
+            //            }
+            
+            // Call inputTextViewOnFinishedTyping
+            self.rootView.inputTextViewOnFinishedTyping()
+        }
+        
+        return source
+    }
+    
+    func animateChatRowIn(view: UIView?) {
+//        DispatchQueue.main.async {
+            view?.alpha = 0.0
+            view?.transform = CGAffineTransform(translationX: 0, y: 20)
+            UIView.animate(withDuration: 0.2, animations: {
+                view?.alpha = 1.0
+                view?.transform = CGAffineTransform(translationX: 0, y: 0)
+            })
+//        }
     }
     
     func dismissKeyboard() {
@@ -940,7 +1143,7 @@ class ChatViewController: HeaderViewController {
     @objc private func didPressGPTModelNameButton() {
         let popupController = ChatGPTModelSelectionViewController()
         popupController.delegate = self
-//        addChild(popupController)
+        //        addChild(popupController)
         popupController.modalPresentationStyle = .overCurrentContext
         tabBarController!.present(popupController, animated: false)
         

@@ -46,7 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // Do migration if necessary
         if !UserDefaults.standard.bool(forKey: Constants.Migration.userDefaultStoredV3_5MigrationComplete) {
-            if V3_5MigrationHandler.migrate() {
+            Task {
+                await V3_5MigrationHandler.migrate()
+                
                 UserDefaults.standard.set(true, forKey: Constants.Migration.userDefaultStoredV3_5MigrationComplete)
             }
         }

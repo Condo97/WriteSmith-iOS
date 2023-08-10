@@ -7,11 +7,7 @@
 
 import Foundation
 
-extension ChatViewController: ChatSmallBlankHeaderSourcedTableViewManagerDelegate {
-    
-    func didFinishDisplayingAllCells() {
-//        rootView.tableView.scrollToBottomUsingOffset(animated: false)
-    }
+extension ChatViewController: SourcedTableViewManagerDelegate {
     
     func didSelectSourceAt(source: CellSource, indexPath: IndexPath) {
         

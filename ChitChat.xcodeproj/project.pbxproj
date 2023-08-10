@@ -73,6 +73,11 @@
 		BB4A9CC529CEB8F80033BA00 /* LabelChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB4A9CC429CEB8F80033BA00 /* LabelChatTableViewCell.xib */; };
 		BB4A9CCA29CEBBCB0033BA00 /* LoadableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4A9CC929CEBBCB0033BA00 /* LoadableCell.swift */; };
 		BB4A9CCD29CECBAB0033BA00 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4A9CCC29CECBAB0033BA00 /* LabelTableViewCell.swift */; };
+		BB4AD4B32A81BC0F0053CF44 /* Typewriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4AD4B22A81BC0F0053CF44 /* Typewriter.swift */; };
+		BB4AD4B52A841D730053CF44 /* EditableCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4AD4B42A841D730053CF44 /* EditableCellSource.swift */; };
+		BB4AD4B72A8429B60053CF44 /* ChatViewController+ChatTableViewCellSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4AD4B62A8429B60053CF44 /* ChatViewController+ChatTableViewCellSourceDelegate.swift */; };
+		BB4AD4B92A846D170053CF44 /* DeleteChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4AD4B82A846D170053CF44 /* DeleteChatRequest.swift */; };
+		BB4AD4BB2A846D8F0053CF44 /* StatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4AD4BA2A846D8F0053CF44 /* StatusResponse.swift */; };
 		BB556B6C29D9DD4F00351563 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB556B6B29D9DD4F00351563 /* IAPHelper.swift */; };
 		BB556B6E29D9E01400351563 /* PremiumUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB556B6D29D9E01400351563 /* PremiumUpdater.swift */; };
 		BB556B7029D9E7A300351563 /* PremiumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB556B6F29D9E7A300351563 /* PremiumHelper.swift */; };
@@ -321,7 +326,7 @@
 		BBDC4E4F29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E4E29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift */; };
 		BBDC4E5329C80C7700204CD7 /* ChatViewController+UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E5229C80C7700204CD7 /* ChatViewController+UITextViewDelegate.swift */; };
 		BBDC4E5929C8165F00204CD7 /* UITableView+IsAtBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E5829C8165F00204CD7 /* UITableView+IsAtBottom.swift */; };
-		BBDC4E5B29C82CE900204CD7 /* Typewriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E5A29C82CE900204CD7 /* Typewriter.swift */; };
+		BBDC4E5B29C82CE900204CD7 /* TypewriterLegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E5A29C82CE900204CD7 /* TypewriterLegacy.swift */; };
 		BBDC4E5D29C8EB7900204CD7 /* WriteSmithNewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4E5C29C8EB7800204CD7 /* WriteSmithNewTests.swift */; };
 		BBDC4EC029C8F96200204CD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0DBAB3296AA50000D2DFB9 /* Assets.xcassets */; };
 		BBDC4EC229C943B300204CD7 /* ChatTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDC4EC129C943B300204CD7 /* ChatTableViewCellSource.swift */; };
@@ -455,6 +460,11 @@
 		BB4A9CC429CEB8F80033BA00 /* LabelChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelChatTableViewCell.xib; sourceTree = "<group>"; };
 		BB4A9CC929CEBBCB0033BA00 /* LoadableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableCell.swift; sourceTree = "<group>"; };
 		BB4A9CCC29CECBAB0033BA00 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		BB4AD4B22A81BC0F0053CF44 /* Typewriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typewriter.swift; sourceTree = "<group>"; };
+		BB4AD4B42A841D730053CF44 /* EditableCellSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableCellSource.swift; sourceTree = "<group>"; };
+		BB4AD4B62A8429B60053CF44 /* ChatViewController+ChatTableViewCellSourceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+ChatTableViewCellSourceDelegate.swift"; sourceTree = "<group>"; };
+		BB4AD4B82A846D170053CF44 /* DeleteChatRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteChatRequest.swift; sourceTree = "<group>"; };
+		BB4AD4BA2A846D8F0053CF44 /* StatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponse.swift; sourceTree = "<group>"; };
 		BB556B6B29D9DD4F00351563 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		BB556B6D29D9E01400351563 /* PremiumUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumUpdater.swift; sourceTree = "<group>"; };
 		BB556B6F29D9E7A300351563 /* PremiumHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumHelper.swift; sourceTree = "<group>"; };
@@ -679,7 +689,7 @@
 		BBDC4E4E29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+CameraViewControllerDelegate.swift"; sourceTree = "<group>"; };
 		BBDC4E5229C80C7700204CD7 /* ChatViewController+UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+UITextViewDelegate.swift"; sourceTree = "<group>"; };
 		BBDC4E5829C8165F00204CD7 /* UITableView+IsAtBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+IsAtBottom.swift"; sourceTree = "<group>"; };
-		BBDC4E5A29C82CE900204CD7 /* Typewriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typewriter.swift; sourceTree = "<group>"; };
+		BBDC4E5A29C82CE900204CD7 /* TypewriterLegacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypewriterLegacy.swift; sourceTree = "<group>"; };
 		BBDC4E5C29C8EB7800204CD7 /* WriteSmithNewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteSmithNewTests.swift; sourceTree = "<group>"; };
 		BBDC4EC129C943B300204CD7 /* ChatTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCellSource.swift; sourceTree = "<group>"; };
 		BBDC4ECA29C9480D00204CD7 /* TableViewCellSourceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellSourceFactory.swift; sourceTree = "<group>"; };
@@ -950,13 +960,14 @@
 			isa = PBXGroup;
 			children = (
 				BB39B70E2A34390C00B25FA4 /* GPTModel */,
-				BBDC4EE429CADCF400204CD7 /* ChatViewController+ChatTableViewTouchDelegate.swift */,
-				BBDC4E4829C80B4F00204CD7 /* ChatViewController+GADDelegate.swift */,
-				BBDC4E4E29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift */,
-				BBDC4E5229C80C7700204CD7 /* ChatViewController+UITextViewDelegate.swift */,
-				BB8B187E29E776A700964724 /* ChatViewController+ChatViewDelegate.swift */,
 				BB39B7122A351F1200B25FA4 /* ChatViewController+ChatGPTModelSelectionViewControllerDelegate.swift */,
+				BB4AD4B62A8429B60053CF44 /* ChatViewController+ChatTableViewCellSourceDelegate.swift */,
+				BBDC4E4E29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift */,
+				BB8B187E29E776A700964724 /* ChatViewController+ChatViewDelegate.swift */,
+				BBDC4E4829C80B4F00204CD7 /* ChatViewController+GADDelegate.swift */,
+				BBDC4EE429CADCF400204CD7 /* ChatViewController+ChatTableViewTouchDelegate.swift */,
 				BBA3AFB22A3EB5F9002F5961 /* ChatViewController+ChatSmallBlankheaderSourcedTableViewManagerDelegate.swift */,
+				BBDC4E5229C80C7700204CD7 /* ChatViewController+UITextViewDelegate.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -973,7 +984,8 @@
 				BBA71D2329D13CEB007B0D99 /* PulsatingDotAnimator.swift */,
 				BB7357EE29D00D7900C67189 /* PulsatingDotsAnimation.swift */,
 				BBD50C8629EC60E000C61B86 /* SubscriptionPeriod.swift */,
-				BBDC4E5A29C82CE900204CD7 /* Typewriter.swift */,
+				BBDC4E5A29C82CE900204CD7 /* TypewriterLegacy.swift */,
+				BB4AD4B22A81BC0F0053CF44 /* Typewriter.swift */,
 				BB92A62D29CD5106002E000F /* XIB_ReuseID.swift */,
 				BB96EBC529F9B89F002CC223 /* PlaceholderTextView.swift */,
 			);
@@ -1438,6 +1450,7 @@
 				BB8B185829E6529A00964724 /* Settings */,
 				BBDC4ECC29C949EE00204CD7 /* CellSource.swift */,
 				BBF6313429F8571800E9F0C2 /* DelegateSource.swift */,
+				BB4AD4B42A841D730053CF44 /* EditableCellSource.swift */,
 				BB8B189929E8BB9900964724 /* SelectableCellSource.swift */,
 				BBF9A85D2A017182005D5BF8 /* TieredVisibilityCellSource.swift */,
 				BB0F042B29CBF4DD00C89A0A /* StackedPresentationSpecification.swift */,
@@ -2168,6 +2181,7 @@
 				BBC9AB3529D550CB00A16CE2 /* GetRemainingResponse.swift */,
 				BBA3AF9D2A3CDBCD002F5961 /* IsPremiumResponse.swift */,
 				BBC9AB2E29D521CB00A16CE2 /* RegisterUserResponse.swift */,
+				BB4AD4BA2A846D8F0053CF44 /* StatusResponse.swift */,
 				BBC9AB3229D5430E00A16CE2 /* ValidateAndUpdateReceiptResponse.swift */,
 			);
 			path = Response;
@@ -2178,6 +2192,7 @@
 			children = (
 				BBC9AB3D29D5FAD100A16CE2 /* AuthRequest.swift */,
 				BBC9AB4329D6115500A16CE2 /* BlankRequest.swift */,
+				BB4AD4B82A846D170053CF44 /* DeleteChatRequest.swift */,
 				BBC9AB3B29D5F94100A16CE2 /* GetChatRequest.swift */,
 				BBA3AF9B2A3CDB5F002F5961 /* RegisterTransactionRequest.swift */,
 				BBC9AB3F29D5FB5E00A16CE2 /* ValidateAndUpdateReceiptRequest.swift */,
@@ -2806,12 +2821,14 @@
 			files = (
 				BBDC4EE129CABDEE00204CD7 /* SourcedTableViewManagerProtocol.swift in Sources */,
 				BB0DBAB2296AA4FE00D2DFB9 /* ChitChat.xcdatamodeld in Sources */,
+				BB4AD4BB2A846D8F0053CF44 /* StatusResponse.swift in Sources */,
 				BB0A8C0D296CE70E0035F046 /* ShadowView.swift in Sources */,
 				BBDC4ECD29C949EE00204CD7 /* CellSource.swift in Sources */,
 				BB9C2F51297CB7710026A441 /* EssayPromptTableViewCell.swift in Sources */,
 				BB39B70D2A3434C100B25FA4 /* ChatGPTModelSelectionView.swift in Sources */,
 				BB39B6FE2A33E39900B25FA4 /* GPTModels.swift in Sources */,
 				BB8B184D29E6190600964724 /* ImageTextTableViewCell.swift in Sources */,
+				BB4AD4B52A841D730053CF44 /* EditableCellSource.swift in Sources */,
 				BBC9AB1B29D4E26F00A16CE2 /* EssayViewController+EssayBodyTableViewCellDelegate.swift in Sources */,
 				BB96EBD529FB0BAF002CC223 /* RoundedViewLabelCollectionViewCell.swift in Sources */,
 				BB8B18D129EB22CD00964724 /* PremiumUpdaterDelegate.swift in Sources */,
@@ -2913,12 +2930,13 @@
 				BB8B18C829EB159100964724 /* GeneratedChatsRemainingUpdater.swift in Sources */,
 				BB96EBBE29F8CDE3002CC223 /* DoneToolbarController.swift in Sources */,
 				BBD50D3529F326C400C61B86 /* IntroPresentationSpecification.swift in Sources */,
-				BBDC4E5B29C82CE900204CD7 /* Typewriter.swift in Sources */,
+				BBDC4E5B29C82CE900204CD7 /* TypewriterLegacy.swift in Sources */,
 				BB8B189429E89D0100964724 /* IdentifiableObject.swift in Sources */,
 				BB8B188829E77D3900964724 /* HeaderViewController.swift in Sources */,
 				BBDC4EDE29CAB72200204CD7 /* SourcedTableViewManager.swift in Sources */,
 				BBC9AB3629D550CB00A16CE2 /* GetRemainingResponse.swift in Sources */,
 				BB8B18A429E8DB0100964724 /* UIApplication+TopmostViewController.swift in Sources */,
+				BB4AD4B92A846D170053CF44 /* DeleteChatRequest.swift in Sources */,
 				BB8B189629E8AA1600964724 /* PresentationSpecification.swift in Sources */,
 				BBC9AB3E29D5FAD100A16CE2 /* AuthRequest.swift in Sources */,
 				BB0A8C0F296D05FA0035F046 /* UltraViewController.swift in Sources */,
@@ -2962,6 +2980,7 @@
 				BBC16389296B601500868752 /* Constants.swift in Sources */,
 				BB8B184929E617DD00964724 /* SettingsTableView.swift in Sources */,
 				BB39B6F72A33DF8700B25FA4 /* ChatGPTModelViewComponents.swift in Sources */,
+				BB4AD4B32A81BC0F0053CF44 /* Typewriter.swift in Sources */,
 				BB39B6FA2A33E28500B25FA4 /* GPTModelHelper.swift in Sources */,
 				BBD50D0B29F1A65600C61B86 /* FirstChatGenerator.swift in Sources */,
 				BBA71D3829D15CEA007B0D99 /* StackedViewController.swift in Sources */,
@@ -3038,6 +3057,7 @@
 				BB0F042C29CBF4DD00C89A0A /* StackedPresentationSpecification.swift in Sources */,
 				BBC4D1F829E5C22A0006D337 /* CollectionTableViewCell.swift in Sources */,
 				BBC4D1FD29E5C5D70006D337 /* GlobalTabBarController+UITabBarControllerDelegate.swift in Sources */,
+				BB4AD4B72A8429B60053CF44 /* ChatViewController+ChatTableViewCellSourceDelegate.swift in Sources */,
 				BB96EC0329FF254E002CC223 /* String+ToImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3215,7 +3235,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				EXCLUDED_ARCHS = Any;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -3238,7 +3258,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChitChat/Controllers/Tenjin",
 				);
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.0.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3258,7 +3278,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				EXCLUDED_ARCHS = Any;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -3281,7 +3301,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChitChat/Controllers/Tenjin",
 				);
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.0.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";

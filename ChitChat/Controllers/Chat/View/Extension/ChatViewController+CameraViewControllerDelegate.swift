@@ -10,7 +10,14 @@ import Foundation
 extension ChatViewController: CameraViewControllerDelegate {
     
     func didGetScan(text: String) {
-        generateChat(inputText: text)
+        Task {
+            do {
+                try await generateChat(inputText: text)
+            } catch {
+                // TODO: Handle error
+                print("Error generating chat in didGetScan in ChatViewController CameraViewControllerDelegate... \(error)")
+            }
+        }
     }
     
 }

@@ -40,4 +40,8 @@ extension ExploreGeneratedViewController: CreationExploreTableViewCellDelegate {
         ShareViewHelper.share(text, viewController: self)
     }
     
+    func upgradeButtonPressed(_ sender: Any) {
+        UltraViewControllerPresenter.presentOnTop(animated: true)
+    }
+    
 }

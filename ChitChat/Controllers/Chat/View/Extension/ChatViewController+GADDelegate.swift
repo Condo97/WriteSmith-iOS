@@ -30,6 +30,8 @@ extension ChatViewController: GADBannerViewDelegate {
     var adViewHeight: CGFloat { 50.0 }
     
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        let shouldMoveDown = self.rootView.adViewHeightConstraint.constant != self.adViewHeight
+        
         DispatchQueue.main.async {
             if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
                 self.rootView.adViewHeightConstraint.constant = self.adViewHeight
@@ -41,7 +43,9 @@ extension ChatViewController: GADBannerViewDelegate {
                 self.rootView.adView.addConstraints([NSLayoutConstraint(item: bannerView, attribute: .centerY, relatedBy: .equal, toItem: self.rootView.adView, attribute: .centerY, multiplier: 1, constant: 0), NSLayoutConstraint(item: bannerView, attribute: .centerX, relatedBy: .equal, toItem: self.rootView.adView, attribute: .centerX, multiplier: 1, constant: 0)])
                 
                 // Move the tableView down by the adViewHeight to make it more "seamless"
-                self.rootView.tableView.contentOffset.y += self.adViewHeight
+                if shouldMoveDown {
+                    self.rootView.tableView.contentOffset.y += self.adViewHeight
+                }
 //                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
             }
         }
