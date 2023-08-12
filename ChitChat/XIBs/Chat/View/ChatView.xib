@@ -398,6 +398,7 @@
                 <outlet property="adView" destination="odG-yy-Ta1" id="3iR-Wh-rV1"/>
                 <outlet property="adViewHeightConstraint" destination="Zgt-mD-MmT" id="9Ec-Uf-aSB"/>
                 <outlet property="bottomView" destination="r2V-Ft-M8I" id="Bz6-7b-fHd"/>
+                <outlet property="bottomViewBottomAlignmentConstraint" destination="pDT-Hy-8fZ" id="zGH-tS-jgT"/>
                 <outlet property="cameraButton" destination="yEa-7V-bCm" id="kga-nZ-fD8"/>
                 <outlet property="cameraButtonHeightConstraint" destination="CJ9-tD-KxN" id="hhv-Lg-7qU"/>
                 <outlet property="chatsRemainingText" destination="aNo-zW-ZLx" id="2h1-yB-ByE"/>

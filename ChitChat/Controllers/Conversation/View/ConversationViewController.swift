@@ -184,12 +184,17 @@ class ConversationViewController: HeaderViewController {
         conversationTableViewManager.sources.insert([ConversationCreateTableViewCellSource(didSelect: { tableView, indexPath in
             Task {
                 do {
+                    // Append and unwrap newConversation
                     guard let newConversation = try await ConversationCDHelper.appendConversation() else {
                         // TODO: Handle error
                         print("Could not append a conversation in viewWillAppear in ConversationViewController!")
                         return
                     }
                     
+                    // Do light haptic
+                    HapticHelper.doLightHaptic()
+                    
+                    // Push with newConversation
                     self.pushWith(conversation: newConversation, animated: true)
                 } catch {
                     // TODO: Handle error

@@ -37,6 +37,8 @@ class ChatView: UIView {
     @IBOutlet weak var promoViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var cameraButtonHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var bottomViewBottomAlignmentConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var submitButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var submitButtonCenterYConstraint: NSLayoutConstraint!
     

@@ -30,14 +30,16 @@ extension GlobalTabBarController: UITabBarControllerDelegate {
         // If the Write button is selected again and top view in the navigation controller is conversation view, then transition to the most recent conversation and return false so the tabBar doesn't push
         if let vcAsNavController = viewController as? UINavigationController {
             if let topVC = vcAsNavController.topViewController {
-                if let conversationVC = topVC as? ConversationViewController {
-                    Task {
-                        if let conversationToResume = await ConversationResumingManager.getConversation() {
-                            conversationVC.pushWith(conversation: conversationToResume, animated: true)
+                if self.topmostViewController() is ConversationViewController {
+                    if let conversationVC = topVC as? ConversationViewController {
+                        Task {
+                            if let conversationToResume = await ConversationResumingManager.getConversation() {
+                                conversationVC.pushWith(conversation: conversationToResume, animated: true)
+                            }
                         }
+                        
+                        return false
                     }
-                    
-                    return false
                 }
             }
         }

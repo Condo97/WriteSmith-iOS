@@ -13,8 +13,8 @@ extension ChatViewController: ManagedTableViewTouchDelegate {
         guard let chatCell = tableView.cellForRow(at: indexPath) as? ChatBubbleTableViewCell else {
             return
         }
-                
-        if !isLongPressForShare {
+        
+        if !isLongPressForShare && !keyboardShowing {
             // Make sure cell has chatText
             if chatCell.chatText != nil {
                 

@@ -9,6 +9,8 @@ import Foundation
 
 class ConversationResumingManager: Any {
     
+    static var cachedConversation: Conversation?
+    
     static func getConversation() async -> Conversation? {
         guard let idURL = UserDefaults.standard.url(forKey: Constants.userDefaultStoredConversationToResume) else {
             return nil

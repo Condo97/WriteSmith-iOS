@@ -28,7 +28,9 @@ class ChatViewController: HeaderViewController {
     }()
     
     // Instance variables
-    var origin: CGFloat = 0.0
+    var originalBottomViewBottomAlignmentConstraintConstant: CGFloat = 0.0
+    var prevContentOffsetFactor: CGFloat?
+    var keyboardShowing = false
     
     var shouldScrollOnFirstAppear = true
     var firstChat = true
@@ -195,7 +197,8 @@ class ChatViewController: HeaderViewController {
 //        shouldScrollOnFirstAppear = false
         
         // Set origin for keyboard
-        origin = self.view.frame.origin.y
+//        origin = self.view.frame.origin.y
+        originalBottomViewBottomAlignmentConstraintConstant = rootView.bottomViewBottomAlignmentConstraint.constant
         
         // Show Ultra Purchase on launch if not premium
         if shouldShowUltra && !PremiumHelper.get() {
@@ -326,11 +329,25 @@ class ChatViewController: HeaderViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
+        // Set keyboardShowing to true immediately
+        keyboardShowing = true
+        
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == self.origin {
+            // Get additional bottom offset if the user is not premium
+            let additionalBottomOffset = PremiumHelper.get() ? 0.0 : 14.0
+            
+            // Move the rootView bottomViewBottomAlignmentConstraint and tableView contentOffset up with keyboard
+            if self.rootView.bottomViewBottomAlignmentConstraint.constant == self.originalBottomViewBottomAlignmentConstraintConstant {
                 //TODO: - In the previous version, the -tabBarController.tabBar.frame.size.height wasn't necessary, but now it is otherwise a black box the size of the tabBar will show up
                 if let tabBarController = UIApplication.shared.topmostViewController()?.tabBarController {
-                    self.view.frame.origin.y -= (keyboardSize.height - tabBarController.tabBar.frame.size.height)
+                    // Calculate offset and set it to prevContentOffsetFactor
+                    let offset = keyboardSize.height - tabBarController.tabBar.frame.size.height - self.originalBottomViewBottomAlignmentConstraintConstant - (self.rootView.bottomView.bounds.height - self.rootView.promoView.frame.maxY) + additionalBottomOffset
+                    self.prevContentOffsetFactor = offset
+                    
+                    // Add offset to bottomViewBottomAlignmentConstraint constant and tableView y contentOffset, and call layoutIfNeeded to animate
+                    self.rootView.bottomViewBottomAlignmentConstraint.constant += offset
+                    self.rootView.tableView.contentOffset.y += offset
+                    self.rootView.layoutIfNeeded()
                 } else {
                     view.endEditing(true)
                 }
@@ -339,7 +356,21 @@ class ChatViewController: HeaderViewController {
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
+        // Set keyboardShowing to false when animation is finished
+        if let userInfo = notification.userInfo, let keyboardAnimationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
+            DispatchQueue.main.asyncAfter(deadline: .now() + keyboardAnimationDuration) {
+                self.keyboardShowing = false
+            }
+        }
         
+        // Move the bottomViewBottomAlignmentConstraint constant back to its original value, and move tableView y contentOffset down by prevContentOffsetFactor if it can be unwrapped
+        if self.rootView.bottomViewBottomAlignmentConstraint.constant != self.originalBottomViewBottomAlignmentConstraintConstant {
+            self.rootView.bottomViewBottomAlignmentConstraint.constant = self.originalBottomViewBottomAlignmentConstraintConstant
+            if let prevContentOffsetFactor = self.prevContentOffsetFactor {
+                self.rootView.tableView.contentOffset.y -= prevContentOffsetFactor
+            }
+            self.rootView.layoutIfNeeded()
+        }
     }
     
     @objc func dismissKeyboardSelector(sender: UITapGestureRecognizer) {
@@ -1065,12 +1096,19 @@ class ChatViewController: HeaderViewController {
     }
     
     func dismissKeyboard() {
-        // Move the view down faster than the keyboard
-        UIView.animate(withDuration: 0.11, delay: 0.0, options: .curveEaseInOut, animations: {
-            if self.view.frame.origin.y != self.origin {
-                self.view.frame.origin.y = self.origin
-            }
-        })
+//        // Move the view down faster than the keyboard
+//        UIView.animate(withDuration: 0.11, delay: 0.0, options: .curveEaseInOut, animations: {
+//            if self.rootView.bottomViewBottomAlignmentConstraint.constant != self.originalBottomViewBottomAlignmentConstraintConstant {
+//                self.rootView.bottomViewBottomAlignmentConstraint.constant = self.originalBottomViewBottomAlignmentConstraintConstant
+//                if let prevContentOffsetFactor = self.prevContentOffsetFactor {
+//                    self.rootView.tableView.contentOffset.y -= self.prevContentOffsetFactor
+//                }
+//                self.rootView.layoutIfNeeded()
+//            }
+////            if self.view.frame.origin.y != self.origin {
+////                self.view.frame.origin.y = self.origin
+////            }
+//        })
         
         view.endEditing(true)
     }
