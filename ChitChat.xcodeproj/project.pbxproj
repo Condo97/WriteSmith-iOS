@@ -19,7 +19,6 @@
 		BB04B3FA296E38E1000BEC02 /* Ultra Image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3F8296E38E0000BEC02 /* Ultra Image1.jpg */; };
 		BB04B3FB296E38E1000BEC02 /* Ultra Image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3F8296E38E0000BEC02 /* Ultra Image1.jpg */; };
 		BB05249A29F6FFD7008C19DE /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05249929F6FFD7008C19DE /* ExploreViewController.swift */; };
-		BB089B082978A3F3003B8AAF /* Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB089B072978A3F3003B8AAF /* Private.swift */; };
 		BB0A7E70298715A300CB252F /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A7E6F298715A300CB252F /* FavoritesViewController.swift */; };
 		BB0A7E72298715B900CB252F /* FavoritesNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A7E71298715B900CB252F /* FavoritesNavigationViewController.swift */; };
 		BB0A8C09296CDB760035F046 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A8C08296CDB760035F046 /* RoundedView.swift */; };
@@ -133,6 +132,7 @@
 		BB8B18D529EB396800964724 /* GeneratedChatsRemainingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B18D429EB396800964724 /* GeneratedChatsRemainingHelper.swift */; };
 		BB8B18D729EB4C3500964724 /* UpdaterBroadcaster+PremiumUpdaterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B18D629EB4C3500964724 /* UpdaterBroadcaster+PremiumUpdaterDelegate.swift */; };
 		BB8B18D929EB4D6D00964724 /* GeneratedChatsRemainingUpdaterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B18D829EB4D6D00964724 /* GeneratedChatsRemainingUpdaterDelegate.swift */; };
+		BB8CF2572A98BAE900F9B9A8 /* Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8CF2562A98BAE900F9B9A8 /* Private.swift */; };
 		BB92A62C29CD504A002E000F /* RegistryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92A62B29CD504A002E000F /* RegistryHelper.swift */; };
 		BB92A62E29CD5106002E000F /* XIB_ReuseID.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92A62D29CD5106002E000F /* XIB_ReuseID.swift */; };
 		BB96EBB829F8A8CB002CC223 /* ChatLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96EBB629F8A8CB002CC223 /* ChatLoadingTableViewCell.swift */; };
@@ -401,7 +401,6 @@
 		BB04B3F4296E2FC4000BEC02 /* UIImage+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GIF.swift"; sourceTree = "<group>"; };
 		BB04B3F8296E38E0000BEC02 /* Ultra Image1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Ultra Image1.jpg"; sourceTree = "<group>"; };
 		BB05249929F6FFD7008C19DE /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
-		BB089B072978A3F3003B8AAF /* Private.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Private.swift; sourceTree = "<group>"; };
 		BB0924692A296861006FB997 /* TenjinSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = TenjinSDK.xcframework; sourceTree = "<group>"; };
 		BB0A7E6F298715A300CB252F /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		BB0A7E71298715B900CB252F /* FavoritesNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNavigationViewController.swift; sourceTree = "<group>"; };
@@ -520,6 +519,7 @@
 		BB8B18D429EB396800964724 /* GeneratedChatsRemainingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedChatsRemainingHelper.swift; sourceTree = "<group>"; };
 		BB8B18D629EB4C3500964724 /* UpdaterBroadcaster+PremiumUpdaterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UpdaterBroadcaster+PremiumUpdaterDelegate.swift"; sourceTree = "<group>"; };
 		BB8B18D829EB4D6D00964724 /* GeneratedChatsRemainingUpdaterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedChatsRemainingUpdaterDelegate.swift; sourceTree = "<group>"; };
+		BB8CF2562A98BAE900F9B9A8 /* Private.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Private.swift; sourceTree = "<group>"; };
 		BB92A62B29CD504A002E000F /* RegistryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryHelper.swift; sourceTree = "<group>"; };
 		BB92A62D29CD5106002E000F /* XIB_ReuseID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XIB_ReuseID.swift; sourceTree = "<group>"; };
 		BB96EBB629F8A8CB002CC223 /* ChatLoadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLoadingTableViewCell.swift; sourceTree = "<group>"; };
@@ -2542,9 +2542,9 @@
 		BBDC4E3229C7DB0D00204CD7 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				BB089B072978A3F3003B8AAF /* Private.swift */,
 				BBC16388296B601500868752 /* Constants.swift */,
 				BBA83E7629779E3A00536FF9 /* FaceConstants.swift */,
+				BB8CF2562A98BAE900F9B9A8 /* Private.swift */,
 				BB0F04CF29CD2AC500C89A0A /* Registry.swift */,
 			);
 			path = Constants;
@@ -2837,6 +2837,7 @@
 				BBDC4ECD29C949EE00204CD7 /* CellSource.swift in Sources */,
 				BB9C2F51297CB7710026A441 /* EssayPromptTableViewCell.swift in Sources */,
 				BB39B70D2A3434C100B25FA4 /* ChatGPTModelSelectionView.swift in Sources */,
+				BB8CF2572A98BAE900F9B9A8 /* Private.swift in Sources */,
 				BB39B6FE2A33E39900B25FA4 /* GPTModels.swift in Sources */,
 				BB8B184D29E6190600964724 /* ImageTextTableViewCell.swift in Sources */,
 				BB4AD4B52A841D730053CF44 /* EditableCellSource.swift in Sources */,
@@ -2871,7 +2872,6 @@
 				BBA3AFA82A3E552F002F5961 /* SocketStream.swift in Sources */,
 				BB8B18D529EB396800964724 /* GeneratedChatsRemainingHelper.swift in Sources */,
 				BB329B4D298B799B00B3824D /* UIImage+Rotated.swift in Sources */,
-				BBF6314029F8A05200E9F0C2 /* ChatTableViewCell.swift in Sources */,
 				BB5E9162297DB62100DC7467 /* EssayBodyTableViewCell.swift in Sources */,
 				BBC4D20E29E5F83A0006D337 /* UltraView.swift in Sources */,
 				BBD50D1929F30E3600C61B86 /* V3_5MigrationHandler.swift in Sources */,
@@ -2963,7 +2963,6 @@
 				BB8B18A829E9084800964724 /* EssayView.swift in Sources */,
 				BB8B18C629EB00DB00964724 /* CameraViewController+CameraViewDelegate.swift in Sources */,
 				BBA3AF9E2A3CDBCD002F5961 /* IsPremiumResponse.swift in Sources */,
-				BB089B082978A3F3003B8AAF /* Private.swift in Sources */,
 				BBD4D86C298063750031BBFA /* LoadingTableViewCell.swift in Sources */,
 				BBF6312D29F8361F00E9F0C2 /* CreationExploreTableViewCell.swift in Sources */,
 				BBC7415129F4C25900B3F41D /* ItemExploreView.swift in Sources */,

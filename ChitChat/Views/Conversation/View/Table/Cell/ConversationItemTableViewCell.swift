@@ -22,11 +22,6 @@ class ConversationItemTableViewCell: UITableViewCell, LoadableCell {
         if let conversationSource = source as? ConversationItemTableViewCellSource {
             conversationNameLabel.text = conversationSource.formattedTitle
             dateLabel.text = conversationSource.formattedDate
-<<<<<<< HEAD
-            
-=======
-                        
->>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
             previousConversationIndicatorWidthConstraint.constant = conversationSource.shouldShowPreviousConversationIndicator ? DEFAULT_PREVIOUS_CONVERSATION_INDICATOR_WIDTH_CONSTRAINT_CONSTANT : 0.0
         }
     }

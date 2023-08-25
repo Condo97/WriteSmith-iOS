@@ -28,11 +28,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-<<<<<<< HEAD
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-=======
                         <color key="backgroundColor" name="AIChatBubbleColor"/>
->>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="WBd-o9-HcQ" secondAttribute="bottom" id="N96-xI-Hvq"/>
                             <constraint firstItem="WBd-o9-HcQ" firstAttribute="leading" secondItem="mJU-rU-EhF" secondAttribute="leading" id="Rnp-TU-hiZ"/>
