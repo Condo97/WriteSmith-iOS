@@ -191,6 +191,10 @@ struct Registry {
         }
     }
     
+    struct LaunchScreen {
+        static let launchScreenStoryboardName = "LaunchScreen"
+    }
+    
     struct Settings {
         struct View {
             struct Table {

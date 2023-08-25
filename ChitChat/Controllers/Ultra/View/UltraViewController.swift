@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 import SafariServices
 import StoreKit
+import TenjinSDK
 
 enum PlanType {
     case none
@@ -353,6 +354,13 @@ extension UltraViewController: IAPHTTPSHelperDelegate {
                         
                         // Purchase the product!
                         let transaction = try await IAPManager.purchase(productToPurchase!)
+                        
+                        // Update tenjin
+                        TenjinSDK.transaction(
+                            withProductName: productToPurchase!.displayName,
+                            andCurrencyCode: "USD",
+                            andQuantity: 1,
+                            andUnitPrice: NSDecimalNumber(decimal: productToPurchase!.price))
                         
                         // Register the transaction ID with the server using PremiumUpdater sharedBroadcaster, so all listeners are notified! :D
                         let isPremium = try await (PremiumUpdater.sharedBroadcaster.updater as! PremiumUpdater).registerTransaction(authToken: try await AuthHelper.ensure(), transactionID: transaction.id)

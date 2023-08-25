@@ -13,6 +13,10 @@ class RegistryHelper {
         return UINib(nibName: nibName, bundle: nil).instantiate(withOwner: owner)[0] as? UIView
     }
     
+    static func instantiateInitialViewControllerFromStoryboard(storyboardName: String) -> UIViewController? {
+        return UIStoryboard(name: storyboardName, bundle: nil).instantiateInitialViewController()
+    }
+    
     
     static func register(_ xib_reuseID: XIB_ReuseID, to collectionView: UICollectionView) {
         register([xib_reuseID], to: collectionView)

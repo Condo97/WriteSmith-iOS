@@ -55,6 +55,10 @@ class EssayPromptTableViewCell: UITableViewCell, LoadableCell {
             editedLabel.text = promptSource.editedText
             
             deleteButtonWidthConstraint.constant = promptSource.shouldShowDeleteButton ? shareButtonWidthConstraint.constant : 0.0
+            
+            setNeedsDisplay()
+            setNeedsLayout()
+            layoutIfNeeded()
         }
     }
     

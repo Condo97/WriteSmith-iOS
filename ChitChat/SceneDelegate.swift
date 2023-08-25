@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        UserDefaults.standard.set(false, forKey: Constants.userDefaultHasFinishedIntro)
 //        #endif
         
-        // Set initial view controller
+        // Set initial view controller, or show launch screen
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultHasFinishedIntro) {
             
             // Create StackedPresentingNavigationController to present intro
@@ -48,6 +48,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = spnc
             self.window = window
             window.makeKeyAndVisible()
+        } else {
+            // Present launch screen in rootViewController if it can be unwrapped
+            if let rootViewController = self.window?.rootViewController {
+                LaunchControl.present(in: rootViewController.view, animated: false)
+            }
         }
     }
 

@@ -16,26 +16,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        if UserDefaults.standard.bool(forKey: Constants.userDefaultNotFirstLaunch) {
+//        if UserDefaults.standard.bool(forKey: Constants.userDefaultNotFirstLaunch) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let center = UNUserNotificationCenter.current()
             UNUserNotificationCenter.current().delegate = self
             center.requestAuthorization(options: [.sound, .alert, .badge], completionHandler: { (granted, error) in
-                if #available(iOS 14.0, *) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-                        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                            DispatchQueue.main.async {
-                                TenjinSDK.getInstance("UN4PPH4ZU5Z3S6BDDJZZCXLPPFFJ5XLP", andSharedSecret: Private.sharedSecret)
-                                TenjinSDK.connect()
-                                TenjinSDK.debugLogs()
-                                TenjinSDK.sendEvent(withName: "test_event")
-                            }
-                        })
-                    })
-                }})
+                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+//                    DispatchQueue.main.async {
+                        TenjinSDK.getInstance("UN4PPH4ZU5Z3S6BDDJZZCXLPPFFJ5XLP", andSharedSecret: Private.sharedSecret)
+                        TenjinSDK.connect()
+                        TenjinSDK.debugLogs()
+                        TenjinSDK.sendEvent(withName: "test_event")
+//                    }
+                })
+            })
+//        }
         }
         
-        UIApplication.shared.registerForRemoteNotifications()
+        UIApplication.shared.registerForRemoteNotifications() // Is this google ads or tenjin?
         
+        // Setup Google Mobile Ads
         GADMobileAds.sharedInstance().start()
         
         // If no authToken, register the user and update the authToken in UserDefaults

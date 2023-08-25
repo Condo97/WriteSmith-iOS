@@ -124,7 +124,7 @@ class ChatViewController: HeaderViewController {
         // Long press for message share sheet
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressOnTableView))
         longPressGestureRecognizer.cancelsTouchesInView = false
-        longPressGestureRecognizer.minimumPressDuration = 1.0
+        longPressGestureRecognizer.minimumPressDuration = 0.4
         rootView.tableView.addGestureRecognizer(longPressGestureRecognizer)
         
         // Set remaining view to transparent before it loads
@@ -156,6 +156,8 @@ class ChatViewController: HeaderViewController {
         /* Setup Cell Source */
         Task {
             await setCellSource()
+            
+            LaunchControl.dismiss(animated: true)
         }
         
         // Set up default tiered padding source at index 1 in spacerSection
@@ -193,11 +195,7 @@ class ChatViewController: HeaderViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        // Set shouldScrollOnFirstAppear to false, as it should have finished scrolling on the viewDidLayoutSubviews call right before viewDidAppear
-//        shouldScrollOnFirstAppear = false
-        
         // Set origin for keyboard
-//        origin = self.view.frame.origin.y
         originalBottomViewBottomAlignmentConstraintConstant = rootView.bottomViewBottomAlignmentConstraint.constant
         
         // Show Ultra Purchase on launch if not premium
@@ -419,7 +417,7 @@ class ChatViewController: HeaderViewController {
             // Share text at row
             var text = attributedText.string
             
-            if let shareURL = UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) {
+            if !PremiumHelper.get(), let shareURL = UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) {
                 text = "\(text)\n\n\(Constants.copyFooterText)\n\(shareURL)"
             } else {
                 text = "\(text)\n\n\(Constants.copyFooterText)"

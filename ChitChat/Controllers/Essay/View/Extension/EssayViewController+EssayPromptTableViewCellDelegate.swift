@@ -40,7 +40,7 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
         
         //TODO: - Make the footer text an option in settings instead of disabling it for premium entirely
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-            if let shareURL = UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) {
+            if !PremiumHelper.get(), let shareURL = UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) {
                 text = "\(text)\n\n\(Constants.copyFooterText)\n\(shareURL)"
             } else {
                 text = "\(text)\n\n\(Constants.copyFooterText)"

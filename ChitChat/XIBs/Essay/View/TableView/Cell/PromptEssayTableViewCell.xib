@@ -3,29 +3,29 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="promptEssayTableViewCell" id="OiH-Ma-cuZ" customClass="EssayPromptTableViewCell" customModule="ChitChat" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="promptEssayTableViewCell" rowHeight="200" id="OiH-Ma-cuZ" customClass="EssayPromptTableViewCell" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OiH-Ma-cuZ" id="umN-p5-oBD">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OiH-Ma-cuZ" id="umN-p5-oBD">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CUe-en-hgH" customClass="HalfRoundedView" customModule="ChitChat" customModuleProvider="target">
-                        <rect key="frame" x="7" y="0.0" width="400" height="49"/>
+                        <rect key="frame" x="7" y="0.0" width="400" height="50"/>
                         <color key="backgroundColor" name="AIChatBubbleColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundTop" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0c-Tn-ngW">
-                        <rect key="frame" x="366" y="11.999999999999996" width="24" height="24.333333333333332"/>
+                        <rect key="frame" x="366" y="12.333333333333332" width="24" height="24.333333333333339"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="z0c-Tn-ngW" secondAttribute="height" multiplier="1:1" id="fcn-ai-E2u"/>
                             <constraint firstAttribute="width" constant="24" id="jPv-Fx-GQq"/>
@@ -38,7 +38,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FdL-lg-KdF">
-                        <rect key="frame" x="328" y="11.666666666666666" width="24" height="24.666666666666671"/>
+                        <rect key="frame" x="328" y="12.000000000000002" width="24" height="24.666666666666671"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="FdL-lg-KdF" secondAttribute="height" multiplier="1:1" id="BZF-tk-t52"/>
                             <constraint firstAttribute="width" constant="24" id="dN3-Ds-Uha"/>
@@ -51,7 +51,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ChO-EM-Bql">
-                        <rect key="frame" x="290" y="12.999999999999996" width="24" height="23.333333333333332"/>
+                        <rect key="frame" x="290" y="13.333333333333332" width="24" height="23.333333333333339"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="ChO-EM-Bql" secondAttribute="height" multiplier="1:1" id="Afh-n9-MiP"/>
                             <constraint firstAttribute="width" constant="24" id="F4n-LU-pfV"/>
@@ -75,7 +75,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Su-W5-zXo">
-                        <rect key="frame" x="24" y="35" width="26" height="14"/>
+                        <rect key="frame" x="24" y="36" width="26" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="7Rr-IU-JD3"/>
                         </constraints>
@@ -84,7 +84,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MR1-6U-d77">
-                        <rect key="frame" x="64" y="31.666666666666671" width="46" height="21"/>
+                        <rect key="frame" x="64" y="32.666666666666664" width="46" height="21"/>
                         <attributedString key="attributedText">
                             <fragment content=" - Edited">
                                 <attributes>
@@ -112,7 +112,7 @@
                     <constraint firstItem="FdL-lg-KdF" firstAttribute="centerY" secondItem="CUe-en-hgH" secondAttribute="centerY" id="aPn-5C-0wC"/>
                     <constraint firstItem="CUe-en-hgH" firstAttribute="top" secondItem="umN-p5-oBD" secondAttribute="top" id="eC4-E2-vqe"/>
                     <constraint firstItem="MR1-6U-d77" firstAttribute="leading" secondItem="5Su-W5-zXo" secondAttribute="trailing" constant="14" id="fRe-yu-7l3"/>
-                    <constraint firstItem="5Su-W5-zXo" firstAttribute="top" secondItem="NLQ-B7-Ulk" secondAttribute="bottom" id="lVy-Qr-bhM"/>
+                    <constraint firstItem="5Su-W5-zXo" firstAttribute="top" secondItem="NLQ-B7-Ulk" secondAttribute="bottom" constant="1" id="lVy-Qr-bhM"/>
                     <constraint firstItem="z0c-Tn-ngW" firstAttribute="leading" secondItem="FdL-lg-KdF" secondAttribute="trailing" constant="14" id="mRT-BT-fku"/>
                     <constraint firstAttribute="trailing" secondItem="CUe-en-hgH" secondAttribute="trailing" constant="7" id="o08-PR-U63"/>
                     <constraint firstItem="5Su-W5-zXo" firstAttribute="bottom" secondItem="CUe-en-hgH" secondAttribute="bottom" id="qpz-DU-UeT"/>
@@ -128,7 +128,7 @@
                 <outlet property="shareButtonWidthConstraint" destination="dN3-Ds-Uha" id="Rsh-pG-DIr"/>
                 <outlet property="title" destination="NLQ-B7-Ulk" id="AFa-8f-aVp"/>
             </connections>
-            <point key="canvasLocation" x="-24" y="20"/>
+            <point key="canvasLocation" x="-24.427480916030532" y="72.535211267605632"/>
         </tableViewCell>
     </objects>
     <resources>
