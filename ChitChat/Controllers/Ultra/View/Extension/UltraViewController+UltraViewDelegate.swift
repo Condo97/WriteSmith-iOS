@@ -11,10 +11,18 @@ import SafariServices
 extension UltraViewController: UltraViewDelegate {
     
     func closeButtonPressed() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Close ultraView
         closeUltraView()
     }
     
     func privacyPolicyButton() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Show privacy policy
         let config = SFSafariViewController.Configuration()
         config.entersReaderIfAvailable = true
         
@@ -24,6 +32,10 @@ extension UltraViewController: UltraViewDelegate {
     }
     
     func termsAndConditionsButton() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Show terms and conditions
         let config = SFSafariViewController.Configuration()
         config.entersReaderIfAvailable = true
         
@@ -33,6 +45,10 @@ extension UltraViewController: UltraViewDelegate {
     }
     
     func restorePurchasesButton() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Do restore purchases
         restorePurchases()
     }
     

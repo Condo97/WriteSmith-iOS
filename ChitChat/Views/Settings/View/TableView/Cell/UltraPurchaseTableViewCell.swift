@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UltraPurchaseTableViewCell: UITableViewCell, LoadableTableViewCell {
+class UltraPurchaseTableViewCell: UITableViewCell, LoadableCell {
     
     @IBOutlet weak var giftImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -23,7 +23,7 @@ class UltraPurchaseTableViewCell: UITableViewCell, LoadableTableViewCell {
         
     }
     
-    func loadWithSource(_ source: TableViewCellSource) {
+    func loadWithSource(_ source: CellSource) {
         if let ultraPurchaseTableViewCellSource = source as? UltraPurchaseTableViewCellSource {
             giftImageView.image = ultraPurchaseTableViewCellSource.giftImage
             titleLabel.text = ultraPurchaseTableViewCellSource.titleText

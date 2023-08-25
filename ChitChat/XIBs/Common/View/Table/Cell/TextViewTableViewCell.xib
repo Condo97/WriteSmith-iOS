@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="textViewTableViewCell" id="Tap-F5-UPT" customClass="TextViewTableViewCell" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tap-F5-UPT" id="yxi-j1-Scr">
+                <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ean-si-0O6">
+                        <rect key="frame" x="24" y="0.0" width="345" height="44"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" systemColor="labelColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ean-si-0O6" secondAttribute="trailing" constant="24" id="LM6-wt-34q"/>
+                    <constraint firstItem="ean-si-0O6" firstAttribute="leading" secondItem="yxi-j1-Scr" secondAttribute="leading" constant="24" id="Oht-be-thg"/>
+                    <constraint firstItem="ean-si-0O6" firstAttribute="top" secondItem="yxi-j1-Scr" secondAttribute="top" id="isw-CT-Glo"/>
+                    <constraint firstAttribute="bottom" secondItem="ean-si-0O6" secondAttribute="bottom" id="uW8-79-3SG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="textView" destination="ean-si-0O6" id="Llp-gX-ImO"/>
+            </connections>
+            <point key="canvasLocation" x="177" y="-33"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

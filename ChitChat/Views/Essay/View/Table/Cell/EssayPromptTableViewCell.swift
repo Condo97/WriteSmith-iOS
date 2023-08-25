@@ -13,7 +13,7 @@ protocol EssayPromptTableViewCellDelegate: AnyObject {
     func didPressDeleteRow(cell: EssayPromptTableViewCell)
 }
 
-class EssayPromptTableViewCell: UITableViewCell, LoadableTableViewCell {
+class EssayPromptTableViewCell: UITableViewCell, LoadableCell {
     
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var date: UILabel!
@@ -47,7 +47,7 @@ class EssayPromptTableViewCell: UITableViewCell, LoadableTableViewCell {
         delegate.didPressDeleteRow(cell: self)
     }
     
-    func loadWithSource(_ source: TableViewCellSource) {
+    func loadWithSource(_ source: CellSource) {
         if let promptSource = source as? PromptEssayTableViewCellSource {
             delegate = promptSource.delegate
             title.text = promptSource.titleText
@@ -55,6 +55,10 @@ class EssayPromptTableViewCell: UITableViewCell, LoadableTableViewCell {
             editedLabel.text = promptSource.editedText
             
             deleteButtonWidthConstraint.constant = promptSource.shouldShowDeleteButton ? shareButtonWidthConstraint.constant : 0.0
+            
+            setNeedsDisplay()
+            setNeedsLayout()
+            layoutIfNeeded()
         }
     }
     

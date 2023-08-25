@@ -7,9 +7,10 @@
 
 import UIKit
 
-class PromptEssayTableViewCellSource: TableViewCellSource {
+class PromptEssayTableViewCellSource: CellSource {
     
-    var reuseIdentifier: String = Registry.Essay.View.Table.Cell.prompt.reuseID
+    var collectionViewCellReuseIdentifier: String?
+    var tableViewCellReuseIdentifier: String? = Registry.Essay.View.Table.Cell.prompt.reuseID
     
     var delegate: EssayPromptTableViewCellDelegate
     var titleText: String

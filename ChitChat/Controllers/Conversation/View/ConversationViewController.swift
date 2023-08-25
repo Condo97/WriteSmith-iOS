@@ -12,7 +12,7 @@ class ConversationViewController: HeaderViewController {
     // Constants
     let conversationSection = 0
     
-    let conversationTableViewManager: SourcedTableViewManagerProtocol = ConversationSourcedTableViewManager()
+    let conversationTableViewManager: ConversationSourcedTableViewManager = ConversationSourcedTableViewManager()
     
     // Instance variables
     var shouldShowUltra = true
@@ -23,8 +23,8 @@ class ConversationViewController: HeaderViewController {
     var pushToConversation = false
     
     
-    lazy var rootView: ManagedInsetGroupedTableViewInView = {
-        let view = RegistryHelper.instantiateAsView(nibName: Registry.Common.View.managedInsetGroupedTableViewIn, owner: self) as! ManagedInsetGroupedTableViewInView
+    lazy var rootView: ManagedTableViewInView = {
+        let view = RegistryHelper.instantiateAsView(nibName: Registry.Common.View.managedInsetGroupedTableViewIn, owner: self) as! ManagedTableViewInView
         view.tableView.backgroundColor = Colors.chatBackgroundColor
         return view
     }()
@@ -47,29 +47,36 @@ class ConversationViewController: HeaderViewController {
         
         /* If it should push, try and push ChatViewController with conversationResumingManager's Conversation, otherwise create a new Conversation and push */
         if pushToConversation {
-            pushWith(conversation: (ConversationResumingManager.conversation ?? ConversationCDHelper.appendConversation())!, animated: false)
-            pushToConversation = false
+            Task {
+                var conversationToPushTo = await ConversationResumingManager.getConversation()
+                if conversationToPushTo == nil {
+                    do {
+                        conversationToPushTo = try await ConversationCDHelper.appendConversation()
+                    } catch {
+                        // TODO: Handle error
+                        print("Could not create conversation in viewDidload in ConversationViewController... \(error)")
+                    }
+                }
+                
+                // Unwrap conversationToPushTo, otherwise do something with the error
+                guard let conversationToPushTo = conversationToPushTo else {
+                    // TODO: Handle error
+                    print("Could not unwrap conversationToPushTo in viewDidLoad of ConversationViewController")
+                    return
+                }
+                
+                // Push to conversation and set pushToConversation to false
+                pushWith(conversation: conversationToPushTo, animated: false)
+                pushToConversation = false
+            }
         }
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         /* Setup Cell Source */
-        // Get all Conversations
-        let allConversations = ConversationCDHelper.getAllConversations()
-        
-        // Set sources to date group sectioned conversation item sources
-        conversationTableViewManager.sources = TableViewCellSourceFactory.makeSortedDateGroupSectionedConversationItemTableViewCellSourceArray(from: allConversations!, indicating: previousSelectedConversation, delegate: self)
-        
-        // Insert Create source in array at section index 0
-        conversationTableViewManager.sources.insert([ConversationCreateTableViewCellSource(didSelect: { tableView, indexPath in
-            self.pushWith(conversation: ConversationCDHelper.appendConversation()!, animated: true)
-        })], at: 0)
-        
-        
-        // Reload data on main thread
-        DispatchQueue.main.async {
-            self.rootView.tableView.reloadData()
+        Task {
+            await setupCellSourcesAndHeaders()
         }
     }
     
@@ -82,13 +89,13 @@ class ConversationViewController: HeaderViewController {
         }
         
         //TODO: Swap this with the three lines, since the gear is shown on more views
-        // Insert gear button with openSettings target as first left bar button item
+        // Insert gear button with settingsPressed target as first left bar button item
         let settingsMenuBarButtonImage = UIImage(systemName: "gear")
         let settingsMenuBarButton = UIButton(type: .custom)
         settingsMenuBarButton.frame = CGRect(x: 0.0, y: 0.0, width: 30.0, height: 28.0)
         settingsMenuBarButton.tintColor = Colors.elementTextColor
         settingsMenuBarButton.setBackgroundImage(settingsMenuBarButtonImage, for: .normal)
-        settingsMenuBarButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
+        settingsMenuBarButton.addTarget(self, action: #selector(settingsPressed), for: .touchUpInside)
         let settingsMenuBarItem = UIBarButtonItem(customView: settingsMenuBarButton)
         
         navigationItem.leftBarButtonItems!.insert(settingsMenuBarItem, at: 0)
@@ -103,20 +110,26 @@ class ConversationViewController: HeaderViewController {
         editingBarButtonItem.setTitleTextAttributes([.font: UIFont(name: Constants.primaryFontNameMedium, size: 17.0)!], for: .normal)
         editingBarButtonItem.setTitleTextAttributes([.font: UIFont(name: Constants.primaryFontNameMedium, size: 17.0)!], for: .selected)
         
-        // Insert edit button item at first index of right menu bar items
-        navigationItem.rightBarButtonItems?.insert(editingBarButtonItem, at: 0)
+        // APpend edit button item to right menu bar items
+        navigationItem.rightBarButtonItems?.append(editingBarButtonItem)
     }
     
     @objc func editButtonPressed(_ sender: UIBarButtonItem) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Toggle isEditing
         rootView.tableView.isEditing = !rootView.tableView.isEditing
         
         if rootView.tableView.isEditing {
+            // If currently editing, show "Done"
             DispatchQueue.main.async {
                 sender.title = "Done"
                 sender.setTitleTextAttributes([.font: UIFont(name: Constants.primaryFontNameBold, size: 17.0)!], for: .normal)
                 sender.setTitleTextAttributes([.font: UIFont(name: Constants.primaryFontNameBold, size: 17.0)!], for: .selected)
             }
         } else {
+            // If not editing, show "Edit"
             DispatchQueue.main.async {
                 sender.title = "Edit"
                 sender.setTitleTextAttributes([.font: UIFont(name: Constants.primaryFontNameMedium, size: 17.0)!], for: .normal)
@@ -125,9 +138,79 @@ class ConversationViewController: HeaderViewController {
         }
     }
     
-    @objc func openSettings() {
+    @objc func settingsPressed() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
         // Push to settings
         navigationController?.pushViewController(SettingsPresentationSpecification().viewController, animated: true)
+    }
+    
+    func setupCellSourcesAndHeaders() async {
+        // Get all Conversations
+        let allConversations = await ConversationCDHelper.getAllConversations()
+        
+        // Set sources to date group sectioned conversation item sources
+        conversationTableViewManager.sources = await TableViewCellSourceFactory.makeSortedDateGroupSectionedConversationItemTableViewCellSourceArray(from: allConversations!, indicating: previousSelectedConversation, delegate: self)
+        
+        // Function to get ordered display string from date group range array
+        func orderedDateGroupRangeToDisplayStringArray(dateGroupRangeArray: [DateGroupRange]) -> [String] {
+            var titleStringArray: [String] = []
+            for i in 0..<dateGroupRangeArray.count {
+                titleStringArray.append(dateGroupRangeArray[i].displayString)
+            }
+            return titleStringArray
+        }
+        
+        // Set ordered section header titles
+        conversationTableViewManager.orderedSectionHeaderTitles = orderedDateGroupRangeToDisplayStringArray(dateGroupRangeArray: DateGroupRange.ordered)
+        
+        // Remove blank source arrays and headers
+        DispatchQueue.main.async {
+            var i = 0
+            while (i < self.conversationTableViewManager.sources.count) {
+                if self.conversationTableViewManager.sources[i].isEmpty {
+                    self.conversationTableViewManager.sources.remove(at: i)
+                    self.conversationTableViewManager.orderedSectionHeaderTitles?.remove(at: i)
+                    
+                    self.rootView.tableView.reloadData()
+                } else {
+                    i += 1
+                }
+            }
+        }
+        
+        // Insert Create source in array at section index 0
+        conversationTableViewManager.sources.insert([ConversationCreateTableViewCellSource(didSelect: { tableView, indexPath in
+            Task {
+                do {
+                    // Append and unwrap newConversation
+                    guard let newConversation = try await ConversationCDHelper.appendConversation() else {
+                        // TODO: Handle error
+                        print("Could not append a conversation in viewWillAppear in ConversationViewController!")
+                        return
+                    }
+                    
+                    // Do light haptic
+                    HapticHelper.doLightHaptic()
+                    
+                    // Push with newConversation
+                    self.pushWith(conversation: newConversation, animated: true)
+                } catch {
+                    // TODO: Handle error
+                    print("Could not append conversation in viewWillAppear in ConversationViewController... \(error)")
+                }
+            }
+        })], at: 0)
+        
+        // Insert blank section header title for the create section
+        conversationTableViewManager.orderedSectionHeaderTitles?.insert("", at: 0)
+        
+        
+        // Reload data on main thread
+        DispatchQueue.main.async {
+            self.rootView.tableView.reloadData()
+        }
     }
     
     func pushWith(conversation: Conversation, animated: Bool) {
@@ -152,7 +235,9 @@ class ConversationViewController: HeaderViewController {
         previousSelectedConversation = conversation
         
         // Push to chatViewController
-        navigationController?.pushViewController(chatViewController, animated: animated)
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(chatViewController, animated: animated)
+        }
     }
 
 }

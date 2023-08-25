@@ -7,16 +7,17 @@
 
 import UIKit
 
-class ImageTextTableViewCellSource: TableViewCellSource, SelectableTableViewCellSource {
+class ImageTextTableViewCellSource: CellSource, SelectableCellSource {
     
-    var reuseIdentifier: String = Registry.Common.View.TableView.Cell.imageText.reuseID
+    var collectionViewCellReuseIdentifier: String?
+    var tableViewCellReuseIdentifier: String? = Registry.Common.View.Table.Cell.imageText.reuseID
     
-    var didSelect: (UITableView, IndexPath)->Void
+    var didSelect: ((UIView, IndexPath)->Void)?
     
     var image: UIImage
     var text: NSAttributedString
     
-    init(didSelect: @escaping (UITableView, IndexPath)->Void, image: UIImage, text: NSAttributedString) {
+    init(didSelect: ((UIView, IndexPath)->Void)?, image: UIImage, text: NSAttributedString) {
         self.didSelect = didSelect
         self.image = image
         self.text = text

@@ -15,7 +15,7 @@ protocol EssayBodyTableViewCellDelegate: AnyObject {
     func essayTextDidEndEditing(cell: EssayBodyTableViewCell, textView: UITextView)
 }
 
-class EssayBodyTableViewCell: UITableViewCell, LoadableTableViewCell {
+class EssayBodyTableViewCell: UITableViewCell, LoadableCell {
 
     @IBOutlet weak var essayTextView: UITextView!
     @IBOutlet weak var essayHeightConstraint: NSLayoutConstraint!
@@ -45,7 +45,7 @@ class EssayBodyTableViewCell: UITableViewCell, LoadableTableViewCell {
         delegate?.didPressShowLess(cell: self)
     }
     
-    func loadWithSource(_ source: TableViewCellSource) {
+    func loadWithSource(_ source: CellSource) {
         if let bodySource = source as? BodyEssayTableViewCellSource {
             delegate = bodySource.delegate
             essayTextView.text = bodySource.text

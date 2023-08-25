@@ -8,7 +8,12 @@
 import Foundation
 
 extension EssayViewController: EssayPromptTableViewCellDelegate {
+    
     func didPressCopyText(cell: EssayPromptTableViewCell) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Get row or return
         guard let row = rootView.tableView.indexPath(for: cell)?.row else {
             print("Could not find row of cell to copy...")
             return
@@ -35,7 +40,7 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
         
         //TODO: - Make the footer text an option in settings instead of disabling it for premium entirely
         if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-            if let shareURL = UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) {
+            if !PremiumHelper.get(), let shareURL = UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) {
                 text = "\(text)\n\n\(Constants.copyFooterText)\n\(shareURL)"
             } else {
                 text = "\(text)\n\n\(Constants.copyFooterText)"
@@ -55,7 +60,10 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
     }
     
     func didPressShare(cell: EssayPromptTableViewCell) {
-        // Share row with appended footer text
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Get row or return
         guard let row = rootView.tableView.indexPath(for: cell)?.row else {
             print("Could not find row of cell to share...")
             return
@@ -77,17 +85,23 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
             return
         }
         
+        // Append footer text TODO: - Should this be changed to check for ultra?
         let text = "Prompt: \(promptText)\n\n\(essayText)\n\n\(Constants.copyFooterText)"
         
-        let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: [])
-        
-        present(activityVC, animated: true)
+        ShareViewHelper.share(text, viewController: self)
     }
     
     func didPressDeleteRow(cell: EssayPromptTableViewCell) {
+        // Do haptic
+        HapticHelper.doWarningHaptic()
+        
         //TODO: - Delete row
         let ac = UIAlertController(title: "Delete", message: "Are you sure you'd like to delete this Essay?", preferredStyle: .alert)
+        ac.view.tintColor = Colors.alertTintColor
         ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { UIAlertAction in
+            // Do haptic
+            HapticHelper.doMediumHaptic()
+            
             guard let row = self.rootView.tableView.indexPath(for: cell)?.row else {
                 print("Could not find row of cell to delete...")
                 return
@@ -97,24 +111,32 @@ extension EssayViewController: EssayPromptTableViewCellDelegate {
             let objectIndex = row / 2
             
             // Actually delete the row and CD object
-            let currentEssay = self.essays[objectIndex]
+            var currentEssay = self.essays[objectIndex]
             
             // Delete essay and update tableView if successful
-            if EssayCDHelper.deleteEssay(currentEssay) {
-                DispatchQueue.main.async {
-                    // Delete at same index twice to remove both the prompt and body
-                    self.rootView.tableView.beginUpdates()
-                    self.rootView.tableView.deleteManagedRow(at: IndexPath(row: row, section: self.essaySection), with: .automatic)
-                    self.rootView.tableView.endUpdates()
+            Task {
+                do {
+                    try await EssayCDHelper.deleteEssay(&currentEssay)
                     
-                    self.rootView.tableView.beginUpdates()
-                    self.rootView.tableView.deleteManagedRow(at: IndexPath(row: row, section: self.essaySection), with: .automatic)
-                    self.rootView.tableView.endUpdates()
+                    DispatchQueue.main.async {
+                        // Delete at same index twice to remove both the prompt and body
+                        self.sourcedTableViewManager.sources[self.essaySection].remove(at: row)
+                        self.sourcedTableViewManager.sources[self.essaySection].remove(at: row)
+                        
+                        self.rootView.tableView.reloadData()
+                    }
+                } catch {
+                    // TODO: Handle error
+                    print("Could not delete essay in EssayViewController EssayPromptTableViewCellDelegate didPressDeleteRow... \(error)")
                 }
             }
         }))
         
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            // Do haptic
+            HapticHelper.doLightHaptic()
+        }))
         present(ac, animated: true)
     }
+    
 }

@@ -9,7 +9,16 @@ import UIKit
 import Foundation
 
 struct Constants {
+    
+    struct Additional {
+        static let coreDataModelName = "ChitChat"
+    }
+    
     static let bottomButtonGradient = UIColor(named: "BottomButtonGradient")!
+    
+    static let defaultChatID = -1
+    static let defaultConversationID = -1
+    
     static let chatStorageUserDefaultKey = "chatStorageUserDefaultKey"
     static let pastChatStorageUserDefaultKey = "pastChatStorageUserDefaultKey"
     static let userDefaultStoredAuthTokenKey = "authTokenKey"
@@ -24,6 +33,8 @@ struct Constants {
     static let userDefaultStoredPremiumLastCheckDate = "premiumLastCheckDate"
     static let userDefaultStoredIsPremium = "storedIsPremium"
     
+    static let userDefaultStoredChatGPTModel = "chatGPTModel"
+    
     static let userDefaultStoredGeneratedChatsRemaining = "generatedChatsRemaining"
     
     static let userDefaultStoredConversationToResume = "conversationToResume"
@@ -33,13 +44,15 @@ struct Constants {
     static let userDefaultNotFirstLaunch = "notFirstLaunch"
     static let userDefaultNotFirstCamera = "firstTimeCamera"
     
+    static let userDefaultStoredSettingReduceMotion = "settingReduceMotion"
+    
     
     //    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
     
     static let reviewFrequency = 5
     static let adFrequency = 4
     
-    static let freeTypingTimeInterval = 4.0/100
+    static let freeTypingTimeInterval = 2.8/100
     static let premiumTypingTimeInterval = 2.0/100
     
     static let defaultTypingUpdateLetterCountFactor = 200
@@ -85,6 +98,9 @@ struct Constants {
                 struct Cell {
                     
                 }
+                
+                static let freeFooterHeight = 240.0
+                static let ultraFooterHeight = 140.0
             }
         }
         
@@ -145,31 +161,55 @@ struct Constants {
     }
     
     struct ImageName {
+        struct BottomBarImages {
+            static let chatBottomButtonTopSelected = "chatButtonTopSelected"
+            static let chatBottomButtonTopNotSelected = "chatButtonTopNotSelected"
+            static let chatBottomButtonBottom = "chatButtonBottom"
+            
+            static let createBottomButton = "createBottomButton"
+            static let createBottomButtonSelected = "createBottomButtonSelected"
+            
+            static let essayBottomButtonNotSelected = "writeBottomButtonNotSelected"
+            static let essayBottomButtonSelected = "writeBottomButtonSelected"
+            
+            static let premiumBottomButtonNotSelected = "premiumBottomButtonNotSelected"
+            
+            static let shareBottomButtonNotSelected = "shareBottomButtonNotSelected"
+            
+            static let sparkleDarkBottomBarBackgroundColor = "sparkleDarkBottomBarBackgroundColor"
+            static let sparkleDarkElementTextColor = "sparkleDarkElementTextColor"
+            static let sparkleLightBottomBarBackgroundColor = "sparkleLightBottomBarBackgroundColor"
+            static let sparkleLightElementTextColor = "sparkleLightElementTextColor"
+        }
+        
+        struct ItemSourceImages {
+            static let instagram = "Instagram"
+            static let linkedIn = "LinkedIn"
+            static let tikTok = "TikTok"
+            static let twitter = "Twitter"
+        }
+        
+        struct Ultra {
+            static let ultraDark = "UltraDark"
+            static let ultraLight = "UltraLight"
+            static let ultraRectangle = "ultraRectangle"
+        }
+        
         static let cameraButtonNotPressed = "cameraButtonNotPressed"
         static let cameraButtonPressed = "cameraButtonPressed"
         static let cameraButtonRedo = "cameraButtonRedo"
         
-        static let chatBottomButtonTopSelected = "chatButtonTopSelected"
-        static let chatBottomButtonTopNotSelected = "chatButtonTopNotSelected"
-        static let chatBottomButtonBottom = "chatButtonBottom"
-        
-        static let essayBottomButtonNotSelected = "writeBottomButtonNotSelected"
-        static let essayBottomButtonSelected = "writeBottomButtonSelected"
+        static let giftGif = "giftGif"
         
         static let introScreenshot1 = "introScreenshot1"
         static let introScreenshot2 = "introScreenshot2"
         static let introScreenshot3 = "introScreenshot3"
         static let introScreenshot4 = "introScreenshot4"
         
-        static let giftGif = "giftGif"
-        
         static let loadingDotsImageName = "loadingDots"
         
-        static let shareBottomButtonNotSelected = "shareBottomButtonNotSelected"
-        static let premiumBottomButtonNotSelected = "premiumBottomButtonNotSelected"
-        
-        static let ultraLight = "UltraLight"
-        static let ultraDark = "UltraDark"
+        static let sparkleLightGif = "sparkleLightGif"
+        static let sparkleDarkGif = "sparkleDarkGif"
     }
 }
 
@@ -197,15 +237,19 @@ struct HTTPSConstants {
     
     static let chitChatServerStaticFiles = "https://chitchatserver.com"
     
-    static let registerUser = "/registerUser"
-    static let getRemaining = "/getRemaining"
+    static let deleteChat = "/deleteChat"
     static let getChat = "/getChat"
+    static let getIAPStuff = "/getIAPStuff"
+    static let getIsPremium = "/getIsPremium"
+    static let getRemaining = "/getRemaining"
+    static let registerTransaction = "/registerTransaction"
+    static let registerUser = "/registerUser"
     static let validateSaveUpdateReceipt = "/validateAndUpdateReceipt"
 //    static let getGenerateImage = "/getImageUrlFromGenerateUrl"
-    static let getIAPStuff = "/getIAPStuff"
+
+    static let getImportantConstants = "/getImportantConstants"
     static let privacyPolicy = "/privacyPolicy.html"
     static let termsAndConditions = "/termsAndConditions.html"
-    static let getImportantConstants = "/getImportantConstants"
 }
 
 struct HTTPSResponseConstants {
@@ -213,6 +257,16 @@ struct HTTPSResponseConstants {
     static let weeklyDisplayPrice = "weeklyDisplayPrice"
     static let monthlyDisplayPrice = "monthlyDisplayPrice"
     static let freeEssayCap = "freeEssayCap"
+}
+
+struct WebSocketConstants {
+    #if DEBUG
+        static let chitChatWebSocketServer = "wss://chitchatserver.com/v1"
+    #else
+        static let chitChatWebSocketServer = "wss://chitchatserver.com/v1"
+    #endif
+    
+    static let getChatStream = "/getChatStream"
 }
 
 struct Colors {
@@ -224,9 +278,10 @@ struct Colors {
     static let aiChatTextColor = UIColor(named: "AIChatTextColor")!
     static let elementBackgroundColor = UIColor(named: "ElementBackgroundColor")!
     static let elementTextColor = UIColor(named: "ElementTextColor")!
-    static let headerTextColor = UIColor(named: "HeaderTextColor")!
+    static let textOnBackgroundColor = UIColor(named: "TextOnBackgroundColor")!
     static let topBarBackgroundColor = UIColor(named: "TopBarBackgroundColor")!
     static let bottomBarBackgroundColor = UIColor(named: "BottomBarBackgroundColor")!
+    static let alertTintColor = userChatBubbleColor.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
 }
 
 struct FinishReasons {

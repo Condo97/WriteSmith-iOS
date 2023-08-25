@@ -7,11 +7,17 @@
 
 import Foundation
 
-class ConversationItemTableViewCellSource: TableViewCellSource, SelectableTableViewCellSource {
+protocol ConversationItemTableViewCellSourceDelegate {
+    //TODO: Should this protocol be moved since it doesn't actually use the ConversationItemTableViewCell class directly, only the source?
+    func didSelect(conversation: Conversation)
+}
+
+class ConversationItemTableViewCellSource: CellSource, SelectableCellSource {
     
-    var reuseIdentifier: String = Registry.Conversation.View.Table.Cell.item.reuseID
+    var collectionViewCellReuseIdentifier: String?
+    var tableViewCellReuseIdentifier: String? = Registry.Conversation.View.Table.Cell.item.reuseID
     
-    var didSelect: (UITableView, IndexPath) -> Void
+    var didSelect: ((UIView, IndexPath)->Void)?
     
     var conversationObject: Conversation
     var mostRecentChatDate: Date?
@@ -21,38 +27,49 @@ class ConversationItemTableViewCellSource: TableViewCellSource, SelectableTableV
     
     var shouldShowPreviousConversationIndicator: Bool
     
-    var delegate: ConversationItemTableViewCellDelegate
+    var delegate: ConversationItemTableViewCellSourceDelegate
     
     
+<<<<<<< HEAD
     convenience init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellDelegate) {
+=======
+    convenience init(conversationObject: inout Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellSourceDelegate) async {
+>>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
         // Set conversation name to last chat's text and formattedDate to last chat's date, plus store date in source for easier ordering TODO: Something better! :)
         var lastChatDate: Date?
         var lastChatText = ""
         var formattedDate = ""
         
-        if conversationObject.chats!.count > 0 {
-            // Get ordered chat array
-            let orderedChatArray = ChatCDHelper.getOrderedChatArray(from: conversationObject)
-            
+        // Get and unwrap orderedChatArray if conversationObject has more than one chat
+        do {
+            if conversationObject.chats!.count > 0, let orderedChatArray = try await ChatCDHelper.getOrderedChatArray(from: &conversationObject) {
+                
 #warning("The last chat index may be changed if an initial chat is added!")
-            // Get lastChat
-            let lastChat = orderedChatArray[orderedChatArray.count - 1]
-            
-            // Set lastChatText
-            lastChatText = lastChat.text!
-            
-            // Set lastChatDate and formattedDate as lastChat's date, with formattedDate dateFormat as Sep 20, 4:10 PM
-            lastChatDate = lastChat.date
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM d, h:mm a"
-            formattedDate = dateFormatter.string(from: lastChat.date!)
+                // Get lastChat
+                let lastChat = orderedChatArray[orderedChatArray.count - 1]
+                
+                // Set lastChatText
+                lastChatText = lastChat.text!
+                
+                // Set lastChatDate and formattedDate as lastChat's date, with formattedDate dateFormat as Sep 20, 4:10 PM
+                lastChatDate = lastChat.date
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, h:mm a"
+                formattedDate = dateFormatter.string(from: lastChat.date!)
+            }
+        } catch {
+            print("Error getting ordered chat array in convenience init in ConversationItemTableViewCellSource... \(error)")
         }
         
         self.init(conversationObject: conversationObject, shouldShowPreviouslyEditedIndicatorImage: shouldShowPreviouslyEditedIndicatorImage, delegate: delegate, mostRecentChatDate: lastChatDate, formattedTitle: lastChatText, formattedDate: formattedDate)
     }
     
+<<<<<<< HEAD
     init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellDelegate, mostRecentChatDate: Date?, formattedTitle: String, formattedDate: String) {
+=======
+    init(conversationObject: Conversation, shouldShowPreviouslyEditedIndicatorImage: Bool, delegate: ConversationItemTableViewCellSourceDelegate, mostRecentChatDate: Date?, formattedTitle: String, formattedDate: String) {
+>>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
         self.conversationObject = conversationObject
         self.shouldShowPreviousConversationIndicator = shouldShowPreviouslyEditedIndicatorImage
         self.delegate = delegate

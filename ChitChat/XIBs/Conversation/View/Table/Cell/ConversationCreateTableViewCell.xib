@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="conversationCreateTableViewCell" id="Q1a-UH-c0X">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="conversationCreateTableViewCell" id="Q1a-UH-c0X">
             <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q1a-UH-c0X" id="R8h-TB-FS7">
@@ -28,7 +28,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+<<<<<<< HEAD
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+=======
+                        <color key="backgroundColor" name="AIChatBubbleColor"/>
+>>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="WBd-o9-HcQ" secondAttribute="bottom" id="N96-xI-Hvq"/>
                             <constraint firstItem="WBd-o9-HcQ" firstAttribute="leading" secondItem="mJU-rU-EhF" secondAttribute="leading" id="Rnp-TU-hiZ"/>

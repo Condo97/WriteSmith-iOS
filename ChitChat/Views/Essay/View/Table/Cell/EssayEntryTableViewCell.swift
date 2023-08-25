@@ -11,7 +11,7 @@ protocol EntryEssayTableViewCellDelegate: AnyObject {
     func didPressSubmitButton(sender: Any)
 }
 
-class EssayEntryTableViewCell: UITableViewCell, LoadableTableViewCell {
+class EssayEntryTableViewCell: UITableViewCell, LoadableCell {
 
     @IBOutlet weak var roundedView: RoundedView!
     @IBOutlet weak var textView: UITextView!
@@ -40,7 +40,7 @@ class EssayEntryTableViewCell: UITableViewCell, LoadableTableViewCell {
         }
     }
     
-    func loadWithSource(_ source: TableViewCellSource) {
+    func loadWithSource(_ source: CellSource) {
         if let entrySource = source as? EntryEssayTableViewCellSource {
             delegate = entrySource.cellDelegate
             textView.delegate = entrySource.textViewDelegate
@@ -71,6 +71,9 @@ class EssayEntryTableViewCell: UITableViewCell, LoadableTableViewCell {
     func textViewStartWriting() {
         // Set inputTextView to blank
         if textView.text == inputPlaceholder || textView.text == tryInputPlaceholder {
+            // Do haptic
+            HapticHelper.doLightHaptic()
+            
             textViewSetToBlank()
         }
     }

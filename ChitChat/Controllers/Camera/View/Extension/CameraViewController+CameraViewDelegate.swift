@@ -12,6 +12,10 @@ import Vision
 extension CameraViewController: CameraViewDelegate {
     
     func cameraButtonPressed() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Take photo or delete and redo, depending on button image
         if rootView.cameraButton.backgroundImage(for: .normal) == UIImage(named: Constants.ImageName.cameraButtonNotPressed) || rootView.cameraButton.backgroundImage(for: .normal) == UIImage(named: Constants.ImageName.cameraButtonPressed) {
             // Camera was enabled, so take the photo
             guard let capturePhotoOutput = self.capturePhotoOutput else { return }
@@ -37,10 +41,18 @@ extension CameraViewController: CameraViewDelegate {
     }
     
     func cancelButtonPressed() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Dismiss view
         dismiss(animated: true)
     }
     
     func imageButtonPressed() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // Show image picker if source type is available
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let imagePickerController = UIImagePickerController()
             imagePickerController.delegate = self
@@ -50,6 +62,9 @@ extension CameraViewController: CameraViewDelegate {
     }
     
     func scanButtonPressed() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
         // Get the output image
         let scale = max((previewImageView.image?.size.width)! / rootView.container.frame.width, (previewImageView.image?.size.height)! / rootView.container.frame.height)
         
@@ -85,6 +100,7 @@ extension CameraViewController: CameraViewDelegate {
             // If there was no text found, present an alertcontroller and allow the user to try cropping again
             if combinedStrings == "" {
                 let ac = UIAlertController(title: "No Text Found", message: "Could not find text in the selection. Please try again.", preferredStyle: .alert)
+                ac.view.tintColor = Colors.alertTintColor
                 ac.addAction(UIAlertAction(title: "Done", style: .cancel))
                 self.present(ac, animated: true)
                 return

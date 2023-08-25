@@ -29,11 +29,15 @@ class ChatView: UIView {
     @IBOutlet weak var adShadowView: ShadowView!
     @IBOutlet weak var cameraButton: UIButton!
     
+    @IBOutlet weak var gptModelView: GPTModelView!
+    
     @IBOutlet weak var inputBackgroundView: RoundedView!
     
     @IBOutlet weak var adViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var promoViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var cameraButtonHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomViewBottomAlignmentConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var submitButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var submitButtonCenterYConstraint: NSLayoutConstraint!
@@ -96,6 +100,9 @@ class ChatView: UIView {
     func inputTextViewStartWriting() {
         // Set inputTextView to blank
         if inputTextView.text == inputPlaceholder {
+            // Do haptic
+            HapticHelper.doLightHaptic()
+            
             inputTextViewSetToBlank()
         }
     }

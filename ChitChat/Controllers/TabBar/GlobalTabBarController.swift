@@ -13,15 +13,17 @@ class GlobalTabBarController: UITabBarController {
     
     var fromStart = false
     
-    lazy var essayTab: UINavigationController = UINavigationController(rootViewController: EssayViewController())
+    lazy var createTab: UINavigationController = UINavigationController(rootViewController: ExplorePresentationSpecification().viewController)
+    //        lazy var essayTab: UINavigationController = UINavigationController(rootViewController: EssayViewController())
     lazy var writeTab: UINavigationController = {
         let conversationViewController = ConversationViewController()
-        conversationViewController.shouldShowUltra = false
+        conversationViewController.shouldShowUltra = true
         conversationViewController.pushToConversation = true
         
         return UINavigationController(rootViewController: conversationViewController)
     }()
-    lazy var favoritesTab: FavoritesViewController = FavoritesViewController()
+    lazy var essaysTab: UINavigationController = UINavigationController(rootViewController: EssayViewController())
+    //    lazy var favoritesTab: FavoritesViewController = FavoritesViewController()
     
     var observerID: Int?
     
@@ -30,9 +32,9 @@ class GlobalTabBarController: UITabBarController {
         
         /* Set viewControllers to tabs */
         viewControllers = [
-            essayTab,
+            createTab,
             writeTab,
-            favoritesTab
+            essaysTab
         ]
         
         // Set selected index to firstViewController
@@ -53,34 +55,39 @@ class GlobalTabBarController: UITabBarController {
         appearance.backgroundColor = Colors.bottomBarBackgroundColor
         appearance.stackedLayoutAppearance.normal.iconColor = Colors.elementTextColor
         appearance.stackedLayoutAppearance.selected.iconColor = Colors.elementTextColor
-
+        
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
         
         /* Setup tab bar items */
         
-        let essayTabBarItem = UITabBarItem(
+        let createTabBarItem = UITabBarItem(
             title: nil,
-            image: UIImage(named: Constants.ImageName.essayBottomButtonNotSelected),
-            selectedImage: UIImage(named: Constants.ImageName.essayBottomButtonSelected)
+            image: UIImage(named: Constants.ImageName.BottomBarImages.createBottomButton)!
+                .withRenderingMode(.alwaysTemplate)
+                .withTintColor(Colors.elementTextColor),
+            selectedImage: UIImage(named: Constants.ImageName.BottomBarImages.createBottomButtonSelected)!
+                .withRenderingMode(.alwaysTemplate)
+                .withTintColor(Colors.elementTextColor)
         )
         
-        essayTab.tabBarItem = essayTabBarItem
+        createTab.tabBarItem = createTabBarItem
         
         let writeTabBarItem = UITabBarItem(
             title: nil,
             image: UIImage.fromStacked(
-                topImage: UIImage(named: Constants.ImageName.chatBottomButtonTopNotSelected)!.withRenderingMode(.alwaysTemplate)
+                topImage: UIImage(named: Constants.ImageName.BottomBarImages.chatBottomButtonTopNotSelected)!
+                    .withRenderingMode(.alwaysTemplate)
                     .withTintColor(Colors.elementTextColor),
-                bottomImage: UIImage(named: Constants.ImageName.chatBottomButtonBottom)!
+                bottomImage: UIImage(named: Constants.ImageName.BottomBarImages.chatBottomButtonBottom)!
                     .withRenderingMode(.alwaysTemplate)
                     .withTintColor(Colors.bottomBarBackgroundColor)
             ),
             selectedImage: UIImage.fromStacked(
-                topImage: UIImage(named: Constants.ImageName.chatBottomButtonTopSelected)!
+                topImage: UIImage(named: Constants.ImageName.BottomBarImages.chatBottomButtonTopSelected)!
                     .withRenderingMode(.alwaysTemplate)
                     .withTintColor(Colors.bottomBarBackgroundColor),
-                bottomImage: UIImage(named: Constants.ImageName.chatBottomButtonBottom)!
+                bottomImage: UIImage(named: Constants.ImageName.BottomBarImages.chatBottomButtonBottom)!
                     .withRenderingMode(.alwaysTemplate)
                     .withTintColor(Colors.elementTextColor)
             )
@@ -88,8 +95,13 @@ class GlobalTabBarController: UITabBarController {
         
         writeTab.tabBarItem = writeTabBarItem
         
-        // In a method so that it can be updated with the premium structure updater
-        updateFavoritesTabBarItem()
+        let essaysTabBarItem = UITabBarItem(
+            title: nil,
+            image: UIImage(named: Constants.ImageName.BottomBarImages.essayBottomButtonNotSelected),
+            selectedImage: UIImage(named: Constants.ImageName.BottomBarImages.essayBottomButtonSelected)
+        )
+        
+        essaysTab.tabBarItem = essaysTabBarItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,16 +116,42 @@ class GlobalTabBarController: UITabBarController {
         tabBar.frame.origin.y = view.frame.height - 180
     }
     
-    func updateFavoritesTabBarItem() {
-        let isPremium = PremiumHelper.get()
-        let favoritesTabBarItem = UITabBarItem(
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        // Switch write tab bar item from dark to light and so
+        let writeTabBarItem = UITabBarItem(
             title: nil,
-            image: UIImage(named: (isPremium ? Constants.ImageName.shareBottomButtonNotSelected : Constants.ImageName.premiumBottomButtonNotSelected)),
-            selectedImage: nil
+            image: UIImage.fromStacked(
+                topImage: UIImage(named: Constants.ImageName.BottomBarImages.chatBottomButtonTopNotSelected)!.withRenderingMode(.alwaysTemplate)
+                    .withTintColor(Colors.elementTextColor),
+                bottomImage: UIImage(named: Constants.ImageName.BottomBarImages.chatBottomButtonBottom)!
+                    .withRenderingMode(.alwaysTemplate)
+                    .withTintColor(Colors.bottomBarBackgroundColor)
+            ),
+            selectedImage: UIImage.fromStacked(
+                topImage: UIImage(named: Constants.ImageName.BottomBarImages.chatBottomButtonTopSelected)!
+                    .withRenderingMode(.alwaysTemplate)
+                    .withTintColor(Colors.bottomBarBackgroundColor),
+                bottomImage: UIImage(named: Constants.ImageName.BottomBarImages.chatBottomButtonBottom)!
+                    .withRenderingMode(.alwaysTemplate)
+                    .withTintColor(Colors.elementTextColor)
+            )
         )
         
-        favoritesTab.tabBarItem = favoritesTabBarItem
+        writeTab.tabBarItem = writeTabBarItem
     }
+    
+//    func updateFavoritesTabBarItem() {
+//        let isPremium = PremiumHelper.get()
+//        let favoritesTabBarItem = UITabBarItem(
+//            title: nil,
+//            image: UIImage(named: (isPremium ? Constants.ImageName.BottomBarImages.shareBottomButtonNotSelected : Constants.ImageName.BottomBarImages.premiumBottomButtonNotSelected)),
+//            selectedImage: nil
+//        )
+//
+//        essaysTab.tabBarItem = favoritesTabBarItem
+//    }
     
 }
 

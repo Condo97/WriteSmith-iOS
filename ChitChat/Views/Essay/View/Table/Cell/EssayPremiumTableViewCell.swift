@@ -11,7 +11,7 @@ protocol EssayPremiumTableViewCellDelegate: AnyObject {
     func didPressPremiumButton(sender: Any, cell: EssayPremiumTableViewCell)
 }
 
-class EssayPremiumTableViewCell: UITableViewCell, LoadableTableViewCell {
+class EssayPremiumTableViewCell: UITableViewCell, LoadableCell {
     
     var delegate: EssayPremiumTableViewCellDelegate!
 
@@ -30,7 +30,7 @@ class EssayPremiumTableViewCell: UITableViewCell, LoadableTableViewCell {
         delegate.didPressPremiumButton(sender: sender, cell: self)
     }
     
-    func loadWithSource(_ source: TableViewCellSource) {
+    func loadWithSource(_ source: CellSource) {
         if let premiumSource = source as? PremiumEssayTableViewCellSource {
             delegate = premiumSource.delegate
         }

@@ -8,6 +8,7 @@
 import Foundation
 
 extension GlobalTabBarController: UITabBarControllerDelegate {
+    
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
         // If the favorites button is selected, show ultra screen or share depending on tier... Favorites is not even implemented by the way, it's just there as a placeholder for now
@@ -16,17 +17,39 @@ extension GlobalTabBarController: UITabBarControllerDelegate {
             // TODO: - Make the "premium" or "share" button favorites, and make it show but say they need to subscribe if not subscriped to premium
             if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
                 //TODO: This sorta thing is repeated a lot
+                
                 UltraViewControllerPresenter.presentOnTop(animated: true)
             } else {
-                let activityVC = UIActivityViewController(activityItems: [UserDefaults.standard.string(forKey: Constants.userDefaultStoredShareURL) ?? ""], applicationActivities: [])
-                
-                present(activityVC, animated: true)
+                // Show share app popup
+                ShareViewHelper.shareApp(viewController: self)
             }
             
             return false
         }
         
+        // If the Write button is selected again and top view in the navigation controller is conversation view, then transition to the most recent conversation and return false so the tabBar doesn't push
+        if let vcAsNavController = viewController as? UINavigationController {
+            if let topVC = vcAsNavController.topViewController {
+                if self.topmostViewController() is ConversationViewController {
+                    if let conversationVC = topVC as? ConversationViewController {
+                        Task {
+                            if let conversationToResume = await ConversationResumingManager.getConversation() {
+                                conversationVC.pushWith(conversation: conversationToResume, animated: true)
+                            }
+                        }
+                        
+                        return false
+                    }
+                }
+            }
+        }
+        
         return true
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        // Do haptic
+        HapticHelper.doLightHaptic()
     }
     
 }

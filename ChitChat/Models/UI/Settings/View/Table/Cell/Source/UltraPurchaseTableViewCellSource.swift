@@ -7,18 +7,22 @@
 
 import UIKit
 
-class UltraPurchaseTableViewCellSource: SelectableTableViewCellSource {
+class UltraPurchaseTableViewCellSource: SelectableCellSource, TieredVisibilityCellSource {
     
-    var reuseIdentifier: String = Registry.Settings.View.TableView.Cell.ultraPurchase.reuseID
+    var collectionViewCellReuseIdentifier: String?
+    var tableViewCellReuseIdentifier: String? = Registry.Settings.View.Table.Cell.ultraPurchase.reuseID
     
     lazy var giftImage: UIImage = UIImage.gifImageWithName(Constants.Settings.View.Table.Cell.UltraPurchase.giftImageName)!
     
     var titleText: String
     var topLabelText: String
     
-    var didSelect: (UITableView, IndexPath)->Void
+    var shouldShowOnPremium: Bool = false
+    var shouldShowOnFree: Bool = true
     
-    convenience init(didSelect: @escaping (UITableView, IndexPath)->Void) {
+    var didSelect: ((UIView, IndexPath)->Void)?
+    
+    convenience init(didSelect: ((UIView, IndexPath)->Void)?) {
         self.init(
             didSelect: didSelect,
             titleText: Constants.Settings.View.Table.Cell.UltraPurchase.defaultTitleText,
@@ -26,7 +30,7 @@ class UltraPurchaseTableViewCellSource: SelectableTableViewCellSource {
         )
     }
     
-    init(didSelect: @escaping (UITableView, IndexPath)->Void, titleText: String, topLabelText: String) {
+    init(didSelect: ((UIView, IndexPath)->Void)?, titleText: String, topLabelText: String) {
         self.didSelect = didSelect
         self.titleText = titleText
         self.topLabelText = topLabelText

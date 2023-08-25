@@ -14,7 +14,19 @@ class HalfRoundedView: UIView {
     @IBInspectable open var borderColor: UIColor = Colors.accentColor
     @IBInspectable open var cornerRadius: CGFloat = UIConstants.cornerRadius
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        configureView()
+    }
+    
     override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        configureView()
+    }
+    
+    func configureView() {
         let path: UIBezierPath
         
         if roundTop {

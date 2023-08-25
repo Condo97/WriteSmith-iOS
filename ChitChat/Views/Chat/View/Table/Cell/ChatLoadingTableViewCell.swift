@@ -12,7 +12,11 @@ class ChatLoadingTableViewCell: LoadingTableViewCell {
     @IBOutlet weak var bubbleImageView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
     
+<<<<<<< HEAD
     override func loadWithSource(_ source: TableViewCellSource) {
+=======
+    override func loadWithSource(_ source: CellSource) {
+>>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
         super.loadWithSource(source)
         
         if let loadingSource = source as? LoadingTableViewCellSource {
@@ -20,6 +24,13 @@ class ChatLoadingTableViewCell: LoadingTableViewCell {
             bubbleImageView.image = BubbleImageMaker.makeBubbleImage(userSent: false)
             bubbleImageView.tintColor = Colors.aiChatBubbleColor
             
+<<<<<<< HEAD
+=======
+            if let loadingChatSource = loadingSource as? LoadingChatTableViewCellSource {
+                loadingChatSource.view = self
+            }
+            
+>>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
             // TODO: Set profileImageView dynamically
         }
     }

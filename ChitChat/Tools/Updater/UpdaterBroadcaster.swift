@@ -39,14 +39,8 @@ class UpdaterBroadcaster<T: Updater> {
         updaters.removeAll(where: { $0.id == id })
     }
     
-    func fullUpdate() {
-        fullUpdate(completion: nil)
-    }
-    
-    func fullUpdate(completion: (()->Void)?) {
-        updater.fullUpdate(completion: {
-            completion?()
-        })
+    func fullUpdate() async throws {
+        try await updater.forceUpdate()
     }
     
 }

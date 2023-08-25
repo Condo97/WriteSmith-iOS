@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -94,7 +94,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwU-eC-7uR" customClass="ShadowView" customModule="ChitChat" customModuleProvider="target">
-                                    <rect key="frame" x="14" y="78" width="365" height="70"/>
+                                    <rect key="frame" x="14" y="78" width="386" height="70"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agN-mv-I4l" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
@@ -208,6 +208,7 @@
                             </constraints>
                             <variation key="default">
                                 <mask key="subviews">
+                                    <exclude reference="IaO-J3-oxb"/>
                                     <exclude reference="fwU-eC-7uR"/>
                                 </mask>
                             </variation>
@@ -406,44 +407,86 @@ Cancel Anytime</string>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iOd-2r-CLl">
-                    <rect key="frame" x="14" y="52" width="28" height="28.5"/>
+                    <rect key="frame" x="24" y="50.5" width="42" height="41"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="33" id="Phr-Kg-FpF"/>
-                        <constraint firstAttribute="width" constant="28" id="cao-fi-zvl"/>
+                        <constraint firstAttribute="height" constant="42" id="Phr-Kg-FpF"/>
+                        <constraint firstAttribute="width" constant="42" id="cao-fi-zvl"/>
                     </constraints>
                     <color key="tintColor" name="UserChatBubbleColor"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" backgroundImage="xmark" catalog="system"/>
+                    <state key="normal" backgroundImage="xmark.circle.fill" catalog="system"/>
                     <connections>
                         <action selector="closeButton:" destination="U1M-LL-vUb" eventType="touchUpInside" id="pzs-dh-HEI"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMc-in-xSW">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2P-Cn-Ev4" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                            <rect key="frame" x="87" y="384" width="240" height="128"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMQ-wz-Dy7">
+                                    <rect key="frame" x="14" y="14" width="212" height="49"/>
+                                    <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="28"/>
+                                    <color key="textColor" name="ElementTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="7HS-0O-ufY">
+                                    <rect key="frame" x="101.5" y="67" width="37" height="37"/>
+                                    <color key="color" name="ElementTextColor"/>
+                                </activityIndicatorView>
+                            </subviews>
+                            <color key="backgroundColor" name="ElementBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="7HS-0O-ufY" firstAttribute="top" secondItem="KMQ-wz-Dy7" secondAttribute="bottom" constant="4" id="03a-Hg-RS9"/>
+                                <constraint firstItem="KMQ-wz-Dy7" firstAttribute="top" secondItem="e2P-Cn-Ev4" secondAttribute="top" constant="14" id="7iZ-2L-Pnr"/>
+                                <constraint firstAttribute="trailing" secondItem="KMQ-wz-Dy7" secondAttribute="trailing" constant="14" id="BYb-9D-8rc"/>
+                                <constraint firstItem="KMQ-wz-Dy7" firstAttribute="leading" secondItem="e2P-Cn-Ev4" secondAttribute="leading" constant="14" id="Bfn-VI-7AJ"/>
+                                <constraint firstAttribute="height" constant="128" id="Lsb-5z-ZwF"/>
+                                <constraint firstItem="7HS-0O-ufY" firstAttribute="centerX" secondItem="e2P-Cn-Ev4" secondAttribute="centerX" id="UJj-nb-UDX"/>
+                                <constraint firstAttribute="width" constant="240" id="c10-Bq-gA1"/>
+                                <constraint firstAttribute="bottom" secondItem="7HS-0O-ufY" secondAttribute="bottom" constant="24" id="xjO-44-bTh"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="e2P-Cn-Ev4" firstAttribute="centerY" secondItem="hMc-in-xSW" secondAttribute="centerY" id="DxZ-47-ez9"/>
+                        <constraint firstItem="e2P-Cn-Ev4" firstAttribute="centerX" secondItem="hMc-in-xSW" secondAttribute="centerX" id="okj-JT-oNN"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="orA-My-MCs"/>
             <color key="backgroundColor" name="AIChatBubbleColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="UqB-Al-lhU" secondAttribute="bottom" id="1bK-5e-gu9"/>
                 <constraint firstItem="xOh-E4-P48" firstAttribute="trailing" secondItem="orA-My-MCs" secondAttribute="trailing" id="3Mk-vD-nzc"/>
+                <constraint firstAttribute="bottom" secondItem="hMc-in-xSW" secondAttribute="bottom" id="4hH-oK-tPy"/>
                 <constraint firstItem="UqB-Al-lhU" firstAttribute="top" secondItem="xOh-E4-P48" secondAttribute="bottom" id="CNt-iD-xlj"/>
                 <constraint firstItem="orA-My-MCs" firstAttribute="trailing" secondItem="vvx-g9-LTk" secondAttribute="trailing" id="Flc-eW-UZ2"/>
                 <constraint firstItem="orA-My-MCs" firstAttribute="bottom" secondItem="iWR-QI-biu" secondAttribute="bottom" id="KZe-O2-ULW"/>
+                <constraint firstItem="orA-My-MCs" firstAttribute="trailing" secondItem="hMc-in-xSW" secondAttribute="trailing" id="LDE-9M-fjW"/>
                 <constraint firstItem="UqB-Al-lhU" firstAttribute="top" secondItem="vvx-g9-LTk" secondAttribute="bottom" id="OQ5-UC-V6a"/>
                 <constraint firstItem="xOh-E4-P48" firstAttribute="top" secondItem="U1M-LL-vUb" secondAttribute="top" priority="999" id="SqF-rv-RK0"/>
                 <constraint firstItem="vvx-g9-LTk" firstAttribute="leading" secondItem="orA-My-MCs" secondAttribute="leading" id="Tj0-bS-BF1"/>
                 <constraint firstItem="Fa3-pL-yNa" firstAttribute="top" secondItem="U1M-LL-vUb" secondAttribute="top" id="Wjs-7H-lVX"/>
+                <constraint firstItem="hMc-in-xSW" firstAttribute="leading" secondItem="orA-My-MCs" secondAttribute="leading" id="ZnZ-xx-nAu"/>
                 <constraint firstItem="iOd-2r-CLl" firstAttribute="top" secondItem="orA-My-MCs" secondAttribute="top" constant="2" id="a4e-Ev-7Ec"/>
-                <constraint firstItem="iOd-2r-CLl" firstAttribute="leading" secondItem="orA-My-MCs" secondAttribute="leading" constant="14" id="dnY-rB-MTM"/>
+                <constraint firstItem="iOd-2r-CLl" firstAttribute="leading" secondItem="orA-My-MCs" secondAttribute="leading" constant="24" id="dnY-rB-MTM"/>
                 <constraint firstItem="Fa3-pL-yNa" firstAttribute="leading" secondItem="orA-My-MCs" secondAttribute="leading" id="jjS-Pf-pcq"/>
                 <constraint firstItem="xOh-E4-P48" firstAttribute="leading" secondItem="orA-My-MCs" secondAttribute="leading" id="mBz-RM-4KX"/>
                 <constraint firstItem="Fa3-pL-yNa" firstAttribute="centerY" secondItem="U1M-LL-vUb" secondAttribute="centerY" id="nvw-wM-irx"/>
                 <constraint firstItem="UqB-Al-lhU" firstAttribute="leading" secondItem="orA-My-MCs" secondAttribute="leading" id="rZ7-2i-e1E"/>
                 <constraint firstItem="Fa3-pL-yNa" firstAttribute="centerX" secondItem="U1M-LL-vUb" secondAttribute="centerX" id="tGF-tw-HAV"/>
                 <constraint firstItem="xOh-E4-P48" firstAttribute="width" secondItem="U1M-LL-vUb" secondAttribute="width" id="uoI-mZ-KUA"/>
+                <constraint firstItem="hMc-in-xSW" firstAttribute="top" secondItem="U1M-LL-vUb" secondAttribute="top" id="vUe-fP-SiP"/>
                 <constraint firstItem="UqB-Al-lhU" firstAttribute="trailing" secondItem="orA-My-MCs" secondAttribute="trailing" id="xE0-Ue-NA8"/>
             </constraints>
             <connections>
                 <outlet property="backgroundView" destination="Fa3-pL-yNa" id="XMe-bL-Yhe"/>
                 <outlet property="closeButton" destination="iOd-2r-CLl" id="xH1-nQ-HhX"/>
+                <outlet property="closeLoadingOverlay" destination="hMc-in-xSW" id="sB6-Jm-YHC"/>
+                <outlet property="closeLoadingOverlayIndicator" destination="7HS-0O-ufY" id="0oa-gj-Gzq"/>
                 <outlet property="everythingElseView" destination="UqB-Al-lhU" id="U8r-j4-h4j"/>
                 <outlet property="imageView" destination="xOh-E4-P48" id="fXf-0r-2hc"/>
                 <outlet property="monthlyActivityView" destination="OlC-Za-VTR" id="r5G-1n-dE1"/>
@@ -465,7 +508,7 @@ Cancel Anytime</string>
     <resources>
         <image name="Ultra Image.png" width="1024" height="1088"/>
         <image name="checkmark.square.fill" catalog="system" width="128" height="114"/>
-        <image name="xmark" catalog="system" width="128" height="113"/>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="AIChatBubbleColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -474,6 +517,9 @@ Cancel Anytime</string>
         </namedColor>
         <namedColor name="ElementBackgroundColor">
             <color red="0.0" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ElementTextColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="UserChatBubbleColor">
             <color red="0.0" green="0.6588235294117647" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

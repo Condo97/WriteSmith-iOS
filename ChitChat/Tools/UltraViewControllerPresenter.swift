@@ -10,12 +10,17 @@ import Foundation
 class UltraViewControllerPresenter: Any {
     
     static func presentOnTop(animated: Bool) {
-        present(animated: animated, in: UIApplication.shared.topmostViewController())
+        presentOnTop(animated: animated, shouldRestoreFromSettings: false)
     }
     
-    private static func present(animated: Bool, in viewController: UIViewController?) {
+    static func presentOnTop(animated: Bool, shouldRestoreFromSettings: Bool) {
+        present(animated: animated, in: UIApplication.shared.topmostViewController(), shouldRestoreFromSettings: shouldRestoreFromSettings)
+    }
+    
+    private static func present(animated: Bool, in viewController: UIViewController?, shouldRestoreFromSettings: Bool) {
         let uvc = UltraViewController()
         uvc.modalPresentationStyle = .overFullScreen
+        uvc.shouldRestoreFromSettings = shouldRestoreFromSettings
         viewController?.present(uvc, animated: true)
     }
     

@@ -13,9 +13,9 @@ class TableViewCellSourceFactory: Any {
      Conversation Table View Cell Source
      */
     
-    static func makeSortedDateGroupSectionedConversationItemTableViewCellSourceArray(from conversationArray: [Conversation], indicating previousConversationToIndicate: Conversation?, delegate: ConversationItemTableViewCellDelegate) -> [[ConversationItemTableViewCellSource]] {
+    static func makeSortedDateGroupSectionedConversationItemTableViewCellSourceArray(from conversationArray: [Conversation], indicating previousConversationToIndicate: Conversation?, delegate: ConversationItemTableViewCellSourceDelegate) async -> [[ConversationItemTableViewCellSource]] {
         // Get sourceArray
-        var sourceArray = makeConversationItemTableViewCellSourceArray(from: conversationArray, indicating: previousConversationToIndicate, delegate: delegate)
+        var sourceArray = await makeConversationItemTableViewCellSourceArray(from: conversationArray, indicating: previousConversationToIndicate, delegate: delegate)
         
         // Remove all where mostRecentChatDate is nil
         sourceArray.removeAll(where: { $0.mostRecentChatDate == nil })
@@ -27,7 +27,7 @@ class TableViewCellSourceFactory: Any {
     }
     
     private static func deriveDateGroupSectionedConversationItemTableViewCellSourceArray(from conversationSourceArray: [ConversationItemTableViewCellSource]) -> [[ConversationItemTableViewCellSource]] {
-        var sectionedSourceArray: [[ConversationItemTableViewCellSource]] = [[]]
+        var sectionedSourceArray: [[ConversationItemTableViewCellSource]] = []
         
         // Add expected section count
         DateGroupRange.allCases.forEach({ body in
@@ -50,13 +50,14 @@ class TableViewCellSourceFactory: Any {
         return sectionedSourceArray
     }
     
-    private static func makeConversationItemTableViewCellSourceArray(from conversationArray: [Conversation], indicating previousConversationToIndicate: Conversation?, delegate: ConversationItemTableViewCellDelegate) -> [ConversationItemTableViewCellSource] {
+    private static func makeConversationItemTableViewCellSourceArray(from conversationArray: [Conversation], indicating previousConversationToIndicate: Conversation?, delegate: ConversationItemTableViewCellSourceDelegate) async -> [ConversationItemTableViewCellSource] {
         var sourceArray: [ConversationItemTableViewCellSource] = []
         
         for obj in conversationArray {
             // Append ConversationItemTableViewCellSource with obj as conversationObject, shouldShowPreviouslyEditedIndicatorImage as true if previousConversationToIndicate is not nil and obj is equal to previousConversationToIndicate, and delegate as the delegate
-            sourceArray.append(ConversationItemTableViewCellSource(
-                conversationObject: obj,
+            var obj = obj // TODO: Is this bad practice? Should I just not be using the inouts ree
+            sourceArray.append(await ConversationItemTableViewCellSource(
+                conversationObject: &obj,
                 shouldShowPreviouslyEditedIndicatorImage: previousConversationToIndicate != nil && obj == previousConversationToIndicate,
                 delegate: delegate)
             )
@@ -70,18 +71,21 @@ class TableViewCellSourceFactory: Any {
      Chat Table View Cell Source
      */
     
-    static func makeChatTableViewCellSource(from chat: Chat) -> ChatTableViewCellSource {
-        ChatTableViewCellSource(chat: chat)
+    static func makeChatTableViewCellSource(from chat: Chat, isTyping: Bool, delegate: ChatTableViewCellSourceDelegate) -> ChatTableViewCellSource {
+        ChatTableViewCellSource(chat: chat, isTyping: isTyping, delegate: delegate)
     }
     
-    static func makeChatTableViewCellSourceArray(from conversation: Conversation) -> [ChatTableViewCellSource] {
+    static func makeChatTableViewCellSourceArray(from conversation: inout Conversation, delegate: ChatTableViewCellSourceDelegate) async throws -> [ChatTableViewCellSource]? {
         var sourceArray: [ChatTableViewCellSource] = []
         
-        // Get sorted chats in conversation
-        let sortedChatArray = ChatCDHelper.getOrderedChatArray(from: conversation)
+        // Unwrap sortedChatArray
+        guard let sortedChatArray = try await ChatCDHelper.getOrderedChatArray(from: &conversation) else {
+            return nil
+        }
         
+        // Get sorted chats in conversation and return sourceArray
         for obj in sortedChatArray {
-            sourceArray.append(ChatTableViewCellSource(chat: obj, typewriter: nil))
+            sourceArray.append(ChatTableViewCellSource(chat: obj, isTyping: false, delegate: delegate))
         }
         
         return sourceArray
@@ -92,16 +96,16 @@ class TableViewCellSourceFactory: Any {
      Essay Table View Cell Source
      */
     
-    static func makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObject essayObject: Essay, delegate: Any, inputAccessoryView: UIView?) -> [TableViewCellSource]? {
+    static func makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObject essayObject: Essay, delegate: Any, inputAccessoryView: UIView?) -> [CellSource]? {
         return makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObjectArray: [essayObject], delegate: delegate, inputAccessoryView: inputAccessoryView)
     }
     
-    static func makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObjectArray essayObjectArray: [Essay], delegate: Any, inputAccessoryView: UIView?) -> [TableViewCellSource]? {
+    static func makeArrangedPromptBodyEssayTableViewCellSourceArray(fromEssayObjectArray essayObjectArray: [Essay], delegate: Any, inputAccessoryView: UIView?) -> [CellSource]? {
         guard let promptDelegate = delegate as? EssayPromptTableViewCellDelegate, let bodyDelegate = delegate as? EssayBodyTableViewCellDelegate else {
             return nil
         }
         
-        var sourceArray: [TableViewCellSource] = []
+        var sourceArray: [CellSource] = []
         
         for obj in essayObjectArray {
             // Append prompt first
