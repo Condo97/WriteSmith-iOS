@@ -142,6 +142,9 @@ class CDClient: Any {
             // Create fetch request
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
             
+            // Ensure objects are not returned as faults TODO: Is this good practice? Returning faults helps code efficienty.. what about when the database gets large?
+            fetchRequest.returnsObjectsAsFaults = false
+            
             // Set sortDescriptor if there is one
             if sortDescriptors != nil {
                 fetchRequest.sortDescriptors = sortDescriptors

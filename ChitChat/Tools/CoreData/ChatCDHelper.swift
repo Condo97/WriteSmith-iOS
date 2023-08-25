@@ -50,14 +50,19 @@ class ChatCDHelper {
     }
     
     static func getOrderedChatArray(from conversation: inout Conversation) async throws -> [Chat]? {
-        // Sync conversation
-        try await ConversationCDHelper.sync(&conversation)
+//        // Sync conversation
+//        try await ConversationCDHelper.sync(&conversation)
+//        guard let chats = try await CDClient.getAll(in: chatEntityName, where: [#keyPath(Chat.conversation): conversation], sortDescriptors: [NSSortDescriptor(key: #keyPath(Chat.date), ascending: true)]) as? [Chat] else {
+//            return nil
+//        }
+//
+//        return chats;
         
         // Create date sorted array from conversation chats
         guard let chats = conversation.chats?.sortedArray(using: [NSSortDescriptor(key: #keyPath(Chat.date), ascending: true)]) as? [Chat] else {
             return nil
         }
-        
+
         return chats
     }
     
