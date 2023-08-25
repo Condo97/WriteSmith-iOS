@@ -301,10 +301,6 @@
 		BBD50CDB29EF9DF400C61B86 /* ManagedTableViewInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBD50CDA29EF9DF400C61B86 /* ManagedTableViewInView.xib */; };
 		BBD50CDD29EF9F3D00C61B86 /* ManagedTableViewInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CDC29EF9F3D00C61B86 /* ManagedTableViewInView.swift */; };
 		BBD50CE529EFA10200C61B86 /* ConversationItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBD50CE429EFA10200C61B86 /* ConversationItemTableViewCell.xib */; };
-<<<<<<< HEAD
-		BBD50CEE29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CEC29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift */; };
-=======
->>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
 		BBD50CF329EFA59800C61B86 /* ConversationItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CF229EFA59800C61B86 /* ConversationItemTableViewCell.swift */; };
 		BBD50CFA29EFA6D100C61B86 /* ConversationItemTableViewCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CF929EFA6D100C61B86 /* ConversationItemTableViewCellSource.swift */; };
 		BBD50CFE29EFA92B00C61B86 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD50CFD29EFA92B00C61B86 /* ConversationViewController.swift */; };
@@ -353,9 +349,6 @@
 		BBEA8A24296E88C100DF37F8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = BBEA8A23296E88C100DF37F8 /* GoogleMobileAds */; };
 		BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedStringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedStringBuilder.swift */; };
 		BBEE697A2988A3FB00BA7E6D /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE69792988A3FB00BA7E6D /* CameraViewController.swift */; };
-<<<<<<< HEAD
-		BBF6314029F8A05200E9F0C2 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6313F29F8A05200E9F0C2 /* ChatTableViewCell.swift */; };
-=======
 		BBF6312229F7749500E9F0C2 /* IndentedHeaderSourcedTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6312129F7749500E9F0C2 /* IndentedHeaderSourcedTableViewManager.swift */; };
 		BBF6312A29F834D400E9F0C2 /* CreationExploreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBF6312929F834D400E9F0C2 /* CreationExploreTableViewCell.xib */; };
 		BBF6312D29F8361F00E9F0C2 /* CreationExploreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6312C29F8361F00E9F0C2 /* CreationExploreTableViewCell.swift */; };
@@ -366,7 +359,6 @@
 		BBF6313C29F8778500E9F0C2 /* PasteboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6313B29F8778500E9F0C2 /* PasteboardHelper.swift */; };
 		BBF6313E29F8790400E9F0C2 /* ShareViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6313D29F8790300E9F0C2 /* ShareViewHelper.swift */; };
 		BBF9A85E2A017182005D5BF8 /* TieredVisibilityCellSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF9A85D2A017182005D5BF8 /* TieredVisibilityCellSource.swift */; };
->>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -675,10 +667,6 @@
 		BBD50CDA29EF9DF400C61B86 /* ManagedTableViewInView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManagedTableViewInView.xib; sourceTree = "<group>"; };
 		BBD50CDC29EF9F3D00C61B86 /* ManagedTableViewInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTableViewInView.swift; sourceTree = "<group>"; };
 		BBD50CE429EFA10200C61B86 /* ConversationItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationItemTableViewCell.xib; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		BBD50CEC29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLoadingTableViewCell.swift; sourceTree = "<group>"; };
-=======
->>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
 		BBD50CF229EFA59800C61B86 /* ConversationItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationItemTableViewCell.swift; sourceTree = "<group>"; };
 		BBD50CF929EFA6D100C61B86 /* ConversationItemTableViewCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationItemTableViewCellSource.swift; sourceTree = "<group>"; };
 		BBD50CFD29EFA92B00C61B86 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -723,9 +711,6 @@
 		BBE011C329F3505800CD7A64 /* introScreenshot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = introScreenshot2.png; sourceTree = "<group>"; };
 		BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedStringBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedStringBuilder.swift; sourceTree = "<group>"; };
 		BBEE69792988A3FB00BA7E6D /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		BBF6313F29F8A05200E9F0C2 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
-=======
 		BBF6312129F7749500E9F0C2 /* IndentedHeaderSourcedTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentedHeaderSourcedTableViewManager.swift; sourceTree = "<group>"; };
 		BBF6312929F834D400E9F0C2 /* CreationExploreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreationExploreTableViewCell.xib; sourceTree = "<group>"; };
 		BBF6312C29F8361F00E9F0C2 /* CreationExploreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationExploreTableViewCell.swift; sourceTree = "<group>"; };
@@ -736,7 +721,6 @@
 		BBF6313B29F8778500E9F0C2 /* PasteboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardHelper.swift; sourceTree = "<group>"; };
 		BBF6313D29F8790300E9F0C2 /* ShareViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewHelper.swift; sourceTree = "<group>"; };
 		BBF9A85D2A017182005D5BF8 /* TieredVisibilityCellSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieredVisibilityCellSource.swift; sourceTree = "<group>"; };
->>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2304,18 +2288,6 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
-		BBD50CEB29EFA4B000C61B86 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				BBD50CEC29EFA4B000C61B86 /* ChatLoadingTableViewCell.swift */,
-				BBF6313F29F8A05200E9F0C2 /* ChatTableViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-=======
->>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
 		BBD50CF429EFA69300C61B86 /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
@@ -3276,11 +3248,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 40;
-=======
 				CURRENT_PROJECT_VERSION = 46;
->>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				EXCLUDED_ARCHS = Any;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -3303,11 +3271,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChitChat/Controllers/Tenjin",
 				);
-<<<<<<< HEAD
-				MARKETING_VERSION = 3.4.1;
-=======
 				MARKETING_VERSION = 4.0.4;
->>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3327,11 +3291,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 40;
-=======
 				CURRENT_PROJECT_VERSION = 46;
->>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				EXCLUDED_ARCHS = Any;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -3354,11 +3314,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChitChat/Controllers/Tenjin",
 				);
-<<<<<<< HEAD
-				MARKETING_VERSION = 3.4.1;
-=======
 				MARKETING_VERSION = 4.0.4;
->>>>>>> 45042808df3fc72a7d9204aef334f518932580b8
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
