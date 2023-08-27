@@ -19,6 +19,7 @@
 		BB04B3FA296E38E1000BEC02 /* Ultra Image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3F8296E38E0000BEC02 /* Ultra Image1.jpg */; };
 		BB04B3FB296E38E1000BEC02 /* Ultra Image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB04B3F8296E38E0000BEC02 /* Ultra Image1.jpg */; };
 		BB05249A29F6FFD7008C19DE /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05249929F6FFD7008C19DE /* ExploreViewController.swift */; };
+		BB05E62B2A9B638D0042A451 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = BB05E62A2A9B638D0042A451 /* GoogleMobileAds */; };
 		BB0A7E70298715A300CB252F /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A7E6F298715A300CB252F /* FavoritesViewController.swift */; };
 		BB0A7E72298715B900CB252F /* FavoritesNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A7E71298715B900CB252F /* FavoritesNavigationViewController.swift */; };
 		BB0A8C09296CDB760035F046 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A8C08296CDB760035F046 /* RoundedView.swift */; };
@@ -346,7 +347,6 @@
 		BBE011C129F344E300CD7A64 /* introScreenshot3.png in Resources */ = {isa = PBXBuildFile; fileRef = BBE011BD29F344E200CD7A64 /* introScreenshot3.png */; };
 		BBE011C229F344E300CD7A64 /* introScreenshot4.png in Resources */ = {isa = PBXBuildFile; fileRef = BBE011BE29F344E200CD7A64 /* introScreenshot4.png */; };
 		BBE011C429F3505800CD7A64 /* introScreenshot2.png in Resources */ = {isa = PBXBuildFile; fileRef = BBE011C329F3505800CD7A64 /* introScreenshot2.png */; };
-		BBEA8A24296E88C100DF37F8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = BBEA8A23296E88C100DF37F8 /* GoogleMobileAds */; };
 		BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedStringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA8A27296FBB9400DF37F8 /* NSMutableAttributedStringBuilder.swift */; };
 		BBEE697A2988A3FB00BA7E6D /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE69792988A3FB00BA7E6D /* CameraViewController.swift */; };
 		BBF6312229F7749500E9F0C2 /* IndentedHeaderSourcedTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6312129F7749500E9F0C2 /* IndentedHeaderSourcedTableViewManager.swift */; };
@@ -729,10 +729,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB3644F52A295C1900C2B8B4 /* StoreKit.framework in Frameworks */,
-				BBEA8A24296E88C100DF37F8 /* GoogleMobileAds in Frameworks */,
 				BBA8C2272971FA08009BDECC /* AdSupport.framework in Frameworks */,
 				BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */,
 				BB3644F12A295C1000C2B8B4 /* AppTrackingTransparency.framework in Frameworks */,
+				BB05E62B2A9B638D0042A451 /* GoogleMobileAds in Frameworks */,
 				BB3644EF2A295C0400C2B8B4 /* AdServices.framework in Frameworks */,
 				BB39B7142A361F2100B25FA4 /* TenjinSDK.xcframework in Frameworks */,
 				BB3644F32A295C1400C2B8B4 /* iAd.framework in Frameworks */,
@@ -2614,7 +2614,7 @@
 			name = ChitChat;
 			packageProductDependencies = (
 				BB720C92296B1EAD00BEA070 /* MessageKit */,
-				BBEA8A23296E88C100DF37F8 /* GoogleMobileAds */,
+				BB05E62A2A9B638D0042A451 /* GoogleMobileAds */,
 			);
 			productName = ChitChat;
 			productReference = BB0DBAA4296AA4FE00D2DFB9 /* ChitChat.app */;
@@ -2690,7 +2690,7 @@
 			mainGroup = BB0DBA9B296AA4FE00D2DFB9;
 			packageReferences = (
 				BB720C91296B1EAD00BEA070 /* XCRemoteSwiftPackageReference "MessageKit" */,
-				BBEA8A22296E88C100DF37F8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				BB05E6292A9B638D0042A451 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = BB0DBAA5296AA4FE00D2DFB9 /* Products */;
 			projectDirPath = "";
@@ -3463,6 +3463,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BB05E6292A9B638D0042A451 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 		BB720C91296B1EAD00BEA070 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MessageKit/MessageKit";
@@ -3471,26 +3479,18 @@
 				minimumVersion = 4.0.0;
 			};
 		};
-		BBEA8A22296E88C100DF37F8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BB05E62A2A9B638D0042A451 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB05E6292A9B638D0042A451 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
 		BB720C92296B1EAD00BEA070 /* MessageKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BB720C91296B1EAD00BEA070 /* XCRemoteSwiftPackageReference "MessageKit" */;
 			productName = MessageKit;
-		};
-		BBEA8A23296E88C100DF37F8 /* GoogleMobileAds */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BBEA8A22296E88C100DF37F8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
-			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 

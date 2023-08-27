@@ -59,6 +59,9 @@ class ChatCDHelper {
 //        return chats;
         
         // Create date sorted array from conversation chats
+//        conversation.willAccessValue(forKey: chatEntityName)
+//        print(conversation.isFault)
+//        print(conversation.chats)
         guard let chats = conversation.chats?.sortedArray(using: [NSSortDescriptor(key: #keyPath(Chat.date), ascending: true)]) as? [Chat] else {
             return nil
         }
