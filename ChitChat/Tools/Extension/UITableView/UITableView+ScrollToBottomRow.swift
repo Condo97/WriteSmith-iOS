@@ -14,7 +14,7 @@ extension UITableView {
         let lastRow = numberOfRows(inSection: lastSection) - 1
         
         // Ensure lastSection and lastRow are not less than 0
-        guard lastSection > 0 && lastRow > 0 else {
+        guard lastSection >= 0 && lastRow >= 0 else {
             return
         }
         

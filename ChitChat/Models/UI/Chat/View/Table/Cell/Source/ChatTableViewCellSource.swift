@@ -15,9 +15,9 @@ class ChatTableViewCellSource: CellSource, EditableCellSource {
     var tableViewCellReuseIdentifier: String? {
         switch chat.sender {
         case Constants.Chat.Sender.user:
-            return Registry.Chat.View.TableView.Cell.user.reuseID
+            return Registry.Chat.View.Table.Cell.user.reuseID
         case Constants.Chat.Sender.ai:
-            return Registry.Chat.View.TableView.Cell.ai.reuseID
+            return Registry.Chat.View.Table.Cell.ai.reuseID
         default:
             return nil
         }

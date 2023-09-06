@@ -8,7 +8,7 @@
 class LoadingChatTableViewCellSource: LoadingTableViewCellSource {
     
     var collectionViewCellReuseIdentifier: String?
-    var tableViewCellReuseIdentifier: String? = Registry.Chat.View.TableView.Cell.loading.reuseID
+    var tableViewCellReuseIdentifier: String? = Registry.Chat.View.Table.Cell.loading.reuseID
     
     var view: UIView?
     

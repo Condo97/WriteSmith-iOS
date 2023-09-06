@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="essayLoadingTableViewCell" id="X7U-yy-OFY" customClass="LoadingTableViewCell" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="42"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X7U-yy-OFY" id="CQ7-U6-26V">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="42"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXj-XC-3b4" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                        <rect key="frame" x="179" y="7" width="56" height="28"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgN-qH-6Zs">
+                                <rect key="frame" x="7" y="2" width="42" height="24"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="AIChatBubbleColor"/>
+                        <constraints>
+                            <constraint firstItem="UgN-qH-6Zs" firstAttribute="top" secondItem="hXj-XC-3b4" secondAttribute="top" constant="2" id="4Wx-A2-Fpz"/>
+                            <constraint firstAttribute="trailing" secondItem="UgN-qH-6Zs" secondAttribute="trailing" constant="7" id="AQM-wj-GdS"/>
+                            <constraint firstAttribute="width" constant="56" id="NeQ-2F-M5w"/>
+                            <constraint firstItem="UgN-qH-6Zs" firstAttribute="leading" secondItem="hXj-XC-3b4" secondAttribute="leading" constant="7" id="ilj-A5-31G"/>
+                            <constraint firstAttribute="height" constant="28" id="nGv-5s-Txn"/>
+                            <constraint firstAttribute="bottom" secondItem="UgN-qH-6Zs" secondAttribute="bottom" constant="2" id="qaz-on-wEK"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="hXj-XC-3b4" secondAttribute="bottom" constant="7" id="6A2-5c-mWB"/>
+                    <constraint firstItem="hXj-XC-3b4" firstAttribute="top" secondItem="CQ7-U6-26V" secondAttribute="top" constant="7" id="L1V-vO-thK"/>
+                    <constraint firstItem="hXj-XC-3b4" firstAttribute="centerX" secondItem="CQ7-U6-26V" secondAttribute="centerX" id="Ua6-FL-qsh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" name="ChatBackgroundColor"/>
+            <connections>
+                <outlet property="loadingView" destination="UgN-qH-6Zs" id="BAG-hL-6U9"/>
+            </connections>
+            <point key="canvasLocation" x="-24" y="20"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="AIChatBubbleColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ChatBackgroundColor">
+            <color red="0.90980392156862744" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

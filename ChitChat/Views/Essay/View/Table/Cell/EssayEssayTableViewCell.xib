@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="essayEssayTableViewCell" rowHeight="158" id="qRZ-ee-A9S" customClass="EssayEssayTableViewCell" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="158"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qRZ-ee-A9S" id="qh9-QO-GKx">
+                <rect key="frame" x="0.0" y="0.0" width="393" height="158"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Su3-DN-ubZ" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                        <rect key="frame" x="7" y="0.0" width="379" height="151"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdc-g4-oFX">
+                                <rect key="frame" x="0.0" y="0.0" width="379" height="103"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgf-Bt-qXM">
+                                        <rect key="frame" x="265" y="40" width="24" height="23.333333333333336"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="fF0-7y-1iJ"/>
+                                            <constraint firstAttribute="width" secondItem="sgf-Bt-qXM" secondAttribute="height" multiplier="1:1" id="iE7-j7-Gam"/>
+                                        </constraints>
+                                        <color key="tintColor" name="AIChatTextColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" backgroundImage="square.on.square.dashed" catalog="system"/>
+                                        <connections>
+                                            <action selector="copyText:" destination="qRZ-ee-A9S" eventType="touchUpInside" id="nQQ-20-5R9"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T2p-5M-VEv">
+                                        <rect key="frame" x="14" y="4" width="244" height="80"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="W1V-sZ-zce"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="ieJ-Vl-wfs"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                        <color key="textColor" name="AIChatTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tc-WU-KB5">
+                                        <rect key="frame" x="341" y="39" width="24" height="24.333333333333336"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="L1N-QC-SBK"/>
+                                            <constraint firstAttribute="width" secondItem="6tc-WU-KB5" secondAttribute="height" multiplier="1:1" id="ZHy-PL-JcT"/>
+                                        </constraints>
+                                        <color key="tintColor" name="AIChatTextColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" backgroundImage="trash" catalog="system"/>
+                                        <connections>
+                                            <action selector="deleteRow:" destination="qRZ-ee-A9S" eventType="touchUpInside" id="72M-yV-8gV"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPN-cO-HeH">
+                                        <rect key="frame" x="14" y="85" width="26" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="hib-Z5-Xfo"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CdU-j2-3PW">
+                                        <rect key="frame" x="303" y="38.666666666666664" width="24" height="24.666666666666664"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="CdU-j2-3PW" secondAttribute="height" multiplier="1:1" id="Ehc-BU-seJ"/>
+                                            <constraint firstAttribute="width" constant="24" id="mdy-6Y-B1a"/>
+                                        </constraints>
+                                        <color key="tintColor" name="AIChatTextColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" backgroundImage="square.and.arrow.up" catalog="system"/>
+                                        <connections>
+                                            <action selector="share:" destination="qRZ-ee-A9S" eventType="touchUpInside" id="GcI-hB-blf"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jH8-9U-1NI">
+                                        <rect key="frame" x="54" y="81.666666666666671" width="46" height="21"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content=" - Edited">
+                                                <attributes>
+                                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <font key="NSFont" size="12" name="Avenir-BookOblique"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="jH8-9U-1NI" firstAttribute="leading" secondItem="KPN-cO-HeH" secondAttribute="trailing" constant="14" id="0xG-Ny-yLo"/>
+                                    <constraint firstItem="CdU-j2-3PW" firstAttribute="width" secondItem="CdU-j2-3PW" secondAttribute="height" multiplier="1:1" id="5Ap-Hf-fSM"/>
+                                    <constraint firstItem="6tc-WU-KB5" firstAttribute="width" secondItem="6tc-WU-KB5" secondAttribute="height" multiplier="1:1" id="8Da-yW-Nh2"/>
+                                    <constraint firstItem="KPN-cO-HeH" firstAttribute="top" secondItem="T2p-5M-VEv" secondAttribute="bottom" constant="1" id="AGO-P6-raU"/>
+                                    <constraint firstItem="T2p-5M-VEv" firstAttribute="top" secondItem="mdc-g4-oFX" secondAttribute="top" constant="4" id="Gh5-sa-T9a"/>
+                                    <constraint firstItem="sgf-Bt-qXM" firstAttribute="leading" secondItem="T2p-5M-VEv" secondAttribute="trailing" constant="7" id="Jcr-YC-S7u"/>
+                                    <constraint firstItem="sgf-Bt-qXM" firstAttribute="width" secondItem="sgf-Bt-qXM" secondAttribute="height" multiplier="1:1" id="JrK-BA-87y"/>
+                                    <constraint firstItem="6tc-WU-KB5" firstAttribute="leading" secondItem="CdU-j2-3PW" secondAttribute="trailing" constant="14" id="PV9-FP-PfP"/>
+                                    <constraint firstItem="jH8-9U-1NI" firstAttribute="height" secondItem="KPN-cO-HeH" secondAttribute="height" multiplier="1.5" id="Tgk-aw-rbW"/>
+                                    <constraint firstAttribute="trailing" secondItem="6tc-WU-KB5" secondAttribute="trailing" constant="14" id="aUo-Q4-uFE"/>
+                                    <constraint firstItem="jH8-9U-1NI" firstAttribute="centerY" secondItem="KPN-cO-HeH" secondAttribute="centerY" id="dGa-Sm-kmi"/>
+                                    <constraint firstAttribute="bottom" secondItem="KPN-cO-HeH" secondAttribute="bottom" constant="4" id="gyM-pv-UFw"/>
+                                    <constraint firstItem="T2p-5M-VEv" firstAttribute="leading" secondItem="mdc-g4-oFX" secondAttribute="leading" constant="14" id="hKh-UI-nr1"/>
+                                    <constraint firstItem="KPN-cO-HeH" firstAttribute="leading" secondItem="T2p-5M-VEv" secondAttribute="leading" id="iNv-Q0-QWA"/>
+                                    <constraint firstItem="CdU-j2-3PW" firstAttribute="centerY" secondItem="mdc-g4-oFX" secondAttribute="centerY" id="ohf-MN-kCY"/>
+                                    <constraint firstItem="6tc-WU-KB5" firstAttribute="centerY" secondItem="mdc-g4-oFX" secondAttribute="centerY" id="tdW-PQ-srq"/>
+                                    <constraint firstItem="sgf-Bt-qXM" firstAttribute="centerY" secondItem="mdc-g4-oFX" secondAttribute="centerY" id="uT4-UE-397"/>
+                                    <constraint firstItem="CdU-j2-3PW" firstAttribute="leading" secondItem="sgf-Bt-qXM" secondAttribute="trailing" constant="14" id="yHg-Im-baq"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HIY-ye-kBS">
+                                <rect key="frame" x="0.0" y="103" width="379" height="48"/>
+                                <subviews>
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccs-eS-KIA">
+                                        <rect key="frame" x="0.0" y="48" width="379" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="6yx-Kt-7rV"/>
+                                        </constraints>
+                                        <color key="tintColor" name="AIChatTextColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Show Less">
+                                            <fontDescription key="titleFontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="showLess:" destination="qRZ-ee-A9S" eventType="touchUpInside" id="aCE-HG-9zk"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dox-zG-ZNB">
+                                        <rect key="frame" x="14" y="28" width="351" height="20"/>
+                                        <color key="backgroundColor" name="AIChatBubbleColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="h0A-wL-hlO"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="gradientColor">
+                                                <color key="value" name="AIChatBubbleColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show More..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbK-NU-5d5">
+                                        <rect key="frame" x="14" y="24" width="351" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="eI7-h4-oEk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                                        <color key="textColor" name="AIChatTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0Ql-xB-dqy">
+                                        <rect key="frame" x="14" y="0.0" width="351" height="48"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="AIChatTextColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="8aP-Af-Wtz"/>
+                                        </constraints>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <color key="textColor" name="AIChatTextColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ti0-kw-WeY" customClass="GradientView" customModule="ChitChat" customModuleProvider="target">
+                                        <rect key="frame" x="14" y="8" width="351" height="20"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="eCw-BW-t8x"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="gradientColor">
+                                                <color key="value" name="AIChatBubbleColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copied!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cED-Qp-dGh">
+                                        <rect key="frame" x="14" y="0.0" width="351" height="48"/>
+                                        <color key="backgroundColor" name="AIChatBubbleColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="24"/>
+                                        <color key="textColor" name="AIChatTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ccs-eS-KIA" firstAttribute="leading" secondItem="HIY-ye-kBS" secondAttribute="leading" id="0Ff-aH-b9Z"/>
+                                    <constraint firstItem="0Ql-xB-dqy" firstAttribute="top" secondItem="HIY-ye-kBS" secondAttribute="top" id="2QB-wB-RaN"/>
+                                    <constraint firstItem="0Ql-xB-dqy" firstAttribute="leading" secondItem="HIY-ye-kBS" secondAttribute="leading" constant="14" id="3Vt-GI-fjZ"/>
+                                    <constraint firstItem="ti0-kw-WeY" firstAttribute="trailing" secondItem="Dox-zG-ZNB" secondAttribute="trailing" id="7Me-NS-dgo"/>
+                                    <constraint firstItem="RbK-NU-5d5" firstAttribute="leading" secondItem="0Ql-xB-dqy" secondAttribute="leading" id="9Xm-Br-0n8"/>
+                                    <constraint firstItem="ccs-eS-KIA" firstAttribute="top" secondItem="0Ql-xB-dqy" secondAttribute="bottom" id="Bsn-72-7FF"/>
+                                    <constraint firstAttribute="trailing" secondItem="ccs-eS-KIA" secondAttribute="trailing" id="Fak-pd-fHB"/>
+                                    <constraint firstItem="Dox-zG-ZNB" firstAttribute="trailing" secondItem="0Ql-xB-dqy" secondAttribute="trailing" id="L2o-u7-bdl"/>
+                                    <constraint firstItem="cED-Qp-dGh" firstAttribute="leading" secondItem="0Ql-xB-dqy" secondAttribute="leading" id="O3E-vl-jal"/>
+                                    <constraint firstItem="cED-Qp-dGh" firstAttribute="bottom" secondItem="0Ql-xB-dqy" secondAttribute="bottom" id="Pqp-Mm-TAf"/>
+                                    <constraint firstItem="cED-Qp-dGh" firstAttribute="trailing" secondItem="0Ql-xB-dqy" secondAttribute="trailing" id="R56-iY-tbJ"/>
+                                    <constraint firstItem="0Ql-xB-dqy" firstAttribute="bottom" secondItem="Dox-zG-ZNB" secondAttribute="bottom" id="RNI-US-kXn"/>
+                                    <constraint firstItem="Dox-zG-ZNB" firstAttribute="leading" secondItem="0Ql-xB-dqy" secondAttribute="leading" id="SCZ-s5-QCl"/>
+                                    <constraint firstItem="RbK-NU-5d5" firstAttribute="bottom" secondItem="Dox-zG-ZNB" secondAttribute="bottom" id="afQ-sx-474"/>
+                                    <constraint firstAttribute="trailing" secondItem="0Ql-xB-dqy" secondAttribute="trailing" constant="14" id="bzM-DJ-CeU"/>
+                                    <constraint firstAttribute="bottom" secondItem="ccs-eS-KIA" secondAttribute="bottom" id="e7Z-o9-dSk"/>
+                                    <constraint firstItem="Dox-zG-ZNB" firstAttribute="top" secondItem="ti0-kw-WeY" secondAttribute="bottom" id="fQ2-qG-H5g"/>
+                                    <constraint firstItem="ti0-kw-WeY" firstAttribute="leading" secondItem="Dox-zG-ZNB" secondAttribute="leading" id="j8T-gK-8lW"/>
+                                    <constraint firstItem="RbK-NU-5d5" firstAttribute="trailing" secondItem="0Ql-xB-dqy" secondAttribute="trailing" id="kvZ-mQ-XRy"/>
+                                    <constraint firstItem="cED-Qp-dGh" firstAttribute="top" secondItem="0Ql-xB-dqy" secondAttribute="top" id="ror-Uq-JGB"/>
+                                    <constraint firstItem="RbK-NU-5d5" firstAttribute="centerX" secondItem="Dox-zG-ZNB" secondAttribute="centerX" id="yl0-jh-B3D"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="AIChatBubbleColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="HIY-ye-kBS" secondAttribute="trailing" id="58B-Nn-x1C"/>
+                            <constraint firstAttribute="bottom" secondItem="HIY-ye-kBS" secondAttribute="bottom" id="5LW-b1-Ajt"/>
+                            <constraint firstItem="mdc-g4-oFX" firstAttribute="leading" secondItem="Su3-DN-ubZ" secondAttribute="leading" id="78f-z0-pZ5"/>
+                            <constraint firstAttribute="trailing" secondItem="mdc-g4-oFX" secondAttribute="trailing" id="Cy1-NL-NCX"/>
+                            <constraint firstItem="HIY-ye-kBS" firstAttribute="leading" secondItem="Su3-DN-ubZ" secondAttribute="leading" id="OmY-FO-Oqw"/>
+                            <constraint firstItem="mdc-g4-oFX" firstAttribute="top" secondItem="Su3-DN-ubZ" secondAttribute="top" id="XU0-5p-bTh"/>
+                            <constraint firstItem="HIY-ye-kBS" firstAttribute="top" secondItem="mdc-g4-oFX" secondAttribute="bottom" id="oTx-c6-DZB"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Su3-DN-ubZ" secondAttribute="trailing" constant="7" id="4Ac-aO-Tcf"/>
+                    <constraint firstItem="Su3-DN-ubZ" firstAttribute="top" secondItem="qh9-QO-GKx" secondAttribute="top" id="5Do-xa-IJk"/>
+                    <constraint firstAttribute="bottom" secondItem="Su3-DN-ubZ" secondAttribute="bottom" constant="7" id="YVM-ik-UcR"/>
+                    <constraint firstItem="Su3-DN-ubZ" firstAttribute="leading" secondItem="qh9-QO-GKx" secondAttribute="leading" constant="7" id="otB-i9-8lh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="copiedLabel" destination="cED-Qp-dGh" id="r6g-jW-MkH"/>
+                <outlet property="date" destination="KPN-cO-HeH" id="AF6-Ie-cMd"/>
+                <outlet property="deleteButtonWidthConstraint" destination="L1N-QC-SBK" id="KkC-bS-SM9"/>
+                <outlet property="editedLabel" destination="jH8-9U-1NI" id="kYE-rD-Yjz"/>
+                <outlet property="essayHeightConstraint" destination="8aP-Af-Wtz" id="qyi-dW-Fuj"/>
+                <outlet property="essayTextView" destination="0Ql-xB-dqy" id="4s7-mr-uxb"/>
+                <outlet property="roundedView" destination="Su3-DN-ubZ" id="8M0-DS-xBQ"/>
+                <outlet property="shareButtonWidthConstraint" destination="mdy-6Y-B1a" id="LbV-9U-O4M"/>
+                <outlet property="showLessButton" destination="ccs-eS-KIA" id="LQD-7B-wjT"/>
+                <outlet property="showLessHeightConstraint" destination="6yx-Kt-7rV" id="zLU-0x-gWN"/>
+                <outlet property="showMoreGradientView" destination="ti0-kw-WeY" id="vao-iO-sMK"/>
+                <outlet property="showMoreLabel" destination="RbK-NU-5d5" id="yPS-0Z-0Zl"/>
+                <outlet property="showMoreSolidView" destination="Dox-zG-ZNB" id="9g5-Wk-5jn"/>
+                <outlet property="title" destination="T2p-5M-VEv" id="B0I-Ex-q7T"/>
+            </connections>
+            <point key="canvasLocation" x="-48.091603053435115" y="57.04225352112676"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="square.on.square.dashed" catalog="system" width="128" height="116"/>
+        <image name="trash" catalog="system" width="117" height="128"/>
+        <namedColor name="AIChatBubbleColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AIChatTextColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

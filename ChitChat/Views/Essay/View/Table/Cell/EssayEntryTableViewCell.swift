@@ -7,11 +7,16 @@
 
 import UIKit
 
-protocol EntryEssayTableViewCellDelegate: AnyObject {
+protocol EssayEntryTableViewCellDelegate: AnyObject {
     func didPressSubmitButton(sender: Any)
+    
+    func textViewDidChange(_ textView: UITextView)
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+    func textViewDidBeginEditing(_ textView: UITextView)
+    func textViewDidEndEditing(_ textView: UITextView)
 }
 
-class EssayEntryTableViewCell: UITableViewCell, LoadableCell {
+class EssayEntryTableViewCell: UITableViewCell, DelegateCell {
 
     @IBOutlet weak var roundedView: RoundedView!
     @IBOutlet weak var textView: UITextView!
@@ -22,11 +27,17 @@ class EssayEntryTableViewCell: UITableViewCell, LoadableCell {
     
     var isGenerating: Bool = false
     
-    var delegate: EntryEssayTableViewCellDelegate!
+    var delegate: AnyObject?
+    var essayEntryDelegate: EssayEntryTableViewCellDelegate? {
+        get {
+            delegate as? EssayEntryTableViewCellDelegate
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        textView.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -36,19 +47,19 @@ class EssayEntryTableViewCell: UITableViewCell, LoadableCell {
     
     @IBAction func submitButton(_ sender: Any) {
         if delegate != nil {
-            delegate.didPressSubmitButton(sender: sender)
+            essayEntryDelegate?.didPressSubmitButton(sender: sender)
         }
     }
     
-    func loadWithSource(_ source: CellSource) {
-        if let entrySource = source as? EntryEssayTableViewCellSource {
-            delegate = entrySource.cellDelegate
-            textView.delegate = entrySource.textViewDelegate
-            
-            textView.text = entrySource.useTryPlaceholderWhenLoaded ? tryInputPlaceholder : inputPlaceholder
-            submitButton.isEnabled = false
-        }
-    }
+//    func loadWithSource(_ source: CellSource) {
+//        if let entrySource = source as? EntryEssayTableViewCellSource {
+//            delegate = entrySource.cellDelegate
+//            textView.delegate = entrySource.textViewDelegate
+//
+//            textView.text = entrySource.useTryPlaceholderWhenLoaded ? tryInputPlaceholder : inputPlaceholder
+//            submitButton.isEnabled = false
+//        }
+//    }
     
     //MARK: InputTextField Functions
     
@@ -67,6 +78,10 @@ class EssayEntryTableViewCell: UITableViewCell, LoadableCell {
         If !isPremium and softDisable, show the alert
         if isPremium regardless of softDisable, generate the chat
      */
+    
+    func textViewLoadPlaceholder(useTryPlaceholder: Bool) {
+        textViewSetToPlaceholder(useTryPlaceholder: useTryPlaceholder)
+    }
     
     func textViewStartWriting() {
         // Set inputTextView to blank
@@ -124,18 +139,44 @@ class EssayEntryTableViewCell: UITableViewCell, LoadableCell {
         }
     }
     
-    func textViewSetToPlaceholder(useTryPlaceholder: Bool) {
+    internal func textViewSetToPlaceholder(useTryPlaceholder: Bool) {
         DispatchQueue.main.async {
             self.textView.text = useTryPlaceholder ? self.tryInputPlaceholder : self.inputPlaceholder
             self.textView.tintColor = .lightText
         }
     }
     
-    func textViewSetToBlank() {
+    internal func textViewSetToBlank() {
         DispatchQueue.main.async {
             self.textView.text = ""
             self.textView.tintColor = Colors.elementTextColor
         }
+    }
+    
+}
+
+extension EssayEntryTableViewCell: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        essayEntryDelegate?.textViewDidChange(textView)
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // Unwrap essayEntryDelegate and return false if it can't be unwrapped
+        guard let essayEntryDelegate = essayEntryDelegate else {
+            return false
+        }
+        
+        // Return result of delegate method
+        return essayEntryDelegate.textView(textView, shouldChangeTextIn: range, replacementText: text)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        essayEntryDelegate?.textViewDidBeginEditing(textView)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        essayEntryDelegate?.textViewDidEndEditing(textView)
     }
     
 }

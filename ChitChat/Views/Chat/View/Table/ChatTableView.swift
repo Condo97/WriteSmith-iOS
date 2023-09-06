@@ -11,9 +11,10 @@ import UIKit
  Easy append, insert, and delete, synchronizing with chatRowSources
  - Delegate and DataSource should be ChatTableViewManagerProtocol to enable UITableViewCellSource appending
  */
-class ChatTableView: ManagedTableView {
+class ChatTableView: UITableView {
     
     var shouldBounce: Bool = true
+    var touchDelegate: TableViewTouchDelegate?
     
     func bounceAt(indexPath: IndexPath) {
         // Get the Bounceable cell if it is and unbounce

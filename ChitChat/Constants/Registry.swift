@@ -19,26 +19,26 @@ struct Registry {
     
     struct Chat {
         struct View {
-            struct TableView {
+            struct Table {
                 struct Cell {
                     static let user = XIB_ReuseID(
-                        xibName: "UserChatTableViewCell",
-                        reuseID: "userChatTableViewCell"
+                        xibName: "ChatBubbleTableViewCellUser",
+                        reuseID: "chatBubbleTableViewCellUser"
                     )
                     
                     static let ai = XIB_ReuseID(
-                        xibName: "AIChatTableViewCell",
-                        reuseID: "aiChatTableViewCell"
+                        xibName: "ChatBubbleTableViewCellAI",
+                        reuseID: "chatBubbleTableViewCellAI"
                     )
                     
                     static let loading = XIB_ReuseID(
-                        xibName: "LoadingChatTableViewCell",
-                        reuseID: "loadingChatTableViewCell"
+                        xibName: "ChatLoadingTableViewCell",
+                        reuseID: "chatLoadingTableViewCell"
                     )
                     
                     static let padding = XIB_ReuseID(
-                        xibName: "PaddingChatTableViewCell",
-                        reuseID: "paddingChatTableViewCell"
+                        xibName: "ChatPaddingTableViewCell",
+                        reuseID: "chatPaddingTableViewCell"
                     )
                 }
             }
@@ -62,8 +62,8 @@ struct Registry {
             struct Table {
                 struct Cell {
                     static let managedCollectionView = XIB_ReuseID(
-                        xibName: "ManagedCollectionViewTableViewCell",
-                        reuseID: "managedCollectionViewTableViewCell"
+                        xibName: "CollectionTableViewCell",
+                        reuseID: "collectionTableViewCell"
                     )
                     
                     static let imageText = XIB_ReuseID(
@@ -112,30 +112,35 @@ struct Registry {
         struct View {
             struct Table {
                 struct Cell {
-                    static let body = XIB_ReuseID(
-                        xibName: "BodyEssayTableViewCell",
-                        reuseID: "bodyEssayTableViewCell"
-                    )
+//                    static let body = XIB_ReuseID(
+//                        xibName: "EssayBodyTableViewCell",
+//                        reuseID: "essayBodyTableViewCell"
+//                    )
                     
                     static let entry = XIB_ReuseID(
-                        xibName: "EntryEssayTableViewCell",
-                        reuseID: "entryEssayTableViewCell"
+                        xibName: "EssayEntryTableViewCell",
+                        reuseID: "essayEntryTableViewCell"
+                    )
+                    
+                    static let essay = XIB_ReuseID(
+                        xibName: "EssayEssayTableViewCell",
+                        reuseID: "essayEssayTableViewCell"
                     )
                     
                     static let loading = XIB_ReuseID(
-                        xibName: "LoadingEssayTableViewCell",
-                        reuseID: "loadingEssayTableViewCell"
+                        xibName: "EssayLoadingTableViewCell",
+                        reuseID: "essayLoadingTableViewCell"
                     )
                     
                     static let premium = XIB_ReuseID(
-                        xibName: "PremiumEssayTableViewCell",
-                        reuseID: "premiumEssayTableViewCell"
+                        xibName: "EssayPremiumTableViewCell",
+                        reuseID: "essayPremiumTableViewCell"
                     )
                     
-                    static let prompt = XIB_ReuseID(
-                        xibName: "PromptEssayTableViewCell",
-                        reuseID: "promptEssayTableViewCell"
-                    )
+//                    static let prompt = XIB_ReuseID(
+//                        xibName: "EssayPromptTableViewCell",
+//                        reuseID: "essayPromptTableViewCell"
+//                    )
                 }
             }
             

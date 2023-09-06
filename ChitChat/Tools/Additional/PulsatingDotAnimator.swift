@@ -7,6 +7,12 @@
 
 import Foundation
 
+struct PulsatingDotAnimatorState {
+    let scale: CGFloat
+    let isAnimating: Bool
+    let animationPassed: CFTimeInterval
+}
+
 class PulsatingDotAnimator {
     
     let frame: CGRect
@@ -36,6 +42,24 @@ class PulsatingDotAnimator {
         self.color = color
         
         dotView = DotView(frame: frame)
+    }
+    
+    func restore(animatorState: PulsatingDotAnimatorState) {
+        self.dotView.transform = CGAffineTransform(scaleX: animatorState.scale, y: animatorState.scale)
+
+        if animatorState.isAnimating {
+            // Adjust the beginTime to place the animation in the correct state
+            self.animation.beginTime = CACurrentMediaTime() - animatorState.animationPassed
+            self.dotView.layer.add(self.animation, forKey: "dotViewAnimation\(self.animationKeyIndex)")
+        }
+    }
+    
+    func getState() -> PulsatingDotAnimatorState {
+        PulsatingDotAnimatorState(
+            scale: self.dotView.layer.presentation()?.value(forKeyPath: "transform.scale") as! CGFloat,
+            isAnimating: self.isAnimating,
+            animationPassed: CACurrentMediaTime() - self.animation.beginTime
+        )
     }
     
     func start() {

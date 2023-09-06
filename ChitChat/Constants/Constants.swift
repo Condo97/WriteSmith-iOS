@@ -88,7 +88,10 @@ struct Constants {
     static let defaultTypingUpdateLetterCount = 1
     
     struct Migration {
+        static let userDefaultStoredLatestVersionMigrationComplete = "latestVersionMigrationComplete"
+        
         static let userDefaultStoredV3_5MigrationComplete = "storedV3_5MigrationComplete"
+        static let userDefaultStoredV4MigrationComplete = "v4MigrationComplete"
     }
     
     
@@ -220,7 +223,7 @@ struct UIConstants {
     static let defaultDotSpeed = 0.4
     static let defaultDotMinSizeDivisor = 4.0
     
-    static let defaultPaddingTableViewCellSourceHeight = 240.0
+    static let defaultPaddingTableViewCellSourceHeight = 200.0
     static let premiumPaddingTableViewCellSourceHeight = 120.0
     
     static let defaultLabelTableViewCellSourceFontSize = 24.0

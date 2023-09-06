@@ -7,13 +7,9 @@
 
 import Foundation
 
-protocol ManagedTableViewTouchDelegate {
-    func tappedIndexPath(_ indexPath: IndexPath, tableView: UITableView, touch: UITouch)
-}
-
 class ManagedTableView: UITableView {
     
-    var touchDelegate: ManagedTableViewTouchDelegate?
+    var touchDelegate: TableViewTouchDelegate?
     
     var manager: SourcedTableViewManagerProtocol? {
         // Automatically set the delegate and datasource when manager is set!

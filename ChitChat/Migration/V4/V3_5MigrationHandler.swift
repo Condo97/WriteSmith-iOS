@@ -19,7 +19,7 @@ class V3_5MigrationHandler {
         }
         
         // Take chats from ChatStorageHelperLegacy and put them in one conversation
-        guard var conversation = try? await ConversationCDHelper.appendConversation() else {
+        guard var conversationObjectID = try? await ConversationCDHelper.appendConversation() else {
             return
         }
         for chatObjectLegacy in chats {
@@ -35,7 +35,7 @@ class V3_5MigrationHandler {
             
             // Append Chat from chatObjectLegacy to conversation
             do {
-                try await ChatCDHelper.appendChat(sender: getSenderString(sender: chatObjectLegacy.sender), text: chatObjectLegacy.text, to: &conversation)
+                try await ChatCDHelper.appendChat(sender: getSenderString(sender: chatObjectLegacy.sender), text: chatObjectLegacy.text, to: conversationObjectID)
             } catch {
                 // TODO: Handle errors
                 print("Could not append chat from chatObjectLegacy to conversation!")
@@ -43,7 +43,7 @@ class V3_5MigrationHandler {
         }
         
         // Set conversation as conversation in conversation resuming manager so that it will be loaded on first migration load
-        ConversationResumingManager.setConversation(conversation)
+        ConversationResumingManager.setConversation(conversationObjectID: conversationObjectID)
     }
     
 }

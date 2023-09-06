@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="chatLoadingTableViewCell" rowHeight="81" id="81K-2c-kIN" customClass="ChatLoadingTableViewCell" customModule="ChitChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="81"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="81K-2c-kIN" id="Yjn-S6-xRw">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="81"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Be3-jw-dfD">
+                        <rect key="frame" x="40" y="45" width="70" height="32"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="Gcy-Lr-a2F"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XH2-nU-FTX" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                        <rect key="frame" x="8" y="45" width="32" height="32"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="aiChatImage" translatesAutoresizingMaskIntoConstraints="NO" id="9Ae-5V-MUe">
+                                <rect key="frame" x="5" y="5" width="22" height="22"/>
+                                <color key="tintColor" name="AIChatTextColor"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="AIChatBubbleColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="9Ae-5V-MUe" secondAttribute="trailing" constant="5" id="2tJ-Pf-t9P"/>
+                            <constraint firstItem="9Ae-5V-MUe" firstAttribute="centerY" secondItem="XH2-nU-FTX" secondAttribute="centerY" id="O6Z-JG-eK2"/>
+                            <constraint firstItem="9Ae-5V-MUe" firstAttribute="leading" secondItem="XH2-nU-FTX" secondAttribute="leading" constant="5" id="dKV-03-o7D"/>
+                            <constraint firstAttribute="width" secondItem="XH2-nU-FTX" secondAttribute="height" id="gH4-5I-YrG"/>
+                            <constraint firstAttribute="width" constant="32" id="hec-Sa-FTI"/>
+                            <constraint firstItem="9Ae-5V-MUe" firstAttribute="top" secondItem="XH2-nU-FTX" secondAttribute="top" constant="5" id="jRf-49-Ahx"/>
+                            <constraint firstAttribute="bottom" secondItem="9Ae-5V-MUe" secondAttribute="bottom" constant="5" id="nJW-uf-gTv"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="14"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="esO-rW-T6Z">
+                        <rect key="frame" x="51" y="50" width="52" height="22"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Be3-jw-dfD" firstAttribute="top" secondItem="XH2-nU-FTX" secondAttribute="top" id="Bfl-fX-5u5"/>
+                    <constraint firstItem="XH2-nU-FTX" firstAttribute="width" secondItem="XH2-nU-FTX" secondAttribute="height" id="CbT-V4-uQj"/>
+                    <constraint firstItem="Be3-jw-dfD" firstAttribute="bottom" secondItem="XH2-nU-FTX" secondAttribute="bottom" id="Cg0-cX-IrF"/>
+                    <constraint firstAttribute="bottom" secondItem="XH2-nU-FTX" secondAttribute="bottom" constant="4" id="DtT-xU-MdW"/>
+                    <constraint firstItem="XH2-nU-FTX" firstAttribute="leading" secondItem="Yjn-S6-xRw" secondAttribute="leading" constant="8" id="GjT-dK-Isv"/>
+                    <constraint firstItem="esO-rW-T6Z" firstAttribute="leading" secondItem="Be3-jw-dfD" secondAttribute="leading" constant="11" id="Rzr-lF-jbD"/>
+                    <constraint firstItem="esO-rW-T6Z" firstAttribute="trailing" secondItem="Be3-jw-dfD" secondAttribute="trailing" constant="-7" id="YMX-Fp-3yg"/>
+                    <constraint firstItem="esO-rW-T6Z" firstAttribute="top" secondItem="Be3-jw-dfD" secondAttribute="top" constant="5" id="mzZ-t9-9Ib"/>
+                    <constraint firstItem="esO-rW-T6Z" firstAttribute="bottom" secondItem="Be3-jw-dfD" secondAttribute="bottom" constant="-5" id="nMM-oz-5Zr"/>
+                    <constraint firstItem="Be3-jw-dfD" firstAttribute="leading" secondItem="XH2-nU-FTX" secondAttribute="trailing" id="na3-A3-riE"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="bubbleImageView" destination="Be3-jw-dfD" id="gyc-Ln-yaS"/>
+                <outlet property="loadingView" destination="esO-rW-T6Z" id="5Ho-Gk-0hP"/>
+                <outlet property="profileImageView" destination="9Ae-5V-MUe" id="wZ5-tb-oK2"/>
+            </connections>
+            <point key="canvasLocation" x="-2559" y="-102"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="aiChatImage" width="168.66667175292969" height="168.66667175292969"/>
+        <namedColor name="AIChatBubbleColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AIChatTextColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -8,7 +8,7 @@
 class PaddingTableViewCellSource: CellSource {
     
     var collectionViewCellReuseIdentifier: String?
-    let tableViewCellReuseIdentifier: String? = Registry.Chat.View.TableView.Cell.padding.reuseID
+    let tableViewCellReuseIdentifier: String? = Registry.Chat.View.Table.Cell.padding.reuseID
     
     var padding: CGFloat
     

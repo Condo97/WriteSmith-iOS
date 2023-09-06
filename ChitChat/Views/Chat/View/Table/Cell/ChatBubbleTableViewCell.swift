@@ -5,9 +5,10 @@
 //  Created by Alex Coundouriotis on 1/9/23.
 //
 
+import CoreData
 import UIKit
 
-class ChatBubbleTableViewCell: UITableViewCell, Bounceable, LoadableCell {
+class ChatBubbleTableViewCell: UITableViewCell, Bounceable, ManagedObjectCell, EditableCell {
     
     @IBOutlet weak var chatText: UILabel!
     @IBOutlet weak var copiedLabel: UILabel!
@@ -15,6 +16,8 @@ class ChatBubbleTableViewCell: UITableViewCell, Bounceable, LoadableCell {
     @IBOutlet weak var bubbleImageView: UIImageView!
     @IBOutlet weak var loadingImageView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
+    
+    var canEdit: Bool = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,30 +37,38 @@ class ChatBubbleTableViewCell: UITableViewCell, Bounceable, LoadableCell {
         bubbleImageView.image = BubbleImageMaker.makeBubbleImage(userSent: isUser)
     }
     
-    /***
-     Loading code that is used when dequing tableViewCell
-     */
-    func loadWithSource(_ source: CellSource) {
-        // TODO: - Look at this again, is this a good place to load the cell, or should it be somewhere else since it references ChatTableViewCelLSource?
-        if let chatSource = source as? ChatTableViewCellSource {
-            chatSource.typingLabel = chatText
-            chatSource.view = self
-//            chatText.text = chatSource.chat.text
+    func configure(managedObject: NSManagedObject) {
+        if let chat = managedObject as? Chat {
+            chatText.text = chat.text
             
-            if chatSource.isTyping {
-                chatText.text = chatSource.typingText
-            } else {
-                chatText.text = chatSource.chat.text
-            }
-            
-//            if let typewriter = chatSource.typewriter, typewriter.isValid() {
-//                chatText.text = typewriter.typingString
+            setBubbleImage(isUser: chat.sender == Constants.Chat.Sender.user)
+        }
+    }
+    
+//    /***
+//     Loading code that is used when dequing tableViewCell
+//     */
+//    func loadWithSource(_ source: CellSource) {
+//        // TODO: - Look at this again, is this a good place to load the cell, or should it be somewhere else since it references ChatTableViewCelLSource?
+//        if let chatSource = source as? ChatTableViewCellSource {
+//            chatSource.typingLabel = chatText
+//            chatSource.view = self
+////            chatText.text = chatSource.chat.text
+//
+//            if chatSource.isTyping {
+//                chatText.text = chatSource.typingText
 //            } else {
 //                chatText.text = chatSource.chat.text
 //            }
-            
-            setBubbleImage(isUser: chatSource.chat.sender == Constants.Chat.Sender.user)
-        }
-    }
+//
+////            if let typewriter = chatSource.typewriter, typewriter.isValid() {
+////                chatText.text = typewriter.typingString
+////            } else {
+////                chatText.text = chatSource.chat.text
+////            }
+//
+//            setBubbleImage(isUser: chatSource.chat.sender == Constants.Chat.Sender.user)
+//        }
+//    }
     
 }

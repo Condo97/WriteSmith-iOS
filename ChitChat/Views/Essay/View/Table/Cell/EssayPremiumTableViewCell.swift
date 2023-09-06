@@ -11,9 +11,14 @@ protocol EssayPremiumTableViewCellDelegate: AnyObject {
     func didPressPremiumButton(sender: Any, cell: EssayPremiumTableViewCell)
 }
 
-class EssayPremiumTableViewCell: UITableViewCell, LoadableCell {
+class EssayPremiumTableViewCell: UITableViewCell, DelegateCell {
     
-    var delegate: EssayPremiumTableViewCellDelegate!
+    var delegate: AnyObject?
+    private var essayPremiumDelegate: EssayPremiumTableViewCellDelegate? {
+        get {
+            delegate as? EssayPremiumTableViewCellDelegate
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,13 +32,7 @@ class EssayPremiumTableViewCell: UITableViewCell, LoadableCell {
     }
 
     @IBAction func premiumButton(_ sender: Any) {
-        delegate.didPressPremiumButton(sender: sender, cell: self)
-    }
-    
-    func loadWithSource(_ source: CellSource) {
-        if let premiumSource = source as? PremiumEssayTableViewCellSource {
-            delegate = premiumSource.delegate
-        }
+        essayPremiumDelegate?.didPressPremiumButton(sender: sender, cell: self)
     }
     
 }

@@ -60,35 +60,30 @@ class EssayCDHelper: Any {
         return essay
     }
     
-    static func deleteEssay(_ essay: inout Essay) async throws {
-        try await CDClient.delete(managedObjectID: essay.objectID)
+    static func deleteEssay(essayObjectID: NSManagedObjectID) async throws {
+        try await CDClient.delete(managedObjectID: essayObjectID)
     }
     
-    static func getAllEssaysReversed() async -> [Essay]? {
-        do {
-            return try await (CDClient.getAll(in: essayEntityName) as? [Essay])?.reversed()
-        } catch {
-            print("Error getting all Essays... \(error)")
-            
-            return nil
-        }
-    }
+//    static func getAllEssaysReversed() async -> [Essay]? {
+//        do {
+//            return try await (CDClient.getAll(in: essayEntityName) as? [Essay])?.reversed()
+//        } catch {
+//            print("Error getting all Essays... \(error)")
+//
+//            return nil
+//        }
+//    }
     
-    static func updateEssay(_ essay: inout Essay, withText text: String) async throws {
+    static func updateEssay(essayObjectID: NSManagedObjectID, withText text: String) async throws {
         // Update essay
-        guard let essayNewContext = try await CDClient.update(
-            managedObjectID: essay.objectID,
+        try await CDClient.update(
+            managedObjectID: essayObjectID,
             updater: {mo in
                 guard let essay = mo as? Essay else {
                     return
                 }
                 
                 essay.essay = text
-            }) as? Essay else {
-            return
-        }
-        
-        // Set essay to essay new context
-        essay = essayNewContext
+            })
     }
 }

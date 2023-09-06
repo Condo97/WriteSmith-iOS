@@ -7,6 +7,6 @@
 
 import Foundation
 
-class EssayTableView: ManagedTableView {
+class EssayTableView: UITableView {
     
 }

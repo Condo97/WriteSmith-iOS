@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct PulsatingDotsAnimationState {
+    let animatorStates: [PulsatingDotAnimatorState]
+}
+
 class PulsatingDotsAnimation: Any {
     
     static let DEFAULT_ANIMATION_FROM_VALUE: CGFloat = 0.0
@@ -85,6 +89,28 @@ class PulsatingDotsAnimation: Any {
         animators.forEach({ animator in
             animator.stop()
         })
+    }
+    
+    func resume(animationState: PulsatingDotsAnimationState) {
+        guard animators.count == animationState.animatorStates.count else {
+            // TODO: Handle errors!
+            print("Animators does not equal animation states when trying to resume PulsatingDotsAnimation!")
+            return
+        }
+        
+        for i in 0..<animators.count {
+            animators[i].restore(animatorState: animationState.animatorStates[i])
+        }
+    }
+    
+    func getState() -> PulsatingDotsAnimationState {
+        var animatorStates: [PulsatingDotAnimatorState] = []
+        
+        for animator in animators {
+            animatorStates.append(animator.getState())
+        }
+        
+        return PulsatingDotsAnimationState(animatorStates: animatorStates)
     }
     
 }

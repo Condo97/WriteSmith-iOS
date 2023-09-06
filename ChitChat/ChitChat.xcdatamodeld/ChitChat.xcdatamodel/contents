@@ -10,6 +10,8 @@
     <entity name="Conversation" representedClassName="Conversation" syncable="YES" codeGenerationType="class">
         <attribute name="behavior" optional="YES" attributeType="String"/>
         <attribute name="conversationID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="latestChatDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="latestChatText" optional="YES" attributeType="String"/>
         <relationship name="chats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chat" inverseName="conversation" inverseEntity="Chat"/>
     </entity>
     <entity name="Essay" representedClassName="Essay" syncable="YES" codeGenerationType="class">
