@@ -201,169 +201,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C62AEA75-2986-4CB1-BC09-25FE256FA301"
+            uuid = "73134FC5-1A75-40C0-97E1-3CBF6E3D9489"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChitChat/Application/Ultra/UltraViewController.swift"
+            filePath = "ChitChat/Application/Chat/Extension/ChatViewController+UIScrollViewDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
-            landmarkName = "didGetIAPStuffFromServer(json:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C62AEA75-2986-4CB1-BC09-25FE256FA301 - daf3d34d1cdfa174"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(8) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ChitChat.UltraViewController.didGetIAPStuffFromServer(json: Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; ()"
-                  moduleName = "ChitChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexcoundouriotis/Xcode%20Projects/WriteSmith-iOS/ChitChat/Application/Ultra/UltraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "399"
-                  endingLineNumber = "399"
-                  offsetFromSymbolStart = "452">
-               </Location>
-               <Location
-                  uuid = "C62AEA75-2986-4CB1-BC09-25FE256FA301 - 8b8d677fd3c0c377"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(9) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ChitChat.UltraViewController.didGetIAPStuffFromServer(json: Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; ()"
-                  moduleName = "ChitChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexcoundouriotis/Xcode%20Projects/WriteSmith-iOS/ChitChat/Application/Ultra/UltraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "399"
-                  endingLineNumber = "399"
-                  offsetFromSymbolStart = "72">
-               </Location>
-               <Location
-                  uuid = "C62AEA75-2986-4CB1-BC09-25FE256FA301 - 8b8d677fd3c0c377"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(9) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ChitChat.UltraViewController.didGetIAPStuffFromServer(json: Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; ()"
-                  moduleName = "ChitChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexcoundouriotis/Xcode%20Projects/WriteSmith-iOS/ChitChat/Application/Ultra/UltraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "399"
-                  endingLineNumber = "399"
-                  offsetFromSymbolStart = "148">
-               </Location>
-               <Location
-                  uuid = "C62AEA75-2986-4CB1-BC09-25FE256FA301 - d061c458a0317531"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(10) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ChitChat.UltraViewController.didGetIAPStuffFromServer(json: Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; ()"
-                  moduleName = "ChitChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexcoundouriotis/Xcode%20Projects/WriteSmith-iOS/ChitChat/Application/Ultra/UltraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "399"
-                  endingLineNumber = "399"
-                  offsetFromSymbolStart = "164">
-               </Location>
-               <Location
-                  uuid = "C62AEA75-2986-4CB1-BC09-25FE256FA301 - d061c458a0317531"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(10) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ChitChat.UltraViewController.didGetIAPStuffFromServer(json: Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; ()"
-                  moduleName = "ChitChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexcoundouriotis/Xcode%20Projects/WriteSmith-iOS/ChitChat/Application/Ultra/UltraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "399"
-                  endingLineNumber = "399"
-                  offsetFromSymbolStart = "240">
-               </Location>
-               <Location
-                  uuid = "C62AEA75-2986-4CB1-BC09-25FE256FA301 - 6d99693d9869630"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(11) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ChitChat.UltraViewController.didGetIAPStuffFromServer(json: Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; ()"
-                  moduleName = "ChitChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexcoundouriotis/Xcode%20Projects/WriteSmith-iOS/ChitChat/Application/Ultra/UltraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "399"
-                  endingLineNumber = "399"
-                  offsetFromSymbolStart = "180">
-               </Location>
-               <Location
-                  uuid = "C62AEA75-2986-4CB1-BC09-25FE256FA301 - 6d99693d9869630"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(11) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ChitChat.UltraViewController.didGetIAPStuffFromServer(json: Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; ()"
-                  moduleName = "ChitChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexcoundouriotis/Xcode%20Projects/WriteSmith-iOS/ChitChat/Application/Ultra/UltraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "399"
-                  endingLineNumber = "399"
-                  offsetFromSymbolStart = "256">
-               </Location>
-               <Location
-                  uuid = "C62AEA75-2986-4CB1-BC09-25FE256FA301 - 74b1a7d6f74ccb33"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(12) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ChitChat.UltraViewController.didGetIAPStuffFromServer(json: Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; ()"
-                  moduleName = "ChitChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexcoundouriotis/Xcode%20Projects/WriteSmith-iOS/ChitChat/Application/Ultra/UltraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "399"
-                  endingLineNumber = "399"
-                  offsetFromSymbolStart = "196">
-               </Location>
-               <Location
-                  uuid = "C62AEA75-2986-4CB1-BC09-25FE256FA301 - 74b1a7d6f74ccb33"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(12) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ChitChat.UltraViewController.didGetIAPStuffFromServer(json: Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; ()"
-                  moduleName = "ChitChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexcoundouriotis/Xcode%20Projects/WriteSmith-iOS/ChitChat/Application/Ultra/UltraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "399"
-                  endingLineNumber = "399"
-                  offsetFromSymbolStart = "272">
-               </Location>
-               <Location
-                  uuid = "C62AEA75-2986-4CB1-BC09-25FE256FA301 - a3bda233b3a2fdf8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Swift.MainActor @Sendable () -&gt; () in closure #1 @Sendable () async -&gt; () in ChitChat.UltraViewController.didGetIAPStuffFromServer(json: Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; ()"
-                  moduleName = "ChitChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexcoundouriotis/Xcode%20Projects/WriteSmith-iOS/ChitChat/Application/Ultra/UltraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "387"
-                  endingLineNumber = "387"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "scrollViewDidScroll(_:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

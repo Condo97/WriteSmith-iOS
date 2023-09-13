@@ -11,6 +11,7 @@ import Foundation
 class LoadableFetchedResultsTableViewDataSource<Entity: NSManagedObject>: FetchedResultsTableViewDataSource<Entity> {
     
     var loadingCellReuseIdentifier: String
+    var loadingOnTop: Bool = true
     
     private var showLoading: Bool = false
     
@@ -49,8 +50,8 @@ class LoadableFetchedResultsTableViewDataSource<Entity: NSManagedObject>: Fetche
         // Set showLoading to true for the tableView to account for it accordingly
         showLoading = true
         
-        // Insert loading cell after the last row in the first section
-        tableView.insertRows(at: [IndexPath(row: tableView.numberOfRows(inSection: 0), section: 0)], with: .none)
+        // Insert loading cell at first row in the first section
+        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
     }
     
     public func hideLoadingCell() {
@@ -74,8 +75,12 @@ class LoadableFetchedResultsTableViewDataSource<Entity: NSManagedObject>: Fetche
         // Set showLoading to false for the tableView to account for it accordingly
         showLoading = false
         
-        // Remove loading cell at the last row in the first section
-        tableView.deleteRows(at: [IndexPath(row: tableView.numberOfRows(inSection: 0) - 1, section: 0)], with: .none)
+        // Remove loading cell at the first row in the first section
+        tableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+    }
+    
+    public func isShowingLoading() -> Bool {
+        showLoading
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,8 +93,8 @@ class LoadableFetchedResultsTableViewDataSource<Entity: NSManagedObject>: Fetche
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // If showLoading is true and it's the last cell in the first section, dequeue with loadingCellReuseIdentifier and if ManagedObjectCell configure
-        if showLoading && indexPath.section == 0 && indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+        // If showLoading is true and it's the first cell in the first section, dequeue with loadingCellReuseIdentifier and if ManagedObjectCell configure
+        if showLoading && indexPath.section == 0 && indexPath.row == 0 {
             let loadingCell = tableView.dequeueReusableCell(withIdentifier: loadingCellReuseIdentifier)!
             
             return loadingCell
@@ -98,23 +103,23 @@ class LoadableFetchedResultsTableViewDataSource<Entity: NSManagedObject>: Fetche
         return super.tableView(tableView, cellForRowAt: indexPath)
     }
     
-//    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        // If showLoading, indexPath and/or newIndexPath row will be decreased by one
-//        if showLoading {
-//            var indexPathWithIncreasedSection = indexPath
-//            if let indexPath = indexPath {
-//                indexPathWithIncreasedSection = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-//            }
-//
-//            var newIndexPathWithIncreasedSection = newIndexPath
-//            if let newIndexPath = newIndexPath {
-//                newIndexPathWithIncreasedSection = IndexPath(row: newIndexPath.row, section: newIndexPath.section)
-//            }
-//
-//            super.controller(controller, didChange: anObject, at: indexPathWithIncreasedSection, for: type, newIndexPath: newIndexPathWithIncreasedSection)
-//        } else {
-//            super.controller(controller, didChange: anObject, at: indexPath, for: type, newIndexPath: newIndexPath)
-//        }
-//    }
+    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        // If showLoading, indexPath and/or newIndexPath row will be decreased by one
+        if showLoading {
+            var indexPathWithIncreasedSection = indexPath
+            if let indexPath = indexPath {
+                indexPathWithIncreasedSection = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+            }
+
+            var newIndexPathWithIncreasedSection = newIndexPath
+            if let newIndexPath = newIndexPath {
+                newIndexPathWithIncreasedSection = IndexPath(row: newIndexPath.row, section: newIndexPath.section)
+            }
+
+            super.controller(controller, didChange: anObject, at: indexPathWithIncreasedSection, for: type, newIndexPath: newIndexPathWithIncreasedSection)
+        } else {
+            super.controller(controller, didChange: anObject, at: indexPath, for: type, newIndexPath: newIndexPath)
+        }
+    }
     
 }

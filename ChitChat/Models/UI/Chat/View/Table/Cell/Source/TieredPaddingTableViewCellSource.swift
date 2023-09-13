@@ -12,7 +12,7 @@ class TieredPaddingTableViewCellSource: PaddingTableViewCellSource {
     var premiumPadding: CGFloat
     
     override init() {
-        self.premiumPadding = UIConstants.premiumPaddingTableViewCellSourceHeight
+        self.premiumPadding = UIConstants.premiumChatTableViewHeaderHeight
         
         super.init()
     }

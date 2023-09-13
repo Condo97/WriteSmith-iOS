@@ -24,9 +24,10 @@ class PulsatingDotsAnimationLoadableFetchedResultsTableViewDataSource<Entity: NS
     override func hideLoadingCell() {
         super.hideLoadingCell()
         
-        // Stop animation and set to nil so it can be reloaded
-        loadingCellAnimation?.stop()
-        loadingCellAnimation = nil
+        // Stop animation, set dotsView to transparent, and set to nil so it can be reloaded
+        self.loadingCellAnimation?.stop()
+        self.loadingCellAnimation?.dotsView.alpha = 0.0
+        self.loadingCellAnimation = nil
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

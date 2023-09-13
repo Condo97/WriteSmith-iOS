@@ -11,14 +11,25 @@ import Foundation
 class ChatTableViewDataSource<Entity: NSManagedObject>: PulsatingDotsAnimationLoadableFetchedResultsTableViewDataSource<Entity> {
     
     var animateScroll = false
-    var shouldScrollOnUpdate = true
+    var shouldScrollOnLineUpdate = true
+    var doLineUpdateScroll = false
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
+        cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        
+        return cell
+    }
     
     override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         super.controllerDidChangeContent(controller)
         
         // Scroll if necessary and tableView can be unwrapped
-        if shouldScrollOnUpdate, let tableView = tableView {
-            tableView.scrollToBottomRow(animated: animateScroll)
+        if doLineUpdateScroll, shouldScrollOnLineUpdate, let tableView = tableView {
+//            tableView.scrollToBottomRow(animated: animateScroll)
+            
+            doLineUpdateScroll = false
         }
     }
     
@@ -26,8 +37,10 @@ class ChatTableViewDataSource<Entity: NSManagedObject>: PulsatingDotsAnimationLo
         super.showLoadingCell()
         
         // Scroll if necessary and tableView can be unwrapped
-        if shouldScrollOnUpdate, let tableView = tableView {
-            tableView.scrollToBottomRow(animated: animateScroll)
+        if doLineUpdateScroll, shouldScrollOnLineUpdate, let tableView = tableView {
+//            tableView.scrollToBottomRow(animated: animateScroll)
+            
+            doLineUpdateScroll = false
         }
     }
     

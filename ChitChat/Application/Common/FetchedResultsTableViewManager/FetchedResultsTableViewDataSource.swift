@@ -85,7 +85,7 @@ class FetchedResultsTableViewDataSource<Entity: NSManagedObject>: NSObject, UITa
                 }
             case .delete:
                 if let indexPath = indexPath {
-                    self.tableView?.deleteRows(at: [indexPath], with: .none)
+                    self.tableView?.deleteRows(at: [indexPath], with: .fade)
                 }
             case .update:
                 if let indexPath = indexPath, let cell = self.tableView?.cellForRow(at: indexPath) {
@@ -96,10 +96,10 @@ class FetchedResultsTableViewDataSource<Entity: NSManagedObject>: NSObject, UITa
             case .move:
                 self.tableView?.performBatchUpdates({
                     if let indexPath = indexPath {
-                        self.tableView?.deleteRows(at: [indexPath], with: .none)
+                        self.tableView?.deleteRows(at: [indexPath], with: .fade)
                     }
                     if let newIndexPath = newIndexPath {
-                        self.tableView?.insertRows(at: [newIndexPath], with: .none)
+                        self.tableView?.insertRows(at: [newIndexPath], with: .fade)
                     }
                 })
             default:
@@ -113,6 +113,7 @@ class FetchedResultsTableViewDataSource<Entity: NSManagedObject>: NSObject, UITa
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // TODO: Fix this, it is not allowed
         if let editableCell = tableView.cellForRow(at: indexPath) as? EditableCell {
             return editableCell.canEdit
         }

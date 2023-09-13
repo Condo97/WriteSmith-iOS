@@ -22,14 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let center = UNUserNotificationCenter.current()
             UNUserNotificationCenter.current().delegate = self
             center.requestAuthorization(options: [.sound, .alert, .badge], completionHandler: { (granted, error) in
-                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-//                    DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                        //                    DispatchQueue.main.async {
                         TenjinSDK.getInstance("UN4PPH4ZU5Z3S6BDDJZZCXLPPFFJ5XLP", andSharedSecret: Private.sharedSecret)
                         TenjinSDK.connect()
                         TenjinSDK.debugLogs()
                         TenjinSDK.sendEvent(withName: "test_event")
-//                    }
-                })
+                        //                    }
+                    })
+                }
             })
 //        }
         }

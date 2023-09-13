@@ -16,6 +16,9 @@ extension ChatViewController: ChatViewDelegate {
         // Immediately dismiss keyboard
         dismissKeyboard()
         
+        // Set fetchedResultsTableViewDataSource shouldScrollOnUpdate to true to scroll tableView while the generated chat updates
+        fetchedResultsTableViewDataSource?.shouldScrollOnLineUpdate = true
+        
         // Ensure submitSoftDisable is not pressed, otherwise show upgrade prompt and return
         guard !rootView.softDisable else {
             let alert = UIAlertController(title: "3 Days Free", message: "Send messages faster! Try Ultra for 3 days free today.", preferredStyle: .alert)

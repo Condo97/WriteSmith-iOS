@@ -46,6 +46,13 @@ extension ExploreItemViewController: ItemExploreViewDelegate {
 //        let usePaidModel = GPTModelHelper.getCurrentChatModel() == .paid
         let currentModel = GPTModelHelper.getCurrentChatModel()
         
+        // If not premium, show ad
+        if !PremiumHelper.get() {
+            Task {
+                await InterstitialAdManager.instance.showAd(from: self)
+            }
+        }
+        
         // Generate, build source, and push to generated on save
         ChatRequestHelper.get(inputText: queryString, conversationID: nil, model: currentModel, completion: { responseText, finishReason, conversationID, remaining in
             DispatchQueue.main.async {

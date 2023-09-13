@@ -20,6 +20,14 @@ class ConversationItemTableViewCell: UITableViewCell, ManagedObjectCell, Editabl
     
     let DEFAULT_PREVIOUS_CONVERSATION_INDICATOR_WIDTH_CONSTRAINT_CONSTANT: CGFloat = 40.0
     
+    func showPreviousConversationIndicator() {
+        previousConversationIndicatorWidthConstraint.constant = DEFAULT_PREVIOUS_CONVERSATION_INDICATOR_WIDTH_CONSTRAINT_CONSTANT
+    }
+    
+    func hidePreviousConversationIndicator() {
+        previousConversationIndicatorWidthConstraint.constant = 0.0
+    }
+    
     func configure(managedObject: NSManagedObject) {
         // Setup with managedObject
         if let conversation = managedObject as? Conversation {

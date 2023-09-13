@@ -23,7 +23,7 @@
 		BB05E64B2A9B79D00042A451 /* FetchedResultsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E64A2A9B79D00042A451 /* FetchedResultsTableViewDataSource.swift */; };
 		BB05E64F2A9CDC7B0042A451 /* ManagedObjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E64E2A9CDC7B0042A451 /* ManagedObjectCell.swift */; };
 		BB05E6512A9CE1B30042A451 /* TableViewTouchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E6502A9CE1B30042A451 /* TableViewTouchDelegate.swift */; };
-		BB05E6542A9CE2A10042A451 /* ChatTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E6532A9CE2A10042A451 /* ChatTableViewDelegate.swift */; };
+		BB05E6542A9CE2A10042A451 /* ChatViewController+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E6532A9CE2A10042A451 /* ChatViewController+UITableViewDelegate.swift */; };
 		BB05E6562A9CEC7E0042A451 /* LoadableFetchedResultsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E6552A9CEC7E0042A451 /* LoadableFetchedResultsTableViewDataSource.swift */; };
 		BB05E6582AA2D2C80042A451 /* ConversationViewController+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E6572AA2D2C80042A451 /* ConversationViewController+UITableViewDelegate.swift */; };
 		BB05E65B2AA2D4050042A451 /* V4MigrationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E65A2AA2D4050042A451 /* V4MigrationHandler.swift */; };
@@ -40,6 +40,7 @@
 		BB05E6792AA791CC0042A451 /* ChatViewController+FetchedResultsTableViewDataSourceEditingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E6782AA791CC0042A451 /* ChatViewController+FetchedResultsTableViewDataSourceEditingDelegate.swift */; };
 		BB05E67B2AA7946E0042A451 /* ConversationViewController+FetchedResultsTableViewDataSourceEditingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E67A2AA7946E0042A451 /* ConversationViewController+FetchedResultsTableViewDataSourceEditingDelegate.swift */; };
 		BB05E67D2AA7961A0042A451 /* EditableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E67C2AA7961A0042A451 /* EditableCell.swift */; };
+		BB05E6C92AA8EB700042A451 /* ChatViewController+UIGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB05E6C82AA8EB700042A451 /* ChatViewController+UIGestureRecognizerDelegate.swift */; };
 		BB0A7E70298715A300CB252F /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A7E6F298715A300CB252F /* FavoritesViewController.swift */; };
 		BB0A7E72298715B900CB252F /* FavoritesNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A7E71298715B900CB252F /* FavoritesNavigationViewController.swift */; };
 		BB0A8C09296CDB760035F046 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A8C08296CDB760035F046 /* RoundedView.swift */; };
@@ -108,11 +109,34 @@
 		BB5E9160297DB2A300DC7467 /* HalfRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E915F297DB2A300DC7467 /* HalfRoundedView.swift */; };
 		BB5E9162297DB62100DC7467 /* EssayBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E9161297DB62100DC7467 /* EssayBodyTableViewCell.swift */; };
 		BB5E9164297DCDED00DC7467 /* EssayEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */; };
+		BB62D3A62AAD95DD001F9ED4 /* FaceAnimation in Frameworks */ = {isa = PBXBuildFile; productRef = BB62D3A52AAD95DD001F9ED4 /* FaceAnimation */; };
+		BB6787C82AB13F0900F2D189 /* InterstitialAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6787C72AB13F0900F2D189 /* InterstitialAdManager.swift */; };
 		BB720C90296AAB7800BEA070 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB720C8F296AAB7800BEA070 /* ChatViewController.swift */; };
 		BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = BB720C92296B1EAD00BEA070 /* MessageKit */; };
 		BB7357E929D000CB00C67189 /* DotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7357E829D000CB00C67189 /* DotsView.swift */; };
 		BB7357EB29D0027500C67189 /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7357EA29D0027500C67189 /* DotView.swift */; };
 		BB7357EF29D00D7900C67189 /* PulsatingDotsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7357EE29D00D7900C67189 /* PulsatingDotsAnimation.swift */; };
+		BB77C6D32AAD9891002EA08A /* GlobalTabBarFaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6D22AAD9891002EA08A /* GlobalTabBarFaceController.swift */; };
+		BB77C6DB2AAE309E002EA08A /* RandomFaceIdleAnimationSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6DA2AAE309E002EA08A /* RandomFaceIdleAnimationSequence.swift */; };
+		BB77C6DD2AAE3123002EA08A /* RandomFaceAnimationSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6DC2AAE3123002EA08A /* RandomFaceAnimationSequence.swift */; };
+		BB77C6E62AAE50B2002EA08A /* FinishedWritingFaceAnimationSequence1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6E52AAE50B2002EA08A /* FinishedWritingFaceAnimationSequence1.swift */; };
+		BB77C6EB2AAE53A4002EA08A /* BlinkFaceAnimationSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6EA2AAE53A4002EA08A /* BlinkFaceAnimationSequence.swift */; };
+		BB77C6ED2AAE5414002EA08A /* FinishedWritingFaceAnimation1_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6EC2AAE5414002EA08A /* FinishedWritingFaceAnimation1_1.swift */; };
+		BB77C6F42AAE55EF002EA08A /* CenterSmileFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6F32AAE55EF002EA08A /* CenterSmileFaceAnimation.swift */; };
+		BB77C6F92AAE59E4002EA08A /* SmileIdleFaceAnimationSequence1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6F82AAE59E4002EA08A /* SmileIdleFaceAnimationSequence1.swift */; };
+		BB77C6FB2AAE5A45002EA08A /* SmileLookLeftCurveFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6FA2AAE5A45002EA08A /* SmileLookLeftCurveFaceAnimation.swift */; };
+		BB77C6FE2AAE5B3A002EA08A /* SmileLookRightCurveFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6FD2AAE5B3A002EA08A /* SmileLookRightCurveFaceAnimation.swift */; };
+		BB77C7002AAE5CD3002EA08A /* RandomFaceAnimationSequenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6FF2AAE5CD3002EA08A /* RandomFaceAnimationSequenceProtocol.swift */; };
+		BB77C7032AAE5EE4002EA08A /* ThinkingLookLeftCurveFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C7022AAE5EE4002EA08A /* ThinkingLookLeftCurveFaceAnimation.swift */; };
+		BB77C7052AAE5F11002EA08A /* ThinkingLookRightCurveFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C7042AAE5F11002EA08A /* ThinkingLookRightCurveFaceAnimation.swift */; };
+		BB77C7072AAE5F6B002EA08A /* ThinkingIdleFaceAnimationSequence1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C7062AAE5F6B002EA08A /* ThinkingIdleFaceAnimationSequence1.swift */; };
+		BB77C70D2AAF9FB9002EA08A /* SmileLookLeftFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C70C2AAF9FB9002EA08A /* SmileLookLeftFaceAnimation.swift */; };
+		BB77C70F2AAFA039002EA08A /* SmileLookRightFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C70E2AAFA039002EA08A /* SmileLookRightFaceAnimation.swift */; };
+		BB77C7112AAFA09A002EA08A /* ThinkingLookLeftFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C7102AAFA09A002EA08A /* ThinkingLookLeftFaceAnimation.swift */; };
+		BB77C7132AAFA104002EA08A /* ThinkingLookRightFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C7122AAFA104002EA08A /* ThinkingLookRightFaceAnimation.swift */; };
+		BB77C7152AB031F3002EA08A /* WritingIdleFaceAnimationSequence1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C7142AB031F3002EA08A /* WritingIdleFaceAnimationSequence1.swift */; };
+		BB77C7172AB03257002EA08A /* WritingLookLeftFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C7162AB03257002EA08A /* WritingLookLeftFaceAnimation.swift */; };
+		BB77C7192AB032F6002EA08A /* WritingLookRightFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C7182AB032F6002EA08A /* WritingLookRightFaceAnimation.swift */; };
 		BB7BC14E2974FC9200D34695 /* ChatTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7BC14D2974FC9200D34695 /* ChatTableView.swift */; };
 		BB7BC150297527EB00D34695 /* AttributedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7BC14F297527EA00D34695 /* AttributedLabel.swift */; };
 		BB7D9ACB2A36E3A100509C7B /* GPTModelTierSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7D9ACA2A36E3A100509C7B /* GPTModelTierSpecification.swift */; };
@@ -424,7 +448,7 @@
 		BB05E64A2A9B79D00042A451 /* FetchedResultsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableViewDataSource.swift; sourceTree = "<group>"; };
 		BB05E64E2A9CDC7B0042A451 /* ManagedObjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectCell.swift; sourceTree = "<group>"; };
 		BB05E6502A9CE1B30042A451 /* TableViewTouchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewTouchDelegate.swift; sourceTree = "<group>"; };
-		BB05E6532A9CE2A10042A451 /* ChatTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewDelegate.swift; sourceTree = "<group>"; };
+		BB05E6532A9CE2A10042A451 /* ChatViewController+UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		BB05E6552A9CEC7E0042A451 /* LoadableFetchedResultsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableFetchedResultsTableViewDataSource.swift; sourceTree = "<group>"; };
 		BB05E6572AA2D2C80042A451 /* ConversationViewController+UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationViewController+UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		BB05E65A2AA2D4050042A451 /* V4MigrationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V4MigrationHandler.swift; sourceTree = "<group>"; };
@@ -441,6 +465,7 @@
 		BB05E6782AA791CC0042A451 /* ChatViewController+FetchedResultsTableViewDataSourceEditingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+FetchedResultsTableViewDataSourceEditingDelegate.swift"; sourceTree = "<group>"; };
 		BB05E67A2AA7946E0042A451 /* ConversationViewController+FetchedResultsTableViewDataSourceEditingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationViewController+FetchedResultsTableViewDataSourceEditingDelegate.swift"; sourceTree = "<group>"; };
 		BB05E67C2AA7961A0042A451 /* EditableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableCell.swift; sourceTree = "<group>"; };
+		BB05E6C82AA8EB700042A451 /* ChatViewController+UIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatViewController+UIGestureRecognizerDelegate.swift"; sourceTree = "<group>"; };
 		BB0924692A296861006FB997 /* TenjinSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = TenjinSDK.xcframework; sourceTree = "<group>"; };
 		BB0A7E6F298715A300CB252F /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		BB0A7E71298715B900CB252F /* FavoritesNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNavigationViewController.swift; sourceTree = "<group>"; };
@@ -515,10 +540,32 @@
 		BB5E915F297DB2A300DC7467 /* HalfRoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfRoundedView.swift; sourceTree = "<group>"; };
 		BB5E9161297DB62100DC7467 /* EssayBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayBodyTableViewCell.swift; sourceTree = "<group>"; };
 		BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayEntryTableViewCell.swift; sourceTree = "<group>"; };
+		BB6787C72AB13F0900F2D189 /* InterstitialAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAdManager.swift; sourceTree = "<group>"; };
 		BB720C8F296AAB7800BEA070 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		BB7357E829D000CB00C67189 /* DotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsView.swift; sourceTree = "<group>"; };
 		BB7357EA29D0027500C67189 /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
 		BB7357EE29D00D7900C67189 /* PulsatingDotsAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulsatingDotsAnimation.swift; sourceTree = "<group>"; };
+		BB77C6D22AAD9891002EA08A /* GlobalTabBarFaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalTabBarFaceController.swift; sourceTree = "<group>"; };
+		BB77C6DA2AAE309E002EA08A /* RandomFaceIdleAnimationSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomFaceIdleAnimationSequence.swift; sourceTree = "<group>"; };
+		BB77C6DC2AAE3123002EA08A /* RandomFaceAnimationSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomFaceAnimationSequence.swift; sourceTree = "<group>"; };
+		BB77C6E52AAE50B2002EA08A /* FinishedWritingFaceAnimationSequence1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedWritingFaceAnimationSequence1.swift; sourceTree = "<group>"; };
+		BB77C6EA2AAE53A4002EA08A /* BlinkFaceAnimationSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlinkFaceAnimationSequence.swift; sourceTree = "<group>"; };
+		BB77C6EC2AAE5414002EA08A /* FinishedWritingFaceAnimation1_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedWritingFaceAnimation1_1.swift; sourceTree = "<group>"; };
+		BB77C6F32AAE55EF002EA08A /* CenterSmileFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterSmileFaceAnimation.swift; sourceTree = "<group>"; };
+		BB77C6F82AAE59E4002EA08A /* SmileIdleFaceAnimationSequence1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileIdleFaceAnimationSequence1.swift; sourceTree = "<group>"; };
+		BB77C6FA2AAE5A45002EA08A /* SmileLookLeftCurveFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileLookLeftCurveFaceAnimation.swift; sourceTree = "<group>"; };
+		BB77C6FD2AAE5B3A002EA08A /* SmileLookRightCurveFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileLookRightCurveFaceAnimation.swift; sourceTree = "<group>"; };
+		BB77C6FF2AAE5CD3002EA08A /* RandomFaceAnimationSequenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomFaceAnimationSequenceProtocol.swift; sourceTree = "<group>"; };
+		BB77C7022AAE5EE4002EA08A /* ThinkingLookLeftCurveFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThinkingLookLeftCurveFaceAnimation.swift; sourceTree = "<group>"; };
+		BB77C7042AAE5F11002EA08A /* ThinkingLookRightCurveFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThinkingLookRightCurveFaceAnimation.swift; sourceTree = "<group>"; };
+		BB77C7062AAE5F6B002EA08A /* ThinkingIdleFaceAnimationSequence1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThinkingIdleFaceAnimationSequence1.swift; sourceTree = "<group>"; };
+		BB77C70C2AAF9FB9002EA08A /* SmileLookLeftFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileLookLeftFaceAnimation.swift; sourceTree = "<group>"; };
+		BB77C70E2AAFA039002EA08A /* SmileLookRightFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileLookRightFaceAnimation.swift; sourceTree = "<group>"; };
+		BB77C7102AAFA09A002EA08A /* ThinkingLookLeftFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThinkingLookLeftFaceAnimation.swift; sourceTree = "<group>"; };
+		BB77C7122AAFA104002EA08A /* ThinkingLookRightFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThinkingLookRightFaceAnimation.swift; sourceTree = "<group>"; };
+		BB77C7142AB031F3002EA08A /* WritingIdleFaceAnimationSequence1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingIdleFaceAnimationSequence1.swift; sourceTree = "<group>"; };
+		BB77C7162AB03257002EA08A /* WritingLookLeftFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingLookLeftFaceAnimation.swift; sourceTree = "<group>"; };
+		BB77C7182AB032F6002EA08A /* WritingLookRightFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingLookRightFaceAnimation.swift; sourceTree = "<group>"; };
 		BB7BC14D2974FC9200D34695 /* ChatTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableView.swift; sourceTree = "<group>"; };
 		BB7BC14F297527EA00D34695 /* AttributedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedLabel.swift; sourceTree = "<group>"; };
 		BB7D9ACA2A36E3A100509C7B /* GPTModelTierSpecification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTModelTierSpecification.swift; sourceTree = "<group>"; };
@@ -772,6 +819,7 @@
 				BBA8C2272971FA08009BDECC /* AdSupport.framework in Frameworks */,
 				BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */,
 				BB3644F12A295C1000C2B8B4 /* AppTrackingTransparency.framework in Frameworks */,
+				BB62D3A62AAD95DD001F9ED4 /* FaceAnimation in Frameworks */,
 				BB05E62B2A9B638D0042A451 /* GoogleMobileAds in Frameworks */,
 				BB3644EF2A295C0400C2B8B4 /* AdServices.framework in Frameworks */,
 				BB39B7142A361F2100B25FA4 /* TenjinSDK.xcframework in Frameworks */,
@@ -858,7 +906,6 @@
 				BB39B70A2A34309600B25FA4 /* ChatGPTModelSelectionViewController.swift */,
 				BBA3AFB02A3EB460002F5961 /* ChatSmallBlankHeaderSourcedTableViewManager.swift */,
 				BB05E6682AA635340042A451 /* ChatTableViewDataSource.swift */,
-				BB05E6532A9CE2A10042A451 /* ChatTableViewDelegate.swift */,
 				BB720C8F296AAB7800BEA070 /* ChatViewController.swift */,
 				BBD50D0A29F1A65600C61B86 /* FirstChatGenerator.swift */,
 			);
@@ -869,14 +916,16 @@
 			isa = PBXGroup;
 			children = (
 				BB39B70F2A34392400B25FA4 /* ChatGPTModelSelectionViewController+ChatGPTModelSelectionViewDelegate.swift */,
+				BBDC4E4E29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift */,
 				BB39B7122A351F1200B25FA4 /* ChatViewController+ChatGPTModelSelectionViewControllerDelegate.swift */,
 				BB4AD4B62A8429B60053CF44 /* ChatViewController+ChatTableViewCellSourceDelegate.swift */,
-				BBDC4E4E29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift */,
-				BB05E6782AA791CC0042A451 /* ChatViewController+FetchedResultsTableViewDataSourceEditingDelegate.swift */,
 				BB8B187E29E776A700964724 /* ChatViewController+ChatViewDelegate.swift */,
+				BB05E6782AA791CC0042A451 /* ChatViewController+FetchedResultsTableViewDataSourceEditingDelegate.swift */,
 				BBDC4E4829C80B4F00204CD7 /* ChatViewController+GADDelegate.swift */,
-				BBDC4EE429CADCF400204CD7 /* ChatViewController+ChatTableViewTouchDelegate.swift */,
 				BBA3AFB22A3EB5F9002F5961 /* ChatViewController+ChatSmallBlankheaderSourcedTableViewManagerDelegate.swift */,
+				BBDC4EE429CADCF400204CD7 /* ChatViewController+ChatTableViewTouchDelegate.swift */,
+				BB05E6C82AA8EB700042A451 /* ChatViewController+UIGestureRecognizerDelegate.swift */,
+				BB05E6532A9CE2A10042A451 /* ChatViewController+UITableViewDelegate.swift */,
 				BBDC4E5229C80C7700204CD7 /* ChatViewController+UITextViewDelegate.swift */,
 			);
 			path = Extension;
@@ -1001,7 +1050,9 @@
 			isa = PBXGroup;
 			children = (
 				BB05E6402A9B76310042A451 /* Extension */,
+				BB77C6E22AAE4C85002EA08A /* FaceAnimation */,
 				BB24FB25297C93CB00A933EA /* GlobalTabBarController.swift */,
+				BB77C6D22AAD9891002EA08A /* GlobalTabBarFaceController.swift */,
 				BBC84683297EFF1E002493A5 /* GlobalTabBar.swift */,
 			);
 			path = TabBar;
@@ -1275,6 +1326,7 @@
 			isa = PBXGroup;
 			children = (
 				BB0F04CE29CD29B800C89A0A /* Additional */,
+				BB6787C62AB13EFD00F2D189 /* Ads */,
 				BB0F04DD29CD39A000C89A0A /* Builder */,
 				BBD50C8829EE599900C61B86 /* CoreData */,
 				BBD65BD4297064ED001F730C /* Extension */,
@@ -1464,6 +1516,89 @@
 				BBC7412529F49A8C00B3F41D /* TextViewTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		BB6787C62AB13EFD00F2D189 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				BB6787C72AB13F0900F2D189 /* InterstitialAdManager.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
+		BB77C6E22AAE4C85002EA08A /* FaceAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				BB77C6E72AAE5370002EA08A /* Blink */,
+				BB77C6E32AAE506E002EA08A /* FinishedWriting */,
+				BB77C6EF2AAE55A8002EA08A /* Smile */,
+				BB77C7012AAE5E66002EA08A /* Thinking */,
+				BB77C7082AAE600F002EA08A /* Writing */,
+				BB77C6DA2AAE309E002EA08A /* RandomFaceIdleAnimationSequence.swift */,
+				BB77C6DC2AAE3123002EA08A /* RandomFaceAnimationSequence.swift */,
+				BB77C6FF2AAE5CD3002EA08A /* RandomFaceAnimationSequenceProtocol.swift */,
+			);
+			path = FaceAnimation;
+			sourceTree = "<group>";
+		};
+		BB77C6E32AAE506E002EA08A /* FinishedWriting */ = {
+			isa = PBXGroup;
+			children = (
+				BB77C6E42AAE507B002EA08A /* Sequence1 */,
+				BB77C6E52AAE50B2002EA08A /* FinishedWritingFaceAnimationSequence1.swift */,
+			);
+			path = FinishedWriting;
+			sourceTree = "<group>";
+		};
+		BB77C6E42AAE507B002EA08A /* Sequence1 */ = {
+			isa = PBXGroup;
+			children = (
+				BB77C6EC2AAE5414002EA08A /* FinishedWritingFaceAnimation1_1.swift */,
+			);
+			path = Sequence1;
+			sourceTree = "<group>";
+		};
+		BB77C6E72AAE5370002EA08A /* Blink */ = {
+			isa = PBXGroup;
+			children = (
+				BB77C6EA2AAE53A4002EA08A /* BlinkFaceAnimationSequence.swift */,
+			);
+			path = Blink;
+			sourceTree = "<group>";
+		};
+		BB77C6EF2AAE55A8002EA08A /* Smile */ = {
+			isa = PBXGroup;
+			children = (
+				BB77C6F32AAE55EF002EA08A /* CenterSmileFaceAnimation.swift */,
+				BB77C6F82AAE59E4002EA08A /* SmileIdleFaceAnimationSequence1.swift */,
+				BB77C6FA2AAE5A45002EA08A /* SmileLookLeftCurveFaceAnimation.swift */,
+				BB77C70C2AAF9FB9002EA08A /* SmileLookLeftFaceAnimation.swift */,
+				BB77C6FD2AAE5B3A002EA08A /* SmileLookRightCurveFaceAnimation.swift */,
+				BB77C70E2AAFA039002EA08A /* SmileLookRightFaceAnimation.swift */,
+			);
+			path = Smile;
+			sourceTree = "<group>";
+		};
+		BB77C7012AAE5E66002EA08A /* Thinking */ = {
+			isa = PBXGroup;
+			children = (
+				BB77C7062AAE5F6B002EA08A /* ThinkingIdleFaceAnimationSequence1.swift */,
+				BB77C7022AAE5EE4002EA08A /* ThinkingLookLeftCurveFaceAnimation.swift */,
+				BB77C7102AAFA09A002EA08A /* ThinkingLookLeftFaceAnimation.swift */,
+				BB77C7042AAE5F11002EA08A /* ThinkingLookRightCurveFaceAnimation.swift */,
+				BB77C7122AAFA104002EA08A /* ThinkingLookRightFaceAnimation.swift */,
+			);
+			path = Thinking;
+			sourceTree = "<group>";
+		};
+		BB77C7082AAE600F002EA08A /* Writing */ = {
+			isa = PBXGroup;
+			children = (
+				BB77C7142AB031F3002EA08A /* WritingIdleFaceAnimationSequence1.swift */,
+				BB77C7162AB03257002EA08A /* WritingLookLeftFaceAnimation.swift */,
+				BB77C7182AB032F6002EA08A /* WritingLookRightFaceAnimation.swift */,
+			);
+			path = Writing;
 			sourceTree = "<group>";
 		};
 		BB8B184429E6176F00964724 /* Settings */ = {
@@ -2282,6 +2417,7 @@
 			packageProductDependencies = (
 				BB720C92296B1EAD00BEA070 /* MessageKit */,
 				BB05E62A2A9B638D0042A451 /* GoogleMobileAds */,
+				BB62D3A52AAD95DD001F9ED4 /* FaceAnimation */,
 			);
 			productName = ChitChat;
 			productReference = BB0DBAA4296AA4FE00D2DFB9 /* ChitChat.app */;
@@ -2358,6 +2494,7 @@
 			packageReferences = (
 				BB720C91296B1EAD00BEA070 /* XCRemoteSwiftPackageReference "MessageKit" */,
 				BB05E6292A9B638D0042A451 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				BB62D3A42AAD95DD001F9ED4 /* XCRemoteSwiftPackageReference "FaceAnimationFramework" */,
 			);
 			productRefGroup = BB0DBAA5296AA4FE00D2DFB9 /* Products */;
 			projectDirPath = "";
@@ -2507,6 +2644,7 @@
 				BB39B70D2A3434C100B25FA4 /* ChatGPTModelSelectionView.swift in Sources */,
 				BB8CF2572A98BAE900F9B9A8 /* Private.swift in Sources */,
 				BB39B6FE2A33E39900B25FA4 /* GPTModels.swift in Sources */,
+				BB77C7132AAFA104002EA08A /* ThinkingLookRightFaceAnimation.swift in Sources */,
 				BB8B184D29E6190600964724 /* ImageTextTableViewCell.swift in Sources */,
 				BB4AD4B52A841D730053CF44 /* EditableCellSource.swift in Sources */,
 				BBC9AB1B29D4E26F00A16CE2 /* EssayViewController+EssayBodyTableViewCellDelegate.swift in Sources */,
@@ -2525,10 +2663,12 @@
 				BBD50D2A29F3249600C61B86 /* IntroViewController.swift in Sources */,
 				BB8B18B829EA0CC600964724 /* PromptEssayTableViewCellSource.swift in Sources */,
 				BBDC4E4929C80B4F00204CD7 /* ChatViewController+GADDelegate.swift in Sources */,
+				BB77C6DD2AAE3123002EA08A /* RandomFaceAnimationSequence.swift in Sources */,
 				BB8B18CC29EB16FD00964724 /* Updater.swift in Sources */,
 				BB8B185729E650F900964724 /* SettingsPresentationSpecification.swift in Sources */,
 				BB05E6582AA2D2C80042A451 /* ConversationViewController+UITableViewDelegate.swift in Sources */,
 				BB5E9164297DCDED00DC7467 /* EssayEntryTableViewCell.swift in Sources */,
+				BB77C70D2AAF9FB9002EA08A /* SmileLookLeftFaceAnimation.swift in Sources */,
 				BBD50D0529F0631F00C61B86 /* ConversationViewController+ConversationItemTableViewCellDelegate.swift in Sources */,
 				BBC9AB2F29D521CB00A16CE2 /* RegisterUserResponse.swift in Sources */,
 				BB39A90A2A33D99D00F877DD /* GPTModelView.swift in Sources */,
@@ -2542,6 +2682,7 @@
 				BBD50CFE29EFA92B00C61B86 /* ConversationViewController.swift in Sources */,
 				BBA3AFA82A3E552F002F5961 /* SocketStream.swift in Sources */,
 				BB8B18D529EB396800964724 /* GeneratedChatsRemainingHelper.swift in Sources */,
+				BB77C6F92AAE59E4002EA08A /* SmileIdleFaceAnimationSequence1.swift in Sources */,
 				BB329B4D298B799B00B3824D /* UIImage+Rotated.swift in Sources */,
 				BB5E9162297DB62100DC7467 /* EssayBodyTableViewCell.swift in Sources */,
 				BBC4D20E29E5F83A0006D337 /* UltraView.swift in Sources */,
@@ -2552,11 +2693,13 @@
 				BBC7411E29F484DA00B3F41D /* SourcedCollectionViewManagerProtocol.swift in Sources */,
 				BBC7414B29F4B5DB00B3F41D /* HeaderItemExploreTableViewCell.swift in Sources */,
 				BBC7416329F5CD0A00B3F41D /* TextFieldComponentItemExploreTableViewCellSource.swift in Sources */,
+				BB77C7192AB032F6002EA08A /* WritingLookRightFaceAnimation.swift in Sources */,
 				BBA3AFA62A3E437B002F5961 /* WebSocketClient.swift in Sources */,
 				BB8B189A29E8BB9900964724 /* SelectableCellSource.swift in Sources */,
 				BB8B189D29E8C5E600964724 /* UltraViewController+UltraViewDelegate.swift in Sources */,
 				BB92A62C29CD504A002E000F /* RegistryHelper.swift in Sources */,
 				BBC7412829F49C6A00B3F41D /* TextViewTableViewCellSource.swift in Sources */,
+				BB77C6EB2AAE53A4002EA08A /* BlinkFaceAnimationSequence.swift in Sources */,
 				BB05E6562A9CEC7E0042A451 /* LoadableFetchedResultsTableViewDataSource.swift in Sources */,
 				BB0DBAA8296AA4FE00D2DFB9 /* AppDelegate.swift in Sources */,
 				BB8B189229E8697D00964724 /* UpdaterBroadcaster.swift in Sources */,
@@ -2586,11 +2729,14 @@
 				BBB351AF29F6F4D000CC15CD /* ExploreViewController+ItemCellSourceDelegate.swift in Sources */,
 				BB24FB26297C93CB00A933EA /* GlobalTabBarController.swift in Sources */,
 				BB96EBF929FD952F002CC223 /* ExploreIndentedHeaderSourcedTableViewManager.swift in Sources */,
+				BB77C6D32AAD9891002EA08A /* GlobalTabBarFaceController.swift in Sources */,
 				BB05249A29F6FFD7008C19DE /* ExploreViewController.swift in Sources */,
 				BB0A7E70298715A300CB252F /* FavoritesViewController.swift in Sources */,
 				BBC16387296B5FF800868752 /* GradientView.swift in Sources */,
 				BBC84686297F2960002493A5 /* EssayPremiumTableViewCell.swift in Sources */,
 				BBC7411A29F482BF00B3F41D /* ExplorePresentationSpecification.swift in Sources */,
+				BB77C7052AAE5F11002EA08A /* ThinkingLookRightCurveFaceAnimation.swift in Sources */,
+				BB77C7032AAE5EE4002EA08A /* ThinkingLookLeftCurveFaceAnimation.swift in Sources */,
 				BB96EBB929F8A8CB002CC223 /* ChatBubbleTableViewCell.swift in Sources */,
 				BBE011BA29F339C400CD7A64 /* ConversationCreateTableViewCellSource.swift in Sources */,
 				BBC4D1DC29E5B0630006D337 /* EssayTableView.swift in Sources */,
@@ -2615,7 +2761,7 @@
 				BBC4D20229E5CDD80006D337 /* ChatView.swift in Sources */,
 				BB0A8C09296CDB760035F046 /* RoundedView.swift in Sources */,
 				BB96EBC929FAFD5C002CC223 /* EssaySmallBlankHeaderSourcedTableViewManager.swift in Sources */,
-				BB05E6542A9CE2A10042A451 /* ChatTableViewDelegate.swift in Sources */,
+				BB05E6542A9CE2A10042A451 /* ChatViewController+UITableViewDelegate.swift in Sources */,
 				BBDC4E4F29C80C3900204CD7 /* ChatViewController+CameraViewControllerDelegate.swift in Sources */,
 				BB8B18C829EB159100964724 /* GeneratedChatsRemainingUpdater.swift in Sources */,
 				BB96EBBE29F8CDE3002CC223 /* DoneToolbarController.swift in Sources */,
@@ -2629,6 +2775,7 @@
 				BB4AD4B92A846D170053CF44 /* DeleteChatRequest.swift in Sources */,
 				BB8B189629E8AA1600964724 /* PresentationSpecification.swift in Sources */,
 				BBC9AB3E29D5FAD100A16CE2 /* AuthRequest.swift in Sources */,
+				BB05E6C92AA8EB700042A451 /* ChatViewController+UIGestureRecognizerDelegate.swift in Sources */,
 				BB0A8C0F296D05FA0035F046 /* UltraViewController.swift in Sources */,
 				BB556B7029D9E7A300351563 /* PremiumHelper.swift in Sources */,
 				BBD50D2D29F324A800C61B86 /* IntroViewController+IntroViewDelegate.swift in Sources */,
@@ -2639,7 +2786,9 @@
 				BBC7411C29F4845700B3F41D /* CollectionTableViewCellSource.swift in Sources */,
 				BBEA8A28296FBB9400DF37F8 /* NSMutableAttributedStringBuilder.swift in Sources */,
 				BB8B18A829E9084800964724 /* EssayView.swift in Sources */,
+				BB77C7112AAFA09A002EA08A /* ThinkingLookLeftFaceAnimation.swift in Sources */,
 				BB8B18C629EB00DB00964724 /* CameraViewController+CameraViewDelegate.swift in Sources */,
+				BB77C6FB2AAE5A45002EA08A /* SmileLookLeftCurveFaceAnimation.swift in Sources */,
 				BBA3AF9E2A3CDBCD002F5961 /* IsPremiumResponse.swift in Sources */,
 				BBD4D86C298063750031BBFA /* LoadingTableViewCell.swift in Sources */,
 				BBF6312D29F8361F00E9F0C2 /* CreationExploreTableViewCell.swift in Sources */,
@@ -2650,6 +2799,7 @@
 				BBC7415E29F5BBDF00B3F41D /* DropdownComponentItemExploreTableViewCellSource.swift in Sources */,
 				BB9D6EED29CF67C100706F08 /* ScrollViewScroller.swift in Sources */,
 				BB8B18CA29EB16B800964724 /* GeneratedChatsRemainingUpdater+SharedUpdaterBroadcaster.swift in Sources */,
+				BB77C6F42AAE55EF002EA08A /* CenterSmileFaceAnimation.swift in Sources */,
 				BBD50D0F29F1CFB300C61B86 /* DateGroupRange.swift in Sources */,
 				BB05E65D2AA2D8770042A451 /* TopViewFetchedResultsTableViewDataSource.swift in Sources */,
 				BBD50D1D29F30F0400C61B86 /* ChatObjectLegacy.swift in Sources */,
@@ -2679,12 +2829,14 @@
 				BB05E67B2AA7946E0042A451 /* ConversationViewController+FetchedResultsTableViewDataSourceEditingDelegate.swift in Sources */,
 				BBD50D0B29F1A65600C61B86 /* FirstChatGenerator.swift in Sources */,
 				BBA71D3829D15CEA007B0D99 /* StackedViewController.swift in Sources */,
+				BB77C6DB2AAE309E002EA08A /* RandomFaceIdleAnimationSequence.swift in Sources */,
 				BB04B3E9296DE2BD000BEC02 /* IAPHTTPSHelper.swift in Sources */,
 				BBF6313729F8688700E9F0C2 /* SmallBlankHeaderSourcedTableViewManager.swift in Sources */,
 				BBD50D3129F324CB00C61B86 /* IntroView.swift in Sources */,
 				BBD50C8329EC532D00C61B86 /* LoadingState.swift in Sources */,
 				BB96EBD929FB0CEF002CC223 /* ExploreView.swift in Sources */,
 				BBD50D1F29F3125E00C61B86 /* ChatObjectProtocolLegacy.swift in Sources */,
+				BB77C6FE2AAE5B3A002EA08A /* SmileLookRightCurveFaceAnimation.swift in Sources */,
 				BBD50CD529EF935E00C61B86 /* ChatStorageHelperLegacy.swift in Sources */,
 				BBC9AB3129D535C400A16CE2 /* GetChatResponse.swift in Sources */,
 				BBD50CF329EFA59800C61B86 /* ConversationItemTableViewCell.swift in Sources */,
@@ -2693,6 +2845,7 @@
 				BBC7412629F49A8C00B3F41D /* TextViewTableViewCell.swift in Sources */,
 				BBC4D1DE29E5B08B0006D337 /* ManagedTableView.swift in Sources */,
 				BBD50CDD29EF9F3D00C61B86 /* ManagedTableViewInView.swift in Sources */,
+				BB77C70F2AAFA039002EA08A /* SmileLookRightFaceAnimation.swift in Sources */,
 				BBC7416929F63F3E00B3F41D /* ManagedHeaderUpdatingTableViewInViewController.swift in Sources */,
 				BB96EBDE29FB1213002CC223 /* ButtonCollectionViewCellSource.swift in Sources */,
 				BB8B187A29E75ACE00964724 /* SettingsSourcedTableViewManager.swift in Sources */,
@@ -2700,12 +2853,16 @@
 				BBC7414129F4AA8D00B3F41D /* ContextMenuCell.swift in Sources */,
 				BB0A8C11296D063D0035F046 /* RoundedButton.swift in Sources */,
 				BB05E6692AA635340042A451 /* ChatTableViewDataSource.swift in Sources */,
+				BB77C6ED2AAE5414002EA08A /* FinishedWritingFaceAnimation1_1.swift in Sources */,
 				BBA3AFA42A3CFEDD002F5961 /* TransactionHTTPSConnector.swift in Sources */,
 				BB4A9CCA29CEBBCB0033BA00 /* LoadableCell.swift in Sources */,
 				BBA3AF9C2A3CDB5F002F5961 /* RegisterTransactionRequest.swift in Sources */,
 				BB5E915E297CF6C800DC7467 /* EssayCDHelper.swift in Sources */,
 				BBD50C8C29EE64C100C61B86 /* IdentifiableManagedObject.swift in Sources */,
+				BB77C6E62AAE50B2002EA08A /* FinishedWritingFaceAnimationSequence1.swift in Sources */,
+				BB77C7002AAE5CD3002EA08A /* RandomFaceAnimationSequenceProtocol.swift in Sources */,
 				BBC9AB2429D4EED600A16CE2 /* HTTPSClient.swift in Sources */,
+				BB77C7072AAE5F6B002EA08A /* ThinkingIdleFaceAnimationSequence1.swift in Sources */,
 				BB8B187529E70E1800964724 /* StackedPresentingNavigationController.swift in Sources */,
 				BB0A7E72298715B900CB252F /* FavoritesNavigationViewController.swift in Sources */,
 				BBF6313C29F8778500E9F0C2 /* PasteboardHelper.swift in Sources */,
@@ -2717,6 +2874,7 @@
 				BB5E9160297DB2A300DC7467 /* HalfRoundedView.swift in Sources */,
 				BB05E6632AA548020042A451 /* PulsatingDotsAnimationLoadableFetchedResultsTableViewDataSource.swift in Sources */,
 				BB7357EB29D0027500C67189 /* DotView.swift in Sources */,
+				BB6787C82AB13F0900F2D189 /* InterstitialAdManager.swift in Sources */,
 				BB8B18D729EB4C3500964724 /* UpdaterBroadcaster+PremiumUpdaterDelegate.swift in Sources */,
 				BB8B18B429EA0CAE00964724 /* LoadingEssayTableViewCellSource.swift in Sources */,
 				BBC7415329F4C34100B3F41D /* ManagedTableViewInViewController.swift in Sources */,
@@ -2724,6 +2882,7 @@
 				BBC84684297EFF1E002493A5 /* GlobalTabBar.swift in Sources */,
 				BBC7416029F5BDE500B3F41D /* Component.swift in Sources */,
 				BBA83E7729779E3A00536FF9 /* FaceConstants.swift in Sources */,
+				BB77C7172AB03257002EA08A /* WritingLookLeftFaceAnimation.swift in Sources */,
 				BB8B184B29E6180E00964724 /* UltraPurchaseTableViewCell.swift in Sources */,
 				BBDC4EC229C943B300204CD7 /* ChatTableViewCellSource.swift in Sources */,
 				BB556B7429D9F82800351563 /* ChatRequestHelper.swift in Sources */,
@@ -2737,6 +2896,7 @@
 				BBC9AB1929D4E22700A16CE2 /* EssayViewController+EssayPremiumTableViewCellDelegate.swift in Sources */,
 				BBD50D1629F2EFFE00C61B86 /* LoadingTableViewCellSource.swift in Sources */,
 				BB96EBF329FD8E04002CC223 /* ExploreCollectionTableViewCell.swift in Sources */,
+				BB77C7152AB031F3002EA08A /* WritingIdleFaceAnimationSequence1.swift in Sources */,
 				BB2213BE29F704D500901B65 /* ManagedCollectionView.swift in Sources */,
 				BBC9AB3829D552AC00A16CE2 /* GetImportantConstantsResponse.swift in Sources */,
 				BBA3AFAD2A3E56EF002F5961 /* ChatWebSocketConnector.swift in Sources */,
@@ -2948,6 +3108,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2967,7 +3128,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/alexcoundouriotis/Xcode Projects/WriteSmith-iOS/ChitChat/Tools/Tenjin/ChitChat-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -2991,6 +3152,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3010,7 +3172,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/alexcoundouriotis/Xcode Projects/WriteSmith-iOS/ChitChat/Tools/Tenjin/ChitChat-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -3158,6 +3320,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		BB62D3A42AAD95DD001F9ED4 /* XCRemoteSwiftPackageReference "FaceAnimationFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:Condo97/FaceAnimationFramework.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		BB720C91296B1EAD00BEA070 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MessageKit/MessageKit";
@@ -3173,6 +3343,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BB05E6292A9B638D0042A451 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		BB62D3A52AAD95DD001F9ED4 /* FaceAnimation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB62D3A42AAD95DD001F9ED4 /* XCRemoteSwiftPackageReference "FaceAnimationFramework" */;
+			productName = FaceAnimation;
 		};
 		BB720C92296B1EAD00BEA070 /* MessageKit */ = {
 			isa = XCSwiftPackageProductDependency;

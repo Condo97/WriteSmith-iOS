@@ -99,19 +99,19 @@ class ConversationViewController: HeaderViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        /* Setup Cell Source */
-//        Task {
-//            await setupCellSourcesAndHeaders()
-//        }
+        /* Update Last Conversation Selected Image */
+        Task {
+            await updateLastConversationSelectedImage()
+        }
     }
     
     override func setLeftMenuBarItems() {
         super.setLeftMenuBarItems()
         
-        // Remove first left bar button item if it is there
-        if navigationItem.leftBarButtonItems!.count > 0 {
-            navigationItem.leftBarButtonItems!.remove(at: 0)
-        }
+//        // Remove first left bar button item if it is there
+//        if navigationItem.leftBarButtonItems!.count > 0 {
+//            navigationItem.leftBarButtonItems!.remove(at: 0)
+//        }
         
         //TODO: Swap this with the three lines, since the gear is shown on more views
         // Insert gear button with settingsPressed target as first left bar button item
@@ -123,7 +123,7 @@ class ConversationViewController: HeaderViewController {
         settingsMenuBarButton.addTarget(self, action: #selector(settingsPressed), for: .touchUpInside)
         let settingsMenuBarItem = UIBarButtonItem(customView: settingsMenuBarButton)
         
-        navigationItem.leftBarButtonItems!.insert(settingsMenuBarItem, at: 0)
+        navigationItem.leftBarButtonItems?.append(settingsMenuBarItem)
     }
     
     override func setRightMenuBarItems() {
@@ -169,6 +169,27 @@ class ConversationViewController: HeaderViewController {
         
         // Push to settings
         navigationController?.pushViewController(SettingsPresentationSpecification().viewController, animated: true)
+    }
+    
+    func updateLastConversationSelectedImage() async {
+        guard let lastSelectedConversationID = await ConversationResumingManager.getConversationObjectID() else {
+            return
+        }
+        
+        for section in 0..<rootView.tableView.numberOfSections {
+            for row in 0..<rootView.tableView.numberOfRows(inSection: section) {
+                let indexPath = IndexPath(row: row, section: section)
+                if let conversationItemCell = rootView.tableView.cellForRow(at: indexPath) as? ConversationItemTableViewCell {
+                    if let conversation = fetchedResultsTableViewDataSource?.object(for: indexPath) as? Conversation {
+                        if conversation.objectID == lastSelectedConversationID {
+                            conversationItemCell.showPreviousConversationIndicator()
+                        } else {
+                            conversationItemCell.hidePreviousConversationIndicator()
+                        }
+                    }
+                }
+            }
+        }
     }
     
 //    func setupCellSourcesAndHeaders() async {

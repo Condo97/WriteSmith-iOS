@@ -9,7 +9,7 @@ import Foundation
 
 class LaunchControl {
 
-    private static let animationTimeInterval = 0.4
+    private static let animationTimeInterval = 0.2
 
     private static let launchScreen: UIViewController = {
         RegistryHelper.instantiateInitialViewControllerFromStoryboard(storyboardName: Registry.LaunchScreen.launchScreenStoryboardName)!
@@ -21,6 +21,8 @@ class LaunchControl {
 
     static func dismiss(animated: Bool) {
         UIView.animate(withDuration: animated ? animationTimeInterval : 0.0) {
+            launchScreen.view.alpha = 0.0
+        } completion: {success in
             launchScreen.view.removeFromSuperview()
         }
     }

@@ -13,7 +13,7 @@ class PaddingTableViewCellSource: CellSource {
     var padding: CGFloat
     
     init() {
-        self.padding = UIConstants.defaultPaddingTableViewCellSourceHeight
+        self.padding = UIConstants.defaultChatTableViewHeaderHeight
     }
     
     init(padding: CGFloat) {

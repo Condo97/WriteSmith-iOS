@@ -10,6 +10,11 @@ import Foundation
 extension GlobalTabBarController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        // Get selected if the writeTabIndex should be selected
+        let selected = tabBarController.viewControllers?.firstIndex(of: viewController) == writeTabIndex
+        
+        // Call setWriteButtonAppearance to set writeButton selected or not selected
+        setWriteButtonAppearance(selected: selected)
         
         // If the favorites button is selected, show ultra screen or share depending on tier... Favorites is not even implemented by the way, it's just there as a placeholder for now
         if viewController.isKind(of: FavoritesViewController.self) {

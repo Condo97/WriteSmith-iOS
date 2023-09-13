@@ -8,22 +8,22 @@
 import Foundation
 import GoogleMobileAds
 
-extension ChatViewController: GADFullScreenContentDelegate {
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        print("Ad failed to present full screen content")
-        
-    }
-    
-    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("Ad will present full screen content")
-    }
-    
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("Ad did dismiss full screen content")
-        
-        loadGAD()
-    }
-}
+//extension ChatViewController: GADFullScreenContentDelegate {
+//    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+//        print("Ad failed to present full screen content")
+//
+//    }
+//
+//    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+//        print("Ad will present full screen content")
+//    }
+//
+//    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+//        print("Ad did dismiss full screen content")
+//
+//        loadGAD()
+//    }
+//}
 
 
 extension ChatViewController: GADBannerViewDelegate {
@@ -42,10 +42,10 @@ extension ChatViewController: GADBannerViewDelegate {
                 self.rootView.adView.addSubview(bannerView)
                 self.rootView.adView.addConstraints([NSLayoutConstraint(item: bannerView, attribute: .centerY, relatedBy: .equal, toItem: self.rootView.adView, attribute: .centerY, multiplier: 1, constant: 0), NSLayoutConstraint(item: bannerView, attribute: .centerX, relatedBy: .equal, toItem: self.rootView.adView, attribute: .centerX, multiplier: 1, constant: 0)])
                 
-                // Move the tableView down by the adViewHeight to make it more "seamless"
-                if shouldMoveDown {
-                    self.rootView.tableView.contentOffset.y += self.adViewHeight
-                }
+//                // Move the tableView down by the adViewHeight to make it more "seamless"
+//                if shouldMoveDown {
+//                    self.rootView.tableView.contentOffset.y += self.adViewHeight
+//                }
 //                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .bottom, animated: false)
             }
         }
@@ -55,7 +55,7 @@ extension ChatViewController: GADBannerViewDelegate {
         print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
         
         DispatchQueue.main.async {
-            self.rootView.tableView.contentOffset.y -= self.adViewHeight
+//            self.rootView.tableView.contentOffset.y -= self.adViewHeight
             
             self.rootView.adView.alpha = 0.0
             self.rootView.adViewHeightConstraint.constant = 0.0

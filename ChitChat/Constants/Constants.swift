@@ -202,6 +202,10 @@ struct Constants {
         static let cameraButtonPressed = "cameraButtonPressed"
         static let cameraButtonRedo = "cameraButtonRedo"
         
+        static let faceImageName = "face_background"
+        static let faceTabBarBackgroundImageName = "tabBarFaceBackground"
+        static let faceTabBarBackgroundRingImageName = "tabBarFaceBackgroundRing"
+        
         static let giftGif = "giftGif"
         
         static let introScreenshot1 = "introScreenshot1"
@@ -223,8 +227,11 @@ struct UIConstants {
     static let defaultDotSpeed = 0.4
     static let defaultDotMinSizeDivisor = 4.0
     
-    static let defaultPaddingTableViewCellSourceHeight = 200.0
-    static let premiumPaddingTableViewCellSourceHeight = 120.0
+    static let defaultChatTableViewHeaderHeight = 180.0
+    static let premiumChatTableViewHeaderHeight = 120.0
+    
+    static let defaultChatTableViewFooterHeight = 64.0
+    static let premiumChatTableViewFooterHeight = 40.0
     
     static let defaultLabelTableViewCellSourceFontSize = 24.0
     static let defaultLabelTableViewCellSourceConstraintConstant = 0.0
