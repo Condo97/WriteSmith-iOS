@@ -124,7 +124,7 @@ class GlobalTabBarController: UITabBarController {
         faceContainerView!.frame = faceContainerViewFrame
         faceContainerView!.isUserInteractionEnabled = false
         
-        faceAnimationView = FaceAnimationView(frame: faceViewFrame, faceImageName: Constants.ImageName.faceImageName, startAnimation: CenterSmileFaceAnimation(duration: 0.0))
+        faceAnimationView = FaceAnimationView(frame: faceViewFrame, faceImageName: Constants.ImageName.faceImageName, startAnimation: SmileCenterFaceAnimation(duration: 0.0))
         
         let faceAnimationViewBackgroundImage = UIImage(named: Constants.ImageName.faceTabBarBackgroundImageName)
         faceAnimationViewBackgroundImageView = UIImageView(image: faceAnimationViewBackgroundImage)
@@ -212,15 +212,17 @@ class GlobalTabBarController: UITabBarController {
 //    }
     
     func setWriteButtonAppearance(selected: Bool) {
+        faceAnimationController!.setIdleAnimations(selected ? RandomFaceIdleAnimationSequence.smile : .deselected)
+        
         faceAnimationViewBackgroundImageView!.tintColor = selected ? Colors.elementTextColor : Colors.elementBackgroundColor
         
         faceAnimationViewBackgroundRingImageView!.tintColor = Colors.elementTextColor
         faceAnimationViewBackgroundRingImageView!.alpha = selected ? 0.0 : 1.0
         
         faceAnimationView!.tintColor = selected ? Colors.elementBackgroundColor : Colors.elementTextColor
-        faceAnimationView?.setNeedsLayout()
-        faceAnimationView?.layoutIfNeeded()
-        faceAnimationView?.setNeedsDisplay()
+        faceAnimationView!.setNeedsLayout()
+        faceAnimationView!.layoutIfNeeded()
+        faceAnimationView!.setNeedsDisplay()
 //        faceAnimationView?.setNeedsLayout()
 //        faceAnimationView?.layoutIfNeeded()
 //        faceAnimationView?.setNeedsDisplay()

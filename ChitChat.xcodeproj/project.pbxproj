@@ -111,6 +111,8 @@
 		BB5E9164297DCDED00DC7467 /* EssayEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */; };
 		BB62D3A62AAD95DD001F9ED4 /* FaceAnimation in Frameworks */ = {isa = PBXBuildFile; productRef = BB62D3A52AAD95DD001F9ED4 /* FaceAnimation */; };
 		BB6787C82AB13F0900F2D189 /* InterstitialAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6787C72AB13F0900F2D189 /* InterstitialAdManager.swift */; };
+		BB6787CB2AB14BF800F2D189 /* NeutralCenterFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6787CA2AB14BF800F2D189 /* NeutralCenterFaceAnimation.swift */; };
+		BB6787CD2AB14CAA00F2D189 /* DeselectedFaceAnimationSequence1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6787CC2AB14CAA00F2D189 /* DeselectedFaceAnimationSequence1.swift */; };
 		BB720C90296AAB7800BEA070 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB720C8F296AAB7800BEA070 /* ChatViewController.swift */; };
 		BB720C93296B1EAD00BEA070 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = BB720C92296B1EAD00BEA070 /* MessageKit */; };
 		BB7357E929D000CB00C67189 /* DotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7357E829D000CB00C67189 /* DotsView.swift */; };
@@ -122,7 +124,7 @@
 		BB77C6E62AAE50B2002EA08A /* FinishedWritingFaceAnimationSequence1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6E52AAE50B2002EA08A /* FinishedWritingFaceAnimationSequence1.swift */; };
 		BB77C6EB2AAE53A4002EA08A /* BlinkFaceAnimationSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6EA2AAE53A4002EA08A /* BlinkFaceAnimationSequence.swift */; };
 		BB77C6ED2AAE5414002EA08A /* FinishedWritingFaceAnimation1_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6EC2AAE5414002EA08A /* FinishedWritingFaceAnimation1_1.swift */; };
-		BB77C6F42AAE55EF002EA08A /* CenterSmileFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6F32AAE55EF002EA08A /* CenterSmileFaceAnimation.swift */; };
+		BB77C6F42AAE55EF002EA08A /* SmileCenterFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6F32AAE55EF002EA08A /* SmileCenterFaceAnimation.swift */; };
 		BB77C6F92AAE59E4002EA08A /* SmileIdleFaceAnimationSequence1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6F82AAE59E4002EA08A /* SmileIdleFaceAnimationSequence1.swift */; };
 		BB77C6FB2AAE5A45002EA08A /* SmileLookLeftCurveFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6FA2AAE5A45002EA08A /* SmileLookLeftCurveFaceAnimation.swift */; };
 		BB77C6FE2AAE5B3A002EA08A /* SmileLookRightCurveFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB77C6FD2AAE5B3A002EA08A /* SmileLookRightCurveFaceAnimation.swift */; };
@@ -541,6 +543,8 @@
 		BB5E9161297DB62100DC7467 /* EssayBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayBodyTableViewCell.swift; sourceTree = "<group>"; };
 		BB5E9163297DCDED00DC7467 /* EssayEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayEntryTableViewCell.swift; sourceTree = "<group>"; };
 		BB6787C72AB13F0900F2D189 /* InterstitialAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAdManager.swift; sourceTree = "<group>"; };
+		BB6787CA2AB14BF800F2D189 /* NeutralCenterFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutralCenterFaceAnimation.swift; sourceTree = "<group>"; };
+		BB6787CC2AB14CAA00F2D189 /* DeselectedFaceAnimationSequence1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeselectedFaceAnimationSequence1.swift; sourceTree = "<group>"; };
 		BB720C8F296AAB7800BEA070 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		BB7357E829D000CB00C67189 /* DotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsView.swift; sourceTree = "<group>"; };
 		BB7357EA29D0027500C67189 /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
@@ -551,7 +555,7 @@
 		BB77C6E52AAE50B2002EA08A /* FinishedWritingFaceAnimationSequence1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedWritingFaceAnimationSequence1.swift; sourceTree = "<group>"; };
 		BB77C6EA2AAE53A4002EA08A /* BlinkFaceAnimationSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlinkFaceAnimationSequence.swift; sourceTree = "<group>"; };
 		BB77C6EC2AAE5414002EA08A /* FinishedWritingFaceAnimation1_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedWritingFaceAnimation1_1.swift; sourceTree = "<group>"; };
-		BB77C6F32AAE55EF002EA08A /* CenterSmileFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterSmileFaceAnimation.swift; sourceTree = "<group>"; };
+		BB77C6F32AAE55EF002EA08A /* SmileCenterFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileCenterFaceAnimation.swift; sourceTree = "<group>"; };
 		BB77C6F82AAE59E4002EA08A /* SmileIdleFaceAnimationSequence1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileIdleFaceAnimationSequence1.swift; sourceTree = "<group>"; };
 		BB77C6FA2AAE5A45002EA08A /* SmileLookLeftCurveFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileLookLeftCurveFaceAnimation.swift; sourceTree = "<group>"; };
 		BB77C6FD2AAE5B3A002EA08A /* SmileLookRightCurveFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileLookRightCurveFaceAnimation.swift; sourceTree = "<group>"; };
@@ -1526,11 +1530,29 @@
 			path = Ads;
 			sourceTree = "<group>";
 		};
+		BB6787C92AB14BD500F2D189 /* Neutral */ = {
+			isa = PBXGroup;
+			children = (
+				BB6787CA2AB14BF800F2D189 /* NeutralCenterFaceAnimation.swift */,
+			);
+			path = Neutral;
+			sourceTree = "<group>";
+		};
+		BB6787CE2AB14CBB00F2D189 /* Deselected */ = {
+			isa = PBXGroup;
+			children = (
+				BB6787CC2AB14CAA00F2D189 /* DeselectedFaceAnimationSequence1.swift */,
+			);
+			path = Deselected;
+			sourceTree = "<group>";
+		};
 		BB77C6E22AAE4C85002EA08A /* FaceAnimation */ = {
 			isa = PBXGroup;
 			children = (
 				BB77C6E72AAE5370002EA08A /* Blink */,
+				BB6787CE2AB14CBB00F2D189 /* Deselected */,
 				BB77C6E32AAE506E002EA08A /* FinishedWriting */,
+				BB6787C92AB14BD500F2D189 /* Neutral */,
 				BB77C6EF2AAE55A8002EA08A /* Smile */,
 				BB77C7012AAE5E66002EA08A /* Thinking */,
 				BB77C7082AAE600F002EA08A /* Writing */,
@@ -1569,7 +1591,7 @@
 		BB77C6EF2AAE55A8002EA08A /* Smile */ = {
 			isa = PBXGroup;
 			children = (
-				BB77C6F32AAE55EF002EA08A /* CenterSmileFaceAnimation.swift */,
+				BB77C6F32AAE55EF002EA08A /* SmileCenterFaceAnimation.swift */,
 				BB77C6F82AAE59E4002EA08A /* SmileIdleFaceAnimationSequence1.swift */,
 				BB77C6FA2AAE5A45002EA08A /* SmileLookLeftCurveFaceAnimation.swift */,
 				BB77C70C2AAF9FB9002EA08A /* SmileLookLeftFaceAnimation.swift */,
@@ -2665,6 +2687,7 @@
 				BBDC4E4929C80B4F00204CD7 /* ChatViewController+GADDelegate.swift in Sources */,
 				BB77C6DD2AAE3123002EA08A /* RandomFaceAnimationSequence.swift in Sources */,
 				BB8B18CC29EB16FD00964724 /* Updater.swift in Sources */,
+				BB6787CD2AB14CAA00F2D189 /* DeselectedFaceAnimationSequence1.swift in Sources */,
 				BB8B185729E650F900964724 /* SettingsPresentationSpecification.swift in Sources */,
 				BB05E6582AA2D2C80042A451 /* ConversationViewController+UITableViewDelegate.swift in Sources */,
 				BB5E9164297DCDED00DC7467 /* EssayEntryTableViewCell.swift in Sources */,
@@ -2799,7 +2822,7 @@
 				BBC7415E29F5BBDF00B3F41D /* DropdownComponentItemExploreTableViewCellSource.swift in Sources */,
 				BB9D6EED29CF67C100706F08 /* ScrollViewScroller.swift in Sources */,
 				BB8B18CA29EB16B800964724 /* GeneratedChatsRemainingUpdater+SharedUpdaterBroadcaster.swift in Sources */,
-				BB77C6F42AAE55EF002EA08A /* CenterSmileFaceAnimation.swift in Sources */,
+				BB77C6F42AAE55EF002EA08A /* SmileCenterFaceAnimation.swift in Sources */,
 				BBD50D0F29F1CFB300C61B86 /* DateGroupRange.swift in Sources */,
 				BB05E65D2AA2D8770042A451 /* TopViewFetchedResultsTableViewDataSource.swift in Sources */,
 				BBD50D1D29F30F0400C61B86 /* ChatObjectLegacy.swift in Sources */,
@@ -2850,6 +2873,7 @@
 				BB96EBDE29FB1213002CC223 /* ButtonCollectionViewCellSource.swift in Sources */,
 				BB8B187A29E75ACE00964724 /* SettingsSourcedTableViewManager.swift in Sources */,
 				BB7D9ACB2A36E3A100509C7B /* GPTModelTierSpecification.swift in Sources */,
+				BB6787CB2AB14BF800F2D189 /* NeutralCenterFaceAnimation.swift in Sources */,
 				BBC7414129F4AA8D00B3F41D /* ContextMenuCell.swift in Sources */,
 				BB0A8C11296D063D0035F046 /* RoundedButton.swift in Sources */,
 				BB05E6692AA635340042A451 /* ChatTableViewDataSource.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  CenterSmileFaceAnimation.swift
+//  SmileCenterFaceAnimation.swift
 //  ChitChat
 //
 //  Created by Alex Coundouriotis on 9/10/23.
@@ -8,7 +8,7 @@
 import FaceAnimation
 import Foundation
 
-struct CenterSmileFaceAnimation: FaceAnimation {
+struct SmileCenterFaceAnimation: FaceAnimation {
     struct ZeroMoveAnimation: MoveAnimation {
         var moveToPosition: CGPoint = CGPoint(x: 0, y: 0)
     }
