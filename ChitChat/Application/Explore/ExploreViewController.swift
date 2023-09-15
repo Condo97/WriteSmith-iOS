@@ -112,11 +112,6 @@ class ExploreViewController: ManagedHeaderUpdatingTableViewInViewController {
     override func setLeftMenuBarItems() {
         super.setLeftMenuBarItems()
         
-        // Remove first left bar button item if it is there
-        if navigationItem.leftBarButtonItems!.count > 0 {
-            navigationItem.leftBarButtonItems!.remove(at: 0)
-        }
-        
         //TODO: Swap this with the three lines, since the gear is shown on more views
         // Insert gear button with settingsPressed target as first left bar button item
         let settingsMenuBarButtonImage = UIImage(systemName: "gear")
@@ -127,7 +122,7 @@ class ExploreViewController: ManagedHeaderUpdatingTableViewInViewController {
         settingsMenuBarButton.addTarget(self, action: #selector(settingsPressed), for: .touchUpInside)
         let settingsMenuBarItem = UIBarButtonItem(customView: settingsMenuBarButton)
         
-        navigationItem.leftBarButtonItems!.insert(settingsMenuBarItem, at: 0)
+        navigationItem.leftBarButtonItems = [settingsMenuBarItem]
     }
     
     @objc func settingsPressed() {

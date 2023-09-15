@@ -63,6 +63,10 @@ class ConversationViewController: HeaderViewController {
         /* Setup TableView Delegate and DataSource */
         rootView.tableView.delegate = self
         rootView.tableView.dataSource = fetchedResultsTableViewDataSource
+        
+        // Set title for back button
+        title = "Chats"
+        
 //        rootView.tableView.manager = conversationTableViewManager
         
         //TODO: Correct space for older chats
@@ -95,7 +99,6 @@ class ConversationViewController: HeaderViewController {
                 pushToConversation = false
             }
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +126,7 @@ class ConversationViewController: HeaderViewController {
         settingsMenuBarButton.addTarget(self, action: #selector(settingsPressed), for: .touchUpInside)
         let settingsMenuBarItem = UIBarButtonItem(customView: settingsMenuBarButton)
         
-        navigationItem.leftBarButtonItems?.append(settingsMenuBarItem)
+        navigationItem.leftBarButtonItems = [settingsMenuBarItem]
     }
     
     override func setRightMenuBarItems() {
