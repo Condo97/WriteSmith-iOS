@@ -65,9 +65,7 @@ class ConversationViewController: HeaderViewController {
         rootView.tableView.dataSource = fetchedResultsTableViewDataSource
         
         // Set title for back button
-        title = "Chats"
-        
-//        rootView.tableView.manager = conversationTableViewManager
+        self.navigationController?.navigationBar.topItem?.title = "Chats"
         
         //TODO: Correct space for older chats
         
