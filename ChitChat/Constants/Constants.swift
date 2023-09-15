@@ -51,6 +51,7 @@ struct Constants {
     
     static let reviewFrequency = 5
     static let adFrequency = 4
+    static let premiumFrequency = 15
     
     static let freeTypingTimeInterval = 2.8/100
     static let premiumTypingTimeInterval = 2.0/100

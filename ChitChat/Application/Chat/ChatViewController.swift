@@ -496,16 +496,9 @@ class ChatViewController: HeaderViewController {
             self.setFaceIdleAnimationToThinking()
         }
         
-        // Show ad or review
-        if (PremiumHelper.get()) {
-            showReviewAtFrequency()
-        } else {
-            showAdAtFrequency(shouldPresent: {shouldPresent in
-                if !shouldPresent {
-                    // If ad didn't present, try to show a review instead
-                    self.showReviewAtFrequency()
-                }
-            })
+        // Call showPromoPopupWhileGenerating to show ad or review
+        Task {
+            await showPromoPopupWhileGenerating()
         }
         
         // Get current model
@@ -810,30 +803,30 @@ class ChatViewController: HeaderViewController {
         }
     }
     
-    func showReviewAtFrequency() {
+    func shouldShowReviewAtFrequency(chatCount: Int) -> Bool {
         // If the number remaining is not zero and its modulo with the review frequency is 0, show review TODO: Should this be determined by total chat count?
-        if self.remaining > 0 && self.remaining % Constants.reviewFrequency == 0 && !firstChat {
-            DispatchQueue.main.async {
-                if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                    DispatchQueue.main.async {
-                        SKStoreReviewController.requestReview(in: scene)
-                    }
-                }
-            }
+        if chatCount > 1 && chatCount % Constants.reviewFrequency == 0 {
+            return true
         }
+        
+        return false
     }
     
-    func showAdAtFrequency(shouldPresent: ((Bool)->Void)?) {
+    func shouldShowAdAtFrequency(chatCount: Int) async -> Bool {
         // If the number remaining modulo the ad frequency is 0, show ad TODO: Should this be determined by total chat count?
-        if self.remaining % Constants.adFrequency == 0  && self.remaining != 0 && !self.firstChat {
-            shouldPresent?(true)
-            
-            Task {
-                await InterstitialAdManager.instance.showAd(from: self)
-            }
-        } else {
-            shouldPresent?(false)
+        if chatCount > 1 && chatCount % Constants.adFrequency == 0 {
+            return true
         }
+        
+        return false
+    }
+    
+    func shouldShowPremiumAtFrequency(chatCount: Int) -> Bool {
+        if chatCount > 1 && chatCount & Constants.premiumFrequency == 0 {
+            return true
+        }
+        
+        return false
     }
     
     func goToUltraPurchase() {
@@ -1081,25 +1074,65 @@ class ChatViewController: HeaderViewController {
         view.endEditing(true)
     }
     
-//    func loadGAD() {
-//        failedToLoadInterstitial = false
-//
-//        if !UserDefaults.standard.bool(forKey: Constants.userDefaultStoredIsPremium) {
-//            let request = GADRequest()
-//            GADInterstitialAd.load(withAdUnitID: Private.interstitialID, request: request, completionHandler: { [self] ad, error in
-//                if let error = error {
-//                    print("Failed to load ad with error: \(error.localizedDescription)")
-//                    self.failedToLoadInterstitial = true
-//
-//                    return
-//                }
-//
-//                interstitial = ad
-//                interstitial?.fullScreenContentDelegate = self
-//                failedToLoadInterstitial = false
-//            })
-//        }
-//    }
+    private func showPromoPopupWhileGenerating() async {
+        let chatCount: Int
+        do {
+            // Get chatCount
+            guard let currentConversationObjectID = currentConversationObjectID, let chatCountUnwrapped = try await ConversationCDHelper.countChats(in: currentConversationObjectID) else {
+                print("Could not unwrap currentConversationObjectID or chatCount in ChatViewController!")
+                return
+            }
+            
+            chatCount = chatCountUnwrapped
+        } catch {
+            // TODO: Handle errors
+            print("Error showing promo popup while generating in ChatViewController... \(error)")
+            return
+        }
+        
+        // Show only one popup at correct frequency depending on premium
+        if (PremiumHelper.get()) {
+            if shouldShowReviewAtFrequency(chatCount: chatCount) {
+                // Show review, only returning if shown
+                DispatchQueue.main.async {
+                    if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                        DispatchQueue.main.async {
+                            SKStoreReviewController.requestReview(in: scene)
+                            
+                            return
+                        }
+                    }
+                }
+            }
+        } else {
+            if await shouldShowAdAtFrequency(chatCount: chatCount) {
+                // Show ad
+                await InterstitialAdManager.instance.showAd(from: self)
+                
+                return
+            }
+            
+            if shouldShowReviewAtFrequency(chatCount: chatCount) {
+                // Show review, only returning if shown
+                DispatchQueue.main.async {
+                    if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                        DispatchQueue.main.async {
+                            SKStoreReviewController.requestReview(in: scene)
+                            
+                            return
+                        }
+                    }
+                }
+            }
+            
+            if shouldShowPremiumAtFrequency(chatCount: chatCount) {
+                // Show premium
+                goToUltraPurchase()
+                
+                return
+            }
+        }
+    }
     
     /* GPT Model Control */
     

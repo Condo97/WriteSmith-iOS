@@ -42,6 +42,17 @@ class ConversationCDHelper: Any {
             })
     }
     
+    static func countChats(in conversationObjectID: NSManagedObjectID) async throws -> Int? {
+        try await CDClient.doInContext(managedObjectID: conversationObjectID) {managedObject in
+            guard let conversation = managedObject as? Conversation else {
+                // TODO: Handle errors
+                return nil
+            }
+            
+            return conversation.chats?.count
+        }
+    }
+    
 //    static func convertToPermanentID(_ conversation: Conversation) async throws {
 //        try await CDClient.convertToPermanentID(managedObject: conversation)
 //    }

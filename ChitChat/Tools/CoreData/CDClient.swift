@@ -123,11 +123,11 @@ class CDClient: Any {
         }
     }
     
-    internal static func doInContext(managedObjectID: NSManagedObjectID, block: @escaping (NSManagedObject)->Void) async throws {
+    internal static func doInContext<T>(managedObjectID: NSManagedObjectID, block: @escaping (NSManagedObject)->T?) async throws -> T? {
         return try await backgroundManagedObjectContext.perform {
             let managedObject = try backgroundManagedObjectContext.existingObject(with: managedObjectID)
             
-            block(managedObject)
+            return block(managedObject)
         }
     }
     
