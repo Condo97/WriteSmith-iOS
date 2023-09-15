@@ -401,19 +401,19 @@
                 <outlet property="bottomViewBottomAlignmentConstraint" destination="pDT-Hy-8fZ" id="zGH-tS-jgT"/>
                 <outlet property="cameraButton" destination="yEa-7V-bCm" id="kga-nZ-fD8"/>
                 <outlet property="cameraButtonHeightConstraint" destination="CJ9-tD-KxN" id="hhv-Lg-7qU"/>
-                <outlet property="chatsRemainingText" destination="aNo-zW-ZLx" id="2h1-yB-ByE"/>
                 <outlet property="gptModelView" destination="phd-U7-1EW" id="Age-U3-xeK"/>
                 <outlet property="inputBackgroundView" destination="fGD-WT-vj1" id="hnJ-BK-WW5"/>
                 <outlet property="inputTextView" destination="lqH-7X-Xmk" id="OfF-Yh-zn1"/>
                 <outlet property="promoShadowView" destination="7LK-cQ-SlI" id="lNV-KD-0zm"/>
                 <outlet property="promoView" destination="OK3-kx-yYI" id="KaF-HQ-R19"/>
                 <outlet property="promoViewHeightConstraint" destination="8TS-sG-luZ" id="qMj-AL-PGR"/>
-                <outlet property="remainingShadowView" destination="PZz-DX-M1g" id="Fo3-TE-bNQ"/>
-                <outlet property="remainingView" destination="iLa-Cf-BcE" id="wYy-cV-g7A"/>
                 <outlet property="submitButton" destination="rvV-EV-3cX" id="XKE-jj-kP2"/>
                 <outlet property="submitButtonBottomConstraint" destination="4L1-fq-mqV" id="j9S-8j-RE7"/>
                 <outlet property="submitButtonCenterYConstraint" destination="nk9-v5-Ofy" id="bFI-wL-KlO"/>
                 <outlet property="tableView" destination="mvY-B7-WIM" id="FaZ-B1-28G"/>
+                <outlet property="upgradeNowPromoLabel" destination="aNo-zW-ZLx" id="2h1-yB-ByE"/>
+                <outlet property="upgradeNowPromoShadowView" destination="PZz-DX-M1g" id="Fo3-TE-bNQ"/>
+                <outlet property="upgradeNowPromoView" destination="iLa-Cf-BcE" id="wYy-cV-g7A"/>
                 <outlet property="upgradeNowText" destination="Iwc-Cj-Gf8" id="FKO-0u-aLJ"/>
             </connections>
             <point key="canvasLocation" x="-25.190839694656489" y="19.718309859154932"/>

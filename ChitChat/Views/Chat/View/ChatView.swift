@@ -21,9 +21,9 @@ class ChatView: UIView {
     @IBOutlet weak var promoView: RoundedView!
     @IBOutlet weak var promoShadowView: ShadowView!
     @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var remainingView: RoundedView!
-    @IBOutlet weak var remainingShadowView: ShadowView!
-    @IBOutlet weak var chatsRemainingText: UILabel!
+    @IBOutlet weak var upgradeNowPromoView: RoundedView!
+    @IBOutlet weak var upgradeNowPromoShadowView: ShadowView!
+    @IBOutlet weak var upgradeNowPromoLabel: UILabel!
     @IBOutlet weak var upgradeNowText: UILabel!
     @IBOutlet weak var adView: UIView!
     @IBOutlet weak var adShadowView: ShadowView!

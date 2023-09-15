@@ -1,14 +1,14 @@
+////
+////  RemainingStructureUpdaterObserver.swift
+////  ChitChat
+////
+////  Created by Alex Coundouriotis on 4/15/23.
+////
 //
-//  RemainingStructureUpdaterObserver.swift
-//  ChitChat
+//import Foundation
 //
-//  Created by Alex Coundouriotis on 4/15/23.
+//extension GeneratedChatsRemainingUpdater {
 //
-
-import Foundation
-
-extension GeneratedChatsRemainingUpdater {
-    
-    static let sharedBroadcaster = UpdaterBroadcaster<GeneratedChatsRemainingUpdater>()
-    
-}
+//    static let sharedBroadcaster = UpdaterBroadcaster<GeneratedChatsRemainingUpdater>()
+//
+//}

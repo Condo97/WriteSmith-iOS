@@ -11,7 +11,7 @@ class HeaderViewController: UpdatingViewController {
     
     var moreMenuBarItem = UIBarButtonItem()
     var shareMenuBarItem = UIBarButtonItem()
-    var ultraMenuBarItem = UIBarButtonItem()
+//    var ultraMenuBarItem = UIBarButtonItem()
     var navigationSpacer = UIBarButtonItem()
     
     override func viewDidLoad() {
@@ -30,7 +30,7 @@ class HeaderViewController: UpdatingViewController {
         /* Setup Menu Bar Items */
         moreMenuBarItem = createMoreMenuBarItem()
         shareMenuBarItem = createShareMenuBarItem()
-        ultraMenuBarItem = createUltraMenuBarItem()
+//        ultraMenuBarItem = createUltraMenuBarItem()
         
         /* Setup Navigation Spacer */
         navigationSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
@@ -44,17 +44,17 @@ class HeaderViewController: UpdatingViewController {
         shareMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 28.0).isActive = true
         shareMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
         
-        /* Setup Ultra Constraints */
-        ultraMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 48.0).isActive = true
-        ultraMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
-        ultraMenuBarItem.customView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 24.0, right: 0)
-        if let ultraView = ultraMenuBarItem.customView as? UltraNavigationItemView {
-            let verticalOffset: CGFloat = 1.0
-            
-            ultraView.topSpaceConstraint.constant = -verticalOffset
-            ultraView.bottomSpaceConstraint.constant = -verticalOffset
-        }
-        
+//        /* Setup Ultra Constraints */
+//        ultraMenuBarItem.customView?.widthAnchor.constraint(equalToConstant: 48.0).isActive = true
+//        ultraMenuBarItem.customView?.heightAnchor.constraint(equalToConstant: 28.0).isActive = true
+//        ultraMenuBarItem.customView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 24.0, right: 0)
+//        if let ultraView = ultraMenuBarItem.customView as? UltraNavigationItemView {
+//            let verticalOffset: CGFloat = 1.0
+//
+//            ultraView.topSpaceConstraint.constant = -verticalOffset
+//            ultraView.bottomSpaceConstraint.constant = -verticalOffset
+//        }
+//
         let imageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 140.0, height: 80.0))
         imageView.contentMode = .scaleAspectFit
         
@@ -79,22 +79,22 @@ class HeaderViewController: UpdatingViewController {
         
     }
     
-    override func updateGeneratedChatsRemaining(remaining: Int) {
-        super.updateGeneratedChatsRemaining(remaining: remaining)
-        
-        // Update remaining bar item on main thread
-        DispatchQueue.main.async {
-            // Check if ultraMenuBarItem is in rightBarButtonItems and if not, setRightMenuBarItems
-            if !self.navigationItem.rightBarButtonItems!.contains(where: { $0 === self.ultraMenuBarItem }) {
-                self.setRightMenuBarItems()
-            }
-            
-            // Set remaining text
-            if let ultraView = self.ultraMenuBarItem.customView as? UltraNavigationItemView {
-                ultraView.label.text = "\(remaining < 0 ? 0 : remaining)"
-            }
-        }
-    }
+//    override func updateGeneratedChatsRemaining(remaining: Int) {
+//        super.updateGeneratedChatsRemaining(remaining: remaining)
+//
+//        // Update remaining bar item on main thread
+//        DispatchQueue.main.async {
+//            // Check if ultraMenuBarItem is in rightBarButtonItems and if not, setRightMenuBarItems
+//            if !self.navigationItem.rightBarButtonItems!.contains(where: { $0 === self.ultraMenuBarItem }) {
+//                self.setRightMenuBarItems()
+//            }
+//
+//            // Set remaining text
+//            if let ultraView = self.ultraMenuBarItem.customView as? UltraNavigationItemView {
+//                ultraView.label.text = "\(remaining < 0 ? 0 : remaining)"
+//            }
+//        }
+//    }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -104,14 +104,14 @@ class HeaderViewController: UpdatingViewController {
         
         let userInterfaceStyle = traitCollection.userInterfaceStyle
         
-        // TODO: Do this better, it also calls a copy pasted code during setup
-        if let ultraNavigationItemView = ultraMenuBarItem.customView as? UltraNavigationItemView {
-            if userInterfaceStyle == .dark {
-                ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleDarkGif)
-            } else {
-                ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleLightGif)
-            }
-        }
+//        // TODO: Do this better, it also calls a copy pasted code during setup
+//        if let ultraNavigationItemView = ultraMenuBarItem.customView as? UltraNavigationItemView {
+//            if userInterfaceStyle == .dark {
+//                ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleDarkGif)
+//            } else {
+//                ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleLightGif)
+//            }
+//        }
     }
     
     @objc func openMenu() {
@@ -126,15 +126,15 @@ class HeaderViewController: UpdatingViewController {
         ShareViewHelper.shareApp(viewController: self)
     }
     
-    @objc func ultraPressed() {
-        // Bounce ultraBarItemView
-        if let ultraView = ultraMenuBarItem.customView as? UltraNavigationItemView {
-            ultraView.bounce(completion: nil)
-        }
-        
-        // Present ultraViewController
-        UltraViewControllerPresenter.presentOnTop(animated: true)
-    }
+//    @objc func ultraPressed() {
+//        // Bounce ultraBarItemView
+//        if let ultraView = ultraMenuBarItem.customView as? UltraNavigationItemView {
+//            ultraView.bounce(completion: nil)
+//        }
+//
+//        // Present ultraViewController
+//        UltraViewControllerPresenter.presentOnTop(animated: true)
+//    }
     
     private func createMoreMenuBarItem() -> UIBarButtonItem {
         /* Setup Menu Menu Bar Item */
@@ -162,51 +162,51 @@ class HeaderViewController: UpdatingViewController {
         return UIBarButtonItem(customView: shareImageButton)
     }
     
-    private func createUltraMenuBarItem() -> UIBarButtonItem {
-        /* Setup Pro Menu Bar Item */
-        // Set height and width
-        let HEIGHT: CGFloat = 24.0
-        let WIDTH: CGFloat = HEIGHT * 2
-        
-        // Get userInterfaceStyle
-        let userInterfaceStyle = traitCollection.userInterfaceStyle
-        
-        // Setup ultra navigation item
-        let ultraNavigationItemView = RegistryHelper.instantiateAsView(nibName: Registry.Common.ultraNavigationItemView, owner: self) as! UltraNavigationItemView
-        ultraNavigationItemView.frame = CGRect(x: 0, y: 0, width: WIDTH, height: HEIGHT)
-        
-        // Set label text to generated chats remaining
-        let remaining = GeneratedChatsRemainingHelper.get()
-        ultraNavigationItemView.label.text = String(describing: remaining < 0 ? 0 : remaining)
-        
-        // Set image to light or dark sprakles depending on userInterfaceStyle
-        if userInterfaceStyle == .dark {
-            ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleDarkGif)
-        } else {
-            ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleLightGif)
-        }
-        
-        // Ådd gesture recognizer to ultraNavigationItemView and return as bar button item
-        ultraNavigationItemView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ultraPressed)))
-        
-        return UIBarButtonItem(customView: ultraNavigationItemView)
-    }
+//    private func createUltraMenuBarItem() -> UIBarButtonItem {
+//        /* Setup Pro Menu Bar Item */
+//        // Set height and width
+//        let HEIGHT: CGFloat = 24.0
+//        let WIDTH: CGFloat = HEIGHT * 2
+//
+//        // Get userInterfaceStyle
+//        let userInterfaceStyle = traitCollection.userInterfaceStyle
+//
+//        // Setup ultra navigation item
+//        let ultraNavigationItemView = RegistryHelper.instantiateAsView(nibName: Registry.Common.ultraNavigationItemView, owner: self) as! UltraNavigationItemView
+//        ultraNavigationItemView.frame = CGRect(x: 0, y: 0, width: WIDTH, height: HEIGHT)
+//
+//        // Set label text to generated chats remaining
+//        let remaining = GeneratedChatsRemainingHelper.get()
+//        ultraNavigationItemView.label.text = String(describing: remaining < 0 ? 0 : remaining)
+//
+//        // Set image to light or dark sprakles depending on userInterfaceStyle
+//        if userInterfaceStyle == .dark {
+//            ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleDarkGif)
+//        } else {
+//            ultraNavigationItemView.imageView.image = UIImage.gifImageWithName(Constants.ImageName.sparkleLightGif)
+//        }
+//
+//        // Ådd gesture recognizer to ultraNavigationItemView and return as bar button item
+//        ultraNavigationItemView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ultraPressed)))
+//
+//        return UIBarButtonItem(customView: ultraNavigationItemView)
+//    }
     
     func setLeftMenuBarItems() {
         /* Put things in left navigationBar. Phew! */
-        navigationItem.leftBarButtonItems = [moreMenuBarItem, shareMenuBarItem, navigationSpacer]
+//        navigationItem.leftBarButtonItems = [moreMenuBarItem, shareMenuBarItem, navigationSpacer]
         
     }
     
     func setRightMenuBarItems() {
         /* Put things in right navigationBar */
-        var rightBarButtonItems: [UIBarButtonItem] = []
+        var rightBarButtonItems: [UIBarButtonItem] = [shareMenuBarItem]
         
-        // If not premium, show proMenuBarItem
-        if !PremiumHelper.get() {
-            rightBarButtonItems.append(UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: #selector(ultraPressed)))
-            rightBarButtonItems.append(self.ultraMenuBarItem)
-        }
+//        // If not premium, show proMenuBarItem
+//        if !PremiumHelper.get() {
+//            rightBarButtonItems.append(UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: #selector(ultraPressed)))
+//            rightBarButtonItems.append(self.ultraMenuBarItem)
+//        }
         
         self.navigationItem.rightBarButtonItems = rightBarButtonItems
     }

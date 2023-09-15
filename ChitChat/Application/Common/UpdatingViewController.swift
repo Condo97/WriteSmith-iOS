@@ -20,9 +20,9 @@ class UpdatingViewController: UIViewController {
             premiumUpdaterDelegateID = PremiumUpdater.sharedBroadcaster.addObserver(self)
         }
         
-        if remainingUpdaterDelegateID == nil {
-            remainingUpdaterDelegateID = GeneratedChatsRemainingUpdater.sharedBroadcaster.addObserver(self)
-        }
+//        if remainingUpdaterDelegateID == nil {
+//            remainingUpdaterDelegateID = GeneratedChatsRemainingUpdater.sharedBroadcaster.addObserver(self)
+//        }
         
     }
     
@@ -36,7 +36,7 @@ class UpdatingViewController: UIViewController {
         Task {
             do {
                 try await PremiumUpdater.sharedBroadcaster.fullUpdate()
-                try await GeneratedChatsRemainingUpdater.sharedBroadcaster.fullUpdate()
+//                try await GeneratedChatsRemainingUpdater.sharedBroadcaster.fullUpdate()
             } catch {
                 print("Error updating premium and generated chats remaining in UpdatingViewController")
                 print(error.localizedDescription)

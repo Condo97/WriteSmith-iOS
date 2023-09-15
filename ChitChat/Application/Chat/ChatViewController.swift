@@ -148,7 +148,7 @@ class ChatViewController: HeaderViewController {
         view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
         
         // Tap on Remaining View to upgrade gesture recognizer
-        rootView.remainingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upgradeSelector)))
+        rootView.upgradeNowPromoView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upgradeSelector)))
         
         // Long press for message share sheet
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressOnTableView))
@@ -157,7 +157,7 @@ class ChatViewController: HeaderViewController {
         rootView.tableView.addGestureRecognizer(longPressGestureRecognizer)
         
         // Set remaining view to transparent before it loads
-        rootView.remainingView.alpha = 0.0
+        rootView.upgradeNowPromoView.alpha = 0.0
         
         // Set gpt model tap gesture recognizer
         let gptModelNameViewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didPressGPTModelNameButton))
@@ -216,6 +216,10 @@ class ChatViewController: HeaderViewController {
 //            }
 //        }
         
+        // Start random promo text task
+        startRandomPromoTextTask()
+        
+        // Mirror tableView upside down
         rootView.tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
     }
     
@@ -247,7 +251,7 @@ class ChatViewController: HeaderViewController {
         // Show Ultra Purchase on launch if not premium
         if shouldShowUltra && !PremiumHelper.get() {
             shouldShowUltra = false
-//            goToUltraPurchase()
+            goToUltraPurchase()
         }
         
         // Show first conversation chats or add chat from first chat generator TODO: This all should be done somewhere else
@@ -290,8 +294,8 @@ class ChatViewController: HeaderViewController {
         // Do all updates on main queue
         DispatchQueue.main.async {
             // Set bottom purchase buttons
-            self.rootView.remainingView.isHidden = isPremium
-            self.rootView.remainingShadowView.isHidden = isPremium
+            self.rootView.upgradeNowPromoView.isHidden = isPremium
+            self.rootView.upgradeNowPromoShadowView.isHidden = isPremium
             self.rootView.promoView.isHidden = isPremium
             self.rootView.promoShadowView.isHidden = isPremium
             
@@ -317,24 +321,24 @@ class ChatViewController: HeaderViewController {
         }
     }
     
-    override func updateGeneratedChatsRemaining(remaining: Int) {
-        super.updateGeneratedChatsRemaining(remaining: remaining)
-        
-        // Set instance remaining
-        self.remaining = remaining
-        
-        // Set chatsRemainingText on main queue
-        DispatchQueue.main.async {
-            self.rootView.chatsRemainingText.text = "You have \(remaining < 0 ? 0 : remaining) chat\(remaining == 1 ? "" : "s") remaining today..."
-            
-            // If the remainingView is transparent, show it now that generated chats remaining has loaded
-            if self.rootView.remainingView.alpha == 0.0 {
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.rootView.remainingView.alpha = 1.0
-                })
-            }
-        }
-    }
+//    override func updateGeneratedChatsRemaining(remaining: Int) {
+//        super.updateGeneratedChatsRemaining(remaining: remaining)
+//
+//        // Set instance remaining
+//        self.remaining = remaining
+//
+//        // Set upgradeNowPromoLabel on main queue
+//        DispatchQueue.main.async {
+//            self.rootView.upgradeNowPromoLabel.text = "You have \(remaining < 0 ? 0 : remaining) chat\(remaining == 1 ? "" : "s") remaining today..."
+//
+//            // If the upgradeNowPromoView is transparent, show it now that generated chats remaining has loaded
+//            if self.rootView.upgradeNowPromoView.alpha == 0.0 {
+//                UIView.animate(withDuration: 0.4, animations: {
+//                    self.rootView.upgradeNowPromoView.alpha = 1.0
+//                })
+//            }
+//        }
+//    }
     
     override func setRightMenuBarItems() {
         super.setRightMenuBarItems()
@@ -348,8 +352,8 @@ class ChatViewController: HeaderViewController {
         plusButton.addTarget(self, action: #selector(addConversationPressed), for: .touchUpInside)
         let plusBarButtonItem = UIBarButtonItem(customView: plusButton)
         
-        // Append as last rightBarButtonItem
-        navigationItem.rightBarButtonItems?.append(plusBarButtonItem)
+        // Insert rightBarButtonItem as first item
+        navigationItem.rightBarButtonItems?.insert(plusBarButtonItem, at: 0)
     }
     
     override func openMenu() {
@@ -651,15 +655,15 @@ class ChatViewController: HeaderViewController {
                     }
                 }
                 
-                // Set remaining
-                if let gcrRemaining = getChatResponse?.body.remaining {
-                    if remaining == nil {
-                        remaining = gcrRemaining
-                        
-                        // Also update the remaining chats text here.. shh TODO: lol
-                        updateGeneratedChatsRemaining(remaining: remaining!)
-                    }
-                }
+//                // Set remaining
+//                if let gcrRemaining = getChatResponse?.body.remaining {
+//                    if remaining == nil {
+//                        remaining = gcrRemaining
+//
+//                        // Also update the remaining chats text here.. shh TODO: lol
+//                        updateGeneratedChatsRemaining(remaining: remaining!)
+//                    }
+//                }
                 
                 /* Set Do Line Update Scroll */
                 
@@ -761,6 +765,49 @@ class ChatViewController: HeaderViewController {
         }
         
         try await self.addChat(message: "I do better with more detail. Don't say, \"Essay on Belgium,\" say \"200 word essay on Belgium's cultural advances in the past 20 years.\" Remember, I'm your Professor, so use what I write as inspiration and never plagiarize!", sender: Constants.Chat.Sender.ai)
+    }
+    
+    func startRandomPromoTextTask(displayDuration seconds: UInt64 = 15) {
+        Task {
+            let upgradeNowPromoViewAnimationDuration = 0.4
+            let maxCatchCount = 10
+            var catchCount = 0
+            while (catchCount < maxCatchCount) {
+                // Wait first since we want this to initially show up as the user is using the app after some delay
+                do {
+                    // Wait
+                    try await Task.sleep(nanoseconds: seconds * 1_000_000_000)
+                } catch {
+                    // If the catch block is triggered, increment catchCount which may exit the while loop if it throws too many and continue
+                    print("Could not sleep when displaying random promo text in ChatViewController, going to do this \(maxCatchCount - catchCount) more times before exiting the while loop... \(error)")
+                    catchCount += 1
+                    continue
+                }
+                
+                // Animate upgradeNowPromoView alpha to 0 before changing text
+                UIView.animate(withDuration: upgradeNowPromoViewAnimationDuration) {
+                    self.rootView.upgradeNowPromoView.alpha = 0.0
+                } completion: {success in
+                    // Set the promo label text to a random upgrade now promo text
+                    self.rootView.upgradeNowPromoLabel.text = PromoTextGenerator.randomUpgradeNowPromoText(differentThan: self.rootView.upgradeNowPromoLabel.text)
+                }
+                
+                // Wait one tenth of the seconds duration and then animate upgradeNowPromoView alpha to 1.0
+                do {
+                    // Wait
+                    try await Task.sleep(nanoseconds: UInt64((upgradeNowPromoViewAnimationDuration + Double(seconds) / 10.0) * 1_000_000_000))
+                } catch {
+                    // If the catch block is triggered, increment catchCount which may exit the while loop if it throws too many and continue
+                    print("Could not sleep when displaying random promo text in ChatViewController, going to do this \(maxCatchCount - catchCount) more times before exiting the while loop... \(error)")
+                    catchCount += 1
+                    continue
+                }
+                
+                UIView.animate(withDuration: upgradeNowPromoViewAnimationDuration) {
+                    self.rootView.upgradeNowPromoView.alpha = 1.0
+                }
+            }
+        }
     }
     
     func showReviewAtFrequency() {

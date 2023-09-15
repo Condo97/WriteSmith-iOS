@@ -1,20 +1,20 @@
+////
+////  UpdaterBroadcaster+RemainingUpdaterDelegate.swift
+////  ChitChat
+////
+////  Created by Alex Coundouriotis on 4/15/23.
+////
 //
-//  UpdaterBroadcaster+RemainingUpdaterDelegate.swift
-//  ChitChat
+//import Foundation
 //
-//  Created by Alex Coundouriotis on 4/15/23.
+//extension UpdaterBroadcaster: GeneratedChatsRemainingUpdaterDelegate {
 //
-
-import Foundation
-
-extension UpdaterBroadcaster: GeneratedChatsRemainingUpdaterDelegate {
-    
-    func updateGeneratedChatsRemaining(remaining: Int) {
-        for updater in updaters {
-            if let generatedChatsRemainingDelegate = updater.t as? GeneratedChatsRemainingUpdaterDelegate {
-                generatedChatsRemainingDelegate.updateGeneratedChatsRemaining(remaining: remaining)
-            }
-        }
-    }
-    
-}
+//    func updateGeneratedChatsRemaining(remaining: Int) {
+//        for updater in updaters {
+//            if let generatedChatsRemainingDelegate = updater.t as? GeneratedChatsRemainingUpdaterDelegate {
+//                generatedChatsRemainingDelegate.updateGeneratedChatsRemaining(remaining: remaining)
+//            }
+//        }
+//    }
+//
+//}

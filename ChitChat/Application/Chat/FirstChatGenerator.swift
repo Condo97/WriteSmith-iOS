@@ -137,7 +137,7 @@ class FirstChatGenerator {
         "Want to learn creative writing? I can guide you through the process with some prompts and tips."
     ]
     
-    static func getRandomFirstChat() -> String {
+    public static func getRandomFirstChat() -> String {
         return firstChat[Int.random(in: 0..<firstChat.count)]
     }
     

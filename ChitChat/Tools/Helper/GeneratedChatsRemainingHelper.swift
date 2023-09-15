@@ -1,19 +1,19 @@
+////
+////  RemainingHelper.swift
+////  ChitChat
+////
+////  Created by Alex Coundouriotis on 4/15/23.
+////
 //
-//  RemainingHelper.swift
-//  ChitChat
+//import Foundation
 //
-//  Created by Alex Coundouriotis on 4/15/23.
+//class GeneratedChatsRemainingHelper: Any {
 //
-
-import Foundation
-
-class GeneratedChatsRemainingHelper: Any {
-    
-    /***
-     Gets the current chats remaining for the user
-     */
-    static func get() -> Int {
-        return UserDefaults.standard.integer(forKey: Constants.userDefaultStoredGeneratedChatsRemaining)
-    }
-    
-}
+//    /***
+//     Gets the current chats remaining for the user
+//     */
+//    static func get() -> Int {
+//        return UserDefaults.standard.integer(forKey: Constants.userDefaultStoredGeneratedChatsRemaining)
+//    }
+//
+//}

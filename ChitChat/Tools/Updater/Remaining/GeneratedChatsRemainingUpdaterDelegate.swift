@@ -1,14 +1,14 @@
+////
+////  RemainingUpdaterDelegate.swift
+////  ChitChat
+////
+////  Created by Alex Coundouriotis on 4/15/23.
+////
 //
-//  RemainingUpdaterDelegate.swift
-//  ChitChat
+//import Foundation
 //
-//  Created by Alex Coundouriotis on 4/15/23.
+//protocol GeneratedChatsRemainingUpdaterDelegate {
 //
-
-import Foundation
-
-protocol GeneratedChatsRemainingUpdaterDelegate {
-    
-    func updateGeneratedChatsRemaining(remaining: Int)
-    
-}
+//    func updateGeneratedChatsRemaining(remaining: Int)
+//
+//}

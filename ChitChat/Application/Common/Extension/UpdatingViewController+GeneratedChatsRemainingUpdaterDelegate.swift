@@ -1,16 +1,16 @@
+////
+////  UpdatingViewController+GeneratedChatsRemainingUpdaterDelegate.swift
+////  ChitChat
+////
+////  Created by Alex Coundouriotis on 4/15/23.
+////
 //
-//  UpdatingViewController+GeneratedChatsRemainingUpdaterDelegate.swift
-//  ChitChat
+//import Foundation
 //
-//  Created by Alex Coundouriotis on 4/15/23.
+//extension UpdatingViewController: GeneratedChatsRemainingUpdaterDelegate {
 //
-
-import Foundation
-
-extension UpdatingViewController: GeneratedChatsRemainingUpdaterDelegate {
-    
-    @objc func updateGeneratedChatsRemaining(remaining: Int) {
-        
-    }
-    
-}
+//    @objc func updateGeneratedChatsRemaining(remaining: Int) {
+//
+//    }
+//
+//}
