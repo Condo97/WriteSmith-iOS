@@ -1,0 +1,940 @@
+{
+    "panelGroups": [
+        {
+            "name": "Suggested",
+            "panels": [
+                {
+                    "emoji": "💬",
+                    "title": "Summarize",
+                    "description": "Simplify complex topics in just a few sentences.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What would you like to summarize?",
+                            "promptPrefix": "Summarize",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🪄",
+                    "title": "Make Interesting",
+                    "description": "Add a twist to any topic and make it surprisingly fascinating.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What would you like to make more interesting?",
+                            "promptPrefix": "Make this more interesting:",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "emoji": "👍",
+                    "title": "Convince",
+                    "description": "Use words to convince someone to do something!",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What would you like to convince someone to do?",
+                            "promptPrefix": "Convince someone to...",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Who are you convincing?",
+                            "promptPrefix": "Convince this person:"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Content",
+            "panels": [
+                {
+                    "emoji": "📝",
+                    "title": "Write an Essay",
+                    "description": "Learn about a topic in a brand new way.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the essay about?",
+                            "promptPrefix": "Write an essay about",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Tone of voice?",
+                            "promptPrefix": "With the tone of voice:",
+                            "detailTitle": "Tone of Voice",
+                            "detailText": "How would you like your advertisement to come off? (i.e. Fun, Convincing, Trendy, etc.)"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "📗",
+                    "title": "Create an Outline",
+                    "description": "Organize your thoughts and ideas with a structured outline for any topic.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the topic for your outline?",
+                            "promptPrefix": "Write an outline about",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "How many sections?",
+                            "promptPrefix": "number of sections"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "✅",
+                    "title": "Proofread",
+                    "description": "Polish your writing and eliminate errors with the help of an AI proofreader.",
+                    "prompt": "You are an AI that proofreads a user's text, correcting any grammatical errors.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What should I proofread?",
+                            "promptPrefix": "",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "emoji": "✍️",
+                    "title": "Write a Paragraph",
+                    "description": "Spark creativity with a captivating paragraph made to inspire.",
+                    "prompt": "Write a paragraph.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is your paragraph about?",
+                            "promptPrefix": "",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Tone of voice?",
+                            "promptPrefix": "With the tone of voice:",
+                            "detailTitle": "Tone of Voice",
+                            "detailText": "How would you like your paragraph to come off? (i.e. Fun, Convincing, Trendy, etc.)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Art",
+            "panels": [
+                {
+                    "emoji": "🎤",
+                    "title": "Lyrics",
+                    "description": "Craft the perfect lyrics for a hit song and leave everyone singing along.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the song about?",
+                            "promptPrefix": "Write a song about",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Artist of inspiration?",
+                            "promptPrefix": "with the artist of inspiration"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "📜",
+                    "title": "Poem",
+                    "description": "Compose a beautiful poem that speaks to the heart and stirs the soul.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the poem about?",
+                            "promptPrefix": "Write a poem about",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Any words of inspiration?",
+                            "promptPrefix": "with these words of inspiration"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "📖",
+                    "title": "Story",
+                    "description": "Weave a captivating tale that takes readers on an unforgettable journey.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the story about?",
+                            "promptPrefix": "Write a story about",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Any authors for inspiration?",
+                            "promptPrefix": "with these authors as inspiration"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🎬",
+                    "title": "Movie Script",
+                    "description": "Pen a script that'll have Hollywood knocking on your door.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the movie about?",
+                            "promptPrefix": "Write a movie script about",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Any writers for inspiration?",
+                            "promptPrefix": "with these writers as inspiration"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🎶",
+                    "title": "Musical Notes",
+                    "description": "Create enchanting sheet music, tabs, and chords for your next masterpiece.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "Describe your song in detail...",
+                            "promptPrefix": "write music for a song with this description",
+                            "required": true
+                        },
+                        {
+                            "type": "dropdown",
+                            "titleText": "Select a format...",
+                            "promptPrefix": "Output the request as a musical:",
+                            "options": [
+                                "Sheet Music",
+                                "Tab",
+                                "Chords",
+                                "Notes"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Business",
+            "panels": [
+                {
+                    "emoji": "📣",
+                    "title": "Slogan",
+                    "description": "Invent a catchy slogan that sets your company apart.",
+                    "prompt": "Write a catchy slogan.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "Describe your company...",
+                            "promptPrefix": "Write a slogan for the company as described:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What is your company named?",
+                            "promptPrefix": "The company is named:"
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What is your company's main competitor?",
+                            "promptPrefix": "The company's main competitor is named:"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🌟",
+                    "title": "Advertisement",
+                    "description": "Write a persuasive ad that draws in customers and skyrockets your sales.",
+                    "prompt": "Make a convincing advertisement.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is your advertisement about?",
+                            "promptPrefix": "Write an advertisement about:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What medium are you advertising for?",
+                            "promptPrefix": "Using the medium:",
+                            "detailTitle": "Advertisement Medium",
+                            "detailText": "Where are you advertising? (i.e. Social Media, Print, TV, etc.)"
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Tone of voice?",
+                            "promptPrefix": "With the tone of voice:",
+                            "detailTitle": "Tone of Voice",
+                            "detailText": "How would you like your advertisement to come off? (i.e. Fun, Convincing, Trendy, etc.)"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "💼",
+                    "title": "Company Bio",
+                    "description": "Showcase your company's strengths with an engaging bio.",
+                    "prompt": "Write a company bio that is enticing to customers.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "Briefly describe your company...",
+                            "promptPrefix": "Description: ",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Company name?",
+                            "promptPrefix": "Company name:"
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Similar companies?",
+                            "promptPrefix": "Similar companies:"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🔖",
+                    "title": "Name Generator",
+                    "description": "Discover the perfect name for your new company that resonates with your vision.",
+                    "prompt": "Generate a company name from the description provided.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "Briefly describe your company...",
+                            "promptPrefix": "Description:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Give 3+ words describing the \"vibe\" (i.e. innovative, exciting, inclusive)",
+                            "promptPrefix": "Use these words as inspiration:"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🧑‍💻",
+                    "title": "Job Post",
+                    "description": "Attract top talent with a well-crafted job post that showcases the perfect role.",
+                    "prompt": "Write a convincing job post.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What job are you looking for?",
+                            "promptPrefix": "The job I am looking for is:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "Describe yourself...",
+                            "promptPrefix": "This is the description of myself:",
+                            "detailTitle": "Describe Yourself",
+                            "detailText": "Around a paragraph, include skills and interesting points. You can also just copy/paste your resume."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Personal",
+            "panels": [
+                {
+                    "emoji": "🎂",
+                    "title": "Birthday",
+                    "description": "Create unforgettable birthday messages or plan the ultimate surprise party.",
+                    "prompt": "You are amazing at everything pertaining to birthdays.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Who's birthday is it?",
+                            "promptPrefix": "It is this person's birthday:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What would you like help with?",
+                            "promptPrefix": ""
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🥺",
+                    "title": "Apology",
+                    "description": "Get help writing a sincere apology to someone you care about.",
+                    "prompt": "Help write a sincere apology.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the apology for?",
+                            "promptPrefix": "The apology is for:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Who is the apology for?",
+                            "promptPrefix": "The person the apology is for is:"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🔥",
+                    "title": "Rizz",
+                    "description": "Master the art of flirting and become a rizz lord in no time.",
+                    "prompt": "You are a rizz lord and help with picking up girls or men.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Who are you trying to rizz?",
+                            "promptPrefix": "Rizz this person:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What are they like?",
+                            "promptPrefix": "They are like:",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "emoji": "📩",
+                    "title": "Invitation",
+                    "description": "Get inspiration for an invitation that nobody can refuse.",
+                    "prompt": "Write an invitation that is kind and convincing.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the invitation for?",
+                            "promptPrefix": "The invitation is for:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Who is the invitation for?",
+                            "promptPrefix": "The person the invitation is for is:"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🗣️",
+                    "title": "Speech",
+                    "description": "Write a powerful speech that engages and inspires your audience.",
+                    "prompt": "Write an unforgettable and engaging and interesting speech.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is your speech about?",
+                            "promptPrefix": "The speech is about:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Tone of voice?",
+                            "promptPrefix": "The tone of voice is:",
+                            "detailTitle": "Tone of Voice",
+                            "detailText": "This is the \"vibe\" your speech is going for. (i.e. Funny, Serious, Dark, etc.)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Email",
+            "panels": [
+                {
+                    "emoji": "📧",
+                    "title": "Email",
+                    "description": "Craft the perfect email that gets your message across and garners a response.",
+                    "prompt": "Write an email.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the email about?",
+                            "promptPrefix": "The email is about:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Who is the email for?",
+                            "promptPrefix": "The email is for..."
+                        }
+                    ]
+                },
+                {
+                    "emoji": "✒️",
+                    "title": "Write a Subject",
+                    "description": "Write a subject that ensures the receiver will open it.",
+                    "prompt": "Write a subject to an email that convinces the receiver to open it and read it.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the email about?",
+                            "promptPrefix": "The email is about:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Who is the email for?",
+                            "promptPrefix": "The email is for..."
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🤔",
+                    "title": "Improve Email",
+                    "description": "Improve an email so that the reader \"gets the message.\"",
+                    "prompt": "Improve an email..",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What email would you like to improve?",
+                            "promptPrefix": "The email to improve is:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Who is the email for?",
+                            "promptPrefix": "The email is for..."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Social",
+            "panels": [
+                {
+                    "imageName": "Twitter",
+                    "title": "Tweet",
+                    "description": "Compose attention-grabbing tweets that boost your followers and likes.",
+                    "prompt": "Write an interesting and convincing tweet that is sure to go viral.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the tweet about?",
+                            "promptPrefix": "The tweet is about:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Tone of voice?",
+                            "promptPrefix": "The tone of voice is:",
+                            "detailTitle": "Tone of Voice",
+                            "detailText": "This is the \"vibe\" your tweet is going for. (i.e. Funny, Serious, Dark, etc.)"
+                        }
+                    ]
+                },
+                {
+                    "imageName": "Twitter",
+                    "title": "Turn into Tweet",
+                    "description": "Turn blog posts, articles, even other social media posts into a tweet.",
+                    "prompt": "Turn something into an interesting and convincing tweet.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "Write what you want to turn into a tweet...",
+                            "promptPrefix": "Turn this into a tweet:",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "imageName": "LinkedIn",
+                    "title": "LinkedIn Post",
+                    "description": "Engage professionals with a well-crafted LinkedIn post that stands out.",
+                    "prompt": "Write a LinkedIn post that engages businesses.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the post about?",
+                            "promptPrefix": "The post is about:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Tone of voice?",
+                            "promptPrefix": "The tone of voice is:",
+                            "detailTitle": "Tone of Voice",
+                            "detailText": "This is the \"vibe\" your post is going for. (i.e. Funny, Serious, Dark, etc.)"
+                        }
+                    ]
+                },
+                {
+                    "imageName": "Instagram",
+                    "title": "Instagram Caption",
+                    "description": "Capture the perfect vibe with an Instagram caption that reels in likes.",
+                    "prompt": "Create an engaging and interesting Instagram caption that engages viewers and will get millions of likes.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is your post about?",
+                            "promptPrefix": "The Instagram caption is about an image as described:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Tone of voice?",
+                            "promptPrefix": "The tone of voice is:",
+                            "detailTitle": "Tone of Voice",
+                            "detailText": "This is the \"vibe\" your caption is going for. (i.e. Funny, Serious, Dark, etc.)"
+                        }
+                    ]
+                },
+                {
+                    "imageName": "TikTok",
+                    "title": "TikTok Caption",
+                    "description": "Craft a TikTok caption that grabs attention and sends your views soaring.",
+                    "prompt": "Create an engaging and interesting TikTok caption that engages viewers and will get millions of likes.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the TikTok about?",
+                            "promptPrefix": "The TikTok caption is about a video as described:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Tone of voice?",
+                            "promptPrefix": "The tone of voice is:",
+                            "detailTitle": "Tone of Voice",
+                            "detailText": "This is the \"vibe\" your caption is going for. (i.e. Funny, Serious, Dark, etc.)"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "💯",
+                    "title": "Viral Video Ideas",
+                    "description": "Get creative with unique viral video ideas that'll skyrocket your popularity.",
+                    "prompt": "Create a list of viral video ideas.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What genre is your video for?",
+                            "promptPrefix": "The genre for the video is:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Creators for inspiration?",
+                            "promptPrefix": "Creators for inspiration:"
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Additional guidance?",
+                            "promptPrefix": "",
+                            "detailTitle": "Additional Guidance",
+                            "detailText": "Provide additional instructions for your AI to work with. (i.e. Format ideas for vertial video.)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Code",
+            "panels": [
+                {
+                    "emoji": "💻",
+                    "title": "Write Code",
+                    "description": "Generate code for any task or problem and watch your ideas come to life.",
+                    "prompt": "Write code for the given task or problem.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What task or problem should the code solve?",
+                            "promptPrefix": "Write code to solve:",
+                            "required": true
+                        },
+                        {
+                            "type": "dropdown",
+                            "titleText": "Choose a programming language...",
+                            "promptPrefix": "using the programming language",
+                            "options": [
+                                "Python",
+                                "JavaScript",
+                                "Java",
+                                "C++",
+                                "Swift"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "emoji": "📚",
+                    "title": "Explain Code",
+                    "description": "Understand the functionality of a code snippet.",
+                    "prompt": "Explain the given code snippet and its functionality.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "Paste the code snippet you want explained...",
+                            "promptPrefix": "Explain the following code snippet:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What language is the code in?",
+                            "promptPrefix": "The code given is in the language:"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🤝",
+                    "title": "Code Interview Question",
+                    "description": "Tackle code interview questions with confidence and land your dream job.",
+                    "prompt": "Help me answer a code interview question.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "What is the code interview question?",
+                            "promptPrefix": "The code interview question is:",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🛠️",
+                    "title": "Code Refactoring",
+                    "description": "Optimize your code for peak performance.",
+                    "prompt": "Refactor the given code snippet for better performance.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "Paste the code snippet you want refactored...",
+                            "promptPrefix": "Refactor the following code snippet:",
+                            "required": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Food",
+            "panels": [
+                {
+                    "emoji": "👩‍🍳",
+                    "title": "Recipe",
+                    "description": "Whip up the perfect dish with a custom recipe tailored to your taste buds.",
+                    "prompt": "Generate a recipe based on the given dish or ingredient.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What dish or ingredient do you want a recipe for?",
+                            "promptPrefix": "Create a recipe for:",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🥗",
+                    "title": "Diet Plan",
+                    "description": "Achieve your health goals with a personalized diet plan crafted just for you.",
+                    "prompt": "Create a personalized diet plan.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What are your dietary preferences?",
+                            "promptPrefix": "Dietary preferences:",
+                            "required": true
+                        },
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What are your health goals?",
+                            "promptPrefix": "Health goals:"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🍳",
+                    "title": "Cooking Techniques",
+                    "description": "Master the art of cooking any dish or ingredient with expert techniques.",
+                    "prompt": "Explain cooking techniques for the given dish or ingredient.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What dish or ingredient do you want to learn techniques for?",
+                            "promptPrefix": "Explain cooking techniques for:",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🍲",
+                    "title": "Food Pairing",
+                    "description": "Uncover perfect food pairings that elevate your dishes to new heights.",
+                    "prompt": "Suggest food pairings for the given ingredient or dish.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What ingredient or dish do you want to find pairings for?",
+                            "promptPrefix": "Find food pairings for:",
+                            "required": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Entertainment",
+            "panels": [
+                {
+                    "emoji": "🍿",
+                    "title": "Movies to Emoji",
+                    "description": "Describe your favorite movies using just emojis!",
+                    "prompt": "Describe the given movie using only emojis",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What movie do you want to describe with emojis?",
+                            "promptPrefix": "Describe the movie using only emojis",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "emoji": "😂",
+                    "title": "Tell Joke",
+                    "description": "Brighten someone's day with a hilarious joke they won't see coming.",
+                    "prompt": "Tell a joke.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "Any specific topic for the joke?",
+                            "promptPrefix": "Tell a joke about"
+                        }
+                    ]
+                },
+                {
+                    "emoji": "✏️",
+                    "title": "Complete Sentence",
+                    "description": "Fill in the blanks with the perfect words to complete any sentence or phrase.",
+                    "prompt": "Complete the given sentence or phrase.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "Write the incomplete sentence or phrase...",
+                            "promptPrefix": "Complete the sentence or phrase:",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "emoji": "👥",
+                    "title": "Create Conversation",
+                    "description": "Invent engaging dialogues between characters with a touch of AI magic.",
+                    "prompt": "Create a conversation between two or more characters.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": true,
+                            "titleText": "Describe the characters and the context...",
+                            "promptPrefix": "Create a conversation with the following context:",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "emoji": "🦛",
+                    "title": "Made Up Words",
+                    "description": "Invent quirky new words and their meanings for a world of linguistic fun.",
+                    "prompt": "Create new words and their meanings.",
+                    "components": [
+                        {
+                            "type": "textField",
+                            "multiline": false,
+                            "titleText": "What's the theme or context for the new words?",
+                            "promptPrefix": "Create new words for the theme or context:"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
