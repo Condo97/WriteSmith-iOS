@@ -15,6 +15,7 @@ struct UltraView: View {
     
     
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     
     @ObservedObject private var ultraViewModel: UltraViewModel
     
@@ -150,6 +151,7 @@ struct UltraView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .opacity(colorScheme == .dark ? 0.8 : 1.0)
+//                .frame(maxWidth: horizontalSizeClass == .regular ? 200.0 : .infinity)
             
             Text("Unlimited Messages & More!")
                 .font(.custom(Constants.FontName.bodyOblique, size: 20.0))
@@ -360,7 +362,12 @@ struct UltraView: View {
 }
 
 #Preview {
-    UltraView(
-        premiumUpdater: PremiumUpdater(),
-        isShowing: .constant(true))
+    VStack {
+        
+    }
+    .sheet(isPresented: .constant(true)) {
+        UltraView(
+            premiumUpdater: PremiumUpdater(),
+            isShowing: .constant(true))
+    }
 }
