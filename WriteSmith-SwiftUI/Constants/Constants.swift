@@ -12,7 +12,7 @@ import Foundation
 struct Constants {
     
     struct Additional {
-        static let coreDataModelName = "WriteSmith_SwiftUI"
+        static let coreDataModelName = "ChitChat"
     }
     
     struct FontName {
@@ -41,7 +41,7 @@ struct Constants {
     
     //    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
     
-    static let reviewFrequency = 5
+    static let reviewFrequency = 7
     static let adFrequency = 4
     static let premiumFrequency = 15
     
@@ -78,6 +78,7 @@ struct Constants {
         
         static let userDefaultStoredV3_5MigrationComplete = "storedV3_5MigrationComplete"
         static let userDefaultStoredV4MigrationComplete = "v4MigrationComplete"
+        static let userDefaultStoredV4_2MigrationComplete = "v4_2MigrationComplete"
     }
     
     

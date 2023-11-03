@@ -66,6 +66,9 @@ struct WriteSmith_SwiftUIApp: App {
                 }
             }
             .task {
+                await migrate()
+            }
+            .task {
                 // Update important constants
                 do {
                     try await ConstantsHelper.update()
@@ -101,6 +104,30 @@ struct WriteSmith_SwiftUIApp: App {
                     print("Error updating remaining in WriteSmith_SwiftUIApp... \(error)")
                 }
             }
+        }
+    }
+    
+    private func migrate() async {
+        // TODO: This uses CDClient mainManagedObjectContext, is that fine?
+        if !UserDefaults.standard.bool(forKey: Constants.Migration.userDefaultStoredV4MigrationComplete) {
+            do {
+                try await V4MigrationHandler.migrate(in: CDClient.mainManagedObjectContext)
+            } catch {
+                print("Error migrating to V4 in WriteSmith_SwiftUIApp... \(error)")
+            }
+            
+            UserDefaults.standard.set(true, forKey: Constants.Migration.userDefaultStoredV4MigrationComplete)
+        }
+        
+        // TODO: This uses CDClient mainManagedObjectContext, is that fine?
+        if !UserDefaults.standard.bool(forKey: Constants.Migration.userDefaultStoredV4_2MigrationComplete) {
+            do {
+                try await V4_2MigrationHandler.migrate(in: CDClient.mainManagedObjectContext)
+            } catch {
+                print("Error migrating to V3_5 in WriteSmith_SwiftUIApp... \(error)")
+            }
+            
+            UserDefaults.standard.set(true, forKey: Constants.Migration.userDefaultStoredV4_2MigrationComplete)
         }
     }
     

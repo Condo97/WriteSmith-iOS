@@ -45,6 +45,9 @@ struct ChatView: View, KeyboardReadable {
     
     @State private var conversation: Conversation
     
+    @State private var currentlyDraggedChat: Chat?
+    
+    
     init(conversation: Conversation, premiumUpdater: ObservedObject<PremiumUpdater>, remainingUpdater: ObservedObject<RemainingUpdater>, faceAnimationController: Binding<FaceAnimationRepresentable?>, isShowingGPTModelSelectionView: Binding<Bool>, transitionToNewConversation: Binding<Bool>, shouldShowFirstConversationChats: Bool) {
         self._chats = FetchRequest(
             sortDescriptors: [NSSortDescriptor(keyPath: \Chat.date, ascending: false)],
@@ -114,6 +117,7 @@ struct ChatView: View, KeyboardReadable {
                         // List
                         VStack {
                             ScrollView(.vertical) {
+//                            List {
                                 Spacer(minLength: premiumUpdater.isPremium ? 100.0 : 180.0)
                                 VStack {
                                     Spacer()
@@ -123,8 +127,21 @@ struct ChatView: View, KeyboardReadable {
                                     }
                                     
                                     chatList
+                                    
+                                    Spacer(minLength: 60.0)
                                 }
                             }
+                            .simultaneousGesture(
+                                DragGesture()
+                                    .onChanged { gesture in
+                                        if abs(gesture.translation.height) >= 20 {
+                                            withAnimation {
+                                                currentlyDraggedChat = nil
+                                            }
+                                        }
+                                    })
+//                            .scrollContentBackground(.hidden)
+//                            .listRowInsets(nil)
                             .scrollIndicators(.never)
                             .rotationEffect(.degrees(180))
                         }
@@ -175,8 +192,8 @@ struct ChatView: View, KeyboardReadable {
 //                }
                 
             }
+            .background(Colors.background)
         }
-        .background(Colors.background)
         .background(
             InterstitialView(interstitialID: Keys.Ads.Interstitial.chatView, disabled: $premiumUpdater.isPremium, isPresented: $isShowingInterstitial))
         .onReceive(chatGenerator.$isLoading, perform: { isLoading in
@@ -276,11 +293,14 @@ struct ChatView: View, KeyboardReadable {
     }
     
     var loadingChatBubble: some View {
-        ChatBubbleView(sender: .ai, content: {
-            PulsatingDotsView(count: 4, size: 14.0)
-                .foregroundStyle(Colors.elementBackgroundColor)
-                .padding([.leading, .trailing], 12)
-        })
+        ChatBubbleView(
+            sender: .ai,
+            isDragged: .constant(false),
+            content: {
+                PulsatingDotsView(count: 4, size: 14.0)
+                    .foregroundStyle(Colors.elementBackgroundColor)
+                    .padding([.leading, .trailing], 12)
+            })
         .rotationEffect(.degrees(180))
         .padding(.bottom, 8)
         .padding([.leading, .trailing])
@@ -289,24 +309,102 @@ struct ChatView: View, KeyboardReadable {
     }
     
     var chatList: some View {
-        ForEach(chats) { chat in
-            if let chatSender = chat.sender, let sender = Sender(rawValue: chatSender), let text = chat.text {
-                ChatBubbleView(sender: sender, content: {
+//        List {
+            ForEach(chats) { chat in
+                if let chatSender = chat.sender, let sender = Sender(rawValue: chatSender), let text = chat.text {
+                    let isDragged = Binding(
+                        get: {
+                            currentlyDraggedChat == chat
+                        },
+                        set: { value in
+                            currentlyDraggedChat = value ? chat : nil
+                        })
+                    
                     HStack {
-                        Text(text)
-                            .font(.custom(sender == .user ? Constants.FontName.heavy : Constants.FontName.body, size: 14.0))
-                            .foregroundStyle(sender == .user ? Colors.userChatTextColor : Colors.aiChatTextColor)
-                        Spacer()
+                        ChatBubbleView(
+                            sender: sender,
+                            isDragged: isDragged,
+                            content: {
+                                HStack {
+                                    Text(text)
+                                        .font(.custom(sender == .user ? Constants.FontName.heavy : Constants.FontName.body, size: 14.0))
+                                        .foregroundStyle(sender == .user ? Colors.userChatTextColor : Colors.aiChatTextColor)
+                                    //                        Spacer()
+                                }
+                                .padding([.top, .bottom], 14)
+                                .padding([.leading, .trailing], 14)
+                            },
+                            onDelete: {
+                                // Delete chat from network
+                                let chatID = chat.chatID
+                                Task {
+                                    let authToken: String
+                                    do {
+                                        authToken = try await AuthHelper.ensure()
+                                    } catch {
+                                        // TODO: Handle errors
+                                        print("Error ensuring authToken in ChatView... \(error)")
+                                        return
+                                    }
+                                    
+                                    do {
+                                        try await ChatHTTPSConnector.deleteChat(
+                                            authToken: authToken,
+                                            chatID: Int(chatID))
+                                    } catch {
+                                        // TODO: Handle errors
+                                        print("Error deleting chat in ChatView... \(error)")
+                                        return
+                                    }
+                                }
+                                
+                                // Delete chat from CoreData
+                                viewContext.delete(chat)
+                                
+                                // Save context
+                                do {
+                                    try viewContext.save()
+                                } catch {
+                                    // TODO: Handle errors
+                                    print("Error saving context when deleting chat in ChatView... \(error)")
+                                }
+                            })
+                        .transition(sender == .ai ? .opacity : .moveUp)
+                        .rotationEffect(.degrees(180))
+                        .padding(.bottom, 8)
+                        .padding([.leading, .trailing])
                     }
-                    .padding([.leading, .trailing], 24)
-                    .padding([.top, .bottom], 14)
-                })
-                .transition(sender == .ai ? .opacity : .moveUp)
-                .rotationEffect(.degrees(180))
-                .padding(.bottom, 8)
-                .padding([.leading, .trailing])
+//                    .swipeActions(edge: .leading) {
+//                        Button(action: {
+//                            print("RHLJDSHFKJLHDJKFHD\n\n\n\n\n\n\n\\n\\nn\n\\n\n\n\n\nasdfasdf")
+//                        }) {
+//                            Text("Testing")
+//                        }
+//                    }
+    //                .padding([.leading, .trailing])
+//                    .onDra
+                }
             }
-        }
+    //        .swipeActions {
+    //            Button("Swipe", action: {
+    //                
+    //            })
+    //        }
+//            .onDelete(perform: { indexSet in
+//                // Delete all chats for indicies in indexSet TODO: Is this the right or best way to do this?
+//                for index in indexSet {
+//                    viewContext.delete(chats[index])
+//                }
+//                
+//                // Save context
+//                do {
+//                    try viewContext.save()
+//                } catch {
+//                    // TODO: Handle errors
+//                    print("Error saving context in ChatView... \(error)")
+//                }
+//        })
+//        }
     }
     
     var gptSelector: some View {
@@ -509,8 +607,6 @@ struct ChatView: View, KeyboardReadable {
     }
     
     func showInterstitialAtFrequency() -> Bool {
-        isShowingInterstitial = true
-        
         // Ensure not premium, otherwise return false
         guard !premiumUpdater.isPremium else {
             // TODO: Handle errors if necessary
