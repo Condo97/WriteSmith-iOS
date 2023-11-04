@@ -61,7 +61,7 @@ struct ConversationView: View {
                             faceAnimationController: $faceAnimationController,
                             isShowingGPTModelSelectionView: $isShowingGPTModelSelectionView,
                             transitionToNewConversation: $transitionToNewConversation,
-                            shouldShowFirstConversationChats: sectionedConversations.count <= 1
+                            shouldShowFirstConversationChats: sectionedConversations.count == 0 || (sectionedConversations.count == 1 && sectionedConversations[0].count <= 1)
                         )
                     }
                 })
