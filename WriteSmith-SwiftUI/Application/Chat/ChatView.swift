@@ -297,9 +297,10 @@ struct ChatView: View, KeyboardReadable {
             sender: .ai,
             isDragged: .constant(false),
             content: {
-                PulsatingDotsView(count: 4, size: 14.0)
+                PulsatingDotsView(count: 4, size: 16.0)
                     .foregroundStyle(Colors.elementBackgroundColor)
-                    .padding([.leading, .trailing], 12)
+                    .padding(.leading, 5)
+                    .padding(.trailing, 9)
             })
         .rotationEffect(.degrees(180))
         .padding(.bottom, 8)

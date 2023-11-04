@@ -321,7 +321,7 @@ struct ConversationView: View {
 //                UIView.setAnimationsEnabled(true)
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                 // Set animations to false and set presentingConversation to conversation
                 UIView.setAnimationsEnabled(false)
                 
@@ -330,7 +330,7 @@ struct ConversationView: View {
 //                UIView.setAnimationsEnabled(true)
             })
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
                 // Set animations back to true
                 UIView.setAnimationsEnabled(true)
             })
