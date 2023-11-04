@@ -15,16 +15,8 @@ struct ChatBubbleView<Content>: View where Content: View {
     var onDelete: (() -> Void)? = nil
     
     
-    @State private var dragOffset: CGFloat = .zero
-    
     private let aiChatBubbleImage: Image = Image(Constants.ImageName.aiChatImage)
     private let userChatBubbleImage: Image = Image(systemName: "pencil")
-    
-    private let maxDragOffset: CGFloat = 200.0
-    
-    private var canDrag: Bool {
-        onDelete != nil
-    }
     
     private var currentChatBubbleImage: Image {
         switch sender {
@@ -41,29 +33,6 @@ struct ChatBubbleView<Content>: View where Content: View {
     
     var body: some View {
         ZStack {
-            HStack(spacing: 16.0) {
-                Spacer(minLength: 0.0)
-                
-                Text("Cancel")
-                    .font(.custom(Constants.FontName.body, size: 17.0))
-                    .foregroundStyle(Colors.textOnBackgroundColor)
-                    .opacity(0.4)
-                
-                Button(action: {
-                    onDelete?()
-                }) {
-                    Text("Delete")
-                        .font(.custom(Constants.FontName.black, size: 17.0))
-                }
-                .foregroundStyle(Color(uiColor: .systemRed))
-                .padding([.top, .bottom], 8)
-                .padding([.leading, .trailing], 16)
-                .background(Colors.foreground)
-                .clipShape(RoundedRectangle(cornerRadius: 24.0))
-            }
-            .frame(minHeight: 0.0)
-            .opacity(-Double(dragOffset) / 100)
-            
             HStack {
                 if sender == .user {
                     Spacer(minLength: 0.0)
@@ -97,61 +66,84 @@ struct ChatBubbleView<Content>: View where Content: View {
                 }
                 
             }
-            .offset(x: dragOffset)
-            .scaleEffect(1 - pow(Double(dragOffset) / 40, 2) / 100)
-            .opacity(1 - pow(Double(dragOffset) / 40, 2) / 100)
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            if dragOffset != .zero {
-                withAnimation {
-                    dragOffset = .zero
+            .modifier(SwipeAction(isDragged: $isDragged, behind: {
+                HStack(spacing: 16.0) {
+                    Spacer(minLength: 0.0)
+                    
+                    Text("Cancel")
+                        .font(.custom(Constants.FontName.body, size: 17.0))
+                        .foregroundStyle(Colors.textOnBackgroundColor)
+                        .opacity(0.4)
+                    
+                    Button(action: {
+                        onDelete?()
+                    }) {
+                        Text("Delete")
+                            .font(.custom(Constants.FontName.black, size: 17.0))
+                    }
+                    .foregroundStyle(Color(uiColor: .systemRed))
+                    .padding([.top, .bottom], 8)
+                    .padding([.leading, .trailing], 16)
+                    .background(Colors.foreground)
+                    .clipShape(RoundedRectangle(cornerRadius: 24.0))
                 }
-            }
+                .frame(minHeight: 0.0)
+            }))
+//            .offset(x: dragOffset)
+//            .scaleEffect(1 - pow(Double(dragOffset) / 40, 2) / 100)
+//            .opacity(1 - pow(Double(dragOffset) / 40, 2) / 100)
         }
-        .gesture(
-            DragGesture()
-                .onChanged { gesture in
-                    // Ensure canDrag, otherwise return
-                    guard canDrag else {
-                        return
-                    }
-                    
-                    // Ensure gesture translation width is less than or equal to 0, otherwise return so that rows can only be swiped left
-                    guard gesture.translation.width <= 0 else {
-                        return
-                    }
-                    
-                    // Set drag offset to gesture translation width
-                    dragOffset = gesture.translation.width
-                    
-                    if dragOffset <= -maxDragOffset {
-                        // If dragOffset is less than or equal to the left max drag offset, do light haptic
-                        HapticHelper.doLightHaptic()
-                    }
-                }
-                .onEnded { value in
-                    // Set the dragOffset to zero or left max drag offset depending on where the user released the row
-                    withAnimation {
-                        if dragOffset <= -maxDragOffset {
-                            dragOffset = -maxDragOffset
-                        } else {
-                            dragOffset = .zero
-                        }
-                    }
-                })
-        .onChange(of: dragOffset) { dragOffset in
-            if dragOffset == 0 {
-                isDragged = false
-            } else {
-                isDragged = true
-            }
-        }
-        .onChange(of: isDragged) { isDragged in
-            withAnimation {
-                dragOffset = isDragged ? -maxDragOffset : .zero
-            }
-        }
+//        .contentShape(Rectangle())
+//        .onTapGesture {
+//            if dragOffset != .zero {
+//                withAnimation {
+//                    dragOffset = .zero
+//                }
+//            }
+//        }
+//        .gesture(
+//            DragGesture()
+//                .onChanged { gesture in
+//                    // Ensure canDrag, otherwise return
+//                    guard canDrag else {
+//                        return
+//                    }
+//                    
+//                    // Ensure gesture translation width is less than or equal to 0, otherwise return so that rows can only be swiped left
+//                    guard gesture.translation.width <= 0 else {
+//                        return
+//                    }
+//                    
+//                    // Set drag offset to gesture translation width
+//                    dragOffset = gesture.translation.width
+//                    
+////                    if dragOffset <= -maxDragOffset {
+////                        // If dragOffset is less than or equal to the left max drag offset, do light haptic
+////                        HapticHelper.doLightHaptic()
+////                    }
+//                }
+//                .onEnded { value in
+//                    // Set the dragOffset to zero or left max drag offset depending on where the user released the row
+//                    withAnimation {
+//                        if dragOffset <= -maxDragOffset * 0.4 {
+//                            dragOffset = -maxDragOffset
+//                        } else {
+//                            dragOffset = .zero
+//                        }
+//                    }
+//                })
+//        .onChange(of: dragOffset) { dragOffset in
+//            if dragOffset == 0 {
+//                isDragged = false
+//            } else {
+//                isDragged = true
+//            }
+//        }
+//        .onChange(of: isDragged) { isDragged in
+//            withAnimation {
+//                dragOffset = isDragged ? -maxDragOffset : .zero
+//            }
+//        }
         
     }
     

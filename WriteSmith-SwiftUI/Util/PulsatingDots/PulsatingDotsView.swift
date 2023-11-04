@@ -13,6 +13,7 @@ struct PulsatingDotsView: View {
     @State var cycleDuration: Float = 0.4
     @State var size: CGFloat = 20
     @State var cycleOffset: CGFloat = 1.0
+    @State var horizontalSpacing: CGFloat = -1.0
     
     
     private let minScale: CGFloat = 0.2
@@ -22,7 +23,7 @@ struct PulsatingDotsView: View {
     @State private var isAnimating: Bool = false
     
     var body: some View {
-        HStack(spacing: 0.0) {
+        HStack(spacing: horizontalSpacing) {
             ForEach(0..<count, id: \.self) { i in
                 Circle()
                     .frame(width: size)

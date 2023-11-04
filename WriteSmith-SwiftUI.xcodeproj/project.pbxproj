@@ -11,6 +11,7 @@
 		BB123D4F2AEA04670037AF8C /* EssayRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB123D4E2AEA04670037AF8C /* EssayRowView.swift */; };
 		BB123D512AEA20990037AF8C /* View+KeyboardDismissingToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB123D502AEA20990037AF8C /* View+KeyboardDismissingToolbar.swift */; };
 		BB123D532AEA20BF0037AF8C /* KeyboardDismisser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB123D522AEA20BF0037AF8C /* KeyboardDismisser.swift */; };
+		BB2436FD2AF6830D0038340E /* SwipeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2436FC2AF6830D0038340E /* SwipeAction.swift */; };
 		BB4CB0C02AF56A9C0082007A /* ChatHTTPSConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4CB0BF2AF56A9C0082007A /* ChatHTTPSConnector.swift */; };
 		BB550EBC2AEADBC40070BAB8 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB550EBB2AEADBC40070BAB8 /* ExploreView.swift */; };
 		BB550EC02AEADD940070BAB8 /* TextFieldPanelComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB550EBF2AEADD940070BAB8 /* TextFieldPanelComponentView.swift */; };
@@ -231,6 +232,7 @@
 		BB123D4E2AEA04670037AF8C /* EssayRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayRowView.swift; sourceTree = "<group>"; };
 		BB123D502AEA20990037AF8C /* View+KeyboardDismissingToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+KeyboardDismissingToolbar.swift"; sourceTree = "<group>"; };
 		BB123D522AEA20BF0037AF8C /* KeyboardDismisser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismisser.swift; sourceTree = "<group>"; };
+		BB2436FC2AF6830D0038340E /* SwipeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeAction.swift; sourceTree = "<group>"; };
 		BB4CB0BF2AF56A9C0082007A /* ChatHTTPSConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHTTPSConnector.swift; sourceTree = "<group>"; };
 		BB550EBB2AEADBC40070BAB8 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		BB550EBF2AEADD940070BAB8 /* TextFieldPanelComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPanelComponentView.swift; sourceTree = "<group>"; };
@@ -605,6 +607,7 @@
 				BB74D3F82AE377DD00EC7579 /* Components */,
 				BB74D4312AE77E6300EC7579 /* ConversationChatGenerator.swift */,
 				BB74D4192AE5782300EC7579 /* ChatView.swift */,
+				BB2436FC2AF6830D0038340E /* SwipeAction.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1372,6 +1375,7 @@
 				BB92C2202AF364FE00A7B3DE /* View+TextFieldTickerTint.swift in Sources */,
 				BBCD958B2AEB429F005554BC /* SmileLookRightCurveFaceAnimation.swift in Sources */,
 				BB74D48D2AE980CE00EC7579 /* View+UltraViewPopover.swift in Sources */,
+				BB2436FD2AF6830D0038340E /* SwipeAction.swift in Sources */,
 				BBEBDFC32AEC63B50097D9AF /* SwiftyGif.swift in Sources */,
 				BB74D43C2AE7819C00EC7579 /* ChatCDHelper.swift in Sources */,
 				BB74D47F2AE7956400EC7579 /* ChatFinishReasons.swift in Sources */,
@@ -1590,7 +1594,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -1615,7 +1619,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 4.2.1;
+				MARKETING_VERSION = 4.2.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1633,7 +1637,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -1658,7 +1662,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 4.2.1;
+				MARKETING_VERSION = 4.2.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
