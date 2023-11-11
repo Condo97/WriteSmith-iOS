@@ -29,7 +29,11 @@ struct UltraButton: View {
     var body: some View {
         ZStack {
             Button(action: {
+                // Show Ultra View
                 isShowingUltraView = true
+                
+                // Do light haptic
+                HapticHelper.doLightHaptic()
             }) {
                 HStack(spacing: horizontalSpacing) {
                     SwiftyGif(name: sparkleImageName)

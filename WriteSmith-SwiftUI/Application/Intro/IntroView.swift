@@ -24,6 +24,10 @@ struct IntroView<Content: View>: View {
                 .aspectRatio(contentMode: .fit)
             
             Button(action: {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
+                // Show next view
                 isShowingNext = true
             }) {
                 ZStack {

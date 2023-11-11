@@ -16,6 +16,8 @@ struct WriteSmith_SwiftUIApp: App {
     @StateObject private var premiumUpdater: PremiumUpdater = PremiumUpdater()
     @StateObject private var remainingUpdater: RemainingUpdater = RemainingUpdater()
     
+    @State private var alertShowingAppLaunchImportant: Bool = false
+    
     @State private var isShowingIntroView: Bool
     
     
@@ -76,6 +78,11 @@ struct WriteSmith_SwiftUIApp: App {
                     // TODO: Handle errors
                     print("Error updating important constants in WriteSmith_SwiftUIApp... \(error)")
                 }
+                
+                // Show alert if received from constants
+                if let launchAlertText = ConstantsHelper.appLaunchAlert {
+                    alertShowingAppLaunchImportant = true
+                }
             }
             .task {
                 // Ensure authToken, otherwise return TODO: Handle errors
@@ -103,6 +110,14 @@ struct WriteSmith_SwiftUIApp: App {
                     // TODO: Handle errors
                     print("Error updating remaining in WriteSmith_SwiftUIApp... \(error)")
                 }
+            }
+            .alert("Issue Occurred", isPresented: $alertShowingAppLaunchImportant, actions: {
+                Button("Done", role: .cancel, action: {
+                    // Set appLaunchAlert to nil since it finished showing
+                    ConstantsHelper.appLaunchAlert = nil
+                })
+            }) {
+                Text(ConstantsHelper.appLaunchAlert ?? "There was an issue reaching one of our services. Please try again in a few moments.")
             }
         }
     }

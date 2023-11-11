@@ -89,6 +89,10 @@ struct EssayPromoRowView: View {
             }
             
             KeyboardDismissingButton(action: {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
+                // Show Ultra View
                 isShowingUltraView = true
             }) {
                 ZStack {

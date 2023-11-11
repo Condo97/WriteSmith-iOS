@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB22900F2AF5F1F600E38DF7"
+               BlueprintIdentifier = "BBB583072AF81C9F001EBF64"
                BuildableName = "WriteSmith_AppleWatch Watch App.app"
                BlueprintName = "WriteSmith_AppleWatch Watch App"
                ReferencedContainer = "container:WriteSmith-SwiftUI.xcodeproj">
@@ -48,7 +48,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB2290282AF5F1F700E38DF7"
+               BlueprintIdentifier = "BBB583202AF81CA2001EBF64"
                BuildableName = "WriteSmith_AppleWatch Watch AppUITests.xctest"
                BlueprintName = "WriteSmith_AppleWatch Watch AppUITests"
                ReferencedContainer = "container:WriteSmith-SwiftUI.xcodeproj">
@@ -59,7 +59,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB22901E2AF5F1F700E38DF7"
+               BlueprintIdentifier = "BBB583162AF81CA0001EBF64"
                BuildableName = "WriteSmith_AppleWatch Watch AppTests.xctest"
                BlueprintName = "WriteSmith_AppleWatch Watch AppTests"
                ReferencedContainer = "container:WriteSmith-SwiftUI.xcodeproj">
@@ -81,7 +81,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BB22900F2AF5F1F600E38DF7"
+            BlueprintIdentifier = "BBB583072AF81C9F001EBF64"
             BuildableName = "WriteSmith_AppleWatch Watch App.app"
             BlueprintName = "WriteSmith_AppleWatch Watch App"
             ReferencedContainer = "container:WriteSmith-SwiftUI.xcodeproj">
@@ -98,7 +98,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BB22900F2AF5F1F600E38DF7"
+            BlueprintIdentifier = "BBB583072AF81C9F001EBF64"
             BuildableName = "WriteSmith_AppleWatch Watch App.app"
             BlueprintName = "WriteSmith_AppleWatch Watch App"
             ReferencedContainer = "container:WriteSmith-SwiftUI.xcodeproj">

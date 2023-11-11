@@ -103,7 +103,7 @@ class ConversationChatGenerator: ObservableObject {
             for try await message in stream {
                 if firstMessage {
                     // Do light haptic
-                    HapticHelper.doLightHaptic()
+                    HapticHelper.doSuccessHaptic()
                     
                     // Set isLoading to false and isGenerating to true
                     DispatchQueue.main.async {

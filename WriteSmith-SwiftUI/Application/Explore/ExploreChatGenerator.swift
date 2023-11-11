@@ -88,8 +88,8 @@ class ExploreChatGenerator: ObservableObject {
         do {
             for try await message in stream {
                 if firstMessage {
-                    // Do light haptic
-                    HapticHelper.doLightHaptic()
+                    // Do success haptic
+                    HapticHelper.doSuccessHaptic()
                     
                     // Set isLoading to false and isGenerating to true
                     DispatchQueue.main.async {

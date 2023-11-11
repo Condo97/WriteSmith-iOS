@@ -21,7 +21,6 @@
 		BB66F9572AF444FB003F2E63 /* V4_2MigrationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66F9562AF444FB003F2E63 /* V4_2MigrationHandler.swift */; };
 		BB66F95A2AF44758003F2E63 /* V4MigrationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66F9592AF44758003F2E63 /* V4MigrationHandler.swift */; };
 		BB74D3C82AE3769C00EC7579 /* WriteSmith_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74D3C72AE3769C00EC7579 /* WriteSmith_SwiftUIApp.swift */; };
-		BB74D3CA2AE3769C00EC7579 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74D3C92AE3769C00EC7579 /* ContentView.swift */; };
 		BB74D3CC2AE3769D00EC7579 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB74D3CB2AE3769D00EC7579 /* Assets.xcassets */; };
 		BB74D3CF2AE3769D00EC7579 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB74D3CE2AE3769D00EC7579 /* Preview Assets.xcassets */; };
 		BB74D3DE2AE3769E00EC7579 /* WriteSmith_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74D3DD2AE3769E00EC7579 /* WriteSmith_SwiftUITests.swift */; };
@@ -135,6 +134,58 @@
 		BBB452DF2AEEBDC8000B4C97 /* PanelParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB452DE2AEEBDC8000B4C97 /* PanelParser.swift */; };
 		BBB452E12AEEBFA9000B4C97 /* PanelPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB452E02AEEBFA9000B4C97 /* PanelPersistenceManager.swift */; };
 		BBB452E32AEF238D000B4C97 /* MaintenanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB452E22AEF238D000B4C97 /* MaintenanceView.swift */; };
+		BBB583122AF81CA0001EBF64 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBB583112AF81CA0001EBF64 /* Preview Assets.xcassets */; };
+		BBB5831C2AF81CA2001EBF64 /* WriteSmith_AppleWatch_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5831B2AF81CA2001EBF64 /* WriteSmith_AppleWatch_Watch_AppTests.swift */; };
+		BBB583262AF81CA3001EBF64 /* WriteSmith_AppleWatch_Watch_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583252AF81CA3001EBF64 /* WriteSmith_AppleWatch_Watch_AppUITests.swift */; };
+		BBB583282AF81CA3001EBF64 /* WriteSmith_AppleWatch_Watch_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583272AF81CA3001EBF64 /* WriteSmith_AppleWatch_Watch_AppUITestsLaunchTests.swift */; };
+		BBB5832B2AF81CA3001EBF64 /* WriteSmith_AppleWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = BBB583082AF81C9F001EBF64 /* WriteSmith_AppleWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BBB583732AF81CE0001EBF64 /* WriteSmith_AppleWatch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBB583362AF81CE0001EBF64 /* WriteSmith_AppleWatch.xcdatamodeld */; };
+		BBB583742AF81CE0001EBF64 /* SocketStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5833A2AF81CE0001EBF64 /* SocketStream.swift */; };
+		BBB583752AF81CE0001EBF64 /* WebSocketClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5833B2AF81CE0001EBF64 /* WebSocketClient.swift */; };
+		BBB583762AF81CE0001EBF64 /* ChatWebSocketConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5833C2AF81CE0001EBF64 /* ChatWebSocketConnector.swift */; };
+		BBB583772AF81CE0001EBF64 /* GetImportantConstantsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5833E2AF81CE0001EBF64 /* GetImportantConstantsResponse.swift */; };
+		BBB583782AF81CE0001EBF64 /* ValidateAndUpdateReceiptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5833F2AF81CE0001EBF64 /* ValidateAndUpdateReceiptResponse.swift */; };
+		BBB583792AF81CE0001EBF64 /* RegisterUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583402AF81CE0001EBF64 /* RegisterUserResponse.swift */; };
+		BBB5837A2AF81CE0001EBF64 /* IsPremiumResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583412AF81CE0001EBF64 /* IsPremiumResponse.swift */; };
+		BBB5837B2AF81CE0001EBF64 /* GetIAPStuffResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583422AF81CE0001EBF64 /* GetIAPStuffResponse.swift */; };
+		BBB5837C2AF81CE0001EBF64 /* GetRemainingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583432AF81CE0001EBF64 /* GetRemainingResponse.swift */; };
+		BBB5837D2AF81CE0001EBF64 /* StatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583442AF81CE0001EBF64 /* StatusResponse.swift */; };
+		BBB5837E2AF81CE0001EBF64 /* GetChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583452AF81CE0001EBF64 /* GetChatResponse.swift */; };
+		BBB5837F2AF81CE0001EBF64 /* HTTPSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583462AF81CE0001EBF64 /* HTTPSClient.swift */; };
+		BBB583802AF81CE0001EBF64 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583482AF81CE0001EBF64 /* AuthRequest.swift */; };
+		BBB583812AF81CE0001EBF64 /* BlankRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583492AF81CE0001EBF64 /* BlankRequest.swift */; };
+		BBB583822AF81CE0001EBF64 /* ValidateAndUpdateReceiptRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5834A2AF81CE0001EBF64 /* ValidateAndUpdateReceiptRequest.swift */; };
+		BBB583832AF81CE0001EBF64 /* DeleteChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5834B2AF81CE0001EBF64 /* DeleteChatRequest.swift */; };
+		BBB583842AF81CE0001EBF64 /* RegisterTransactionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5834C2AF81CE0001EBF64 /* RegisterTransactionRequest.swift */; };
+		BBB583852AF81CE0001EBF64 /* GetChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5834D2AF81CE0001EBF64 /* GetChatRequest.swift */; };
+		BBB583862AF81CE0001EBF64 /* TransactionHTTPSConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5834F2AF81CE0001EBF64 /* TransactionHTTPSConnector.swift */; };
+		BBB583872AF81CE0001EBF64 /* HTTPSConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583502AF81CE0001EBF64 /* HTTPSConnector.swift */; };
+		BBB583882AF81CE0001EBF64 /* ChatHTTPSConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583512AF81CE0001EBF64 /* ChatHTTPSConnector.swift */; };
+		BBB583892AF81CE0001EBF64 /* WriteSmith_WatchAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583522AF81CE0001EBF64 /* WriteSmith_WatchAppApp.swift */; };
+		BBB5838A2AF81CE0001EBF64 /* PremiumUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583542AF81CE0001EBF64 /* PremiumUpdater.swift */; };
+		BBB5838B2AF81CE0001EBF64 /* RemainingUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583552AF81CE0001EBF64 /* RemainingUpdater.swift */; };
+		BBB5838C2AF81CE0001EBF64 /* HapticHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583562AF81CE0001EBF64 /* HapticHelper.swift */; };
+		BBB5838D2AF81CE0001EBF64 /* BubbleImageMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583572AF81CE0001EBF64 /* BubbleImageMaker.swift */; };
+		BBB5838E2AF81CE0001EBF64 /* GPTModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583582AF81CE0001EBF64 /* GPTModelHelper.swift */; };
+		BBB5838F2AF81CE0001EBF64 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583592AF81CE0001EBF64 /* AuthHelper.swift */; };
+		BBB583902AF81CE0001EBF64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBB5835A2AF81CE0001EBF64 /* Assets.xcassets */; };
+		BBB583912AF81CE0001EBF64 /* PulsatingDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5835D2AF81CE0001EBF64 /* PulsatingDotsView.swift */; };
+		BBB583922AF81CE0001EBF64 /* ChatGeneratorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5835F2AF81CE0001EBF64 /* ChatGeneratorError.swift */; };
+		BBB583932AF81CE0001EBF64 /* ChatCDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583612AF81CE0001EBF64 /* ChatCDHelper.swift */; };
+		BBB583942AF81CE0001EBF64 /* CDClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583622AF81CE0001EBF64 /* CDClient.swift */; };
+		BBB583952AF81CE0001EBF64 /* ChatFinishReasons.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583642AF81CE0001EBF64 /* ChatFinishReasons.swift */; };
+		BBB583962AF81CE0001EBF64 /* GPTModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583652AF81CE0001EBF64 /* GPTModels.swift */; };
+		BBB583972AF81CE0001EBF64 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583662AF81CE0001EBF64 /* Sender.swift */; };
+		BBB583982AF81CE0001EBF64 /* GPTModelTierSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583672AF81CE0001EBF64 /* GPTModelTierSpecification.swift */; };
+		BBB583992AF81CE0001EBF64 /* FirstChats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583682AF81CE0001EBF64 /* FirstChats.swift */; };
+		BBB5839A2AF81CE0001EBF64 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583692AF81CE0001EBF64 /* Constants.swift */; };
+		BBB5839B2AF81CE0001EBF64 /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5836B2AF81CE0001EBF64 /* ConversationView.swift */; };
+		BBB5839C2AF81CE0001EBF64 /* ConversationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5836C2AF81CE0001EBF64 /* ConversationRowView.swift */; };
+		BBB5839D2AF81CE0001EBF64 /* SwipeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5836F2AF81CE0001EBF64 /* SwipeAction.swift */; };
+		BBB5839E2AF81CE0001EBF64 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583702AF81CE0001EBF64 /* ChatBubbleView.swift */; };
+		BBB5839F2AF81CE0001EBF64 /* ConversationChatGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583712AF81CE0001EBF64 /* ConversationChatGenerator.swift */; };
+		BBB583A02AF81CE0001EBF64 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583722AF81CE0001EBF64 /* ChatView.swift */; };
+		BBB615422AFF5E1900E7BBFB /* BounceableOnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB615412AFF5E1900E7BBFB /* BounceableOnChange.swift */; };
 		BBCD95362AEAEBF0005554BC /* HeaderPanelComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCD95352AEAEBF0005554BC /* HeaderPanelComponentView.swift */; };
 		BBCD95382AEAECF4005554BC /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCD95372AEAECF4005554BC /* PanelView.swift */; };
 		BBCD953C2AEAED16005554BC /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCD953B2AEAED16005554BC /* Panel.swift */; };
@@ -212,9 +263,41 @@
 			remoteGlobalIDString = BB74D3C32AE3769C00EC7579;
 			remoteInfo = "WriteSmith-SwiftUI";
 		};
+		BBB583182AF81CA1001EBF64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB74D3BC2AE3769C00EC7579 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BBB583072AF81C9F001EBF64;
+			remoteInfo = "WriteSmith_AppleWatch Watch App";
+		};
+		BBB583222AF81CA3001EBF64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB74D3BC2AE3769C00EC7579 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BBB583072AF81C9F001EBF64;
+			remoteInfo = "WriteSmith_AppleWatch Watch App";
+		};
+		BBB583292AF81CA3001EBF64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB74D3BC2AE3769C00EC7579 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BBB583072AF81C9F001EBF64;
+			remoteInfo = "WriteSmith_AppleWatch Watch App";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		BBCC1AA32AF6E4EE00C9BC99 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				BBB5832B2AF81CA3001EBF64 /* WriteSmith_AppleWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBEBDFCA2AEC64130097D9AF /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -243,7 +326,6 @@
 		BB66F9592AF44758003F2E63 /* V4MigrationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V4MigrationHandler.swift; sourceTree = "<group>"; };
 		BB74D3C42AE3769C00EC7579 /* WriteSmith-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WriteSmith-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB74D3C72AE3769C00EC7579 /* WriteSmith_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteSmith_SwiftUIApp.swift; sourceTree = "<group>"; };
-		BB74D3C92AE3769C00EC7579 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BB74D3CB2AE3769D00EC7579 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB74D3CE2AE3769D00EC7579 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BB74D3D92AE3769E00EC7579 /* WriteSmith-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WriteSmith-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -360,6 +442,61 @@
 		BBB452DE2AEEBDC8000B4C97 /* PanelParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelParser.swift; sourceTree = "<group>"; };
 		BBB452E02AEEBFA9000B4C97 /* PanelPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelPersistenceManager.swift; sourceTree = "<group>"; };
 		BBB452E22AEF238D000B4C97 /* MaintenanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceView.swift; sourceTree = "<group>"; };
+		BBB583082AF81C9F001EBF64 /* WriteSmith_AppleWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WriteSmith_AppleWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBB583112AF81CA0001EBF64 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BBB583172AF81CA1001EBF64 /* WriteSmith_AppleWatch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WriteSmith_AppleWatch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBB5831B2AF81CA2001EBF64 /* WriteSmith_AppleWatch_Watch_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteSmith_AppleWatch_Watch_AppTests.swift; sourceTree = "<group>"; };
+		BBB583212AF81CA2001EBF64 /* WriteSmith_AppleWatch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WriteSmith_AppleWatch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBB583252AF81CA3001EBF64 /* WriteSmith_AppleWatch_Watch_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteSmith_AppleWatch_Watch_AppUITests.swift; sourceTree = "<group>"; };
+		BBB583272AF81CA3001EBF64 /* WriteSmith_AppleWatch_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteSmith_AppleWatch_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BBB583352AF81CDF001EBF64 /* WriteSmith_AppleWatch Watch App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WriteSmith_AppleWatch Watch App-Bridging-Header.h"; sourceTree = "<group>"; };
+		BBB583372AF81CE0001EBF64 /* WriteSmith_AppleWatch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WriteSmith_AppleWatch.xcdatamodel; sourceTree = "<group>"; };
+		BBB5833A2AF81CE0001EBF64 /* SocketStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketStream.swift; sourceTree = "<group>"; };
+		BBB5833B2AF81CE0001EBF64 /* WebSocketClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketClient.swift; sourceTree = "<group>"; };
+		BBB5833C2AF81CE0001EBF64 /* ChatWebSocketConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatWebSocketConnector.swift; sourceTree = "<group>"; };
+		BBB5833E2AF81CE0001EBF64 /* GetImportantConstantsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImportantConstantsResponse.swift; sourceTree = "<group>"; };
+		BBB5833F2AF81CE0001EBF64 /* ValidateAndUpdateReceiptResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateAndUpdateReceiptResponse.swift; sourceTree = "<group>"; };
+		BBB583402AF81CE0001EBF64 /* RegisterUserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterUserResponse.swift; sourceTree = "<group>"; };
+		BBB583412AF81CE0001EBF64 /* IsPremiumResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsPremiumResponse.swift; sourceTree = "<group>"; };
+		BBB583422AF81CE0001EBF64 /* GetIAPStuffResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetIAPStuffResponse.swift; sourceTree = "<group>"; };
+		BBB583432AF81CE0001EBF64 /* GetRemainingResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetRemainingResponse.swift; sourceTree = "<group>"; };
+		BBB583442AF81CE0001EBF64 /* StatusResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusResponse.swift; sourceTree = "<group>"; };
+		BBB583452AF81CE0001EBF64 /* GetChatResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetChatResponse.swift; sourceTree = "<group>"; };
+		BBB583462AF81CE0001EBF64 /* HTTPSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPSClient.swift; sourceTree = "<group>"; };
+		BBB583482AF81CE0001EBF64 /* AuthRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
+		BBB583492AF81CE0001EBF64 /* BlankRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlankRequest.swift; sourceTree = "<group>"; };
+		BBB5834A2AF81CE0001EBF64 /* ValidateAndUpdateReceiptRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateAndUpdateReceiptRequest.swift; sourceTree = "<group>"; };
+		BBB5834B2AF81CE0001EBF64 /* DeleteChatRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteChatRequest.swift; sourceTree = "<group>"; };
+		BBB5834C2AF81CE0001EBF64 /* RegisterTransactionRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterTransactionRequest.swift; sourceTree = "<group>"; };
+		BBB5834D2AF81CE0001EBF64 /* GetChatRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetChatRequest.swift; sourceTree = "<group>"; };
+		BBB5834F2AF81CE0001EBF64 /* TransactionHTTPSConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHTTPSConnector.swift; sourceTree = "<group>"; };
+		BBB583502AF81CE0001EBF64 /* HTTPSConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPSConnector.swift; sourceTree = "<group>"; };
+		BBB583512AF81CE0001EBF64 /* ChatHTTPSConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatHTTPSConnector.swift; sourceTree = "<group>"; };
+		BBB583522AF81CE0001EBF64 /* WriteSmith_WatchAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteSmith_WatchAppApp.swift; sourceTree = "<group>"; };
+		BBB583542AF81CE0001EBF64 /* PremiumUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PremiumUpdater.swift; sourceTree = "<group>"; };
+		BBB583552AF81CE0001EBF64 /* RemainingUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemainingUpdater.swift; sourceTree = "<group>"; };
+		BBB583562AF81CE0001EBF64 /* HapticHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticHelper.swift; sourceTree = "<group>"; };
+		BBB583572AF81CE0001EBF64 /* BubbleImageMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleImageMaker.swift; sourceTree = "<group>"; };
+		BBB583582AF81CE0001EBF64 /* GPTModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPTModelHelper.swift; sourceTree = "<group>"; };
+		BBB583592AF81CE0001EBF64 /* AuthHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
+		BBB5835A2AF81CE0001EBF64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BBB5835D2AF81CE0001EBF64 /* PulsatingDotsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulsatingDotsView.swift; sourceTree = "<group>"; };
+		BBB5835F2AF81CE0001EBF64 /* ChatGeneratorError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGeneratorError.swift; sourceTree = "<group>"; };
+		BBB583612AF81CE0001EBF64 /* ChatCDHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCDHelper.swift; sourceTree = "<group>"; };
+		BBB583622AF81CE0001EBF64 /* CDClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDClient.swift; sourceTree = "<group>"; };
+		BBB583642AF81CE0001EBF64 /* ChatFinishReasons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFinishReasons.swift; sourceTree = "<group>"; };
+		BBB583652AF81CE0001EBF64 /* GPTModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPTModels.swift; sourceTree = "<group>"; };
+		BBB583662AF81CE0001EBF64 /* Sender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		BBB583672AF81CE0001EBF64 /* GPTModelTierSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPTModelTierSpecification.swift; sourceTree = "<group>"; };
+		BBB583682AF81CE0001EBF64 /* FirstChats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstChats.swift; sourceTree = "<group>"; };
+		BBB583692AF81CE0001EBF64 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BBB5836B2AF81CE0001EBF64 /* ConversationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
+		BBB5836C2AF81CE0001EBF64 /* ConversationRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationRowView.swift; sourceTree = "<group>"; };
+		BBB5836F2AF81CE0001EBF64 /* SwipeAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeAction.swift; sourceTree = "<group>"; };
+		BBB583702AF81CE0001EBF64 /* ChatBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
+		BBB583712AF81CE0001EBF64 /* ConversationChatGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationChatGenerator.swift; sourceTree = "<group>"; };
+		BBB583722AF81CE0001EBF64 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		BBB615412AFF5E1900E7BBFB /* BounceableOnChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BounceableOnChange.swift; sourceTree = "<group>"; };
 		BBCD95352AEAEBF0005554BC /* HeaderPanelComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderPanelComponentView.swift; sourceTree = "<group>"; };
 		BBCD95372AEAECF4005554BC /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
 		BBCD953B2AEAED16005554BC /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
@@ -451,6 +588,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BBB583052AF81C9F001EBF64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBB583142AF81CA0001EBF64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBB5831E2AF81CA2001EBF64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -519,6 +677,9 @@
 				BB74D3C62AE3769C00EC7579 /* WriteSmith-SwiftUI */,
 				BB74D3DC2AE3769E00EC7579 /* WriteSmith-SwiftUITests */,
 				BB74D3E62AE3769E00EC7579 /* WriteSmith-SwiftUIUITests */,
+				BBB583092AF81C9F001EBF64 /* WriteSmith_AppleWatch Watch App */,
+				BBB5831A2AF81CA2001EBF64 /* WriteSmith_AppleWatch Watch AppTests */,
+				BBB583242AF81CA3001EBF64 /* WriteSmith_AppleWatch Watch AppUITests */,
 				BB74D3C52AE3769C00EC7579 /* Products */,
 				BBEBDFC42AEC64100097D9AF /* Frameworks */,
 			);
@@ -530,6 +691,9 @@
 				BB74D3C42AE3769C00EC7579 /* WriteSmith-SwiftUI.app */,
 				BB74D3D92AE3769E00EC7579 /* WriteSmith-SwiftUITests.xctest */,
 				BB74D3E32AE3769E00EC7579 /* WriteSmith-SwiftUIUITests.xctest */,
+				BBB583082AF81C9F001EBF64 /* WriteSmith_AppleWatch Watch App.app */,
+				BBB583172AF81CA1001EBF64 /* WriteSmith_AppleWatch Watch AppTests.xctest */,
+				BBB583212AF81CA2001EBF64 /* WriteSmith_AppleWatch Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -544,12 +708,12 @@
 				BB66F9472AF444C9003F2E63 /* Migration */,
 				BB74D40C2AE5686000EC7579 /* Model */,
 				BB74D44D2AE7893A00EC7579 /* Networking */,
+				BB74D46C2AE789BA00EC7579 /* HTTPSClient.swift */,
 				BB74D41B2AE57C8700EC7579 /* Persistence */,
 				BB74D40F2AE56AF400EC7579 /* Tools */,
 				BB74D4162AE572AE00EC7579 /* Util */,
 				BB74D4752AE790D000EC7579 /* WebSocket */,
 				BB74D3C72AE3769C00EC7579 /* WriteSmith_SwiftUIApp.swift */,
-				BB74D3C92AE3769C00EC7579 /* ContentView.swift */,
 				BBB452DA2AEEBD91000B4C97 /* WriteSmithPanelSpec.json */,
 				BBB452D02AEDFDA1000B4C97 /* Info.plist */,
 				BB74D3CB2AE3769D00EC7579 /* Assets.xcassets */,
@@ -689,7 +853,6 @@
 				BB8938942AF1631B00ED725E /* ConstantsHelper.swift */,
 				BB74D43E2AE786FF00EC7579 /* GPTModelHelper.swift */,
 				BB74D47C2AE7924500EC7579 /* HapticHelper.swift */,
-				BB74D46C2AE789BA00EC7579 /* HTTPSClient.swift */,
 				BBEBDFB32AEC55DB0097D9AF /* IAPHTTPSClient.swift */,
 				BBEBDFB52AEC55F30097D9AF /* IAPManager.swift */,
 				BB92C21B2AF2FDE500A7B3DE /* IntroManager.swift */,
@@ -710,6 +873,7 @@
 				BBB452CB2AEDF9C6000B4C97 /* Legacy */,
 				BB74D4972AE9BEBF00EC7579 /* PulsatingDots */,
 				BB74D4802AE8306300EC7579 /* BounceableModifier.swift */,
+				BBB615412AFF5E1900E7BBFB /* BounceableOnChange.swift */,
 				BB74D4862AE8CA4B00EC7579 /* ConversationResumingManager.swift */,
 				BB74D48E2AE9B6FE00EC7579 /* FullScreenCoverBackgroundCleanerView.swift */,
 				BB123D522AEA20BF0037AF8C /* KeyboardDismisser.swift */,
@@ -922,6 +1086,198 @@
 			path = Legacy;
 			sourceTree = "<group>";
 		};
+		BBB583092AF81C9F001EBF64 /* WriteSmith_AppleWatch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				BBB5836E2AF81CE0001EBF64 /* Chat */,
+				BBB5836D2AF81CE0001EBF64 /* Constants */,
+				BBB5836A2AF81CE0001EBF64 /* Conversation */,
+				BBB5835E2AF81CE0001EBF64 /* Error */,
+				BBB583632AF81CE0001EBF64 /* Model */,
+				BBB583382AF81CE0001EBF64 /* Networking */,
+				BBB583602AF81CE0001EBF64 /* Persistence */,
+				BBB583532AF81CE0001EBF64 /* Tools */,
+				BBB5835B2AF81CE0001EBF64 /* Util */,
+				BBB583522AF81CE0001EBF64 /* WriteSmith_WatchAppApp.swift */,
+				BBB583352AF81CDF001EBF64 /* WriteSmith_AppleWatch Watch App-Bridging-Header.h */,
+				BBB5835A2AF81CE0001EBF64 /* Assets.xcassets */,
+				BBB583362AF81CE0001EBF64 /* WriteSmith_AppleWatch.xcdatamodeld */,
+				BBB583102AF81CA0001EBF64 /* Preview Content */,
+			);
+			path = "WriteSmith_AppleWatch Watch App";
+			sourceTree = "<group>";
+		};
+		BBB583102AF81CA0001EBF64 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				BBB583112AF81CA0001EBF64 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BBB5831A2AF81CA2001EBF64 /* WriteSmith_AppleWatch Watch AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				BBB5831B2AF81CA2001EBF64 /* WriteSmith_AppleWatch_Watch_AppTests.swift */,
+			);
+			path = "WriteSmith_AppleWatch Watch AppTests";
+			sourceTree = "<group>";
+		};
+		BBB583242AF81CA3001EBF64 /* WriteSmith_AppleWatch Watch AppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BBB583252AF81CA3001EBF64 /* WriteSmith_AppleWatch_Watch_AppUITests.swift */,
+				BBB583272AF81CA3001EBF64 /* WriteSmith_AppleWatch_Watch_AppUITestsLaunchTests.swift */,
+			);
+			path = "WriteSmith_AppleWatch Watch AppUITests";
+			sourceTree = "<group>";
+		};
+		BBB583382AF81CE0001EBF64 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				BBB583392AF81CE0001EBF64 /* WebSocket */,
+				BBB5833D2AF81CE0001EBF64 /* Response */,
+				BBB583462AF81CE0001EBF64 /* HTTPSClient.swift */,
+				BBB583472AF81CE0001EBF64 /* Request */,
+				BBB5834E2AF81CE0001EBF64 /* HTTPSConnector */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		BBB583392AF81CE0001EBF64 /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				BBB5833A2AF81CE0001EBF64 /* SocketStream.swift */,
+				BBB5833B2AF81CE0001EBF64 /* WebSocketClient.swift */,
+				BBB5833C2AF81CE0001EBF64 /* ChatWebSocketConnector.swift */,
+			);
+			path = WebSocket;
+			sourceTree = "<group>";
+		};
+		BBB5833D2AF81CE0001EBF64 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				BBB5833E2AF81CE0001EBF64 /* GetImportantConstantsResponse.swift */,
+				BBB5833F2AF81CE0001EBF64 /* ValidateAndUpdateReceiptResponse.swift */,
+				BBB583402AF81CE0001EBF64 /* RegisterUserResponse.swift */,
+				BBB583412AF81CE0001EBF64 /* IsPremiumResponse.swift */,
+				BBB583422AF81CE0001EBF64 /* GetIAPStuffResponse.swift */,
+				BBB583432AF81CE0001EBF64 /* GetRemainingResponse.swift */,
+				BBB583442AF81CE0001EBF64 /* StatusResponse.swift */,
+				BBB583452AF81CE0001EBF64 /* GetChatResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		BBB583472AF81CE0001EBF64 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				BBB583482AF81CE0001EBF64 /* AuthRequest.swift */,
+				BBB583492AF81CE0001EBF64 /* BlankRequest.swift */,
+				BBB5834A2AF81CE0001EBF64 /* ValidateAndUpdateReceiptRequest.swift */,
+				BBB5834B2AF81CE0001EBF64 /* DeleteChatRequest.swift */,
+				BBB5834C2AF81CE0001EBF64 /* RegisterTransactionRequest.swift */,
+				BBB5834D2AF81CE0001EBF64 /* GetChatRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		BBB5834E2AF81CE0001EBF64 /* HTTPSConnector */ = {
+			isa = PBXGroup;
+			children = (
+				BBB5834F2AF81CE0001EBF64 /* TransactionHTTPSConnector.swift */,
+				BBB583502AF81CE0001EBF64 /* HTTPSConnector.swift */,
+				BBB583512AF81CE0001EBF64 /* ChatHTTPSConnector.swift */,
+			);
+			path = HTTPSConnector;
+			sourceTree = "<group>";
+		};
+		BBB583532AF81CE0001EBF64 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				BBB583542AF81CE0001EBF64 /* PremiumUpdater.swift */,
+				BBB583552AF81CE0001EBF64 /* RemainingUpdater.swift */,
+				BBB583562AF81CE0001EBF64 /* HapticHelper.swift */,
+				BBB583572AF81CE0001EBF64 /* BubbleImageMaker.swift */,
+				BBB583582AF81CE0001EBF64 /* GPTModelHelper.swift */,
+				BBB583592AF81CE0001EBF64 /* AuthHelper.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		BBB5835B2AF81CE0001EBF64 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				BBB5835C2AF81CE0001EBF64 /* PulsatingDots */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		BBB5835C2AF81CE0001EBF64 /* PulsatingDots */ = {
+			isa = PBXGroup;
+			children = (
+				BBB5835D2AF81CE0001EBF64 /* PulsatingDotsView.swift */,
+			);
+			path = PulsatingDots;
+			sourceTree = "<group>";
+		};
+		BBB5835E2AF81CE0001EBF64 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				BBB5835F2AF81CE0001EBF64 /* ChatGeneratorError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		BBB583602AF81CE0001EBF64 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				BBB583612AF81CE0001EBF64 /* ChatCDHelper.swift */,
+				BBB583622AF81CE0001EBF64 /* CDClient.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		BBB583632AF81CE0001EBF64 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BBB583642AF81CE0001EBF64 /* ChatFinishReasons.swift */,
+				BBB583652AF81CE0001EBF64 /* GPTModels.swift */,
+				BBB583662AF81CE0001EBF64 /* Sender.swift */,
+				BBB583672AF81CE0001EBF64 /* GPTModelTierSpecification.swift */,
+				BBB583682AF81CE0001EBF64 /* FirstChats.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BBB5836A2AF81CE0001EBF64 /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				BBB5836B2AF81CE0001EBF64 /* ConversationView.swift */,
+				BBB5836C2AF81CE0001EBF64 /* ConversationRowView.swift */,
+			);
+			path = Conversation;
+			sourceTree = "<group>";
+		};
+		BBB5836D2AF81CE0001EBF64 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				BBB583692AF81CE0001EBF64 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		BBB5836E2AF81CE0001EBF64 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				BBB5836F2AF81CE0001EBF64 /* SwipeAction.swift */,
+				BBB583702AF81CE0001EBF64 /* ChatBubbleView.swift */,
+				BBB583712AF81CE0001EBF64 /* ConversationChatGenerator.swift */,
+				BBB583722AF81CE0001EBF64 /* ChatView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		BBCD953F2AEAED48005554BC /* Panel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1120,10 +1476,12 @@
 				BB74D3C12AE3769C00EC7579 /* Frameworks */,
 				BB74D3C22AE3769C00EC7579 /* Resources */,
 				BBEBDFCA2AEC64130097D9AF /* Embed Frameworks */,
+				BBCC1AA32AF6E4EE00C9BC99 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BBB5832A2AF81CA3001EBF64 /* PBXTargetDependency */,
 			);
 			name = "WriteSmith-SwiftUI";
 			packageProductDependencies = (
@@ -1176,6 +1534,59 @@
 			productReference = BB74D3E32AE3769E00EC7579 /* WriteSmith-SwiftUIUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		BBB583072AF81C9F001EBF64 /* WriteSmith_AppleWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBB5832C2AF81CA3001EBF64 /* Build configuration list for PBXNativeTarget "WriteSmith_AppleWatch Watch App" */;
+			buildPhases = (
+				BBB583042AF81C9F001EBF64 /* Sources */,
+				BBB583052AF81C9F001EBF64 /* Frameworks */,
+				BBB583062AF81C9F001EBF64 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WriteSmith_AppleWatch Watch App";
+			productName = "WriteSmith_AppleWatch Watch App";
+			productReference = BBB583082AF81C9F001EBF64 /* WriteSmith_AppleWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BBB583162AF81CA0001EBF64 /* WriteSmith_AppleWatch Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBB5832F2AF81CA3001EBF64 /* Build configuration list for PBXNativeTarget "WriteSmith_AppleWatch Watch AppTests" */;
+			buildPhases = (
+				BBB583132AF81CA0001EBF64 /* Sources */,
+				BBB583142AF81CA0001EBF64 /* Frameworks */,
+				BBB583152AF81CA0001EBF64 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BBB583192AF81CA1001EBF64 /* PBXTargetDependency */,
+			);
+			name = "WriteSmith_AppleWatch Watch AppTests";
+			productName = "WriteSmith_AppleWatch Watch AppTests";
+			productReference = BBB583172AF81CA1001EBF64 /* WriteSmith_AppleWatch Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BBB583202AF81CA2001EBF64 /* WriteSmith_AppleWatch Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBB583322AF81CA3001EBF64 /* Build configuration list for PBXNativeTarget "WriteSmith_AppleWatch Watch AppUITests" */;
+			buildPhases = (
+				BBB5831D2AF81CA2001EBF64 /* Sources */,
+				BBB5831E2AF81CA2001EBF64 /* Frameworks */,
+				BBB5831F2AF81CA2001EBF64 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BBB583232AF81CA3001EBF64 /* PBXTargetDependency */,
+			);
+			name = "WriteSmith_AppleWatch Watch AppUITests";
+			productName = "WriteSmith_AppleWatch Watch AppUITests";
+			productReference = BBB583212AF81CA2001EBF64 /* WriteSmith_AppleWatch Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1196,6 +1607,18 @@
 					BB74D3E22AE3769E00EC7579 = {
 						CreatedOnToolsVersion = 15.0.1;
 						TestTargetID = BB74D3C32AE3769C00EC7579;
+					};
+					BBB583072AF81C9F001EBF64 = {
+						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
+					};
+					BBB583162AF81CA0001EBF64 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = BBB583072AF81C9F001EBF64;
+					};
+					BBB583202AF81CA2001EBF64 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = BBB583072AF81C9F001EBF64;
 					};
 				};
 			};
@@ -1221,6 +1644,9 @@
 				BB74D3C32AE3769C00EC7579 /* WriteSmith-SwiftUI */,
 				BB74D3D82AE3769E00EC7579 /* WriteSmith-SwiftUITests */,
 				BB74D3E22AE3769E00EC7579 /* WriteSmith-SwiftUIUITests */,
+				BBB583072AF81C9F001EBF64 /* WriteSmith_AppleWatch Watch App */,
+				BBB583162AF81CA0001EBF64 /* WriteSmith_AppleWatch Watch AppTests */,
+				BBB583202AF81CA2001EBF64 /* WriteSmith_AppleWatch Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1256,6 +1682,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BB74D3E12AE3769E00EC7579 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBB583062AF81C9F001EBF64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBB583902AF81CE0001EBF64 /* Assets.xcassets in Resources */,
+				BBB583122AF81CA0001EBF64 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBB583152AF81CA0001EBF64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBB5831F2AF81CA2001EBF64 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1360,6 +1809,7 @@
 				BB89388E2AF0B40D00ED725E /* InterstitialView.swift in Sources */,
 				BB74D46F2AE78D9000EC7579 /* AuthHelper.swift in Sources */,
 				BB74D4292AE590CE00EC7579 /* TabBar.swift in Sources */,
+				BBB615422AFF5E1900E7BBFB /* BounceableOnChange.swift in Sources */,
 				BB74D4052AE3789200EC7579 /* FaceConstants.swift in Sources */,
 				BBEBDFB42AEC55DB0097D9AF /* IAPHTTPSClient.swift in Sources */,
 				BB123D512AEA20990037AF8C /* View+KeyboardDismissingToolbar.swift in Sources */,
@@ -1381,7 +1831,6 @@
 				BB74D47F2AE7956400EC7579 /* ChatFinishReasons.swift in Sources */,
 				BB74D4852AE8C5A200EC7579 /* FirstChats.swift in Sources */,
 				BBB452C12AEDF81A000B4C97 /* RegistryHelper.swift in Sources */,
-				BB74D3CA2AE3769C00EC7579 /* ContentView.swift in Sources */,
 				BBB452952AEC82FE000B4C97 /* SettingsView.swift in Sources */,
 				BBCD958D2AEB429F005554BC /* SmileLookLeftFaceAnimation.swift in Sources */,
 				BBB452BF2AEDF77C000B4C97 /* CameraView.swift in Sources */,
@@ -1453,6 +1902,75 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BBB583042AF81C9F001EBF64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBB583922AF81CE0001EBF64 /* ChatGeneratorError.swift in Sources */,
+				BBB5839E2AF81CE0001EBF64 /* ChatBubbleView.swift in Sources */,
+				BBB5839C2AF81CE0001EBF64 /* ConversationRowView.swift in Sources */,
+				BBB5837D2AF81CE0001EBF64 /* StatusResponse.swift in Sources */,
+				BBB583772AF81CE0001EBF64 /* GetImportantConstantsResponse.swift in Sources */,
+				BBB583912AF81CE0001EBF64 /* PulsatingDotsView.swift in Sources */,
+				BBB583972AF81CE0001EBF64 /* Sender.swift in Sources */,
+				BBB583892AF81CE0001EBF64 /* WriteSmith_WatchAppApp.swift in Sources */,
+				BBB5838E2AF81CE0001EBF64 /* GPTModelHelper.swift in Sources */,
+				BBB583852AF81CE0001EBF64 /* GetChatRequest.swift in Sources */,
+				BBB5837F2AF81CE0001EBF64 /* HTTPSClient.swift in Sources */,
+				BBB583742AF81CE0001EBF64 /* SocketStream.swift in Sources */,
+				BBB583882AF81CE0001EBF64 /* ChatHTTPSConnector.swift in Sources */,
+				BBB5837C2AF81CE0001EBF64 /* GetRemainingResponse.swift in Sources */,
+				BBB583962AF81CE0001EBF64 /* GPTModels.swift in Sources */,
+				BBB5838B2AF81CE0001EBF64 /* RemainingUpdater.swift in Sources */,
+				BBB583992AF81CE0001EBF64 /* FirstChats.swift in Sources */,
+				BBB583942AF81CE0001EBF64 /* CDClient.swift in Sources */,
+				BBB583822AF81CE0001EBF64 /* ValidateAndUpdateReceiptRequest.swift in Sources */,
+				BBB583832AF81CE0001EBF64 /* DeleteChatRequest.swift in Sources */,
+				BBB583802AF81CE0001EBF64 /* AuthRequest.swift in Sources */,
+				BBB5839D2AF81CE0001EBF64 /* SwipeAction.swift in Sources */,
+				BBB583A02AF81CE0001EBF64 /* ChatView.swift in Sources */,
+				BBB5838D2AF81CE0001EBF64 /* BubbleImageMaker.swift in Sources */,
+				BBB5839A2AF81CE0001EBF64 /* Constants.swift in Sources */,
+				BBB5838F2AF81CE0001EBF64 /* AuthHelper.swift in Sources */,
+				BBB5838A2AF81CE0001EBF64 /* PremiumUpdater.swift in Sources */,
+				BBB583872AF81CE0001EBF64 /* HTTPSConnector.swift in Sources */,
+				BBB583792AF81CE0001EBF64 /* RegisterUserResponse.swift in Sources */,
+				BBB583932AF81CE0001EBF64 /* ChatCDHelper.swift in Sources */,
+				BBB583782AF81CE0001EBF64 /* ValidateAndUpdateReceiptResponse.swift in Sources */,
+				BBB583842AF81CE0001EBF64 /* RegisterTransactionRequest.swift in Sources */,
+				BBB5837A2AF81CE0001EBF64 /* IsPremiumResponse.swift in Sources */,
+				BBB583812AF81CE0001EBF64 /* BlankRequest.swift in Sources */,
+				BBB583952AF81CE0001EBF64 /* ChatFinishReasons.swift in Sources */,
+				BBB5837E2AF81CE0001EBF64 /* GetChatResponse.swift in Sources */,
+				BBB583762AF81CE0001EBF64 /* ChatWebSocketConnector.swift in Sources */,
+				BBB583732AF81CE0001EBF64 /* WriteSmith_AppleWatch.xcdatamodeld in Sources */,
+				BBB5838C2AF81CE0001EBF64 /* HapticHelper.swift in Sources */,
+				BBB583982AF81CE0001EBF64 /* GPTModelTierSpecification.swift in Sources */,
+				BBB5837B2AF81CE0001EBF64 /* GetIAPStuffResponse.swift in Sources */,
+				BBB5839F2AF81CE0001EBF64 /* ConversationChatGenerator.swift in Sources */,
+				BBB583862AF81CE0001EBF64 /* TransactionHTTPSConnector.swift in Sources */,
+				BBB583752AF81CE0001EBF64 /* WebSocketClient.swift in Sources */,
+				BBB5839B2AF81CE0001EBF64 /* ConversationView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBB583132AF81CA0001EBF64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBB5831C2AF81CA2001EBF64 /* WriteSmith_AppleWatch_Watch_AppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBB5831D2AF81CA2001EBF64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBB583262AF81CA3001EBF64 /* WriteSmith_AppleWatch_Watch_AppUITests.swift in Sources */,
+				BBB583282AF81CA3001EBF64 /* WriteSmith_AppleWatch_Watch_AppUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1465,6 +1983,21 @@
 			isa = PBXTargetDependency;
 			target = BB74D3C32AE3769C00EC7579 /* WriteSmith-SwiftUI */;
 			targetProxy = BB74D3E42AE3769E00EC7579 /* PBXContainerItemProxy */;
+		};
+		BBB583192AF81CA1001EBF64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BBB583072AF81C9F001EBF64 /* WriteSmith_AppleWatch Watch App */;
+			targetProxy = BBB583182AF81CA1001EBF64 /* PBXContainerItemProxy */;
+		};
+		BBB583232AF81CA3001EBF64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BBB583072AF81C9F001EBF64 /* WriteSmith_AppleWatch Watch App */;
+			targetProxy = BBB583222AF81CA3001EBF64 /* PBXContainerItemProxy */;
+		};
+		BBB5832A2AF81CA3001EBF64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BBB583072AF81C9F001EBF64 /* WriteSmith_AppleWatch Watch App */;
+			targetProxy = BBB583292AF81CA3001EBF64 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1591,10 +2124,11 @@
 		BB74D3EE2AE3769E00EC7579 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 62;
+				CURRENT_PROJECT_VERSION = 66;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -1619,7 +2153,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 4.2.3;
+				MARKETING_VERSION = 4.2.6;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1634,10 +2168,11 @@
 		BB74D3EF2AE3769E00EC7579 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 62;
+				CURRENT_PROJECT_VERSION = 66;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -1662,7 +2197,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 4.2.3;
+				MARKETING_VERSION = 4.2.6;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1750,6 +2285,153 @@
 			};
 			name = Release;
 		};
+		BBB5832D2AF81CA3001EBF64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith_AppleWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = WNCN9TJFT3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WriteSmith_AppleWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.acapplications.ChitChat;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WriteSmith_AppleWatch Watch App/WriteSmith_AppleWatch Watch App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		BBB5832E2AF81CA3001EBF64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith_AppleWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = WNCN9TJFT3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WriteSmith_AppleWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.acapplications.ChitChat;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WriteSmith_AppleWatch Watch App/WriteSmith_AppleWatch Watch App-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		BBB583302AF81CA3001EBF64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WNCN9TJFT3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acapplications.WriteSmith-AppleWatch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WriteSmith_AppleWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WriteSmith_AppleWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		BBB583312AF81CA3001EBF64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WNCN9TJFT3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acapplications.WriteSmith-AppleWatch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WriteSmith_AppleWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WriteSmith_AppleWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		BBB583332AF81CA3001EBF64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WNCN9TJFT3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acapplications.WriteSmith-AppleWatch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "WriteSmith_AppleWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		BBB583342AF81CA3001EBF64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WNCN9TJFT3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acapplications.WriteSmith-AppleWatch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "WriteSmith_AppleWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1785,6 +2467,33 @@
 			buildConfigurations = (
 				BB74D3F42AE3769E00EC7579 /* Debug */,
 				BB74D3F52AE3769E00EC7579 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BBB5832C2AF81CA3001EBF64 /* Build configuration list for PBXNativeTarget "WriteSmith_AppleWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBB5832D2AF81CA3001EBF64 /* Debug */,
+				BBB5832E2AF81CA3001EBF64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BBB5832F2AF81CA3001EBF64 /* Build configuration list for PBXNativeTarget "WriteSmith_AppleWatch Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBB583302AF81CA3001EBF64 /* Debug */,
+				BBB583312AF81CA3001EBF64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BBB583322AF81CA3001EBF64 /* Build configuration list for PBXNativeTarget "WriteSmith_AppleWatch Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBB583332AF81CA3001EBF64 /* Debug */,
+				BBB583342AF81CA3001EBF64 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1857,6 +2566,16 @@
 			);
 			currentVersion = BB66F9452AF44424003F2E63 /* ChitChat.xcdatamodel */;
 			path = ChitChat.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		BBB583362AF81CE0001EBF64 /* WriteSmith_AppleWatch.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BBB583372AF81CE0001EBF64 /* WriteSmith_AppleWatch.xcdatamodel */,
+			);
+			currentVersion = BBB583372AF81CE0001EBF64 /* WriteSmith_AppleWatch.xcdatamodel */;
+			path = WriteSmith_AppleWatch.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

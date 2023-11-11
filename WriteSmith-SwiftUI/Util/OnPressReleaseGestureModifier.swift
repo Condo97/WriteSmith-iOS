@@ -21,7 +21,8 @@ struct OnPressReleaseGestureModifier: ViewModifier {
                 })
                 .onEnded({ dragValue in
                     onRelease()
-                }))
+                })
+            )
     }
     
 }

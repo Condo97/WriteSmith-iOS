@@ -106,10 +106,10 @@ struct ExploreView: View {
                 ForEach(sections, id: \.self) { section in
                     ZStack {
                         KeyboardDismissingButton(action: {
+                            // Do light haptic
+                            HapticHelper.doLightHaptic()
+                            
                             withAnimation {
-                                // Do haptic
-                                HapticHelper.doLightHaptic()
-                                
                                 // Set selected section to section
                                 selectedSection = section
                             }
@@ -153,6 +153,10 @@ struct ExploreView: View {
                         LazyHStack {
                             ForEach(panelGroup.panels) { panel in
                                 KeyboardDismissingButton(action: {
+                                    // Do light haptic
+                                    HapticHelper.doLightHaptic()
+                                    
+                                    // Set presentingPanel to panel
                                     presentingPanel = panel
                                 }) {
                                     PanelMiniView(
@@ -187,6 +191,10 @@ struct ExploreView: View {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 8.0) {
                         ForEach(selectedPanelGroup.panels) { panel in
                             KeyboardDismissingButton(action: {
+                                // Do light haptic
+                                HapticHelper.doLightHaptic()
+                                
+                                // Set presentingPanel to panel
                                 presentingPanel = panel
                             }) {
                                 PanelMiniView(

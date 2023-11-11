@@ -254,10 +254,16 @@ struct TabBar: View, KeyboardReadable {
     var createButton: some View {
         ZStack {
             Button(action: {
+                // Do light hpatic
+                HapticHelper.doLightHaptic()
+                
+                // Show alert if panelGroups is nil, otherwise select explore tab
                 withAnimation(.none) {
                     if panelGroups == nil {
+                        // Show under maintenance alert
                         alertShowingExploreUnderMaintenance = true
                     } else {
+                        // Set selected tab to explore
                         self.selectedTab = .explore
                     }
                 }
@@ -291,6 +297,9 @@ struct TabBar: View, KeyboardReadable {
                     .frame(width: faceFrameDiameter, height: faceFrameDiameter)
             }
             .onTapGesture {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
                 // If not selected set the selectedTab to chat, otherwise set pushToLatestConversationOrClose to true
                 if selectedTab != .chat {
                     withAnimation(.none) {
@@ -306,6 +315,10 @@ struct TabBar: View, KeyboardReadable {
     var essayButton: some View {
         ZStack {
             Button(action: {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
+                // Set selected tab to essay
                 withAnimation(.none) {
                     self.selectedTab = .essay
                 }

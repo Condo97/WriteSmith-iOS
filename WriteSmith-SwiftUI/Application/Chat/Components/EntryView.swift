@@ -7,13 +7,15 @@
 
 import SwiftUI
 
-struct EntryView: View {
+struct EntryView: View, KeyboardReadable {
     
     @Binding var text: String
     let initialHeight: CGFloat
     var buttonDisabled: Bool = false
     var onSubmit: () -> Void
     
+    
+    @State private var isKeyboardShowing: Bool = false
     
 //    private let initialHeight: CGFloat = 32.0
     
@@ -25,6 +27,13 @@ struct EntryView: View {
                     Text("Tap to start chatting...")
                 })
                 .dismissOnReturn()
+                .onReceive(keyboardPublisher, perform: { newIsKeyboardVisible in
+                    if newIsKeyboardVisible && !isKeyboardShowing {
+                        HapticHelper.doLightHaptic()
+                    }
+                    
+                    isKeyboardShowing = newIsKeyboardVisible
+                })
                 .font(.custom(Constants.FontName.medium, size: 20.0))
                 .foregroundStyle(Colors.elementTextColor)
                 .frame(minHeight: initialHeight)

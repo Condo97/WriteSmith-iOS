@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TextFieldPanelComponentView: ComponentView {
+struct TextFieldPanelComponentView: ComponentView, KeyboardReadable {
     
     @State var titleText: String
     @State var placeholder: String
@@ -19,6 +19,7 @@ struct TextFieldPanelComponentView: ComponentView {
     
     
     @State private var textFieldText: String = ""
+    @State private var isKeyboardShowing: Bool = false
     
     var body: some View {
         VStack(spacing: 4.0) {
@@ -36,6 +37,14 @@ struct TextFieldPanelComponentView: ComponentView {
                         Text(placeholder)
                             .opacity(0.6)
                     })
+                .onReceive(keyboardPublisher, perform: { newIsKeyboardShowing in
+                    if newIsKeyboardShowing && !isKeyboardShowing {
+                        // Do light haptic
+                        HapticHelper.doLightHaptic()
+                    }
+                    
+                    isKeyboardShowing = newIsKeyboardShowing
+                })
                 .dismissOnReturn()
 //                .keyboardDismissingTextFieldToolbar("Done", color: Colors.buttonBackground)
                 .font(.custom(Constants.FontName.body, size: 17.0))

@@ -52,18 +52,6 @@ struct EssayView: View {
                 Spacer(minLength: 20.0)
                 
                 essaysList
-//                    .keyboardSavingTextFieldToolbar(
-//                        saveText: "Save",
-//                        cancelText: "Cancel",
-//                        color: Colors.buttonBackground,
-//                        save: {
-////                            saveChanges()
-//                        }, cancel: {
-//                            // Show discard changes alert if there are changes, otherwise do nothing to just dismiss the keyboard
-////                            if hasEdits {
-////                                alertShowingDiscardChanges = true
-////                            }
-//                        })
                 
                 if !premiumUpdater.isPremium {
                     EssayPromoRowView(isShowingUltraView: $isShowingUltraView)
@@ -73,6 +61,7 @@ struct EssayView: View {
             }
         }
         .background(Colors.background)
+        .keyboardDismissingTextFieldToolbar("Done", color: Colors.buttonBackground)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .toolbar {
@@ -100,7 +89,6 @@ struct EssayView: View {
         }
         .toolbarBackground(Colors.topBarBackgroundColor, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-        .keyboardDismissingTextFieldToolbar("Done", color: Colors.buttonBackground)
         .ultraViewPopover(isPresented: $isShowingUltraView, premiumUpdater: premiumUpdater)
         .navigationDestination(isPresented: $isShowingSettingsView, destination: {
             SettingsView(premiumUpdater: premiumUpdater)
@@ -116,18 +104,19 @@ struct EssayView: View {
         HStack {
             // Essay Text Field
             TextField("", text: $essayFieldText)
-                .textFieldTickerTint(Colors.elementTextColor)
                 .placeholder(when: essayFieldText.isEmpty, placeholder: {
                     Text("Enter a prompt...")
                 })
-                .dismissOnReturn()
-//                .keyboardDismissingTextFieldToolbar("Done", color: Colors.buttonBackground)
+//                .dismissOnReturn()
                 .toolbarBackground(Colors.elementTextColor)
                 .font(.custom(Constants.FontName.medium, size: 20.0))
                 .foregroundStyle(Colors.elementTextColor)
             
             // Generate Essay Button
             KeyboardDismissingButton(action: {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
                 // If not premium and has reached free essay limit, show alert and return
                 if !premiumUpdater.isPremium && essays.count >= freeEssayLimit {
                     alertShowingFreeEssayLimitReached = true

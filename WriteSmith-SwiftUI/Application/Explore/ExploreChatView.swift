@@ -50,6 +50,9 @@ struct ExploreChatView: View {
     
     var upgradeButton: some View {
         KeyboardDismissingButton(action: {
+            // Do light haptic
+            HapticHelper.doLightHaptic()
+            
             // Show ultra view
             isShowingUltraView = true
         }) {
@@ -68,6 +71,9 @@ struct ExploreChatView: View {
     
     var copyButton: some View {
         KeyboardDismissingButton(action: {
+            // Do light haptic
+            HapticHelper.doLightHaptic()
+            
             // Copy chat
             PasteboardHelper.copy(chat.chat, showFooterIfNotPremium: true, isPremium: premiumUpdater.isPremium)
             
@@ -102,6 +108,10 @@ struct ExploreChatView: View {
         .padding(8)
         .background(Colors.elementTextColor)
         .clipShape(RoundedRectangle(cornerRadius: UIConstants.cornerRadius))
+        .onTapGesture {
+            // Do light haptic
+            HapticHelper.doLightHaptic()
+        }
         .bounceable()
     }
     

@@ -83,7 +83,11 @@ struct ConversationView: View {
                 tightenLeadingSpacing: true,
                 tightenTrailingSpacing: true,
                 action: {
-                isShowingSettingsView = true
+                    // Do light haptic
+                    HapticHelper.doLightHaptic()
+                    
+                    // Show Settings View
+                    isShowingSettingsView = true
             })
             
             ShareToolbarItem(
@@ -99,6 +103,10 @@ struct ConversationView: View {
                     .font(.custom(Constants.FontName.black, size: 17.0))
                     .padding(.top, 4)
                     .padding(.trailing, premiumUpdater.isPremium ? 0.0 : -12.0)
+                    .onTapGesture {
+                        // Do light haptic
+                        HapticHelper.doLightHaptic()
+                    }
             }
             
             if !premiumUpdater.isPremium {
@@ -126,6 +134,10 @@ struct ConversationView: View {
     
     var newChatButton: some View {
         Button(action: {
+            // Do light haptic
+            HapticHelper.doLightHaptic()
+            
+            // Create and save conversation, setting to presentingConversation
             do {
                 let conversation = Conversation(context: viewContext)
                 conversation.conversationID = Constants.defaultConversationID
@@ -180,6 +192,9 @@ struct ConversationView: View {
                         }()
                         
                         Button(action: {
+                            // Do light haptic
+                            HapticHelper.doLightHaptic()
+                            
                             // Set presentingConversation to show conversation
                             presentingConversation = conversation
                         }) {

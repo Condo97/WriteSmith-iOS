@@ -69,6 +69,9 @@ struct PanelView: View {
                 
                 ZStack {
                     KeyboardDismissingButton(action: {
+                        // Do light haptic
+                        HapticHelper.doLightHaptic()
+                        
                         // Ensure finalizedPrompt can be unwrapped, otherwise show empty fields alert and return
                         guard let finalizedPrompt = finalizedPrompt else {
                             alertShowingEmptyRequiredFields = true

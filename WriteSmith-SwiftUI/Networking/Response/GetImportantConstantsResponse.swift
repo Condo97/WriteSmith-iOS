@@ -16,6 +16,7 @@ struct GetImportantConstantsResponse: Codable {
         var annualDisplayPrice: String
         var shareURL: String
         var freeEssayCap: Int
+        var appLaunchAlert: String
         
         enum CodingKeys: String, CodingKey {
             case weeklyDisplayPrice
@@ -23,6 +24,7 @@ struct GetImportantConstantsResponse: Codable {
             case annualDisplayPrice
             case shareURL
             case freeEssayCap
+            case appLaunchAlert
         }
         
     }

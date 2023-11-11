@@ -25,6 +25,10 @@ struct ShareToolbarItem: ToolbarContent {
                         .aspectRatio(contentMode: .fit)
                         .padding(2)
                 }
+                .onTapGesture {
+                    // Do light haptic
+                    HapticHelper.doLightHaptic()
+                }
                 .foregroundStyle(elementColor)
                 .padding(.leading, tightenLeadingSpacing ? -15.0 : 0.0)
                 .padding(.trailing, tightenTrailingSpacing ? -15.0 : 0.0)

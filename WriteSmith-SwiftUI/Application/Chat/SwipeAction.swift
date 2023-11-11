@@ -45,7 +45,6 @@ struct SwipeAction<V: View>: ViewModifier {
             .offset(x: dragOffset)
             .scaleEffect(1 - pow(Double(dragOffset) / 40, 2) / 100)
             .opacity(1 - pow(Double(dragOffset) / 40, 2) / 100)
-            .contentShape(Rectangle())
             .onTapGesture {
                 if dragOffset != .zero {
                     withAnimation {
@@ -96,6 +95,7 @@ struct SwipeAction<V: View>: ViewModifier {
                         }
                     })
         }
+        .contentShape(Rectangle())
         .onChange(of: dragOffset) { dragOffset in
             if dragOffset == 0 {
                 isDragged = false

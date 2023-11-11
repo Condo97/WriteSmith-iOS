@@ -178,6 +178,10 @@ struct ChatView: View, KeyboardReadable {
                         LogoToolbarItem(elementColor: .constant(Colors.elementTextColor))
                         
                         AddChatToolbarItem(elementColor: .constant(Colors.elementTextColor), trailingPadding: premiumUpdater.isPremium ? 0.0 : -12.0, action: {
+                            // Do light haptic
+                            HapticHelper.doLightHaptic()
+                            
+                            // Transition to new conversation
                             transitionToNewConversation = true
                         })
                         
@@ -369,7 +373,11 @@ struct ChatView: View, KeyboardReadable {
                                     // TODO: Handle errors
                                     print("Error saving context when deleting chat in ChatView... \(error)")
                                 }
-                            })
+                            },
+                        onCopy: {
+                            // Copy TODO: Add footer and stuff if not premium
+                            PasteboardHelper.copy(chat.text ?? "")
+                        })
                         .transition(sender == .ai ? .opacity : .moveUp)
                         .rotationEffect(.degrees(180))
                         .padding(.bottom, 8)
@@ -411,6 +419,10 @@ struct ChatView: View, KeyboardReadable {
     var gptSelector: some View {
         ZStack {
             GPTModelSelectionButton(action: {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
+                // Show GPT model selection view
                 withAnimation {
                     isShowingGPTModelSelectionView = true
                 }
@@ -426,6 +438,10 @@ struct ChatView: View, KeyboardReadable {
                 // Remaining Promo Button
                 if !premiumUpdater.isPremium, let remaining = remainingUpdater.remaining {
                     KeyboardDismissingButton(action: {
+                        // Do light haptic
+                        HapticHelper.doLightHaptic()
+                        
+                        // Show Ultra View
                         isShowingUltraView = true
                     }) {
                         HStack {
@@ -452,8 +468,13 @@ struct ChatView: View, KeyboardReadable {
                     CameraButtonView(
                         initialHeight: initialHeight,
                         action: {
+                            // Do light haptic
+                            HapticHelper.doLightHaptic()
+                            
+                            // Is showing Camera View
                             isShowingCameraView = true
                             
+                            // Print entryText and isLoading for debugging
                             print(entryText.isEmpty)
                             print(chatGenerator.isLoading)
                         })
@@ -463,6 +484,9 @@ struct ChatView: View, KeyboardReadable {
                         initialHeight: initialHeight,
                         buttonDisabled: entryText.isEmpty || chatGenerator.isLoading,
                         onSubmit: {
+                            // Do haptic
+                            HapticHelper.doLightHaptic()
+                            
                             // If chatGenerajtor is loading, return
                             if chatGenerator.isLoading {
                                 return
@@ -538,6 +562,10 @@ struct ChatView: View, KeyboardReadable {
                 // Free Trial Promo Button
                 if !premiumUpdater.isPremium {
                     KeyboardDismissingButton(action: {
+                        // Do light haptic
+                        HapticHelper.doLightHaptic()
+                        
+                        // Show Ultra View
                         isShowingUltraView = true
                     }) {
                         HStack {

@@ -219,8 +219,12 @@ struct Constants {
     }
     
     struct UserDefaults {
+        static let appLaunchAlert = "appLaunchAlert"
+        
         static let chatStorageUserDefaultKey = "chatStorageUserDefaultKey"
         static let pastChatStorageUserDefaultKey = "pastChatStorageUserDefaultKey"
+        
+        static let hapticsDisabled = "hapticsDisabled"
         
         static let panelGroupsJSON = "panelGroupsJSON"
         
@@ -232,6 +236,7 @@ struct Constants {
         //    static let userDefaultStoredAnnualDisplayPrice = "annualDisplayPrice"
         static let userDefaultStoredFreeEssayCap = "freeEssayCap"
         static let userDefaultStoredShareURL = "shareURL"
+        
         
         static let userDefaultStoredPremiumLastCheckDate = "premiumLastCheckDate"
         static let userDefaultStoredIsPremium = "storedIsPremium"

@@ -12,21 +12,28 @@ struct ChatBubbleView<Content>: View where Content: View {
     @State var sender: Sender
     @Binding var isDragged: Bool
     var content: () -> Content
-    var onDelete: (() -> Void)? = nil
+    var onDelete: (() -> Void)?
+    var onCopy: (() -> Void)?
     
     
-    private let aiChatBubbleImage: Image = Image(Constants.ImageName.aiChatImage)
-    private let userChatBubbleImage: Image = Image(systemName: "pencil")
+    @State private var isBounced: Bool = false
+    @State private var isShowingCopyText: Bool = false
     
-    private var currentChatBubbleImage: Image {
+    private let aiChatSenderImage: Image = Image(Constants.ImageName.aiChatImage)
+    private let userChatSenderImage: Image = Image(systemName: "pencil")
+    
+    private let copiedTextAnimationDuration: CGFloat = 0.2
+    private let copiedTextAnimationDelay: CGFloat = 0.4
+    
+    private var currentChatSenderImage: Image {
         switch sender {
         case .ai:
-            aiChatBubbleImage
+            aiChatSenderImage
         case .user:
-            userChatBubbleImage
+            userChatSenderImage
         case nil:
             // TODO: Handle this
-            userChatBubbleImage
+            userChatSenderImage
         }
     }
     
@@ -70,10 +77,14 @@ struct ChatBubbleView<Content>: View where Content: View {
                 HStack(spacing: 16.0) {
                     Spacer(minLength: 0.0)
                     
-                    Text("Cancel")
-                        .font(.custom(Constants.FontName.body, size: 17.0))
-                        .foregroundStyle(Colors.textOnBackgroundColor)
-                        .opacity(0.4)
+                    Button(action: {
+                        isDragged = false
+                    }) {
+                        Text("Cancel")
+                            .font(.custom(Constants.FontName.body, size: 17.0))
+                    }
+                    .foregroundStyle(Colors.textOnBackgroundColor)
+                    .opacity(0.4)
                     
                     Button(action: {
                         onDelete?()
@@ -93,57 +104,34 @@ struct ChatBubbleView<Content>: View where Content: View {
 //            .scaleEffect(1 - pow(Double(dragOffset) / 40, 2) / 100)
 //            .opacity(1 - pow(Double(dragOffset) / 40, 2) / 100)
         }
-//        .contentShape(Rectangle())
-//        .onTapGesture {
-//            if dragOffset != .zero {
-//                withAnimation {
-//                    dragOffset = .zero
-//                }
-//            }
-//        }
-//        .gesture(
-//            DragGesture()
-//                .onChanged { gesture in
-//                    // Ensure canDrag, otherwise return
-//                    guard canDrag else {
-//                        return
-//                    }
-//                    
-//                    // Ensure gesture translation width is less than or equal to 0, otherwise return so that rows can only be swiped left
-//                    guard gesture.translation.width <= 0 else {
-//                        return
-//                    }
-//                    
-//                    // Set drag offset to gesture translation width
-//                    dragOffset = gesture.translation.width
-//                    
-////                    if dragOffset <= -maxDragOffset {
-////                        // If dragOffset is less than or equal to the left max drag offset, do light haptic
-////                        HapticHelper.doLightHaptic()
-////                    }
-//                }
-//                .onEnded { value in
-//                    // Set the dragOffset to zero or left max drag offset depending on where the user released the row
-//                    withAnimation {
-//                        if dragOffset <= -maxDragOffset * 0.4 {
-//                            dragOffset = -maxDragOffset
-//                        } else {
-//                            dragOffset = .zero
-//                        }
-//                    }
-//                })
-//        .onChange(of: dragOffset) { dragOffset in
-//            if dragOffset == 0 {
-//                isDragged = false
-//            } else {
-//                isDragged = true
-//            }
-//        }
-//        .onChange(of: isDragged) { isDragged in
-//            withAnimation {
-//                dragOffset = isDragged ? -maxDragOffset : .zero
-//            }
-//        }
+        .simultaneousGesture(TapGesture()
+            .onEnded({
+                // Ensure not isDragged, otherwise return
+                guard !isDragged else {
+                    return
+                }
+                
+                // Set isBounced to true to do bounce
+                isBounced = true
+                
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
+                // Do onCopy
+                onCopy?()
+                
+                // Show "Copied" text
+                Task {
+                    do {
+                        try await showCopiedText()
+                    } catch {
+                        // TODO: Handle errors
+                        print("Error showing copied text in ChatBubbleView... \(error)")
+                    }
+                }
+            })
+        )
+        .bounceableOnChange(bounce: $isBounced)
         
     }
     
@@ -152,7 +140,7 @@ struct ChatBubbleView<Content>: View where Content: View {
             VStack {
                 Spacer()
                 
-                currentChatBubbleImage
+                currentChatSenderImage
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(sender == .user ? 8 : 5)
@@ -168,14 +156,47 @@ struct ChatBubbleView<Content>: View where Content: View {
         ZStack {
             ZStack {
                 content()
-                    .padding(sender == .user ? .trailing : .leading, 8.0)
+                    .opacity(isShowingCopyText ? 0.0 : 1.0)
+                
+                if isShowingCopyText {
+                    Text("Copied")
+                        .font(.custom(Constants.FontName.black, size: 20.0))
+                        .foregroundStyle(sender == .user ? Colors.userChatTextColor : Colors.aiChatTextColor)
+                }
             }
+            .padding(sender == .user ? .trailing : .leading, 8.0)
             .frame(minWidth: 40.0)
             .background(
                 BubbleImageMaker.makeBubbleImage(userSent: sender == .user)
                     .foregroundStyle(sender == .user ? Colors.userChatBubbleColor : Colors.aiChatBubbleColor)
             )
         }
+    }
+    
+    func showCopiedText() async throws {
+        // Ensure not isShowingCopyText, otherwise return
+        guard !isShowingCopyText else {
+            return
+        }
+        
+        // Defer setting isShowingCopyText to false to ensure it is always executed on completion
+        defer {
+            DispatchQueue.main.async {
+                withAnimation(.easeInOut(duration: copiedTextAnimationDuration)) {
+                    isShowingCopyText = false
+                }
+            }
+        }
+        
+        // Set isShowingCopyText to true
+        DispatchQueue.main.async {
+            withAnimation(.easeInOut(duration: copiedTextAnimationDuration)) {
+                isShowingCopyText = true
+            }
+        }
+        
+        // Wait for copiedTextAnimationDelay
+        try await Task.sleep(nanoseconds: UInt64(copiedTextAnimationDelay * CGFloat(1_000_000_000)))
     }
     
 }

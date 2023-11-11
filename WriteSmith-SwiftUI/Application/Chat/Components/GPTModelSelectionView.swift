@@ -56,8 +56,13 @@ struct GPTModelSelectionView: View {
                     
                     VStack {
                         KeyboardDismissingButton(action: {
+                            // Do light haptic
+                            HapticHelper.doLightHaptic()
+                            
+                            // Set currentChatModel to gpt3turbo
                             GPTModelHelper.currentChatModel = GPTModels.gpt3turbo
                             
+                            // Dismiss
                             withAnimation {
                                 isShowing = false
                             }
@@ -99,12 +104,21 @@ struct GPTModelSelectionView: View {
                         
                         KeyboardDismissingButton(action: {
                             if premiumUpdater.isPremium {
+                                // Do light haptic
+                                HapticHelper.doLightHaptic()
+                                
+                                // Set currentChatModel to gpt4
                                 GPTModelHelper.currentChatModel = GPTModels.gpt4
                                 
+                                // Dismiss
                                 withAnimation {
                                     isShowing = false
                                 }
                             } else {
+                                // Do warning haptic
+                                HapticHelper.doWarningHaptic()
+                                
+                                // Show upgrade to premium alert
                                 alertShowingUpgradeToPremium = true
                             }
                         }) {
@@ -146,6 +160,10 @@ struct GPTModelSelectionView: View {
                 .clipShape(RoundedRectangle(cornerRadius: UIConstants.cornerRadius))
                 
                 KeyboardDismissingButton(action: {
+                    // Do light haptic
+                    HapticHelper.doLightHaptic()
+                    
+                    // Dismiss
                     withAnimation {
                         isShowing = false
                     }
@@ -168,6 +186,10 @@ struct GPTModelSelectionView: View {
                     })
                     
                     Button("Try for FREE", role: nil, action: {
+                        // Do light haptic
+                        HapticHelper.doLightHaptic()
+                        
+                        // Show Ultra View
                         isShowingUltraView = true
                     })
                 }) {

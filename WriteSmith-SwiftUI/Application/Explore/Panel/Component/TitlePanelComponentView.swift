@@ -28,6 +28,10 @@ struct TitlePanelComponentView: View {
             
             if let detailTitle = detailTitle, let detailText = detailText {
                 KeyboardDismissingButton(action: {
+                    // Do light haptic
+                    HapticHelper.doLightHaptic()
+                    
+                    // Show info alert
                     alertShowingInfo = true
                 }) {
                     Text(Image(systemName: "info.circle"))

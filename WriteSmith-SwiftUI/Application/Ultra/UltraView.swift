@@ -213,6 +213,9 @@ struct UltraView: View {
     var purchaseButtons: some View {
         VStack(spacing: 8.0) {
             Button(action: {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
                 // Set tapped period to weekly and purchase
                 tappedPeriod = .weekly
                 
@@ -252,6 +255,9 @@ struct UltraView: View {
             .bounceable(disabled: ultraViewModel.isLoading)
             
             Button(action: {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
                 // Set tapped period to monthly and purchase
                 tappedPeriod = .monthly
                 
@@ -298,6 +304,10 @@ struct UltraView: View {
     var iapRequiredButtons: some View {
         HStack {
             Button(action: {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
+                // Show privacy web view
                 isShowingPrivacyWebView = true
             }) {
                 Text("Privacy")
@@ -305,6 +315,10 @@ struct UltraView: View {
             }
             
             Button(action: {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
+                // Show terms web view
                 isShowingTermsWebView = true
             }) {
                 Text("Terms")
@@ -314,7 +328,10 @@ struct UltraView: View {
             Spacer()
             
             Button(action: {
-                // TODO: Restore - Needs more testing
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
+                // Restore TODO: Restore - Needs more testing
                 restore()
             }) {
                 Text("Restore")
@@ -328,10 +345,19 @@ struct UltraView: View {
     func restore() {
         Task {
             do {
+                // Do restore TODO: Needs more testing
                 try await ultraViewModel.restore()
+                
+                // Do success haptic
+                HapticHelper.doSuccessHaptic()
             } catch {
                 // TODO: Handle errors
                 print("Error restoring purchases in UltraView... \(error)")
+                
+                // Do warning haptic
+                HapticHelper.doWarningHaptic()
+                
+                // Show error restoring purchases alert
                 alertShowingErrorRestoringPurchases = true
             }
         }
@@ -349,8 +375,12 @@ struct UltraView: View {
             // Purchase
             await ultraViewModel.purchase(subscriptionPeriod: tappedPeriod)
             
-            // If premium on complete, dismiss
+            // If premium on complete, do success haptic and dismiss
             if premiumUpdater.isPremium {
+                // Do success haptic
+                HapticHelper.doSuccessHaptic()
+                
+                // Dismiss
                 DispatchQueue.main.async {
                     isShowing = false
                 }

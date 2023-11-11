@@ -15,7 +15,11 @@ struct CloseToolbarItem: ToolbarContent {
     var body: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Button(action: {
+                // Set isPresented to false
                 isPresented = false
+                
+                // Do light haptic
+                HapticHelper.doLightHaptic()
             }) {
                 Text("Close")
                     .font(.custom(Constants.FontName.body, size: 17.0))

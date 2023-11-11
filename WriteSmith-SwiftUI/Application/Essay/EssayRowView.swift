@@ -92,6 +92,9 @@ struct EssayRowView: View {
                         
                         // Copy Button
                         KeyboardDismissingButton(action: {
+                            // Do light haptic
+                            HapticHelper.doLightHaptic()
+                            
                             // Unwrap prompt, otherwise return if nil
                             guard let prompt = essay.prompt else {
                                 // TODO: Handle errors
@@ -127,6 +130,10 @@ struct EssayRowView: View {
                         // Delete Button
                         if premiumUpdater.isPremium {
                             KeyboardDismissingButton(action: {
+                                // Do warning haptic
+                                HapticHelper.doWarningHaptic()
+                                
+                                // Show alert to confirm delete essay
                                 alertShowingConfirmDeleteEssay = true
                             }) {
                                 Image(systemName: "trash")
@@ -153,6 +160,9 @@ struct EssayRowView: View {
                     if hasEdits && !isGenerating {
                         HStack {
                             KeyboardDismissingButton(action: {
+                                // Do warning haptic
+                                HapticHelper.doWarningHaptic()
+                                
                                 // Show discard changes alert
                                 alertShowingDiscardChanges = true
                                 
@@ -179,8 +189,13 @@ struct EssayRowView: View {
                             )
                             
                             KeyboardDismissingButton(action: {
+                                // Do success haptic
+                                HapticHelper.doSuccessHaptic()
+                                
+                                // Save changes
                                 saveChanges()
                                 
+                                // Dismiss keyboard
                                 KeyboardDismisser.dismiss()
                             }) {
                                 Spacer()
@@ -239,8 +254,16 @@ struct EssayRowView: View {
                 KeyboardDismissingButton(action: {
                     // If is exapnded and has edits show discard changes alert, otherwise toggle isExpanded
                     if hasEdits && isExpanded && !isGenerating {
+                        // Do warning haptic
+                        HapticHelper.doWarningHaptic()
+                        
+                        // Show discard changes alert
                         alertShowingDiscardChanges = true
                     } else {
+                        // Do light haptic
+                        HapticHelper.doLightHaptic()
+                        
+                        // Toggle isExpanded
                         isExpanded.toggle()
                     }
                 }) {

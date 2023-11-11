@@ -38,6 +38,10 @@ struct DropdownPanelComponentView: ComponentView {
                             }
                         })
                     .onChange(of: selectedOption) { newSelectedOption in
+                        // Do light haptic
+                        HapticHelper.doLightHaptic()
+                        
+                        // Update finalized prompt
                         updateFinalizedPrompt()
                     }
                 } label: {
@@ -56,6 +60,10 @@ struct DropdownPanelComponentView: ComponentView {
             .padding()
             .background(Colors.foreground)
             .clipShape(RoundedRectangle(cornerRadius: UIConstants.cornerRadius))
+            .onTapGesture {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+            }
             
         }
     }
