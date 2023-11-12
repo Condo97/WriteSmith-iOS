@@ -145,7 +145,9 @@ struct ConversationView: View {
                 
                 try viewContext.save()
                 
-                presentingConversation = conversation
+                DispatchQueue.main.async {
+                    presentingConversation = conversation
+                }
             } catch {
                 print("Error saving new Conversation in ConversationView... \(error)")
             }
@@ -158,16 +160,16 @@ struct ConversationView: View {
                     .padding()
                 Spacer()
             }
+            .background(
+                ZStack {
+                    let cornerRadius = UIConstants.cornerRadius
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(Colors.buttonBackground, lineWidth: 2.0)
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(Colors.elementTextColor)
+                })
         }
         .buttonStyle(.plain)
-        .background(
-            ZStack {
-                let cornerRadius = UIConstants.cornerRadius
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(Colors.buttonBackground, lineWidth: 2.0)
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(Colors.elementTextColor)
-            })
         .listRowBackground(
             Color.clear
         )

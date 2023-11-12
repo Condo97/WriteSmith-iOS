@@ -64,16 +64,20 @@ struct ChatView: View, KeyboardReadable {
         
         if !shouldShowFirstConversationChats && conversation.chats?.count == 0 {
             // If there are no chats, add the initial one
-            do {
-                // TODO: This uses CDClient mainManagedObjectContext instead of viewContext, is there a better way to do this?
-                try ChatCDHelper.appendChat(
-                    sender: .ai,
-                    text: FirstChats.getRandomFirstChat(),
-                    to: conversation,
-                    in: CDClient.mainManagedObjectContext)
-            } catch {
-                // TODO: Handle errors
-                print("Error appending chat in ChatView... \(error)")
+            DispatchQueue.main.async {
+                do {
+                    // TODO: This uses CDClient mainManagedObjectContext instead of viewContext, is there a better way to do this?
+                    try withAnimation(.none) {
+                        try ChatCDHelper.appendChat(
+                            sender: .ai,
+                            text: FirstChats.getRandomFirstChat(),
+                            to: conversation,
+                            in: CDClient.mainManagedObjectContext)
+                    }
+                } catch {
+                    // TODO: Handle errors
+                    print("Error appending chat in ChatView... \(error)")
+                }
             }
         }
         
@@ -614,8 +618,10 @@ struct ChatView: View, KeyboardReadable {
 //            })
 //        }
         
-        try withAnimation(.none) {
-            try ChatCDHelper.appendChat(sender: .ai, text: "Hi! I'm Prof. Write, your AI writing companion...", to: conversation, in: viewContext)
+        try await MainActor.run {
+            try withAnimation(.none) {
+                try ChatCDHelper.appendChat(sender: .ai, text: "Hi! I'm Prof. Write, your AI writing companion...", to: conversation, in: viewContext)
+            }
         }
         
         await withCheckedContinuation { continuation in
@@ -624,7 +630,9 @@ struct ChatView: View, KeyboardReadable {
             })
         }
         
-        try ChatCDHelper.appendChat(sender: .ai, text: "Ask me to write lyrics, poems, essays and more. Talk to me like a human and ask me anything you'd ask your professor!", to: conversation, in: viewContext)
+        try await MainActor.run {
+            try ChatCDHelper.appendChat(sender: .ai, text: "Ask me to write lyrics, poems, essays and more. Talk to me like a human and ask me anything you'd ask your professor!", to: conversation, in: viewContext)
+        }
         
         await withCheckedContinuation { continuation in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.4, execute: {
@@ -632,7 +640,9 @@ struct ChatView: View, KeyboardReadable {
             })
         }
         
-        try ChatCDHelper.appendChat(sender: .ai, text: "I do better with more detail. Don't say, \"Essay on Belgium,\" say \"200 word essay on Belgium's cultural advances in the past 20 years.\" Remember, I'm your Professor, so use what I write as inspiration and never plagiarize!", to: conversation, in: viewContext)
+        try await MainActor.run {
+            try ChatCDHelper.appendChat(sender: .ai, text: "I do better with more detail. Don't say, \"Essay on Belgium,\" say \"200 word essay on Belgium's cultural advances in the past 20 years.\" Remember, I'm your Professor, so use what I write as inspiration and never plagiarize!", to: conversation, in: viewContext)
+        }
     }
     
     func showInterstitialAtFrequency() -> Bool {

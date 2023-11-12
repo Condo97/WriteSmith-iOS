@@ -59,6 +59,7 @@ struct EssayView: View {
                 
                 Spacer(minLength: 120.0)
             }
+            .scrollDismissesKeyboard(.interactively)
         }
         .background(Colors.background)
         .keyboardDismissingTextFieldToolbar("Done", color: Colors.buttonBackground)

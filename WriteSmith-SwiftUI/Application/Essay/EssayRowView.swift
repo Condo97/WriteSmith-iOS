@@ -165,11 +165,6 @@ struct EssayRowView: View {
                                 
                                 // Show discard changes alert
                                 alertShowingDiscardChanges = true
-                                
-//                                // Discard changes and dismiss keyboard
-//                                discardChanges()
-//                                
-//                                KeyboardDismisser.dismiss()
                             }) {
                                 Spacer()
                                 Text("Cancel")
@@ -216,29 +211,14 @@ struct EssayRowView: View {
                     
                     HStack {
                         TextField("", text: $editedText, axis: .vertical)
-                            .textFieldTickerTint(Colors.elementBackgroundColor)
+                            .textFieldTickerTint(Colors.elementTextColor)
                             .dismissOnReturn()
                             .font(.custom(Constants.FontName.body, size: 14.0))
                             .disabled(!isExpanded || isGenerating)
-//                            .keyboardSavingTextFieldToolbar(
-//                                saveText: "Save",
-//                                cancelText: "Cancel",
-//                                color: Colors.buttonBackground,
-//                                save: {
-//                                    saveChanges()
-//                                }, cancel: {
-//                                    // Show discard changes alert if there are changes, otherwise do nothing to just dismiss the keyboard
-//                                    if hasEdits {
-//                                        alertShowingDiscardChanges = true
-//                                    }
-//                                })
-//                            .toolbarBackground(Colors.elementTextColor)
-                        //                            TextField(essayText, text: .constant(essayText), axis: .vertical)
-                        //                            Text(essayText)
-                        //                                .font(.custom(Constants.FontName.body, size: 14.0))
                         
                         Spacer()
                     }
+                    .foregroundStyle(Colors.elementTextColor)
                 }
                 .padding(.bottom, isExpanded ? 80 : 10)
             }

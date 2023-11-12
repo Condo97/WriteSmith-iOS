@@ -67,17 +67,7 @@ struct UltraView: View {
             ZStack {
                 VStack {
                     HStack {
-                        Button(action: {
-                            DispatchQueue.main.async {
-                                isShowing = false
-                            }
-                        }) {
-                            Text(Image(systemName: "xmark"))
-                                .font(isCloseButtonEnlarged ? .custom(Constants.FontName.medium, size: 24.0) : .custom(Constants.FontName.body, size: 17.0))
-                        }
-                        .foregroundStyle(Colors.elementBackgroundColor)
-                        .opacity(isCloseButtonEnlarged ? 1.0 : 0.2)
-                        .padding()
+                        closeButton
                         
                         Spacer()
                     }
@@ -340,6 +330,20 @@ struct UltraView: View {
         }
         .foregroundStyle(Colors.elementBackgroundColor)
         .opacity(0.5)
+    }
+    
+    var closeButton: some View {
+        Button(action: {
+            DispatchQueue.main.async {
+                isShowing = false
+            }
+        }) {
+            Text(Image(systemName: "xmark"))
+                .font(isCloseButtonEnlarged ? .custom(Constants.FontName.medium, size: 24.0) : .custom(Constants.FontName.body, size: 17.0))
+        }
+        .foregroundStyle(Colors.elementBackgroundColor)
+        .opacity(isCloseButtonEnlarged ? 0.6 : 0.2)
+        .padding()
     }
     
     func restore() {

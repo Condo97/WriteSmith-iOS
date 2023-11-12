@@ -13,26 +13,23 @@ class ChatCDHelper {
     static let chatEntityName = String(describing: Chat.self)
     
     static func appendChat(sender: Sender, text: String, to conversation: Conversation, in managedContext: NSManagedObjectContext) throws {
-        // Build and save new chat to parent conversation
-        try managedContext.performAndWait {
-            // Create Chat in managedContext
-            let chat = Chat(context: managedContext)
-            
-            // Get current date for chat and conversation
-            let date = Date()
-            
-            // Update chat values
-            chat.sender = sender.rawValue
-            chat.text = text
-            chat.date = date
-            chat.conversation = conversation
-            
-            // Update conversation latestChatDate and latestChatText TODO: Is this appropriate to do here? I guess this is the best place lol
-            conversation.latestChatDate = date
-            conversation.latestChatText = text
-            
-            try managedContext.save()
-        }
+        // Create Chat in managedContext
+        let chat = Chat(context: managedContext)
+        
+        // Get current date for chat and conversation
+        let date = Date()
+        
+        // Update chat values
+        chat.sender = sender.rawValue
+        chat.text = text
+        chat.date = date
+        chat.conversation = conversation
+        
+        // Update conversation latestChatDate and latestChatText TODO: Is this appropriate to do here? I guess this is the best place lol
+        conversation.latestChatDate = date
+        conversation.latestChatText = text
+        
+        try managedContext.save()
     }
     
     static func deleteChat(chat: Chat, in managedContext: NSManagedObjectContext) async throws {

@@ -19,6 +19,9 @@ struct WriteSmith_SwiftUIApp: App {
     @State private var alertShowingAppLaunchImportant: Bool = false
     
     @State private var isShowingIntroView: Bool
+    @State private var isShowingUltraView: Bool = false
+    
+    private let firstTabBarViewEver: Bool
     
     
     init() {
@@ -29,6 +32,7 @@ struct WriteSmith_SwiftUIApp: App {
         GADMobileAds.sharedInstance().start()
         
         self._isShowingIntroView = State(initialValue: !IntroManager.isIntroComplete)
+        self.firstTabBarViewEver = !IntroManager.isIntroComplete
     }
     
     var body: some Scene {
@@ -44,6 +48,14 @@ struct WriteSmith_SwiftUIApp: App {
                     TabBar(
                         premiumUpdater: premiumUpdater,
                         remainingUpdater: remainingUpdater)
+                    .onAppear {
+                        if !firstTabBarViewEver && !premiumUpdater.isPremium {
+                            isShowingUltraView = true
+                        }
+                    }
+                    .ultraViewPopover(
+                        isPresented: $isShowingUltraView,
+                        premiumUpdater: premiumUpdater)
                 }
             }
             .animation(.easeInOut(duration: 0.4), value: isShowingIntroView)
