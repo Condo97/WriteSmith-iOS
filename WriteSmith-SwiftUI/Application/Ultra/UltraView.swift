@@ -143,8 +143,8 @@ struct UltraView: View {
                 .opacity(colorScheme == .dark ? 0.8 : 1.0)
 //                .frame(maxWidth: horizontalSizeClass == .regular ? 200.0 : .infinity)
             
-            Text("Unlimited Messages & More!")
-                .font(.custom(Constants.FontName.bodyOblique, size: 20.0))
+            Text("Unlimited Messages, Image Chats & More!")
+                .font(.custom(Constants.FontName.bodyOblique, size: 17.0))
                 .foregroundStyle(Colors.elementBackgroundColor)
                 .padding(.top, -28)
         }
@@ -156,10 +156,21 @@ struct UltraView: View {
                 Text(Image(systemName: "checkmark.square.fill"))
                     .font(.custom(Constants.FontName.body, size: 24.0))
                 
-                Text(" ULTRA GPT-4")
+                Text(" GPT-4 + Vision")
                     .font(.custom(Constants.FontName.black, size: 24.0))
                 +
-                Text(" Intelligence")
+                Text(" ")
+                    .font(.custom(Constants.FontName.body, size: 24.0))
+            }
+            
+            HStack(alignment: .top) {
+                Text(Image(systemName: "checkmark.square.fill"))
+                    .font(.custom(Constants.FontName.body, size: 24.0))
+                
+                Text(" Send Images,\n")
+                    .font(.custom(Constants.FontName.black, size: 24.0))
+                +
+                Text(" Cancel Anytime")
                     .font(.custom(Constants.FontName.body, size: 24.0))
             }
             
@@ -184,17 +195,6 @@ struct UltraView: View {
                 Text(" Ads")
                     .font(.custom(Constants.FontName.body, size: 24.0))
             }
-            
-            HStack(alignment: .top) {
-                Text(Image(systemName: "checkmark.square.fill"))
-                    .font(.custom(Constants.FontName.body, size: 24.0))
-                
-                Text(" No Commitments,\n")
-                    .font(.custom(Constants.FontName.black, size: 24.0))
-                +
-                Text(" Cancel Anytime")
-                    .font(.custom(Constants.FontName.body, size: 24.0))
-            }
         }
         .foregroundStyle(Colors.text)
         .multilineTextAlignment(.leading)
@@ -202,6 +202,11 @@ struct UltraView: View {
     
     var purchaseButtons: some View {
         VStack(spacing: 8.0) {
+            Text("Directly Supports the Developer - Cancel Anytime")
+                .font(.custom(Constants.FontName.bodyOblique, size: 12.0))
+                .padding(.bottom, -6)
+                .opacity(0.6)
+            
             Button(action: {
                 // Do light haptic
                 HapticHelper.doLightHaptic()

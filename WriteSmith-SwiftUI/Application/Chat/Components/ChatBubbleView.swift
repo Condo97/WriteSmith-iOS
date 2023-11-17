@@ -53,18 +53,18 @@ struct ChatBubbleView<Content>: View where Content: View {
                             
                             bubble
                             
-                            //                        Spacer()
+//                        Spacer()
                         }
-                        .fixedSize(horizontal: false, vertical: true)
+//                        .fixedSize(horizontal: false, vertical: true)
                     case .user:
                         HStack(spacing: 0.0) {
-                            //                        Spacer()
+//                            Spacer()
                             
                             bubble
                             
                             senderImage
                         }
-                        .fixedSize(horizontal: false, vertical: true)
+//                        .fixedSize(horizontal: false, vertical: true)
                     }
                 }
                 

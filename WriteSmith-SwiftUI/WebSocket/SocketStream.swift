@@ -34,7 +34,7 @@ class SocketStream: AsyncSequence {
             guard let continuation = self?.continuation else {
                 return
             }
-
+            
             do {
                 let message = try result.get()
                 continuation.yield(message)
@@ -44,18 +44,22 @@ class SocketStream: AsyncSequence {
             }
         })
     }
-
+    
     init(task: URLSessionWebSocketTask) {
         self.task = task
         task.resume()
     }
-
+    
     deinit {
         continuation?.finish()
     }
-
+    
     func makeAsyncIterator() -> AsyncIterator {
         return stream.makeAsyncIterator()
+    }
+    
+    func send(_ message: Element) async throws {
+        try await task.send(message)
     }
 
     func cancel() async throws {

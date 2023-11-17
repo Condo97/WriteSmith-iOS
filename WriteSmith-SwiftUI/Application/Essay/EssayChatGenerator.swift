@@ -7,6 +7,7 @@
 
 import CoreData
 import Foundation
+import UIKit
 
 class EssayChatGenerator: ObservableObject {
     
@@ -24,7 +25,7 @@ class EssayChatGenerator: ObservableObject {
 //            to: conversationObjectID)
 //    }
     
-    func generateEssay(input: String, isPremium: Bool, remainingUpdater: RemainingUpdater, in managedContext: NSManagedObjectContext) async throws {
+    func generateEssay(input: String, image: UIImage?, imageURL: String?, isPremium: Bool, remainingUpdater: RemainingUpdater, in managedContext: NSManagedObjectContext) async throws {
         // Ensure can generate, which is a variable
         guard canGenerate else {
             return
@@ -59,17 +60,27 @@ class EssayChatGenerator: ObservableObject {
         // Build GetChatRequest
         let request: GetChatRequest
         do {
-            request = GetChatRequest(
+            request = GetChatRequest.Builder(
                 authToken: try await AuthHelper.ensure(),
-                inputText: input,
+                behavior: nil, // TODO: Implement behavior
                 conversationID: Constants.defaultConversationID,
                 usePaidModel: GPTModelTierSpecification.paidModels.contains(where: {$0 == selectedModel}))
+            .addChat(
+                index: 0,
+                input: input,
+                imageData: image?.pngData(),
+                imageURL: imageURL,
+                sender: .user)
+            .build()
         } catch {
             throw ChatGeneratorError.invalidAuthToken
         }
         
         // Get stream
-        let stream = ChatWebSocketConnector.getChatStream(request: request)
+        let stream = ChatWebSocketConnector.getChatStream()
+        
+        // Send request TODO: Handle errors here if necessary
+        try await stream.send(.string(JSONEncoder().encode(request).base64EncodedString()))
         
         // Create firstMessage to get when the first message is processed
         var firstMessage = true

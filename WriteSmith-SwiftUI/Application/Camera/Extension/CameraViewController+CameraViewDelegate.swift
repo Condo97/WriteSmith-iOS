@@ -45,7 +45,8 @@ extension CameraViewController: CameraViewDelegate {
         HapticHelper.doLightHaptic()
         
         // Dismiss view
-        dismiss(animated: true)
+        delegate.dismiss()
+//        dismiss(animated: true)
     }
     
     func imageButtonPressed() {
@@ -61,9 +62,15 @@ extension CameraViewController: CameraViewDelegate {
         }
     }
     
-    func scanButtonPressed() {
-        // Ensure previewImageView can be unwrapped, otherwise return
-        guard let previewImageView = previewImageView else {
+    func attachImageButtonPressed() {
+//        // Ensure previewImageView can be unwrapped, otherwise return
+//        guard let previewImageView = previewImageView else {
+//            // TODO: Handle errors
+//            return
+//        }
+        
+        // Ensure previewImage can be unwrapped, otherwise return
+        guard let previewImage = previewImageView.image else {
             // TODO: Handle errors
             return
         }
@@ -71,10 +78,115 @@ extension CameraViewController: CameraViewDelegate {
         // Do haptic
         HapticHelper.doLightHaptic()
         
-        // Get the output image
-        let scale = max((previewImageView.image?.size.width)! / rootView.container.frame.width, (previewImageView.image?.size.height)! / rootView.container.frame.height)
+        // Get croppedImage and cropFrame, either cropped or not depending on crop switch
+        if rootView.showCropViewSwitch.isOn {
+            let (croppedImage, cropFrame): (CGImage?, CGRect?) = {
+                // Get the bounds of the image view and the previewImage
+                let imageViewSize = previewImageView.bounds.size
+                let imageSize = previewImage.size
+                
+                // Calculate the scale factor and the offset
+                let widthScale = imageSize.width / imageViewSize.width
+                let heightScale = imageSize.height / imageViewSize.height
+                let scaleFactor = max(widthScale, heightScale)
+                
+                let scaledImageWidth = imageSize.width / scaleFactor
+                let scaledImageHeight = imageSize.height / scaleFactor
+                
+                let imageOffsetX = (imageViewSize.width - scaledImageWidth) / 2
+                let imageOffsetY = (imageViewSize.height - scaledImageHeight) / 2
+                
+                let cropAreaWidth = rootView.container.frame.width - rootView.cropViewLeadingConstraint.constant - rootView.cropViewTrailingConstraint.constant
+                let cropAreaHeight = rootView.container.frame.height - rootView.cropViewTopConstraint.constant - rootView.cropViewBottomConstraint.constant
+                
+                // Calculate the cropping rectangle
+                let cropFrame = CGRect(
+                    x: (rootView.cropViewLeadingConstraint.constant - imageOffsetX) * scaleFactor,
+                    y: (rootView.cropViewTopConstraint.constant - imageOffsetY) * scaleFactor,
+                    width: cropAreaWidth * scaleFactor,
+                    height: cropAreaHeight * scaleFactor
+                )
+                
+                return (previewImageView.image?.cgImage?.cropping(to: cropFrame), cropFrame)
+                //            } else {
+                //                // Simply return the image as cgImage
+                //                return previewImageView.image?.cgImage
+                //            }
+            }()
+            
+            // Unwrap croppedImage and cropFrame, otherwise start up camera again and return
+            guard let croppedImage = croppedImage, let cropFrame = cropFrame else {
+                // TODO: Handle errors
+                print("Could not get the cropped image.")
+                startUpCameraAgain()
+                return
+            }
+            
+            // Call delegate didAttachImage with croppedImage as image,
+            delegate.didAttachImage(image: UIImage(cgImage: croppedImage), cropFrame: cropFrame, unmodifiedImage: previewImage)
+        } else {
+            // Call delegate didAttachImage with just previewImage as image
+            delegate.didAttachImage(image: previewImage, cropFrame: nil, unmodifiedImage: nil)
+        }
         
-        guard let outputImage = previewImageView.image?.cgImage?.cropping(to: CGRect(x: rootView.cropViewLeadingConstraint.constant * scale, y: rootView.cropViewTopConstraint.constant * scale, width: (rootView.container.frame.width - rootView.cropViewLeadingConstraint.constant - rootView.cropViewTrailingConstraint.constant) * scale, height: (rootView.container.frame.height - rootView.cropViewTopConstraint.constant - rootView.cropViewBottomConstraint.constant) * scale)) else {
+        // Dismiss
+        delegate.dismiss()
+//        self.dismiss(animated: true)
+    }
+    
+    func scanButtonPressed() {
+//        // Ensure previewImageView can be unwrapped, otherwise return
+//        guard let previewImageView = previewImageView else {
+//            // TODO: Handle errors
+//            return
+//        }
+        
+        // Ensure previewImage can be unwrapped, otherwise return
+        guard let previewImage = previewImageView.image else {
+            // TODO: Handle errors
+            return
+        }
+        
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        let (croppedImage, cropFrame): (CGImage?, CGRect?) = {
+            // Get the bounds of the image view and the previewImage
+            let imageViewSize = previewImageView.bounds.size
+            let imageSize = previewImage.size
+            
+            // Calculate the scale factor and the offset
+            let widthScale = imageSize.width / imageViewSize.width
+            let heightScale = imageSize.height / imageViewSize.height
+            let scaleFactor = max(widthScale, heightScale)
+            
+            let scaledImageWidth = imageSize.width / scaleFactor
+            let scaledImageHeight = imageSize.height / scaleFactor
+            
+            let imageOffsetX = (imageViewSize.width - scaledImageWidth) / 2
+            let imageOffsetY = (imageViewSize.height - scaledImageHeight) / 2
+            
+            let cropAreaWidth = rootView.container.frame.width - rootView.cropViewLeadingConstraint.constant - rootView.cropViewTrailingConstraint.constant
+            let cropAreaHeight = rootView.container.frame.height - rootView.cropViewTopConstraint.constant - rootView.cropViewBottomConstraint.constant
+            
+            // Calculate the cropping rectangle
+            let cropFrame = CGRect(
+                x: (rootView.cropViewLeadingConstraint.constant - imageOffsetX) * scaleFactor,
+                y: (rootView.cropViewTopConstraint.constant - imageOffsetY) * scaleFactor,
+                width: cropAreaWidth * scaleFactor,
+                height: cropAreaHeight * scaleFactor
+            )
+            
+            return (previewImageView.image?.cgImage?.cropping(to: cropFrame), cropFrame)
+            //            } else {
+            //                // Simply return the image as cgImage
+            //                return previewImageView.image?.cgImage
+            //            }
+        }()
+        
+        // Unwrap croppedImage, otherwise start up camera again and return
+        guard let croppedImage = croppedImage else {
+            // TODO: Handle errors
             print("Could not get the cropped image.")
             startUpCameraAgain()
             return
@@ -85,7 +197,7 @@ extension CameraViewController: CameraViewDelegate {
 //        previewImageView.image = UIImage(cgImage: outputImage)
         
         // Do text recognition
-        let requestHandler = VNImageRequestHandler(cgImage: outputImage)
+        let requestHandler = VNImageRequestHandler(cgImage: croppedImage)
         let request = VNRecognizeTextRequest(completionHandler: { request, error in
             guard let observations =
                     request.results as? [VNRecognizedTextObservation] else {
@@ -116,7 +228,8 @@ extension CameraViewController: CameraViewDelegate {
             
             if self.delegate != nil {
                 self.delegate.didGetScan(text: trimmedString)
-                self.dismiss(animated: true)
+                self.delegate.dismiss()
+//                self.dismiss(animated: true)
             }
         })
         
@@ -126,6 +239,14 @@ extension CameraViewController: CameraViewDelegate {
             try requestHandler.perform([request])
         } catch {
             print("Unable to perform the requests: \(error).")
+        }
+    }
+    
+    func showCropViewSwitchChanged(to newValue: Bool) {
+        if newValue {
+            showCropView()
+        } else {
+            hideCropView()
         }
     }
     

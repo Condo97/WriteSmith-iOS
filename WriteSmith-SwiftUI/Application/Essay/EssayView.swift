@@ -134,6 +134,8 @@ struct EssayView: View {
                     do {
                         try await essayGenerator.generateEssay(
                             input: essayFieldText,
+                            image: nil, // TODO: Add image functionality
+                            imageURL: nil, // TODO: Add image URL functionality
                             isPremium: premiumUpdater.isPremium,
                             remainingUpdater: remainingUpdater,
                             in: viewContext)

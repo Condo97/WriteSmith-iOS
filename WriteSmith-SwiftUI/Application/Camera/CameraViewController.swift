@@ -10,7 +10,9 @@ import UIKit
 import Vision
 
 protocol CameraViewControllerDelegate: AnyObject {
+    func didAttachImage(image: UIImage, cropFrame: CGRect?, unmodifiedImage: UIImage?)
     func didGetScan(text: String)
+    func dismiss()
 }
 
 class CameraViewController: UIViewController {
@@ -40,10 +42,10 @@ class CameraViewController: UIViewController {
     
     let defaultScanIntroTextAlpha = 0.4
     
-    var shouldCrop = false
+    var isCropInteractive = false
     
-    var cameraView: UIView!
-    var previewImageView: UIImageView!
+    lazy var cameraView: UIView = UIView(frame: rootView.container.bounds)
+    lazy var previewImageView: UIImageView = UIImageView(frame: rootView.container.bounds)
     var resizeRect = ResizeRect()
     
     var captureSession: AVCaptureSession?
@@ -71,10 +73,10 @@ class CameraViewController: UIViewController {
         deInitializeCropView()
         
         // Configure cameraView, previewImageView, and cameraButton
-        cameraView = UIView(frame: rootView.container.bounds)
+//        cameraView = UIView(frame: rootView.container.bounds)
         rootView.container.addSubview(cameraView)
         
-        previewImageView = UIImageView(frame: rootView.container.bounds)
+//        previewImageView = UIImageView(frame: rootView.container.bounds)
         
         rootView.cameraButton.setBackgroundImage(UIImage(named: Constants.ImageName.cameraButtonNotPressed), for: .normal)
         
@@ -96,7 +98,8 @@ class CameraViewController: UIViewController {
                 
             } catch {
                 print(error)
-                dismiss(animated: true)
+                delegate.dismiss()
+//                dismiss(animated: true)
                 return
             }
         }
@@ -118,7 +121,8 @@ class CameraViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if !UserDefaults.standard.bool(forKey: Constants.UserDefaults.userDefaultNotFirstCamera) {
-            let ac = UIAlertController(title: "Important - Scan Text!", message: "Easily scan prompts, questions and more.\n\nWorks with multiple choice, true/false, and open ended question types.", preferredStyle: .alert)
+//            let ac = UIAlertController(title: "Important - Scan Text!", message: "Easily scan prompts, questions and more.\n\nWorks with multiple choice, true/false, and open ended question types.", preferredStyle: .alert)
+            let ac = UIAlertController(title: "*NEW* - Send Images", message: "WriteSmith Can See! Introducing GPT-4-Vision. Send an image, ask questions, and get smart human-like feedback from your personal AI tutor.", preferredStyle: .alert)
             ac.view.tintColor = UIColor(Colors.alertTintColor)
             ac.addAction(UIAlertAction(title: "Confirm", style: .cancel))
             present(ac, animated: true)
@@ -128,7 +132,7 @@ class CameraViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard shouldCrop == true else { return }
+        guard isCropInteractive == true else { return }
         
         // Get touches to move that crop view!
         if let touch = touches.first {
@@ -163,7 +167,7 @@ class CameraViewController: UIViewController {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard shouldCrop == true else { return }
+        guard isCropInteractive == true else { return }
         
         // Move that crop view!
         if let touch = touches.first {
@@ -208,9 +212,9 @@ class CameraViewController: UIViewController {
         cameraButtonPressed()
     }
     
-    func initializeCropView(with image: UIImage, _ fromCamera: Bool, _ contentMode: UIView.ContentMode) {
+    func initializeCropView(with image: UIImage, cropFrame: CGRect?, fromCamera: Bool, contentMode: UIView.ContentMode) {
         // Adjust the UI elements
-        shouldCrop = true
+        isCropInteractive = true
         
         rootView.topResizeView.alpha = 1.0
         rootView.leftResizeView.alpha = 1.0
@@ -219,18 +223,55 @@ class CameraViewController: UIViewController {
         
         rootView.scanIntroText.alpha = 0.0
         
+        // Adjust overlay views if cropFrame is provided
+        if let cropFrame = cropFrame {
+            // First, set the contentMode and image for the previewImageView as usual.
+                   previewImageView.contentMode = contentMode
+                   previewImageView.image = image
+            
+                   // Calculate the crop view constraints based on the cropFrame
+                   let imageViewSize = previewImageView.bounds.size
+                   let imageSize = image.size
+                   let widthScale = imageSize.width / imageViewSize.width
+                   let heightScale = imageSize.height / imageViewSize.height
+                   let scaleFactor = max(widthScale, heightScale)
+
+                   // Deriving the constraints values from the reverse operation of the cropping process.
+                   rootView.cropViewLeadingConstraint.constant = (cropFrame.minX / scaleFactor)
+                   rootView.cropViewTopConstraint.constant = (cropFrame.minY / scaleFactor)
+                   rootView.cropViewTrailingConstraint.constant = imageViewSize.width - (cropFrame.maxX / scaleFactor)
+                   rootView.cropViewBottomConstraint.constant = imageViewSize.height - (cropFrame.maxY / scaleFactor)
+
+                   // Ensure the constraints are updated.
+                   self.view.layoutIfNeeded()
+        } else {
+            // Use default if no specific cropping frame is provided
+            rootView.cropViewTopConstraint.constant = InitialCropViewConstraintConstants().top
+            rootView.cropViewLeadingConstraint.constant = InitialCropViewConstraintConstants().leading
+            rootView.cropViewTrailingConstraint.constant = InitialCropViewConstraintConstants().trailing
+            rootView.cropViewBottomConstraint.constant = InitialCropViewConstraintConstants().bottom
+        }
+        
         // Hide Tap to Scan button
         UIView.animate(withDuration: 0.2, animations: {
             self.rootView.tapToScanImageView.alpha = 0.0
         })
         
-        // Show "Scan Selection" button
+        // Show "Scan Selection" and "Attach Image" buttons
 //        UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
+        self.rootView.attachImageButton.alpha = 1.0
         self.rootView.scanButton.alpha = 1.0
-        self.rootView.scanButtonHeightConstraint.constant = self.defaultScanButtonHeight
-        self.rootView.scanButtonTopSpaceConstraint.constant = self.defaultScanButtonTopSpace
         
+        self.rootView.scanButtonsHeightConstraint.constant = self.defaultScanButtonHeight
+        self.rootView.scanButtonsTopSpaceConstraint.constant = self.defaultScanButtonTopSpace
+        
+        // TODO: Should and can these be coombined into an update to the container instead?
+        self.rootView.attachImageButton.setNeedsDisplay()
         self.rootView.scanButton.setNeedsDisplay()
+        
+        // Show show crop view switch
+        self.rootView.showCropViewSwitchContainer.alpha = 0.8
+        self.rootView.showCropViewSwitchContainer.setNeedsDisplay()
 //        })
         
         // Ensure the capture session has stopped
@@ -258,8 +299,6 @@ class CameraViewController: UIViewController {
             orientation = .up
         }
         
-//        imageToSave = UIImage(cgImage: imageRefToSave, scale: 1.0, orientation: orientation)
-        
         previewImageView.contentMode = contentMode
         previewImageView.image = imageToSave
         rootView.container.addSubview(previewImageView)
@@ -269,7 +308,7 @@ class CameraViewController: UIViewController {
     
     func deInitializeCropView() {
         // Adjust the UI elements
-        shouldCrop = false
+        isCropInteractive = false
         
         rootView.topResizeView.alpha = 0.0
         rootView.leftResizeView.alpha = 0.0
@@ -284,10 +323,42 @@ class CameraViewController: UIViewController {
         rootView.cropViewBottomConstraint.constant = InitialCropViewConstraintConstants().bottom
         
         //TODO: - Smoother animation
+        self.rootView.attachImageButton.alpha = 0.0
         self.rootView.scanButton.alpha = 0.0
-        self.rootView.scanButtonHeightConstraint.constant = 0.0
-        self.rootView.scanButtonTopSpaceConstraint.constant = 0.0
+        self.rootView.scanButtonsHeightConstraint.constant = 0.0
+        self.rootView.scanButtonsTopSpaceConstraint.constant = 0.0
+        self.rootView.showCropViewSwitchContainer.alpha = 0.0
+        self.rootView.attachImageButton.setNeedsDisplay()
         self.rootView.scanButton.setNeedsDisplay()
+        self.rootView.showCropViewSwitchContainer.setNeedsDisplay()
+    }
+    
+    func showCropView() {
+        // Set cropView element opacity to 1.0
+        rootView.topResizeView.alpha = 1.0
+        rootView.leftResizeView.alpha = 1.0
+        rootView.rightResizeView.alpha = 1.0
+        rootView.bottomResizeView.alpha = 1.0
+        
+        rootView.topOverlay.alpha = rootView.defaultOverlayOpacity
+        rootView.leftOverlay.alpha = rootView.defaultOverlayOpacity
+        rootView.rightOverlay.alpha = rootView.defaultOverlayOpacity
+        rootView.bottomOverlay.alpha = rootView.defaultOverlayOpacity
+        rootView.initialImageCropZone.alpha = 1.0
+    }
+    
+    func hideCropView() {
+        // Set cropView element opacity to 0.0
+        rootView.topResizeView.alpha = 0.0
+        rootView.leftResizeView.alpha = 0.0
+        rootView.rightResizeView.alpha = 0.0
+        rootView.bottomResizeView.alpha = 0.0
+        
+        rootView.topOverlay.alpha = 0.0
+        rootView.leftOverlay.alpha = 0.0
+        rootView.rightOverlay.alpha = 0.0
+        rootView.bottomOverlay.alpha = 0.0
+        rootView.initialImageCropZone.alpha = 0.0
     }
     
     func startUpCameraAgain() {
@@ -338,7 +409,7 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
         rootView.cameraButton.setBackgroundImage(UIImage(named: Constants.ImageName.cameraButtonRedo), for: .normal)
         
         // Setup Crop View
-        initializeCropView(with: imageToSave, true, .scaleAspectFill)
+        initializeCropView(with: imageToSave, cropFrame: nil, fromCamera: true, contentMode: .scaleAspectFill)
     }
 }
 
@@ -366,7 +437,7 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
             
             let imageToSave = UIImage(cgImage: imageRef, scale: 1.0, orientation: .up)
             
-            initializeCropView(with: imageToSave, false, .scaleAspectFill)
+            initializeCropView(with: imageToSave, cropFrame: nil, fromCamera: false, contentMode: .scaleAspectFit)
             
             rootView.cameraButton.setBackgroundImage(UIImage(named: Constants.ImageName.cameraButtonRedo), for: .normal)
         } else {

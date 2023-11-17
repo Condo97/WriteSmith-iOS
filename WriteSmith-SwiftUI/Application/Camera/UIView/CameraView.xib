@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,7 +15,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="c9P-Vp-eiZ" customClass="CameraView" customModule="ChitChat" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="c9P-Vp-eiZ" customClass="CameraView" customModule="WriteSmith_SwiftUI" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -66,7 +66,7 @@
                         <constraint firstAttribute="width" secondItem="A7e-vo-rsz" secondAttribute="height" multiplier="6:9" id="fSC-rD-gmq"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUj-0n-X2g" customClass="SillyCropView" customModule="ChitChat" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUj-0n-X2g" customClass="SillyCropView" customModule="WriteSmith_SwiftUI" customModuleProvider="target">
                     <rect key="frame" x="40" y="99.999999999999986" width="313" height="215.66666666666663"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <userDefinedRuntimeAttributes>
@@ -94,7 +94,7 @@
                     <rect key="frame" x="353" y="99.999999999999986" width="40" height="215.66666666666663"/>
                     <color key="backgroundColor" name="AIChatTextColor"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IpG-Zm-EjK" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IpG-Zm-EjK" customClass="RoundedView" customModule="WriteSmith_SwiftUI" customModuleProvider="target">
                     <rect key="frame" x="156.66666666666666" y="90" width="80" height="20"/>
                     <color key="backgroundColor" name="AIChatTextColor"/>
                     <constraints>
@@ -106,17 +106,18 @@
                             <real key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" name="ChatBackgroundColor"/>
+                            <color key="value" name="AIChatBubbleColor"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                             <real key="value" value="2"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bn-xv-pgp" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bn-xv-pgp" customClass="RoundedView" customModule="WriteSmith_SwiftUI" customModuleProvider="target">
                     <rect key="frame" x="156.66666666666666" y="305.66666666666669" width="80" height="20"/>
                     <color key="backgroundColor" name="AIChatTextColor"/>
                     <constraints>
+                        <constraint firstAttribute="width" secondItem="9bn-xv-pgp" secondAttribute="height" multiplier="4:1" id="KUM-ob-ba9"/>
                         <constraint firstAttribute="height" constant="20" id="oh7-mq-dHf"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -124,61 +125,98 @@
                             <real key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" name="ChatBackgroundColor"/>
+                            <color key="value" name="AIChatBubbleColor"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                             <real key="value" value="2"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdp-N0-EFp" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdp-N0-EFp" customClass="RoundedView" customModule="WriteSmith_SwiftUI" customModuleProvider="target">
                     <rect key="frame" x="30" y="167.66666666666666" width="20" height="80"/>
                     <color key="backgroundColor" name="AIChatTextColor"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="DMh-zd-YIn"/>
+                        <constraint firstAttribute="width" secondItem="rdp-N0-EFp" secondAttribute="height" multiplier="1:4" id="HDM-CM-06u"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" name="ChatBackgroundColor"/>
+                            <color key="value" name="AIChatBubbleColor"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                             <real key="value" value="2"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4T-xV-GTx" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4T-xV-GTx" customClass="RoundedView" customModule="WriteSmith_SwiftUI" customModuleProvider="target">
                     <rect key="frame" x="343" y="167.66666666666666" width="20" height="80"/>
                     <color key="backgroundColor" name="AIChatTextColor"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="fsR-UF-ieT"/>
+                        <constraint firstAttribute="width" secondItem="q4T-xV-GTx" secondAttribute="height" multiplier="1:4" id="pfI-Bb-8hE"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" name="ChatBackgroundColor"/>
+                            <color key="value" name="AIChatBubbleColor"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                             <real key="value" value="2"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1z-TE-mk8" customClass="RoundedView" customModule="ChitChat" customModuleProvider="target">
+                <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVh-eq-sMU" customClass="RoundedView" customModule="WriteSmith_SwiftUI" customModuleProvider="target">
+                    <rect key="frame" x="266" y="534.66666666666663" width="119" height="47"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6c-0o-Nca">
+                            <rect key="frame" x="8" y="8" width="46" height="31"/>
+                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
+                            <color key="textColor" name="Text"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZyN-j6-if0">
+                            <rect key="frame" x="62" y="8" width="51" height="31"/>
+                            <connections>
+                                <action selector="showCropViewSwitchChanged:" destination="c9P-Vp-eiZ" eventType="valueChanged" id="sZr-fi-Cai"/>
+                            </connections>
+                        </switch>
+                    </subviews>
+                    <color key="backgroundColor" name="ForegroundColor"/>
+                    <constraints>
+                        <constraint firstItem="ZyN-j6-if0" firstAttribute="leading" secondItem="f6c-0o-Nca" secondAttribute="trailing" constant="8" id="BTh-aW-e1I"/>
+                        <constraint firstItem="f6c-0o-Nca" firstAttribute="top" secondItem="JVh-eq-sMU" secondAttribute="top" constant="8" id="BwZ-1d-OhC"/>
+                        <constraint firstAttribute="bottom" secondItem="ZyN-j6-if0" secondAttribute="bottom" constant="8" id="DV5-gl-7Iz"/>
+                        <constraint firstItem="f6c-0o-Nca" firstAttribute="leading" secondItem="JVh-eq-sMU" secondAttribute="leading" constant="8" id="Fd3-Be-nhA"/>
+                        <constraint firstItem="ZyN-j6-if0" firstAttribute="top" secondItem="JVh-eq-sMU" secondAttribute="top" constant="8" id="q1m-yc-FRr"/>
+                        <constraint firstAttribute="trailing" secondItem="ZyN-j6-if0" secondAttribute="trailing" constant="8" id="seA-yM-Dbp"/>
+                        <constraint firstAttribute="bottom" secondItem="f6c-0o-Nca" secondAttribute="bottom" constant="8" id="vHX-ps-7qj"/>
+                    </constraints>
+                </view>
+                <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1z-TE-mk8" customClass="RoundedView" customModule="WriteSmith_SwiftUI" customModuleProvider="target">
                     <rect key="frame" x="56.666666666666657" y="388.66666666666669" width="280" height="177.00000000000006"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZn-Vh-n69">
                             <rect key="frame" x="14" y="7" width="252" height="163"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <attributedString key="attributedText">
-                                <fragment content="Scan Questions, Prompts, and More...">
+                                <fragment>
+                                    <string key="content">*NEW* - Send Images
+</string>
                                     <attributes>
                                         <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <font key="NSFont" size="20" name="Avenir-Heavy"/>
-                                        <font key="NSOriginalFont" size="20" name="Avenir-Heavy"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Now send images directly to GPT-4.">
+                                    <attributes>
+                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <font key="NSFont" size="14" name="Avenir-BookOblique"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>
@@ -204,9 +242,10 @@ Cg
                                     </attributes>
                                 </fragment>
                                 <fragment>
-                                    <string key="content">1. Center text in frame above
-2. Tap circle button to take picture
-3. Watch the AI instantly answer!</string>
+                                    <string key="content">Try Sending...
+• Image problems
+• Objects &amp; scenery
+• Full pages of text</string>
                                     <attributes>
                                         <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <font key="NSFont" size="14" name="Avenir-Book"/>
@@ -227,24 +266,63 @@ Cg
                         <constraint firstAttribute="width" constant="280" id="zBd-UJ-rZD"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ES4-7Q-4bc" customClass="RoundedButton" customModule="ChitChat" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QT1-zE-o2E">
                     <rect key="frame" x="24" y="613.66666666666663" width="345" height="52"/>
-                    <color key="backgroundColor" name="AIChatBubbleColor"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ES4-7Q-4bc" customClass="RoundedButton" customModule="WriteSmith_SwiftUI" customModuleProvider="target">
+                            <rect key="frame" x="60" y="0.0" width="285" height="52"/>
+                            <color key="backgroundColor" name="ElementTextColor"/>
+                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Attach Image...">
+                                <color key="titleColor" name="ElementBackgroundColor"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="hasArrow" value="YES"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                    <color key="value" name="ElementBackgroundColor"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="attachImageButtonPressed:" destination="c9P-Vp-eiZ" eventType="touchUpInside" id="E5Z-Xw-5Qe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWD-E9-wHX" customClass="RoundedButton" customModule="WriteSmith_SwiftUI" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
+                            <color key="backgroundColor" name="ElementTextColor"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="vWD-E9-wHX" secondAttribute="height" multiplier="1:1" id="KZe-Kj-xSD"/>
+                            </constraints>
+                            <color key="tintColor" name="ElementBackgroundColor"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="" image="text.viewfinder" catalog="system">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="medium"/>
+                            </state>
+                            <buttonConfiguration key="configuration" style="plain" image="text.viewfinder" catalog="system" title="">
+                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20" scale="default" weight="medium"/>
+                            </buttonConfiguration>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                    <color key="value" name="ElementBackgroundColor"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="scanButtonPressed:" destination="c9P-Vp-eiZ" eventType="touchUpInside" id="gTT-cU-Lqs"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="52" id="dpV-Ey-P4i"/>
+                        <constraint firstAttribute="bottom" secondItem="ES4-7Q-4bc" secondAttribute="bottom" id="SOA-NP-uvk"/>
+                        <constraint firstItem="ES4-7Q-4bc" firstAttribute="leading" secondItem="vWD-E9-wHX" secondAttribute="trailing" constant="8" id="Xpn-We-WQW"/>
+                        <constraint firstAttribute="bottom" secondItem="vWD-E9-wHX" secondAttribute="bottom" id="fIB-oB-808"/>
+                        <constraint firstAttribute="trailing" secondItem="ES4-7Q-4bc" secondAttribute="trailing" id="hHT-NR-hin"/>
+                        <constraint firstAttribute="height" constant="52" id="keJ-Mz-wxx"/>
+                        <constraint firstItem="vWD-E9-wHX" firstAttribute="top" secondItem="QT1-zE-o2E" secondAttribute="top" id="mS9-cw-Sm3"/>
+                        <constraint firstItem="ES4-7Q-4bc" firstAttribute="top" secondItem="QT1-zE-o2E" secondAttribute="top" id="xhp-H8-Cj6"/>
+                        <constraint firstItem="vWD-E9-wHX" firstAttribute="leading" secondItem="QT1-zE-o2E" secondAttribute="leading" id="zIr-xS-Suk"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Scan Selection...">
-                        <color key="titleColor" name="AIChatTextColor"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="hasArrow" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="scanButtonPressed:" destination="c9P-Vp-eiZ" eventType="touchUpInside" id="lYK-QZ-BC5"/>
-                    </connections>
-                </button>
+                </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TapToScan" translatesAutoresizingMaskIntoConstraints="NO" id="jWL-Cc-xIj">
                     <rect key="frame" x="130" y="778.66666666666663" width="133" height="66.333333333333371"/>
                     <color key="tintColor" name="AIChatBubbleColor"/>
@@ -258,20 +336,17 @@ Cg
                 <constraint firstItem="J5m-Ie-bOA" firstAttribute="bottom" secondItem="hUj-0n-X2g" secondAttribute="top" id="1DE-tC-Oyg"/>
                 <constraint firstItem="q4T-xV-GTx" firstAttribute="trailing" secondItem="hUj-0n-X2g" secondAttribute="trailing" constant="10" id="1Gs-8a-CR0"/>
                 <constraint firstItem="ola-Nm-tFe" firstAttribute="trailing" secondItem="A7e-vo-rsz" secondAttribute="trailing" id="1gC-qW-3va"/>
-                <constraint firstItem="ES4-7Q-4bc" firstAttribute="top" secondItem="A7e-vo-rsz" secondAttribute="bottom" constant="24" id="2zq-33-J4L"/>
+                <constraint firstItem="QT1-zE-o2E" firstAttribute="leading" secondItem="ola-Nm-tFe" secondAttribute="leading" constant="24" id="34z-Gg-dxY"/>
                 <constraint firstItem="hUj-0n-X2g" firstAttribute="leading" secondItem="ola-Nm-tFe" secondAttribute="leading" constant="40" id="43V-tv-4Y2"/>
                 <constraint firstItem="IpG-Zm-EjK" firstAttribute="top" secondItem="hUj-0n-X2g" secondAttribute="top" constant="-10" id="5h3-Mh-jK4"/>
                 <constraint firstItem="J5m-Ie-bOA" firstAttribute="leading" secondItem="ola-Nm-tFe" secondAttribute="leading" id="6FL-Dr-SkQ"/>
                 <constraint firstItem="A7e-vo-rsz" firstAttribute="bottom" secondItem="hUj-0n-X2g" secondAttribute="bottom" constant="274" id="6ZH-vy-FMM"/>
-                <constraint firstItem="ES4-7Q-4bc" firstAttribute="leading" secondItem="ola-Nm-tFe" secondAttribute="leading" constant="24" id="6b4-QD-ODJ"/>
                 <constraint firstItem="I9L-uY-Xqc" firstAttribute="centerX" secondItem="c9P-Vp-eiZ" secondAttribute="centerX" id="7qM-rD-JTD"/>
                 <constraint firstAttribute="trailing" secondItem="gxg-4u-htC" secondAttribute="trailing" id="AAW-dE-RdO"/>
+                <constraint firstItem="JVh-eq-sMU" firstAttribute="bottom" secondItem="A7e-vo-rsz" secondAttribute="bottom" constant="-8" id="CjX-go-bco"/>
                 <constraint firstItem="9bn-xv-pgp" firstAttribute="bottom" secondItem="hUj-0n-X2g" secondAttribute="bottom" constant="10" id="FqS-39-P0h"/>
                 <constraint firstItem="p1z-TE-mk8" firstAttribute="centerX" secondItem="c9P-Vp-eiZ" secondAttribute="centerX" id="Gdr-iu-eDB"/>
-                <constraint firstItem="rdp-N0-EFp" firstAttribute="width" secondItem="rdp-N0-EFp" secondAttribute="height" multiplier="1:4" id="HDM-CM-06u"/>
-                <constraint firstItem="9bn-xv-pgp" firstAttribute="width" secondItem="9bn-xv-pgp" secondAttribute="height" multiplier="4:1" id="KUM-ob-ba9"/>
                 <constraint firstItem="q4T-xV-GTx" firstAttribute="centerY" secondItem="hUj-0n-X2g" secondAttribute="centerY" id="MSl-gT-Dnt"/>
-                <constraint firstItem="I9L-uY-Xqc" firstAttribute="top" secondItem="ES4-7Q-4bc" secondAttribute="bottom" constant="24" id="MUp-QW-4UL"/>
                 <constraint firstItem="hUj-0n-X2g" firstAttribute="leading" secondItem="OZM-10-dg6" secondAttribute="trailing" id="N8c-4d-CdU"/>
                 <constraint firstItem="gxg-4u-htC" firstAttribute="top" secondItem="J5m-Ie-bOA" secondAttribute="bottom" id="PEe-Uq-umd"/>
                 <constraint firstItem="I9L-uY-Xqc" firstAttribute="leading" secondItem="6Iu-ce-egx" secondAttribute="trailing" constant="74" id="QEg-ud-8eb"/>
@@ -286,6 +361,7 @@ Cg
                 <constraint firstItem="jWL-Cc-xIj" firstAttribute="centerX" secondItem="I9L-uY-Xqc" secondAttribute="centerX" id="YL7-c0-DvT"/>
                 <constraint firstItem="rdp-N0-EFp" firstAttribute="leading" secondItem="hUj-0n-X2g" secondAttribute="leading" constant="-10" id="Ylp-av-uck"/>
                 <constraint firstItem="195-PY-YCS" firstAttribute="leading" secondItem="I9L-uY-Xqc" secondAttribute="trailing" constant="70" id="Ysm-PK-uuJ"/>
+                <constraint firstItem="ola-Nm-tFe" firstAttribute="trailing" secondItem="QT1-zE-o2E" secondAttribute="trailing" constant="24" id="ZCn-o0-Par"/>
                 <constraint firstItem="OZM-10-dg6" firstAttribute="top" secondItem="J5m-Ie-bOA" secondAttribute="bottom" id="btw-4C-IM1"/>
                 <constraint firstItem="ubd-S0-xEX" firstAttribute="top" secondItem="gxg-4u-htC" secondAttribute="bottom" id="cUu-OA-PUP"/>
                 <constraint firstItem="OZM-10-dg6" firstAttribute="leading" secondItem="ola-Nm-tFe" secondAttribute="leading" id="ccf-Bs-v3G"/>
@@ -293,15 +369,17 @@ Cg
                 <constraint firstItem="A7e-vo-rsz" firstAttribute="bottom" secondItem="ubd-S0-xEX" secondAttribute="bottom" id="eIR-QV-6Kd"/>
                 <constraint firstItem="p1z-TE-mk8" firstAttribute="bottom" secondItem="A7e-vo-rsz" secondAttribute="bottom" constant="-24" id="eOb-pV-Tfp"/>
                 <constraint firstItem="ola-Nm-tFe" firstAttribute="trailing" secondItem="J5m-Ie-bOA" secondAttribute="trailing" id="fK9-0h-C2q"/>
+                <constraint firstItem="ola-Nm-tFe" firstAttribute="trailing" secondItem="JVh-eq-sMU" secondAttribute="trailing" constant="8" id="j14-MI-X9Z"/>
                 <constraint firstItem="A7e-vo-rsz" firstAttribute="leading" secondItem="ola-Nm-tFe" secondAttribute="leading" id="m3c-dM-FpL"/>
                 <constraint firstItem="ubd-S0-xEX" firstAttribute="top" secondItem="hUj-0n-X2g" secondAttribute="bottom" id="mcE-bY-JEQ"/>
                 <constraint firstItem="hUj-0n-X2g" firstAttribute="top" secondItem="A7e-vo-rsz" secondAttribute="top" constant="100" id="mnr-9v-ier"/>
-                <constraint firstItem="ES4-7Q-4bc" firstAttribute="centerX" secondItem="c9P-Vp-eiZ" secondAttribute="centerX" id="p7G-0W-wEJ"/>
                 <constraint firstItem="IpG-Zm-EjK" firstAttribute="centerX" secondItem="hUj-0n-X2g" secondAttribute="centerX" id="pGN-Gy-zWL"/>
-                <constraint firstItem="q4T-xV-GTx" firstAttribute="width" secondItem="q4T-xV-GTx" secondAttribute="height" multiplier="1:4" id="pfI-Bb-8hE"/>
+                <constraint firstItem="QT1-zE-o2E" firstAttribute="top" secondItem="ubd-S0-xEX" secondAttribute="bottom" constant="24" id="q20-fj-22M"/>
                 <constraint firstItem="ola-Nm-tFe" firstAttribute="trailing" secondItem="hUj-0n-X2g" secondAttribute="trailing" constant="40" id="qZF-96-6T0"/>
+                <constraint firstItem="I9L-uY-Xqc" firstAttribute="top" secondItem="QT1-zE-o2E" secondAttribute="bottom" constant="24" id="vKz-C3-R8J"/>
             </constraints>
             <connections>
+                <outlet property="attachImageButton" destination="ES4-7Q-4bc" id="sJJ-AH-xPm"/>
                 <outlet property="bottomOverlay" destination="ubd-S0-xEX" id="cEp-El-NaM"/>
                 <outlet property="bottomResizeView" destination="9bn-xv-pgp" id="IUd-oe-V1e"/>
                 <outlet property="cameraButton" destination="I9L-uY-Xqc" id="cMl-M2-sCC"/>
@@ -317,16 +395,18 @@ Cg
                 <outlet property="pictureButton" destination="195-PY-YCS" id="hOy-VL-SiI"/>
                 <outlet property="rightOverlay" destination="gxg-4u-htC" id="d96-tW-0bB"/>
                 <outlet property="rightResizeView" destination="q4T-xV-GTx" id="GGy-Jh-OOo"/>
-                <outlet property="scanButton" destination="ES4-7Q-4bc" id="qxZ-Lq-DpK"/>
-                <outlet property="scanButtonHeightConstraint" destination="dpV-Ey-P4i" id="aSp-F1-ea8"/>
-                <outlet property="scanButtonTopSpaceConstraint" destination="2zq-33-J4L" id="JaB-kM-qfD"/>
+                <outlet property="scanButton" destination="vWD-E9-wHX" id="L3q-8a-hL4"/>
+                <outlet property="scanButtonsHeightConstraint" destination="keJ-Mz-wxx" id="S7G-YX-zW2"/>
+                <outlet property="scanButtonsTopSpaceConstraint" destination="q20-fj-22M" id="pj0-g0-h0H"/>
                 <outlet property="scanIntroText" destination="p1z-TE-mk8" id="4ct-KY-nQI"/>
+                <outlet property="showCropViewSwitch" destination="ZyN-j6-if0" id="ShB-di-KrT"/>
+                <outlet property="showCropViewSwitchContainer" destination="JVh-eq-sMU" id="5G2-VN-Ubu"/>
                 <outlet property="tapToScanImageView" destination="jWL-Cc-xIj" id="TvU-Qp-lbz"/>
                 <outlet property="tapToScanImageViewVerticalSpaceConstraint" destination="Y5r-9g-k3b" id="BL8-c8-Egf"/>
                 <outlet property="topOverlay" destination="J5m-Ie-bOA" id="Irf-D7-tEF"/>
                 <outlet property="topResizeView" destination="IpG-Zm-EjK" id="V0s-FB-Gdy"/>
             </connections>
-            <point key="canvasLocation" x="-40" y="20"/>
+            <point key="canvasLocation" x="-40.458015267175568" y="19.718309859154932"/>
         </view>
     </objects>
     <resources>
@@ -335,17 +415,24 @@ Cg
         <image name="cameraButtonPressed" width="170.66667175292969" height="170.66667175292969"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="photo.on.rectangle.angled" catalog="system" width="128" height="98"/>
+        <image name="text.viewfinder" catalog="system" width="128" height="115"/>
         <namedColor name="AIChatBubbleColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="AIChatTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="ChatBackgroundColor">
-            <color red="0.91199999999999992" green="0.94999999999999996" blue="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="ElementBackgroundColor">
             <color red="0.0" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ElementTextColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ForegroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Text">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="UserChatBubbleColor">
             <color red="0.0" green="0.6588235294117647" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

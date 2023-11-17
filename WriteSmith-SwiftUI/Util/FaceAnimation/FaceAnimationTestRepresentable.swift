@@ -9,7 +9,7 @@ import FaceAnimation
 import SwiftUI
 import UIKit
 
-public struct FaceAnimationRepresentable: UIViewRepresentable {
+public struct FaceAnimationViewRepresentable: UIViewRepresentable {
     
     public var frame: CGRect
     public var faceImageName: String
@@ -106,7 +106,7 @@ public struct FaceAnimationRepresentable: UIViewRepresentable {
             Spacer()
             HStack {
                 Spacer()
-                FaceAnimationRepresentable(
+                FaceAnimationViewRepresentable(
                     frame: CGRect(x: 0, y: 0, width: 200, height: 200),
                     faceImageName: "face_background",
                     color: .aiChatBubble,

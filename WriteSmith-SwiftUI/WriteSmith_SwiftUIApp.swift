@@ -45,9 +45,7 @@ struct WriteSmith_SwiftUIApp: App {
                     .transition(.move(edge: .bottom))
                     .zIndex(1.0)
                 } else {
-                    TabBar(
-                        premiumUpdater: premiumUpdater,
-                        remainingUpdater: remainingUpdater)
+                    TabBar()
                     .onAppear {
                         if !firstTabBarViewEver && !premiumUpdater.isPremium {
                             isShowingUltraView = true
@@ -60,6 +58,8 @@ struct WriteSmith_SwiftUIApp: App {
             }
             .animation(.easeInOut(duration: 0.4), value: isShowingIntroView)
             .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
+            .environmentObject(premiumUpdater)
+            .environmentObject(remainingUpdater)
             .onAppear {
                 // Start Tenjin stuff
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {

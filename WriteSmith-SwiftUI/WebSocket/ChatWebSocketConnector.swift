@@ -9,25 +9,25 @@ import Foundation
 
 class ChatWebSocketConnector: WebSocketClient {
     
-    static func getChatStream(request: GetChatRequest) -> SocketStream {
+    static func getChatStream() -> SocketStream {
         // Set url
         let url = URL(string: "\(WebSocketConstants.chitChatWebSocketServer)\(WebSocketConstants.getChatStream)")!
         
-        // Setup headers from GetChatRequest TODO: Make this better lol
-        var headers: [String: String] = [
-            "authToken": request.authToken,
-            "inputText": request.inputText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        ]
+//        // Setup headers from GetChatRequest TODO: Make this better lol
+//        var headers: [String: String] = [
+//            "authToken": request.authToken,
+//            "inputText": request.inputText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+//        ]
+//        
+//        if let conversationID = request.conversationID {
+//            headers["conversationID"] = "\(conversationID)"
+//        }
+//        
+//        if let usePaidModel = request.usePaidModel {
+//            headers["usePaidModel"] = "\(usePaidModel)"
+//        }
         
-        if let conversationID = request.conversationID {
-            headers["conversationID"] = "\(conversationID)"
-        }
-        
-        if let usePaidModel = request.usePaidModel {
-            headers["usePaidModel"] = "\(usePaidModel)"
-        }
-        
-        return connect(url: url, headers: headers)
+        return connect(url: url, headers: nil)
     }
     
 }

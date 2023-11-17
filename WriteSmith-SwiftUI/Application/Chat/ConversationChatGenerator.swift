@@ -7,6 +7,8 @@
 
 import CoreData
 import Foundation
+import SwiftUI
+import UIKit
 
 class ConversationChatGenerator: ObservableObject {
     
@@ -16,6 +18,10 @@ class ConversationChatGenerator: ObservableObject {
     @Published var alertShowingUserChatNotSaved = false
     
     
+    private let imageURLChatIndex: Int = 0
+    private let imageChatIndex: Int = 0
+    private let textChatIndex: Int = 0
+    
 //    func addChat(message: String, sender: Sender, to conversationObjectID: NSManagedObjectID) async throws {
 //        // TODO: Do I have to get the permanent object ID for conversationObjectID
 //        try await ChatCDHelper.appendChat(
@@ -24,20 +30,69 @@ class ConversationChatGenerator: ObservableObject {
 //            to: conversationObjectID)
 //    }
     
-    func generateChat(input: String, conversation: Conversation, authToken: String, isPremium: Bool, remainingUpdater: RemainingUpdater, in managedContext: NSManagedObjectContext) async throws {
+    /***
+     Generate Chat
+     
+     Takes multiple inputs and splits them into new Chats with one input per chat, then gets a Chat with the current Conversation with all the new Chats
+     Okay, but instead, should I just do it all in one chat and parse it out to make it look like multiple chats in ChatView's list? I think they should be multiple chats because then the user would be able to delete an image or image url but maintain the other parts they specified in the input
+     */
+    func generateChat(input: String?, image: UIImage?, imageURL: String?, conversation: Conversation, authToken: String, isPremium: Bool, remainingUpdater: RemainingUpdater, in managedContext: NSManagedObjectContext) async throws {
         // Ensure can generate, which is a variable
         guard canGenerateChat(isPremium: isPremium) else {
             return
         }
         
-        // Create User Chat and save on main queue
-        let userChat = Chat(context: managedContext)
+        // Create User Image URL Chat if imageURL is not nil and User Image Chat if image is not null and User Text Chat if input is not nil and save on main queue
+        let userImageURLChat: Chat? = {
+            // Unwrap imageURL, otherwise return nil
+            guard let imageURL = imageURL else {
+                return nil
+            }
+            
+            let userImageURLChat = Chat(context: managedContext)
+            
+            // Set and save User Image URL Chat
+            userImageURLChat.imageURL = imageURL
+            userImageURLChat.sender = Sender.user.rawValue
+            userImageURLChat.date = Date()
+            userImageURLChat.conversation = conversation
+            
+            return userImageURLChat
+        }()
         
-        // Set and save User Chat
-        userChat.text = input
-        userChat.sender = Sender.user.rawValue
-        userChat.date = Date()
-        userChat.conversation = conversation
+        let userImageChat: Chat? = {
+            // Unwrap image, otherwise return nil
+            guard let image = image else {
+                return nil
+            }
+            
+            let userImageChat = Chat(context: managedContext)
+            
+            // Set and save User Image Chat
+            userImageChat.imageData = image.pngData()
+            userImageChat.sender = Sender.user.rawValue
+            userImageChat.date = Date().advanced(by: 0.1)
+            userImageChat.conversation = conversation
+            
+            return userImageChat
+        }()
+        
+        let userTextChat: Chat? = {
+            // Unwrap input and ensure it's not empty, otherwise return nil
+            guard let input = input, !input.isEmpty else {
+                return nil
+            }
+            
+            let userTextChat = Chat(context: managedContext)
+            
+            // Set and save User Text Chat
+            userTextChat.text = input
+            userTextChat.sender = Sender.user.rawValue
+            userTextChat.date = Date().advanced(by: 0.2)
+            userTextChat.conversation = conversation
+            
+            return userTextChat
+        }()
         
         DispatchQueue.main.async {
             do {
@@ -68,26 +123,53 @@ class ConversationChatGenerator: ObservableObject {
         
         aiChat.sender = Sender.ai.rawValue
         aiChat.conversation = conversation
-        aiChat.date = Date()
+        aiChat.date = Date().advanced(by: 0.3)
         
         // Get selected model
         let selectedModel = GPTModelHelper.currentChatModel
         
-        // Build GetChatRequest
-        let request: GetChatRequest
-        do {
-            request = GetChatRequest(
-                authToken: authToken,
-                inputText: input,
-                conversationID: conversation.conversationID,
-                usePaidModel: GPTModelTierSpecification.paidModels.contains(where: {$0 == selectedModel}))
-        } catch {
-            throw ChatGeneratorError.invalidAuthToken
+        // Create GetChatRequest Body Chats from the userImageURLChat, userImageChat, and userTextChat that can be unwrapped with indices in that order
+        let requestBuilder = GetChatRequest.Builder(
+            authToken: authToken,
+            behavior: nil, // TODO: Implement behavior functionality with topics
+            conversationID: conversation.conversationID,
+            usePaidModel: GPTModelTierSpecification.paidModels.contains(where: {$0 == selectedModel}))
+        
+        if let userImageURLChat = userImageURLChat {
+            requestBuilder.addChat(
+                index: imageURLChatIndex,
+                input: userImageURLChat.text,
+                imageData: userImageURLChat.imageData,
+                imageURL: userImageURLChat.imageURL,
+                sender: Sender(rawValue: userImageURLChat.sender ?? "") ?? .user) // TODO: Is the user being the default sender here good? Should I even send to the server as Sender instead of the string?
         }
         
-        // Get stream
-        let stream = ChatWebSocketConnector.getChatStream(request: request)
+        if let userImageChat = userImageChat {
+            requestBuilder.addChat(
+                index: imageChatIndex,
+                input: userImageChat.text,
+                imageData: userImageChat.imageData,
+                imageURL: userImageChat.imageURL,
+                sender: Sender(rawValue: userImageChat.sender ?? "") ?? .user) // TODO: Is the user being the default sender here good? Should I even send to the server as Sender instead of the string?
+        }
         
+        if let userTextChat = userTextChat {
+            requestBuilder.addChat(
+                index: textChatIndex,
+                input: userTextChat.text,
+                imageData: userTextChat.imageData,
+                imageURL: userTextChat.imageURL,
+                sender: Sender(rawValue: userTextChat.sender ?? "") ?? .user) // TODO: Is the user being the default sender here good? Should I even send to the server as Sender instead of the string?
+        }
+        
+        let request = requestBuilder.build()
+        
+        // Get stream
+        let stream = ChatWebSocketConnector.getChatStream()
+        
+        // Send request TODO: Handle errors here if necessary
+        try await stream.send(.string(String(data: JSONEncoder().encode(request), encoding: .utf8)!))
+        PasteboardHelper.copy(String(data: try JSONEncoder().encode(request), encoding: .utf8)!)
         // Create firstMessage to get when the first message is processed
         var firstMessage = true
         
@@ -160,12 +242,33 @@ class ConversationChatGenerator: ObservableObject {
                     // Set aiChat text to fullOutput
                     aiChat.text = fullOutput
                     
-                    // Set userChat chatID to inputChatID
-                    if let inputChatID = getChatResponse.body.inputChatID, inputChatID > 0 {
-                        if let inputChatIDCastInt64 = Int64(exactly: inputChatID) {
-                            userChat.chatID = inputChatIDCastInt64
+                    // Set userImageURLChat chatID to inputChat with index imageURLChatIndex
+                    if let responseInputImageURLChat = getChatResponse.body.inputChats.first(where: {$0.index == imageURLChatIndex}) {
+                        if let responseInputChatIDCastInt64 = Int64(exactly: responseInputImageURLChat.chatID) {
+                            userImageURLChat?.chatID = responseInputChatIDCastInt64
                         }
                     }
+                    
+                    // Set userImageChat chatID to inputChat with index imageChatIndex
+                    if let responseInputImageChat = getChatResponse.body.inputChats.first(where: {$0.index == imageChatIndex}) {
+                        if let responseInputChatIDCastInt64 = Int64(exactly: responseInputImageChat.chatID) {
+                            userImageChat?.chatID = responseInputChatIDCastInt64
+                        }
+                    }
+                    
+                    // Set userTextChat chatID to inputChat with index textChatIndex
+                    if let responseInputTextChat = getChatResponse.body.inputChats.first(where: {$0.index == textChatIndex}) {
+                        if let responseInputChatIDCastInt64 = Int64(exactly: responseInputTextChat.chatID) {
+                            userTextChat?.chatID = responseInputChatIDCastInt64
+                        }
+                    }
+                    
+//                    // Set userChat chatID to inputChatID
+//                    if let inputChatID = getChatResponse.body.inputChatID, inputChatID > 0 {
+//                        if let inputChatIDCastInt64 = Int64(exactly: inputChatID) {
+//                            userChat.chatID = inputChatIDCastInt64
+//                        }
+//                    }
                     
                     // Set aiChat chatID to outputChatID
                     if let outputChatID = getChatResponse.body.outputChatID, outputChatID > 0 {

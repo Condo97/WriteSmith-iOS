@@ -11,7 +11,9 @@ protocol CameraViewDelegate {
     func cameraButtonPressed()
     func cancelButtonPressed()
     func imageButtonPressed()
+    func attachImageButtonPressed()
     func scanButtonPressed()
+    func showCropViewSwitchChanged(to newValue: Bool)
 }
 
 class CameraView: UIView {
@@ -37,14 +39,20 @@ class CameraView: UIView {
     @IBOutlet weak var rightOverlay: UIView!
     @IBOutlet weak var bottomOverlay: UIView!
     
-    @IBOutlet weak var scanButtonHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var scanButtonTopSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var showCropViewSwitchContainer: RoundedView!
+    @IBOutlet weak var showCropViewSwitch: UISwitch!
     
+    @IBOutlet weak var scanButtonsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scanButtonsTopSpaceConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var attachImageButton: RoundedButton!
     @IBOutlet weak var scanButton: RoundedButton!
     @IBOutlet weak var scanIntroText: RoundedView!
     
     @IBOutlet weak var tapToScanImageView: UIImageView!
     @IBOutlet weak var tapToScanImageViewVerticalSpaceConstraint: NSLayoutConstraint!
+    
+    let defaultOverlayOpacity = 0.4
     
     var delegate: CameraViewDelegate?
     
@@ -62,6 +70,14 @@ class CameraView: UIView {
     
     @IBAction func scanButtonPressed(_ sender: Any) {
         delegate?.scanButtonPressed()
+    }
+    
+    @IBAction func attachImageButtonPressed(_ sender: Any) {
+        delegate?.attachImageButtonPressed()
+    }
+    
+    @IBAction func showCropViewSwitchChanged(_ sender: UISwitch) {
+        delegate?.showCropViewSwitchChanged(to: sender.isOn)
     }
     
 }

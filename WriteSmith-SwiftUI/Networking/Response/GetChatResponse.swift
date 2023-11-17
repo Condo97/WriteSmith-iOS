@@ -11,10 +11,22 @@ struct GetChatResponse: Codable {
     
     struct Body: Codable {
         
+        struct Chat: Codable {
+            
+            var index: Int
+            var chatID: Int
+            
+            enum CodingKeys: String, CodingKey {
+                case index
+                case chatID
+            }
+            
+        }
+        
         var outputText: String?
         var finishReason: String?
         var conversationID: Int?
-        var inputChatID: Int?
+        var inputChats: [GetChatResponse.Body.Chat]
         var outputChatID: Int?
         var remaining: Int?
         
@@ -22,7 +34,7 @@ struct GetChatResponse: Codable {
             case outputText = "output"
             case finishReason
             case conversationID
-            case inputChatID
+            case inputChats
             case outputChatID
             case remaining
         }

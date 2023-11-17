@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Sender: String {
+enum Sender: String, Codable {
     
     case ai = "ai"
     case user = "user"

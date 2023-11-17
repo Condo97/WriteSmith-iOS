@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ConversationView: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
-    @ObservedObject var remainingUpdater: RemainingUpdater
-    @Binding var faceAnimationController: FaceAnimationRepresentable?
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var remainingUpdater: RemainingUpdater
+    @EnvironmentObject var faceAnimationUpdater: FaceAnimationUpdater
+    
     @Binding var isShowingGPTModelSelectionView: Bool
     @Binding var pushToLatestConversationOrClose: Bool
     
@@ -56,9 +57,6 @@ struct ConversationView: View {
                     if let presentingConversation = presentingConversation {
                         ChatView(
                             conversation: presentingConversation,
-                            premiumUpdater: _premiumUpdater,
-                            remainingUpdater: _remainingUpdater,
-                            faceAnimationController: $faceAnimationController,
                             isShowingGPTModelSelectionView: $isShowingGPTModelSelectionView,
                             transitionToNewConversation: $transitionToNewConversation,
                             shouldShowFirstConversationChats: sectionedConversations.count == 0 || (sectionedConversations.count == 1 && sectionedConversations[0].count <= 1)
@@ -182,54 +180,15 @@ struct ConversationView: View {
             Section {
                 ForEach(conversations) { conversation in
                     if let latestChatText = conversation.latestChatText {
-                        let formattedLatestChatDate: String? = {
-                            guard let latestChatDate = conversation.latestChatDate else {
-                                return nil
-                            }
-                            
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "MMM d, h:mm a"
-                            
-                            return dateFormatter.string(from: latestChatDate)
-                        }()
-                        
-                        Button(action: {
-                            // Do light haptic
-                            HapticHelper.doLightHaptic()
-                            
-                            // Set presentingConversation to show conversation
-                            presentingConversation = conversation
-                        }) {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    // Conversation Title
-                                    Text(latestChatText)
-                                        .font(.custom(Constants.FontName.body, size: 17.0))
-                                        .lineLimit(1)
-                                    
-                                    // Conversation Formatted Date
-                                    Text(formattedLatestChatDate ?? "Unknown")
-                                        .font(.custom(Constants.FontName.heavy, size: 12.0))
-                                        .opacity(0.4)
-                                        .lineLimit(1)
-                                }
+                        ConversationRow(
+                            conversation: conversation,
+                            action: {
+                                // Do light haptic
+                                HapticHelper.doLightHaptic()
                                 
-                                Spacer()
-                                
-                                if let conversationToResume = try? ConversationResumingManager.getConversation(in: viewContext), conversationToResume == conversation {
-                                    // Conversation to resume image
-                                    Text(Image(systemName: "rectangle.and.pencil.and.ellipsis"))
-                                        .font(.custom(Constants.FontName.body, size: 20.0))
-                                        .opacity(0.4)
-                                }
-                                
-                                Image(systemName: "chevron.right")
-                                    .font(.custom(Constants.FontName.body, size: 20.0))
-                            }
-                        }
-                        .foregroundStyle(Colors.text)
-                        .padding(4)
-                        .listRowBackground(Colors.foreground)
+                                // Set presentingConversation to show conversation
+                                presentingConversation = conversation
+                            })
                     }
                 }
                 .onDelete(perform: { indexSet in
@@ -244,11 +203,6 @@ struct ConversationView: View {
                         print("Error saving viewContext after deleting conversatoins in ConversationView... \(error)")
                     }
                 })
-            } header: {
-//                Text(conversations.id)
-//                    .font(.custom(Constants.FontName.black, size: 24.0))
-//                    .textCase(nil)
-//                    .foregroundStyle(Colors.textOnBackgroundColor)
             }
         }
     }
@@ -325,17 +279,11 @@ struct ConversationView: View {
             
             try viewContext.save()
             
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-//                    UIView.setAnimationsEnabled(true)
-//                
-//                }
             DispatchQueue.main.async {
                 // Set animations to false and set presentingConversation to nil
                 UIView.setAnimationsEnabled(false)
                 
                 presentingConversation = nil
-                
-//                UIView.setAnimationsEnabled(true)
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
@@ -343,8 +291,6 @@ struct ConversationView: View {
                 UIView.setAnimationsEnabled(false)
                 
                 presentingConversation = conversation
-                
-//                UIView.setAnimationsEnabled(true)
             })
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
@@ -370,11 +316,11 @@ struct ConversationView: View {
     
     return NavigationStack {
         ConversationView(
-            premiumUpdater: PremiumUpdater(),
-            remainingUpdater: RemainingUpdater(),
-            faceAnimationController: .constant(nil),
             isShowingGPTModelSelectionView: .constant(false),
             pushToLatestConversationOrClose: .constant(false))
     }
     .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
+    .environmentObject(PremiumUpdater())
+    .environmentObject(RemainingUpdater())
+    .environmentObject(FaceAnimationUpdater())
 }

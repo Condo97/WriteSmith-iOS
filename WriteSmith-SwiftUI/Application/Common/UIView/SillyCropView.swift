@@ -58,6 +58,6 @@ class SillyCropView: UIView {
 //        layer.addSublayer(bottomRightShapeLayer)
         
         layer.borderWidth = borderWidth
-        layer.borderColor = Colors.elementBackgroundColor.cgColor
+        layer.borderColor = UIColor.darkGray.cgColor
     }
 }

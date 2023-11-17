@@ -88,6 +88,8 @@ struct PanelView: View {
                             do {
                                 try await exploreChatGenerator.generateExplore(
                                     input: finalizedPrompt,
+                                    image: nil, // TODO: Add image functionality
+                                    imageURL: nil, // TODO: Add image URL functionality
                                     isPremium: premiumUpdater.isPremium,
                                     remainingUpdater: remainingUpdater)
                             }

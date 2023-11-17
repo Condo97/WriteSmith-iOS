@@ -277,7 +277,7 @@ struct UIConstants {
 
 struct HTTPSConstants {
     #if DEBUG
-        static let chitChatServer = "https://chitchatserver.com/v1"
+        static let chitChatServer = "https://chitchatserver.com:2000/v1"//"https://chitchatserver.com/v1"
     #else
         static let chitChatServer = "https://chitchatserver.com/v1"
     #endif
@@ -308,12 +308,13 @@ struct HTTPSResponseConstants {
 
 struct WebSocketConstants {
     #if DEBUG
-        static let chitChatWebSocketServer = "wss://chitchatserver.com/v1"
+        static let chitChatWebSocketServer = "wss://chitchatserver.com:2000/v1"
     #else
         static let chitChatWebSocketServer = "wss://chitchatserver.com/v1"
     #endif
     
-    static let getChatStream = "/getChatStream"
+    static let getChatStream = "/streamChat"
+//    static let getChatStreamLegacy = "/getChatStream"
 }
 
 struct Colors {

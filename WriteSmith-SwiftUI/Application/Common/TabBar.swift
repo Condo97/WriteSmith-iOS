@@ -10,13 +10,17 @@ import SwiftUI
 
 struct TabBar: View, KeyboardReadable {
     
+    private var faceAnimationUpdater: FaceAnimationUpdater
+    
+    
     @Environment(\.managedObjectContext) var viewContext
     @State private var selectedTab: Tab = .chat
     
-    @ObservedObject private var premiumUpdater: PremiumUpdater
-    @ObservedObject private var remainingUpdater: RemainingUpdater
+    @EnvironmentObject private var premiumUpdater: PremiumUpdater
+    @EnvironmentObject private var remainingUpdater: RemainingUpdater
     
     @State private var isShowingGPTModelSelectionView: Bool = false
+    @State private var isShowingPromoSendImagesView: Bool = false
     
     @State private var isKeyboardVisible: Bool = false
     
@@ -24,7 +28,7 @@ struct TabBar: View, KeyboardReadable {
     
     @State private var alertShowingExploreUnderMaintenance: Bool = false
     
-    @State private var faceAnimationViewRepresentable: FaceAnimationRepresentable? = FaceAnimationRepresentable(
+    @State private var faceAnimationViewRepresentable: FaceAnimationViewRepresentable? = FaceAnimationViewRepresentable(
         frame: CGRect(x: 0, y: 0, width: faceFrameDiameter, height: faceFrameDiameter),
         faceImageName: "face_background",
         color: UIColor(Colors.elementBackgroundColor),
@@ -52,9 +56,8 @@ struct TabBar: View, KeyboardReadable {
         return nil
     }
     
-    init(premiumUpdater: PremiumUpdater, remainingUpdater: RemainingUpdater) {
-        self.premiumUpdater = premiumUpdater
-        self.remainingUpdater = remainingUpdater
+    init() {
+        self.faceAnimationUpdater = FaceAnimationUpdater(faceAnimationViewRepresentable: nil)
         
         UITabBar.appearance().isHidden = true
     }
@@ -82,9 +85,6 @@ struct TabBar: View, KeyboardReadable {
                         
                         NavigationStack {
                             ConversationView(
-                                premiumUpdater: premiumUpdater,
-                                remainingUpdater: remainingUpdater,
-                                faceAnimationController: $faceAnimationViewRepresentable,
                                 isShowingGPTModelSelectionView: $isShowingGPTModelSelectionView,
                                 pushToLatestConversationOrClose: $pushToLatestConversationOrClose)
                         }
@@ -146,10 +146,10 @@ struct TabBar: View, KeyboardReadable {
 //                .padding(.bottom, 80)
             }
             
-            
+            /*** Popups ***/
             
             // Blur Background View
-            if isShowingGPTModelSelectionView {
+            if isShowingGPTModelSelectionView || isShowingPromoSendImagesView {
                 MaterialView(.systemMaterialDark)
                     .zIndex(1.0)
                     .animation(.easeInOut, value: isShowingGPTModelSelectionView)
@@ -170,7 +170,6 @@ struct TabBar: View, KeyboardReadable {
                         premiumUpdater: premiumUpdater,
                         isShowing: $isShowingGPTModelSelectionView)
                     .background(FullScreenCoverBackgroundCleanerView())
-//                    .transition(.move(edge: .bottom))
                 }
                 .zIndex(2.0)
                 .padding()
@@ -178,52 +177,23 @@ struct TabBar: View, KeyboardReadable {
                 .transition(.move(edge: .bottom))
                 .ignoresSafeArea()
             }
+            
+            // Promo Send Images View
+            if isShowingPromoSendImagesView {
+                VStack {
+                    PromoSendImagesView(
+                        isShowing: $isShowingPromoSendImagesView, pressedScan: {
+                            
+                        })
+                }
+            }
+            
+            
         }
-//        .safeAreaInset(edge: .bottom, content: {
-//            // Tab Bar Buttons
-//            VStack(spacing: 0.0) {
-////                Spacer()
-//                
-//                ZStack {
-//                    VStack {
-//                        Spacer()
-//                        Colors.bottomBarBackgroundColor
-////                            .ignoresSafeArea()
-//                            .frame(height: 64.0)
-//                    }
-//                    
-//                    HStack(alignment: .bottom) {
-//                        HStack {
-//                            Spacer()
-//                            createButton
-//                                .frame(width: buttonWidth)
-//                            Spacer()
-//                        }
-//                        
-//                        HStack {
-//                            writeButton
-//                        }
-//                        
-//                        HStack {
-//                            Spacer()
-//                            essayButton
-//                                .frame(width: buttonWidth)
-//                            Spacer()
-//                        }
-//                    }
-////                    .ignoresSafeArea()
-//                }
-//                .frame(height: 120.0)
-//                .background(.clear)
-//                
-//                Colors.bottomBarBackgroundColor
-////                    .ignoresSafeArea()
-//                    .frame(height: 14.0)
-//            }
-//        })
-//        .ignoresSafeArea(.keyboard, edges: .bottom)
-//        .ignoresSafeArea(.keyboard,)
-//        .ignoresSafeArea(.keyboard, edges: .bottom)
+        .onAppear {
+            faceAnimationUpdater.faceAnimationViewRepresentable = faceAnimationViewRepresentable
+        }
+        .environmentObject(faceAnimationUpdater)
         .onChange(of: selectedTab, perform: { value in
             // Change faceIdleAnimation
             switch value {
@@ -342,10 +312,10 @@ struct TabBar: View, KeyboardReadable {
 //    VStack {
 //        Spacer()
         
-        TabBar(
-            premiumUpdater: PremiumUpdater(),
-            remainingUpdater: RemainingUpdater())
+        TabBar()
         .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
+        .environmentObject(PremiumUpdater())
+        .environmentObject(RemainingUpdater())
 //    }
 //    .ignoresSafeArea()
 }

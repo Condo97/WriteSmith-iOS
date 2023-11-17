@@ -51,6 +51,14 @@ class RoundedButton: UIButton {
     @IBInspectable open var bigFont: Bool = false
     @IBInspectable open var borderWidth: CGFloat = UIConstants.borderWidth
     @IBInspectable open var borderColor: UIColor = UIColor(Colors.elementBackgroundColor)
+
+    @IBInspectable open var color: UIColor = UIColor(Colors.elementBackgroundColor) {
+        didSet {
+            buttonArrowImageView.tintColor = color
+            activityView.color = color
+            tintColor = color
+        }
+    }
     
     var buttonArrowImageView = UIImageView()
     var activityView = UIActivityIndicatorView()
@@ -63,12 +71,14 @@ class RoundedButton: UIButton {
     let arrowAccessoryWidth = 30.0
     let arrowAccessoryHeight = 24.0
     
-    let accessoryInset = 42.0
+    let accessoryInset = 24.0
     
     
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
+        tintColor = color
+        
         self.layer.cornerRadius = UIConstants.cornerRadius
         self.layer.borderWidth = borderWidth
         self.layer.borderColor = borderColor.cgColor
