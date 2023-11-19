@@ -20,6 +20,13 @@ class UltraViewModel: ObservableObject {
     var premiumUpdater: PremiumUpdater
     
     
+    enum ValidSubscriptions: String {
+        // The subscription id represented as an enum
+        case weekly = "chitchatultra"
+        case monthly = "ultramonthly"
+    }
+    
+    
     init(premiumUpdater: PremiumUpdater) {
         self.premiumUpdater = premiumUpdater
     }
@@ -40,7 +47,7 @@ class UltraViewModel: ObservableObject {
         
     }
     
-    func purchase(subscriptionPeriod: SubscriptionPeriod) async {
+    func purchase(subscriptionPeriod: ValidSubscriptions) async {
         let authToken: String
         do {
             authToken = try await AuthHelper.ensure()
@@ -71,7 +78,7 @@ class UltraViewModel: ObservableObject {
                 return
             }
             
-            try await handleGetIAPStuffFromServerResponse(json, subscriptionPeriod: subscriptionPeriod)
+            try await handleGetIAPStuffFromServerResponse(json, productID: subscriptionPeriod.rawValue)
         } catch {
             // TODO: Handle errors
             DispatchQueue.main.async {
@@ -82,7 +89,7 @@ class UltraViewModel: ObservableObject {
         }
     }
     
-    private func handleGetIAPStuffFromServerResponse(_ json: [String: Any], subscriptionPeriod: SubscriptionPeriod) async throws {
+    private func handleGetIAPStuffFromServerResponse(_ json: [String: Any], productID: String) async throws {
         guard let success = json["Success"] as? Int else { showGeneralIAPErrorAndUnhide(); return }
 
         if success == 1 {
@@ -94,7 +101,7 @@ class UltraViewModel: ObservableObject {
                 // Get products from server
                 let products = try await IAPManager.fetchProducts(productIDs: productIDs)
                 
-                guard let productToPurchase: Product = products.first(where: {IAPManager.getSubscriptionPeriod(product: $0) == subscriptionPeriod}) else {
+                guard let productToPurchase: Product = products.first(where: {$0.id == productID}) else {
                     showGeneralRetryableIAPErrorAndUnhide()
                     return
                 }

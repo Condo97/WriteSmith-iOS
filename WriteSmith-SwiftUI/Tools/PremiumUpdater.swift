@@ -12,10 +12,15 @@ class PremiumUpdater: ObservableObject {
     
     @Published var isPremium: Bool = persistentIsPremium
     
+#if DEBUG
+    private static let testOverrideIsPremiumTrue = true
+    #else
+    private static let testOverrideIsPremiumTrue = false
+#endif
     
     private static var persistentIsPremium: Bool {
         get {
-            UserDefaults.standard.bool(forKey: Constants.UserDefaults.userDefaultStoredIsPremium)
+            UserDefaults.standard.bool(forKey: Constants.UserDefaults.userDefaultStoredIsPremium) || testOverrideIsPremiumTrue
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.userDefaultStoredIsPremium)
@@ -23,7 +28,7 @@ class PremiumUpdater: ObservableObject {
     }
     
     static func get() -> Bool {
-        UserDefaults.standard.bool(forKey: Constants.UserDefaults.userDefaultStoredIsPremium)
+        UserDefaults.standard.bool(forKey: Constants.UserDefaults.userDefaultStoredIsPremium) || testOverrideIsPremiumTrue
     }
     
     func registerTransaction(authToken: String, transactionID: UInt64) async throws {

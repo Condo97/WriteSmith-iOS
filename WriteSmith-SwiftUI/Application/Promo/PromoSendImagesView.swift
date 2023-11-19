@@ -68,7 +68,7 @@ struct PromoSendImagesView: View {
                     pressedScan()
                 }) {
                     Text(Image(systemName: "text.viewfinder"))
-                        .font(.custom(Constants.FontName.body, size: 20.0))
+                        .font(.custom(Constants.FontName.body, size: 24.0))
                 }
                 .frame(width: buttonHeight, height: buttonHeight)
                 .foregroundStyle(Colors.elementBackgroundColor)

@@ -394,22 +394,22 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
         captureSession?.stopRunning()
         cameraView.removeFromSuperview()
         
-        let width = capturedImage.size.width
-        let height = capturedImage.size.height
-        let origin = CGPoint(x: ((height - width * 9/6))/2, y: (height - height)/2)
-        let size = CGSize(width: width * 9/6, height: width)
-        
-        guard let imageRef = capturedImage.cgImage?.cropping(to: CGRect(origin: origin, size: size)) else {
-            print("Fail to crop image")
-            return
-        }
-        
-        let imageToSave = UIImage(cgImage: imageRef, scale: 1.0, orientation: .right)
+//        let width = capturedImage.size.width
+//        let height = capturedImage.size.height
+//        let origin = CGPoint(x: ((height - width * 9/6))/2, y: (height - height)/2)
+//        let size = CGSize(width: width * 9/6, height: width)
+//        
+//        guard let imageRef = capturedImage.cgImage?.cropping(to: CGRect(origin: origin, size: size)) else {
+//            print("Fail to crop image")
+//            return
+//        }
+//        
+//        let imageToSave = UIImage(cgImage: imageRef, scale: 1.0, orientation: .right)
         
         rootView.cameraButton.setBackgroundImage(UIImage(named: Constants.ImageName.cameraButtonRedo), for: .normal)
         
         // Setup Crop View
-        initializeCropView(with: imageToSave, cropFrame: nil, fromCamera: true, contentMode: .scaleAspectFill)
+        initializeCropView(with: capturedImage, cropFrame: nil, fromCamera: true, contentMode: .scaleAspectFill)
     }
 }
 
@@ -425,19 +425,19 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
             captureSession?.stopRunning()
             cameraView.removeFromSuperview()
             
-            let width = image.size.width
-            let height = image.size.height
-            let origin = CGPoint(x: (height - height)/2, y: ((height - width * 9/6))/2)
-            let size = CGSize(width: width, height: width * 9/6)
+//            let width = image.size.width
+//            let height = image.size.height
+//            let origin = CGPoint(x: (height - height)/2, y: ((height - width * 9/6))/2)
+//            let size = CGSize(width: width, height: width * 9/6)
+//            
+//            guard let imageRef = image.cgImage?.cropping(to: CGRect(origin: origin, size: size)) else {
+//                print("Fail to crop image")
+//                return
+//            }
+//            
+//            let imageToSave = UIImage(cgImage: imageRef, scale: 1.0, orientation: .up)
             
-            guard let imageRef = image.cgImage?.cropping(to: CGRect(origin: origin, size: size)) else {
-                print("Fail to crop image")
-                return
-            }
-            
-            let imageToSave = UIImage(cgImage: imageRef, scale: 1.0, orientation: .up)
-            
-            initializeCropView(with: imageToSave, cropFrame: nil, fromCamera: false, contentMode: .scaleAspectFit)
+            initializeCropView(with: image, cropFrame: nil, fromCamera: false, contentMode: .scaleAspectFit)
             
             rootView.cameraButton.setBackgroundImage(UIImage(named: Constants.ImageName.cameraButtonRedo), for: .normal)
         } else {

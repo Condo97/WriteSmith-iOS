@@ -30,8 +30,8 @@ struct BounceableModifier: ViewModifier {
                     return
                 }
                 
-                // Do light haptic
-                HapticHelper.doLightHaptic()
+//                // Do light haptic
+//                HapticHelper.doLightHaptic()
                 
                 // Set isPressed to true with animation
                 withAnimation {

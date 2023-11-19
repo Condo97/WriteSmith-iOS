@@ -20,7 +20,6 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="editedEssay" optional="YES" attributeType="String"/>
         <attribute name="essay" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="prompt" optional="YES" attributeType="String"/>
         <attribute name="userEdited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>

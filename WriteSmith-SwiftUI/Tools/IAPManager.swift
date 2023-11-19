@@ -25,46 +25,46 @@ class IAPManager: Any {
         return storeProducts
 }
     
-    static func getSubscriptionPeriod(product: Product) -> SubscriptionPeriod? {
-        if let subscription = product.subscription {
-            
-            let unit = subscription.subscriptionPeriod.unit
-            let value = subscription.subscriptionPeriod.value
-            
-            switch unit {
-            case .day:
-                switch value {
-                case 1:
-                    return .daily
-                case 7:
-                    return .weekly
-                default:
-                    return .invalid
-                }
-            case .week:
-                return .weekly
-            case .month:
-                switch value {
-                case 1:
-                    return .monthly
-                case 2:
-                    return .biMonthly
-                case 3:
-                    return .triMonthly
-                case 6:
-                    return .semiYearly
-                default:
-                    return .invalid
-                }
-            case .year:
-                return .yearly
-            @unknown default:
-                return .invalid
-            }
-        }
-        
-        return nil
-    }
+//    static func getSubscriptionPeriod(product: Product) -> SubscriptionPeriod? {
+//        if let subscription = product.subscription {
+//            
+//            let unit = subscription.subscriptionPeriod.unit
+//            let value = subscription.subscriptionPeriod.value
+//            
+//            switch unit {
+//            case .day:
+//                switch value {
+//                case 1:
+//                    return .daily
+//                case 7:
+//                    return .weekly
+//                default:
+//                    return .invalid
+//                }
+//            case .week:
+//                return .weekly
+//            case .month:
+//                switch value {
+//                case 1:
+//                    return .monthly
+//                case 2:
+//                    return .biMonthly
+//                case 3:
+//                    return .triMonthly
+//                case 6:
+//                    return .semiYearly
+//                default:
+//                    return .invalid
+//                }
+//            case .year:
+//                return .yearly
+//            @unknown default:
+//                return .invalid
+//            }
+//        }
+//        
+//        return nil
+//    }
     
     static func purchase(_ product: Product) async throws -> Transaction {
         let result = try await product.purchase()

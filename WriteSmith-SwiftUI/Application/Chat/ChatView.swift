@@ -81,11 +81,10 @@ struct ChatView: View, KeyboardReadable {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(spacing: 0.0) {
                 if !premiumUpdater.isPremium {
                     BannerView(bannerID: Keys.Ads.Banner.chatView)
                 }
-                
                 
                 ZStack {
                     
