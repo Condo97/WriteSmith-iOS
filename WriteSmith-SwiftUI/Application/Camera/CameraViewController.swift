@@ -80,36 +80,9 @@ class CameraViewController: UIViewController {
         
         rootView.cameraButton.setBackgroundImage(UIImage(named: Constants.ImageName.cameraButtonNotPressed), for: .normal)
         
-        // Setup capture device if it can be unwrapped
-        if let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) {
-            do {
-                let input = try AVCaptureDeviceInput(device: captureDevice)
-                captureSession = AVCaptureSession()
-                captureSession?.addInput(input)
-                capturePhotoOutput = AVCapturePhotoOutput()
-                capturePhotoOutput?.isHighResolutionCaptureEnabled = true
-                captureSession?.addOutput(capturePhotoOutput!)
-                
-                videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
-                videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-                videoPreviewLayer?.frame = rootView.container.layer.bounds // View or Container?
-                
-                cameraView.layer.addSublayer(videoPreviewLayer!)
-                
-            } catch {
-                print(error)
-                delegate.dismiss()
-//                dismiss(animated: true)
-                return
-            }
-        }
-        
-        // Start capture session
-        DispatchQueue.global().async {
-            self.captureSession?.startRunning()
-        }
-        
         rootView.scanIntroText.alpha = defaultScanIntroTextAlpha
+        
+        startUpCamera()
     }
     
     override func viewDidLayoutSubviews() {
@@ -178,12 +151,12 @@ class CameraViewController: UIViewController {
             let deltaY = currentTouchPoint.y - prevTouchPoint.y
             
             if resizeRect.middleTouch {
-                if rootView.cropViewTopConstraint.constant + deltaY >= 0 && rootView.cropViewLeadingConstraint.constant + deltaX >= 0 && rootView.cropViewTrailingConstraint.constant - deltaX >= 0 && rootView.cropViewBottomConstraint.constant - deltaY >= 0 {
+//                if rootView.cropViewTopConstraint.constant + deltaY >= 0 && rootView.cropViewLeadingConstraint.constant + deltaX >= 0 && rootView.cropViewTrailingConstraint.constant - deltaX >= 0 && rootView.cropViewBottomConstraint.constant - deltaY >= 0 {
                     rootView.cropViewTopConstraint.constant += deltaY
                     rootView.cropViewLeadingConstraint.constant += deltaX
                     rootView.cropViewTrailingConstraint.constant -= deltaX
                     rootView.cropViewBottomConstraint.constant -= deltaY
-                }
+//                }
             }
             
             if resizeRect.topTouch && rootView.cropViewTopConstraint.constant + deltaY >= 0 && rootView.container.frame.height - (rootView.cropViewTopConstraint.constant + deltaY + rootView.cropViewBottomConstraint.constant) >= cropViewMinSquare {
@@ -212,7 +185,7 @@ class CameraViewController: UIViewController {
         cameraButtonPressed()
     }
     
-    func initializeCropView(with image: UIImage, cropFrame: CGRect?, fromCamera: Bool, contentMode: UIView.ContentMode) {
+    func initializeCropView(with image: UIImage, cropFrame: CGRect?, fixOrientation: Bool, contentMode: UIView.ContentMode) {
         // Adjust the UI elements
         isCropInteractive = true
         
@@ -235,7 +208,7 @@ class CameraViewController: UIViewController {
                    let widthScale = imageSize.width / imageViewSize.width
                    let heightScale = imageSize.height / imageViewSize.height
                    let scaleFactor = max(widthScale, heightScale)
-
+            
                    // Deriving the constraints values from the reverse operation of the cropping process.
                    rootView.cropViewLeadingConstraint.constant = (cropFrame.minX / scaleFactor)
                    rootView.cropViewTopConstraint.constant = (cropFrame.minY / scaleFactor)
@@ -278,10 +251,10 @@ class CameraViewController: UIViewController {
         captureSession?.stopRunning()
         cameraView.removeFromSuperview()
         
-        var orientation: UIImage.Orientation
+//        var orientation: UIImage.Orientation
         var imageToSave: UIImage
-        if fromCamera {
-            // Set the image in the crop view
+        if fixOrientation && image.imageOrientation != .up {
+            // Fix the images orientation with regard to the crop
             let width = image.size.width
             let height = image.size.height
             let origin = CGPoint(x: ((height - width * 9/6))/2, y: (height - height)/2)
@@ -296,7 +269,7 @@ class CameraViewController: UIViewController {
             imageToSave = imageToRotate.rotated(radians: .pi / 2)!
         } else {
             imageToSave = image
-            orientation = .up
+//            orientation = .up
         }
         
         previewImageView.contentMode = contentMode
@@ -361,15 +334,50 @@ class CameraViewController: UIViewController {
         rootView.initialImageCropZone.alpha = 0.0
     }
     
-    func startUpCameraAgain() {
+    func startUpCamera() {
+        // Setup capture device if it can be unwrapped
+        if let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) {
+            do {
+                let input = try AVCaptureDeviceInput(device: captureDevice)
+                captureSession = AVCaptureSession()
+                captureSession?.addInput(input)
+                capturePhotoOutput = AVCapturePhotoOutput()
+                capturePhotoOutput?.isHighResolutionCaptureEnabled = true
+                captureSession?.addOutput(capturePhotoOutput!)
+                
+                videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
+                videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                videoPreviewLayer?.frame = rootView.container.layer.bounds // View or Container?
+                
+                cameraView.layer.addSublayer(videoPreviewLayer!)
+                
+            } catch {
+                print(error)
+                delegate.dismiss()
+//                dismiss(animated: true)
+                return
+            }
+        }
+        
+        // Start capture session
+        DispatchQueue.global().async {
+            self.captureSession?.startRunning()
+        }
+        
+        // Set previewImageView
         if previewImageView != nil && previewImageView.isDescendant(of: rootView.container) {
             previewImageView.removeFromSuperview()
         }
         
+        // Add cameraView to container
         rootView.container.addSubview(cameraView)
         
-        captureSession?.startRunning()
+        // Start captureSession on background thread
+        DispatchQueue.global().async {
+            self.captureSession?.startRunning()
+        }
         
+        // Set cameraButton background image to not pressed
         rootView.cameraButton.setBackgroundImage(UIImage(named: Constants.ImageName.cameraButtonNotPressed), for: .normal)
     }
 }
@@ -409,7 +417,7 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
         rootView.cameraButton.setBackgroundImage(UIImage(named: Constants.ImageName.cameraButtonRedo), for: .normal)
         
         // Setup Crop View
-        initializeCropView(with: capturedImage, cropFrame: nil, fromCamera: true, contentMode: .scaleAspectFill)
+        initializeCropView(with: capturedImage, cropFrame: nil, fixOrientation: true, contentMode: .scaleAspectFill)
     }
 }
 
@@ -437,7 +445,7 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
 //            
 //            let imageToSave = UIImage(cgImage: imageRef, scale: 1.0, orientation: .up)
             
-            initializeCropView(with: image, cropFrame: nil, fromCamera: false, contentMode: .scaleAspectFit)
+            initializeCropView(with: image, cropFrame: nil, fixOrientation: true, contentMode: .scaleAspectFit)
             
             rootView.cameraButton.setBackgroundImage(UIImage(named: Constants.ImageName.cameraButtonRedo), for: .normal)
         } else {

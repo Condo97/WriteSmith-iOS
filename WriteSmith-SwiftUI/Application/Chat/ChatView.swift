@@ -234,7 +234,7 @@ struct ChatView: View, KeyboardReadable {
                 HStack {
                     ChatBubbleView(
                         sender: sender,
-                        canCopy: chat.text != nil,
+                        canCopy: true,
                         canDrag: true,
                         isDragged: isDragged,
                         content: {
@@ -311,7 +311,11 @@ struct ChatView: View, KeyboardReadable {
                         },
                         onCopy: {
                             // Copy TODO: Add footer and stuff if not premium
-                            PasteboardHelper.copy(chat.text ?? "")
+                            if let imageData = chat.imageData, let image = UIImage(data: imageData) {
+                                UIPasteboard.general.image = image
+                            } else {
+                                PasteboardHelper.copy(chat.text ?? "")
+                            }
                         })
                     .transition(sender == .ai ? .opacity : .moveUp)
                     .rotationEffect(.degrees(180))

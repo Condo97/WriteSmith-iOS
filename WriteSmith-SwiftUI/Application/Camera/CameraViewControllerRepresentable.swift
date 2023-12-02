@@ -48,7 +48,7 @@ struct CameraViewControllerRepresentable: UIViewControllerRepresentable {
         cameraViewController.delegate = context.coordinator
         
         if let withImage = withImage {
-            cameraViewController.initializeCropView(with: withImage, cropFrame: withCropFrame, fromCamera: false, contentMode: .scaleAspectFit)
+            cameraViewController.initializeCropView(with: withImage, cropFrame: withCropFrame, fixOrientation: false, contentMode: .scaleAspectFit)
             
             // I'm doing this here to avoid the logic in the cameraViewController itself lol
             cameraViewController.rootView.showCropViewSwitch.isOn = withCropFrame != nil

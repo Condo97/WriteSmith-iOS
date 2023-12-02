@@ -30,7 +30,7 @@ extension CameraViewController: CameraViewDelegate {
             capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
         } else {
             // Camera was not enabled, so delete the picture and redo
-            startUpCameraAgain()
+            startUpCamera()
             deInitializeCropView()
             
             // Show Tap to Scan button
@@ -118,7 +118,7 @@ extension CameraViewController: CameraViewDelegate {
             guard let croppedImage = croppedImage, let cropFrame = cropFrame else {
                 // TODO: Handle errors
                 print("Could not get the cropped image.")
-                startUpCameraAgain()
+                startUpCamera()
                 return
             }
             
@@ -188,7 +188,7 @@ extension CameraViewController: CameraViewDelegate {
         guard let croppedImage = croppedImage else {
             // TODO: Handle errors
             print("Could not get the cropped image.")
-            startUpCameraAgain()
+            startUpCamera()
             return
         }
         
