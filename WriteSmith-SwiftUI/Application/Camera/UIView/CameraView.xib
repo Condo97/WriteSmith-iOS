@@ -323,8 +323,8 @@ Cg
                         <constraint firstItem="vWD-E9-wHX" firstAttribute="leading" secondItem="QT1-zE-o2E" secondAttribute="leading" id="zIr-xS-Suk"/>
                     </constraints>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TapToScan" translatesAutoresizingMaskIntoConstraints="NO" id="jWL-Cc-xIj">
-                    <rect key="frame" x="130" y="778.66666666666663" width="133" height="66.333333333333371"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TapToCapture" translatesAutoresizingMaskIntoConstraints="NO" id="jWL-Cc-xIj">
+                    <rect key="frame" x="113.33333333333333" y="778.66666666666663" width="166.66666666666669" height="66.333333333333371"/>
                     <color key="tintColor" name="AIChatBubbleColor"/>
                 </imageView>
             </subviews>
@@ -410,7 +410,7 @@ Cg
         </view>
     </objects>
     <resources>
-        <image name="TapToScan" width="133.33332824707031" height="66.666664123535156"/>
+        <image name="TapToCapture" width="166.66667175292969" height="66.666664123535156"/>
         <image name="cameraButtonNotPressed" width="170.66667175292969" height="170.66667175292969"/>
         <image name="cameraButtonPressed" width="170.66667175292969" height="170.66667175292969"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>

@@ -9,15 +9,14 @@ import SwiftUI
 
 struct UltraToolbarItem: ToolbarContent {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
-    @ObservedObject var remainingUpdater: RemainingUpdater
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var productUpdater: ProductUpdater
+    @EnvironmentObject var remainingUpdater: RemainingUpdater
     
     
     var body: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             UltraButton(
-                premiumUpdater: premiumUpdater,
-                remainingUpdater: remainingUpdater,
                 sparkleDiameter: 19.0,
                 fontSize: 14.0,
                 cornerRadius: 8.0,
@@ -41,12 +40,13 @@ struct UltraToolbarItem: ToolbarContent {
                 
             })
             
-            UltraToolbarItem(
-                premiumUpdater: PremiumUpdater(),
-                remainingUpdater: RemainingUpdater())
+            UltraToolbarItem()
         }
         .toolbarBackground(Colors.elementBackgroundColor)
         .toolbarBackground(.visible, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)
+        .environmentObject(RemainingUpdater())
+        .environmentObject(PremiumUpdater())
+        .environmentObject(ProductUpdater())
     }
 }

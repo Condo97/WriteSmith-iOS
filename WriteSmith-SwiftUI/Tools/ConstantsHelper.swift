@@ -27,6 +27,33 @@ class ConstantsHelper {
         }
     }
     
+    static var sharedSecret: String {
+        get {
+            UserDefaults.standard.string(forKey: Constants.UserDefaults.userDefaultStoredSharedSecret) ?? Constants.fallbackSharedSecret
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.userDefaultStoredSharedSecret)
+        }
+    }
+    
+    static var weeklyProductID: String {
+        get {
+            UserDefaults.standard.string(forKey: Constants.UserDefaults.userDefaultStoredWeeklyProductID) ?? Constants.fallbackWeeklyProductIdentifier
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.userDefaultStoredWeeklyProductID)
+        }
+    }
+    
+    static var monthlyProductID: String {
+        get {
+            UserDefaults.standard.string(forKey: Constants.UserDefaults.userDefaultStoredMonthlyProductID) ?? Constants.fallbackMonthlyProductIdentifier
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaults.userDefaultStoredMonthlyProductID)
+        }
+    }
+    
     static var weeklyDisplayPrice: String {
         get {
             UserDefaults.standard.string(forKey: Constants.UserDefaults.userDefaultStoredWeeklyDisplayPrice) ?? Constants.defaultWeeklyDisplayPrice
@@ -69,7 +96,7 @@ class ConstantsHelper {
 //            setIfNil(Constants.defaultWeeklyDisplayPrice, forKey: Constants.UserDefaults.userDefaultStoredWeeklyDisplayPrice)
 //            setIfNil(Constants.defaultMonthlyDisplayPrice, forKey: Constants.UserDefaults.userDefaultStoredMonthlyDisplayPrice)
 //        }
-//        
+//
 //        // Update constants
 //        UserDefaults.standard.set(response.body.shareURL, forKey: Constants.UserDefaults.userDefaultStoredShareURL)
 //        UserDefaults.standard.set(response.body.freeEssayCap, forKey: Constants.UserDefaults.userDefaultStoredFreeEssayCap)
@@ -78,9 +105,28 @@ class ConstantsHelper {
         
         shareURL = response.body.shareURL
         freeEssayCap = response.body.freeEssayCap
-        weeklyDisplayPrice = response.body.weeklyDisplayPrice
-        monthlyDisplayPrice = response.body.monthlyDisplayPrice
         appLaunchAlert = response.body.appLaunchAlert
+        
+        if let responseSharedSecret = response.body.sharedSecret {
+            sharedSecret = responseSharedSecret
+        }
+        
+        if let responseWeeklyProductID = response.body.weeklyProductID {
+            weeklyProductID = responseWeeklyProductID
+        }
+        
+        if let responseMonthlyProductID = response.body.monthlyProductID {
+            monthlyProductID = responseMonthlyProductID
+        }
+        
+        if let responseWeeklyDisplayPrice = response.body.weeklyDisplayPrice {
+            weeklyDisplayPrice = responseWeeklyDisplayPrice
+        }
+        
+        if let responseMonthlyDisplayPrice = response.body.monthlyDisplayPrice {
+            monthlyDisplayPrice = responseMonthlyDisplayPrice
+        }
+        
     }
     
     private static func setIfNil(_ value: Any, forKey key: String) {

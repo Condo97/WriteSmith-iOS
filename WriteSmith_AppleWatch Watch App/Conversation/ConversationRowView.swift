@@ -58,7 +58,7 @@ struct ConversationRowView: View {
 
 #Preview {
 //    ConversationRowView()
-    ConversationView(
-        premiumUpdater: PremiumUpdater(),
-        remainingUpdater: RemainingUpdater())
+    ConversationView()
+        .environmentObject(RemainingUpdater())
+        .environmentObject(PremiumUpdater())
 }

@@ -13,6 +13,7 @@ struct PromoSendImagesView: View {
     var pressedScan: ()->Void
     
     @EnvironmentObject private var premiumUpdater: PremiumUpdater
+    @EnvironmentObject private var productUpdater: ProductUpdater
     
     
     @Environment(\.colorScheme) private var colorScheme
@@ -113,9 +114,7 @@ struct PromoSendImagesView: View {
         .background(Colors.background)
         .clipShape(RoundedRectangle(cornerRadius: 24.0))
         .padding()
-        .ultraViewPopover(
-            isPresented: $isShowingUltraView,
-            premiumUpdater: premiumUpdater)
+        .ultraViewPopover(isPresented: $isShowingUltraView)
         .onReceive(premiumUpdater.$isPremium, perform: { newIsPremium in
             if newIsPremium {
                 isShowing = false

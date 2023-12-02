@@ -9,7 +9,6 @@ import SwiftUI
 
 struct IntroPresenterView: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
     @Binding var isShowing: Bool
     
     
@@ -17,7 +16,7 @@ struct IntroPresenterView: View {
         NavigationStack {
             IntroView(image: Image(uiImage: UIImage(named: Constants.ImageName.introScreenshot1)!), destination: {
                 IntroView(image: Image(uiImage: UIImage(named: Constants.ImageName.introScreenshot2)!), destination: {
-                    UltraView(premiumUpdater: premiumUpdater, isShowing: $isShowing)
+                    UltraView(isShowing: $isShowing)
                         .toolbar(.hidden, for: .navigationBar)
                         .onAppear {
                             IntroManager.isIntroComplete = true
@@ -30,7 +29,7 @@ struct IntroPresenterView: View {
 }
 
 #Preview {
-    IntroPresenterView(
-        premiumUpdater: PremiumUpdater(),
-        isShowing: .constant(true))
+    IntroPresenterView(isShowing: .constant(true))
+        .environmentObject(PremiumUpdater())
+        .environmentObject(ProductUpdater())
 }

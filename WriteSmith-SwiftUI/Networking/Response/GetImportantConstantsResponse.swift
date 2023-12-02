@@ -11,14 +11,30 @@ struct GetImportantConstantsResponse: Codable {
     
     struct Body: Codable {
         
-        var weeklyDisplayPrice: String
-        var monthlyDisplayPrice: String
-        var annualDisplayPrice: String
+        var sharedSecret: String?
+        
+        var weeklyProductID: String?
+        var monthlyProductID: String?
+        var annualProductID: String?
+        
+        var weeklyDisplayPrice: String?
+//        var weeklyIntroductoryOfferPrice: String?
+        
+        var monthlyDisplayPrice: String?
+//        var monthlyIntroductoryOfferPrice: String?
+        
+        var annualDisplayPrice: String?
+//        var annualIntroductoryOfferPrice: String?
+        
         var shareURL: String
         var freeEssayCap: Int
         var appLaunchAlert: String
         
         enum CodingKeys: String, CodingKey {
+            case sharedSecret
+            case weeklyProductID
+            case monthlyProductID
+            case annualProductID
             case weeklyDisplayPrice
             case monthlyDisplayPrice
             case annualDisplayPrice

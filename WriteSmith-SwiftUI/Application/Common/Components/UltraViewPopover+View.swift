@@ -10,9 +10,11 @@ import SwiftUI
 
 struct UltraViewPopover: ViewModifier {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
     @Binding var isPresented: Bool
     @Binding var restoreOnAppear: Bool
+    
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var productUpdater: ProductUpdater
     
     
     @Environment(\.horizontalSizeClass) var horizontalSize
@@ -22,7 +24,6 @@ struct UltraViewPopover: ViewModifier {
             content
                 .sheet(isPresented: $isPresented, content: {
                     UltraView(
-                        premiumUpdater: premiumUpdater,
                         restoreOnAppear: $restoreOnAppear,
                         isShowing: $isPresented)
                 })
@@ -30,7 +31,6 @@ struct UltraViewPopover: ViewModifier {
             content
                 .fullScreenCover(isPresented: $isPresented, content: {
                     UltraView(
-                        premiumUpdater: premiumUpdater,
                         restoreOnAppear: $restoreOnAppear,
                         isShowing: $isPresented)
                 })
@@ -41,10 +41,9 @@ struct UltraViewPopover: ViewModifier {
 
 extension View {
     
-    func ultraViewPopover(isPresented: Binding<Bool>, restoreOnAppear: Binding<Bool> = .constant(false), premiumUpdater: PremiumUpdater) -> some View {
+    func ultraViewPopover(isPresented: Binding<Bool>, restoreOnAppear: Binding<Bool> = .constant(false)) -> some View {
         self
             .modifier(UltraViewPopover(
-                premiumUpdater: premiumUpdater,
                 isPresented: isPresented,
                 restoreOnAppear: restoreOnAppear))
     }

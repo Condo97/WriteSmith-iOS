@@ -10,6 +10,8 @@ import SwiftUI
 struct ChatBubbleView<Content>: View where Content: View {
     
     @State var sender: Sender
+    @State var canCopy: Bool
+    @State var canDrag: Bool
     @Binding var isDragged: Bool
     var content: () -> Content
     var onDelete: (() -> Void)?
@@ -53,18 +55,18 @@ struct ChatBubbleView<Content>: View where Content: View {
                             
                             bubble
                             
-//                        Spacer()
+                            //                        Spacer()
                         }
-//                        .fixedSize(horizontal: false, vertical: true)
+                        //                        .fixedSize(horizontal: false, vertical: true)
                     case .user:
                         HStack(spacing: 0.0) {
-//                            Spacer()
+                            //                            Spacer()
                             
                             bubble
                             
                             senderImage
                         }
-//                        .fixedSize(horizontal: false, vertical: true)
+                        //                        .fixedSize(horizontal: false, vertical: true)
                     }
                 }
                 
@@ -73,39 +75,48 @@ struct ChatBubbleView<Content>: View where Content: View {
                 }
                 
             }
-            .modifier(SwipeAction(isDragged: $isDragged, behind: {
-                HStack(spacing: 16.0) {
-                    Spacer(minLength: 0.0)
-                    
-                    Button(action: {
-                        isDragged = false
-                    }) {
-                        Text("Cancel")
-                            .font(.custom(Constants.FontName.body, size: 17.0))
-                    }
-                    .foregroundStyle(Colors.textOnBackgroundColor)
-                    .opacity(0.4)
-                    
-                    Button(action: {
-                        onDelete?()
-                    }) {
-                        Text("Delete")
-                            .font(.custom(Constants.FontName.black, size: 17.0))
-                    }
-                    .foregroundStyle(Color(uiColor: .systemRed))
-                    .padding([.top, .bottom], 8)
-                    .padding([.leading, .trailing], 16)
-                    .background(Colors.foreground)
-                    .clipShape(RoundedRectangle(cornerRadius: 24.0))
-                }
-                .frame(minHeight: 0.0)
-            }))
-//            .offset(x: dragOffset)
-//            .scaleEffect(1 - pow(Double(dragOffset) / 40, 2) / 100)
-//            .opacity(1 - pow(Double(dragOffset) / 40, 2) / 100)
+            .modifier(
+                SwipeAction(
+                    canDrag: canDrag,
+                    isDragged: $isDragged,
+                    behind: {
+                        HStack(spacing: 16.0) {
+                            Spacer(minLength: 0.0)
+                            
+                            Button(action: {
+                                isDragged = false
+                            }) {
+                                Text("Cancel")
+                                    .font(.custom(Constants.FontName.body, size: 17.0))
+                            }
+                            .foregroundStyle(Colors.textOnBackgroundColor)
+                            .opacity(0.4)
+                            
+                            Button(action: {
+                                onDelete?()
+                            }) {
+                                Text("Delete")
+                                    .font(.custom(Constants.FontName.black, size: 17.0))
+                            }
+                            .foregroundStyle(Color(uiColor: .systemRed))
+                            .padding([.top, .bottom], 8)
+                            .padding([.leading, .trailing], 16)
+                            .background(Colors.foreground)
+                            .clipShape(RoundedRectangle(cornerRadius: 24.0))
+                        }
+                        .frame(minHeight: 0.0)
+                    }))
+            //            .offset(x: dragOffset)
+            //            .scaleEffect(1 - pow(Double(dragOffset) / 40, 2) / 100)
+            //            .opacity(1 - pow(Double(dragOffset) / 40, 2) / 100)
         }
         .simultaneousGesture(TapGesture()
             .onEnded({
+                // Ensure canCopy, otherwise return
+                guard canCopy else {
+                    return
+                }
+                
                 // Ensure not isDragged, otherwise return
                 guard !isDragged else {
                     return
@@ -212,9 +223,11 @@ struct ChatBubbleView<Content>: View where Content: View {
     
     return ChatBubbleView(
         sender: .ai,
+        canCopy: true,
+        canDrag: true,
         isDragged: .constant(false),
         content: {
             Text("Test")
-    })
+        })
     .background(Color(uiColor: .gray))
 }

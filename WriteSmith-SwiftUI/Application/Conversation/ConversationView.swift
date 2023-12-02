@@ -10,6 +10,7 @@ import SwiftUI
 struct ConversationView: View {
     
     @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var productUpdater: ProductUpdater
     @EnvironmentObject var remainingUpdater: RemainingUpdater
     @EnvironmentObject var faceAnimationUpdater: FaceAnimationUpdater
     
@@ -69,8 +70,7 @@ struct ConversationView: View {
         .background(Colors.background)
         .navigationTitle("Chats")
         .navigationDestination(isPresented: $isShowingSettingsView, destination: {
-            SettingsView(
-                premiumUpdater: premiumUpdater)
+            SettingsView()
         })
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
@@ -108,9 +108,7 @@ struct ConversationView: View {
             }
             
             if !premiumUpdater.isPremium {
-                UltraToolbarItem(
-                    premiumUpdater: premiumUpdater,
-                    remainingUpdater: remainingUpdater)
+                UltraToolbarItem()
             }
         }
         .toolbarBackground(Colors.topBarBackgroundColor, for: .navigationBar)

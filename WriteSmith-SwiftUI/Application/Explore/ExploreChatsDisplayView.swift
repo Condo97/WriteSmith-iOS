@@ -9,9 +9,11 @@ import SwiftUI
 
 struct ExploreChatsDisplayView: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
-    @ObservedObject var remainingUpdater: RemainingUpdater
     @Binding var chats: [ExploreChat]
+    
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var productUpdater: ProductUpdater
+    @EnvironmentObject var remainingUpdater: RemainingUpdater
     
     
     var body: some View {
@@ -23,9 +25,7 @@ struct ExploreChatsDisplayView: View {
             Spacer(minLength: 20.0)
             
             List($chats) { chat in
-                ExploreChatView(
-                    premiumUpdater: premiumUpdater,
-                    chat: chat)
+                ExploreChatView(chat: chat)
                 .listRowBackground(Colors.background)
             }
             .buttonStyle(.plain)
@@ -36,9 +36,7 @@ struct ExploreChatsDisplayView: View {
             LogoToolbarItem(elementColor: .constant(Colors.elementTextColor))
             
             if !premiumUpdater.isPremium {
-                UltraToolbarItem(
-                    premiumUpdater: premiumUpdater,
-                    remainingUpdater: remainingUpdater)
+                UltraToolbarItem()
             }
         }
         .background(Colors.background)
@@ -51,8 +49,6 @@ struct ExploreChatsDisplayView: View {
 #Preview {
     NavigationStack {
         ExploreChatsDisplayView(
-            premiumUpdater: PremiumUpdater(),
-            remainingUpdater: RemainingUpdater(),
             chats: .constant([
                 ExploreChat(chat: "Chat 1, it's a long one! Chat 1, it's a long one! Chat 1, it's a long one! Chat 1, it's a long one! Chat 1, it's a long one! Chat 1, it's a long one! Chat 1, it's a long one! Chat 1, it's a long one! Chat 1, it's a long one! Chat 1, it's a long one!")
             ])
@@ -64,4 +60,7 @@ struct ExploreChatsDisplayView: View {
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarBackground(Colors.elementBackgroundColor, for: .navigationBar)
     }
+    .environmentObject(RemainingUpdater())
+    .environmentObject(PremiumUpdater())
+    .environmentObject(ProductUpdater())
 }

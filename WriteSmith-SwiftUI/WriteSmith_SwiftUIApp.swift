@@ -14,6 +14,7 @@ import TenjinSDK
 struct WriteSmith_SwiftUIApp: App {
     
     @StateObject private var premiumUpdater: PremiumUpdater = PremiumUpdater()
+    @StateObject private var productUpdater: ProductUpdater = ProductUpdater()
     @StateObject private var remainingUpdater: RemainingUpdater = RemainingUpdater()
     
     @State private var alertShowingAppLaunchImportant: Bool = false
@@ -39,9 +40,7 @@ struct WriteSmith_SwiftUIApp: App {
         WindowGroup {
             ZStack {
                 if isShowingIntroView {
-                    IntroPresenterView(
-                        premiumUpdater: premiumUpdater,
-                        isShowing: $isShowingIntroView)
+                    IntroPresenterView(isShowing: $isShowingIntroView)
                     .transition(.move(edge: .bottom))
                     .zIndex(1.0)
                 } else {
@@ -51,14 +50,13 @@ struct WriteSmith_SwiftUIApp: App {
                             isShowingUltraView = true
                         }
                     }
-                    .ultraViewPopover(
-                        isPresented: $isShowingUltraView,
-                        premiumUpdater: premiumUpdater)
+                    .ultraViewPopover(isPresented: $isShowingUltraView)
                 }
             }
             .animation(.easeInOut(duration: 0.4), value: isShowingIntroView)
             .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
             .environmentObject(premiumUpdater)
+            .environmentObject(productUpdater)
             .environmentObject(remainingUpdater)
             .onAppear {
                 // Start Tenjin stuff

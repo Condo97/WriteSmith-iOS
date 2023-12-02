@@ -82,8 +82,8 @@ struct EntryView: View, KeyboardReadable {
             .onChange(of: buttonDisabled, perform: { value in
                 print("REE")
             })
-            .fixedSize(horizontal: false, vertical: true)
             .padding()
+            .fixedSize(horizontal: false, vertical: true)
             .background(Colors.elementBackgroundColor)
             .clipShape(RoundedRectangle(cornerRadius: UIConstants.cornerRadius))
         }

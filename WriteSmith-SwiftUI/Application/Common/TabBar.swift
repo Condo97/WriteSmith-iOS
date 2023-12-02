@@ -12,12 +12,13 @@ struct TabBar: View, KeyboardReadable {
     
     private var faceAnimationUpdater: FaceAnimationUpdater
     
+    @EnvironmentObject private var premiumUpdater: PremiumUpdater
+    @EnvironmentObject private var productUpdater: ProductUpdater
+    @EnvironmentObject private var remainingUpdater: RemainingUpdater
+    
     
     @Environment(\.managedObjectContext) var viewContext
     @State private var selectedTab: Tab = .chat
-    
-    @EnvironmentObject private var premiumUpdater: PremiumUpdater
-    @EnvironmentObject private var remainingUpdater: RemainingUpdater
     
     @State private var isShowingGPTModelSelectionView: Bool = false
     @State private var isShowingPromoSendImagesView: Bool = false
@@ -71,10 +72,7 @@ struct TabBar: View, KeyboardReadable {
                         ZStack {
                             if let panelGroups = panelGroups {
                                 NavigationStack {
-                                    ExploreView(
-                                        premiumUpdater: premiumUpdater,
-                                        remainingUpdater: remainingUpdater,
-                                        panelGroups: panelGroups)
+                                    ExploreView(panelGroups: panelGroups)
                                 }
                             } else {
                                 MaintenanceView()
@@ -92,9 +90,7 @@ struct TabBar: View, KeyboardReadable {
     //                    .padding(.bottom, 80)
                         
                         NavigationStack {
-                            EssayView(
-                                premiumUpdater: premiumUpdater,
-                                remainingUpdater: remainingUpdater)
+                            EssayView()
                         }
                         .tag(Tab.essay)
 //                        .padding(.bottom, 80)
@@ -166,9 +162,7 @@ struct TabBar: View, KeyboardReadable {
             if isShowingGPTModelSelectionView {
                 VStack {
                     Spacer()
-                    GPTModelSelectionView(
-                        premiumUpdater: premiumUpdater,
-                        isShowing: $isShowingGPTModelSelectionView)
+                    GPTModelSelectionView(isShowing: $isShowingGPTModelSelectionView)
                     .background(FullScreenCoverBackgroundCleanerView())
                 }
                 .zIndex(2.0)
@@ -315,6 +309,7 @@ struct TabBar: View, KeyboardReadable {
         TabBar()
         .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
         .environmentObject(PremiumUpdater())
+        .environmentObject(ProductUpdater())
         .environmentObject(RemainingUpdater())
 //    }
 //    .ignoresSafeArea()

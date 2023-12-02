@@ -59,8 +59,12 @@ struct Constants {
     static let defaultMonthlyDisplayPrice = "14.99"
     //    static let defaultAnnualDisplayPrice = "29.99"
     
-    static let weeklyProductIdentifier = "chitchatultra"
-    static let monthlyProductIdentifier = "ultramonthly"
+    static let fallbackSharedSecret = "57f880d1fff94a2a8595576969eea83b"
+    static let fallbackWeeklyProductIdentifier = "chitchatultra"
+    static let fallbackMonthlyProductIdentifier = "ultramonthly"
+    
+//    static let weeklyProductIdentifier = "chitchatultra"
+//    static let monthlyProductIdentifier = "ultramonthly"
     //    static let annualProductIdentifier = "chitchatultrayearly"
     
     static let mainStoryboardName = "Main"
@@ -231,6 +235,8 @@ struct Constants {
         static let userDefaultStoredAuthTokenKey = "authTokenKey"
         
         static let userDefaultHasFinishedIntro = "hasFinishedIntro"
+        static let userDefaultStoredWeeklyProductID = "weeklyProductID"
+        static let userDefaultStoredMonthlyProductID = "monthlyProductID"
         static let userDefaultStoredWeeklyDisplayPrice = "weeklyDisplayPrice"
         static let userDefaultStoredMonthlyDisplayPrice = "monthlyDisplayPrice"
         //    static let userDefaultStoredAnnualDisplayPrice = "annualDisplayPrice"
@@ -246,6 +252,8 @@ struct Constants {
         static let userDefaultStoredGeneratedChatsRemaining = "generatedChatsRemaining"
         
         static let userDefaultStoredConversationToResume = "conversationToResume"
+        
+        static let userDefaultStoredSharedSecret = "udStoredSharedSecret"
         
         static let userDefaultStoredShouldNotLoadFirstConversationChats = "shouldNotLoadFirstConversationChats"
         
@@ -277,7 +285,7 @@ struct UIConstants {
 
 struct HTTPSConstants {
     #if DEBUG
-        static let chitChatServer = "https://chitchatserver.com:2000/v1"//"https://chitchatserver.com/v1"
+        static let chitChatServer = "https://chitchatserver.com/v1"//"https://chitchatserver.com:2000/v1"
     #else
         static let chitChatServer = "https://chitchatserver.com/v1"
     #endif
@@ -308,7 +316,7 @@ struct HTTPSResponseConstants {
 
 struct WebSocketConstants {
     #if DEBUG
-        static let chitChatWebSocketServer = "wss://chitchatserver.com:2000/v1"
+        static let chitChatWebSocketServer = "wss://chitchatserver.com/v1"//"wss://chitchatserver.com:2000/v1"
     #else
         static let chitChatWebSocketServer = "wss://chitchatserver.com/v1"
     #endif

@@ -17,6 +17,7 @@ struct ChatView: View, KeyboardReadable {
     
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var premiumUpdater: PremiumUpdater
+    @EnvironmentObject private var productUpdater: ProductUpdater
     @EnvironmentObject private var remainingUpdater: RemainingUpdater
     @EnvironmentObject private var faceAnimationUpdater: FaceAnimationUpdater
     
@@ -100,9 +101,6 @@ struct ChatView: View, KeyboardReadable {
                                 }
                                 
                                 chatList
-                                    .onAppear {
-                                        premiumUpdater.isPremium = false
-                                    }
                                 
                                 Spacer(minLength: 60.0)
                             }
@@ -144,9 +142,7 @@ struct ChatView: View, KeyboardReadable {
                     })
                     
                     if !premiumUpdater.isPremium {
-                        UltraToolbarItem(
-                            premiumUpdater: premiumUpdater,
-                            remainingUpdater: remainingUpdater)
+                        UltraToolbarItem()
                     }
                 }
                 .toolbarBackground(Colors.topBarBackgroundColor, for: .navigationBar)
@@ -187,9 +183,7 @@ struct ChatView: View, KeyboardReadable {
                 isKeyboardVisible = value
             }
         })
-        .ultraViewPopover(
-            isPresented: $isShowingUltraView,
-            premiumUpdater: premiumUpdater)
+        .ultraViewPopover(isPresented: $isShowingUltraView)
         //        .keyboardDismissingTextFieldToolbar("Done", color: Colors.buttonBackground)
         .scrollDismissesKeyboard(.immediately)
         .alert("Upgrade for FREE", isPresented: $alertShowingUpgradeForUnlimitedChats, actions: {
@@ -210,6 +204,8 @@ struct ChatView: View, KeyboardReadable {
     var loadingChatBubble: some View {
         ChatBubbleView(
             sender: .ai,
+            canCopy: false,
+            canDrag: false,
             isDragged: .constant(false),
             content: {
                 PulsatingDotsView(count: 4, size: 16.0)
@@ -238,6 +234,8 @@ struct ChatView: View, KeyboardReadable {
                 HStack {
                     ChatBubbleView(
                         sender: sender,
+                        canCopy: chat.text != nil,
+                        canDrag: true,
                         isDragged: isDragged,
                         content: {
                             ZStack {
@@ -249,7 +247,7 @@ struct ChatView: View, KeyboardReadable {
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
                                                 .frame(maxHeight: 80.0)
-                                                .clipShape(RoundedRectangle(cornerRadius: 14.0))
+                                                .clipShape(RoundedRectangle(cornerRadius: 12.0))
                                             
                                             Divider()
                                                 .background(sender == .user ? Colors.userChatTextColor : Colors.aiChatTextColor)
@@ -271,7 +269,7 @@ struct ChatView: View, KeyboardReadable {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(maxHeight: 200.0)
-                                        .clipShape(RoundedRectangle(cornerRadius: 14.0))
+                                        .clipShape(RoundedRectangle(cornerRadius: 12.0))
                                         .padding(8)
                                 }
                             }
@@ -395,17 +393,50 @@ struct ChatView: View, KeyboardReadable {
                         // Show Ultra View
                         isShowingUltraView = true
                     }) {
-                        HStack {
-                            Spacer()
+                        ZStack {
+                            HStack {
+                                Spacer()
+                                
+                                Text(Image(systemName: "chevron.right"))
+                                    .font(.custom(Constants.FontName.body, size: 20.0))
+                                    .foregroundStyle(Colors.elementBackgroundColor)
+                                    .padding(.trailing, 8)
+                            }
                             
-                            Text("Get 3 Days Free...")
-                                .font(.custom(Constants.FontName.heavy, size: 20.0))
-                                .foregroundStyle(Colors.elementBackgroundColor)
-                            
-                            Spacer()
+                            HStack {
+                                Spacer()
+                                
+                                VStack(spacing: -2.0) {
+                                    if let introductaryOffer = productUpdater.weeklyProduct?.subscription?.introductoryOffer {
+                                        Text("NEW - Send Images\(introductaryOffer.paymentMode == .freeTrial ? "!" : "")")
+                                            .font(.custom(Constants.FontName.heavy, size: 20.0))
+                                            .foregroundStyle(Colors.elementBackgroundColor)
+                                        
+                                        if introductaryOffer.paymentMode == .freeTrial {
+                                            Text("Get 3 Days Free...")
+                                                .font(.custom(Constants.FontName.lightOblique, size: 17.0))
+                                                .foregroundStyle(Colors.elementBackgroundColor)
+                                        } else {
+                                            Text("Get access for just 99¢ today!")
+                                                .font(.custom(Constants.FontName.lightOblique, size: 17.0))
+                                                .foregroundStyle(Colors.elementBackgroundColor)
+                                        }
+                                    } else {
+                                        Text("NEW - Send Pictures!")
+                                            .font(.custom(Constants.FontName.heavy, size: 20.0))
+                                            .foregroundStyle(Colors.elementBackgroundColor)
+                                        
+                                        Text("Tap to upgrade now...")
+                                            .font(.custom(Constants.FontName.lightOblique, size: 17.0))
+                                            .foregroundStyle(Colors.elementBackgroundColor)
+                                    }
+                                }
+                                
+                                Spacer()
+                            }
                         }
                     }
-                    .padding(12)
+                    .padding(8.0)
                     .background(
                         ZStack {
                             let cornerRadius = 14.0
@@ -445,7 +476,7 @@ struct ChatView: View, KeyboardReadable {
         
         try await MainActor.run {
             try withAnimation(.none) {
-                try ChatCDHelper.appendChat(sender: .ai, text: "Hi! I'm Prof. Write, your AI writing companion...", to: conversation, in: viewContext)
+                try ChatCDHelper.appendChat(sender: .ai, text: "Hi! I'm Prof. Write, your AI personal tutor...", to: conversation, in: viewContext)
             }
         }
         
@@ -456,7 +487,7 @@ struct ChatView: View, KeyboardReadable {
         }
         
         try await MainActor.run {
-            try ChatCDHelper.appendChat(sender: .ai, text: "Ask me to write lyrics, poems, essays and more. Talk to me like a human and ask me anything you'd ask your professor!", to: conversation, in: viewContext)
+            try ChatCDHelper.appendChat(sender: .ai, text: "Text or send a picture for help on difficult problems. Ask follow up questions to dive deep on a subject.", to: conversation, in: viewContext)
         }
         
         await withCheckedContinuation { continuation in
@@ -466,7 +497,7 @@ struct ChatView: View, KeyboardReadable {
         }
         
         try await MainActor.run {
-            try ChatCDHelper.appendChat(sender: .ai, text: "I do better with more detail. Don't say, \"Essay on Belgium,\" say \"200 word essay on Belgium's cultural advances in the past 20 years.\" Remember, I'm your Professor, so use what I write as inspiration and never plagiarize!", to: conversation, in: viewContext)
+            try ChatCDHelper.appendChat(sender: .ai, text: "Talk to me like a human. I remember what we talk about, so conversations flow naturally. Let's chat!", to: conversation, in: viewContext)
         }
     }
     
@@ -513,6 +544,7 @@ struct ChatView: View, KeyboardReadable {
     }
     .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
     .environmentObject(PremiumUpdater())
+    .environmentObject(ProductUpdater())
     .environmentObject(RemainingUpdater())
     .environmentObject(FaceAnimationUpdater())
 }

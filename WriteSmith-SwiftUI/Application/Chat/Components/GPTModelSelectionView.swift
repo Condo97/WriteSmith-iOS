@@ -9,8 +9,11 @@ import SwiftUI
 
 struct GPTModelSelectionView: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
     @Binding var isShowing: Bool
+    
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var productUpdater: ProductUpdater
+    
     
     @State private var alertShowingUpgradeToPremium: Bool = false
     
@@ -195,9 +198,7 @@ struct GPTModelSelectionView: View {
                 }) {
                     Text("Unlock GPT-4 FREE for 3 days. Upgrade your essays and be part of the AI revolution")
                 }
-                .ultraViewPopover(
-                    isPresented: $isShowingUltraView,
-                    premiumUpdater: premiumUpdater)
+                .ultraViewPopover(isPresented: $isShowingUltraView)
             }
 //        }
 //    }
@@ -207,8 +208,9 @@ struct GPTModelSelectionView: View {
 #Preview {
     ZStack {
         GPTModelSelectionView(
-            premiumUpdater: PremiumUpdater(),
             isShowing: .constant(true))
+        .environmentObject(PremiumUpdater())
+        .environmentObject(ProductUpdater())
     }
 //    .background(Colors.background)
 }

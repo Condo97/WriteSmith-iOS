@@ -10,7 +10,7 @@ import WebKit
 
 struct SettingsView: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
     
     
     @State private var restoreOnUltraViewAppear: Bool = false
@@ -59,8 +59,7 @@ struct SettingsView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .ultraViewPopover(
                 isPresented: $isShowingUltraView,
-                restoreOnAppear: $restoreOnUltraViewAppear,
-                premiumUpdater: premiumUpdater)
+                restoreOnAppear: $restoreOnUltraViewAppear)
             .fullScreenCover(isPresented: $isShowingTermsWebView) {
                 NavigationStack {
                     VStack {
@@ -254,5 +253,7 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(premiumUpdater: PremiumUpdater())
+    SettingsView()
+    .environmentObject(PremiumUpdater())
+    .environmentObject(ProductUpdater())
 }

@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ExploreChatView: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
     @Binding var chat: ExploreChat
+    
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var productUpdater: ProductUpdater
     
     
     @State private var isShowingUltraView: Bool = false
@@ -43,9 +45,7 @@ struct ExploreChatView: View {
                 shareButton
             }
         }
-        .ultraViewPopover(
-            isPresented: $isShowingUltraView,
-            premiumUpdater: premiumUpdater)
+        .ultraViewPopover(isPresented: $isShowingUltraView)
     }
     
     var upgradeButton: some View {
@@ -119,8 +119,9 @@ struct ExploreChatView: View {
 
 #Preview {
     ExploreChatView(
-        premiumUpdater: PremiumUpdater(),
         chat: .constant(ExploreChat(chat: "This is the chat. This is the chat. This is the chat. This is the chat. This is the chat. This is the chat. This is the chat. This is the chat."))
     )
     .background(Colors.background)
+    .environmentObject(PremiumUpdater())
+    .environmentObject(ProductUpdater())
 }

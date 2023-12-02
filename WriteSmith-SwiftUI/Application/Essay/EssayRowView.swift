@@ -9,10 +9,13 @@ import SwiftUI
 
 struct EssayRowView: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
     @ObservedObject var essay: Essay
     var isGenerating: Bool
     @Binding var isExpanded: Bool
+    
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var productUpdater: ProductUpdater
+    
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -44,8 +47,7 @@ struct EssayRowView: View {
         return prompt + "\n" + essay + (premiumUpdater.isPremium ? "" : "\n\n" + Constants.copyFooterText)
     }
     
-    init(premiumUpdater: PremiumUpdater, essay: Essay, isGenerating: Bool, isExpanded: Binding<Bool>) {
-        self.premiumUpdater = premiumUpdater
+    init(essay: Essay, isGenerating: Bool, isExpanded: Binding<Bool>) {
         self.essay = essay
         self.isGenerating = isGenerating
         self._isExpanded = isExpanded
@@ -323,7 +325,6 @@ struct EssayRowView: View {
         
         var body: some View {
             EssayRowView(
-                premiumUpdater: PremiumUpdater(),
                 essay: essay,
                 isGenerating: true,
                 isExpanded: $isExpanded)
@@ -334,5 +335,7 @@ struct EssayRowView: View {
     
     return ScrollView {
         ContentView(essay: essay)
+            .environmentObject(PremiumUpdater())
+            .environmentObject(ProductUpdater())
     }
 }

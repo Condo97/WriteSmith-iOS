@@ -9,9 +9,6 @@ import SwiftUI
 
 struct ConversationView: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
-    @ObservedObject var remainingUpdater: RemainingUpdater
-    
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest<Conversation>(
         sortDescriptors: [NSSortDescriptor(keyPath: \Conversation.latestChatDate, ascending: false)],
@@ -44,10 +41,7 @@ struct ConversationView: View {
             }
             .navigationDestination(isPresented: isPresentingConversation, destination: {
                 if let presentingConversation = presentingConversation {
-                    ChatView(
-                        premiumUpdater: premiumUpdater,
-                        remainingUpdater: remainingUpdater,
-                        conversation: presentingConversation)
+                    ChatView(conversation: presentingConversation)
                 }
             })
         }
@@ -112,8 +106,8 @@ struct ConversationView: View {
 }
 
 #Preview {
-    ConversationView(
-        premiumUpdater: PremiumUpdater(),
-        remainingUpdater: RemainingUpdater())
+    ConversationView()
         .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
+        .environmentObject(RemainingUpdater())
+        .environmentObject(PremiumUpdater())
 }

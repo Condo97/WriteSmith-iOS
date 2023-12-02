@@ -9,8 +9,9 @@ import SwiftUI
 
 struct EssayView: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
-    @ObservedObject var remainingUpdater: RemainingUpdater
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var productUpdater: ProductUpdater
+    @EnvironmentObject var remainingUpdater: RemainingUpdater
     
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -83,16 +84,14 @@ struct EssayView: View {
             LogoToolbarItem(elementColor: .constant(Colors.elementTextColor))
             
             if !premiumUpdater.isPremium {
-                UltraToolbarItem(
-                    premiumUpdater: premiumUpdater,
-                    remainingUpdater: remainingUpdater)
+                UltraToolbarItem()
             }
         }
         .toolbarBackground(Colors.topBarBackgroundColor, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-        .ultraViewPopover(isPresented: $isShowingUltraView, premiumUpdater: premiumUpdater)
+        .ultraViewPopover(isPresented: $isShowingUltraView)
         .navigationDestination(isPresented: $isShowingSettingsView, destination: {
-            SettingsView(premiumUpdater: premiumUpdater)
+            SettingsView()
         })
         .onReceive(essayGenerator.$isLoading) { isLoading in
             withAnimation {
@@ -201,7 +200,6 @@ struct EssayView: View {
                     })
                 
                 EssayRowView(
-                    premiumUpdater: premiumUpdater,
                     essay: essay,
                     isGenerating: essayGenerator.isLoading || essayGenerator.isGenerating,
                     isExpanded: isExpanded)
@@ -221,9 +219,10 @@ struct EssayView: View {
     
     try? CDClient.mainManagedObjectContext.save()
     
-    return EssayView(
-        premiumUpdater: PremiumUpdater(),
-        remainingUpdater: RemainingUpdater())
+    return EssayView()
         .background(Colors.background)
         .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
+        .environmentObject(RemainingUpdater())
+        .environmentObject(PremiumUpdater())
+        .environmentObject(ProductUpdater())
 }

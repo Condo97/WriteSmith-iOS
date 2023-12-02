@@ -9,14 +9,17 @@ import SwiftUI
 
 struct UltraButton: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
-    @ObservedObject var remainingUpdater: RemainingUpdater
     @State var sparkleDiameter: CGFloat = 28.0
     @State var fontSize: CGFloat = 20.0
     @State var cornerRadius: CGFloat = 10
     @State var horizontalSpacing: CGFloat = 4.0
     @State var innerPadding: CGFloat = 8.0
     @State var lineWidth: CGFloat = 2.0
+    
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var productUpdater: ProductUpdater
+    @EnvironmentObject var remainingUpdater: RemainingUpdater
+    
     
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
@@ -51,16 +54,15 @@ struct UltraButton: View {
             }
             .bounceable()
         }
-        .ultraViewPopover(
-            isPresented: $isShowingUltraView,
-            premiumUpdater: premiumUpdater)
+        .ultraViewPopover(isPresented: $isShowingUltraView)
     }
     
 }
 
 #Preview {
-    UltraButton(
-        premiumUpdater: PremiumUpdater(),
-        remainingUpdater: RemainingUpdater())
+    UltraButton()
         .background(.yellow)
+        .environmentObject(RemainingUpdater())
+        .environmentObject(PremiumUpdater())
+        .environmentObject(ProductUpdater())
 }

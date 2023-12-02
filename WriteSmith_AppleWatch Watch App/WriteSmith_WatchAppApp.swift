@@ -16,10 +16,10 @@ struct WriteSmith_WatchApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ConversationView(
-                premiumUpdater: premiumUpdater,
-                remainingUpdater: remainingUpdater)
+            ConversationView()
                 .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
+                .environmentObject(remainingUpdater)
+                .environmentObject(premiumUpdater)
         }
     }
     

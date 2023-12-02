@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ChatView: View {
     
-    @ObservedObject private var premiumUpdater: PremiumUpdater
-    @ObservedObject private var remainingUpdater: RemainingUpdater
     @State private var conversation: Conversation
+    
+    @EnvironmentObject private var premiumUpdater: PremiumUpdater
+    @EnvironmentObject private var remainingUpdater: RemainingUpdater
     
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -27,9 +28,7 @@ struct ChatView: View {
     
 //    @State private var inputFieldDragTranslation: CGFloat = 0.0
     
-    init(premiumUpdater: PremiumUpdater, remainingUpdater: RemainingUpdater, conversation: Conversation) {
-        self.premiumUpdater = premiumUpdater
-        self.remainingUpdater = remainingUpdater
+    init(conversation: Conversation) {
         self._chats = FetchRequest(
             sortDescriptors: [NSSortDescriptor(keyPath: \Chat.date, ascending: false)],
             predicate: NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation.objectID),
@@ -274,10 +273,9 @@ struct ChatView: View {
     try? CDClient.mainManagedObjectContext.save()
     
     
-    return ChatView(
-        premiumUpdater: PremiumUpdater(),
-        remainingUpdater: RemainingUpdater(),
-        conversation: conversation)
+    return ChatView(conversation: conversation)
         .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
+        .environmentObject(RemainingUpdater())
+        .environmentObject(PremiumUpdater())
     
 }

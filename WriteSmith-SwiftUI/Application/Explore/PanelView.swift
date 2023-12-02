@@ -9,9 +9,11 @@ import SwiftUI
 
 struct PanelView: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
-    @ObservedObject var remainingUpdater: RemainingUpdater
     @State var panel: Panel
+    
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var productUpdater: ProductUpdater
+    @EnvironmentObject var remainingUpdater: RemainingUpdater
     
     
     @StateObject private var exploreChatGenerator = ExploreChatGenerator()
@@ -144,9 +146,7 @@ struct PanelView: View {
             LogoToolbarItem(elementColor: .constant(Colors.elementTextColor))
             
             if !premiumUpdater.isPremium {
-                UltraToolbarItem(
-                    premiumUpdater: premiumUpdater,
-                    remainingUpdater: remainingUpdater)
+                UltraToolbarItem()
             }
         }
         .toolbarBackground(.visible, for: .navigationBar)
@@ -161,10 +161,7 @@ struct PanelView: View {
             }
         })
         .navigationDestination(isPresented: $isShowingExploreChatsDisplayView, destination: {
-            ExploreChatsDisplayView(
-                premiumUpdater: premiumUpdater,
-                remainingUpdater: remainingUpdater,
-                chats: $exploreChatGenerator.generatedChats)
+            ExploreChatsDisplayView(chats: $exploreChatGenerator.generatedChats)
         })
         .alert("Empty Required Fields", isPresented: $alertShowingEmptyRequiredFields, actions: {
             Button("Close", role: .cancel, action: {
@@ -221,112 +218,112 @@ struct PanelView: View {
 
 #Preview {
     NavigationStack {
-        PanelView(
-            premiumUpdater: PremiumUpdater(),
-            remainingUpdater: RemainingUpdater(),
-            panel: Panel(
-                emoji: "🎶",
-                title: "The title",
-                description: "The description",
-                prompt: "The prompt",
-                components: [
-                    PanelComponent(
-                        type: .dropdown(
-                            DropdownPanelComponent(
-                                placeholder: "Placeholder",
-                                options: [
-                                    "Option 1",
-                                    "Option 2",
-                                    "Option 3"
-                                ])),
-                        titleText: "Title Text",
-                        detailTitle: "Detail Title",
-                        detailText: "Detail Text",
-                        promptPrefix: "Prompt Prefix",
-                        required: true),
-                    PanelComponent(
-                        type: .textField(
-                            TextFieldPanelComponent(
-                                placeholder: "placeholder"
-                            )),
-                        titleText: "Text Field Title Text",
-                        detailTitle: "Text Field Detail Title",
-                        detailText: "Text Field Detail Text",
-                        promptPrefix: "Text Field Prompt Prefix",
-                        required: false),
-                    PanelComponent(
-                        type: .dropdown(
-                            DropdownPanelComponent(
-                                placeholder: "Placeholder",
-                                options: [
-                                    "Option 1",
-                                    "Option 2",
-                                    "Option 3"
-                                ])),
-                        titleText: "Title Text",
-                        detailTitle: "Detail Title",
-                        detailText: "Detail Text",
-                        promptPrefix: "Prompt Prefix",
-                        required: true),
-                    PanelComponent(
-                        type: .textField(
-                            TextFieldPanelComponent(
-                                placeholder: "placeholder"
-                            )),
-                        titleText: "Text Field Title Text",
-                        detailTitle: "Text Field Detail Title",
-                        detailText: "Text Field Detail Text",
-                        promptPrefix: "Text Field Prompt Prefix",
-                        required: false),
-                    PanelComponent(
-                        type: .dropdown(
-                            DropdownPanelComponent(
-                                placeholder: "Placeholder",
-                                options: [
-                                    "Option 1",
-                                    "Option 2",
-                                    "Option 3"
-                                ])),
-                        titleText: "Title Text",
-                        detailTitle: "Detail Title",
-                        detailText: "Detail Text",
-                        promptPrefix: "Prompt Prefix",
-                        required: true),
-                    PanelComponent(
-                        type: .textField(
-                            TextFieldPanelComponent(
-                                placeholder: "placeholder"
-                            )),
-                        titleText: "Text Field Title Text",
-                        detailTitle: "Text Field Detail Title",
-                        detailText: "Text Field Detail Text",
-                        promptPrefix: "Text Field Prompt Prefix",
-                        required: false),
-                    PanelComponent(
-                        type: .dropdown(
-                            DropdownPanelComponent(
-                                placeholder: "Placeholder",
-                                options: [
-                                    "Option 1",
-                                    "Option 2",
-                                    "Option 3"
-                                ])),
-                        titleText: "Title Text",
-                        detailTitle: "Detail Title",
-                        detailText: "Detail Text",
-                        promptPrefix: "Prompt Prefix",
-                        required: true),
-                    PanelComponent(
-                        type: .textField(
-                            TextFieldPanelComponent(
-                                placeholder: "placeholder"
-                            )),
-                        titleText: "Text Field Title Text",
-                        detailTitle: "Text Field Detail Title",
-                        detailText: "Text Field Detail Text",
-                        promptPrefix: "Text Field Prompt Prefix",
-                        required: false)
-                ]))
+        PanelView(panel: Panel(
+            emoji: "🎶",
+            title: "The title",
+            description: "The description",
+            prompt: "The prompt",
+            components: [
+                PanelComponent(
+                    type: .dropdown(
+                        DropdownPanelComponent(
+                            placeholder: "Placeholder",
+                            options: [
+                                "Option 1",
+                                "Option 2",
+                                "Option 3"
+                            ])),
+                    titleText: "Title Text",
+                    detailTitle: "Detail Title",
+                    detailText: "Detail Text",
+                    promptPrefix: "Prompt Prefix",
+                    required: true),
+                PanelComponent(
+                    type: .textField(
+                        TextFieldPanelComponent(
+                            placeholder: "placeholder"
+                        )),
+                    titleText: "Text Field Title Text",
+                    detailTitle: "Text Field Detail Title",
+                    detailText: "Text Field Detail Text",
+                    promptPrefix: "Text Field Prompt Prefix",
+                    required: false),
+                PanelComponent(
+                    type: .dropdown(
+                        DropdownPanelComponent(
+                            placeholder: "Placeholder",
+                            options: [
+                                "Option 1",
+                                "Option 2",
+                                "Option 3"
+                            ])),
+                    titleText: "Title Text",
+                    detailTitle: "Detail Title",
+                    detailText: "Detail Text",
+                    promptPrefix: "Prompt Prefix",
+                    required: true),
+                PanelComponent(
+                    type: .textField(
+                        TextFieldPanelComponent(
+                            placeholder: "placeholder"
+                        )),
+                    titleText: "Text Field Title Text",
+                    detailTitle: "Text Field Detail Title",
+                    detailText: "Text Field Detail Text",
+                    promptPrefix: "Text Field Prompt Prefix",
+                    required: false),
+                PanelComponent(
+                    type: .dropdown(
+                        DropdownPanelComponent(
+                            placeholder: "Placeholder",
+                            options: [
+                                "Option 1",
+                                "Option 2",
+                                "Option 3"
+                            ])),
+                    titleText: "Title Text",
+                    detailTitle: "Detail Title",
+                    detailText: "Detail Text",
+                    promptPrefix: "Prompt Prefix",
+                    required: true),
+                PanelComponent(
+                    type: .textField(
+                        TextFieldPanelComponent(
+                            placeholder: "placeholder"
+                        )),
+                    titleText: "Text Field Title Text",
+                    detailTitle: "Text Field Detail Title",
+                    detailText: "Text Field Detail Text",
+                    promptPrefix: "Text Field Prompt Prefix",
+                    required: false),
+                PanelComponent(
+                    type: .dropdown(
+                        DropdownPanelComponent(
+                            placeholder: "Placeholder",
+                            options: [
+                                "Option 1",
+                                "Option 2",
+                                "Option 3"
+                            ])),
+                    titleText: "Title Text",
+                    detailTitle: "Detail Title",
+                    detailText: "Detail Text",
+                    promptPrefix: "Prompt Prefix",
+                    required: true),
+                PanelComponent(
+                    type: .textField(
+                        TextFieldPanelComponent(
+                            placeholder: "placeholder"
+                        )),
+                    titleText: "Text Field Title Text",
+                    detailTitle: "Text Field Detail Title",
+                    detailText: "Text Field Detail Text",
+                    promptPrefix: "Text Field Prompt Prefix",
+                    required: false)
+            ]))
         .background(Colors.background)
     }
+    .environmentObject(RemainingUpdater())
+    .environmentObject(PremiumUpdater())
+    .environmentObject(ProductUpdater())
 }

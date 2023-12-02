@@ -13,7 +13,7 @@ class PremiumUpdater: ObservableObject {
     @Published var isPremium: Bool = persistentIsPremium
     
 #if DEBUG
-    private static let testOverrideIsPremiumTrue = true
+    private static let testOverrideIsPremiumTrue = false
     #else
     private static let testOverrideIsPremiumTrue = false
 #endif

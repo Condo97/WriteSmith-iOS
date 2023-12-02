@@ -9,9 +9,11 @@ import SwiftUI
 
 struct ExploreView: View {
     
-    @ObservedObject var premiumUpdater: PremiumUpdater
-    @ObservedObject var remainingUpdater: RemainingUpdater
     @State var panelGroups: [PanelGroup]
+    
+    @EnvironmentObject var premiumUpdater: PremiumUpdater
+    @EnvironmentObject var productUpdater: ProductUpdater
+    @EnvironmentObject var remainingUpdater: RemainingUpdater
     
     
     @Namespace private var namespace
@@ -80,22 +82,17 @@ struct ExploreView: View {
             LogoToolbarItem(elementColor: .constant(Colors.elementTextColor))
             
             if !premiumUpdater.isPremium {
-                UltraToolbarItem(
-                    premiumUpdater: premiumUpdater,
-                    remainingUpdater: remainingUpdater)
+                UltraToolbarItem()
             }
         }
         .toolbarBackground(Colors.topBarBackgroundColor, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .navigationDestination(isPresented: $isShowingSettingsView, destination: {
-            SettingsView(premiumUpdater: premiumUpdater)
+            SettingsView()
         })
         .navigationDestination(isPresented: isShowingPresentingPanelView, destination: {
             if let presentingPanel = presentingPanel {
-                PanelView(
-                    premiumUpdater: premiumUpdater,
-                    remainingUpdater: remainingUpdater,
-                    panel: presentingPanel)
+                PanelView(panel: presentingPanel)
             }
         })
     }
@@ -219,10 +216,7 @@ struct ExploreView: View {
 
 #Preview {
     NavigationStack {
-        ExploreView(
-            premiumUpdater: PremiumUpdater(),
-            remainingUpdater: RemainingUpdater(),
-            panelGroups: try! PanelParser.parsePanelGroups(fromJson: PanelPersistenceManager.get()!)!)
+        ExploreView(panelGroups: try! PanelParser.parsePanelGroups(fromJson: PanelPersistenceManager.get()!)!)
         .toolbar {
             LogoToolbarItem(elementColor: .constant(Colors.elementTextColor))
         }
@@ -231,4 +225,7 @@ struct ExploreView: View {
         .toolbar(.visible, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)
     }
+    .environmentObject(RemainingUpdater())
+    .environmentObject(PremiumUpdater())
+    .environmentObject(ProductUpdater())
 }
