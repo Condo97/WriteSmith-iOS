@@ -29,7 +29,7 @@ struct SettingsView: View {
                 Section {
                     premiumRow
                 } footer: {
-                    Text("Unlimited chats, GPT-4 access, and the latest AI features as soon as they are released.")
+                    Text("Unlimited chats, GPT-4 + Vision access, and the latest AI features as soon as they are released.")
                         .font(.custom(Constants.FontName.bodyOblique, size: 14.0))
                 }
                 
@@ -114,8 +114,9 @@ struct SettingsView: View {
                     Text("Claim Free Trial...")
                         .font(.custom(Constants.FontName.heavy, size: 20.0))
                         .minimumScaleFactor(0.5)
-                    Text("Get Unlimited GPT-4 Chats, Scans, Essay Help + More!")
+                    Text("Get Unlimited GPT-4 + Vision Chats, Scans, Essay Help & More!")
                         .font(.custom(Constants.FontName.bodyOblique, size: 12.0))
+                        .minimumScaleFactor(0.5)
                         .opacity(0.6)
                 }
                 
