@@ -17,10 +17,17 @@ class ConversationChatGenerator: ObservableObject {
     
     @Published var alertShowingUserChatNotSaved = false
     
+    var generatingChats: [Int64: String] = [:]
+    
     
     private let imageURLChatIndex: Int = 0
     private let imageChatIndex: Int = 0
     private let textChatIndex: Int = 0
+    
+    private let DEFAULT_CORE_DATA_NEW_CHAT_ID = 0 // Another approach would be setting the chatID.. but it seems to be pretty consistenlty 0 and though that's up to Apple to keep like that I feel like if it's not gonna be optional a new one will be zero ya know.. TODO: Reapproach this and maybe set initial chatIDs to a number manually, just that that adds a tiny bit of complexity so idk if I may just keep it like this
+    
+//    private let ITERATIONS_PER_UPDATE = 5
+    private let UPDATES_PER_SECOND = 2
     
 //    func addChat(message: String, sender: Sender, to conversationObjectID: NSManagedObjectID) async throws {
 //        // TODO: Do I have to get the permanent object ID for conversationObjectID
@@ -94,7 +101,7 @@ class ConversationChatGenerator: ObservableObject {
             return userTextChat
         }()
         
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             do {
                 try managedContext.save()
             } catch {
@@ -103,7 +110,7 @@ class ConversationChatGenerator: ObservableObject {
 //                throw ChatGeneratorError.addUserChat
                 self.alertShowingUserChatNotSaved = true
             }
-        }
+//        }
         
         // Defer setting canGenerate to true and isLoading and isGenerating to false to ensure they are set to false when this method completes
         defer {
@@ -164,12 +171,20 @@ class ConversationChatGenerator: ObservableObject {
         
         let request = requestBuilder.build()
         
+        // Create and unwrap requestString from JSONEncoded request, otherwise return
+        guard let requestString = String(data: try JSONEncoder().encode(request), encoding: .utf8) else {
+            // TODO: Handle errors
+            print("Could not unwrap requestString in EssayChatGenerator!")
+            return
+        }
+        
         // Get stream
         let stream = ChatWebSocketConnector.getChatStream()
         
         // Send request TODO: Handle errors here if necessary
-        try await stream.send(.string(String(data: JSONEncoder().encode(request), encoding: .utf8)!))
-        PasteboardHelper.copy(String(data: try JSONEncoder().encode(request), encoding: .utf8)!)
+        try await stream.send(.string(requestString))
+//        PasteboardHelper.copy(String(data: try JSONEncoder().encode(request), encoding: .utf8)!)
+        
         // Create firstMessage to get when the first message is processed
         var firstMessage = true
         
@@ -179,6 +194,13 @@ class ConversationChatGenerator: ObservableObject {
         // Define important variables to get during stream
         var fullOutput: String = ""
         var finishReason: ChatFinishReasons?
+        
+        var mostRecentUpdateTime: Date = Date()
+        
+        var tempUserImageURLChatID: Int64?
+        var tempUserImageChatID: Int64?
+        var tempUserTextChatID: Int64?
+        var tempAIChatID: Int64?
         
         // Stream generation, updating AI chat in managed context
         do {
@@ -238,65 +260,138 @@ class ConversationChatGenerator: ObservableObject {
                     remainingUpdater.set(drinksRemaining: responseRemaining)
                 }
                 
-                await MainActor.run { [fullOutput] in
-                    // Set aiChat text to fullOutput
-                    aiChat.text = fullOutput
-                    
-                    // Set userImageURLChat chatID to inputChat with index imageURLChatIndex
-                    if let responseInputImageURLChat = getChatResponse.body.inputChats.first(where: {$0.index == imageURLChatIndex}) {
-                        if let responseInputChatIDCastInt64 = Int64(exactly: responseInputImageURLChat.chatID) {
+                // Set and save userImageURLChat's chatID as response userImageURLChatID if the response chatID is different than the temp one
+                if let responseInputImageURLChat = getChatResponse.body.inputChats?.first(where: {$0.index == self.imageURLChatIndex}) {
+                    if let responseInputChatIDCastInt64 = Int64(exactly: responseInputImageURLChat.chatID) {
+                        if tempUserImageURLChatID != responseInputChatIDCastInt64 {
+                            // Set userImageURLChat's chatID to response chatID
                             userImageURLChat?.chatID = responseInputChatIDCastInt64
+                            
+                            // Save to CoreData
+                            do {
+                                try managedContext.save()
+                            } catch {
+                                // TODO: Handle errors
+                                print("Error saving to CoreData in ConversationChatGenerator... \(error)")
+                            }
+                            
+                            // Set tempUserImageURLChatID to response chatID
+                            tempUserImageURLChatID = responseInputChatIDCastInt64
                         }
-                    }
-                    
-                    // Set userImageChat chatID to inputChat with index imageChatIndex
-                    if let responseInputImageChat = getChatResponse.body.inputChats.first(where: {$0.index == imageChatIndex}) {
-                        if let responseInputChatIDCastInt64 = Int64(exactly: responseInputImageChat.chatID) {
-                            userImageChat?.chatID = responseInputChatIDCastInt64
-                        }
-                    }
-                    
-                    // Set userTextChat chatID to inputChat with index textChatIndex
-                    if let responseInputTextChat = getChatResponse.body.inputChats.first(where: {$0.index == textChatIndex}) {
-                        if let responseInputChatIDCastInt64 = Int64(exactly: responseInputTextChat.chatID) {
-                            userTextChat?.chatID = responseInputChatIDCastInt64
-                        }
-                    }
-                    
-//                    // Set userChat chatID to inputChatID
-//                    if let inputChatID = getChatResponse.body.inputChatID, inputChatID > 0 {
-//                        if let inputChatIDCastInt64 = Int64(exactly: inputChatID) {
-//                            userChat.chatID = inputChatIDCastInt64
-//                        }
-//                    }
-                    
-                    // Set aiChat chatID to outputChatID
-                    if let outputChatID = getChatResponse.body.outputChatID, outputChatID > 0 {
-                        if let outputChatIDCastInt64 = Int64(exactly: outputChatID) {
-                            aiChat.chatID = outputChatIDCastInt64
-                        }
-                    }
-                    
-                    // Set conversation conversationID to conversationID
-                    if let conversationID = getChatResponse.body.conversationID, conversationID > 0 {
-                        if let conversationIDCastInt64 = Int64(exactly: conversationID) {
-                            conversation.conversationID = conversationIDCastInt64
-                        }
-                    }
-                    
-                    // Save to CoreData
-                    do {
-                        try managedContext.save()
-                    } catch {
-                        // TODO: Handle errors
-                        print("Error saving to CoreData in ConversationChatGenerator... \(error)")
                     }
                 }
                 
+                // Set and save userImageChat's chatID as response userImageChatID if the response's chatID is different than the temp one
+                if let responseInputImageChat = getChatResponse.body.inputChats?.first(where: {$0.index == self.imageChatIndex}) {
+                    if let responseInputChatIDCastInt64 = Int64(exactly: responseInputImageChat.chatID) {
+                        if tempUserImageChatID != responseInputChatIDCastInt64 {
+                            // Set userImageChat's chatID to response's chatID
+                            userImageChat?.chatID = responseInputChatIDCastInt64
+                            
+                            // Save to CoreData
+                            do {
+                                try managedContext.save()
+                            } catch {
+                                // TODO: Handle errors
+                                print("Error saving to CoreData in ConversationChatGenerator... \(error)")
+                            }
+                            
+                            // Set tempUserImageChatID to response chatID
+                            tempUserImageChatID = responseInputChatIDCastInt64
+                        }
+                    }
+                }
+                
+                // Set and save userTextChat's chatID as response userTextChatID if the response's chatID is different than the tmep one
+                if let responseInputTextChat = getChatResponse.body.inputChats?.first(where: {$0.index == self.textChatIndex}) {
+                    if let responseInputChatIDCastInt64 = Int64(exactly: responseInputTextChat.chatID) {
+                        if tempUserTextChatID != responseInputChatIDCastInt64 {
+                            // Set userTextChat's chatID to response's chatID
+                            userTextChat?.chatID = responseInputChatIDCastInt64
+                            
+                            // Save to CoreData
+                            do {
+                                try managedContext.save()
+                            } catch {
+                                // TODO: Handle errors
+                                print("Error saving to CoreData in ConversationChatGenerator... \(error)")
+                            }
+                            
+                            // Set tempUserTextChatID to response chatID
+                            tempUserTextChatID = responseInputChatIDCastInt64
+                        }
+                    }
+                }
+                
+                // Set and save aiChat's chatID as response outputChatID if the response's chatID is different than the temp one
+                if let outputChatID = getChatResponse.body.outputChatID, outputChatID > 0 {
+                    if let outputChatIDCastInt64 = Int64(exactly: outputChatID) {
+                        if tempAIChatID != outputChatIDCastInt64 {
+                            // Set aiChat's text to empty and chatID to response's chatID
+                            aiChat.text = ""
+                            aiChat.chatID = outputChatIDCastInt64
+                            
+                            // Save to CoreData
+                            do {
+                                try managedContext.save()
+                            } catch {
+                                // TODO: Handle errors
+                                print("Error saving to CoreData in ConversationChatGenerator... \(error)")
+                            }
+                            
+                            // Set tempAIChatID to response chatID
+                            tempAIChatID = aiChat.chatID
+                        }
+                    }
+                }
+                
+                // Set and save conversationID as response conversationID if the response's conversationID is different than the stored one
+                if let conversationID = getChatResponse.body.conversationID, conversationID > 0 {
+                    if let conversationIDCastInt64 = Int64(exactly: conversationID) {
+                        if conversation.conversationID != conversationIDCastInt64 {
+                            // Set conversationID to response's conversationID
+                            conversation.conversationID = conversationIDCastInt64
+                            
+                            // Save to CoreData
+                            do {
+                                try managedContext.save()
+                            } catch {
+                                // TODO: Handle errors
+                                print("Error saving to CoreData in ConversationChatGenerator... \(error)")
+                            }
+                        }
+                    }
+                }
+                
+                // If the aiChat has a chatID not equal to DEFAULT_CORE_DATA_NEW_CHAT_ID, set it as the key with fullOutput as the value in generatingChats
+                if Date().timeIntervalSince(mostRecentUpdateTime) >= TimeInterval(1 / UPDATES_PER_SECOND), let tempAIChatID = tempAIChatID, tempAIChatID != DEFAULT_CORE_DATA_NEW_CHAT_ID {
+//                    DispatchQueue.main.async { [fullOutput] in
+                        self.generatingChats[tempAIChatID] = fullOutput
+                    
+                    mostRecentUpdateTime = Date()
+//                    }
+                }
             }
         } catch {
             // TODO: Handle errors
 //            print("Error getting the next message in stream in ConversationChatGenerator... \(error)")
+        }
+        
+        // Set aiChat text and remove its chatID from generatingChats on main thread
+        await MainActor.run { [fullOutput] in
+            // Set generatingChats value for aiChat's chatID key to nil
+            generatingChats[aiChat.chatID] = nil
+            
+            // Set aiChat's text as fullOutput
+            aiChat.text = fullOutput
+            
+            // Save to CoreData
+            do {
+                try managedContext.save()
+            } catch {
+                // TODO: Handle errors
+                print("Error saving to CoreData in ConversationChatGenerator... \(error)")
+            }
         }
         
         // Ensure first message has been generated, otherwise return before saving context

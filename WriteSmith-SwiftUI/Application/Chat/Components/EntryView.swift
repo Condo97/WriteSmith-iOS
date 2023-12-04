@@ -315,11 +315,11 @@ struct EntryView: View, KeyboardReadable {
         
         // Set isShowingInterstitial to true if generated chats count is more than one and its modulo ad frequency is 0 and return true
         let chatsFetchRequest = Chat.fetchRequest()
-        chatsFetchRequest.predicate = NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation)
+        chatsFetchRequest.predicate = NSPredicate(format: "%K = %@ AND %K = %@", #keyPath(Chat.conversation), conversation, #keyPath(Chat.sender), Sender.ai.rawValue)
         
         do {
             let generatedChatCount = try viewContext.count(for: chatsFetchRequest)//chats.filter({$0.sender == Sender.ai.rawValue}).count
-            if generatedChatCount > 0 && generatedChatCount % Constants.adFrequency == 0 {
+            if generatedChatCount > 0 && remainingUpdater.remaining ?? 0 > 0 && generatedChatCount % Constants.adFrequency == 0 {
                 isShowingInterstitial = true
                 
                 return true

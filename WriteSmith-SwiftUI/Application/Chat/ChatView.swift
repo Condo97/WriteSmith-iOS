@@ -93,7 +93,7 @@ struct ChatView: View, KeyboardReadable {
                         ScrollView(.vertical) {
                             
                             Spacer(minLength: premiumUpdater.isPremium ? 50.0 : 120.0)
-                            VStack {
+                            LazyVStack {
                                 Spacer()
                                 
                                 if isDisplayingLoadingChatBubble {
@@ -239,7 +239,7 @@ struct ChatView: View, KeyboardReadable {
                         isDragged: isDragged,
                         content: {
                             ZStack {
-                                if let text = chat.text {
+                                if let text = chatGenerator.generatingChats[chat.chatID] ?? chat.text {
                                     VStack(alignment: sender == .user ? .trailing : .leading) {
                                         // If there is text and an image, display the image on top
                                         if let imageData = chat.imageData, let image = UIImage(data: imageData) {
@@ -421,7 +421,7 @@ struct ChatView: View, KeyboardReadable {
                                                 .font(.custom(Constants.FontName.lightOblique, size: 17.0))
                                                 .foregroundStyle(Colors.elementBackgroundColor)
                                         } else {
-                                            Text("Get access for just 99¢ today!")
+                                            Text("Get access for \(introductaryOffer.price == 0.99 ? "just 99¢" : String(format: "%d%% off", Int(NSDecimalNumber(decimal: (1 - introductaryOffer.price / productUpdater.weeklyProduct!.price) * 100).doubleValue))) today!")
                                                 .font(.custom(Constants.FontName.lightOblique, size: 17.0))
                                                 .foregroundStyle(Colors.elementBackgroundColor)
                                         }

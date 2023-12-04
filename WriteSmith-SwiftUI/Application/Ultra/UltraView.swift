@@ -230,7 +230,7 @@ struct UltraView: View {
                     .minimumScaleFactor(0.5)
                     .lineLimit(1)
                 
-                Text("Powered by **Pro GPT-4**")
+                Text("Powered by **GPT-4 + Vision**")
                     .font(.custom(Constants.FontName.body, size: 17.0))
                     .minimumScaleFactor(0.5)
                     .lineLimit(1)
