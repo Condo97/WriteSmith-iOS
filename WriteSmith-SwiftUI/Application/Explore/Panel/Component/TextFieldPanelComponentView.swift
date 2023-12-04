@@ -29,7 +29,7 @@ struct TextFieldPanelComponentView: ComponentView, KeyboardReadable {
             TextField("", text: $textFieldText, axis: multiline ? .vertical : .horizontal)
                 .lineLimit(multiline ? 999 : 1)
                 .frame(minHeight: multiline ? 80.0 : 0.0, alignment: .topLeading)
-                .textFieldTickerTint(Colors.elementBackgroundColor)
+                .textFieldTickerTint(Colors.text)
                 .placeholder(
                     when: textFieldText.isEmpty,
                     alignment: .topLeading,
