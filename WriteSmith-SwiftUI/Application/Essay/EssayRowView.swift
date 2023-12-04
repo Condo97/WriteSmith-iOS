@@ -17,6 +17,7 @@ struct EssayRowView: View {
     @EnvironmentObject var productUpdater: ProductUpdater
     
     
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.managedObjectContext) private var viewContext
     
     @State private var editedText: String = ""
@@ -118,14 +119,18 @@ struct EssayRowView: View {
                             })
                         }) {
                             Text(copyButtonCopyState == .copied ? "Copied" : "\(Image(systemName: "square.on.square.dashed"))")
+                                .font(.custom(Constants.FontName.body, size: copyButtonCopyState == .copied ? 17.0 : 22.0))
                         }
+                        .foregroundStyle(colorScheme == .dark ? Colors.elementTextColor : Colors.elementBackgroundColor)
                         .disabled(formattedEssayWithPromptForCopyingAndSharing == nil)
                         .opacity(formattedEssayWithPromptForCopyingAndSharing == nil ? 0.4 : 1.0)
                         
                         // Share Button
                         ShareLink(item: formattedEssayWithPromptForCopyingAndSharing ?? "") {
-                            Image(systemName: "square.and.arrow.up")
+                            Text(Image(systemName: "square.and.arrow.up"))
+                                .font(.custom(Constants.FontName.body, size: 22.0))
                         }
+                        .foregroundStyle(colorScheme == .dark ? Colors.elementTextColor : Colors.elementBackgroundColor)
                         .disabled(formattedEssayWithPromptForCopyingAndSharing == nil)
                         .opacity(formattedEssayWithPromptForCopyingAndSharing == nil ? 0.4 : 1.0)
                         
@@ -138,8 +143,10 @@ struct EssayRowView: View {
                                 // Show alert to confirm delete essay
                                 alertShowingConfirmDeleteEssay = true
                             }) {
-                                Image(systemName: "trash")
+                                Text(Image(systemName: "trash"))
+                                    .font(.custom(Constants.FontName.body, size: 22.0))
                             }
+                            .foregroundStyle(colorScheme == .dark ? Colors.elementTextColor : Colors.elementBackgroundColor)
                             .alert("Delete Essay", isPresented: $alertShowingConfirmDeleteEssay, actions: {
                                 Button("Cancel", role: .cancel, action: {
                                     
@@ -213,16 +220,16 @@ struct EssayRowView: View {
                     
                     HStack {
                         TextField("", text: $editedText, axis: .vertical)
-                            .textFieldTickerTint(Colors.elementTextColor)
+                            .textFieldTickerTint(Colors.text)
                             .dismissOnReturn()
                             .font(.custom(Constants.FontName.body, size: 14.0))
                             .disabled(!isExpanded || isGenerating)
                         
                         Spacer()
                     }
-                    .foregroundStyle(Colors.elementTextColor)
+                    .foregroundStyle(Colors.text)
                 }
-                .padding(.bottom, isExpanded ? 80 : 10)
+                .padding(.bottom, isExpanded ? 80 : 40)
             }
             
             VStack(spacing: 0.0) {

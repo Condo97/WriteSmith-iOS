@@ -26,7 +26,7 @@ struct GetChatResponse: Codable {
         var outputText: String?
         var finishReason: String?
         var conversationID: Int?
-        var inputChats: [GetChatResponse.Body.Chat]
+        var inputChats: [GetChatResponse.Body.Chat]?
         var outputChatID: Int?
         var remaining: Int?
         

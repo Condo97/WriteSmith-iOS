@@ -76,11 +76,18 @@ class EssayChatGenerator: ObservableObject {
             throw ChatGeneratorError.invalidAuthToken
         }
         
+        // Create and unwrap requestString from JSONEncoded request, otherwise return
+        guard let requestString = String(data: try JSONEncoder().encode(request), encoding: .utf8) else {
+            // TODO: Handle errors
+            print("Could not unwrap requestString in EssayChatGenerator!")
+            return
+        }
+        
         // Get stream
         let stream = ChatWebSocketConnector.getChatStream()
         
         // Send request TODO: Handle errors here if necessary
-        try await stream.send(.string(JSONEncoder().encode(request).base64EncodedString()))
+        try await stream.send(.string(requestString))
         
         // Create firstMessage to get when the first message is processed
         var firstMessage = true
@@ -150,7 +157,7 @@ class EssayChatGenerator: ObservableObject {
                     remainingUpdater.set(drinksRemaining: responseRemaining)
                 }
                 
-                await MainActor.run { [fullOutput] in
+//                await MainActor.run { [fullOutput] in
                     // Set essay and editedEssay to fullOutput
                     essay.essay = fullOutput
                     essay.editedEssay = fullOutput
@@ -162,7 +169,7 @@ class EssayChatGenerator: ObservableObject {
                         // TODO: Handle errors
                         print("Error saving to CoreData in ConversationChatGenerator... \(error)")
                     }
-                }
+//                }
                 
             }
         } catch {
@@ -176,7 +183,7 @@ class EssayChatGenerator: ObservableObject {
             throw ChatGeneratorError.nothingFromServer
         }
         
-        DispatchQueue.main.async { [finishReason] in
+//        DispatchQueue.main.async { [finishReason] in
             // Add additional text if finishReason is length and isPremium is false
             if finishReason == .length && !isPremium {
                 essay.essay? += Constants.lengthFinishReasonAdditionalText
@@ -192,7 +199,7 @@ class EssayChatGenerator: ObservableObject {
                 // TODO: Handle errors
                 print("Error saving to CoreData in ConversationChatGenerator... \(error)")
             }
-        }
+//        }
     }
     
 }
