@@ -166,7 +166,7 @@ class ConversationChatGenerator: ObservableObject {
                 input: userTextChat.text,
                 imageData: userTextChat.imageData,
                 imageURL: userTextChat.imageURL,
-                sender: Sender(rawValue: userTextChat.sender ?? "") ?? .user) // TODO: Is the user being the default sender here good? Should I even send to the server as Sender instead of the string?
+                sender: Sender(rawValue: userTextChat.sender ?? "") ?? .user) // TODO: Is the user being the default sender here good? Should I even hsend to the server as Sender instead of the string?
         }
         
         let request = requestBuilder.build()

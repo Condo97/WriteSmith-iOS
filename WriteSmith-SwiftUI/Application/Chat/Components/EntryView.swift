@@ -11,6 +11,7 @@ struct EntryView: View, KeyboardReadable {
     
     @Binding var conversation: Conversation
     let initialHeight: CGFloat = 32.0
+    let maxHeight: CGFloat
     
     @Environment(\.requestReview) private var requestReview
     @Environment(\.managedObjectContext) private var viewContext
@@ -18,7 +19,6 @@ struct EntryView: View, KeyboardReadable {
     @EnvironmentObject private var premiumUpdater: PremiumUpdater // TODO: Use @Environment with an optional
     @EnvironmentObject private var remainingUpdater: RemainingUpdater // TODO: Use @Environment with an optional
     @EnvironmentObject private var faceAnimationUpdater: FaceAnimationUpdater // TODO: Use @Environment with an optional
-    
     
     @State private var alertShowingUpgradeForFasterChats: Bool = false
     
@@ -215,6 +215,7 @@ struct EntryView: View, KeyboardReadable {
             .font(.custom(Constants.FontName.medium, size: 20.0))
             .foregroundStyle(Colors.elementTextColor)
             .frame(minHeight: initialHeight)
+            .frame(maxHeight: maxHeight)
     }
     
     var submitButton: some View {
@@ -377,11 +378,12 @@ struct EntryView: View, KeyboardReadable {
     
     try? CDClient.mainManagedObjectContext.save()
     
-    return EntryView(conversation: .constant(conversation))
+    return EntryView(
+        conversation: .constant(conversation),
+        maxHeight: 400.0)
         .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
         .environmentObject(ConversationChatGenerator())
         .environmentObject(PremiumUpdater())
         .environmentObject(RemainingUpdater())
         .environmentObject(FaceAnimationUpdater())
-    
 }

@@ -373,7 +373,9 @@ struct ChatView: View, KeyboardReadable {
                 }
                 
                 HStack(alignment: .bottom) {
-                    EntryView(conversation: $conversation)
+                    EntryView(
+                        conversation: $conversation,
+                        maxHeight: 350.0)
                         .onChange(of: chatGenerator.isLoading, perform: { value in
                             // Set face idle animation to thinking if isLoading
                             if value {
@@ -463,6 +465,10 @@ struct ChatView: View, KeyboardReadable {
                     LinearGradient(colors: [Colors.background, .clear], startPoint: .bottom, endPoint: .top)
                         .frame(height: 50.0)
                     Colors.background
+                }
+                .onTapGesture {
+                    // Dismiss keyboard when background is tapped
+                    KeyboardDismisser.dismiss()
                 }
             )
         }
