@@ -31,6 +31,55 @@ class HTTPSConnector {
         return registerUserResponse
     }
     
+    static func getIsPremium(request: AuthRequest) async throws -> IsPremiumResponse {
+        let (data, response) = try await HTTPSClient.post(
+            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getIsPremium)")!,
+            body: request,
+            headers: nil)
+        
+        let isPremiumResponse = try JSONDecoder().decode(IsPremiumResponse.self, from: data)
+        
+        return isPremiumResponse
+    }
+    
+    static func getRemaining(request: AuthRequest) async throws -> GetRemainingResponse {
+        let (data, response) = try await HTTPSClient.post(
+            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getRemaining)")!,
+            body: request,
+            headers: nil)
+        
+        let getRemainingResponse = try JSONDecoder().decode(GetRemainingResponse.self, from: data)
+        
+        return getRemainingResponse
+    }
+    
+    static func getImportantConstants() async throws -> GetImportantConstantsResponse {
+        let (data, response) = try await HTTPSClient.post(
+            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getImportantConstants)")!,
+            body: BlankRequest(),
+            headers: nil)
+        
+        let getImportantConstantsResponse = try JSONDecoder().decode(GetImportantConstantsResponse.self, from: data)
+        
+        return getImportantConstantsResponse
+    }
+    
+    static func submitFeedback(request: SubmitFeedbackRequest) async throws -> StatusResponse {
+        let (data, respnose) = try await HTTPSClient.post(
+            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.submitFeedback)")!,
+            body: request,
+            headers: nil)
+        
+        let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)
+        
+        return statusResponse
+    }
+    
+    
+    
+    
+    // MARK: - Legacy
+    
     // TODO: Legacy so need to delete
     static func registerUser(completion: @escaping (RegisterUserResponse)->Void) {
         do {
@@ -92,73 +141,6 @@ class HTTPSConnector {
         }
     }
     
-    
-    
-//    // TODO: Remove because this is now legacy
-//    static func validateAndUpdateReceipt(request: ValidateAndUpdateReceiptRequest) async throws -> ValidateAndUpdateReceiptResponse {
-//        let (data, response) = try await HTTPSClient.post(
-//            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.validateSaveUpdateReceipt)")!,
-//            body: request,
-//            headers: nil)
-//
-//        let validateAndUpdateReceiptResponse = try JSONDecoder().decode(ValidateAndUpdateReceiptResponse.self, from: data)
-//
-//        return validateAndUpdateReceiptResponse
-//    }
-    
-//    // TODO: Remove because this is now legacy
-//    static func validateAndUpdateReceipt(request: ValidateAndUpdateReceiptRequest, completion: @escaping (ValidateAndUpdateReceiptResponse)->Void) {
-//        do {
-//            try HTTPSClient.post(
-//                url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.validateSaveUpdateReceipt)")!,
-//                body: request,
-//                headers: nil,
-//                completion: {data, error in
-//                    if let error = error {
-//                        print("Error validating and updating receipt")
-//                        print(error.localizedDescription)
-//                    } else if let data = data {
-//                        do {
-//                            // Try decoding to ValidateAndUpdateReceiptResponse
-//                            let validateAndUpdateReceiptResponse = try JSONDecoder().decode(ValidateAndUpdateReceiptResponse.self, from: data)
-//
-//                            // Call completion block
-//                            completion(validateAndUpdateReceiptResponse)
-//                        } catch {
-//                            print("Error decoding to ValidateAndUpdateReceiptResponse")
-//                            print(error.localizedDescription)
-//                        }
-//                    }
-//                }
-//            )
-//        } catch {
-//            print("Error making POST request in validateAndUpdateReceipt")
-//            print(error.localizedDescription)
-//        }
-//    }
-    
-    static func getIsPremium(request: AuthRequest) async throws -> IsPremiumResponse {
-        let (data, response) = try await HTTPSClient.post(
-            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getIsPremium)")!,
-            body: request,
-            headers: nil)
-        
-        let isPremiumResponse = try JSONDecoder().decode(IsPremiumResponse.self, from: data)
-        
-        return isPremiumResponse
-    }
-    
-    static func getRemaining(request: AuthRequest) async throws -> GetRemainingResponse {
-        let (data, response) = try await HTTPSClient.post(
-            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getRemaining)")!,
-            body: request,
-            headers: nil)
-        
-        let getRemainingResponse = try JSONDecoder().decode(GetRemainingResponse.self, from: data)
-        
-        return getRemainingResponse
-    }
-    
     // TODO: Legacy need to delete
     static func getRemaining(request: AuthRequest, completion: @escaping (GetRemainingResponse)->Void) {
         do {
@@ -188,17 +170,6 @@ class HTTPSConnector {
             print("Error making POST request in getRemaining")
             print(error.localizedDescription)
         }
-    }
-    
-    static func getImportantConstants() async throws -> GetImportantConstantsResponse {
-        let (data, response) = try await HTTPSClient.post(
-            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getImportantConstants)")!,
-            body: BlankRequest(),
-            headers: nil)
-        
-        let getImportantConstantsResponse = try JSONDecoder().decode(GetImportantConstantsResponse.self, from: data)
-        
-        return getImportantConstantsResponse
     }
     
     static func getImportantConstants(completion: @escaping (GetImportantConstantsResponse)->Void) {

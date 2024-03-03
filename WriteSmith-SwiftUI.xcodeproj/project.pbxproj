@@ -255,6 +255,15 @@
 		BBED61242AF04A0700355E4F /* GADInterstitialError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBED61232AF04A0700355E4F /* GADInterstitialError.swift */; };
 		BBED61272AF060E400355E4F /* GADBlankAdContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBED61262AF060E400355E4F /* GADBlankAdContainerViewController.swift */; };
 		BBED612B2AF08A5100355E4F /* GADBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBED612A2AF08A5100355E4F /* GADBannerViewController.swift */; };
+		BBF3D8ED2B93BC0E00C99BB1 /* ReviewPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF3D8EC2B93BC0E00C99BB1 /* ReviewPrompt.swift */; };
+		BBF3D8F22B93FF7800C99BB1 /* FeedbackAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF3D8F12B93FF7800C99BB1 /* FeedbackAlert.swift */; };
+		BBF3D8F42B94023500C99BB1 /* SubmitFeedbackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF3D8F32B94023500C99BB1 /* SubmitFeedbackRequest.swift */; };
+		BBF3D8F72B9410B400C99BB1 /* ChatManagedReviewPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF3D8F62B9410B400C99BB1 /* ChatManagedReviewPrompt.swift */; };
+		BBF3D8FB2B942BEC00C99BB1 /* Scan Image Light.m4v in Resources */ = {isa = PBXBuildFile; fileRef = BBF3D8F92B942BEB00C99BB1 /* Scan Image Light.m4v */; };
+		BBF3D8FC2B942BEC00C99BB1 /* Scan Image Dark.m4v in Resources */ = {isa = PBXBuildFile; fileRef = BBF3D8FA2B942BEC00C99BB1 /* Scan Image Dark.m4v */; };
+		BBF3D8FE2B942C0C00C99BB1 /* BackgroundVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF3D8FD2B942C0C00C99BB1 /* BackgroundVideoView.swift */; };
+		BBF3D9002B9433C800C99BB1 /* VideoViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF3D8FF2B9433C800C99BB1 /* VideoViewRepresentable.swift */; };
+		BBF3D9022B94377D00C99BB1 /* IntroVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF3D9012B94377D00C99BB1 /* IntroVideoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -576,6 +585,15 @@
 		BBED61232AF04A0700355E4F /* GADInterstitialError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADInterstitialError.swift; sourceTree = "<group>"; };
 		BBED61262AF060E400355E4F /* GADBlankAdContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADBlankAdContainerViewController.swift; sourceTree = "<group>"; };
 		BBED612A2AF08A5100355E4F /* GADBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADBannerViewController.swift; sourceTree = "<group>"; };
+		BBF3D8EC2B93BC0E00C99BB1 /* ReviewPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPrompt.swift; sourceTree = "<group>"; };
+		BBF3D8F12B93FF7800C99BB1 /* FeedbackAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackAlert.swift; sourceTree = "<group>"; };
+		BBF3D8F32B94023500C99BB1 /* SubmitFeedbackRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitFeedbackRequest.swift; sourceTree = "<group>"; };
+		BBF3D8F62B9410B400C99BB1 /* ChatManagedReviewPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManagedReviewPrompt.swift; sourceTree = "<group>"; };
+		BBF3D8F92B942BEB00C99BB1 /* Scan Image Light.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scan Image Light.m4v"; sourceTree = "<group>"; };
+		BBF3D8FA2B942BEC00C99BB1 /* Scan Image Dark.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scan Image Dark.m4v"; sourceTree = "<group>"; };
+		BBF3D8FD2B942C0C00C99BB1 /* BackgroundVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundVideoView.swift; sourceTree = "<group>"; };
+		BBF3D8FF2B9433C800C99BB1 /* VideoViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewRepresentable.swift; sourceTree = "<group>"; };
+		BBF3D9012B94377D00C99BB1 /* IntroVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVideoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -794,6 +812,7 @@
 		BB74D3F62AE377D300EC7579 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				BBF3D8F02B93FF6F00C99BB1 /* Alerts */,
 				BBB452B52AEDF6BF000B4C97 /* Camera */,
 				BB74D3F72AE377D700EC7579 /* Chat */,
 				BB74D3F92AE377E400EC7579 /* Common */,
@@ -825,6 +844,7 @@
 			children = (
 				BB74D4172AE576DA00EC7579 /* CameraButtonView.swift */,
 				BB74D40A2AE5685300EC7579 /* ChatBubbleView.swift */,
+				BBF3D8F62B9410B400C99BB1 /* ChatManagedReviewPrompt.swift */,
 				BB74D4122AE570BA00EC7579 /* EntryView.swift */,
 				BBB452AF2AECD9B8000B4C97 /* GPTModelSelectionButton.swift */,
 				BB74D4882AE8D90600EC7579 /* GPTModelSelectionView.swift */,
@@ -929,6 +949,7 @@
 				BB74D4A52AE9D75500EC7579 /* MoveUpTransition.swift */,
 				BB74D4822AE8317E00EC7579 /* OnPressReleaseGestureModifier.swift */,
 				BBB452DE2AEEBDC8000B4C97 /* PanelParser.swift */,
+				BBF3D8EC2B93BC0E00C99BB1 /* ReviewPrompt.swift */,
 				BBCD95502AEB0887005554BC /* String+ToImage.swift */,
 				BB92C2252AF4022E00A7B3DE /* View+DismissOnReturn.swift */,
 				BBED61112AF007FD00355E4F /* View+Interstitial.swift */,
@@ -992,6 +1013,7 @@
 				BB74D4522AE7894900EC7579 /* DeleteChatRequest.swift */,
 				BB74D4542AE7894900EC7579 /* GetChatRequest.swift */,
 				BB74D4532AE7894900EC7579 /* RegisterTransactionRequest.swift */,
+				BBF3D8F32B94023500C99BB1 /* SubmitFeedbackRequest.swift */,
 				BB74D4512AE7894900EC7579 /* ValidateAndUpdateReceiptRequest.swift */,
 			);
 			path = Request;
@@ -1053,8 +1075,11 @@
 		BB92C2012AF2F8A900A7B3DE /* Intro */ = {
 			isa = PBXGroup;
 			children = (
-				BB92C20C2AF2F8F900A7B3DE /* IntroView.swift */,
+				BBF3D8FD2B942C0C00C99BB1 /* BackgroundVideoView.swift */,
 				BB92C2192AF2FC5E00A7B3DE /* IntroPresenterView.swift */,
+				BBF3D9012B94377D00C99BB1 /* IntroVideoView.swift */,
+				BB92C20C2AF2F8F900A7B3DE /* IntroView.swift */,
+				BBF3D8FF2B9433C800C99BB1 /* VideoViewRepresentable.swift */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -1460,6 +1485,7 @@
 			children = (
 				BBEBDFBA2AEC60B20097D9AF /* Images */,
 				BB92C20E2AF2F98600A7B3DE /* Screenshots for Inside the App */,
+				BBF3D8F82B942BCE00C99BB1 /* Videos */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -1522,6 +1548,23 @@
 				BBED61132AF0086E00355E4F /* GADInterstitialCoordinator.swift */,
 			);
 			path = Interstitial;
+			sourceTree = "<group>";
+		};
+		BBF3D8F02B93FF6F00C99BB1 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				BBF3D8F12B93FF7800C99BB1 /* FeedbackAlert.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
+		BBF3D8F82B942BCE00C99BB1 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				BBF3D8FA2B942BEC00C99BB1 /* Scan Image Dark.m4v */,
+				BBF3D8F92B942BEB00C99BB1 /* Scan Image Light.m4v */,
+			);
+			path = Videos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1721,7 +1764,9 @@
 				BB92C21E2AF322D800A7B3DE /* LaunchScreen.storyboard in Resources */,
 				BBB452DB2AEEBD91000B4C97 /* WriteSmithPanelSpec.json in Resources */,
 				BBB452D32AEEA80C000B4C97 /* sparkleLightGif.gif in Resources */,
+				BBF3D8FB2B942BEC00C99BB1 /* Scan Image Light.m4v in Resources */,
 				BBB452AE2AECD96D000B4C97 /* GPTModelGifElementBackgroundColorLight.gif in Resources */,
+				BBF3D8FC2B942BEC00C99BB1 /* Scan Image Dark.m4v in Resources */,
 				BB92C2152AF2F98600A7B3DE /* introScreenshot2.png in Resources */,
 				BB92C2182AF2F98600A7B3DE /* Screenshot 3 Cropped.psd in Resources */,
 				BBB452D42AEEA80C000B4C97 /* sparkleDarkGif.gif in Resources */,
@@ -1803,12 +1848,14 @@
 				BB123D532AEA20BF0037AF8C /* KeyboardDismisser.swift in Sources */,
 				BBCD955B2AEB4015005554BC /* ShareViewHelper.swift in Sources */,
 				BBCD95802AEB429F005554BC /* RandomFaceAnimationSequence.swift in Sources */,
+				BBF3D8F72B9410B400C99BB1 /* ChatManagedReviewPrompt.swift in Sources */,
 				BB74D48F2AE9B6FE00EC7579 /* FullScreenCoverBackgroundCleanerView.swift in Sources */,
 				BB74D4692AE7894900EC7579 /* GetRemainingResponse.swift in Sources */,
 				BBCD958A2AEB429F005554BC /* SmileIdleFaceAnimationSequence1.swift in Sources */,
 				BBCD95872AEB429F005554BC /* DeselectedFaceAnimationSequence1.swift in Sources */,
 				BB550EBC2AEADBC40070BAB8 /* ExploreView.swift in Sources */,
 				BB123D4F2AEA04670037AF8C /* EssayRowView.swift in Sources */,
+				BBF3D9022B94377D00C99BB1 /* IntroVideoView.swift in Sources */,
 				BB74D4792AE790D000EC7579 /* SocketStream.swift in Sources */,
 				BBB452BA2AEDF6CF000B4C97 /* CameraViewController+CameraViewDelegate.swift in Sources */,
 				BBCD95822AEB429F005554BC /* ThinkingLookLeftFaceAnimation.swift in Sources */,
@@ -1821,6 +1868,7 @@
 				BBCD95492AEB00E2005554BC /* ExploreChatGenerator.swift in Sources */,
 				BBB452B02AECD9B8000B4C97 /* GPTModelSelectionButton.swift in Sources */,
 				BB74D4602AE7894900EC7579 /* ValidateAndUpdateReceiptRequest.swift in Sources */,
+				BBF3D8F22B93FF7800C99BB1 /* FeedbackAlert.swift in Sources */,
 				BB74D4302AE7273F00EC7579 /* Tab.swift in Sources */,
 				BBED61242AF04A0700355E4F /* GADInterstitialError.swift in Sources */,
 				BB66F95A2AF44758003F2E63 /* V4MigrationHandler.swift in Sources */,
@@ -1831,6 +1879,7 @@
 				BBCD95412AEAED69005554BC /* DropdownPanelComponent.swift in Sources */,
 				BBCD958E2AEB429F005554BC /* WritingLookRightFaceAnimation.swift in Sources */,
 				BB550EC82AEAE0780070BAB8 /* DropdownPanelComponentView.swift in Sources */,
+				BBF3D8ED2B93BC0E00C99BB1 /* ReviewPrompt.swift in Sources */,
 				BB74D4652AE7894900EC7579 /* ValidateAndUpdateReceiptResponse.swift in Sources */,
 				BBB452E12AEEBFA9000B4C97 /* PanelPersistenceManager.swift in Sources */,
 				BB89388C2AF0AE4800ED725E /* BannerView.swift in Sources */,
@@ -1842,6 +1891,7 @@
 				BB74D4622AE7894900EC7579 /* RegisterTransactionRequest.swift in Sources */,
 				BB74D45E2AE7894900EC7579 /* AuthRequest.swift in Sources */,
 				BB74D48B2AE8DFF100EC7579 /* MaterialView.swift in Sources */,
+				BBF3D8FE2B942C0C00C99BB1 /* BackgroundVideoView.swift in Sources */,
 				BB74D4112AE56B0700EC7579 /* BubbleImageMaker.swift in Sources */,
 				BB74D49F2AE9C36E00EC7579 /* PulsatingDotsView.swift in Sources */,
 				BB74D44C2AE7891800EC7579 /* HTTPSConnector.swift in Sources */,
@@ -1851,6 +1901,7 @@
 				BB550EC42AEADDD60070BAB8 /* TitlePanelComponentView.swift in Sources */,
 				BB74D4472AE787E500EC7579 /* PremiumUpdater.swift in Sources */,
 				BB92C20D2AF2F8F900A7B3DE /* IntroView.swift in Sources */,
+				BBF3D9002B9433C800C99BB1 /* VideoViewRepresentable.swift in Sources */,
 				BB0992392B06F54700236D33 /* PromoPopupViewModel.swift in Sources */,
 				BB74D46D2AE789BA00EC7579 /* HTTPSClient.swift in Sources */,
 				BB09923B2B06F5FF00236D33 /* PromoPopup.swift in Sources */,
@@ -1885,6 +1936,7 @@
 				BBB452992AEC8660000B4C97 /* ShareHelper.swift in Sources */,
 				BB8938952AF1631B00ED725E /* ConstantsHelper.swift in Sources */,
 				BBB452C32AEDF90F000B4C97 /* UIImage+Rotated.swift in Sources */,
+				BBF3D8F42B94023500C99BB1 /* SubmitFeedbackRequest.swift in Sources */,
 				BBED61122AF007FD00355E4F /* View+Interstitial.swift in Sources */,
 				BBCD95432AEAEDE0005554BC /* PanelComponent.swift in Sources */,
 				BB92C2202AF364FE00A7B3DE /* View+TextFieldTickerTint.swift in Sources */,
@@ -2196,7 +2248,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -2221,7 +2273,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 5.0.2;
+				MARKETING_VERSION = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2240,7 +2292,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -2265,7 +2317,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 5.0.2;
+				MARKETING_VERSION = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";

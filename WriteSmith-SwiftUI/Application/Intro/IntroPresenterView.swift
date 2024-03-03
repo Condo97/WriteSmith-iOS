@@ -16,11 +16,13 @@ struct IntroPresenterView: View {
         NavigationStack {
             IntroView(image: Image(uiImage: UIImage(named: Constants.ImageName.introScreenshot1)!), destination: {
                 IntroView(image: Image(uiImage: UIImage(named: Constants.ImageName.introScreenshot2)!), destination: {
-                    UltraView(isShowing: $isShowing)
-                        .toolbar(.hidden, for: .navigationBar)
-                        .onAppear {
-                            IntroManager.isIntroComplete = true
-                        }
+                    IntroVideoView(destination: {
+                        UltraView(isShowing: $isShowing)
+                            .toolbar(.hidden, for: .navigationBar)
+                            .onAppear {
+                                IntroManager.isIntroComplete = true
+                            }
+                    })
                 })
             })
         }

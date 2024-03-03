@@ -29,6 +29,7 @@ struct EntryView: View, KeyboardReadable {
     
     @State private var isShowingCameraView: Bool = false
     @State private var isShowingInterstitial: Bool = false
+    @State private var isShowingReviewModel: Bool = false
     @State private var isShowingUltraView: Bool = false
     
     @State private var isDisplayingPromoSendImagesView: Bool = false
@@ -43,6 +44,22 @@ struct EntryView: View, KeyboardReadable {
 //    private let initialHeight: CGFloat = 32.0
     var buttonDisabled: Bool {
         (text.isEmpty && image == nil && (imageURL == nil || imageURL!.isEmpty)) || chatGenerator.isLoading
+    }
+    
+    var generatedChatCount: Int? {
+        let chatsFetchRequest = Chat.fetchRequest()
+        chatsFetchRequest.predicate = NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation)
+        
+        do {
+            let generatedChatCount = try viewContext.count(for: chatsFetchRequest)//chats.filter({$0.sender == Sender.ai.rawValue}).count
+            
+            return generatedChatCount
+        } catch {
+            // TODO: Handle errors if necessary
+            print("Error counting generated chats and therefore showing review in EntryView... \(error)")
+            
+            return nil
+        }
     }
     
     var body: some View {
@@ -86,6 +103,11 @@ struct EntryView: View, KeyboardReadable {
             .fixedSize(horizontal: false, vertical: true)
             .background(Colors.elementBackgroundColor)
             .clipShape(RoundedRectangle(cornerRadius: UIConstants.cornerRadius))
+        }
+        .overlay {
+            ChatManagedReviewPrompt(
+                isPresented: $isShowingReviewModel,
+            	chatCount: generatedChatCount ?? 0)
         }
         .background(
             InterstitialView(interstitialID: Keys.Ads.Interstitial.chatView, disabled: $premiumUpdater.isPremium, isPresented: $isShowingInterstitial))
@@ -230,7 +252,7 @@ struct EntryView: View, KeyboardReadable {
                     return
                 }
                 
-                // If chatGenerajtor is loading, return
+                // If chatGenerator is loading, return
                 if chatGenerator.isLoading {
                     return
                 }
@@ -284,14 +306,9 @@ struct EntryView: View, KeyboardReadable {
                     }
                 }
                 
-                // Show ad if not premium or review if ad not shown lol this is a funny way of doing it so it doesn't escape the function when returning
-                {
-                    if !premiumUpdater.isPremium && showInterstitialAtFrequency() {
-                        return
-                    }
-                    
-                    showReviewAtFrequency()
-                }()
+                if premiumUpdater.isPremium || !showInterstitialAtFrequency() {
+                    isShowingReviewModel = true
+                }
             }) {
                 Image(systemName: "arrow.up.circle.fill")
                     .resizable()
@@ -334,26 +351,31 @@ struct EntryView: View, KeyboardReadable {
         return false
     }
     
-    func showReviewAtFrequency() -> Bool {
-        // Show review if generated chat count is more than one and its modulo review frequency is 0 and return true
-        let chatsFetchRequest = Chat.fetchRequest()
-        chatsFetchRequest.predicate = NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation)
-        
-        do {
-            let generatedChatCount = try viewContext.count(for: chatsFetchRequest)//chats.filter({$0.sender == Sender.ai.rawValue}).count
-            if generatedChatCount > 0 && generatedChatCount % Constants.reviewFrequency == 0 {
-                requestReview()
-                
-                return true
-            }
-        } catch {
-            // TODO: Handle errors if necessary
-            print("Error counting generated chats and therefore showing review in EntryView... \(error)")
-        }
-        
-        // Return false
-        return false
-    }
+//    func showReviewAtFrequency() -> Bool {
+//        // The frequency is like after 3 chats or something, then after 10
+//        // First, the user will be prompted with a "Do you like the app?" popup
+//        // If the user selects yes, then the user will be prompted with a review next time
+//        // If the user selects no, then the user will be prompted with the submit feedback popup, then the user will be prompted after 10 chats or so
+//        
+//        // Show review if generated chat count is more than one and its modulo review frequency is 0 and return true
+//        let chatsFetchRequest = Chat.fetchRequest()
+//        chatsFetchRequest.predicate = NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation)
+//        
+//        do {
+//            let generatedChatCount = try viewContext.count(for: chatsFetchRequest)//chats.filter({$0.sender == Sender.ai.rawValue}).count
+//            if generatedChatCount > 0 && generatedChatCount % Constants.reviewFrequency == 0 {
+//                requestReview()
+//                
+//                return true
+//            }
+//        } catch {
+//            // TODO: Handle errors if necessary
+//            print("Error counting generated chats and therefore showing review in EntryView... \(error)")
+//        }
+//        
+//        // Return false
+//        return false
+//    }
     
 //    func buttonsDisabled(_ disabled: Bool) -> EntryView {
 //        var newView = self

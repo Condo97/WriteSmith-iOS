@@ -17,7 +17,7 @@ struct ShareToolbarItem: ToolbarContent {
     var body: some ToolbarContent {
         ToolbarItem(placement: placement) {
             VStack {
-                ShareLink(item: Constants.UserDefaults.userDefaultStoredShareURL) {
+                ShareLink(item: ShareHelper.appShareURL) {
                     Spacer()
                     Image(Constants.ImageName.share)
                         .resizable()

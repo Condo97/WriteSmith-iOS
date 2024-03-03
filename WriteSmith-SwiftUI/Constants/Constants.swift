@@ -41,9 +41,9 @@ struct Constants {
     
     //    static let shareURL = NSURL(string: "https://apps.apple.com/us/app/chit-chat-ai-chat-with-gpt/id1664039953")!
     
-    static let reviewFrequency = 7
-    static let adFrequency = 4
-    static let premiumFrequency = 15
+//    static let reviewFrequency = 7
+    static let adFrequency = 15
+    static let premiumFrequency = 17
     
     static let freeTypingTimeInterval = 2.8/100
     static let premiumTypingTimeInterval = 2.0/100
@@ -299,6 +299,7 @@ struct HTTPSConstants {
     static let getRemaining = "/getRemaining"
     static let registerTransaction = "/registerTransaction"
     static let registerUser = "/registerUser"
+    static let submitFeedback = "/submitFeedback"
     static let validateSaveUpdateReceipt = "/validateAndUpdateReceipt"
 //    static let getGenerateImage = "/getImageUrlFromGenerateUrl"
     
