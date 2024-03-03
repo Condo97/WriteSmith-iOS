@@ -23,6 +23,8 @@ struct ReviewPrompt: View {
     
     private let showStopShowingAfterDislikeCount = 2
     
+    private let showReviewImmediatelyAfterLikeOdds = 3
+    
     
     @Environment(\.requestReview) private var requestReview
     
@@ -76,10 +78,19 @@ struct ReviewPrompt: View {
         })
         .alert("WriteSmith Feedback", isPresented: $isShowingRequestReview, actions: {
             Button("Yes", action: {
-                // Increment likeCount and requestReview
+                // Increment likeCount and requestReview.. only requesting the review after this in a 1/3 chance if likeCount is <= 1 andalways if likeCount is > 1 (since it adds one before) though this should not happen since the user has indicated they like the app so the review should just show directly instead of the are you liking the app screen :D :) :O
                 ReviewPrompt.likeCount += 1
                 
-                requestReview()
+                if ReviewPrompt.likeCount > 1 {
+                    // Shouldn't be called ever becuase the review prmopt popup wouldn't show if the user tapped they like the app and it would have directly gone to review, but here it is as a redundancy :)
+                    requestReview()
+                } else {
+                    if Int.random(in: 0..<showReviewImmediatelyAfterLikeOdds) == 0 {
+                        // Request the review in a 1 / showReviewImmediatelyAfterLikeOdds chance !
+                        requestReview()
+                    }
+                }
+                    
             })
             
             Button("No", role: .cancel, action: {
