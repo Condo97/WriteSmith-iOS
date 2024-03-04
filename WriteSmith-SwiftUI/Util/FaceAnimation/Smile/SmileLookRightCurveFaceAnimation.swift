@@ -16,6 +16,6 @@ struct SmileLookRightCurveFaceAnimation: FullFaceMoveCurveAnimation {
     var eyebrowsPosition: EyebrowsPositions? = .dismissed
     var mouthPosition: MouthPositions? = .smile
     
-    var duration: CFTimeInterval = 0.4
+    var duration: CFTimeInterval = 0.6
     
 }

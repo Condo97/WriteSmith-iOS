@@ -17,6 +17,10 @@
 		BB123D512AEA20990037AF8C /* View+KeyboardDismissingToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB123D502AEA20990037AF8C /* View+KeyboardDismissingToolbar.swift */; };
 		BB123D532AEA20BF0037AF8C /* KeyboardDismisser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB123D522AEA20BF0037AF8C /* KeyboardDismisser.swift */; };
 		BB2436FD2AF6830D0038340E /* SwipeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2436FC2AF6830D0038340E /* SwipeAction.swift */; };
+		BB40575C2B96406E0095C825 /* SmileIdleFaceAnimationSequence2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40575B2B96406E0095C825 /* SmileIdleFaceAnimationSequence2.swift */; };
+		BB40575E2B9640F90095C825 /* SmileLookUpFaceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40575D2B9640F90095C825 /* SmileLookUpFaceAnimation.swift */; };
+		BB4057602B9643E00095C825 /* BlankFaceAnimationSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40575F2B9643E00095C825 /* BlankFaceAnimationSequence.swift */; };
+		BB4057622B9645660095C825 /* SmileIdleFaceAnimationSequence3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4057612B9645660095C825 /* SmileIdleFaceAnimationSequence3.swift */; };
 		BB4CB0C02AF56A9C0082007A /* ChatHTTPSConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4CB0BF2AF56A9C0082007A /* ChatHTTPSConnector.swift */; };
 		BB550EBC2AEADBC40070BAB8 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB550EBB2AEADBC40070BAB8 /* ExploreView.swift */; };
 		BB550EC02AEADD940070BAB8 /* TextFieldPanelComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB550EBF2AEADD940070BAB8 /* TextFieldPanelComponentView.swift */; };
@@ -344,6 +348,10 @@
 		BB123D502AEA20990037AF8C /* View+KeyboardDismissingToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+KeyboardDismissingToolbar.swift"; sourceTree = "<group>"; };
 		BB123D522AEA20BF0037AF8C /* KeyboardDismisser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismisser.swift; sourceTree = "<group>"; };
 		BB2436FC2AF6830D0038340E /* SwipeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeAction.swift; sourceTree = "<group>"; };
+		BB40575B2B96406E0095C825 /* SmileIdleFaceAnimationSequence2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileIdleFaceAnimationSequence2.swift; sourceTree = "<group>"; };
+		BB40575D2B9640F90095C825 /* SmileLookUpFaceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileLookUpFaceAnimation.swift; sourceTree = "<group>"; };
+		BB40575F2B9643E00095C825 /* BlankFaceAnimationSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankFaceAnimationSequence.swift; sourceTree = "<group>"; };
+		BB4057612B9645660095C825 /* SmileIdleFaceAnimationSequence3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmileIdleFaceAnimationSequence3.swift; sourceTree = "<group>"; };
 		BB4CB0BF2AF56A9C0082007A /* ChatHTTPSConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHTTPSConnector.swift; sourceTree = "<group>"; };
 		BB550EBB2AEADBC40070BAB8 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		BB550EBF2AEADD940070BAB8 /* TextFieldPanelComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPanelComponentView.swift; sourceTree = "<group>"; };
@@ -1401,6 +1409,7 @@
 				BBCD956E2AEB429E005554BC /* Deselected */,
 				BBCD95702AEB429E005554BC /* Smile */,
 				BBCD95772AEB429E005554BC /* Writing */,
+				BB40575F2B9643E00095C825 /* BlankFaceAnimationSequence.swift */,
 				BBCD955F2AEB429E005554BC /* RandomFaceAnimationSequenceProtocol.swift */,
 				BBCD95602AEB429E005554BC /* RandomFaceIdleAnimationSequence.swift */,
 				BBCD95652AEB429E005554BC /* RandomFaceAnimationSequence.swift */,
@@ -1465,12 +1474,15 @@
 		BBCD95702AEB429E005554BC /* Smile */ = {
 			isa = PBXGroup;
 			children = (
-				BBCD95712AEB429E005554BC /* SmileLookLeftCurveFaceAnimation.swift */,
 				BBCD95722AEB429E005554BC /* SmileCenterFaceAnimation.swift */,
 				BBCD95732AEB429E005554BC /* SmileIdleFaceAnimationSequence1.swift */,
+				BB4057612B9645660095C825 /* SmileIdleFaceAnimationSequence3.swift */,
+				BB40575B2B96406E0095C825 /* SmileIdleFaceAnimationSequence2.swift */,
+				BBCD95712AEB429E005554BC /* SmileLookLeftCurveFaceAnimation.swift */,
+				BBCD95762AEB429E005554BC /* SmileLookLeftFaceAnimation.swift */,
 				BBCD95742AEB429E005554BC /* SmileLookRightCurveFaceAnimation.swift */,
 				BBCD95752AEB429E005554BC /* SmileLookRightFaceAnimation.swift */,
-				BBCD95762AEB429E005554BC /* SmileLookLeftFaceAnimation.swift */,
+				BB40575D2B9640F90095C825 /* SmileLookUpFaceAnimation.swift */,
 			);
 			path = Smile;
 			sourceTree = "<group>";
@@ -1870,8 +1882,10 @@
 				BBCD958A2AEB429F005554BC /* SmileIdleFaceAnimationSequence1.swift in Sources */,
 				BBCD95872AEB429F005554BC /* DeselectedFaceAnimationSequence1.swift in Sources */,
 				BB550EBC2AEADBC40070BAB8 /* ExploreView.swift in Sources */,
+				BB40575E2B9640F90095C825 /* SmileLookUpFaceAnimation.swift in Sources */,
 				BB123D4F2AEA04670037AF8C /* EssayRowView.swift in Sources */,
 				BBF3D9022B94377D00C99BB1 /* IntroVideoView.swift in Sources */,
+				BB4057622B9645660095C825 /* SmileIdleFaceAnimationSequence3.swift in Sources */,
 				BB74D4792AE790D000EC7579 /* SocketStream.swift in Sources */,
 				BBB452BA2AEDF6CF000B4C97 /* CameraViewController+CameraViewDelegate.swift in Sources */,
 				BBCD95822AEB429F005554BC /* ThinkingLookLeftFaceAnimation.swift in Sources */,
@@ -1932,6 +1946,7 @@
 				BB92C21A2AF2FC5E00A7B3DE /* IntroPresenterView.swift in Sources */,
 				BBED61272AF060E400355E4F /* GADBlankAdContainerViewController.swift in Sources */,
 				BBCD95902AEB429F005554BC /* WritingIdleFaceAnimationSequence1.swift in Sources */,
+				BB4057602B9643E00095C825 /* BlankFaceAnimationSequence.swift in Sources */,
 				BB74D4662AE7894900EC7579 /* RegisterUserResponse.swift in Sources */,
 				BB92C21C2AF2FDE500A7B3DE /* IntroManager.swift in Sources */,
 				BBED61162AF0086E00355E4F /* GADBannerViewRepresentable.swift in Sources */,
@@ -1983,6 +1998,7 @@
 				BB74D41A2AE5782300EC7579 /* ChatView.swift in Sources */,
 				BBED612B2AF08A5100355E4F /* GADBannerViewController.swift in Sources */,
 				BBCD957D2AEB429F005554BC /* RandomFaceIdleAnimationSequence.swift in Sources */,
+				BB40575C2B96406E0095C825 /* SmileIdleFaceAnimationSequence2.swift in Sources */,
 				BBCD957B2AEB429F005554BC /* BlinkFaceAnimationSequence.swift in Sources */,
 				BB74D3C82AE3769C00EC7579 /* WriteSmith_SwiftUIApp.swift in Sources */,
 				BBED61182AF008AC00355E4F /* Keys.swift in Sources */,
@@ -2268,7 +2284,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 79;
+				CURRENT_PROJECT_VERSION = 80;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -2293,7 +2309,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 5.1;
+				MARKETING_VERSION = 5.1.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2312,7 +2328,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 79;
+				CURRENT_PROJECT_VERSION = 80;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -2337,7 +2353,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 5.1;
+				MARKETING_VERSION = 5.1.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";

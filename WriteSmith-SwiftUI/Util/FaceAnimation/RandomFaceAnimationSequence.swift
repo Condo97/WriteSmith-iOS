@@ -10,6 +10,12 @@ import Foundation
 
 enum RandomFaceAnimationSequence: RandomFaceAnimationSequenceProtocol {
     
+    private var numberOfAnimationsToCombine: Int {
+        get {
+            5
+        }
+    }
+    
     private var blinkAnimations: [FaceAnimationSequence] {
         [
             BlinkFaceAnimationSequence()
@@ -26,8 +32,8 @@ enum RandomFaceAnimationSequence: RandomFaceAnimationSequenceProtocol {
     
     var animationSequence: FaceAnimationSequence {
         switch(self) {
-        case .blink: return getRandomAnimationSequence(from: blinkAnimations)
-        case .finishedWriting: return getRandomAnimationSequence(from: finishedWritingAnimations)
+        case .blink: return getCombinedRandomAnimationSequence(from: blinkAnimations, numberOfRandomSequencesToCombine: numberOfAnimationsToCombine)
+        case .finishedWriting: return getCombinedRandomAnimationSequence(from: finishedWritingAnimations, numberOfRandomSequencesToCombine: numberOfAnimationsToCombine)
         }
     }
     

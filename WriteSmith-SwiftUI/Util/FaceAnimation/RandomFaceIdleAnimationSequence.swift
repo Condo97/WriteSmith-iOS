@@ -10,6 +10,12 @@ import Foundation
 
 enum RandomFaceIdleAnimationSequence: RandomFaceAnimationSequenceProtocol {
     
+    private var numberOfAnimationsToCombine: Int {
+        get {
+            5
+        }
+    }
+    
     private var deselectedIdleAnimations: [FaceAnimationSequence] {
         [
             DeselectedFaceAnimationSequence1()
@@ -18,7 +24,9 @@ enum RandomFaceIdleAnimationSequence: RandomFaceAnimationSequenceProtocol {
     
     private var smileIdleAnimations: [FaceAnimationSequence] {
         [
-            SmileIdleFaceAnimationSequence1()
+            SmileIdleFaceAnimationSequence1(),
+            SmileIdleFaceAnimationSequence2(),
+            SmileIdleFaceAnimationSequence3()
         ]
     }
     
@@ -41,10 +49,10 @@ enum RandomFaceIdleAnimationSequence: RandomFaceAnimationSequenceProtocol {
     
     var animationSequence: FaceAnimationSequence {
         switch(self) {
-        case .deselected: return getRandomAnimationSequence(from: deselectedIdleAnimations)
-        case .smile: return getRandomAnimationSequence(from: smileIdleAnimations)
-        case .thinking: return getRandomAnimationSequence(from: thinkingIdleAnimations)
-        case .writing: return getRandomAnimationSequence(from: writingIdleAnimations)
+        case .deselected: return getCombinedRandomAnimationSequence(from: deselectedIdleAnimations, numberOfRandomSequencesToCombine: numberOfAnimationsToCombine)
+        case .smile: return getCombinedRandomAnimationSequence(from: smileIdleAnimations, numberOfRandomSequencesToCombine: numberOfAnimationsToCombine)
+        case .thinking: return getCombinedRandomAnimationSequence(from: thinkingIdleAnimations, numberOfRandomSequencesToCombine: numberOfAnimationsToCombine)
+        case .writing: return getCombinedRandomAnimationSequence(from: writingIdleAnimations, numberOfRandomSequencesToCombine: numberOfAnimationsToCombine)
         }
     }
     

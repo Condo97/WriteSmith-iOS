@@ -335,7 +335,7 @@ struct UltraView: View {
                             .font(.custom(Constants.FontName.body, size: 20.0))
                         
                         if showingPromoRow == .gptIntelligence {
-                            Text("Incredibly smart. Trained on books, research, websites and more. Updated for 2023.")
+                            Text("Incredibly smart. Trained on books, research, websites and more. Updated for 2024.")
                                 .font(.custom(Constants.FontName.lightOblique, size: 14.0))
                                 .multilineTextAlignment(.leading)
                                 .opacity(0.6)
