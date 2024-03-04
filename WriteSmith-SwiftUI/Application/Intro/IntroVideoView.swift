@@ -58,10 +58,13 @@ struct IntroVideoView<Content: View>: View {
             
             // Button within container with blurry overlay background
             VStack {
-                let additionalYOffset = 100.0
+                let additionalYOffset = 80.0
                 
                 ZStack {
                     Image(blurryOverlayImageName)
+                        .resizable()
+                        .frame(height: 400)
+                        .offset(y: 18)
                         .foregroundStyle(Colors.elementBackgroundColor)
                     
                     Button(action: {
@@ -87,8 +90,8 @@ struct IntroVideoView<Content: View>: View {
                     .clipShape(RoundedRectangle(cornerRadius: UIConstants.cornerRadius))
                     .padding()
 //                    .padding(.top, blurryOverlayImageYOffset + buttonYOffset)
-                    .padding()
-                    .padding(.top, -48)
+//                    .padding()
+//                    .padding(.top, -48)
                 }
                 .offset(y: UIScreen.screenHeight / 2 - additionalYOffset)
             }

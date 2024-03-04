@@ -21,7 +21,7 @@ public struct FaceAnimationViewRepresentable: UIViewRepresentable {
     
     @State private var isRandomBlinkRunning: Bool = false
     
-    private let randomBlinkSecondsMin: UInt64 = 4
+    private let randomBlinkSecondsMin: UInt64 = 2
     private let randomBlinkSecondsMax: UInt64 = 12
     
     public init(frame: CGRect, faceImageName: String, color: UIColor, startAnimation: FaceAnimation? = nil) {
