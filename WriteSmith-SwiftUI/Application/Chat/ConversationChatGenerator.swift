@@ -101,7 +101,7 @@ class ConversationChatGenerator: ObservableObject {
             return userTextChat
         }()
         
-//        DispatchQueue.main.async {
+        DispatchQueue.main.async {
             do {
                 try managedContext.save()
             } catch {
@@ -110,7 +110,7 @@ class ConversationChatGenerator: ObservableObject {
 //                throw ChatGeneratorError.addUserChat
                 self.alertShowingUserChatNotSaved = true
             }
-//        }
+        }
         
         // Defer setting canGenerate to true and isLoading and isGenerating to false to ensure they are set to false when this method completes
         defer {

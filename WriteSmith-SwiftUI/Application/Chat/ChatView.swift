@@ -344,7 +344,7 @@ struct ChatView: View, KeyboardReadable {
         VStack {
             //            Spacer()
             
-            VStack(spacing: 12.0) {
+            VStack {
                 // Remaining Promo Button
                 if !premiumUpdater.isPremium, let remaining = remainingUpdater.remaining {
                     KeyboardDismissingButton(action: {
@@ -369,9 +369,10 @@ struct ChatView: View, KeyboardReadable {
                     .foregroundStyle(Colors.elementTextColor)
                     .background(Colors.elementBackgroundColor)
                     .clipShape(RoundedRectangle(cornerRadius: UIConstants.cornerRadius))
-                    
+                    .padding([.leading, .trailing])
                 }
                 
+                // EntryView for image and text entry
                 HStack(alignment: .bottom) {
                     EntryView(
                         conversation: $conversation,
@@ -452,10 +453,11 @@ struct ChatView: View, KeyboardReadable {
                                 .stroke(Colors.elementBackgroundColor, lineWidth: 2.0)
                         }
                     )
+                    .padding([.leading, .trailing])
                 }
             }
             //            .padding(.bottom, 32)
-            .padding([.leading, .trailing])
+//            .padding([.leading, .trailing])
             .background(
                 VStack(spacing: 0.0) {
                     if !premiumUpdater.isPremium {

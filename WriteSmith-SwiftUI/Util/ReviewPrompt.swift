@@ -76,7 +76,7 @@ struct ReviewPrompt: View {
                 }
             }
         })
-        .alert("WriteSmith Feedback", isPresented: $isShowingRequestReview, actions: {
+        .alert("Are you enjoying WriteSmith?", isPresented: $isShowingRequestReview, actions: {
             Button("Yes", action: {
                 // Increment likeCount and requestReview.. only requesting the review after this in a 1/3 chance if likeCount is <= 1 andalways if likeCount is > 1 (since it adds one before) though this should not happen since the user has indicated they like the app so the review should just show directly instead of the are you liking the app screen :D :) :O
                 ReviewPrompt.likeCount += 1
@@ -105,9 +105,7 @@ struct ReviewPrompt: View {
                     ReviewPrompt.stopShowing = true
                 })
             }
-        }) {
-            Text("How are you enjoying WriteSmith?")
-        }
+        })
         
     }
     

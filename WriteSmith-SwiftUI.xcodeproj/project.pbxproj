@@ -115,6 +115,11 @@
 		BB92C2242AF4000000A7B3DE /* Button+DismissesKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92C2232AF4000000A7B3DE /* Button+DismissesKeyboard.swift */; };
 		BB92C2262AF4022E00A7B3DE /* View+DismissOnReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92C2252AF4022E00A7B3DE /* View+DismissOnReturn.swift */; };
 		BBB1E3DC2B067B0500BC4F35 /* PromoSendImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB1E3DB2B067B0500BC4F35 /* PromoSendImagesView.swift */; };
+		BBB431BD2B94EC7200314885 /* GenerateSuggestionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB431BC2B94EC7200314885 /* GenerateSuggestionsRequest.swift */; };
+		BBB431BF2B94ED0C00314885 /* GenerateSuggestionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB431BE2B94ED0C00314885 /* GenerateSuggestionsResponse.swift */; };
+		BBB431C12B94EE8600314885 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB431C02B94EE8600314885 /* SuggestionsView.swift */; };
+		BBB431C32B95310800314885 /* GetConversationChatOnTapSuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB431C22B95310800314885 /* GetConversationChatOnTapSuggestionsView.swift */; };
+		BBB431C72B95539C00314885 /* UIScreen+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB431C62B95539C00314885 /* UIScreen+Size.swift */; };
 		BBB452952AEC82FE000B4C97 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB452942AEC82FE000B4C97 /* SettingsView.swift */; };
 		BBB452972AEC8313000B4C97 /* giftGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = BBB452962AEC8313000B4C97 /* giftGif.gif */; };
 		BBB452992AEC8660000B4C97 /* ShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB452982AEC8660000B4C97 /* ShareHelper.swift */; };
@@ -441,6 +446,11 @@
 		BB92C2232AF4000000A7B3DE /* Button+DismissesKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Button+DismissesKeyboard.swift"; sourceTree = "<group>"; };
 		BB92C2252AF4022E00A7B3DE /* View+DismissOnReturn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+DismissOnReturn.swift"; sourceTree = "<group>"; };
 		BBB1E3DB2B067B0500BC4F35 /* PromoSendImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoSendImagesView.swift; sourceTree = "<group>"; };
+		BBB431BC2B94EC7200314885 /* GenerateSuggestionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateSuggestionsRequest.swift; sourceTree = "<group>"; };
+		BBB431BE2B94ED0C00314885 /* GenerateSuggestionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateSuggestionsResponse.swift; sourceTree = "<group>"; };
+		BBB431C02B94EE8600314885 /* SuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsView.swift; sourceTree = "<group>"; };
+		BBB431C22B95310800314885 /* GetConversationChatOnTapSuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetConversationChatOnTapSuggestionsView.swift; sourceTree = "<group>"; };
+		BBB431C62B95539C00314885 /* UIScreen+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Size.swift"; sourceTree = "<group>"; };
 		BBB452942AEC82FE000B4C97 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BBB452962AEC8313000B4C97 /* giftGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = giftGif.gif; sourceTree = "<group>"; };
 		BBB452982AEC8660000B4C97 /* ShareHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareHelper.swift; sourceTree = "<group>"; };
@@ -848,6 +858,8 @@
 				BB74D4122AE570BA00EC7579 /* EntryView.swift */,
 				BBB452AF2AECD9B8000B4C97 /* GPTModelSelectionButton.swift */,
 				BB74D4882AE8D90600EC7579 /* GPTModelSelectionView.swift */,
+				BBB431C02B94EE8600314885 /* SuggestionsView.swift */,
+				BBB431C22B95310800314885 /* GetConversationChatOnTapSuggestionsView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -957,6 +969,8 @@
 				BB123D502AEA20990037AF8C /* View+KeyboardDismissingToolbar.swift */,
 				BB92C21F2AF364FE00A7B3DE /* View+TextFieldTickerTint.swift */,
 				BBEBDFC22AEC63B50097D9AF /* SwiftyGif.swift */,
+				BBB431C62B95539C00314885 /* UIScreen+Size.swift */,
+				BBF3D8FF2B9433C800C99BB1 /* VideoViewRepresentable.swift */,
 				BBB4529A2AEC87AD000B4C97 /* WebView.swift */,
 			);
 			path = Util;
@@ -1011,6 +1025,7 @@
 				BB74D44F2AE7894900EC7579 /* AuthRequest.swift */,
 				BB74D4502AE7894900EC7579 /* BlankRequest.swift */,
 				BB74D4522AE7894900EC7579 /* DeleteChatRequest.swift */,
+				BBB431BC2B94EC7200314885 /* GenerateSuggestionsRequest.swift */,
 				BB74D4542AE7894900EC7579 /* GetChatRequest.swift */,
 				BB74D4532AE7894900EC7579 /* RegisterTransactionRequest.swift */,
 				BBF3D8F32B94023500C99BB1 /* SubmitFeedbackRequest.swift */,
@@ -1022,6 +1037,7 @@
 		BB74D4552AE7894900EC7579 /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				BBB431BE2B94ED0C00314885 /* GenerateSuggestionsResponse.swift */,
 				BB74D45D2AE7894900EC7579 /* GetChatResponse.swift */,
 				BB74D45A2AE7894900EC7579 /* GetIAPStuffResponse.swift */,
 				BB74D4562AE7894900EC7579 /* GetImportantConstantsResponse.swift */,
@@ -1079,7 +1095,6 @@
 				BB92C2192AF2FC5E00A7B3DE /* IntroPresenterView.swift */,
 				BBF3D9012B94377D00C99BB1 /* IntroVideoView.swift */,
 				BB92C20C2AF2F8F900A7B3DE /* IntroView.swift */,
-				BBF3D8FF2B9433C800C99BB1 /* VideoViewRepresentable.swift */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -1847,6 +1862,7 @@
 				BB74D3FC2AE377F700EC7579 /* LogoToolbarItem.swift in Sources */,
 				BB123D532AEA20BF0037AF8C /* KeyboardDismisser.swift in Sources */,
 				BBCD955B2AEB4015005554BC /* ShareViewHelper.swift in Sources */,
+				BBB431BD2B94EC7200314885 /* GenerateSuggestionsRequest.swift in Sources */,
 				BBCD95802AEB429F005554BC /* RandomFaceAnimationSequence.swift in Sources */,
 				BBF3D8F72B9410B400C99BB1 /* ChatManagedReviewPrompt.swift in Sources */,
 				BB74D48F2AE9B6FE00EC7579 /* FullScreenCoverBackgroundCleanerView.swift in Sources */,
@@ -1902,14 +1918,17 @@
 				BB74D4472AE787E500EC7579 /* PremiumUpdater.swift in Sources */,
 				BB92C20D2AF2F8F900A7B3DE /* IntroView.swift in Sources */,
 				BBF3D9002B9433C800C99BB1 /* VideoViewRepresentable.swift in Sources */,
+				BBB431C32B95310800314885 /* GetConversationChatOnTapSuggestionsView.swift in Sources */,
 				BB0992392B06F54700236D33 /* PromoPopupViewModel.swift in Sources */,
 				BB74D46D2AE789BA00EC7579 /* HTTPSClient.swift in Sources */,
 				BB09923B2B06F5FF00236D33 /* PromoPopup.swift in Sources */,
 				BBB452D72AEEAF48000B4C97 /* SettingsToolbarItem.swift in Sources */,
 				BB74D46B2AE7894900EC7579 /* GetChatResponse.swift in Sources */,
 				BBCD95862AEB429F005554BC /* ThinkingIdleFaceAnimationSequence1.swift in Sources */,
+				BBB431C12B94EE8600314885 /* SuggestionsView.swift in Sources */,
 				BB57956E2B1A5F4F00E87471 /* Int+Word.swift in Sources */,
 				BBCD95592AEB3C43005554BC /* PasteboardHelper.swift in Sources */,
+				BBB431C72B95539C00314885 /* UIScreen+Size.swift in Sources */,
 				BB92C21A2AF2FC5E00A7B3DE /* IntroPresenterView.swift in Sources */,
 				BBED61272AF060E400355E4F /* GADBlankAdContainerViewController.swift in Sources */,
 				BBCD95902AEB429F005554BC /* WritingIdleFaceAnimationSequence1.swift in Sources */,
@@ -1948,6 +1967,7 @@
 				BB74D47F2AE7956400EC7579 /* ChatFinishReasons.swift in Sources */,
 				BB74D4852AE8C5A200EC7579 /* FirstChats.swift in Sources */,
 				BBB452C12AEDF81A000B4C97 /* RegistryHelper.swift in Sources */,
+				BBB431BF2B94ED0C00314885 /* GenerateSuggestionsResponse.swift in Sources */,
 				BBB452952AEC82FE000B4C97 /* SettingsView.swift in Sources */,
 				BBCD958D2AEB429F005554BC /* SmileLookLeftFaceAnimation.swift in Sources */,
 				BBB452BF2AEDF77C000B4C97 /* CameraView.swift in Sources */,
@@ -2248,7 +2268,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 78;
+				CURRENT_PROJECT_VERSION = 79;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -2292,7 +2312,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 78;
+				CURRENT_PROJECT_VERSION = 79;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;

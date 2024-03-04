@@ -41,6 +41,14 @@ struct EntryView: View, KeyboardReadable {
     @State private var uncroppedImage: UIImage?
     @State private var cropFrame: CGRect?
     
+    @State private var isShowingSuggestions: Bool = false
+    @State private var selectedSuggestionText: String = ""
+    
+//    var suggestionsViewChatFetchRequest = FetchRequest<Chat>(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Chat.date, ascending: false)],
+//        predicate: NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation.objectID),
+//        animation: .default) // TODO: This could be moved to a wrapper class for SuggestionsView where just the Conversation would be implemented, though I think that would make the hirearchy a little complicated for now, so I actually should organize it and then organize this code yay wow that would be great
+    
 //    private let initialHeight: CGFloat = 32.0
     var buttonDisabled: Bool {
         (text.isEmpty && image == nil && (imageURL == nil || imageURL!.isEmpty)) || chatGenerator.isLoading
@@ -63,46 +71,75 @@ struct EntryView: View, KeyboardReadable {
     }
     
     var body: some View {
-        HStack(alignment: .bottom) {
-            CameraButtonView(
-                initialHeight: initialHeight,
-                action: {
-                    // Do light haptic
-                    HapticHelper.doLightHaptic()
-                    
-                    // Set camera view crop frame and initial image to nil
-                    cameraViewCropFrame = nil
-                    cameraViewInitialImage = nil
-                    
-                    // Is showing Camera View
-                    isShowingCameraView = true
-                    
-                    // Print text and isLoading for debugging
-                    print(text.isEmpty)
-                    print(chatGenerator.isLoading)
-                })
+        VStack {
+            var suggestionsViewChatFetchRequest = FetchRequest<Chat>(
+                sortDescriptors: [NSSortDescriptor(keyPath: \Chat.date, ascending: false)],
+                predicate: NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation.objectID),
+                animation: .default) // TODO: This could be moved to a wrapper class for SuggestionsView where just the Conversation would be implemented, though I think that would make the hirearchy a little complicated for now, so I actually should organize it and then organize this code yay wow that would be great
             
-            VStack(alignment: .leading) {
-                if image != nil {
-                    entryImage
+            // Suggestions
+            SuggestionsView(
+                isActive: $isShowingSuggestions,
+                selected: $selectedSuggestionText,
+                chats: suggestionsViewChatFetchRequest)
+            .onChange(of: selectedSuggestionText, perform: { value in
+                if !selectedSuggestionText.isEmpty {
+                    // If selectedSuggestionText is not empty, that means an option was selected, so dismiss, set text to it, submitText, and clear the field
+                    isShowingSuggestions = false
                     
-                    Divider()
-                        .background(Colors.elementTextColor)
-                }
-                
-                HStack(alignment: .bottom) {
-                    entryTextField
+                    text = selectedSuggestionText
                     
-                    submitButton
+                    submitText()
+                    
+                    selectedSuggestionText = ""
                 }
-            }
-            .onChange(of: buttonDisabled, perform: { value in
-                print("REE")
             })
-            .padding()
-            .fixedSize(horizontal: false, vertical: true)
-            .background(Colors.elementBackgroundColor)
-            .clipShape(RoundedRectangle(cornerRadius: UIConstants.cornerRadius))
+            
+            // Image and Text Entry
+            HStack(alignment: .bottom) {
+                // Camera Button
+                CameraButtonView(
+                    initialHeight: initialHeight,
+                    action: {
+                        // Do light haptic
+                        HapticHelper.doLightHaptic()
+                        
+                        // Set camera view crop frame and initial image to nil
+                        cameraViewCropFrame = nil
+                        cameraViewInitialImage = nil
+                        
+                        // Is showing Camera View
+                        isShowingCameraView = true
+                        
+                        // Print text and isLoading for debugging
+                        print(text.isEmpty)
+                        print(chatGenerator.isLoading)
+                    })
+                
+                // Text entry
+                VStack(alignment: .leading) {
+                    if image != nil {
+                        entryImage
+                        
+                        Divider()
+                            .background(Colors.elementTextColor)
+                    }
+                    
+                    HStack(alignment: .bottom) {
+                        entryTextField
+                        
+                        submitButton
+                    }
+                }
+                .onChange(of: buttonDisabled, perform: { value in
+                    print("REE")
+                })
+                .padding()
+                .fixedSize(horizontal: false, vertical: true)
+                .background(Colors.elementBackgroundColor)
+                .clipShape(RoundedRectangle(cornerRadius: UIConstants.cornerRadius))
+            }
+            .padding([.leading, .trailing])
         }
         .overlay {
             ChatManagedReviewPrompt(
@@ -164,6 +201,15 @@ struct EntryView: View, KeyboardReadable {
             })
         }) {
             Text("Please upgrade to send chats faster. Good news... you can get this and GPT-4 for FREE!")
+        }
+        .onReceive(chatGenerator.$isGenerating) { value in
+            if value {
+                // If changed to isGenerating, deactivate the suggestions view
+                isShowingSuggestions = false
+            } else {
+                // If changed to not isGenerating, activate the suggestions view
+                isShowingSuggestions = true
+            }
         }
     }
     
@@ -243,72 +289,7 @@ struct EntryView: View, KeyboardReadable {
     var submitButton: some View {
         VStack {
             KeyboardDismissingButton(action: {
-                // Do haptic
-                HapticHelper.doLightHaptic()
-                
-                // If user is not premium and an image is attached, show send images promo and return
-                if !premiumUpdater.isPremium && (image != nil || imageURL != nil) {
-                    isDisplayingPromoSendImagesView = true
-                    return
-                }
-                
-                // If chatGenerator is loading, return
-                if chatGenerator.isLoading {
-                    return
-                }
-                
-                // if chatGenerator isGenerating and user is not premium, show upgrade alert and return
-                if chatGenerator.isGenerating && !premiumUpdater.isPremium {
-                    alertShowingUpgradeForFasterChats = true
-                    return
-                }
-                
-                // Assign tempText to text, tempImage to image, and tempImageURL to imageURL
-                let tempText = text
-                let tempImage = image
-                let tempImageURL = imageURL
-                
-                // Clear text, image, and imageURL
-                text = ""
-                image = nil
-                imageURL = nil
-                
-                // Start task to generate chat
-                Task {
-                    // Defer setting face idle animation to smile to ensure it is set after the task completes
-                    defer {
-                        faceAnimationUpdater.setFaceIdleAnimationToSmile()
-                    }
-                    
-                    // Ensure authToken, otherwise return TODO: Handle errors
-                    let authToken: String
-                    do {
-                        authToken = try await AuthHelper.ensure()
-                    } catch {
-                        // TODO: Handle errors
-                        print("Error ensureing AuthToken in ChatView... \(error)")
-                        return
-                    }
-                    
-                    do {
-                        try await chatGenerator.generateChat(
-                            input: tempText,
-                            image: tempImage,
-                            imageURL: tempImageURL,
-                            conversation: conversation,
-                            authToken: authToken,
-                            isPremium: premiumUpdater.isPremium,
-                            remainingUpdater: remainingUpdater,
-                            in: viewContext)
-                    } catch {
-                        // TODO: Handle errors
-                        print("Error generating chat in ChatView... \(error)")
-                    }
-                }
-                
-                if premiumUpdater.isPremium || !showInterstitialAtFrequency() {
-                    isShowingReviewModel = true
-                }
+                submitText()
             }) {
                 Image(systemName: "arrow.up.circle.fill")
                     .resizable()
@@ -323,6 +304,75 @@ struct EntryView: View, KeyboardReadable {
     }
     
     // MARK: - Functions
+    
+    func submitText() {
+        // Do haptic
+        HapticHelper.doLightHaptic()
+        
+        // If user is not premium and an image is attached, show send images promo and return
+        if !premiumUpdater.isPremium && (image != nil || imageURL != nil) {
+            isDisplayingPromoSendImagesView = true
+            return
+        }
+        
+        // If chatGenerator is loading, return
+        if chatGenerator.isLoading {
+            return
+        }
+        
+        // if chatGenerator isGenerating and user is not premium, show upgrade alert and return
+        if chatGenerator.isGenerating && !premiumUpdater.isPremium {
+            alertShowingUpgradeForFasterChats = true
+            return
+        }
+        
+        // Assign tempText to text, tempImage to image, and tempImageURL to imageURL
+        let tempText = text
+        let tempImage = image
+        let tempImageURL = imageURL
+        
+        // Clear text, image, and imageURL
+        text = ""
+        image = nil
+        imageURL = nil
+        
+        // Start task to generate chat
+        Task {
+            // Defer setting face idle animation to smile to ensure it is set after the task completes
+            defer {
+                faceAnimationUpdater.setFaceIdleAnimationToSmile()
+            }
+            
+            // Ensure authToken, otherwise return TODO: Handle errors
+            let authToken: String
+            do {
+                authToken = try await AuthHelper.ensure()
+            } catch {
+                // TODO: Handle errors
+                print("Error ensureing AuthToken in ChatView... \(error)")
+                return
+            }
+            
+            do {
+                try await chatGenerator.generateChat(
+                    input: tempText,
+                    image: tempImage,
+                    imageURL: tempImageURL,
+                    conversation: conversation,
+                    authToken: authToken,
+                    isPremium: premiumUpdater.isPremium,
+                    remainingUpdater: remainingUpdater,
+                    in: viewContext)
+            } catch {
+                // TODO: Handle errors
+                print("Error generating chat in ChatView... \(error)")
+            }
+        }
+        
+        if premiumUpdater.isPremium || !showInterstitialAtFrequency() {
+            isShowingReviewModel = true
+        }
+    }
     
     func showInterstitialAtFrequency() -> Bool {
         // Ensure not premium, otherwise return false

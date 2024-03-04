@@ -31,6 +31,17 @@ class HTTPSConnector {
         return registerUserResponse
     }
     
+    static func generateSuggestions(request: GenerateSuggestionsRequest) async throws -> GenerateSuggestionsResponse {
+        let (data, response) = try await HTTPSClient.post(
+            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.generateSuggestions)")!,
+            body: request,
+            headers: nil)
+        
+        let generateSuggestionsResponse = try JSONDecoder().decode(GenerateSuggestionsResponse.self, from: data)
+        
+        return generateSuggestionsResponse
+    }
+    
     static func getIsPremium(request: AuthRequest) async throws -> IsPremiumResponse {
         let (data, response) = try await HTTPSClient.post(
             url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.getIsPremium)")!,

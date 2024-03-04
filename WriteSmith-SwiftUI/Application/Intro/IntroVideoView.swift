@@ -5,42 +5,63 @@
 //  Created by Alex Coundouriotis on 3/2/24.
 //
 
+import AVKit
 import Foundation
 import SwiftUI
+import UIKit
 
 struct IntroVideoView<Content: View>: View {
     
+    @State var avPlayer: AVPlayer
+    @State var videoAspectRatio: CGFloat
     @ViewBuilder var destination: ()->Content
     
     
     @Environment(\.colorScheme) private var colorScheme
     
-    private let lightModeVideoName = "Scan Image Light"
-    private let lightModeVideoExtension = "m4v"
-    private let darkModeVideoName = "Scan Image Dark"
-    private let darkModeVideoExtension = "m4v"
-    
     private let blurryOverlayImageName = "Blurry Overlay"
     
     @State var isShowingNext: Bool = false
     
+    
+    var videoViewRepresentableTopPadding: CGFloat {
+        get {
+            // Get device width and height, multiply device width by aspect ratio, subtract product from device height to get top padding if positive otherwise zero
+            let additionalOffset = UIScreen.screenWidth < 388 ? 50.0 : 0.0
+            print(UIScreen.screenWidth)
+            let topPadding = UIScreen.screenWidth * (1 / videoAspectRatio) - UIScreen.screenHeight - additionalOffset
+            
+            if topPadding < 0 {
+                return 0
+            }
+            
+            return topPadding
+        }
+    }
+    
+    
     var body: some View {
         ZStack {
             // Background Video View
-            BackgroundVideoView(
-                imageName: colorScheme == .light ? lightModeVideoName : darkModeVideoName,
-                imageExtension: colorScheme == .light ? lightModeVideoExtension : darkModeVideoExtension)
+//            BackgroundVideoView(
+//                imageName: colorScheme == .light ? lightModeVideoName : darkModeVideoName,
+//                imageExtension: colorScheme == .light ? lightModeVideoExtension : darkModeVideoExtension)
+            
+            ZStack {
+                VideoViewRepresentable(player: avPlayer)
+//                    .padding(.top, -50)
+            }
+            .aspectRatio(videoAspectRatio, contentMode: .fill)
+            .padding(.top, videoViewRepresentableTopPadding)
+            
+            
             
             // Button within container with blurry overlay background
             VStack {
-                Spacer()
+                let additionalYOffset = 100.0
                 
                 ZStack {
-                    let blurryOverlayImageYOffset = 220.0
-                    let buttonYOffset = 150.0
-                    
                     Image(blurryOverlayImageName)
-                        .offset(y: blurryOverlayImageYOffset)
                         .foregroundStyle(Colors.elementBackgroundColor)
                     
                     Button(action: {
@@ -65,22 +86,28 @@ struct IntroVideoView<Content: View>: View {
                     .background(Colors.buttonBackground)
                     .clipShape(RoundedRectangle(cornerRadius: UIConstants.cornerRadius))
                     .padding()
-                    .padding(.top, blurryOverlayImageYOffset + buttonYOffset)
+//                    .padding(.top, blurryOverlayImageYOffset + buttonYOffset)
                     .padding()
+                    .padding(.top, -48)
                 }
+                .offset(y: UIScreen.screenHeight / 2 - additionalYOffset)
             }
-            
         }
         .ignoresSafeArea()
         .toolbar(.hidden, for: .navigationBar)
         .navigationDestination(isPresented: $isShowingNext, destination: destination)
+        .background(Colors.elementBackgroundColor)
     }
     
 }
 
 #Preview {
     
-    IntroVideoView(
+    let avPlayer = AVPlayer(url: Bundle.main.url(forResource: "Scan Image Light", withExtension: "m4v")!)
+    
+    return IntroVideoView(
+        avPlayer: avPlayer,
+        videoAspectRatio: 1284.0/2778.0,
         destination: {
         
     })

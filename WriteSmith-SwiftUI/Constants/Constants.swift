@@ -293,6 +293,7 @@ struct HTTPSConstants {
     static let chitChatServerStaticFiles = "https://chitchatserver.com"
     
     static let deleteChat = "/deleteChat"
+    static let generateSuggestions = "/generateSuggestions"
     static let getChat = "/getChat"
     static let getIAPStuff = "/getIAPStuff"
     static let getIsPremium = "/getIsPremium"

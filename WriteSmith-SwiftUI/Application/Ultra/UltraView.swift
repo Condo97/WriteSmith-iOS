@@ -483,8 +483,8 @@ struct UltraView: View {
                             .onTapGesture {
                                 HapticHelper.doMediumHaptic()
                             }
-                            .tint(Colors.userChatBubbleColor)
-                            .foregroundStyle(Colors.userChatBubbleColor)
+                            .tint(Colors.elementBackgroundColor)
+                            .foregroundStyle(Colors.elementBackgroundColor)
                         }
                     }
                     .padding(8)
@@ -578,7 +578,7 @@ struct UltraView: View {
                 }
             }
             .padding(12)
-            .foregroundStyle(Colors.userChatBubbleColor)
+            .foregroundStyle(Colors.elementBackgroundColor)
             .tint(.white)
             .background(
                 ZStack {
@@ -586,7 +586,7 @@ struct UltraView: View {
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .fill(Colors.userChatTextColor)
                     RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(Colors.buttonBackground, lineWidth: selectedSubscription == .weekly ? 2.0 : 1.0)
+                        .stroke(Colors.elementBackgroundColor, lineWidth: selectedSubscription == .weekly ? 2.0 : 1.0)
                 }
             )
             .opacity(isLoadingPurchase ? 0.4 : 1.0)
@@ -626,15 +626,15 @@ struct UltraView: View {
                 }
             }
             .padding(12)
-            .foregroundStyle(Colors.buttonBackground)
-            .tint(Colors.buttonBackground)
+            .foregroundStyle(Colors.elementBackgroundColor)
+            .tint(Colors.elementBackgroundColor)
             .background(
                 ZStack {
                     let cornerRadius = UIConstants.cornerRadius
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .fill(Colors.userChatTextColor)
                     RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(Colors.buttonBackground, lineWidth: selectedSubscription == .monthly ? 2.0 : 1.0)
+                        .stroke(Colors.elementBackgroundColor, lineWidth: selectedSubscription == .monthly ? 2.0 : 1.0)
                 }
             )
             .opacity(isLoadingPurchase ? 0.4 : 1.0)
@@ -659,9 +659,9 @@ struct UltraView: View {
                     }
                 }
             }
-            .padding()
+            .padding(18)
             .foregroundStyle(Colors.elementTextColor)
-            .background(Colors.buttonBackground)
+            .background(Colors.elementBackgroundColor)
             .clipShape(RoundedRectangle(cornerRadius: UIConstants.cornerRadius))
             .opacity(isLoadingPurchase ? 0.4 : 1.0)
             .disabled(isLoadingPurchase)
