@@ -786,7 +786,6 @@
 				BB66F9472AF444C9003F2E63 /* Migration */,
 				BB74D40C2AE5686000EC7579 /* Model */,
 				BB74D44D2AE7893A00EC7579 /* Networking */,
-				BB74D46C2AE789BA00EC7579 /* HTTPSClient.swift */,
 				BB74D41B2AE57C8700EC7579 /* Persistence */,
 				BB74D40F2AE56AF400EC7579 /* Tools */,
 				BB74D4162AE572AE00EC7579 /* Util */,
@@ -944,6 +943,7 @@
 				BB92C21B2AF2FDE500A7B3DE /* IntroManager.swift */,
 				BBCD95582AEB3C43005554BC /* PasteboardHelper.swift */,
 				BB74D4462AE787E500EC7579 /* PremiumUpdater.swift */,
+				BB57956B2B1A59C000E87471 /* ProductUpdater.swift */,
 				BBB452C02AEDF81A000B4C97 /* RegistryHelper.swift */,
 				BB89388F2AF155FF00ED725E /* RemainingUpdater.swift */,
 				BBCD955A2AEB4015005554BC /* ShareViewHelper.swift */,
@@ -1023,6 +1023,7 @@
 				BB74D4482AE7891800EC7579 /* HTTPSConnector */,
 				BB74D44E2AE7894900EC7579 /* Request */,
 				BB74D4552AE7894900EC7579 /* Response */,
+				BB74D46C2AE789BA00EC7579 /* HTTPSClient.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1500,7 +1501,6 @@
 		BBCD959A2AEC1DD9005554BC /* Ultra */ = {
 			isa = PBXGroup;
 			children = (
-				BB57956B2B1A59C000E87471 /* ProductUpdater.swift */,
 				BBCD959D2AEC1F91005554BC /* UltraView.swift */,
 				BBEBDFB72AEC606A0097D9AF /* UltraButton.swift */,
 			);
