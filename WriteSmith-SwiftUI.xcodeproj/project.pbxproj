@@ -39,7 +39,6 @@
 		BB74D3EA2AE3769E00EC7579 /* WriteSmith_SwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74D3E92AE3769E00EC7579 /* WriteSmith_SwiftUIUITestsLaunchTests.swift */; };
 		BB74D3FC2AE377F700EC7579 /* LogoToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74D3FB2AE377F700EC7579 /* LogoToolbarItem.swift */; };
 		BB74D4022AE3789200EC7579 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74D3FE2AE3789200EC7579 /* Constants.swift */; };
-		BB74D4042AE3789200EC7579 /* Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74D4002AE3789200EC7579 /* Private.swift */; };
 		BB74D4052AE3789200EC7579 /* FaceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74D4012AE3789200EC7579 /* FaceConstants.swift */; };
 		BB74D4072AE5663000EC7579 /* ShareToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74D4062AE5663000EC7579 /* ShareToolbarItem.swift */; };
 		BB74D4092AE567A800EC7579 /* AddChatToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB74D4082AE567A800EC7579 /* AddChatToolbarItem.swift */; };
@@ -373,7 +372,6 @@
 		BB74D3E92AE3769E00EC7579 /* WriteSmith_SwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteSmith_SwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BB74D3FB2AE377F700EC7579 /* LogoToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoToolbarItem.swift; sourceTree = "<group>"; };
 		BB74D3FE2AE3789200EC7579 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		BB74D4002AE3789200EC7579 /* Private.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Private.swift; sourceTree = "<group>"; };
 		BB74D4012AE3789200EC7579 /* FaceConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceConstants.swift; sourceTree = "<group>"; };
 		BB74D4062AE5663000EC7579 /* ShareToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToolbarItem.swift; sourceTree = "<group>"; };
 		BB74D4082AE567A800EC7579 /* AddChatToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChatToolbarItem.swift; sourceTree = "<group>"; };
@@ -904,7 +902,6 @@
 			isa = PBXGroup;
 			children = (
 				BB74D3FE2AE3789200EC7579 /* Constants.swift */,
-				BB74D4002AE3789200EC7579 /* Private.swift */,
 				BB74D4012AE3789200EC7579 /* FaceConstants.swift */,
 				BBED61172AF008AC00355E4F /* Keys.swift */,
 			);
@@ -1952,7 +1949,6 @@
 				BBED61162AF0086E00355E4F /* GADBannerViewRepresentable.swift in Sources */,
 				BBCD95992AEB8721005554BC /* ExploreChat.swift in Sources */,
 				BBCD95532AEB34AF005554BC /* PanelGroupSpec.swift in Sources */,
-				BB74D4042AE3789200EC7579 /* Private.swift in Sources */,
 				BBCD953E2AEAED2B005554BC /* PanelComponentType.swift in Sources */,
 				BB74D4A62AE9D75500EC7579 /* MoveUpTransition.swift in Sources */,
 				BB89388E2AF0B40D00ED725E /* InterstitialView.swift in Sources */,
@@ -2284,7 +2280,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 80;
+				CURRENT_PROJECT_VERSION = 83;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -2309,7 +2305,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 5.1.1;
+				MARKETING_VERSION = 5.1.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2328,7 +2324,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 80;
+				CURRENT_PROJECT_VERSION = 83;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -2353,7 +2349,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 5.1.1;
+				MARKETING_VERSION = 5.1.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";

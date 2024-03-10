@@ -140,6 +140,20 @@ class ExploreChatGenerator: ObservableObject {
                     getChatResponse = try JSONDecoder().decode(GetChatResponse.self, from: messageData)
                 } catch {
                     print("Error decoding messageData to GetChatResponse so skipping... \(error)")
+                    
+                    // Catch as StatusResponse
+                    let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: messageData)
+                    
+                    if statusResponse.success == 5 {
+                        Task {
+                            do {
+                                try await AuthHelper.regenerate()
+                            } catch {
+                                print("Error regenerating authToken in HTTPSConnector... \(error)")
+                            }
+                        }
+                    }
+                    
                     continue
                 }
                 

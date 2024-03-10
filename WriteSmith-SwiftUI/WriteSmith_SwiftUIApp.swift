@@ -95,9 +95,18 @@ struct WriteSmith_SwiftUIApp: App {
                 }
             }
             .task {
-                // Ensure authToken, otherwise return TODO: Handle errors
+                // Ensure authToken, then validate, otherwise return TODO: Handle errors
                 let authToken: String
                 do {
+                    let tempAuthToken = try await AuthHelper.ensure()
+                    
+                    // TODO: Do this better
+                    let authRequest = AuthRequest(authToken: "")
+                    let statusResponse = try await HTTPSConnector.validateAuthToken(request: authRequest)
+                    if statusResponse.success == 5 {
+                        try await AuthHelper.regenerate()
+                    }
+                    
                     authToken = try await AuthHelper.ensure()
                 } catch {
                     // TODO: Handle errors

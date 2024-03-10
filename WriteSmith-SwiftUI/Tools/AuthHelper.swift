@@ -30,6 +30,23 @@ class AuthHelper {
         return UserDefaults.standard.string(forKey: Constants.UserDefaults.userDefaultStoredAuthTokenKey)!
     }
     
+    /***
+     Regenerate - Deletes current authToken and gets a new one from the server
+     
+     throws
+        - If the client cannot get the AuthToken from the server and there is no AuthToken available locally
+     */
+    @discardableResult
+    static func regenerate() async throws -> String {
+        UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.userDefaultStoredAuthTokenKey)
+        
+        let registerUserResponse = try await HTTPSConnector.registerUser()
+        
+        UserDefaults.standard.set(registerUserResponse.body.authToken, forKey: Constants.UserDefaults.userDefaultStoredAuthTokenKey)
+        
+        return UserDefaults.standard.string(forKey: Constants.UserDefaults.userDefaultStoredAuthTokenKey)!
+    }
+    
     // TODO: Legacy need to delete
     static func ensure(completion: ((String)->Void)?) {
         // If no authToken, register the user and update the authToken in UserDefaults

@@ -26,9 +26,26 @@ class HTTPSConnector {
             body: BlankRequest(),
             headers: nil)
         
-        let registerUserResponse = try JSONDecoder().decode(RegisterUserResponse.self, from: data)
-        
-        return registerUserResponse
+        do {
+            let registerUserResponse = try JSONDecoder().decode(RegisterUserResponse.self, from: data)
+            
+            return registerUserResponse
+        } catch {
+            // Catch as StatusResponse
+            let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)
+            
+            if statusResponse.success == 5 {
+                Task {
+                    do {
+                        try await AuthHelper.regenerate()
+                    } catch {
+                        print("Error regenerating authToken in HTTPSConnector... \(error)")
+                    }
+                }
+            }
+            
+            throw error
+        }
     }
     
     static func generateSuggestions(request: GenerateSuggestionsRequest) async throws -> GenerateSuggestionsResponse {
@@ -37,9 +54,26 @@ class HTTPSConnector {
             body: request,
             headers: nil)
         
-        let generateSuggestionsResponse = try JSONDecoder().decode(GenerateSuggestionsResponse.self, from: data)
-        
-        return generateSuggestionsResponse
+        do {
+            let generateSuggestionsResponse = try JSONDecoder().decode(GenerateSuggestionsResponse.self, from: data)
+            
+            return generateSuggestionsResponse
+        } catch {
+            // Catch as StatusResponse
+            let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)
+            
+            if statusResponse.success == 5 {
+                Task {
+                    do {
+                        try await AuthHelper.regenerate()
+                    } catch {
+                        print("Error regenerating authToken in HTTPSConnector... \(error)")
+                    }
+                }
+            }
+            
+            throw error
+        }
     }
     
     static func getIsPremium(request: AuthRequest) async throws -> IsPremiumResponse {
@@ -48,9 +82,26 @@ class HTTPSConnector {
             body: request,
             headers: nil)
         
-        let isPremiumResponse = try JSONDecoder().decode(IsPremiumResponse.self, from: data)
-        
-        return isPremiumResponse
+        do {
+            let isPremiumResponse = try JSONDecoder().decode(IsPremiumResponse.self, from: data)
+            
+            return isPremiumResponse
+        } catch {
+            // Catch as StatusResponse
+            let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)
+            
+            if statusResponse.success == 5 {
+                Task {
+                    do {
+                        try await AuthHelper.regenerate()
+                    } catch {
+                        print("Error regenerating authToken in HTTPSConnector... \(error)")
+                    }
+                }
+            }
+            
+            throw error
+        }
     }
     
     static func getRemaining(request: AuthRequest) async throws -> GetRemainingResponse {
@@ -59,9 +110,26 @@ class HTTPSConnector {
             body: request,
             headers: nil)
         
-        let getRemainingResponse = try JSONDecoder().decode(GetRemainingResponse.self, from: data)
-        
-        return getRemainingResponse
+        do {
+            let getRemainingResponse = try JSONDecoder().decode(GetRemainingResponse.self, from: data)
+            
+            return getRemainingResponse
+        } catch {
+            // Catch as StatusResponse
+            let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)
+            
+            if statusResponse.success == 5 {
+                Task {
+                    do {
+                        try await AuthHelper.regenerate()
+                    } catch {
+                        print("Error regenerating authToken in HTTPSConnector... \(error)")
+                    }
+                }
+            }
+            
+            throw error
+        }
     }
     
     static func getImportantConstants() async throws -> GetImportantConstantsResponse {
@@ -70,9 +138,26 @@ class HTTPSConnector {
             body: BlankRequest(),
             headers: nil)
         
-        let getImportantConstantsResponse = try JSONDecoder().decode(GetImportantConstantsResponse.self, from: data)
-        
-        return getImportantConstantsResponse
+        do {
+            let getImportantConstantsResponse = try JSONDecoder().decode(GetImportantConstantsResponse.self, from: data)
+            
+            return getImportantConstantsResponse
+        } catch {
+            // Catch as StatusResponse
+            let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)
+            
+            if statusResponse.success == 5 {
+                Task {
+                    do {
+                        try await AuthHelper.regenerate()
+                    } catch {
+                        print("Error regenerating authToken in HTTPSConnector... \(error)")
+                    }
+                }
+            }
+            
+            throw error
+        }
     }
     
     static func submitFeedback(request: SubmitFeedbackRequest) async throws -> StatusResponse {
@@ -81,11 +166,38 @@ class HTTPSConnector {
             body: request,
             headers: nil)
         
+        do {
+            let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)
+            
+            return statusResponse
+        } catch {
+            // Catch as StatusResponse
+            let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)
+            
+            if statusResponse.success == 5 {
+                Task {
+                    do {
+                        try await AuthHelper.regenerate()
+                    } catch {
+                        print("Error regenerating authToken in HTTPSConnector... \(error)")
+                    }
+                }
+            }
+            
+            throw error
+        }
+    }
+    
+    static func validateAuthToken(request: AuthRequest) async throws -> StatusResponse {
+        let (data, response) = try await HTTPSClient.post(
+            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.validateAuthToken)")!,
+            body: request,
+            headers: nil)
+        
         let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)
         
         return statusResponse
     }
-    
     
     
     

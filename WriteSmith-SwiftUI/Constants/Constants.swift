@@ -302,6 +302,7 @@ struct HTTPSConstants {
     static let registerUser = "/registerUser"
     static let submitFeedback = "/submitFeedback"
     static let validateSaveUpdateReceipt = "/validateAndUpdateReceipt"
+    static let validateAuthToken = "/validateAuthToken"
 //    static let getGenerateImage = "/getImageUrlFromGenerateUrl"
     
     static let getImportantConstants = "/getImportantConstants"
