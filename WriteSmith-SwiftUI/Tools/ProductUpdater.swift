@@ -30,7 +30,7 @@ class ProductUpdater: ObservableObject {
                     monthlyProductID
                 ])
                 
-                DispatchQueue.main.async {
+                await MainActor.run {
                     self.weeklyProduct = products.first(where: {$0.id == weeklyProductID})
                     self.monthlyProduct = products.first(where: {$0.id == monthlyProductID})
                 }

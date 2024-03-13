@@ -44,7 +44,7 @@ class PremiumUpdater: ObservableObject {
     func update(authToken: String) async throws {
         // Create authRequest
         let authRequest = AuthRequest(authToken: authToken)
-        
+
         // Get isPremiumResponse from server
         let isPremiumResponse = try await HTTPSConnector.getIsPremium(request: authRequest)
         

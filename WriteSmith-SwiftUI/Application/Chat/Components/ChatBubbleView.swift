@@ -200,7 +200,7 @@ struct ChatBubbleView<Content>: View where Content: View {
         }
         
         // Set isShowingCopyText to true
-        DispatchQueue.main.async {
+        await MainActor.run {
             withAnimation(.easeInOut(duration: copiedTextAnimationDuration)) {
                 isShowingCopyText = true
             }

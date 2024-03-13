@@ -14,7 +14,7 @@ class ChatCDHelper {
     
     static func appendChat(sender: Sender, text: String, to conversation: Conversation, in managedContext: NSManagedObjectContext) throws {
         // Build and save new chat to parent conversation
-        managedContext.performAndWait {
+        try managedContext.performAndWait {
             // Create Chat in managedContext
             let chat = Chat(context: managedContext)
             
@@ -31,15 +31,16 @@ class ChatCDHelper {
             conversation.latestChatDate = date
             conversation.latestChatText = text
             
+            try managedContext.save()
         }
-        
-        try managedContext.save()
     }
     
-    static func deleteChat(chat: Chat, in managedContext: NSManagedObjectContext) async throws {
+    static func deleteChat(chat: Chat, in managedContext: NSManagedObjectContext) throws {
         managedContext.delete(chat)
         
-        try managedContext.save()
+        try managedContext.performAndWait {
+            try managedContext.save()
+        }
     }
     
 //    static func getOrderedChatArray(conversationObjectID: NSManagedObjectID) async throws -> [Chat]? {

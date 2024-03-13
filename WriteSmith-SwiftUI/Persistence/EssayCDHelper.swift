@@ -63,7 +63,9 @@ class EssayCDHelper: Any {
     static func deleteEssay(essay: Essay, in managedContext: NSManagedObjectContext) async throws {
         managedContext.delete(essay)
         
-        try managedContext.save()
+        try await managedContext.perform {
+            try managedContext.save()
+        }
     }
     
 //    static func getAllEssaysReversed() async -> [Essay]? {

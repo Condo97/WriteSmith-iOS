@@ -57,13 +57,15 @@ struct ConversationView: View {
             // TODO: This is for testing, need to remove!
             conversation.latestChatDate = Date()
             
-            do {
-                try viewContext.save()
-                
-                presentingConversation = conversation
-            } catch {
-                // TODO: Handle errors
-                print("Error saving context in ConversationView... \(error)")
+            DispatchQueue.main.async {
+                do {
+                    try viewContext.save()
+                    
+                    presentingConversation = conversation
+                } catch {
+                    // TODO: Handle errors
+                    print("Error saving context in ConversationView... \(error)")
+                }
             }
         }) {
             HStack {

@@ -324,8 +324,13 @@ struct UltraView: View {
                 }
             }) {
                 HStack(alignment: showingPromoRow == .gptIntelligence ? .top : .center) {
-                    Text(Image(systemName: "brain.fill"))
-                        .font(.custom(Constants.FontName.body, size: 24.0))
+                    if #available(iOS 17.0, *) {
+                        Text(Image(systemName: "brain.fill"))
+                            .font(.custom(Constants.FontName.body, size: 24.0))
+                    } else {
+                        Text(Image(systemName: "brain"))
+                            .font(.custom(Constants.FontName.body, size: 24.0))
+                    }
                     
                     VStack(alignment: .leading) {
                         Text("Unlock")
@@ -374,7 +379,7 @@ struct UltraView: View {
             }) {
                 HStack(alignment: showingPromoRow == .unlimitedMessages ? .top : .center) {
                     ZStack {
-                        Text(Image(systemName: "bubble.fill"))
+                        Text(Image(systemName: "bubble.left.fill"))
                             .font(.custom(Constants.FontName.body, size: 28.0))
                         Text(Image(systemName: "infinity"))
                             .font(.custom(Constants.FontName.medium, size: 14.0))
@@ -824,7 +829,7 @@ struct UltraView: View {
             }
         }
         
-        DispatchQueue.main.async {
+        await MainActor.run {
             isLoadingPurchase = true
         }
         

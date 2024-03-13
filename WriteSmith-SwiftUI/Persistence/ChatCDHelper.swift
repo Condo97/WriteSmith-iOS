@@ -29,13 +29,17 @@ class ChatCDHelper {
         conversation.latestChatDate = date
         conversation.latestChatText = text
         
-        try managedContext.save()
+        try managedContext.performAndWait {
+            try managedContext.save()
+        }
     }
     
     static func deleteChat(chat: Chat, in managedContext: NSManagedObjectContext) async throws {
         managedContext.delete(chat)
         
-        try managedContext.save()
+        try managedContext.performAndWait {
+            try managedContext.save()
+        }
     }
     
 //    static func getOrderedChatArray(conversationObjectID: NSManagedObjectID) async throws -> [Chat]? {

@@ -21,7 +21,7 @@ struct ChatView: View, KeyboardReadable {
     @EnvironmentObject private var remainingUpdater: RemainingUpdater
     @EnvironmentObject private var faceAnimationUpdater: FaceAnimationUpdater
     
-    @State private var chatGenerator: ConversationChatGenerator = ConversationChatGenerator()
+    @StateObject private var chatGenerator: ConversationChatGenerator = ConversationChatGenerator()
     
     
     private let chatsBottomPadding: CGFloat = 140.0
@@ -88,7 +88,6 @@ struct ChatView: View, KeyboardReadable {
                 }
                 
                 ZStack {
-                    
                     VStack(spacing: 0.0) {
                         ScrollView(.vertical) {
                             
@@ -128,30 +127,28 @@ struct ChatView: View, KeyboardReadable {
                     
                 }
                 .padding(.bottom, isKeyboardVisible ? 8.0 : 48.0)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar(.visible, for: .navigationBar)
-                .toolbar {
-                    LogoToolbarItem(elementColor: .constant(Colors.elementTextColor))
-                    
-                    AddChatToolbarItem(elementColor: .constant(Colors.elementTextColor), trailingPadding: premiumUpdater.isPremium ? 0.0 : -12.0, action: {
-                        // Do light haptic
-                        HapticHelper.doLightHaptic()
-                        
-                        // Transition to new conversation
-                        transitionToNewConversation = true
-                    })
-                    
-                    if !premiumUpdater.isPremium {
-                        UltraToolbarItem()
-                    }
-                }
-                .toolbarBackground(Colors.topBarBackgroundColor, for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
-                
             }
             .background(Colors.background)
         }
-        .environmentObject(chatGenerator)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
+        .toolbar {
+            LogoToolbarItem(elementColor: .constant(Colors.elementTextColor))
+            
+            AddChatToolbarItem(elementColor: .constant(Colors.elementTextColor), trailingPadding: premiumUpdater.isPremium ? 0.0 : -12.0, action: {
+                // Do light haptic
+                HapticHelper.doLightHaptic()
+                
+                // Transition to new conversation
+                transitionToNewConversation = true
+            })
+            
+            if !premiumUpdater.isPremium {
+                UltraToolbarItem()
+            }
+        }
+        .toolbarBackground(Colors.topBarBackgroundColor, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
         .task {
             // Ensure there are no chats, otherwise return
             guard chats.count == 0 else {
@@ -303,7 +300,9 @@ struct ChatView: View, KeyboardReadable {
                             
                             // Save context
                             do {
-                                try viewContext.save()
+                                try viewContext.performAndWait {
+                                    try viewContext.save()
+                                }
                             } catch {
                                 // TODO: Handle errors
                                 print("Error saving context when deleting chat in ChatView... \(error)")
@@ -376,7 +375,8 @@ struct ChatView: View, KeyboardReadable {
                 HStack(alignment: .bottom) {
                     EntryView(
                         conversation: $conversation,
-                        maxHeight: 350.0)
+                        maxHeight: 350.0,
+                        chatGenerator: chatGenerator)
                         .onChange(of: chatGenerator.isLoading, perform: { value in
                             // Set face idle animation to thinking if isLoading
                             if value {

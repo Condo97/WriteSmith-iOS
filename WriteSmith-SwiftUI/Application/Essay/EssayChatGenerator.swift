@@ -44,7 +44,7 @@ class EssayChatGenerator: ObservableObject {
         // Set canGenerate to false since it will be generating a chat
         canGenerate = false
         
-        DispatchQueue.main.async {
+        await MainActor.run {
             // Set isLoading to true
             self.isLoading = true
         }
@@ -107,7 +107,7 @@ class EssayChatGenerator: ObservableObject {
                     HapticHelper.doSuccessHaptic()
                     
                     // Set isLoading to false and isGenerating to true
-                    DispatchQueue.main.async {
+                    await MainActor.run {
                         self.isLoading = false
                         self.isGenerating = true
                     }
@@ -178,7 +178,9 @@ class EssayChatGenerator: ObservableObject {
                     
                     // Save to CoreData
                     do {
-                        try managedContext.save()
+                        try await managedContext.perform {
+                            try managedContext.save()
+                        }
                     } catch {
                         // TODO: Handle errors
                         print("Error saving to CoreData in ConversationChatGenerator... \(error)")
@@ -208,7 +210,9 @@ class EssayChatGenerator: ObservableObject {
         
             // Save to CoreData
             do {
-                try managedContext.save()
+                try await managedContext.perform {
+                    try managedContext.save()
+                }
             } catch {
                 // TODO: Handle errors
                 print("Error saving to CoreData in ConversationChatGenerator... \(error)")

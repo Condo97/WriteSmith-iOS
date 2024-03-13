@@ -167,7 +167,9 @@ struct ChatView: View {
                             
                             // Save context
                             do {
-                                try viewContext.save()
+                                try viewContext.performAndWait {
+                                    try viewContext.save()
+                                }
                             } catch {
                                 // TODO: Handle errors
                                 print("Error saving context when deleting chat in ChatView... \(error)")

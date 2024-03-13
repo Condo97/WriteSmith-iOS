@@ -43,88 +43,92 @@ struct ConversationView: View {
     }
     
     var body: some View {
-        ZStack {
-            VStack(spacing: 0.0) {
-                if !premiumUpdater.isPremium {
-                    BannerView(bannerID: Keys.Ads.Banner.conversationView)
-                }
-                
-                List {
-                    newChatButton
-                    
-                    conversationList
-                }
-                .navigationDestination(isPresented: isShowingPresentingConversation, destination: {
-                    if let presentingConversation = presentingConversation {
-                        ChatView(
-                            conversation: presentingConversation,
-                            isShowingGPTModelSelectionView: $isShowingGPTModelSelectionView,
-                            transitionToNewConversation: $transitionToNewConversation,
-                            shouldShowFirstConversationChats: sectionedConversations.count == 0 || (sectionedConversations.count == 1 && sectionedConversations[0].count <= 1)
-                        )
+        NavigationStack {
+            ZStack {
+                VStack(spacing: 0.0) {
+                    if !premiumUpdater.isPremium {
+                        BannerView(bannerID: Keys.Ads.Banner.conversationView)
                     }
-                })
-            }
-        }
-        .scrollContentBackground(.hidden)
-        .background(Colors.background)
-        .navigationTitle("Chats")
-        .navigationDestination(isPresented: $isShowingSettingsView, destination: {
-            SettingsView()
-        })
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar(.visible, for: .navigationBar)
-        .toolbar {
-            SettingsToolbarItem(
-                elementColor: .constant(Colors.elementTextColor),
-                placement: .topBarLeading,
-                tightenLeadingSpacing: true,
-                tightenTrailingSpacing: true,
-                action: {
-                    // Do light haptic
-                    HapticHelper.doLightHaptic()
                     
-                    // Show Settings View
-                    isShowingSettingsView = true
+                    List {
+                        newChatButton
+                        
+                        conversationList
+                    }
+                    .navigationDestination(isPresented: isShowingPresentingConversation, destination: {
+                        if let presentingConversation = presentingConversation {
+                            ChatView(
+                                conversation: presentingConversation,
+                                isShowingGPTModelSelectionView: $isShowingGPTModelSelectionView,
+                                transitionToNewConversation: $transitionToNewConversation,
+                                shouldShowFirstConversationChats: sectionedConversations.count == 0 || (sectionedConversations.count == 1 && sectionedConversations[0].count <= 1)
+                            )
+                        }
+                    })
+                }
+            }
+            .scrollContentBackground(.hidden)
+            .background(Colors.background)
+            .navigationTitle("Chats")
+            .navigationDestination(isPresented: $isShowingSettingsView, destination: {
+                SettingsView()
             })
-            
-            ShareToolbarItem(
-                elementColor: .constant(Colors.elementTextColor),
-                placement: .topBarLeading,
-                tightenLeadingSpacing: true)
-            
-            LogoToolbarItem(elementColor: .constant(Colors.elementTextColor))
-            
-            ToolbarItem(placement: .topBarTrailing) {
-                EditButton()
-                    .tint(Colors.elementTextColor)
-                    .font(.custom(Constants.FontName.black, size: 17.0))
-                    .padding(.top, 4)
-                    .padding(.trailing, premiumUpdater.isPremium ? 0.0 : -12.0)
-                    .onTapGesture {
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.visible, for: .navigationBar)
+            .toolbar {
+                SettingsToolbarItem(
+                    elementColor: .constant(Colors.elementTextColor),
+                    placement: .topBarLeading,
+                    tightenLeadingSpacing: true,
+                    tightenTrailingSpacing: true,
+                    action: {
                         // Do light haptic
                         HapticHelper.doLightHaptic()
+                        
+                        // Show Settings View
+                        isShowingSettingsView = true
+                })
+                
+                ShareToolbarItem(
+                    elementColor: .constant(Colors.elementTextColor),
+                    placement: .topBarLeading,
+                    tightenLeadingSpacing: true)
+                
+                LogoToolbarItem(elementColor: .constant(Colors.elementTextColor))
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    EditButton()
+                        .tint(Colors.elementTextColor)
+                        .font(.custom(Constants.FontName.black, size: 17.0))
+                        .padding(.top, 4)
+                        .padding(.trailing, premiumUpdater.isPremium ? 0.0 : -12.0)
+                        .onTapGesture {
+                            // Do light haptic
+                            HapticHelper.doLightHaptic()
+                        }
+                }
+                
+                if !premiumUpdater.isPremium {
+                    UltraToolbarItem()
+                }
+            }
+            .toolbarBackground(Colors.topBarBackgroundColor, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .onChange(of: pushToLatestConversationOrClose, perform: { value in
+                if value {
+                    pushToLatestConversationOrCloseIfNecessary()
+                }
+            })
+            .onChange(of: transitionToNewConversation, perform: { value in
+                if value {
+                    Task {
+                        await transitionToNewConversationIfNecessary()
                     }
-            }
-            
-            if !premiumUpdater.isPremium {
-                UltraToolbarItem()
-            }
-        }
-        .toolbarBackground(Colors.topBarBackgroundColor, for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
-        .onChange(of: pushToLatestConversationOrClose, perform: { value in
-            if value {
+                }
+            })
+            .onAppear {
                 pushToLatestConversationOrCloseIfNecessary()
-            }
-        })
-        .onChange(of: transitionToNewConversation, perform: { value in
-            if value {
-                transitionToNewConversationIfNecessary()
-            }
-        })
-        .onAppear {
-            pushToLatestConversationOrCloseIfNecessary()
+        }
         }
     }
     
@@ -134,18 +138,19 @@ struct ConversationView: View {
             HapticHelper.doLightHaptic()
             
             // Create and save conversation, setting to presentingConversation
-            do {
-                let conversation = Conversation(context: viewContext)
-                conversation.conversationID = Constants.defaultConversationID
-                conversation.behavior = nil
-                
-                try viewContext.save()
-                
-                DispatchQueue.main.async {
-                    presentingConversation = conversation
+            let conversation = Conversation(context: viewContext)
+            conversation.conversationID = Constants.defaultConversationID
+            conversation.behavior = nil
+            
+            
+            DispatchQueue.main.async {
+                do {
+                    try viewContext.save()
+                } catch {
+                    print("Error saving new Conversation in ConversationView... \(error)")
                 }
-            } catch {
-                print("Error saving new Conversation in ConversationView... \(error)")
+                
+                presentingConversation = conversation
             }
         }) {
             HStack {
@@ -190,15 +195,19 @@ struct ConversationView: View {
                     }
                 }
                 .onDelete(perform: { indexSet in
-                    for index in indexSet {
-                        viewContext.delete(conversations[index])
-                    }
-                    
-                    do {
-                        try viewContext.save()
-                    } catch {
-                        // TODO: Handle errors
-                        print("Error saving viewContext after deleting conversatoins in ConversationView... \(error)")
+                    Task {
+                        for index in indexSet {
+                            viewContext.delete(conversations[index])
+                        }
+                        
+                        do {
+                            try await viewContext.perform {
+                                try viewContext.save()
+                            }
+                        } catch {
+                            // TODO: Handle errors
+                            print("Error saving viewContext after deleting conversatoins in ConversationView... \(error)")
+                        }
                     }
                 })
             }
@@ -235,29 +244,32 @@ struct ConversationView: View {
             conversation.conversationID = Constants.defaultConversationID
             conversation.behavior = nil
             
-            do {
-                try viewContext.save()
-            } catch {
-                // TODO: Handle errors
-                print("Error saving viewContext in ConversationView... \(error)")
-            }
-            
-            // Set presentingConversation to conversation TODO: Should this be in the do ?
-            presentingConversation = conversation
-            
-            // Set ConversationResumingManager conversation
-            do {
-                try ConversationResumingManager.setConversation(conversation, in: viewContext)
-            } catch {
-                // TODO: Handle errors
-                print("Error obtaining permanent ID for Conversation in ConversationView... \(error)")
+            // TODO: This doesn't all necessarily have to be on the main thread, it can also be a Task with just the saving done on the MainActor 
+            DispatchQueue.main.async {
+                do {
+                    try viewContext.save()
+                } catch {
+                    // TODO: Handle errors
+                    print("Error saving viewContext in ConversationView... \(error)")
+                }
+                
+                // Set presentingConversation to conversation TODO: Should this be in the do ?
+                self.presentingConversation = conversation
+                
+                // Set ConversationResumingManager conversation
+                do {
+                    try ConversationResumingManager.setConversation(conversation, in: viewContext)
+                } catch {
+                    // TODO: Handle errors
+                    print("Error obtaining permanent ID for Conversation in ConversationView... \(error)")
+                }
             }
         } else {
             presentingConversation = nil
         }
     }
     
-    func transitionToNewConversationIfNecessary() {
+    func transitionToNewConversationIfNecessary() async {
         // TODO: Make this better, it's a little jumpy in the transition
         
         // Defer setting transitionToNewConversation to false to ensure it is always set when the function completes
@@ -270,35 +282,35 @@ struct ConversationView: View {
             return
         }
         
-        do {
-            let conversation = Conversation(context: viewContext)
-            conversation.conversationID = Constants.defaultConversationID
-            conversation.behavior = nil
-            
-            try viewContext.save()
-            
-            DispatchQueue.main.async {
-                // Set animations to false and set presentingConversation to nil
-                UIView.setAnimationsEnabled(false)
-                
-                presentingConversation = nil
+        let conversation = Conversation(context: viewContext)
+        conversation.conversationID = Constants.defaultConversationID
+        conversation.behavior = nil
+        
+        await MainActor.run {
+            do {
+                try viewContext.save()
+            } catch {
+                // TODO: Handle errors
+                print("Error saving new conversation in ConversationView... \(error)")
             }
+        
+            // Set animations to false and set presentingConversation to nil
+            UIView.setAnimationsEnabled(false)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-                // Set animations to false and set presentingConversation to conversation
-                UIView.setAnimationsEnabled(false)
-                
-                presentingConversation = conversation
-            })
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
-                // Set animations back to true
-                UIView.setAnimationsEnabled(true)
-            })
-        } catch {
-            // TODO: Handle errors
-            print("Error saving new conversation in ConversationView... \(error)")
+            presentingConversation = nil
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.12, execute: {
+            // Set animations to false and set presentingConversation to conversation
+            UIView.setAnimationsEnabled(false)
+            
+            presentingConversation = conversation
+        })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
+            // Set animations back to true
+            UIView.setAnimationsEnabled(true)
+        })
     }
     
 }

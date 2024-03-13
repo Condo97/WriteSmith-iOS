@@ -60,7 +60,10 @@ struct EssayRowView: View {
             
             // Save view context
             do {
-                try viewContext.save()
+                // TODO: Perform and wait is the same thing as putting this in async and making it await perform, right?
+                try viewContext.performAndWait {
+                    try viewContext.save()
+                }
             } catch {
                 // TODO: Handle errors
                 print("Error saving edited essay when initializing EssayRowView... \(error)")
@@ -156,7 +159,9 @@ struct EssayRowView: View {
                                     viewContext.delete(essay)
                                     
                                     do {
-                                        try viewContext.save()
+                                        try viewContext.performAndWait {
+                                            try viewContext.save()
+                                        }
                                     } catch {
                                         // TODO: Handle errors
                                         print("Error saving viewContext after deleting essay in EssayRowView... \(error)")
@@ -303,7 +308,9 @@ struct EssayRowView: View {
         
         // Save essay
         do {
-            try viewContext.save()
+            try viewContext.performAndWait {
+                try viewContext.save()
+            }
         } catch {
             // TODO: Handle errors
             print("Error saving edited essay in EssayRowView... \(error)")

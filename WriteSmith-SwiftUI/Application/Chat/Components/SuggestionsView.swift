@@ -17,14 +17,16 @@ struct SuggestionsView: View {
     
     @Binding var isActive: Bool
     @Binding var selected: String
-    @FetchRequest<Chat> var chats: FetchedResults<Chat>
+    @Binding var conversation: Conversation
     
     
     private let numberOfChatsToIncludeInRequest: Int = 3
     private let numberOfSuggestionsToLoad: Int = 5
     
+    @FetchRequest<Chat> var chats: FetchedResults<Chat>
     
     @Environment(\.managedObjectContext) var managedContext
+    
     
 //    (
 //        sortDescriptors: [NSSortDescriptor(keyPath: \Chat.date, ascending: false)]
@@ -37,8 +39,16 @@ struct SuggestionsView: View {
     @State private var suggestions: [String] = []
     
     
-//    init(isActive: Binding<Bool>, selected: Binding<String>)
-    
+    init(isActive: Binding<Bool>, selected: Binding<String>, conversation: Binding<Conversation>) {
+        self._chats = FetchRequest<Chat>(
+            sortDescriptors: [NSSortDescriptor(keyPath: \Chat.date, ascending: false)],
+            predicate: NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation.wrappedValue.objectID),
+            animation: .default)
+        
+        self._conversation = conversation
+        self._isActive = isActive
+        self._selected = selected
+    }
     
     var body: some View {
         // Should show up automatically if suggestions is not empty and isPresented is true, and not show if suggestions is empty OR isPresented is false meaning it will not show if isPresented is true but suggestions is empty or vice versa
@@ -83,6 +93,11 @@ struct SuggestionsView: View {
     }
     
     func generateSuggestions() async throws -> [String] {
+        // Ensure there is at least one chat, otherwise return
+        guard chats.count > 0 else {
+            return []
+        }
+        
         // Get numberOfChatsToIncludeInRequestInRange as chats count or numberOfChatsToIncludeInRequest, whichever is less
         let numberOfChatsToIncludeInRequestInRange = min(chats.count, numberOfChatsToIncludeInRequest)
         
@@ -126,10 +141,17 @@ struct SuggestionsView: View {
         @State private var isActive: Bool = false
         @State private var selected: String = ""
         
-        let fetchRequest = FetchRequest<Chat>(
-            sortDescriptors: [NSSortDescriptor(keyPath: \Chat.date, ascending: false)]
-        )
+        @State private var conversation: Conversation
         
+//        let fetchRequest = FetchRequest<Chat>(
+//            sortDescriptors: [NSSortDescriptor(keyPath: \Chat.date, ascending: false)]
+//        )
+        
+        init() {
+            self.conversation = Conversation(context: CDClient.mainManagedObjectContext)
+            
+            try? CDClient.mainManagedObjectContext.save()
+        }
         
         var body: some View {
             VStack {
@@ -139,7 +161,7 @@ struct SuggestionsView: View {
                     SuggestionsView(
                         isActive: $isActive,
                         selected: $selected,
-                        chats: fetchRequest
+                        conversation: .constant(conversation)
                     )
                     .background(.white)
                     

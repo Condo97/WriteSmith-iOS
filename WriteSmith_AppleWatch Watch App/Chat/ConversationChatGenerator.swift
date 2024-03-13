@@ -39,15 +39,15 @@ class ConversationChatGenerator: ObservableObject {
         userChat.date = Date()
         userChat.conversation = conversation
         
-        DispatchQueue.main.async {
-            do {
+        do {
+            try await managedContext.perform {
                 try managedContext.save()
-            } catch {
-                // TODO: Handle errors
-                print("Error saving userChat to CoreData in ConversationChatGenerator... \(error)")
-//                throw ChatGeneratorError.addUserChat
-                self.alertShowingUserChatNotSaved = true
             }
+        } catch {
+            // TODO: Handle errors
+            print("Error saving userChat to CoreData in ConversationChatGenerator... \(error)")
+//                throw ChatGeneratorError.addUserChat
+            self.alertShowingUserChatNotSaved = true
         }
         
         // Defer setting canGenerate to true and isLoading and isGenerating to false to ensure they are set to false when this method completes
@@ -58,7 +58,7 @@ class ConversationChatGenerator: ObservableObject {
             }
         }
         
-        DispatchQueue.main.async {
+        await MainActor.run {
             // Set isLoading to true
             self.isLoading = true
         }
@@ -106,7 +106,7 @@ class ConversationChatGenerator: ObservableObject {
                     HapticHelper.doLightHaptic()
                     
                     // Set isLoading to false and isGenerating to true
-                    DispatchQueue.main.async {
+                    await MainActor.run {
                         self.isLoading = false
                         self.isGenerating = true
                     }
@@ -202,7 +202,7 @@ class ConversationChatGenerator: ObservableObject {
             throw ChatGeneratorError.nothingFromServer
         }
         
-        DispatchQueue.main.async { [finishReason] in
+        await MainActor.run { [finishReason] in
             // Add additional text if finishReason is length and isPremium is false
             if finishReason == .length && !isPremium {
                 aiChat.text? += Constants.lengthFinishReasonAdditionalText

@@ -15,6 +15,20 @@ extension CameraViewController: CameraViewDelegate {
         // Do haptic
         HapticHelper.doLightHaptic()
         
+        // Get flash mode TODO: Fix this, make it more dynamic so it doesn't have to get caputreDevice
+        let flashMode: AVCaptureDevice.FlashMode = {
+            if let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) {
+                return switch captureDevice.torchMode {
+                case .auto: .auto
+                case .off: .off
+                case .on: .on
+                @unknown default: .off
+                }
+            }
+            
+            return .off
+        }()
+        
         // Take photo or delete and redo, depending on button image
         if rootView.cameraButton.backgroundImage(for: .normal) == UIImage(named: Constants.ImageName.cameraButtonNotPressed) || rootView.cameraButton.backgroundImage(for: .normal) == UIImage(named: Constants.ImageName.cameraButtonPressed) {
             // Camera was enabled, so take the photo
@@ -23,8 +37,9 @@ extension CameraViewController: CameraViewDelegate {
             // Set photoSettings
             let photoSettings = AVCapturePhotoSettings()
             photoSettings.isAutoStillImageStabilizationEnabled = true
-            photoSettings.isHighResolutionPhotoEnabled = true
-            photoSettings.flashMode = .auto
+//            photoSettings.isHighResolutionPhotoEnabled = true
+            
+            photoSettings.flashMode = flashMode
             
             // Capture the photo
             capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)

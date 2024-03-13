@@ -51,7 +51,7 @@ struct BounceableOnChange: ViewModifier {
         }
         
         // Animate bounce in
-        DispatchQueue.main.async {
+        await MainActor.run {
             withAnimation(.easeInOut(duration: bounceDuration)) {
                 isBouncing = true
             }

@@ -23,6 +23,10 @@ class V4_2MigrationHandler {
                 essay.editedEssay = essay.essay
             }
         }
+        
+        try await context.perform {
+            try context.save()
+        }
     }
     
 }

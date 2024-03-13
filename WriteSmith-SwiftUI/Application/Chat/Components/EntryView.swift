@@ -12,10 +12,11 @@ struct EntryView: View, KeyboardReadable {
     @Binding var conversation: Conversation
     let initialHeight: CGFloat = 32.0
     let maxHeight: CGFloat
+    @ObservedObject var chatGenerator: ConversationChatGenerator
     
     @Environment(\.requestReview) private var requestReview
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject private var chatGenerator: ConversationChatGenerator // TODO: Use @Environment with an optional, or maybe something else for this
+//    @EnvironmentObject private var chatGenerator: ConversationChatGenerator // TODO: Use @Environment with an optional, or maybe something else for this
     @EnvironmentObject private var premiumUpdater: PremiumUpdater // TODO: Use @Environment with an optional
     @EnvironmentObject private var remainingUpdater: RemainingUpdater // TODO: Use @Environment with an optional
     @EnvironmentObject private var faceAnimationUpdater: FaceAnimationUpdater // TODO: Use @Environment with an optional
@@ -72,16 +73,16 @@ struct EntryView: View, KeyboardReadable {
     
     var body: some View {
         VStack {
-            var suggestionsViewChatFetchRequest = FetchRequest<Chat>(
-                sortDescriptors: [NSSortDescriptor(keyPath: \Chat.date, ascending: false)],
-                predicate: NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation.objectID),
-                animation: .default) // TODO: This could be moved to a wrapper class for SuggestionsView where just the Conversation would be implemented, though I think that would make the hirearchy a little complicated for now, so I actually should organize it and then organize this code yay wow that would be great
+//            var suggestionsViewChatFetchRequest = FetchRequest<Chat>(
+//                sortDescriptors: [NSSortDescriptor(keyPath: \Chat.date, ascending: false)],
+//                predicate: NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation.objectID),
+//                animation: .default) // TODO: This could be moved to a wrapper class for SuggestionsView where just the Conversation would be implemented, though I think that would make the hirearchy a little complicated for now, so I actually should organize it and then organize this code yay wow that would be great
             
             // Suggestions
             SuggestionsView(
                 isActive: $isShowingSuggestions,
                 selected: $selectedSuggestionText,
-                chats: suggestionsViewChatFetchRequest)
+                conversation: $conversation)
             .onChange(of: selectedSuggestionText, perform: { value in
                 if !selectedSuggestionText.isEmpty {
                     // If selectedSuggestionText is not empty, that means an option was selected, so dismiss, set text to it, submitText, and clear the field
@@ -205,10 +206,14 @@ struct EntryView: View, KeyboardReadable {
         .onReceive(chatGenerator.$isGenerating) { value in
             if value {
                 // If changed to isGenerating, deactivate the suggestions view
-                isShowingSuggestions = false
+                DispatchQueue.main.async {
+                    self.isShowingSuggestions = false
+                }
             } else {
                 // If changed to not isGenerating, activate the suggestions view
-                isShowingSuggestions = true
+                DispatchQueue.main.async {
+                    self.isShowingSuggestions = true
+                }
             }
         }
     }
@@ -452,7 +457,8 @@ struct EntryView: View, KeyboardReadable {
     
     return EntryView(
         conversation: .constant(conversation),
-        maxHeight: 400.0)
+        maxHeight: 400.0,
+        chatGenerator: ConversationChatGenerator())
         .environment(\.managedObjectContext, CDClient.mainManagedObjectContext)
         .environmentObject(ConversationChatGenerator())
         .environmentObject(PremiumUpdater())

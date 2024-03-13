@@ -12,15 +12,15 @@ class ConversationCDHelper: Any {
     
     static let conversationEntityName = String(describing: Conversation.self)
     
-    static func appendConversation(in managedContext: NSManagedObjectContext) throws {
-        return try appendConversation(conversationID: Int64(Constants.defaultConversationID), in: managedContext)
+    static func appendConversation(in managedContext: NSManagedObjectContext) async throws {
+        return try await appendConversation(conversationID: Int64(Constants.defaultConversationID), in: managedContext)
     }
     
-    static func appendConversation(conversationID: Int64, in managedContext: NSManagedObjectContext) throws {
-        return try appendConversation(conversationID: conversationID, behavior: nil, in: managedContext)
+    static func appendConversation(conversationID: Int64, in managedContext: NSManagedObjectContext) async throws {
+        return try await appendConversation(conversationID: conversationID, behavior: nil, in: managedContext)
     }
     
-    static func appendConversation(conversationID: Int64, behavior: String?, in managedContext: NSManagedObjectContext) throws {
+    static func appendConversation(conversationID: Int64, behavior: String?, in managedContext: NSManagedObjectContext) async throws {
         // Could also do it this way, but I think the way I have it now is cooler!
 //            let keyValueMap: Dictionary<String, Any> = [
 //                #keyPath(Conversation.conversationID):conversationID,
@@ -29,14 +29,15 @@ class ConversationCDHelper: Any {
         
 //            return try CDClient.append(keyValueMap: keyValueMap, in: conversationEntityName) as! Conversation
         
-        managedContext.performAndWait {
-            let conversation = Conversation(context: managedContext)
-            
-            conversation.conversationID = conversationID
-            conversation.behavior = behavior
+        let conversation = Conversation(context: managedContext)
+        
+        conversation.conversationID = conversationID
+        conversation.behavior = behavior
+        
+        try await managedContext.perform {
+            try managedContext.save()
         }
         
-        try managedContext.save()
     }
     
 //    static func countChats(in conversationObjectID: NSManagedObjectID) async throws -> Int? {
@@ -93,10 +94,12 @@ class ConversationCDHelper: Any {
 //        }
 //    }
     
-    static func deleteConversation(conversation: Conversation, in managedContext: NSManagedObjectContext) throws {
+    static func deleteConversation(conversation: Conversation, in managedContext: NSManagedObjectContext) async throws {
         managedContext.delete(conversation)
         
-        try managedContext.save()
+        try await managedContext.perform {
+            try managedContext.save()
+        }
     }
     
 //    static func isValidObject(conversationObjectID: NSManagedObjectID?) async -> Bool {

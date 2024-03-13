@@ -32,8 +32,10 @@ struct ChatManagedReviewPrompt: View {
                         // Show review prompt
                         isShowingReviewPrompt = true
                     } else {
-                        // Set idPresented to false
-                        isPresented = false
+                        // Set isPresented to false
+                        DispatchQueue.main.async {
+                            isPresented = false
+                        }
                     }
                 } else {
                     // If changed to false, dismiss the reviewPrompt

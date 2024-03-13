@@ -101,7 +101,7 @@ struct WriteSmith_SwiftUIApp: App {
                     let tempAuthToken = try await AuthHelper.ensure()
                     
                     // TODO: Do this better
-                    let authRequest = AuthRequest(authToken: "")
+                    let authRequest = AuthRequest(authToken: tempAuthToken)
                     let statusResponse = try await HTTPSConnector.validateAuthToken(request: authRequest)
                     if statusResponse.success == 5 {
                         try await AuthHelper.regenerate()

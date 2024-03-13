@@ -48,11 +48,15 @@ class ExploreChatGenerator: ObservableObject {
         
         // Append exploreChat and get ID
         var exploreChat = ExploreChat()
-        generatedChats.append(exploreChat)
+        
+        await MainActor.run { [exploreChat] in
+            generatedChats.append(exploreChat)
+        }
+        
         let generatedChatID = exploreChat.id
 //        generatedText = ""
         
-        DispatchQueue.main.async {
+        await MainActor.run {
             // Set isLoading to true
             self.isLoading = true
         }
@@ -110,7 +114,7 @@ class ExploreChatGenerator: ObservableObject {
                     HapticHelper.doSuccessHaptic()
                     
                     // Set isLoading to false and isGenerating to true
-                    DispatchQueue.main.async {
+                    await MainActor.run {
                         self.isLoading = false
                         self.isGenerating = true
                     }
@@ -194,7 +198,7 @@ class ExploreChatGenerator: ObservableObject {
             throw ChatGeneratorError.nothingFromServer
         }
         
-        DispatchQueue.main.async { [finishReason] in
+        await MainActor.run { [finishReason] in
             // Add additional text if finishReason is length and isPremium is false
             if finishReason == .length && !isPremium {
                 if let generatedChatIndex = self.generatedChats.firstIndex(where: {$0.id == generatedChatID}) {
