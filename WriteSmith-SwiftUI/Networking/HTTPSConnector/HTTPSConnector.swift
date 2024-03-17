@@ -9,6 +9,28 @@ import Foundation
 
 class HTTPSConnector {
     
+    static func checkIfChatRequestsImageRevision(request: CheckIfChatRequestsImageRevisionRequest) async throws -> CheckIfChatRequestsImageRevisionResponse {
+        let (data, response) = try await HTTPSClient.post(
+            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.checkIfChatRequestsImageRevision)")!,
+            body: request,
+            headers: nil)
+        
+        let checkIfChatRequestsImageRevisionResponse = try JSONDecoder().decode(CheckIfChatRequestsImageRevisionResponse.self, from: data)
+        
+        return checkIfChatRequestsImageRevisionResponse
+    }
+    
+    static func classifyChat(request: ClassifyChatRequest) async throws -> ClassifyChatResponse {
+        let (data, response) = try await HTTPSClient.post(
+            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.classifyChat)")!,
+            body: request,
+            headers: nil)
+        
+        let classifyChatResponse = try JSONDecoder().decode(ClassifyChatResponse.self, from: data)
+        
+        return classifyChatResponse
+    }
+    
     static func deleteChat(request: DeleteChatRequest) async throws -> StatusResponse {
         let (data, response) = try await HTTPSClient.post(
             url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.deleteChat)")!,
@@ -30,6 +52,34 @@ class HTTPSConnector {
             let registerUserResponse = try JSONDecoder().decode(RegisterUserResponse.self, from: data)
             
             return registerUserResponse
+        } catch {
+            // Catch as StatusResponse
+            let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)
+            
+            if statusResponse.success == 5 {
+                Task {
+                    do {
+                        try await AuthHelper.regenerate()
+                    } catch {
+                        print("Error regenerating authToken in HTTPSConnector... \(error)")
+                    }
+                }
+            }
+            
+            throw error
+        }
+    }
+    
+    static func generateImage(request: GenerateImageRequest) async throws -> GenerateImageResponse {
+        let (data, response) = try await HTTPSClient.post(
+            url: URL(string: "\(HTTPSConstants.chitChatServer)\(HTTPSConstants.generateImage)")!,
+            body: request,
+            headers: nil)
+        
+        do {
+            let generateImageResponse = try JSONDecoder().decode(GenerateImageResponse.self, from: data)
+            
+            return generateImageResponse
         } catch {
             // Catch as StatusResponse
             let statusResponse = try JSONDecoder().decode(StatusResponse.self, from: data)

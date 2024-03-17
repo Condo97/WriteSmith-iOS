@@ -28,6 +28,14 @@
 		BB550EC82AEAE0780070BAB8 /* DropdownPanelComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB550EC72AEAE0780070BAB8 /* DropdownPanelComponentView.swift */; };
 		BB57956C2B1A59C000E87471 /* ProductUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB57956B2B1A59C000E87471 /* ProductUpdater.swift */; };
 		BB57956E2B1A5F4F00E87471 /* Int+Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB57956D2B1A5F4F00E87471 /* Int+Word.swift */; };
+		BB60B10C2BA2A365008D7762 /* PromoGenerateImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60B10B2BA2A365008D7762 /* PromoGenerateImagesView.swift */; };
+		BB60B1122BA37414008D7762 /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60B1112BA37414008D7762 /* FullScreenImageView.swift */; };
+		BB60B1162BA3875F008D7762 /* Image+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60B1152BA3875F008D7762 /* Image+Identifiable.swift */; };
+		BB60B11E2BA3BA12008D7762 /* Generate Images Promo Scroller Light.png in Resources */ = {isa = PBXBuildFile; fileRef = BB60B11C2BA3BA11008D7762 /* Generate Images Promo Scroller Light.png */; };
+		BB60B11F2BA3BA12008D7762 /* Generate Images Promo Scroller Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = BB60B11D2BA3BA12008D7762 /* Generate Images Promo Scroller Dark.png */; };
+		BB60B1212BA3C113008D7762 /* ImageGenerationLimiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60B1202BA3C113008D7762 /* ImageGenerationLimiter.swift */; };
+		BB60B1282BA3CDB3008D7762 /* Image Generation Demo Dark.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BB60B1262BA3CDB3008D7762 /* Image Generation Demo Dark.mp4 */; };
+		BB60B1292BA3CDB3008D7762 /* Image Generation Demo Light.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BB60B1272BA3CDB3008D7762 /* Image Generation Demo Light.mp4 */; };
 		BB66F9462AF44424003F2E63 /* ChitChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB66F9442AF44424003F2E63 /* ChitChat.xcdatamodeld */; };
 		BB66F9572AF444FB003F2E63 /* V4_2MigrationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66F9562AF444FB003F2E63 /* V4_2MigrationHandler.swift */; };
 		BB66F95A2AF44758003F2E63 /* V4MigrationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66F9592AF44758003F2E63 /* V4MigrationHandler.swift */; };
@@ -204,6 +212,12 @@
 		BBB5839F2AF81CE0001EBF64 /* ConversationChatGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583712AF81CE0001EBF64 /* ConversationChatGenerator.swift */; };
 		BBB583A02AF81CE0001EBF64 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB583722AF81CE0001EBF64 /* ChatView.swift */; };
 		BBB615422AFF5E1900E7BBFB /* BounceableOnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB615412AFF5E1900E7BBFB /* BounceableOnChange.swift */; };
+		BBBCD7422BA1457900B29E0F /* ClassifyChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBCD7412BA1457900B29E0F /* ClassifyChatRequest.swift */; };
+		BBBCD7442BA145C000B29E0F /* ClassifyChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBCD7432BA145C000B29E0F /* ClassifyChatResponse.swift */; };
+		BBBCD7462BA1462900B29E0F /* CheckIfChatRequestsImageRevisionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBCD7452BA1462900B29E0F /* CheckIfChatRequestsImageRevisionRequest.swift */; };
+		BBBCD7482BA1465F00B29E0F /* CheckIfChatRequestsImageRevisionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBCD7472BA1465F00B29E0F /* CheckIfChatRequestsImageRevisionResponse.swift */; };
+		BBBCD74A2BA161D200B29E0F /* GenerateImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBCD7492BA161D200B29E0F /* GenerateImageRequest.swift */; };
+		BBBCD74C2BA1621600B29E0F /* GenerateImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBCD74B2BA1621600B29E0F /* GenerateImageResponse.swift */; };
 		BBCD95362AEAEBF0005554BC /* HeaderPanelComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCD95352AEAEBF0005554BC /* HeaderPanelComponentView.swift */; };
 		BBCD95382AEAECF4005554BC /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCD95372AEAECF4005554BC /* PanelView.swift */; };
 		BBCD953C2AEAED16005554BC /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCD953B2AEAED16005554BC /* Panel.swift */; };
@@ -358,6 +372,14 @@
 		BB550EC72AEAE0780070BAB8 /* DropdownPanelComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownPanelComponentView.swift; sourceTree = "<group>"; };
 		BB57956B2B1A59C000E87471 /* ProductUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductUpdater.swift; sourceTree = "<group>"; };
 		BB57956D2B1A5F4F00E87471 /* Int+Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Word.swift"; sourceTree = "<group>"; };
+		BB60B10B2BA2A365008D7762 /* PromoGenerateImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoGenerateImagesView.swift; sourceTree = "<group>"; };
+		BB60B1112BA37414008D7762 /* FullScreenImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageView.swift; sourceTree = "<group>"; };
+		BB60B1152BA3875F008D7762 /* Image+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Identifiable.swift"; sourceTree = "<group>"; };
+		BB60B11C2BA3BA11008D7762 /* Generate Images Promo Scroller Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Generate Images Promo Scroller Light.png"; sourceTree = "<group>"; };
+		BB60B11D2BA3BA12008D7762 /* Generate Images Promo Scroller Dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Generate Images Promo Scroller Dark.png"; sourceTree = "<group>"; };
+		BB60B1202BA3C113008D7762 /* ImageGenerationLimiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationLimiter.swift; sourceTree = "<group>"; };
+		BB60B1262BA3CDB3008D7762 /* Image Generation Demo Dark.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Image Generation Demo Dark.mp4"; sourceTree = "<group>"; };
+		BB60B1272BA3CDB3008D7762 /* Image Generation Demo Light.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Image Generation Demo Light.mp4"; sourceTree = "<group>"; };
 		BB66F9452AF44424003F2E63 /* ChitChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChitChat.xcdatamodel; sourceTree = "<group>"; };
 		BB66F9562AF444FB003F2E63 /* V4_2MigrationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V4_2MigrationHandler.swift; sourceTree = "<group>"; };
 		BB66F9592AF44758003F2E63 /* V4MigrationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = V4MigrationHandler.swift; sourceTree = "<group>"; };
@@ -541,6 +563,12 @@
 		BBB583712AF81CE0001EBF64 /* ConversationChatGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationChatGenerator.swift; sourceTree = "<group>"; };
 		BBB583722AF81CE0001EBF64 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		BBB615412AFF5E1900E7BBFB /* BounceableOnChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BounceableOnChange.swift; sourceTree = "<group>"; };
+		BBBCD7412BA1457900B29E0F /* ClassifyChatRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifyChatRequest.swift; sourceTree = "<group>"; };
+		BBBCD7432BA145C000B29E0F /* ClassifyChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifyChatResponse.swift; sourceTree = "<group>"; };
+		BBBCD7452BA1462900B29E0F /* CheckIfChatRequestsImageRevisionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIfChatRequestsImageRevisionRequest.swift; sourceTree = "<group>"; };
+		BBBCD7472BA1465F00B29E0F /* CheckIfChatRequestsImageRevisionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIfChatRequestsImageRevisionResponse.swift; sourceTree = "<group>"; };
+		BBBCD7492BA161D200B29E0F /* GenerateImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateImageRequest.swift; sourceTree = "<group>"; };
+		BBBCD74B2BA1621600B29E0F /* GenerateImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateImageResponse.swift; sourceTree = "<group>"; };
 		BBCD95352AEAEBF0005554BC /* HeaderPanelComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderPanelComponentView.swift; sourceTree = "<group>"; };
 		BBCD95372AEAECF4005554BC /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
 		BBCD953B2AEAED16005554BC /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
@@ -667,6 +695,7 @@
 		BB0992322B06984300236D33 /* Promo Images */ = {
 			isa = PBXGroup;
 			children = (
+				BB60B1172BA3AEFB008D7762 /* Generate Images */,
 				BB0992332B06984B00236D33 /* Send Images */,
 			);
 			path = "Promo Images";
@@ -720,6 +749,15 @@
 				BB550EC32AEADDD60070BAB8 /* TitlePanelComponentView.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		BB60B1172BA3AEFB008D7762 /* Generate Images */ = {
+			isa = PBXGroup;
+			children = (
+				BB60B11D2BA3BA12008D7762 /* Generate Images Promo Scroller Dark.png */,
+				BB60B11C2BA3BA11008D7762 /* Generate Images Promo Scroller Light.png */,
+			);
+			path = "Generate Images";
 			sourceTree = "<group>";
 		};
 		BB66F9472AF444C9003F2E63 /* Migration */ = {
@@ -861,10 +899,10 @@
 				BB74D40A2AE5685300EC7579 /* ChatBubbleView.swift */,
 				BBF3D8F62B9410B400C99BB1 /* ChatManagedReviewPrompt.swift */,
 				BB74D4122AE570BA00EC7579 /* EntryView.swift */,
+				BBB431C22B95310800314885 /* GetConversationChatOnTapSuggestionsView.swift */,
 				BBB452AF2AECD9B8000B4C97 /* GPTModelSelectionButton.swift */,
 				BB74D4882AE8D90600EC7579 /* GPTModelSelectionView.swift */,
 				BBB431C02B94EE8600314885 /* SuggestionsView.swift */,
-				BBB431C22B95310800314885 /* GetConversationChatOnTapSuggestionsView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -876,6 +914,7 @@
 				BBB452C82AEDF961000B4C97 /* UIView */,
 				BB89388B2AF0AE4800ED725E /* BannerView.swift */,
 				BBB552F42B01A05C00284399 /* FaceAnimationUpdater.swift */,
+				BB60B1112BA37414008D7762 /* FullScreenImageView.swift */,
 				BBB452E22AEF238D000B4C97 /* MaintenanceView.swift */,
 				BB74D4282AE590CE00EC7579 /* TabBar.swift */,
 				BB89388D2AF0B40D00ED725E /* InterstitialView.swift */,
@@ -937,6 +976,7 @@
 				BB74D47C2AE7924500EC7579 /* HapticHelper.swift */,
 				BBEBDFB32AEC55DB0097D9AF /* IAPHTTPSClient.swift */,
 				BBEBDFB52AEC55F30097D9AF /* IAPManager.swift */,
+				BB60B1202BA3C113008D7762 /* ImageGenerationLimiter.swift */,
 				BB92C21B2AF2FDE500A7B3DE /* IntroManager.swift */,
 				BBCD95582AEB3C43005554BC /* PasteboardHelper.swift */,
 				BB74D4462AE787E500EC7579 /* PremiumUpdater.swift */,
@@ -977,6 +1017,7 @@
 				BBB431C62B95539C00314885 /* UIScreen+Size.swift */,
 				BBF3D8FF2B9433C800C99BB1 /* VideoViewRepresentable.swift */,
 				BBB4529A2AEC87AD000B4C97 /* WebView.swift */,
+				BB60B1152BA3875F008D7762 /* Image+Identifiable.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1030,7 +1071,10 @@
 			children = (
 				BB74D44F2AE7894900EC7579 /* AuthRequest.swift */,
 				BB74D4502AE7894900EC7579 /* BlankRequest.swift */,
+				BBBCD7452BA1462900B29E0F /* CheckIfChatRequestsImageRevisionRequest.swift */,
+				BBBCD7412BA1457900B29E0F /* ClassifyChatRequest.swift */,
 				BB74D4522AE7894900EC7579 /* DeleteChatRequest.swift */,
+				BBBCD7492BA161D200B29E0F /* GenerateImageRequest.swift */,
 				BBB431BC2B94EC7200314885 /* GenerateSuggestionsRequest.swift */,
 				BB74D4542AE7894900EC7579 /* GetChatRequest.swift */,
 				BB74D4532AE7894900EC7579 /* RegisterTransactionRequest.swift */,
@@ -1043,6 +1087,9 @@
 		BB74D4552AE7894900EC7579 /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				BBBCD7472BA1465F00B29E0F /* CheckIfChatRequestsImageRevisionResponse.swift */,
+				BBBCD7432BA145C000B29E0F /* ClassifyChatResponse.swift */,
+				BBBCD74B2BA1621600B29E0F /* GenerateImageResponse.swift */,
 				BBB431BE2B94ED0C00314885 /* GenerateSuggestionsResponse.swift */,
 				BB74D45D2AE7894900EC7579 /* GetChatResponse.swift */,
 				BB74D45A2AE7894900EC7579 /* GetIAPStuffResponse.swift */,
@@ -1120,9 +1167,10 @@
 		BBB1E3D62B067A7300BC4F35 /* Promo */ = {
 			isa = PBXGroup;
 			children = (
-				BBB1E3DB2B067B0500BC4F35 /* PromoSendImagesView.swift */,
+				BB60B10B2BA2A365008D7762 /* PromoGenerateImagesView.swift */,
 				BB0992382B06F54700236D33 /* PromoPopupViewModel.swift */,
 				BB09923A2B06F5FF00236D33 /* PromoPopup.swift */,
+				BBB1E3DB2B067B0500BC4F35 /* PromoSendImagesView.swift */,
 			);
 			path = Promo;
 			sourceTree = "<group>";
@@ -1585,6 +1633,8 @@
 		BBF3D8F82B942BCE00C99BB1 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
+				BB60B1262BA3CDB3008D7762 /* Image Generation Demo Dark.mp4 */,
+				BB60B1272BA3CDB3008D7762 /* Image Generation Demo Light.mp4 */,
 				BBF3D8FA2B942BEC00C99BB1 /* Scan Image Dark.m4v */,
 				BBF3D8F92B942BEB00C99BB1 /* Scan Image Light.m4v */,
 			);
@@ -1786,11 +1836,15 @@
 				BBB452B42AEDAFEA000B4C97 /* GPTModelGifElementBackgroundColorDark.gif in Resources */,
 				BBB452972AEC8313000B4C97 /* giftGif.gif in Resources */,
 				BB92C21E2AF322D800A7B3DE /* LaunchScreen.storyboard in Resources */,
+				BB60B11F2BA3BA12008D7762 /* Generate Images Promo Scroller Dark.png in Resources */,
 				BBB452DB2AEEBD91000B4C97 /* WriteSmithPanelSpec.json in Resources */,
+				BB60B1282BA3CDB3008D7762 /* Image Generation Demo Dark.mp4 in Resources */,
 				BBB452D32AEEA80C000B4C97 /* sparkleLightGif.gif in Resources */,
 				BBF3D8FB2B942BEC00C99BB1 /* Scan Image Light.m4v in Resources */,
 				BBB452AE2AECD96D000B4C97 /* GPTModelGifElementBackgroundColorLight.gif in Resources */,
 				BBF3D8FC2B942BEC00C99BB1 /* Scan Image Dark.m4v in Resources */,
+				BB60B11E2BA3BA12008D7762 /* Generate Images Promo Scroller Light.png in Resources */,
+				BB60B1292BA3CDB3008D7762 /* Image Generation Demo Light.mp4 in Resources */,
 				BB92C2152AF2F98600A7B3DE /* introScreenshot2.png in Resources */,
 				BB92C2182AF2F98600A7B3DE /* Screenshot 3 Cropped.psd in Resources */,
 				BBB452D42AEEA80C000B4C97 /* sparkleDarkGif.gif in Resources */,
@@ -1855,6 +1909,7 @@
 				BBCD958C2AEB429F005554BC /* SmileLookRightFaceAnimation.swift in Sources */,
 				BB8938A02AF1805600ED725E /* EssayPromoRowView.swift in Sources */,
 				BB550EC02AEADD940070BAB8 /* TextFieldPanelComponentView.swift in Sources */,
+				BB60B1212BA3C113008D7762 /* ImageGenerationLimiter.swift in Sources */,
 				BB74D4632AE7894900EC7579 /* GetChatRequest.swift in Sources */,
 				BBCD95882AEB429F005554BC /* SmileLookLeftCurveFaceAnimation.swift in Sources */,
 				BB92C2242AF4000000A7B3DE /* Button+DismissesKeyboard.swift in Sources */,
@@ -1880,6 +1935,7 @@
 				BBCD95872AEB429F005554BC /* DeselectedFaceAnimationSequence1.swift in Sources */,
 				BB550EBC2AEADBC40070BAB8 /* ExploreView.swift in Sources */,
 				BB40575E2B9640F90095C825 /* SmileLookUpFaceAnimation.swift in Sources */,
+				BB60B1122BA37414008D7762 /* FullScreenImageView.swift in Sources */,
 				BB123D4F2AEA04670037AF8C /* EssayRowView.swift in Sources */,
 				BBF3D9022B94377D00C99BB1 /* IntroVideoView.swift in Sources */,
 				BB4057622B9645660095C825 /* SmileIdleFaceAnimationSequence3.swift in Sources */,
@@ -1891,6 +1947,7 @@
 				BBCD95812AEB429F005554BC /* NeutralCenterFaceAnimation.swift in Sources */,
 				BBCD953C2AEAED16005554BC /* Panel.swift in Sources */,
 				BB74D4072AE5663000EC7579 /* ShareToolbarItem.swift in Sources */,
+				BBBCD74A2BA161D200B29E0F /* GenerateImageRequest.swift in Sources */,
 				BB74D42C2AE622A400EC7579 /* ConversationView.swift in Sources */,
 				BBCD95492AEB00E2005554BC /* ExploreChatGenerator.swift in Sources */,
 				BBB452B02AECD9B8000B4C97 /* GPTModelSelectionButton.swift in Sources */,
@@ -1908,6 +1965,7 @@
 				BB550EC82AEAE0780070BAB8 /* DropdownPanelComponentView.swift in Sources */,
 				BBF3D8ED2B93BC0E00C99BB1 /* ReviewPrompt.swift in Sources */,
 				BB74D4652AE7894900EC7579 /* ValidateAndUpdateReceiptResponse.swift in Sources */,
+				BBBCD74C2BA1621600B29E0F /* GenerateImageResponse.swift in Sources */,
 				BBB452E12AEEBFA9000B4C97 /* PanelPersistenceManager.swift in Sources */,
 				BB89388C2AF0AE4800ED725E /* BannerView.swift in Sources */,
 				BB74D45F2AE7894900EC7579 /* BlankRequest.swift in Sources */,
@@ -1917,6 +1975,7 @@
 				BB74D4682AE7894900EC7579 /* GetIAPStuffResponse.swift in Sources */,
 				BB74D4622AE7894900EC7579 /* RegisterTransactionRequest.swift in Sources */,
 				BB74D45E2AE7894900EC7579 /* AuthRequest.swift in Sources */,
+				BB60B1162BA3875F008D7762 /* Image+Identifiable.swift in Sources */,
 				BB74D48B2AE8DFF100EC7579 /* MaterialView.swift in Sources */,
 				BBF3D8FE2B942C0C00C99BB1 /* BackgroundVideoView.swift in Sources */,
 				BB74D4112AE56B0700EC7579 /* BubbleImageMaker.swift in Sources */,
@@ -1935,6 +1994,7 @@
 				BB09923B2B06F5FF00236D33 /* PromoPopup.swift in Sources */,
 				BBB452D72AEEAF48000B4C97 /* SettingsToolbarItem.swift in Sources */,
 				BB74D46B2AE7894900EC7579 /* GetChatResponse.swift in Sources */,
+				BBBCD7442BA145C000B29E0F /* ClassifyChatResponse.swift in Sources */,
 				BBCD95862AEB429F005554BC /* ThinkingIdleFaceAnimationSequence1.swift in Sources */,
 				BBB431C12B94EE8600314885 /* SuggestionsView.swift in Sources */,
 				BB57956E2B1A5F4F00E87471 /* Int+Word.swift in Sources */,
@@ -1985,6 +2045,7 @@
 				BB8938902AF155FF00ED725E /* RemainingUpdater.swift in Sources */,
 				BB74D4672AE7894900EC7579 /* IsPremiumResponse.swift in Sources */,
 				BBCD95512AEB0887005554BC /* String+ToImage.swift in Sources */,
+				BB60B10C2BA2A365008D7762 /* PromoGenerateImagesView.swift in Sources */,
 				BB74D4912AE9BC8900EC7579 /* EssayView.swift in Sources */,
 				BB74D43B2AE7819C00EC7579 /* IdentifiableManagedObject.swift in Sources */,
 				BB74D4422AE7874700EC7579 /* GPTModelTierSpecification.swift in Sources */,
@@ -1992,6 +2053,7 @@
 				BB92C2002AF2A70500A7B3DE /* KeyboardReadable.swift in Sources */,
 				BBCD957F2AEB429F005554BC /* FinishedWritingFaceAnimation1_1.swift in Sources */,
 				BB74D41A2AE5782300EC7579 /* ChatView.swift in Sources */,
+				BBBCD7462BA1462900B29E0F /* CheckIfChatRequestsImageRevisionRequest.swift in Sources */,
 				BBED612B2AF08A5100355E4F /* GADBannerViewController.swift in Sources */,
 				BBCD957D2AEB429F005554BC /* RandomFaceIdleAnimationSequence.swift in Sources */,
 				BB40575C2B96406E0095C825 /* SmileIdleFaceAnimationSequence2.swift in Sources */,
@@ -2020,12 +2082,14 @@
 				BBCD95892AEB429F005554BC /* SmileCenterFaceAnimation.swift in Sources */,
 				BBCD95972AEB4F9D005554BC /* FaceAnimationTestRepresentable.swift in Sources */,
 				BBCD959E2AEC1F91005554BC /* UltraView.swift in Sources */,
+				BBBCD7482BA1465F00B29E0F /* CheckIfChatRequestsImageRevisionResponse.swift in Sources */,
 				BB92C2262AF4022E00A7B3DE /* View+DismissOnReturn.swift in Sources */,
 				BBB452CF2AEDFA0E000B4C97 /* CameraViewControllerRepresentable.swift in Sources */,
 				BBEBDFB82AEC606A0097D9AF /* UltraButton.swift in Sources */,
 				BB57956C2B1A59C000E87471 /* ProductUpdater.swift in Sources */,
 				BB74D4642AE7894900EC7579 /* GetImportantConstantsResponse.swift in Sources */,
 				BB66F9462AF44424003F2E63 /* ChitChat.xcdatamodeld in Sources */,
+				BBBCD7422BA1457900B29E0F /* ClassifyChatRequest.swift in Sources */,
 				BB74D40B2AE5685300EC7579 /* ChatBubbleView.swift in Sources */,
 				BBCD957C2AEB429F005554BC /* RandomFaceAnimationSequenceProtocol.swift in Sources */,
 				BBCD95572AEB39A8005554BC /* ExploreChatView.swift in Sources */,
@@ -2280,7 +2344,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -2305,7 +2369,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 5.1.5;
+				MARKETING_VERSION = 5.2.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2324,7 +2388,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_ASSET_PATHS = "\"WriteSmith-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = WNCN9TJFT3;
 				ENABLE_PREVIEWS = YES;
@@ -2349,7 +2413,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WriteSmith-SwiftUI/Tools/Tenjin",
 				);
-				MARKETING_VERSION = 5.1.5;
+				MARKETING_VERSION = 5.2.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acapplications.ChitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";

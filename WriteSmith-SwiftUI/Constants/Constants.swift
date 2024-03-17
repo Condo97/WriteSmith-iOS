@@ -194,6 +194,8 @@ struct Constants {
         
         static let aiChatImage = "aiChatImage"
         
+        static let blurryOverlay = "Blurry Overlay"
+        
         static let cameraButtonNotPressed = "cameraButtonNotPressed"
         static let cameraButtonPressed = "cameraButtonPressed"
         static let cameraButtonRedo = "cameraButtonRedo"
@@ -235,6 +237,7 @@ struct Constants {
         static let userDefaultStoredAuthTokenKey = "authTokenKey"
         
         static let userDefaultHasFinishedIntro = "hasFinishedIntro"
+        static let userDefaultStoredIAPVarientSuffix = "IAPVarientSuffix"
         static let userDefaultStoredWeeklyProductID = "weeklyProductID"
         static let userDefaultStoredMonthlyProductID = "monthlyProductID"
         static let userDefaultStoredWeeklyDisplayPrice = "weeklyDisplayPrice"
@@ -292,7 +295,10 @@ struct HTTPSConstants {
     
     static let chitChatServerStaticFiles = "https://chitchatserver.com"
     
+    static let checkIfChatRequestsImageRevision = "/checkIfChatRequestsImageRevision"
+    static let classifyChat = "/classifyChat"
     static let deleteChat = "/deleteChat"
+    static let generateImage = "/generateImage"
     static let generateSuggestions = "/generateSuggestions"
     static let getChat = "/getChat"
     static let getIAPStuff = "/getIAPStuff"

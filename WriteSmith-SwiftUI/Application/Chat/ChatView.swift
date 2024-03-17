@@ -32,6 +32,7 @@ struct ChatView: View, KeyboardReadable {
     
     @State private var alertShowingUpgradeForUnlimitedChats: Bool = false
     
+    @State private var isShowingFullScreenImageView: Bool = false
     @State private var isShowingUltraView: Bool = false
     
     @State private var isKeyboardVisible: Bool = false
@@ -39,6 +40,8 @@ struct ChatView: View, KeyboardReadable {
     @State private var conversation: Conversation
     
     @State private var currentlyDraggedChat: Chat?
+    
+    @State private var fullScreenImageViewImage: Image?
     
     
     init(conversation: Conversation, isShowingGPTModelSelectionView: Binding<Bool>, transitionToNewConversation: Binding<Bool>, shouldShowFirstConversationChats: Bool) {
@@ -129,6 +132,13 @@ struct ChatView: View, KeyboardReadable {
                 .padding(.bottom, isKeyboardVisible ? 8.0 : 48.0)
             }
             .background(Colors.background)
+            .fullScreenCover(isPresented: $isShowingFullScreenImageView) {
+//                if let fullScreenImageViewImage = fullScreenImageViewImage {
+                    FullScreenImageView(
+                        isPresented: $isShowingFullScreenImageView,
+                        image: $fullScreenImageViewImage)
+//                }
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
@@ -179,6 +189,9 @@ struct ChatView: View, KeyboardReadable {
             withAnimation {
                 isKeyboardVisible = value
             }
+        })
+        .clearFullScreenCover(isPresented: $chatGenerator.isShowingPromoImageGenerationView, content: {
+            PromoGenerateImagesView(isShowing: $chatGenerator.isShowingPromoImageGenerationView)
         })
         .ultraViewPopover(isPresented: $isShowingUltraView)
         //        .keyboardDismissingTextFieldToolbar("Done", color: Colors.buttonBackground)
@@ -231,7 +244,7 @@ struct ChatView: View, KeyboardReadable {
                 HStack {
                     ChatBubbleView(
                         sender: sender,
-                        canCopy: true,
+                        canCopy: chat.imageData == nil || chat.imageData!.isEmpty, // False for images since images will have the popup TODO: Make this implementation better
                         canDrag: true,
                         isDragged: isDragged,
                         content: {
@@ -308,12 +321,22 @@ struct ChatView: View, KeyboardReadable {
                                 print("Error saving context when deleting chat in ChatView... \(error)")
                             }
                         },
-                        onCopy: {
-                            // Copy TODO: Add footer and stuff if not premium
-                            if let imageData = chat.imageData, let image = UIImage(data: imageData) {
-                                UIPasteboard.general.image = image
+                        onTap: { didShowCopiedText in
+                            if didShowCopiedText {
+                                // Copy TODO: Add footer and stuff if not premium
+                                if let imageData = chat.imageData, let image = UIImage(data: imageData) {
+                                    UIPasteboard.general.image = image
+                                } else {
+                                    PasteboardHelper.copy(chat.text ?? "")
+                                }
                             } else {
-                                PasteboardHelper.copy(chat.text ?? "")
+                                // TODO: Add image URL support here
+                                if let imageData = chat.imageData, let image = UIImage(data: imageData) {
+                                    withAnimation {
+                                        fullScreenImageViewImage = Image(uiImage: image)
+                                        isShowingFullScreenImageView = true
+                                    }
+                                }
                             }
                         })
                     .transition(sender == .ai ? .opacity : .moveUp)

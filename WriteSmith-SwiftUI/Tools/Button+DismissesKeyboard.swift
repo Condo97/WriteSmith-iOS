@@ -20,7 +20,12 @@ struct KeyboardDismissingButton<Label: View>: View {
     
     var body: some View {
         Button(action: {
+            #if DEBUG
+            
+            #else
             KeyboardDismisser.dismiss()
+            #endif
+            
             action()
         }) {
             content

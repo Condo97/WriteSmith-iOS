@@ -13,14 +13,20 @@ struct GetImportantConstantsResponse: Codable {
         
         var sharedSecret: String?
         
-        var weeklyProductID: String?
-        var monthlyProductID: String?
-        var annualProductID: String?
+        var priceVAR2DisplayChance: Double?
         
-        var weeklyDisplayPrice: String?
+        var weeklyProductID_VAR1: String?
+        var weeklyProductID_VAR2: String?
+        var monthlyProductID_VAR1: String?
+        var monthlyProductID_VAR2: String?
+//        var annualProductID: String?
+        
+        var weeklyDisplayPrice_VAR1: String?
+        var weeklyDisplayPrice_VAR2: String?
 //        var weeklyIntroductoryOfferPrice: String?
         
-        var monthlyDisplayPrice: String?
+        var monthlyDisplayPrice_VAR1: String?
+        var monthlyDisplayPrice_VAR2: String?
 //        var monthlyIntroductoryOfferPrice: String?
         
         var annualDisplayPrice: String?
@@ -32,12 +38,15 @@ struct GetImportantConstantsResponse: Codable {
         
         enum CodingKeys: String, CodingKey {
             case sharedSecret
-            case weeklyProductID
-            case monthlyProductID
-            case annualProductID
-            case weeklyDisplayPrice
-            case monthlyDisplayPrice
-            case annualDisplayPrice
+            case priceVAR2DisplayChance
+            case weeklyProductID_VAR1
+            case weeklyProductID_VAR2
+            case monthlyProductID_VAR1
+            case monthlyProductID_VAR2
+            case weeklyDisplayPrice_VAR1
+            case weeklyDisplayPrice_VAR2
+            case monthlyDisplayPrice_VAR1
+            case monthlyDisplayPrice_VAR2
             case shareURL
             case freeEssayCap
             case appLaunchAlert

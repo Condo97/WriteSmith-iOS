@@ -81,9 +81,11 @@ struct WriteSmith_SwiftUIApp: App {
                 await migrate()
             }
             .task {
-                // Update important constants
+                // Update important constants and then refresh productUpdater
                 do {
                     try await ConstantsHelper.update()
+                    
+                    await productUpdater.refresh()
                 } catch {
                     // TODO: Handle errors
                     print("Error updating important constants in WriteSmith_SwiftUIApp... \(error)")

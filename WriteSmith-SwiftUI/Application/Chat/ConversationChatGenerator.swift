@@ -17,8 +17,24 @@ class ConversationChatGenerator: ObservableObject {
     
     @Published var alertShowingUserChatNotSaved = false
     
+    @Published var isShowingPromoImageGenerationView = false
+    
     var generatingChats: [Int64: String] = [:]
     
+    private let imageGenerationConfirmationAIMessages: [String] = [
+        "I'll try to create that for you...",
+        "I'll make that image for you..."
+    ]
+    private let defaultImageGenerationConfirmationAIMessage: String = "I'll try to create that for you..."
+    
+    private let imageGenerationErrorAIMessages: [String] = [
+        "Please try generating that again.",
+        "Hmm, I had an issue generating your image. Please try again and double check your propmt to make sure it's appropriate.",
+        "There was an issue generating your image. Please try rephrasing the prmopt, and make sure it's appropriate.",
+        "There was an issue generating your image. Please try again.",
+        "Hm, I couldn't generate that. Can you try something else?"
+    ]
+    private let defaultImageGenerationErrorAIMessage: String = "Please try generating that again."
     
     private let imageURLChatIndex: Int = 0
     private let imageChatIndex: Int = 0
@@ -44,9 +60,23 @@ class ConversationChatGenerator: ObservableObject {
      Okay, but instead, should I just do it all in one chat and parse it out to make it look like multiple chats in ChatView's list? I think they should be multiple chats because then the user would be able to delete an image or image url but maintain the other parts they specified in the input
      */
     func generateChat(input: String?, image: UIImage?, imageURL: String?, conversation: Conversation, authToken: String, isPremium: Bool, remainingUpdater: RemainingUpdater, in managedContext: NSManagedObjectContext) async throws {
+        /* Save User Chats */
+        
         // Ensure can generate, which is a variable
         guard canGenerateChat(isPremium: isPremium) else {
             return
+        }
+        
+        // Defer isLoading to set to false when function finishes
+        defer {
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+        }
+        
+        // Set isLoading to true
+        await MainActor.run {
+            self.isLoading = true
         }
         
         // Create User Image URL Chat if imageURL is not nil and User Image Chat if image is not null and User Text Chat if input is not nil and save on main queue
@@ -112,6 +142,124 @@ class ConversationChatGenerator: ObservableObject {
             self.alertShowingUserChatNotSaved = true
         }
         
+        /* Check For and Do Image Generation */
+        
+        // First, userTextChat's text has to be unwrapped and not empty and userImageChat and userImageURLChat have to be nil or empty or whatever they can't exist for a prompt to be sent, it has to be only a text chat that the user sent
+        var shouldGenerateImage: Bool = false
+        var imageGenerationPrompt: String?
+        if let userInput = userTextChat?.text, !userInput.isEmpty && userImageChat == nil && userImageURLChat == nil {
+            // TODO: Maybe notify user if they attach an image they won't be generating a chat if they are trying to!
+            
+            // Second, check if the chat is or can be an image revision
+            
+            // Check if the previous AI chat contained an image.. that's reliable right?
+            if try await previousAIChatContainsImage(conversation: conversation, in: managedContext) {
+                // If so, ask the server if this is a request for revision
+                let cicrirRequest = CheckIfChatRequestsImageRevisionRequest(
+                    authToken: authToken,
+                    chat: userInput)
+                
+                let cicrirResponse = try await HTTPSConnector.checkIfChatRequestsImageRevision(request: cicrirRequest)
+                
+                // If cicrirResponse requestedRevision is true, we are definitely generating an image so set generateImage to true and imageGenerationPrompt to userTextChatText
+                if cicrirResponse.body.requestsImageRevision {
+                    // Now to check for revisionss.. append all chats that are preceeded by an image in a chain until one is found that is not preceeded by an image into an input string and do image generation TODO: Is this a good idea?
+                    let userChatImagePromptAndRevisionChain = try await getPreviousUserChatsTillPreceedingAIChatDoesNotContainImage(conversation: conversation, in: managedContext)
+                    
+                    // Create tempImageGenerationPrompt as an empty string and set to imageGenerationPrompt later to avoid setting to a force unwarpped variable
+                    var tempImageGenerationPrompt = ""
+                    
+                    // Add each chatString in reversed userChatImagePromptAndRevisionChain to imageGenreationPrompt separate by a comma
+                    for chatString in userChatImagePromptAndRevisionChain.reversed() {
+                        // Append chatString to imageGenerationPrompt
+                        tempImageGenerationPrompt.append(chatString)
+                        
+                        // Append ", " separator after appending chatString
+                        tempImageGenerationPrompt.append(", ")
+                    }
+                    
+                    // Append userTextChatText to imageGenerationPrompt
+                    tempImageGenerationPrompt.append(userInput)
+                    
+                    // Set generateImage to true and set imageGenerationPrompt to tempImageGenerationPrompt
+                    shouldGenerateImage = true
+                    imageGenerationPrompt = tempImageGenerationPrompt
+                }
+            }
+            
+            // Check if imageGenerationPrompt is nil or empty--meaning there was no previous image, therefore no chain, and therefore this chat could still want image generation so check with server and set shouldGenerateImgae and imageGenerationPrompt accordingly
+            if imageGenerationPrompt == nil {
+                // Check if chat wants image generation
+                if try await promptWantsImageGeneration(
+                    authToken: authToken,
+                    prompt: userInput) {
+                    // Set shouldGenerateImage to true and imageGenerationPrompt to userTextChatText
+                    shouldGenerateImage = true
+                    imageGenerationPrompt = userInput
+                }
+            }
+        }
+        
+        if !ImageGenerationLimiter.canGenerateImage(isPremium: isPremium), shouldGenerateImage, imageGenerationPrompt != nil && !imageGenerationPrompt!.isEmpty {
+            // Show promo popup for upgrade to generate images
+            await MainActor.run {
+                isShowingPromoImageGenerationView = true
+            }
+        }
+        
+        // If isPremium, shouldGenerateImage is true, and imageGenerationPrompt can be unwrapped do image generation, otherwise do text generation
+        if ImageGenerationLimiter.canGenerateImage(isPremium: isPremium), shouldGenerateImage, let imageGenerationPrompt = imageGenerationPrompt {
+//            // Create, set, and save image generation AI chat
+//            let imageGenerationConfirmationAIChat = Chat(context: managedContext)
+//            
+//            imageGenerationConfirmationAIChat.sender = Sender.ai.rawValue
+//            imageGenerationConfirmationAIChat.conversation = conversation
+//            imageGenerationConfirmationAIChat.date = Date()
+//            imageGenerationConfirmationAIChat.text = imageGenerationConfirmationAIMessages.randomElement() ?? defaultImageGenerationConfirmationAIMessage
+//            
+//            try await managedContext.perform {
+//                try managedContext.save()
+//            }
+            
+            do {
+                // Generate image
+                try await generateImage(
+                    prompt: imageGenerationPrompt,
+                    authToken: authToken,
+                    conversation: conversation,
+                    in: managedContext)
+                
+                // Increment image generation limiter
+                ImageGenerationLimiter.increment()
+            } catch {
+                // Create, set, and save image generation error AI chat
+                let imageGenerationErrorAIChat = Chat(context: managedContext)
+                
+                imageGenerationErrorAIChat.sender = Sender.ai.rawValue
+                imageGenerationErrorAIChat.conversation = conversation
+                imageGenerationErrorAIChat.date = Date()
+                imageGenerationErrorAIChat.text = imageGenerationErrorAIMessages.randomElement() ?? defaultImageGenerationErrorAIMessage
+                
+                print("Error generating image: \(error)")
+                throw error
+            }
+        } else {
+            // Generate chat text
+            try await generateText(
+                userTextChat: userTextChat,
+                userImageChat: userImageChat,
+                userImageURLChat: userImageURLChat,
+                conversation: conversation,
+                authToken: authToken,
+                isPremium: isPremium,
+                remainingUpdater: remainingUpdater,
+                in: managedContext)
+        }
+    }
+    
+    private func generateText(userTextChat: Chat?, userImageChat: Chat?, userImageURLChat: Chat?, conversation: Conversation, authToken: String, isPremium: Bool, remainingUpdater: RemainingUpdater, in managedContext: NSManagedObjectContext) async throws {
+        /* Defer Block */
+        
         // Defer setting canGenerate to true and isLoading and isGenerating to false to ensure they are set to false when this method completes
         defer {
             DispatchQueue.main.async {
@@ -119,6 +267,8 @@ class ConversationChatGenerator: ObservableObject {
                 self.isGenerating = false
             }
         }
+        
+        /* Build Request */
         
         await MainActor.run {
             // Set isLoading to true
@@ -177,6 +327,8 @@ class ConversationChatGenerator: ObservableObject {
             print("Could not unwrap requestString in EssayChatGenerator!")
             return
         }
+        
+        /* Start Stream */
         
         // Get stream
         let stream = ChatWebSocketConnector.getChatStream()
@@ -447,7 +599,58 @@ class ConversationChatGenerator: ObservableObject {
         }
     }
     
-    func canGenerateChat(isPremium: Bool) -> Bool {
+    private func generateImage(prompt: String, authToken: String, conversation: Conversation, in managedContext: NSManagedObjectContext) async throws {
+        /* Defer Block */
+        
+        // Defer setting canGenerate to true and isLoading and isGenerating to false to ensure they are set to false when this method completes
+        defer {
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+        }
+        
+        // Set isLoading to true
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        // Create generate image request
+        let giRequest = GenerateImageRequest(
+            authToken: authToken,
+            prompt: prompt)
+        
+        // Get generate image response from HTTPSConnector
+        let giResponse = try await HTTPSConnector.generateImage(request: giRequest)
+        
+        // Ensure response has imageData, otherwise throw ChatGeneratorError imageGenerationError TODO: Make this better also for imageURL
+        guard let giResponseImageData = giResponse.body.imageData else {
+            throw ChatGeneratorError.imageGenerationError
+        }
+        
+        // Try to decode image data from the base64 string imageData, otherwise throw ChatGeneratorError imageGenerationError
+        guard let imageData = Data(base64Encoded: giResponseImageData) else {
+            throw ChatGeneratorError.imageGenerationError
+        }
+        
+        // Ensure an image set with its data is not nil, otherwise throw ChatGeneratorError imageGenerationError
+        guard UIImage(data: imageData) != nil else {
+            throw ChatGeneratorError.imageGenerationError
+        }
+        
+        // Create and save AI Chat
+        try await managedContext.perform {
+            let aiChat = Chat(context: managedContext)
+            
+            aiChat.sender = Sender.ai.rawValue
+            aiChat.conversation = conversation
+            aiChat.date = Date()
+            aiChat.imageData = imageData
+            
+            try managedContext.save()
+        }
+    }
+    
+    private func canGenerateChat(isPremium: Bool) -> Bool {
         return true
         
         // Can never generate if isLoading
@@ -462,6 +665,107 @@ class ConversationChatGenerator: ObservableObject {
         
         // All other cases can generate
         return true
+    }
+    
+    private func previousAIChatContainsImage(conversation: Conversation, in managedContext: NSManagedObjectContext) async throws -> Bool {
+        // Just check the one previous chat
+        let fetchRequest: NSFetchRequest<Chat>
+        fetchRequest = Chat.fetchRequest()
+        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Chat.date, ascending: false)]
+        fetchRequest.predicate = NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation.objectID)
+        
+        return try await managedContext.perform {
+            let chats = try managedContext.fetch(fetchRequest)
+            
+            var aiChatFound = false
+            
+            // chats should contain 2 or more objects and the second should be AI and contain an image and if so return true
+            if chats.count > 1, chats[1].sender == Sender.ai.rawValue, (chats[1].imageData != nil && !chats[1].imageData!.isEmpty) || (chats[1].imageURL != nil && !chats[1].imageURL!.isEmpty) {
+                return true
+            }
+            
+//            // Loop through chats
+//            for i in 0..<chats.count {
+//                // If aiChatFound is true and userChat is found, return false
+//                if aiChatFound, chats[i].sender == Sender.user.rawValue {
+//                    return false
+//                }
+//                
+//                // If chat sender is AI, set aiChatFound to false and check if it includes an image
+//                if chats[i].sender == Sender.ai.rawValue {
+//                    aiChatFound = true
+//                    
+//                    // If any AI chat till then contains an image, return true
+//                    if (chats[i].imageData != nil && !chats[i].imageData!.isEmpty) || (chats[i].imageURL != nil && !chats[i].imageURL!.isEmpty) {
+//                        return true
+//                    }
+//                }
+//            }
+//            
+//            // Otherwise return false, which will happen if there are no user chats
+            // Otherwise return false
+            return false
+        }
+        
+    }
+    
+    private func getPreviousUserChatsTillPreceedingAIChatDoesNotContainImage(conversation: Conversation, in managedContext: NSManagedObjectContext) async throws -> [String] {
+        // Get previous user chats till preceeding AI chat does not contain an image
+        let fetchRequest: NSFetchRequest<Chat>
+        fetchRequest = Chat.fetchRequest()
+        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Chat.date, ascending: false)]
+        fetchRequest.predicate = NSPredicate(format: "%K = %@", #keyPath(Chat.conversation), conversation.objectID)
+        
+        return try await managedContext.perform {
+            let chats = try managedContext.fetch(fetchRequest)
+            
+            var userChatStrings: [String] = []
+            
+            var aiImageChatFoundBeforeUserChat = false
+            
+            // Ensure there are at least two chats, otherwise return userChatStrings
+            guard chats.count > 1 else {
+                return userChatStrings
+            }
+            
+            // Loop from 1 to chats count, skipping the first chat because it's the user chat, checking if AI image is found before the previous chat is user and add it
+            for i in 1..<chats.count {
+                // If chat is AI and contains an image, set aiImageChatFoundBeforeUserChat to true
+                if chats[i].sender == Sender.ai.rawValue {
+                    if (chats[i].imageData != nil && !chats[i].imageData!.isEmpty) || (chats[i].imageURL != nil && !chats[i].imageURL!.isEmpty) {
+                        aiImageChatFoundBeforeUserChat = true
+                        continue
+                    }
+                }
+                
+                // If chat is User and aiImageChatFoundBeforeUserChat unwrap and ensure not empty and add text to userChatStrings and set aiImageChatFoundBeforeUserChat to false, otherwise return userChatStrings
+                if chats[i].sender == Sender.user.rawValue {
+                    if let chatText = chats[i].text, !chatText.isEmpty, aiImageChatFoundBeforeUserChat {
+                        userChatStrings.append(chatText)
+                        aiImageChatFoundBeforeUserChat = false
+                        continue
+                    } else {
+                        return userChatStrings
+                    }
+                }
+            }
+            
+            return userChatStrings
+        }
+    }
+    
+    private func promptWantsImageGeneration(authToken: String, prompt: String) async throws -> Bool {
+        // Create ClassifyChatRequest
+        let classifyChatRequest = ClassifyChatRequest(
+            authToken: authToken,
+            chat: prompt)
+        
+        // Get ClassifyChatResponse from HTTPSConnector and return wantsImageGeneration
+        let classifyChatResponse = try await HTTPSConnector.classifyChat(request: classifyChatRequest)
+        
+        return classifyChatResponse.body.wantsImageGeneration
     }
     
 }

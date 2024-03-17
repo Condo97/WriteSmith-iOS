@@ -11,6 +11,7 @@ enum ChatGeneratorError: Error {
     
     case addUserChat
     case nothingFromServer
+    case imageGenerationError // TODO: Is this too unviersal?
     case invalidAuthToken
     
 }

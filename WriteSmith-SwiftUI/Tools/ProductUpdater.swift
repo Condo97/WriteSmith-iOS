@@ -21,23 +21,27 @@ class ProductUpdater: ObservableObject {
     
     init() {
         Task {
-            let weeklyProductID = ConstantsHelper.weeklyProductID
-            let monthlyProductID = ConstantsHelper.monthlyProductID
+            await refresh()
+        }
+    }
+    
+    func refresh() async {
+        let weeklyProductID = ConstantsHelper.weeklyProductID
+        let monthlyProductID = ConstantsHelper.monthlyProductID
+        
+        do {
+            let products = try await IAPManager.fetchProducts(productIDs: [
+                weeklyProductID,
+                monthlyProductID
+            ])
             
-            do {
-                let products = try await IAPManager.fetchProducts(productIDs: [
-                    weeklyProductID,
-                    monthlyProductID
-                ])
-                
-                await MainActor.run {
-                    self.weeklyProduct = products.first(where: {$0.id == weeklyProductID})
-                    self.monthlyProduct = products.first(where: {$0.id == monthlyProductID})
-                }
-            } catch {
-                // TODO: Handle errors
-                print("Error fetching products in UltraViewModel... \(error)")
+            await MainActor.run {
+                self.weeklyProduct = products.first(where: {$0.id == weeklyProductID})
+                self.monthlyProduct = products.first(where: {$0.id == monthlyProductID})
             }
+        } catch {
+            // TODO: Handle errors
+            print("Error fetching products in UltraViewModel... \(error)")
         }
     }
     

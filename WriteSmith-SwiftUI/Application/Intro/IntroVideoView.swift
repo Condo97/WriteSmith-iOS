@@ -19,7 +19,7 @@ struct IntroVideoView<Content: View>: View {
     
     @Environment(\.colorScheme) private var colorScheme
     
-    private let blurryOverlayImageName = "Blurry Overlay"
+    private let blurryOverlayImageName = Constants.ImageName.blurryOverlay
     
     @State var isShowingNext: Bool = false
     

@@ -15,7 +15,7 @@ struct ChatBubbleView<Content>: View where Content: View {
     @Binding var isDragged: Bool
     var content: () -> Content
     var onDelete: (() -> Void)?
-    var onCopy: (() -> Void)?
+    var onTap: ((_ didShowCopyText: Bool) -> Void)?
     
     
     @State private var isBounced: Bool = false
@@ -112,13 +112,16 @@ struct ChatBubbleView<Content>: View where Content: View {
         }
         .simultaneousGesture(TapGesture()
             .onEnded({
-                // Ensure canCopy, otherwise return
-                guard canCopy else {
-                    return
-                }
+                // TODO: I feel like this code or maybe this and even the drag code should be abstracted into other structs that use eachother
                 
                 // Ensure not isDragged, otherwise return
                 guard !isDragged else {
+                    return
+                }
+                
+                // Ensure canCopy, otherwise call onTap false and return
+                guard canCopy else {
+                    onTap?(false)
                     return
                 }
                 
@@ -128,8 +131,8 @@ struct ChatBubbleView<Content>: View where Content: View {
                 // Do light haptic
                 HapticHelper.doLightHaptic()
                 
-                // Do onCopy
-                onCopy?()
+                // Do onTap true
+                onTap?(true)
                 
                 // Show "Copied" text
                 Task {

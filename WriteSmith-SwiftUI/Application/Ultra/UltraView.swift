@@ -68,6 +68,14 @@ struct UltraView: View {
     
     private let faceAnimationUpdater: FaceAnimationUpdater = FaceAnimationUpdater(faceAnimationViewRepresentable: nil)
     
+    private let currencyNumberFormatter: NumberFormatter = {
+        let currencyNumberFormatter = NumberFormatter()
+        currencyNumberFormatter.numberStyle = .decimal
+        currencyNumberFormatter.maximumFractionDigits = 2
+        currencyNumberFormatter.minimumFractionDigits = 2
+        return currencyNumberFormatter
+    }()
+    
     private var freeTrialSelected: Binding<Bool> {
         Binding(
             get: {
@@ -516,11 +524,11 @@ struct UltraView: View {
             }) {
                 ZStack {
                     if let weeklyProduct = productUpdater.weeklyProduct {
-                        let productPriceString = String(format: "%@", NSDecimalNumber(decimal: weeklyProduct.price))
+                        let productPriceString = currencyNumberFormatter.string(from: weeklyProduct.price as NSNumber) ?? weeklyProduct.displayPrice
                         
                         HStack {
                             if let introductaryOffer = weeklyProduct.subscription?.introductoryOffer {
-                                let offerPriceString = introductaryOffer.price == 0.99 ? "99¢" : String(format: "%@", NSDecimalNumber(decimal: introductaryOffer.price))
+                                let offerPriceString = introductaryOffer.price == 0.99 ? "99¢" : currencyNumberFormatter.string(from: introductaryOffer.price as NSNumber) ?? introductaryOffer.displayPrice
                                 
                                 if introductaryOffer.paymentMode == .freeTrial || introductaryOffer.price == 0.0 {
                                     // Free Trial
@@ -536,7 +544,7 @@ struct UltraView: View {
                                     Text("\(durationString) \(unitString) Trial")
                                         .font(.custom(Constants.FontName.black, size: 20.0))
                                     +
-                                    Text(" - Then 6.95 / week")
+                                    Text(" - Then \(productPriceString) / week")
                                         .font(.custom(Constants.FontName.body, size: 19.0))
                                 } else {
                                     // Discount
@@ -545,7 +553,7 @@ struct UltraView: View {
                                             .font(.custom(Constants.FontName.black, size: 20.0))
                                         let durationString = introductaryOffer.periodCount.word
                                         
-                                        Text("unlimited for \(durationString) weeks, then \(productPriceString) / week")
+                                        Text("for \(durationString) weeks, then \(productPriceString) / week")
                                             .font(.custom(Constants.FontName.bodyOblique, size: 19.0))
                                             .minimumScaleFactor(0.69)
                                             .lineLimit(1)
@@ -606,26 +614,30 @@ struct UltraView: View {
                 selectedSubscription = .monthly
             }) {
                 ZStack {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 0.0) {
-                            Text("Monthly - 19.99 / month")
-                                .font(.custom(Constants.FontName.body, size: 20.0))
-                            Text("That's 30% Off Weekly!")
-                                .font(.custom(Constants.FontName.black, size: 14.0))
-                                .padding(.top, -2)
+                    if let monthlyProduct = productUpdater.monthlyProduct {
+                        let productPriceString = currencyNumberFormatter.string(from: monthlyProduct.price as NSNumber) ?? monthlyProduct.displayPrice
+                        
+                        HStack {
+                            VStack(alignment: .leading, spacing: 0.0) {
+                                Text("Monthly - \(productPriceString) / month")
+                                    .font(.custom(Constants.FontName.body, size: 20.0))
+                                Text("That's 30% Off Weekly!")
+                                    .font(.custom(Constants.FontName.black, size: 14.0))
+                                    .padding(.top, -2)
+                            }
+                            
+                            Spacer()
+                            
+                            Text(Image(systemName: selectedSubscription == .monthly ? "checkmark.circle.fill" : "circle"))
+                                .font(.custom(Constants.FontName.body, size: 28.0))
+                                .padding([.top, .bottom], -6)
                         }
                         
-                        Spacer()
-                        
-                        Text(Image(systemName: selectedSubscription == .monthly ? "checkmark.circle.fill" : "circle"))
-                            .font(.custom(Constants.FontName.body, size: 28.0))
-                            .padding([.top, .bottom], -6)
-                    }
-                    
-                    if isLoadingPurchase && selectedSubscription == .monthly {
-                        HStack {
-                            Spacer()
-                            ProgressView()
+                        if isLoadingPurchase && selectedSubscription == .monthly {
+                            HStack {
+                                Spacer()
+                                ProgressView()
+                            }
                         }
                     }
                 }
